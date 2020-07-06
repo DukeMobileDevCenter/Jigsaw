@@ -11,7 +11,7 @@ import ResearchKit
 
 class LoginViewController: UIViewController {
     /// The welcome button at center.
-    @IBOutlet weak var startOverButton: ORKContinueButton!
+    @IBOutlet weak var startButton: UIButton!
 
     override func viewDidLoad() {
         super.viewDidLoad()
