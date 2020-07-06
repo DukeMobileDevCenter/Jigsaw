@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  LoginViewController.swift
 //  Jigsaw
 //
 //  Created by Ting Chen on 7/3/20.
@@ -7,14 +7,14 @@
 //
 
 import UIKit
+import ResearchKit
 
-class ViewController: UIViewController {
+class LoginViewController: UIViewController {
+    /// The welcome button at center.
+    @IBOutlet weak var startOverButton: ORKContinueButton!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
     }
-
-
 }
-
