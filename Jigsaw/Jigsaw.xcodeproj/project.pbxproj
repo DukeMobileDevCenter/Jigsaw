@@ -14,6 +14,10 @@
 		0070DFF324B0060500E71F46 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0070DFF224B0060500E71F46 /* Assets.xcassets */; };
 		0070DFF624B0060500E71F46 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0070DFF424B0060500E71F46 /* LaunchScreen.storyboard */; };
 		0070E00124B0060500E71F46 /* JigsawTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0070E00024B0060500E71F46 /* JigsawTests.swift */; };
+		00CDFF0D24B4353E009C789D /* QuestionnaireModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00CDFF0C24B4353E009C789D /* QuestionnaireModel.swift */; };
+		00CDFF1224B44797009C789D /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00CDFF1124B44797009C789D /* UIViewController.swift */; };
+		00CDFF1424B44C9D009C789D /* LocalErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00CDFF1324B44C9D009C789D /* LocalErrors.swift */; };
+		00CDFF1624B44F4C009C789D /* QuestionStepsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00CDFF1524B44F4C009C789D /* QuestionStepsModel.swift */; };
 		4C4D65101A3F2EDDFFFD6EE1 /* Pods_Jigsaw.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 601967226BC24AEDC4FA99EE /* Pods_Jigsaw.framework */; };
 /* End PBXBuildFile section */
 
@@ -39,6 +43,10 @@
 		0070DFFC24B0060500E71F46 /* JigsawTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JigsawTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0070E00024B0060500E71F46 /* JigsawTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JigsawTests.swift; sourceTree = "<group>"; };
 		0070E00224B0060500E71F46 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		00CDFF0C24B4353E009C789D /* QuestionnaireModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionnaireModel.swift; sourceTree = "<group>"; };
+		00CDFF1124B44797009C789D /* UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
+		00CDFF1324B44C9D009C789D /* LocalErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalErrors.swift; sourceTree = "<group>"; };
+		00CDFF1524B44F4C009C789D /* QuestionStepsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionStepsModel.swift; sourceTree = "<group>"; };
 		601967226BC24AEDC4FA99EE /* Pods_Jigsaw.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Jigsaw.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B4591A0726378C2FDAC05571 /* Pods-Jigsaw.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Jigsaw.release.xcconfig"; path = "Target Support Files/Pods-Jigsaw/Pods-Jigsaw.release.xcconfig"; sourceTree = "<group>"; };
 		E489C461B8389ED9A300FE26 /* Pods-Jigsaw.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Jigsaw.debug.xcconfig"; path = "Target Support Files/Pods-Jigsaw/Pods-Jigsaw.debug.xcconfig"; sourceTree = "<group>"; };
@@ -121,6 +129,7 @@
 		00CDFF0324B2E8C3009C789D /* UIKit Extension */ = {
 			isa = PBXGroup;
 			children = (
+				00CDFF1124B44797009C789D /* UIViewController.swift */,
 			);
 			path = "UIKit Extension";
 			sourceTree = "<group>";
@@ -136,6 +145,9 @@
 		00CDFF0524B2E8F0009C789D /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				00CDFF0C24B4353E009C789D /* QuestionnaireModel.swift */,
+				00CDFF1324B44C9D009C789D /* LocalErrors.swift */,
+				00CDFF1524B44F4C009C789D /* QuestionStepsModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -335,9 +347,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				00CDFF1424B44C9D009C789D /* LocalErrors.swift in Sources */,
 				0070DFEE24B0060400E71F46 /* LoginViewController.swift in Sources */,
 				0070DFEA24B0060400E71F46 /* AppDelegate.swift in Sources */,
+				00CDFF1624B44F4C009C789D /* QuestionStepsModel.swift in Sources */,
+				00CDFF1224B44797009C789D /* UIViewController.swift in Sources */,
 				0070DFEC24B0060400E71F46 /* SceneDelegate.swift in Sources */,
+				00CDFF0D24B4353E009C789D /* QuestionnaireModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
