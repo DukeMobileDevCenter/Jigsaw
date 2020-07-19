@@ -2,7 +2,7 @@
 name: Feature implementation
 about: Implement a proposed feature for this project
 title: "[Implementation] "
-labels: ''
+labels: A-feature
 assignees: ''
 
 ---
