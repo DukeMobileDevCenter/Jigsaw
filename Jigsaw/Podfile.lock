@@ -84,14 +84,14 @@ PODS:
   - nanopb/decode (1.30905.0)
   - nanopb/encode (1.30905.0)
   - PromisesObjC (1.2.9)
-  - ResearchKit (2.1.0-beta)
+  - ResearchKit (2.0.0)
 
 DEPENDENCIES:
   - Firebase/Analytics
   - Firebase/Auth
   - Firebase/Database
   - Firebase/Storage
-  - ResearchKit (from `https://github.com/ResearchKit/ResearchKit.git`, branch `master`)
+  - ResearchKit
 
 SPEC REPOS:
   trunk:
@@ -110,16 +110,7 @@ SPEC REPOS:
     - leveldb-library
     - nanopb
     - PromisesObjC
-
-EXTERNAL SOURCES:
-  ResearchKit:
-    :branch: master
-    :git: https://github.com/ResearchKit/ResearchKit.git
-
-CHECKOUT OPTIONS:
-  ResearchKit:
-    :commit: a9b64253f15d8b7f2393c6c96e4fa0d729842de5
-    :git: https://github.com/ResearchKit/ResearchKit.git
+    - ResearchKit
 
 SPEC CHECKSUMS:
   Firebase: ed042590caa0029392257529a8003c25ee82bc18
@@ -137,8 +128,8 @@ SPEC CHECKSUMS:
   leveldb-library: 55d93ee664b4007aac644a782d11da33fba316f7
   nanopb: c43f40fadfe79e8b8db116583945847910cbabc9
   PromisesObjC: b48e0338dbbac2207e611750777895f7a5811b75
-  ResearchKit: 454bd5d013f5d6817b1c893ebe471a082061ceee
+  ResearchKit: 06020ff370f830138b5efd10bd3606acc4de49d6
 
-PODFILE CHECKSUM: 31531efe7639c996a22dc7e105e7967ae527d92d
+PODFILE CHECKSUM: 3d7730132942f2532bba67acd237030a45da562d
 
 COCOAPODS: 1.9.0
