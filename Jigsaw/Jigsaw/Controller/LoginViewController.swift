@@ -20,7 +20,6 @@ class LoginViewController: UIViewController {
                 DispatchQueue.main.async {
                     let taskViewController = ORKTaskViewController(task: task, taskRun: nil)
                     taskViewController.delegate = self
-                    taskViewController.modalPresentationStyle = .fullScreen
                     taskViewController.navigationBar.prefersLargeTitles = false
                     self.show(taskViewController, sender: sender)
                 }
