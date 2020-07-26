@@ -44,9 +44,31 @@
                                     <action selector="startOverWelcomePage:" destination="BYZ-38-t0r" eventType="touchUpInside" id="IN9-xv-Lp2"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HgV-Os-aOT">
+                                <rect key="frame" x="132" y="513" width="150" height="50"/>
+                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="Bne-2c-wDB"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="150" id="NVC-8l-QDH"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                <state key="normal" title="Results">
+                                    <color key="titleColor" systemColor="linkColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="reviewQuestionnaireResult:" destination="BYZ-38-t0r" eventType="touchUpInside" id="h8u-vw-u0f"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
+                            <constraint firstItem="HgV-Os-aOT" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="01p-3W-BXl"/>
+                            <constraint firstItem="HgV-Os-aOT" firstAttribute="top" secondItem="qRy-Mq-PF5" secondAttribute="bottom" constant="40" id="E2r-9e-mx9"/>
                             <constraint firstItem="ASS-Ax-GVc" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="WgB-1k-SzK"/>
                             <constraint firstItem="qRy-Mq-PF5" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="dfS-kK-dIA"/>
                             <constraint firstItem="qRy-Mq-PF5" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="f4x-sQ-POb"/>
@@ -55,6 +77,9 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Home" image="house.fill" catalog="system" id="lsR-w7-jx7"/>
+                    <connections>
+                        <outlet property="reviewButton" destination="HgV-Os-aOT" id="y0n-Jr-T4i"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>

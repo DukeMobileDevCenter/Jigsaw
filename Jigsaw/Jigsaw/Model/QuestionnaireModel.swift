@@ -17,33 +17,6 @@ struct Questionnaire: Codable {
         self.version = version
         self.questions = list
     }
-    
-    static func load(fromURL url: URL, completion: @escaping (Result<Questionnaire, Error>) -> Void) {
-        let decoder = JSONDecoder()
-        let config = URLSessionConfiguration.default
-        config.requestCachePolicy = .reloadIgnoringLocalCacheData
-        config.urlCache = nil
-        let request = URLRequest(url: url, cachePolicy: URLRequest.CachePolicy.reloadIgnoringLocalCacheData, timeoutInterval: 60.0)
-        let task = URLSession.shared.dataTask(with: request) { data, response, error in
-            if let httpResponse = response as? HTTPURLResponse {
-                guard (200...299).contains(httpResponse.statusCode) else {
-                    return
-                }
-                // text/plain text/html application/json
-                if let mimeType = httpResponse.mimeType, mimeType == "application/json", let data = data {
-                    do {
-                        let decoded = try decoder.decode(Questionnaire.self, from: data)
-                        completion(.success(decoded))
-                    } catch {
-                        completion(.failure(error))
-                    }
-                }
-            } else if let error = error {
-                completion(.failure(error))
-            }
-        }
-        task.resume()
-    }
 }
 
 struct Question: Codable {

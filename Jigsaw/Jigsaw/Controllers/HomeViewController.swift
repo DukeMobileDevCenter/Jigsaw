@@ -10,77 +10,71 @@ import UIKit
 import ResearchKit
 
 class HomeViewController: UIViewController {
-    @IBAction func startOverWelcomePage(_ sender: Any) {
-        let questionnaireSchemaURL = URL(string: "https://people.duke.edu/~tc233/hosted_files/questionnaire_v1.json")!
-        Questionnaire.load(fromURL: questionnaireSchemaURL) { [weak self] result in
-            guard let self = self else { return }
-            switch result {
-            case .success(let questionnaire):
-                let task = self.createSurveyTaskFromJson(q: questionnaire)
-                OperationQueue.main.addOperation {
-                    let taskViewController = ORKTaskViewController(task: task, taskRun: nil)
-                    taskViewController.delegate = self
-                    self.show(taskViewController, sender: sender)
-                }
-            case .failure(let error):
-                OperationQueue.main.addOperation { self.presentAlert(error: error) }
-            }
+    @IBOutlet weak var reviewButton: UIButton!
+    
+    var reviewVC: ORKReviewViewController!
+    
+    @IBAction func startOverWelcomePage(_ sender: UIButton) {
+        if QuestionnaireStore.shared.isLoaded {
+            let questionnaire = QuestionnaireStore.shared.allQuestionnaires.first!
+            let taskViewController = QuestionnaireTaskViewController(questionnaire: questionnaire, taskRun: nil)
+            taskViewController.delegate = self
+            show(taskViewController, sender: sender)
         }
     }
-
+    
+    @IBAction func reviewQuestionnaireResult(_ sender: UIButton) {
+//        show(reviewVC, sender: sender)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        
-    }
-    
-    /// this is the function to create the surveytask from the Questionnaire class (parsed from json)
-    ///
-    /// - Parameter q: Questionnaire class object
-    /// - Returns: an ORKOrderedTask surveyTask
-    func createSurveyTaskFromJson(q: Questionnaire) -> ORKOrderedTask {
-        var steps = [ORKStep]()
-        print("debug info: the version of questionnaire is \(q.version)")
-        for question in q.questions {
-            switch question.questionType {
-            case .instruction:
-                steps.append(QuestionSteps.instructionStep(question: question))
-            case .multipleChoice:
-                steps.append(QuestionSteps.multipleChoiceStep(question: question))
-            case .singleChoice:
-                steps.append(QuestionSteps.singleChoiceStep(question: question))
-            case .numeric:
-                steps.append(QuestionSteps.numericStep(question: question))
-            case .map:
-                steps.append(QuestionSteps.mapStep(question: question))
-            case .scale:
-                steps.append(QuestionSteps.scaleStep(question: question))
-            case .unknown:
-                print("debug info: i've no idea what is this. unidentified type")
-                continue
-            }
-        }
-        // completion instruction
-        let completionStep = ORKOrderedTask.makeCompletionStep()
-        completionStep.title = "Survey Complete"
-        completionStep.text = "Your answers will reflect our provided choices."
-        steps.append(completionStep)
-        return ORKOrderedTask(identifier: "surveyTask", steps: steps)
+        reviewButton.isEnabled = false
     }
 }
 
 extension HomeViewController: ORKTaskViewControllerDelegate {
     func taskViewController(_ taskViewController: ORKTaskViewController, didFinishWith reason: ORKTaskViewControllerFinishReason, error: Error?) {
         switch reason {
-        case .discarded, .saved, .failed:
-            taskViewController.dismiss(animated: true)
+        case .discarded, .failed, .saved:
             if let error = error { presentAlert(error: error) }
+            taskViewController.dismiss(animated: true)
         case .completed:
+            reviewButton.isEnabled = true
+            // Access the first and last name from the review step
+            //            if let signatureResult = signatureResult(taskViewController: taskViewController),
+            //                let signature = signatureResult.signature {
+            //                let defaults = UserDefaults.standard
+            //                defaults.set(signature.givenName, forKey: "firstName")
+            //                defaults.set(signature.familyName, forKey: "lastName")
+            //            }
+            
             print("✅ completed")
             print(taskViewController.result)
-            taskViewController.dismiss(animated: true)
-        default:
-            return
+            
+            // It should be put in "review and submit action"
+            reviewVC = ORKReviewViewController(
+                task: taskViewController.task as! ORKOrderedTask,
+                result: taskViewController.result,
+                delegate: taskViewController as! QuestionnaireTaskViewController
+            )
+            reviewVC.reviewTitle = "Review your response"
+            reviewVC.text = "Please take a moment to review your responses below. If you need to change any answers just tap the edit button to update your response."
+            show(reviewVC, sender: taskViewController)
+//            taskViewController.dismiss(animated: true, completion: nil)
+        @unknown default:
+            fatalError("Error: Onboarding task yields unknown result.")
         }
+    }
+}
+
+extension HomeViewController: ORKReviewViewControllerDelegate {
+    func reviewViewController(_ reviewViewController: ORKReviewViewController, didUpdate updatedResult: ORKTaskResult, source resultSource: ORKTaskResult) {
+        print("✅ updatedResult")
+    }
+    
+    func reviewViewControllerDidSelectIncompleteCell(_ reviewViewController: ORKReviewViewController) {
+        print("✅ incompleted cell selected")
     }
 }

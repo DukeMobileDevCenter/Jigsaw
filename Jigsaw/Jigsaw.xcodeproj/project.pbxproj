@@ -22,6 +22,8 @@
 		00D0862124CD185C00FB7A20 /* OnboardingStateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00D0862024CD185C00FB7A20 /* OnboardingStateManager.swift */; };
 		00D0862324CD192800FB7A20 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00D0862224CD192800FB7A20 /* OnboardingViewController.swift */; };
 		00D0862524CD24EA00FB7A20 /* OnboardingSteps.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00D0862424CD24EA00FB7A20 /* OnboardingSteps.swift */; };
+		00D0862724CD2D9A00FB7A20 /* QuestionnaireTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00D0862624CD2D9A00FB7A20 /* QuestionnaireTaskViewController.swift */; };
+		00D0862924CD2EED00FB7A20 /* QuestionnaireStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00D0862824CD2EED00FB7A20 /* QuestionnaireStore.swift */; };
 		00F2197624CCEF5D00B72858 /* ResearchKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00F2196B24CCEAEB00B72858 /* ResearchKit.framework */; };
 		00F2197724CCEF5D00B72858 /* ResearchKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 00F2196B24CCEAEB00B72858 /* ResearchKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		00F2197C24CCF99800B72858 /* GameHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F2197B24CCF99800B72858 /* GameHistoryViewController.swift */; };
@@ -73,6 +75,8 @@
 		00D0862024CD185C00FB7A20 /* OnboardingStateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingStateManager.swift; sourceTree = "<group>"; };
 		00D0862224CD192800FB7A20 /* OnboardingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		00D0862424CD24EA00FB7A20 /* OnboardingSteps.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingSteps.swift; sourceTree = "<group>"; };
+		00D0862624CD2D9A00FB7A20 /* QuestionnaireTaskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionnaireTaskViewController.swift; sourceTree = "<group>"; };
+		00D0862824CD2EED00FB7A20 /* QuestionnaireStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionnaireStore.swift; sourceTree = "<group>"; };
 		00F2196B24CCEAEB00B72858 /* ResearchKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ResearchKit.framework; path = Pods/ResearchKit.framework; sourceTree = "<group>"; };
 		00F2197224CCEF3000B72858 /* ResearchKit-simulator.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = "ResearchKit-simulator.framework"; path = "Pods/ResearchKit-simulator.framework"; sourceTree = "<group>"; };
 		00F2197B24CCF99800B72858 /* GameHistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameHistoryViewController.swift; sourceTree = "<group>"; };
@@ -170,6 +174,7 @@
 			children = (
 				00D0861E24CD135B00FB7A20 /* RootTabBarController.swift */,
 				00D0862224CD192800FB7A20 /* OnboardingViewController.swift */,
+				00D0862624CD2D9A00FB7A20 /* QuestionnaireTaskViewController.swift */,
 				0070DFED24B0060400E71F46 /* HomeViewController.swift */,
 				00F2197B24CCF99800B72858 /* GameHistoryViewController.swift */,
 				00F2197D24CCF9A200B72858 /* ProfileViewController.swift */,
@@ -180,6 +185,7 @@
 		00CDFF0524B2E8F0009C789D /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				00D0862824CD2EED00FB7A20 /* QuestionnaireStore.swift */,
 				00CDFF1324B44C9D009C789D /* LocalErrors.swift */,
 				00CDFF0C24B4353E009C789D /* QuestionnaireModel.swift */,
 				00CDFF1524B44F4C009C789D /* QuestionStepsModel.swift */,
@@ -388,8 +394,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				00D0862324CD192800FB7A20 /* OnboardingViewController.swift in Sources */,
+				00D0862924CD2EED00FB7A20 /* QuestionnaireStore.swift in Sources */,
 				00CDFF1424B44C9D009C789D /* LocalErrors.swift in Sources */,
 				0070DFEE24B0060400E71F46 /* HomeViewController.swift in Sources */,
+				00D0862724CD2D9A00FB7A20 /* QuestionnaireTaskViewController.swift in Sources */,
 				00F2197E24CCF9A200B72858 /* ProfileViewController.swift in Sources */,
 				00D0862524CD24EA00FB7A20 /* OnboardingSteps.swift in Sources */,
 				0070DFEA24B0060400E71F46 /* AppDelegate.swift in Sources */,

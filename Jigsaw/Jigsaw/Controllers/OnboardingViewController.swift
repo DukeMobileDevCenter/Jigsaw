@@ -71,7 +71,4 @@ extension OnboardingViewController: ORKTaskViewControllerDelegate {
             fatalError("Error: Onboarding task yields unknown result.")
         }
     }
-    
-    func taskViewController(_ taskViewController: ORKTaskViewController, didChange result: ORKTaskResult) {
-    }
 }

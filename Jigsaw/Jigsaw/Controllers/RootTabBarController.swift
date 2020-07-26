@@ -10,6 +10,12 @@ import UIKit
 import ResearchKit
 
 class RootTabBarController: UITabBarController {
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        // Start to load questionnaires from the very first screen.
+        QuestionnaireStore.shared.loadQuestionnairesToMemory()
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         // First time user

@@ -9,74 +9,59 @@
 import Foundation
 
 class QuestionnaireStore {
-    static let questionnaireStoreDirectory: URL = {
-        let fileManager = FileManager.default
-        let documentDirectories = fileManager.urls(for: .documentDirectory, in: .userDomainMask)
-        return documentDirectories.first!.appendingPathComponent("Questionnaires", isDirectory: true)
-    }()
-    
     static let shared = QuestionnaireStore()
     
-    var allQuestionnaires = [(filename: String, questionnaire: Questionnaire)]()
+    var allQuestionnaires = [Questionnaire]()
     
-    private init() {
-        loadFromRemoteToMemory()
-        removeAllFromDisk()
+    var isLoaded: Bool {
+        return !allQuestionnaires.isEmpty
     }
     
-    private func removeAllFromDisk() {
-        let fileManager = FileManager.default
-        let directory = QuestionnaireStore.questionnaireStoreDirectory
-        do {
-            let filePaths = try fileManager.contentsOfDirectory(atPath: directory.path)
-            for filePath in filePaths {
-                try fileManager.removeItem(atPath: directory.appendingPathComponent(filePath, isDirectory: false).path)
+    func loadQuestionnairesToMemory() {
+        let urls = loadQuestionnaireURLs()
+        for url in urls {
+            fetchQuestionnaire(fromURL: url) { [weak self] result in
+                guard let self = self else { return }
+                switch result {
+                case .success(let questionnaire):
+                    self.allQuestionnaires.append(questionnaire)
+                case .failure(let error):
+                    print("Error: loading questionnaire from remote: \(error)")
+                }
             }
-        } catch {
-            print("Error: Could not clear questionnaire folder: \(error)")
         }
     }
     
-    private func loadFromRemoteToMemory() {
-        
+    private func loadQuestionnaireURLs() -> [URL] {
+        return [
+            URL(string: "https://people.duke.edu/~tc233/hosted_files/questionnaire_v1.json")!
+        ]
     }
-
-    private func loadFromDisk() {
-        let fileManager = FileManager.default
-        let directory = QuestionnaireStore.questionnaireStoreDirectory
+    
+    private func fetchQuestionnaire(fromURL url: URL, completion: @escaping (Result<Questionnaire, Error>) -> Void) {
         let decoder = JSONDecoder()
-        do {
-            let filePaths = try fileManager.contentsOfDirectory(atPath: directory.path)
-            for filePath in filePaths {
-                guard let fileURL = URL(string: filePath), filePath.hasSuffix("json") else { return }
-                let data = try Data(contentsOf: fileURL)
-                let questionnaire = try decoder.decode(Questionnaire.self, from: data)
-                allQuestionnaires.append((fileURL.lastPathComponent, questionnaire))
+        let config = URLSessionConfiguration.default
+        config.requestCachePolicy = .reloadIgnoringLocalCacheData
+        config.urlCache = nil
+        let request = URLRequest(url: url, cachePolicy: URLRequest.CachePolicy.reloadIgnoringLocalCacheData, timeoutInterval: 60.0)
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            if let httpResponse = response as? HTTPURLResponse {
+                guard (200...299).contains(httpResponse.statusCode) else {
+                    return
+                }
+                // text/plain text/html application/json
+                if let mimeType = httpResponse.mimeType, mimeType == "application/json", let data = data {
+                    do {
+                        let decoded = try decoder.decode(Questionnaire.self, from: data)
+                        completion(.success(decoded))
+                    } catch {
+                        completion(.failure(error))
+                    }
+                }
+            } else if let error = error {
+                completion(.failure(error))
             }
-        } catch let decodingError as DecodingError {
-            print("Error reading in saved items: \(decodingError)")
-        } catch let nsError as NSError {
-            print("NSError: \(nsError.localizedDescription)")
-        } catch {
-            print("Error: Could not load questionnaire with unknown error: \(error)")
         }
-    }
-
-    private func saveToDisk() throws {
-        let encoder = JSONEncoder()
-        let directory = QuestionnaireStore.questionnaireStoreDirectory
-        do {
-            for (filename, questionnaire) in allQuestionnaires {
-                let data = try encoder.encode(questionnaire)
-                let filePath = directory.appendingPathComponent(filename, isDirectory: false)
-                try data.write(to: filePath, options: [.atomic])
-            }
-        } catch let encodingError as EncodingError {
-            print("Error encoding allItems: \(encodingError)")
-            throw encodingError
-        } catch {
-            print("Error: Could not save questionnaire to disk with unknown error: \(error)")
-            throw error
-        }
+        task.resume()
     }
 }
