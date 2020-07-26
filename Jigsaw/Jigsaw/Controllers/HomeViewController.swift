@@ -1,5 +1,5 @@
 //
-//  LoginViewController.swift
+//  HomeViewController.swift
 //  Jigsaw
 //
 //  Created by Ting Chen on 7/3/20.
@@ -9,7 +9,7 @@
 import UIKit
 import ResearchKit
 
-class LoginViewController: UIViewController {
+class HomeViewController: UIViewController {
     @IBAction func startOverWelcomePage(_ sender: Any) {
         let questionnaireSchemaURL = URL(string: "https://people.duke.edu/~tc233/hosted_files/questionnaire_v1.json")!
         Questionnaire.load(fromURL: questionnaireSchemaURL) { [weak self] result in
@@ -17,14 +17,13 @@ class LoginViewController: UIViewController {
             switch result {
             case .success(let questionnaire):
                 let task = self.createSurveyTaskFromJson(q: questionnaire)
-                DispatchQueue.main.async {
+                OperationQueue.main.addOperation {
                     let taskViewController = ORKTaskViewController(task: task, taskRun: nil)
                     taskViewController.delegate = self
-                    taskViewController.navigationBar.prefersLargeTitles = false
                     self.show(taskViewController, sender: sender)
                 }
             case .failure(let error):
-                DispatchQueue.main.async { self.presentAlert(error: error) }
+                OperationQueue.main.addOperation { self.presentAlert(error: error) }
             }
         }
     }
@@ -32,6 +31,7 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        
     }
     
     /// this is the function to create the surveytask from the Questionnaire class (parsed from json)
@@ -69,7 +69,7 @@ class LoginViewController: UIViewController {
     }
 }
 
-extension LoginViewController: ORKTaskViewControllerDelegate {
+extension HomeViewController: ORKTaskViewControllerDelegate {
     func taskViewController(_ taskViewController: ORKTaskViewController, didFinishWith reason: ORKTaskViewControllerFinishReason, error: Error?) {
         switch reason {
         case .discarded, .saved, .failed:

@@ -8,7 +8,7 @@
 
 import ResearchKit
 
-enum QuestionSteps {
+enum QuestionStepsModel {
     static func instructionStep(question: Question) -> ORKStep {
         let instructionStep = ORKInstructionStep(identifier: question.title)
         instructionStep.title = question.title
