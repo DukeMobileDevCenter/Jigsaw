@@ -13,7 +13,8 @@ class QuestionnaireTaskViewController: ORKTaskViewController {
         super.init(task: nil, taskRun: taskRunUUID)
         self.task = self.createSurveyTaskFromJson(questionnaire: questionnaire)
     }
-
+    
+    @available(*, unavailable)
     required init(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

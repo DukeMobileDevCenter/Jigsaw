@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		005856BC24D91C4A0010BE55 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 005856BB24D91C4A0010BE55 /* GoogleService-Info.plist */; };
 		0070DFEA24B0060400E71F46 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0070DFE924B0060400E71F46 /* AppDelegate.swift */; };
 		0070DFEC24B0060400E71F46 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0070DFEB24B0060400E71F46 /* SceneDelegate.swift */; };
 		0070DFEE24B0060400E71F46 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0070DFED24B0060400E71F46 /* HomeViewController.swift */; };
@@ -56,6 +57,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		005856BB24D91C4A0010BE55 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		0070DFE624B0060400E71F46 /* Jigsaw.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Jigsaw.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0070DFE924B0060400E71F46 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0070DFEB24B0060400E71F46 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -138,6 +140,7 @@
 				0070DFE924B0060400E71F46 /* AppDelegate.swift */,
 				0070DFEB24B0060400E71F46 /* SceneDelegate.swift */,
 				0070DFF224B0060500E71F46 /* Assets.xcassets */,
+				005856BB24D91C4A0010BE55 /* GoogleService-Info.plist */,
 				0070DFF724B0060500E71F46 /* Info.plist */,
 			);
 			path = Jigsaw;
@@ -314,6 +317,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0070DFF624B0060500E71F46 /* LaunchScreen.storyboard in Resources */,
+				005856BC24D91C4A0010BE55 /* GoogleService-Info.plist in Resources */,
 				0070DFF324B0060500E71F46 /* Assets.xcassets in Resources */,
 				0070DFF124B0060400E71F46 /* Main.storyboard in Resources */,
 			);

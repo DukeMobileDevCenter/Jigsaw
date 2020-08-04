@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>637123784713-p6a5ir4sjvs07mebbbfneqqj7b8ld538.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.637123784713-p6a5ir4sjvs07mebbbfneqqj7b8ld538</string>
+	<key>API_KEY</key>
+	<string>AIzaSyDlt0g3FeJ6X28qx0DLfFSNOH8PG_AbGU0</string>
+	<key>GCM_SENDER_ID</key>
+	<string>637123784713</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>edu.duke.mobilecenter.Jigsaw-Beta</string>
+	<key>PROJECT_ID</key>
+	<string>jigsaw-25200</string>
+	<key>STORAGE_BUCKET</key>
+	<string>jigsaw-25200.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:637123784713:ios:fce313f2c3232c4af408d8</string>
+	<key>DATABASE_URL</key>
+	<string>https://jigsaw-25200.firebaseio.com</string>
+</dict>
+</plist>
