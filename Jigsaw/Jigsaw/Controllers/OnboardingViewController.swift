@@ -33,7 +33,8 @@ class OnboardingViewController: ORKTaskViewController {
         steps.append(contentsOf: [
             OnboardingSteps.instructionStep,
             OnboardingSteps.informedConsentInstructionStep,
-            OnboardingSteps.politicalSliderStep
+            OnboardingSteps.politicalSliderStep,
+            OnboardingSteps.profileStep
         ])
         let completionStep = ORKOrderedTask.makeCompletionStep()
         completionStep.title = "Complete"

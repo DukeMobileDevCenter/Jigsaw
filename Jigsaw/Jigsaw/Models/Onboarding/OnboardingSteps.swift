@@ -72,4 +72,49 @@ enum OnboardingSteps {
         politicalSliderStep.isOptional = false
         return politicalSliderStep
     }()
+    
+    static let profileStep: ORKFormStep = {
+        
+        // Gender picker
+        var genderTextChoices: [ORKTextChoice] = []
+        for gender in Genders.allCases {
+            let c = ORKTextChoice(text: gender.rawValue, value: gender.rawValue as NSString)
+            genderTextChoices.append(c)
+        }
+        let genderAnswerFormat = ORKAnswerFormat.valuePickerAnswerFormat(with: genderTextChoices)
+        let genderItem = ORKFormItem(identifier: "gender", text: "Gender", answerFormat: genderAnswerFormat, optional: true)
+        genderItem.isOptional = true
+        
+        // Age group
+        let ageAnswerFormat = ORKAnswerFormat.integerAnswerFormat(withUnit: "years old")
+        ageAnswerFormat.minimum = 1
+        ageAnswerFormat.maximum = 99
+        let ageItem = ORKFormItem(identifier: "age", text: "Age", answerFormat: ageAnswerFormat, optional: true)
+        ageItem.isOptional = true
+        
+        // Display name
+        let displayNameAnswerFormat = ORKAnswerFormat.textAnswerFormat(withMaximumLength: 10)
+        displayNameAnswerFormat.placeholder = "Your nickname in the app"
+        displayNameAnswerFormat.spellCheckingType = .no
+        let displayNameItem = ORKFormItem(identifier: "displayName", text: "Display name", answerFormat: displayNameAnswerFormat, optional: true)
+        
+        // Email
+        let emailAnswerFormat = ORKAnswerFormat.emailAnswerFormat()
+        let emailItem = ORKFormItem(identifier: "email", text: "Email Address", answerFormat: emailAnswerFormat, optional: true)
+        
+        let formStep = ORKFormStep(
+            identifier: "ProfileStep",
+            title: "Profile info",
+            text: "Tell us more about yourself, skipable."
+        )
+        
+        formStep.formItems = [
+            displayNameItem,
+            emailItem,
+            genderItem,
+            ageItem
+        ]
+        
+        return formStep
+    }()
 }

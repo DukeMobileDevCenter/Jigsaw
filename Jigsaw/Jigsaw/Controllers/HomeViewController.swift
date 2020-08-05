@@ -23,8 +23,9 @@ class HomeViewController: UIViewController {
         }
     }
     
-    @IBAction func reviewQuestionnaireResult(_ sender: UIButton) {
+    @IBAction func testButtonTapped(_ sender: UIButton) {
 //        show(reviewVC, sender: sender)
+//        let vc = ChatViewController(user: currentUser, chatroom: "zY40mIdv1xnSxyB9GVPK")
     }
     
     override func viewDidLoad() {

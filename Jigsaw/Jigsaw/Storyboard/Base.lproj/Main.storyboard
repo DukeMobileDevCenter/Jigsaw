@@ -52,7 +52,7 @@
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="150" id="NVC-8l-QDH"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
-                                <state key="normal" title="Results">
+                                <state key="normal" title="Test">
                                     <color key="titleColor" systemColor="linkColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <userDefinedRuntimeAttributes>
@@ -61,7 +61,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <action selector="reviewQuestionnaireResult:" destination="BYZ-38-t0r" eventType="touchUpInside" id="h8u-vw-u0f"/>
+                                    <action selector="testButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="h8u-vw-u0f"/>
                                 </connections>
                             </button>
                         </subviews>

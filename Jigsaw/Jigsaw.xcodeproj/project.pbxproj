@@ -8,6 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		005856BC24D91C4A0010BE55 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 005856BB24D91C4A0010BE55 /* GoogleService-Info.plist */; };
+		005856BE24D923630010BE55 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005856BD24D923630010BE55 /* ChatViewController.swift */; };
+		005856C024D924970010BE55 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005856BF24D924970010BE55 /* Message.swift */; };
+		005856C224D9262C0010BE55 /* Profiles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005856C124D9262C0010BE55 /* Profiles.swift */; };
+		005856C424D92CFB0010BE55 /* Chatroom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005856C324D92CFB0010BE55 /* Chatroom.swift */; };
+		005856C624D92D320010BE55 /* DatabaseRepresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005856C524D92D320010BE55 /* DatabaseRepresentation.swift */; };
+		005856C924D92E480010BE55 /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005856C824D92E480010BE55 /* UIImage.swift */; };
+		005856CE24D92FB60010BE55 /* ChatUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005856CD24D92FB60010BE55 /* ChatUser.swift */; };
 		0070DFEA24B0060400E71F46 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0070DFE924B0060400E71F46 /* AppDelegate.swift */; };
 		0070DFEC24B0060400E71F46 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0070DFEB24B0060400E71F46 /* SceneDelegate.swift */; };
 		0070DFEE24B0060400E71F46 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0070DFED24B0060400E71F46 /* HomeViewController.swift */; };
@@ -15,6 +22,9 @@
 		0070DFF324B0060500E71F46 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0070DFF224B0060500E71F46 /* Assets.xcassets */; };
 		0070DFF624B0060500E71F46 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0070DFF424B0060500E71F46 /* LaunchScreen.storyboard */; };
 		0070E00124B0060500E71F46 /* JigsawTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0070E00024B0060500E71F46 /* JigsawTests.swift */; };
+		00B2AB7024DA5B3100607346 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B2AB6F24DA5B3100607346 /* UIColor.swift */; };
+		00BA555B24DA5D2A006A207E /* UICollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00BA555A24DA5D2A006A207E /* UICollectionView.swift */; };
+		00BA555D24DA7CF7006A207E /* Genders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00BA555C24DA7CF7006A207E /* Genders.swift */; };
 		00CDFF0D24B4353E009C789D /* QuestionnaireModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00CDFF0C24B4353E009C789D /* QuestionnaireModel.swift */; };
 		00CDFF1224B44797009C789D /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00CDFF1124B44797009C789D /* UIViewController.swift */; };
 		00CDFF1424B44C9D009C789D /* LocalErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00CDFF1324B44C9D009C789D /* LocalErrors.swift */; };
@@ -58,6 +68,13 @@
 
 /* Begin PBXFileReference section */
 		005856BB24D91C4A0010BE55 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		005856BD24D923630010BE55 /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
+		005856BF24D924970010BE55 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
+		005856C124D9262C0010BE55 /* Profiles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profiles.swift; sourceTree = "<group>"; };
+		005856C324D92CFB0010BE55 /* Chatroom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chatroom.swift; sourceTree = "<group>"; };
+		005856C524D92D320010BE55 /* DatabaseRepresentation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseRepresentation.swift; sourceTree = "<group>"; };
+		005856C824D92E480010BE55 /* UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
+		005856CD24D92FB60010BE55 /* ChatUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatUser.swift; sourceTree = "<group>"; };
 		0070DFE624B0060400E71F46 /* Jigsaw.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Jigsaw.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0070DFE924B0060400E71F46 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0070DFEB24B0060400E71F46 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -69,6 +86,9 @@
 		0070DFFC24B0060500E71F46 /* JigsawTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JigsawTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0070E00024B0060500E71F46 /* JigsawTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JigsawTests.swift; sourceTree = "<group>"; };
 		0070E00224B0060500E71F46 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		00B2AB6F24DA5B3100607346 /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
+		00BA555A24DA5D2A006A207E /* UICollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UICollectionView.swift; sourceTree = "<group>"; };
+		00BA555C24DA7CF7006A207E /* Genders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Genders.swift; sourceTree = "<group>"; };
 		00CDFF0C24B4353E009C789D /* QuestionnaireModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionnaireModel.swift; sourceTree = "<group>"; };
 		00CDFF1124B44797009C789D /* UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
 		00CDFF1324B44C9D009C789D /* LocalErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalErrors.swift; sourceTree = "<group>"; };
@@ -108,6 +128,44 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		005856C724D92D400010BE55 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				005856C524D92D320010BE55 /* DatabaseRepresentation.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		005856CA24D92F820010BE55 /* Questionnaire */ = {
+			isa = PBXGroup;
+			children = (
+				00D0862824CD2EED00FB7A20 /* QuestionnaireStore.swift */,
+				00CDFF0C24B4353E009C789D /* QuestionnaireModel.swift */,
+				00CDFF1524B44F4C009C789D /* QuestionStepsModel.swift */,
+			);
+			path = Questionnaire;
+			sourceTree = "<group>";
+		};
+		005856CB24D92F900010BE55 /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				00D0862024CD185C00FB7A20 /* OnboardingStateManager.swift */,
+				00D0862424CD24EA00FB7A20 /* OnboardingSteps.swift */,
+			);
+			path = Onboarding;
+			sourceTree = "<group>";
+		};
+		005856CC24D92F990010BE55 /* Chatroom */ = {
+			isa = PBXGroup;
+			children = (
+				005856BF24D924970010BE55 /* Message.swift */,
+				005856C124D9262C0010BE55 /* Profiles.swift */,
+				005856C324D92CFB0010BE55 /* Chatroom.swift */,
+				005856CD24D92FB60010BE55 /* ChatUser.swift */,
+			);
+			path = Chatroom;
+			sourceTree = "<group>";
+		};
 		0070DFDD24B0060400E71F46 = {
 			isa = PBXGroup;
 			children = (
@@ -132,8 +190,9 @@
 			isa = PBXGroup;
 			children = (
 				00CDFF0724B2E90E009C789D /* Javascript */,
+				005856C724D92D400010BE55 /* Protocols */,
 				00CDFF0624B2E908009C789D /* Views */,
-				00CDFF0524B2E8F0009C789D /* Model */,
+				00CDFF0524B2E8F0009C789D /* Models */,
 				00CDFF0424B2E8E1009C789D /* Controllers */,
 				00CDFF0324B2E8C3009C789D /* UIKit Extension */,
 				00CDFF0224B2E8AA009C789D /* Storyboard */,
@@ -168,6 +227,9 @@
 			isa = PBXGroup;
 			children = (
 				00CDFF1124B44797009C789D /* UIViewController.swift */,
+				005856C824D92E480010BE55 /* UIImage.swift */,
+				00B2AB6F24DA5B3100607346 /* UIColor.swift */,
+				00BA555A24DA5D2A006A207E /* UICollectionView.swift */,
 			);
 			path = "UIKit Extension";
 			sourceTree = "<group>";
@@ -181,21 +243,21 @@
 				0070DFED24B0060400E71F46 /* HomeViewController.swift */,
 				00F2197B24CCF99800B72858 /* GameHistoryViewController.swift */,
 				00F2197D24CCF9A200B72858 /* ProfileViewController.swift */,
+				005856BD24D923630010BE55 /* ChatViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
 		};
-		00CDFF0524B2E8F0009C789D /* Model */ = {
+		00CDFF0524B2E8F0009C789D /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				00D0862824CD2EED00FB7A20 /* QuestionnaireStore.swift */,
 				00CDFF1324B44C9D009C789D /* LocalErrors.swift */,
-				00CDFF0C24B4353E009C789D /* QuestionnaireModel.swift */,
-				00CDFF1524B44F4C009C789D /* QuestionStepsModel.swift */,
-				00D0862024CD185C00FB7A20 /* OnboardingStateManager.swift */,
-				00D0862424CD24EA00FB7A20 /* OnboardingSteps.swift */,
+				005856CA24D92F820010BE55 /* Questionnaire */,
+				005856CB24D92F900010BE55 /* Onboarding */,
+				005856CC24D92F990010BE55 /* Chatroom */,
+				00BA555C24DA7CF7006A207E /* Genders.swift */,
 			);
-			path = Model;
+			path = Models;
 			sourceTree = "<group>";
 		};
 		00CDFF0624B2E908009C789D /* Views */ = {
@@ -397,12 +459,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				005856CE24D92FB60010BE55 /* ChatUser.swift in Sources */,
 				00D0862324CD192800FB7A20 /* OnboardingViewController.swift in Sources */,
 				00D0862924CD2EED00FB7A20 /* QuestionnaireStore.swift in Sources */,
 				00CDFF1424B44C9D009C789D /* LocalErrors.swift in Sources */,
+				005856C624D92D320010BE55 /* DatabaseRepresentation.swift in Sources */,
+				005856C024D924970010BE55 /* Message.swift in Sources */,
+				00BA555B24DA5D2A006A207E /* UICollectionView.swift in Sources */,
+				005856BE24D923630010BE55 /* ChatViewController.swift in Sources */,
+				005856C924D92E480010BE55 /* UIImage.swift in Sources */,
 				0070DFEE24B0060400E71F46 /* HomeViewController.swift in Sources */,
 				00D0862724CD2D9A00FB7A20 /* QuestionnaireTaskViewController.swift in Sources */,
+				00BA555D24DA7CF7006A207E /* Genders.swift in Sources */,
+				00B2AB7024DA5B3100607346 /* UIColor.swift in Sources */,
 				00F2197E24CCF9A200B72858 /* ProfileViewController.swift in Sources */,
+				005856C424D92CFB0010BE55 /* Chatroom.swift in Sources */,
 				00D0862524CD24EA00FB7A20 /* OnboardingSteps.swift in Sources */,
 				0070DFEA24B0060400E71F46 /* AppDelegate.swift in Sources */,
 				00CDFF1624B44F4C009C789D /* QuestionStepsModel.swift in Sources */,
@@ -410,6 +481,7 @@
 				00CDFF1224B44797009C789D /* UIViewController.swift in Sources */,
 				0070DFEC24B0060400E71F46 /* SceneDelegate.swift in Sources */,
 				00F2197C24CCF99800B72858 /* GameHistoryViewController.swift in Sources */,
+				005856C224D9262C0010BE55 /* Profiles.swift in Sources */,
 				00CDFF0D24B4353E009C789D /* QuestionnaireModel.swift in Sources */,
 				00D0861F24CD135B00FB7A20 /* RootTabBarController.swift in Sources */,
 			);
