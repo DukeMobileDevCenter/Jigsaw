@@ -14,6 +14,10 @@ pod 'Firebase/Auth'
 pod 'Firebase/Analytics'
 pod 'Firebase/Storage'
 pod 'Firebase/Firestore'
+
+# For Swift Codable
+pod 'FirebaseFirestoreSwift'
+
 # pod 'ResearchKit'
 
 # Messaging UI

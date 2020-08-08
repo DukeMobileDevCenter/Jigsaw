@@ -7,6 +7,7 @@
 //
 
 import ResearchKit
+import FirebaseFirestore
 
 protocol OnboardingManagerDelegate: AnyObject {
     func didCompleteOnboarding()
@@ -43,10 +44,10 @@ class OnboardingViewController: ORKTaskViewController {
         return steps
     }
     
-    private static func getTask() -> ORKNavigableOrderedTask {
+    private static func getTask() -> ORKOrderedTask {
         // completion instruction
         let steps = makeInstructionSteps()
-        return ORKNavigableOrderedTask(identifier: "InstructionTaskIdentifier", steps: steps)
+        return ORKOrderedTask(identifier: "InstructionTaskIdentifier", steps: steps)
     }
 }
 
@@ -66,10 +67,42 @@ extension OnboardingViewController: ORKTaskViewControllerDelegate {
 //                defaults.set(signature.familyName, forKey: "lastName")
 //            }
             print("✅ completed")
-            print(taskViewController.result)
-            presentingViewController?.dismiss(animated: true, completion: nil)
+            if let sliderResult = taskViewController.result.stepResult(forStepIdentifier: "PoliticalSliderStep")?.results?.first as? ORKScaleQuestionResult,
+                let answer = sliderResult.scaleAnswer {
+                Profiles.jigsawValue = answer.doubleValue
+            } else {
+                // Never arrives here.
+                fatalError("Error: Jigsaw slider value not provided.")
+            }
+            if let displayNameResult = taskViewController.result.stepResult(forStepIdentifier: "DisplayNameStep")?.results?.first as? ORKTextQuestionResult,
+                let answer = displayNameResult.textAnswer {
+                Profiles.displayName = answer
+            } else {
+                Profiles.displayName = "AnonymUser"
+            }
+            createUserInfo(userID: Profiles.userID, displayName: Profiles.displayName, jigsawValue: Profiles.jigsawValue)
+            presentingViewController?.dismiss(animated: true)
         @unknown default:
             fatalError("Error: Onboarding task yields unknown result.")
+        }
+    }
+    
+    private func createUserInfo(userID: String, displayName: String, jigsawValue: Double) {
+        // Update the database here. Fill in the 2 fields, and left blank the others.
+        let player = Player(
+            userID: userID,
+            displayName: displayName,
+            jigsawValue: jigsawValue,
+            joinDate: Date(),
+            gameHistory: [],
+            email: nil,
+            demographics: [String: String]()
+        )
+        let db = Firestore.firestore()
+        do {
+            _ = try db.collection("Players").addDocument(from: player)
+        } catch {
+            presentAlert(error: error)
         }
     }
 }

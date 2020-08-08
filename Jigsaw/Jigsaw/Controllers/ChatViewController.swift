@@ -17,7 +17,6 @@ import MessageKit
 import InputBarAccessoryView
 
 class ChatViewController: MessagesViewController {
-    
     private var isSendingPhoto = false {
         didSet {
             DispatchQueue.main.async {
@@ -105,7 +104,8 @@ class ChatViewController: MessagesViewController {
     
     // MARK: - Actions
     
-    @objc private func cameraButtonPressed(_ sender: InputBarButtonItem) {
+    @objc
+    private func cameraButtonPressed(_ sender: InputBarButtonItem) {
         let picker = UIImagePickerController()
         picker.delegate = self
         
@@ -191,13 +191,13 @@ class ChatViewController: MessagesViewController {
         
         let imageName = [UUID().uuidString, String(Date().timeIntervalSince1970)].joined()
         let imageRef = storage.child(channelID).child(imageName)
-        imageRef.putData(data, metadata: metadata) { metadata, error in
+        imageRef.putData(data, metadata: metadata) { metadata, _ in
             guard metadata != nil else {
                 completion(nil)
                 return
             }
             // Async fetch the download URL.
-            imageRef.downloadURL { (url, error) in
+            imageRef.downloadURL { url, _ in
                 completion(url)
             }
         }
@@ -228,7 +228,7 @@ class ChatViewController: MessagesViewController {
         let ref = Storage.storage().reference(forURL: url.absoluteString)
         let megaByte = Int64(1 * 1024 * 1024)
         
-        ref.getData(maxSize: megaByte) { data, error in
+        ref.getData(maxSize: megaByte) { data, _ in
             guard let imageData = data else {
                 completion(nil)
                 return
@@ -253,7 +253,6 @@ extension ChatViewController: MessagesDisplayDelegate {
         let corner: MessageStyle.TailCorner = isFromCurrentSender(message: message) ? .bottomRight : .bottomLeft
         return .bubbleTail(corner, .curved)
     }
-    
 }
 
 // MARK: - MessagesLayoutDelegate
@@ -272,7 +271,7 @@ extension ChatViewController: MessagesLayoutDelegate {
 
 extension ChatViewController: MessagesDataSource {
     func currentSender() -> SenderType {
-        return ChatUser(senderId: user.uid, displayName: Profiles.displayName)
+        return ChatUser(senderId: user.uid, displayName: Profiles.displayName, jigsawValue: Profiles.jigsawValue)
     }
     
     func numberOfSections(in messagesCollectionView: MessagesCollectionView) -> Int {
@@ -313,11 +312,11 @@ extension ChatViewController: InputBarAccessoryViewDelegate {
 // MARK: - UIImagePickerControllerDelegate
 
 extension ChatViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
         picker.dismiss(animated: true, completion: nil)
         if let asset = info[.phAsset] as? PHAsset { // 1
             let size = CGSize(width: 500, height: 500)
-            PHImageManager.default().requestImage(for: asset, targetSize: size, contentMode: .aspectFit, options: nil) { result, info in
+            PHImageManager.default().requestImage(for: asset, targetSize: size, contentMode: .aspectFit, options: nil) { result, _ in
                 guard let image = result else {
                     return
                 }

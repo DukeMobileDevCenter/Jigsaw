@@ -34,11 +34,11 @@ struct Message: MessageType {
         return id ?? UUID().uuidString
     }
     
-    var image: UIImage? = nil
-    var downloadURL: URL? = nil
+    var image: UIImage?
+    var downloadURL: URL?
     
     init(user: User, content: String) {
-        self.user = ChatUser(senderId: user.uid, displayName: Profiles.displayName)
+        self.user = ChatUser(senderId: user.uid, displayName: Profiles.displayName, jigsawValue: Profiles.jigsawValue)
         self.content = content
         self.sentDate = Date()
         self.id = nil
@@ -46,7 +46,7 @@ struct Message: MessageType {
     }
     
     init(user: User, image: UIImage) {
-        self.user = ChatUser(senderId: user.uid, displayName: Profiles.displayName)
+        self.user = ChatUser(senderId: user.uid, displayName: Profiles.displayName, jigsawValue: Profiles.jigsawValue)
         self.image = image
         self.content = ""
         self.sentDate = Date()
@@ -56,21 +56,17 @@ struct Message: MessageType {
     
     init?(document: QueryDocumentSnapshot) {
         let data = document.data()
-        
-        guard let sentDate = data["created"] as? Date else {
-            return nil
-        }
-        guard let senderID = data["senderID"] as? String else {
-            return nil
-        }
-        guard let senderName = data["senderName"] as? String else {
-            return nil
+        guard let sentDate = data["created"] as? Date,
+            let senderID = data["senderID"] as? String,
+            let senderName = data["senderName"] as? String,
+            let jigsawValue = data["jigsawValue"] as? Double else {
+                return nil
         }
         
         id = document.documentID
         
         self.sentDate = sentDate
-        self.user = ChatUser(senderId: senderID, displayName: senderName)
+        self.user = ChatUser(senderId: senderID, displayName: senderName, jigsawValue: jigsawValue)
         
         if let content = data["content"] as? String {
             self.content = content
@@ -87,9 +83,8 @@ struct Message: MessageType {
 }
 
 extension Message: DatabaseRepresentation {
-    
-    var representation: [String : Any] {
-        var rep: [String : Any] = [
+    var representation: [String: Any] {
+        var rep: [String: Any] = [
             "created": sentDate,
             "senderID": sender.senderId,
             "senderName": sender.displayName
@@ -103,7 +98,6 @@ extension Message: DatabaseRepresentation {
         
         return rep
     }
-    
 }
 
 extension Message: Comparable {

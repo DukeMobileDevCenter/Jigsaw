@@ -28,7 +28,7 @@ struct Chatroom {
 }
 
 extension Chatroom: DatabaseRepresentation {
-    var representation: [String : Any] {
+    var representation: [String: Any] {
         var rep = ["name": name]
         if let id = id {
             rep["id"] = id

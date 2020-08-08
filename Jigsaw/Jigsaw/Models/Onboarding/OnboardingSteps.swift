@@ -51,10 +51,10 @@ enum OnboardingSteps {
     static let politicalSliderStep: ORKQuestionStep = {
         // The key value of the app: political slider value
         let sliderAnswerFormat = ORKContinuousScaleAnswerFormat(
-            maximumValue: 10,
+            maximumValue: 1,
             minimumValue: 0,
-            defaultValue: 5,
-            maximumFractionDigits: 1,
+            defaultValue: 0.5,
+            maximumFractionDigits: 2,
             vertical: false,
             maximumValueDescription: "Conservative",
             minimumValueDescription: "Liberal"
@@ -73,48 +73,56 @@ enum OnboardingSteps {
         return politicalSliderStep
     }()
     
-    static let profileStep: ORKFormStep = {
-        
-        // Gender picker
-        var genderTextChoices: [ORKTextChoice] = []
-        for gender in Genders.allCases {
-            let c = ORKTextChoice(text: gender.rawValue, value: gender.rawValue as NSString)
-            genderTextChoices.append(c)
-        }
-        let genderAnswerFormat = ORKAnswerFormat.valuePickerAnswerFormat(with: genderTextChoices)
-        let genderItem = ORKFormItem(identifier: "gender", text: "Gender", answerFormat: genderAnswerFormat, optional: true)
-        genderItem.isOptional = true
-        
-        // Age group
-        let ageAnswerFormat = ORKAnswerFormat.integerAnswerFormat(withUnit: "years old")
-        ageAnswerFormat.minimum = 1
-        ageAnswerFormat.maximum = 99
-        let ageItem = ORKFormItem(identifier: "age", text: "Age", answerFormat: ageAnswerFormat, optional: true)
-        ageItem.isOptional = true
-        
+    static let profileStep: ORKQuestionStep = {
         // Display name
         let displayNameAnswerFormat = ORKAnswerFormat.textAnswerFormat(withMaximumLength: 10)
-        displayNameAnswerFormat.placeholder = "Your nickname in the app"
         displayNameAnswerFormat.spellCheckingType = .no
-        let displayNameItem = ORKFormItem(identifier: "displayName", text: "Display name", answerFormat: displayNameAnswerFormat, optional: true)
-        
-        // Email
-        let emailAnswerFormat = ORKAnswerFormat.emailAnswerFormat()
-        let emailItem = ORKFormItem(identifier: "email", text: "Email Address", answerFormat: emailAnswerFormat, optional: true)
-        
-        let formStep = ORKFormStep(
-            identifier: "ProfileStep",
-            title: "Profile info",
-            text: "Tell us more about yourself, skipable."
-        )
-        
-        formStep.formItems = [
-            displayNameItem,
-            emailItem,
-            genderItem,
-            ageItem
-        ]
-        
-        return formStep
+        displayNameAnswerFormat.autocapitalizationType = .none
+        let step = ORKQuestionStep(identifier: "DisplayNameStep", title: "Display name", question: "Please provide a nickname.", answer: displayNameAnswerFormat)
+        return step
     }()
+    
+//    static let profileStep: ORKFormStep = {
+//        // Gender picker
+//        var genderTextChoices: [ORKTextChoice] = []
+//        for gender in Genders.allCases {
+//            let c = ORKTextChoice(text: gender.rawValue, value: gender.rawValue as NSString)
+//            genderTextChoices.append(c)
+//        }
+//        let genderAnswerFormat = ORKAnswerFormat.valuePickerAnswerFormat(with: genderTextChoices)
+//        let genderItem = ORKFormItem(identifier: "gender", text: "Gender", answerFormat: genderAnswerFormat, optional: true)
+//        genderItem.isOptional = true
+//
+//        // Age group
+//        let ageAnswerFormat = ORKAnswerFormat.integerAnswerFormat(withUnit: "years old")
+//        ageAnswerFormat.minimum = 1
+//        ageAnswerFormat.maximum = 99
+//        let ageItem = ORKFormItem(identifier: "age", text: "Age", answerFormat: ageAnswerFormat, optional: true)
+//        ageItem.isOptional = true
+//
+//        // Display name
+//        let displayNameAnswerFormat = ORKAnswerFormat.textAnswerFormat(withMaximumLength: 10)
+//        displayNameAnswerFormat.spellCheckingType = .no
+//        displayNameAnswerFormat.autocapitalizationType = .none
+//        let displayNameItem = ORKFormItem(identifier: "displayName", text: "Display name", detailText: "Your nickname in the app", learnMoreItem: nil, showsProgress: false, answerFormat: displayNameAnswerFormat, tagText: nil, optional: true)
+//
+//        // Email
+//        let emailAnswerFormat = ORKAnswerFormat.emailAnswerFormat()
+//        let emailItem = ORKFormItem(identifier: "email", text: "Email Address", answerFormat: emailAnswerFormat, optional: true)
+//
+//        let formStep = ORKFormStep(
+//            identifier: "ProfileStep",
+//            title: "Profile info",
+//            text: "Tell us more about yourself, skipable."
+//        )
+//
+//        formStep.formItems = [
+//            displayNameItem,
+//            emailItem,
+//            genderItem,
+//            ageItem
+//        ]
+//
+//        return formStep
+//    }()
 }
