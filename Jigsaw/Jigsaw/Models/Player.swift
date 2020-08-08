@@ -10,7 +10,7 @@ import Foundation
 import FirebaseFirestoreSwift
 
 struct Player: Codable {
-    @DocumentID var userID: String?
+    let userID: String
     var displayName: String
     var jigsawValue: Double
     let joinDate: Date

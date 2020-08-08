@@ -8,6 +8,7 @@
 
 import UIKit
 import FirebaseAuth
+import FirebaseFirestore
 
 class RootTabBarController: UITabBarController {
     override func viewDidLoad() {
@@ -47,8 +48,28 @@ class RootTabBarController: UITabBarController {
 extension RootTabBarController: OnboardingManagerDelegate {
     func didCompleteOnboarding() {
         // Load from firebase to fill in user info.
-        print(Profiles.userID!)
-        print(Profiles.displayName!)
-        print(Profiles.jigsawValue)
+        let db = Firestore.firestore()
+        let docRef = db.collection("Players").document(Profiles.userID)
+        // Get player info from remote.
+        docRef.getDocument { [weak self] document, error in
+            guard let self = self else { return }
+            if let error = error {
+                self.presentAlert(error: error)
+            }
+            guard let document = document, document.exists else {
+                // Impossible to come here.
+                self.presentAlert(title: "Error: player doesn't exist.")
+                return
+            }
+            do {
+                if let currentPlayer = try document.data(as: Player.self) {
+                    Profiles.displayName = currentPlayer.displayName
+                    Profiles.jigsawValue = currentPlayer.jigsawValue
+                    print(Profiles().description)
+                }
+            } catch {
+                self.presentAlert(error: error)
+            }
+        }
     }
 }

@@ -20,6 +20,7 @@ class OnboardingViewController: ORKTaskViewController {
         super.init(task: OnboardingViewController.getTask(), taskRun: taskRunUUID)
     }
     
+    @available(*, unavailable)
     required init(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -66,7 +67,7 @@ extension OnboardingViewController: ORKTaskViewControllerDelegate {
 //                defaults.set(signature.givenName, forKey: "firstName")
 //                defaults.set(signature.familyName, forKey: "lastName")
 //            }
-            print("✅ completed")
+//            print("✅ completed")
             if let sliderResult = taskViewController.result.stepResult(forStepIdentifier: "PoliticalSliderStep")?.results?.first as? ORKScaleQuestionResult,
                 let answer = sliderResult.scaleAnswer {
                 Profiles.jigsawValue = answer.doubleValue
@@ -100,7 +101,7 @@ extension OnboardingViewController: ORKTaskViewControllerDelegate {
         )
         let db = Firestore.firestore()
         do {
-            _ = try db.collection("Players").addDocument(from: player)
+            try db.collection("Players").document(userID).setData(from: player)
         } catch {
             presentAlert(error: error)
         }

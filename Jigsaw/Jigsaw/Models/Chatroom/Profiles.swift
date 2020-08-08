@@ -8,7 +8,11 @@
 
 import Foundation
 
-class Profiles {
+struct Profiles: CustomStringConvertible {
+    var description: String {
+        return "userID: \(Profiles.userID ?? "nil"), displayName: \(Profiles.displayName ?? "nil"), jigsawValue: \(Profiles.jigsawValue)"
+    }
+    
     private enum SettingKeys: String, CaseIterable {
         case userID
         case displayName
