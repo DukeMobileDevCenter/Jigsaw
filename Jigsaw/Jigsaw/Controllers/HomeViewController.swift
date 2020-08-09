@@ -8,27 +8,55 @@
 
 import UIKit
 import ResearchKit
+import FirebaseFirestore
+import FirebaseAuth
 
 class HomeViewController: UIViewController {
     var reviewVC: ORKReviewViewController!
     
     @IBAction func startOverWelcomePage(_ sender: UIButton) {
-        if QuestionnaireStore.shared.isLoaded {
-            let questionnaire = QuestionnaireStore.shared.allQuestionnaires.first!
-            let taskViewController = QuestionnaireTaskViewController(questionnaire: questionnaire, taskRun: nil)
+        if !GameStore.shared.allGames.isEmpty {
+            let game = GameStore.shared.allGames.first!
+            let gameOfMyGroup = GameOfGroup(version: game.version, gameName: game.gameName, resourceURL: game.g2resURL, questionnaire: game.g2Questionnaire)
+            let taskViewController = GameViewController(game: gameOfMyGroup, taskRun: nil)
             taskViewController.delegate = self
-            show(taskViewController, sender: sender)
+            present(taskViewController, animated: true)
         }
     }
     
     @IBAction func testBarButtonTapped(_ sender: UIBarButtonItem) {
 //        show(reviewVC, sender: sender)
 //        let vc = ChatViewController(user: currentUser, chatroom: "zY40mIdv1xnSxyB9GVPK")
+        let chatroom = Chatroom(name: "US1")
+        let chatroomRef = Firestore.firestore().collection("Chatrooms")
+        do {
+            _ = try chatroomRef.document(chatroom.id!).setData(from: chatroom)
+        } catch {
+            print("Error saving chatroom: \(error.localizedDescription)")
+        }
+        
+        let chatroomVC = ChatViewController(user: Auth.auth().currentUser!, chatroom: chatroom)
+        show(chatroomVC, sender: sender)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        GameStore.shared.loadGames { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(let games):
+                // Update collection view UI here.
+                DispatchQueue.main.async {
+                    print(games.count)
+                }
+            case .failure(let error):
+                DispatchQueue.main.async {
+                    self.presentAlert(error: error)
+                }
+                print("Error: loading games from remote: \(error)")
+            }
+        }
     }
 }
 

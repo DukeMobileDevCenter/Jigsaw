@@ -22,9 +22,9 @@ class RootTabBarController: UITabBarController {
             }
             guard let user = result?.user else { return }
             let uid = user.uid
-            Profiles.userID = uid
-            // Randomize a display name for now. Add a skippable step to create name in onboarding.
-            Profiles.displayName = ["p1", "p2", "p3", "p4"].randomElement()
+            if Profiles.userID != uid {
+                self.presentAlert(title: "Something wrong with anonymous user", message: "This should never happen unless database is corrupted.")
+            }
         }
     }
     

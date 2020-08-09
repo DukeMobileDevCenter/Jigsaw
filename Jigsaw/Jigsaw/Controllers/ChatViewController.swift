@@ -70,7 +70,6 @@ class ChatViewController: MessagesViewController {
                 print("Error listening for channel updates: \(error?.localizedDescription ?? "No error")")
                 return
             }
-            
             snapshot.documentChanges.forEach { change in
                 self.handleDocumentChange(change)
             }
@@ -88,8 +87,7 @@ class ChatViewController: MessagesViewController {
         messagesCollectionView.messagesDisplayDelegate = self
         
         let cameraItem = InputBarButtonItem(type: .system)
-        cameraItem.tintColor = .accentColor
-        cameraItem.image = #imageLiteral(resourceName: "camera")
+        cameraItem.image = UIImage(systemName: "Camera.fill")
         cameraItem.addTarget(
             self,
             action: #selector(cameraButtonPressed),
@@ -100,6 +98,8 @@ class ChatViewController: MessagesViewController {
         messageInputBar.leftStackView.alignment = .center
         messageInputBar.setLeftStackViewWidthConstant(to: 50, animated: false)
         messageInputBar.setStackViewItems([cameraItem], forStack: .left, animated: false)
+        
+        messages.append(Message(user: user, content: "Hello world!"))
     }
     
     // MARK: - Actions

@@ -8,12 +8,12 @@
 
 import FirebaseFirestore
 
-struct Chatroom {
+struct Chatroom: Codable {
     let id: String?
     let name: String
     
     init(name: String) {
-        self.id = nil
+        self.id = UUID().uuidString
         self.name = name
     }
     

@@ -13,18 +13,20 @@ import FirebaseFirestoreSwift
 class GameStore {
     // Singleton of the class.
     static let shared = GameStore()
+    
     var allGames = [Game]()
     
-    private func fetchGames(completion: @escaping (Result<[Game], Error>) -> Void) {
+    func loadGames(completion: @escaping (Result<[Game], Error>) -> Void) {
         let db = Firestore.firestore()
         var games = [Game]()
-        db.collection("Games").getDocuments { querySnapshot, error in
+        db.collection("Games").getDocuments { [weak self] querySnapshot, error in
             if let snapshot = querySnapshot {
                 for document in snapshot.documents {
                     do {
                         if let game = try document.data(as: Game.self) {
                             games.append(game)
                         }
+                        self?.allGames = games
                     } catch {
                         completion(.failure(error))
                         return
