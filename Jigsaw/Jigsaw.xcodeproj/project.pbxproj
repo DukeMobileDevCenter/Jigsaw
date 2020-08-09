@@ -138,14 +138,14 @@
 			path = Protocols;
 			sourceTree = "<group>";
 		};
-		005856CA24D92F820010BE55 /* Questionnaire */ = {
+		005856CA24D92F820010BE55 /* Game */ = {
 			isa = PBXGroup;
 			children = (
 				00D0862824CD2EED00FB7A20 /* QuestionnaireStore.swift */,
 				00CDFF0C24B4353E009C789D /* QuestionnaireModel.swift */,
 				00CDFF1524B44F4C009C789D /* QuestionStepsModel.swift */,
 			);
-			path = Questionnaire;
+			path = Game;
 			sourceTree = "<group>";
 		};
 		005856CB24D92F900010BE55 /* Onboarding */ = {
@@ -254,7 +254,7 @@
 			isa = PBXGroup;
 			children = (
 				00CDFF1324B44C9D009C789D /* LocalErrors.swift */,
-				005856CA24D92F820010BE55 /* Questionnaire */,
+				005856CA24D92F820010BE55 /* Game */,
 				005856CB24D92F900010BE55 /* Onboarding */,
 				005856CC24D92F990010BE55 /* Chatroom */,
 				00BA555C24DA7CF7006A207E /* Genders.swift */,

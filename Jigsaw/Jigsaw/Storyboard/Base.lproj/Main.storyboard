@@ -7,7 +7,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Home-->
+        <!--Home View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="HomeViewController" customModule="Jigsaw" customModuleProvider="target" sceneMemberID="viewController">
@@ -44,31 +44,9 @@
                                     <action selector="startOverWelcomePage:" destination="BYZ-38-t0r" eventType="touchUpInside" id="IN9-xv-Lp2"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HgV-Os-aOT">
-                                <rect key="frame" x="132" y="513" width="150" height="50"/>
-                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="Bne-2c-wDB"/>
-                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="150" id="NVC-8l-QDH"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
-                                <state key="normal" title="Test">
-                                    <color key="titleColor" systemColor="linkColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </state>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                        <integer key="value" value="10"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                                <connections>
-                                    <action selector="testButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="h8u-vw-u0f"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="HgV-Os-aOT" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="01p-3W-BXl"/>
-                            <constraint firstItem="HgV-Os-aOT" firstAttribute="top" secondItem="qRy-Mq-PF5" secondAttribute="bottom" constant="40" id="E2r-9e-mx9"/>
                             <constraint firstItem="ASS-Ax-GVc" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="WgB-1k-SzK"/>
                             <constraint firstItem="qRy-Mq-PF5" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="dfS-kK-dIA"/>
                             <constraint firstItem="qRy-Mq-PF5" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="f4x-sQ-POb"/>
@@ -76,14 +54,17 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Home" image="house.fill" catalog="system" id="lsR-w7-jx7"/>
-                    <connections>
-                        <outlet property="reviewButton" destination="HgV-Os-aOT" id="y0n-Jr-T4i"/>
-                    </connections>
+                    <navigationItem key="navigationItem" id="jVh-S5-uyh">
+                        <barButtonItem key="leftBarButtonItem" title="test" image="rhombus.fill" catalog="system" id="YBj-fk-KFO">
+                            <connections>
+                                <action selector="testBarButtonTapped:" destination="BYZ-38-t0r" id="XEH-iE-2ew"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="661" y="-552"/>
+            <point key="canvasLocation" x="1571.0144927536232" y="-552.45535714285711"/>
         </scene>
         <!--Game History View Controller-->
         <scene sceneID="RvK-v8-KTo">
@@ -128,7 +109,7 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
                     <connections>
-                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="viewControllers" id="aTr-de-qo0"/>
+                        <segue destination="pKm-lh-eNO" kind="relationship" relationship="viewControllers" id="aTr-de-qo0"/>
                         <segue destination="JJs-pR-gZw" kind="relationship" relationship="viewControllers" id="izP-lQ-aiT"/>
                         <segue destination="P4k-pc-CCe" kind="relationship" relationship="viewControllers" id="LRr-EH-84z"/>
                     </connections>
@@ -137,9 +118,29 @@
             </objects>
             <point key="canvasLocation" x="-329" y="834"/>
         </scene>
+        <!--Home-->
+        <scene sceneID="JeR-U1-B5l">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="pKm-lh-eNO" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Home" image="house.fill" catalog="system" id="lsR-w7-jx7"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="iOO-q6-bIL">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="ujg-hn-QDE"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="DWb-bs-VUc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="660.86956521739137" y="-552.45535714285711"/>
+        </scene>
     </scenes>
     <resources>
         <image name="house.fill" catalog="system" width="128" height="106"/>
         <image name="person.fill" catalog="system" width="128" height="120"/>
+        <image name="rhombus.fill" catalog="system" width="107" height="128"/>
     </resources>
 </document>

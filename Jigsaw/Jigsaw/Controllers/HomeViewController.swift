@@ -10,8 +10,6 @@ import UIKit
 import ResearchKit
 
 class HomeViewController: UIViewController {
-    @IBOutlet weak var reviewButton: UIButton!
-    
     var reviewVC: ORKReviewViewController!
     
     @IBAction func startOverWelcomePage(_ sender: UIButton) {
@@ -23,7 +21,7 @@ class HomeViewController: UIViewController {
         }
     }
     
-    @IBAction func testButtonTapped(_ sender: UIButton) {
+    @IBAction func testBarButtonTapped(_ sender: UIBarButtonItem) {
 //        show(reviewVC, sender: sender)
 //        let vc = ChatViewController(user: currentUser, chatroom: "zY40mIdv1xnSxyB9GVPK")
     }
@@ -31,7 +29,6 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        reviewButton.isEnabled = false
     }
 }
 
@@ -42,7 +39,6 @@ extension HomeViewController: ORKTaskViewControllerDelegate {
             if let error = error { presentAlert(error: error) }
             taskViewController.dismiss(animated: true)
         case .completed:
-            reviewButton.isEnabled = true
             // Access the first and last name from the review step
             //            if let signatureResult = signatureResult(taskViewController: taskViewController),
             //                let signature = signatureResult.signature {
@@ -53,17 +49,7 @@ extension HomeViewController: ORKTaskViewControllerDelegate {
             
             print("✅ completed")
             print(taskViewController.result)
-            
-            // It should be put in "review and submit action"
-            reviewVC = ORKReviewViewController(
-                task: taskViewController.task as! ORKOrderedTask,
-                result: taskViewController.result,
-                delegate: taskViewController as! QuestionnaireTaskViewController
-            )
-            reviewVC.reviewTitle = "Review your response"
-            reviewVC.text = "Please take a moment to review your responses below. If you need to change any answers just tap the edit button to update your response."
-            show(reviewVC, sender: taskViewController)
-//            taskViewController.dismiss(animated: true, completion: nil)
+            taskViewController.dismiss(animated: true, completion: nil)
         @unknown default:
             fatalError("Error: Onboarding task yields unknown result.")
         }
