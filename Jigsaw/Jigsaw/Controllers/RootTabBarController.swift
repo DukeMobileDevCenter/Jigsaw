@@ -13,8 +13,6 @@ import FirebaseFirestore
 class RootTabBarController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Start to load questionnaires from the very first screen.
-        QuestionnaireStore.shared.loadQuestionnairesToMemory()
         // Sign in anonymously for now. Add other sign in options later.
         Auth.auth().signInAnonymously { [weak self] result, error in
             guard let self = self else { return }

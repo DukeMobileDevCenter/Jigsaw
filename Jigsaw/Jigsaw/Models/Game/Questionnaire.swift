@@ -1,5 +1,5 @@
 //
-//  QuestionnaireModel.swift
+//  Questionnaire.swift
 //  Jigsaw
 //
 //  Created by Ting Chen on 7/6/20.
@@ -9,15 +9,8 @@
 import Foundation
 import ResearchKit
 
-struct Questionnaire: Codable {
-    let version: Int
-    let questions: [Question]
-
-    init(version: Int, list: [Question]) {
-        self.version = version
-        self.questions = list
-    }
-}
+// Questionnaire is [Question], i.e. an array of questions.
+typealias Questionnaire = [Question]
 
 struct Question: Codable {
     let questionType: QuestionType
@@ -28,8 +21,6 @@ struct Question: Codable {
     let optional: Bool
 
     init(questionType: String, title: String, prompt: String, choices: [Choice], custom: String, optional: Bool) {
-//        self.questionType = QuestionType(rawValue: questionType)
-        
         switch questionType {
         case "INSTRUCTION":
             self.questionType = .instruction
@@ -68,9 +59,4 @@ enum QuestionType: String, Codable {
 struct Choice: Codable {
     let text: String
     let value: String
-
-    init(text: String, value: String) {
-        self.text = text
-        self.value = value
-    }
 }

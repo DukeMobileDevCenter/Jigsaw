@@ -25,8 +25,7 @@ class QuestionnaireTaskViewController: ORKTaskViewController {
     /// - Returns: an ORKOrderedTask surveyTask
     func createSurveyTaskFromJson(questionnaire: Questionnaire) -> ORKOrderedTask {
         var steps = [ORKStep]()
-        print("debug info: the version of questionnaire is \(questionnaire.version)")
-        for question in questionnaire.questions {
+        for question in questionnaire {
             switch question.questionType {
             case .instruction:
                 steps.append(QuestionStepsModel.instructionStep(question: question))
