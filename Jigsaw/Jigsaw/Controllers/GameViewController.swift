@@ -9,17 +9,12 @@
 import ResearchKit
 
 class GameViewController: ORKTaskViewController {
-    var gameResourceHTML: String = "Resource cannot load."
+    var resourceURL: URL!
     
     init(game: GameOfGroup, taskRun taskRunUUID: UUID?) {
         super.init(task: nil, taskRun: taskRunUUID)
-        // Load resource reading html asynchronously.
-//        DispatchQueue.global(qos: .utility).async { [weak self] in
-        if let html = try? String(contentsOf: URL(string: game.resourceURL)!) {
-            gameResourceHTML = html
-        }
-//        }
-        self.task = self.createSurveyTaskFromJson(questionnaire: game.questionnaire)
+        resourceURL = URL(string: game.resourceURL)!
+        task = self.createSurveyTaskFromJson(questionnaire: game.questionnaire)
     }
     
     @available(*, unavailable)
@@ -42,16 +37,8 @@ class GameViewController: ORKTaskViewController {
         steps.append(welcomeStep)
         
         // Resource reading page
-        let readingsStep = ORKWebViewStep(identifier: "Resource")
-        readingsStep.html = gameResourceHTML
-        if let cssPath = Bundle.main.path(forResource: "style", ofType: "css"),
-            let css = try? String(contentsOfFile: cssPath) {
-            readingsStep.customCSS = css.trimmingCharacters(in: .whitespacesAndNewlines)
-        }
+        let readingsStep = ResourceWebStep(identifier: "Res", url: resourceURL)
         steps.append(readingsStep)
-        
-        // Chatroom page
-//        let chatroomStep = ORKCustomStep(identifier: "Chatroom", contentView: <#T##UIView#>)
         
         for question in questionnaire {
             switch question.questionType {
@@ -75,7 +62,7 @@ class GameViewController: ORKTaskViewController {
             }
         }
         
-        // completion instruction
+        // Completion instruction.
         let completionStep = ORKOrderedTask.makeCompletionStep()
         completionStep.title = "Survey Complete"
         completionStep.text = "Your answers will reflect our provided choices."
