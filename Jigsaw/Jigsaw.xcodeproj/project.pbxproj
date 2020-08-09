@@ -12,7 +12,6 @@
 		0020D54E24DF95F700DB20E1 /* PopulateGames.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0020D54D24DF95F700DB20E1 /* PopulateGames.swift */; };
 		0020D55024DFAED000DB20E1 /* GameOfGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0020D54F24DFAED000DB20E1 /* GameOfGroup.swift */; };
 		0020D55224DFB1FA00DB20E1 /* ProgressIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0020D55124DFB1FA00DB20E1 /* ProgressIndicator.swift */; };
-		0020D55524DFB7F600DB20E1 /* style.css in Resources */ = {isa = PBXBuildFile; fileRef = 0020D55424DFB7F600DB20E1 /* style.css */; };
 		0020D55D24E0A74C00DB20E1 /* ResourceWebStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0020D55C24E0A74C00DB20E1 /* ResourceWebStepViewController.swift */; };
 		0020D55F24E0A7DB00DB20E1 /* ResourceWebStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0020D55E24E0A7DB00DB20E1 /* ResourceWebStep.swift */; };
 		005856BC24D91C4A0010BE55 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 005856BB24D91C4A0010BE55 /* GoogleService-Info.plist */; };
@@ -80,7 +79,6 @@
 		0020D54D24DF95F700DB20E1 /* PopulateGames.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopulateGames.swift; sourceTree = "<group>"; };
 		0020D54F24DFAED000DB20E1 /* GameOfGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameOfGroup.swift; sourceTree = "<group>"; };
 		0020D55124DFB1FA00DB20E1 /* ProgressIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressIndicator.swift; sourceTree = "<group>"; };
-		0020D55424DFB7F600DB20E1 /* style.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = style.css; sourceTree = "<group>"; };
 		0020D55C24E0A74C00DB20E1 /* ResourceWebStepViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResourceWebStepViewController.swift; sourceTree = "<group>"; };
 		0020D55E24E0A7DB00DB20E1 /* ResourceWebStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResourceWebStep.swift; sourceTree = "<group>"; };
 		005856BB24D91C4A0010BE55 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -309,7 +307,6 @@
 		00CDFF0724B2E90E009C789D /* Javascript */ = {
 			isa = PBXGroup;
 			children = (
-				0020D55424DFB7F600DB20E1 /* style.css */,
 			);
 			path = Javascript;
 			sourceTree = "<group>";
@@ -420,7 +417,6 @@
 			files = (
 				0070DFF624B0060500E71F46 /* LaunchScreen.storyboard in Resources */,
 				005856BC24D91C4A0010BE55 /* GoogleService-Info.plist in Resources */,
-				0020D55524DFB7F600DB20E1 /* style.css in Resources */,
 				0070DFF324B0060500E71F46 /* Assets.xcassets in Resources */,
 				0070DFF124B0060400E71F46 /* Main.storyboard in Resources */,
 			);
