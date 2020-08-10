@@ -9,7 +9,10 @@
 import MessageKit
 
 struct ChatUser: SenderType, Equatable {
+    /// The ID, which is the same ID as the account and player ID.
     var senderId: String
+    /// The nickname displayed in a chatroom.
     var displayName: String
+    /// The player's Jigsaw value, which may be fun to see as a color?
     var jigsawValue: Double
 }

@@ -9,11 +9,13 @@
 import FirebaseFirestore
 
 struct Chatroom: Codable {
+    /// The unique identifier of the chatroom.
     let id: String?
+    /// The name or title of the chatroom, should be decided by the game.
     let name: String
     
     init(name: String) {
-        self.id = UUID().uuidString
+        self.id = "TestChatroom1"
         self.name = name
     }
     

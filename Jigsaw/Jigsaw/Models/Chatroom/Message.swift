@@ -6,6 +6,7 @@
 //  Copyright © 2020 DukeMobileDevCenter. All rights reserved.
 //
 
+import UIKit
 import Firebase
 import FirebaseAuth
 import FirebaseFirestore
@@ -15,6 +16,8 @@ struct Message: MessageType {
     let id: String?
     let content: String
     let sentDate: Date
+    let senderJigsawValue: Double
+    
     var kind: MessageKind
     var sender: SenderType {
         return user
@@ -23,8 +26,8 @@ struct Message: MessageType {
     var user: ChatUser
     
     var data: MessageKind {
-        if let image = image {
-            return .photo(image)
+        if let downloadURL = downloadURL {
+            return .photo(ImageMediaItem(url: downloadURL, image: nil))
         } else {
             return .text(content)
         }
@@ -34,7 +37,6 @@ struct Message: MessageType {
         return id ?? UUID().uuidString
     }
     
-    var image: UIImage?
     var downloadURL: URL?
     
     init(user: User, content: String) {
@@ -43,39 +45,39 @@ struct Message: MessageType {
         self.sentDate = Date()
         self.id = nil
         self.kind = .text(content)
+        self.senderJigsawValue = Profiles.jigsawValue
     }
     
-    init(user: User, image: UIImage) {
+    init(user: User, imageURL: URL) {
         self.user = ChatUser(senderId: user.uid, displayName: Profiles.displayName, jigsawValue: Profiles.jigsawValue)
-        self.image = image
         self.content = ""
         self.sentDate = Date()
         self.id = nil
-        self.kind = .photo(image)
+        self.kind = .photo(ImageMediaItem(url: imageURL, image: nil))
+        self.senderJigsawValue = Profiles.jigsawValue
     }
     
     init?(document: QueryDocumentSnapshot) {
         let data = document.data()
-        guard let sentDate = data["created"] as? Date,
-            let senderID = data["senderID"] as? String,
-            let senderName = data["senderName"] as? String,
-            let jigsawValue = data["jigsawValue"] as? Double else {
-                return nil
-        }
-        
         id = document.documentID
         
-        self.sentDate = sentDate
-        self.user = ChatUser(senderId: senderID, displayName: senderName, jigsawValue: jigsawValue)
+        guard let docSenderID = data["senderID"] as? String,
+            let docSenderName = data["senderName"] as? String,
+            let jigsawValue = data["senderJigsawValue"] as? Double,
+            let docSentDate = data["created"] as? Timestamp else { return nil }
         
-        if let content = data["content"] as? String {
-            self.content = content
+        self.sentDate = docSentDate.dateValue()
+        self.user = ChatUser(senderId: docSenderID, displayName: docSenderName, jigsawValue: jigsawValue)
+        self.senderJigsawValue = jigsawValue
+        
+        if let text = data["content"] as? String {
+            self.content = text
             downloadURL = nil
-            self.kind = .text(content)
+            self.kind = .text(text)
         } else if let urlString = data["url"] as? String, let url = URL(string: urlString) {
             downloadURL = url
-            content = ""
-            self.kind = .photo(UIImage())
+            self.content = ""
+            self.kind = .photo(ImageMediaItem(url: url, image: nil))
         } else {
             return nil
         }
@@ -87,7 +89,8 @@ extension Message: DatabaseRepresentation {
         var rep: [String: Any] = [
             "created": sentDate,
             "senderID": sender.senderId,
-            "senderName": sender.displayName
+            "senderName": sender.displayName,
+            "senderJigsawValue": senderJigsawValue
         ]
         
         if let url = downloadURL {
@@ -95,32 +98,31 @@ extension Message: DatabaseRepresentation {
         } else {
             rep["content"] = content
         }
-        
         return rep
     }
 }
 
 extension Message: Comparable {
-    // Equal by id.
+    // Compare equal by id.
     static func == (lhs: Message, rhs: Message) -> Bool {
-        return lhs.id == rhs.id
+        lhs.id == rhs.id
     }
-    // Compare by date.
+    // Compare smaller than by date.
     static func < (lhs: Message, rhs: Message) -> Bool {
-        return lhs.sentDate < rhs.sentDate
+        lhs.sentDate < rhs.sentDate
     }
 }
 
-extension UIImage: MediaItem {
-    public var url: URL? {
-        return nil
-    }
-    
-    public var image: UIImage? {
-        return self
-    }
-    
-    public var placeholderImage: UIImage {
-        return self
+private struct ImageMediaItem: MediaItem {
+    var url: URL?
+    var image: UIImage?
+    var placeholderImage: UIImage
+    var size: CGSize
+
+    init(url: URL, image: UIImage?) {
+        self.url = url
+        self.image = image
+        self.size = CGSize(width: 240, height: 160)
+        self.placeholderImage = UIImage(systemName: "questionmark")!
     }
 }

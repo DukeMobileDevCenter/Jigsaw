@@ -22,10 +22,10 @@ class GameViewController: ORKTaskViewController {
         fatalError("init(coder:) has not been implemented")
     }
 
-    /// this is the function to create the surveytask from the Questionnaire class (parsed from json)
+    /// The function to create the surveytask from the Questionnaire class (parsed from json)
     ///
-    /// - Parameter q: Questionnaire class object
-    /// - Returns: an ORKOrderedTask surveyTask
+    /// - Parameter questionnaire: Questionnaire type, which is an array of questions.
+    /// - Returns: an `ORKOrderedTask` surveyTask.
     func createSurveyTaskFromJson(questionnaire: Questionnaire) -> ORKOrderedTask {
         var steps = [ORKStep]()
         
@@ -37,8 +37,21 @@ class GameViewController: ORKTaskViewController {
         steps.append(welcomeStep)
         
         // Resource reading page
-        let readingsStep = ResourceWebStep(identifier: "Res", url: resourceURL)
+        let readingsStep = ResourceWebStep(identifier: "Resource", url: resourceURL)
         steps.append(readingsStep)
+        
+        let chatroomCountdownStep = ORKActiveStep(identifier: "Countdown")
+        chatroomCountdownStep.stepDuration = TimeInterval(integerLiteral: 15)
+        chatroomCountdownStep.isOptional = true
+        chatroomCountdownStep.shouldUseNextAsSkipButton = true
+        chatroomCountdownStep.shouldContinueOnFinish = true
+        chatroomCountdownStep.shouldShowDefaultTimer = true
+        chatroomCountdownStep.shouldPlaySoundOnStart = true
+        chatroomCountdownStep.shouldSpeakRemainingTimeAtHalfway = true
+        chatroomCountdownStep.shouldStartTimerAutomatically = true
+        chatroomCountdownStep.shouldSpeakCountDown = true
+        chatroomCountdownStep.shouldPlaySoundOnFinish = true
+        steps.append(chatroomCountdownStep)
         
         for question in questionnaire {
             switch question.questionType {

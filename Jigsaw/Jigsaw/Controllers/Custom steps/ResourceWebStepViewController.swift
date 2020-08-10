@@ -35,7 +35,7 @@ class ResourceWebStepViewController: ORKStepViewController {
         navigationFooterView = ORKNavigationContainerView()
         navigationFooterView.removeStyling()
         navigationFooterView.continueButtonItem = continueButtonItem
-        continueButtonItem?.title = "Continue"
+        continueButtonItem?.title = "Next"
         navigationFooterView.continueEnabled = true
         navigationFooterView.updateContinueAndSkipEnabled()
         navigationFooterView.useExtendedPadding = step!.useExtendedPadding

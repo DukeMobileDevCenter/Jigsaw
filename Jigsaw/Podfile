@@ -23,4 +23,7 @@ pod 'FirebaseFirestoreSwift'
 # Messaging UI
 pod 'MessageKit'
 
+# Image lazy loading
+pod 'PINRemoteImage'
+
 end

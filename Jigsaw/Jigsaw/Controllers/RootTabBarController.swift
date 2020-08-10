@@ -22,7 +22,9 @@ class RootTabBarController: UITabBarController {
             }
             guard let user = result?.user else { return }
             let uid = user.uid
-            if Profiles.userID != uid {
+            if Profiles.userID == nil {
+                Profiles.userID = uid
+            } else if Profiles.userID != uid {
                 self.presentAlert(title: "Something wrong with anonymous user", message: "This should never happen unless database is corrupted.")
             }
         }
