@@ -40,11 +40,14 @@ class HomeCollectionViewController: UICollectionViewController {
     }
     
     override func viewDidLoad() {
+        // Do any additional setup after loading the view.
         super.viewDidLoad()
         
+        // Set collection view delegates.
         collectionView.delegate = self
         collectionView.dataSource = GameStore.shared
-        // Do any additional setup after loading the view.
+        
+        // Asynchronously load the games from Firebase.
         GameStore.shared.loadGames { [weak self] result in
             guard let self = self else { return }
             switch result {
