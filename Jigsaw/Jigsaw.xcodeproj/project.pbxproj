@@ -14,6 +14,8 @@
 		0020D55224DFB1FA00DB20E1 /* ProgressIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0020D55124DFB1FA00DB20E1 /* ProgressIndicator.swift */; };
 		0020D55D24E0A74C00DB20E1 /* ResourceWebStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0020D55C24E0A74C00DB20E1 /* ResourceWebStepViewController.swift */; };
 		0020D55F24E0A7DB00DB20E1 /* ResourceWebStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0020D55E24E0A7DB00DB20E1 /* ResourceWebStep.swift */; };
+		0020D56724E263C600DB20E1 /* MatchingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0020D56624E263C600DB20E1 /* MatchingViewController.swift */; };
+		0020D56A24E267B300DB20E1 /* GameCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0020D56924E267B300DB20E1 /* GameCollectionCell.swift */; };
 		005856BC24D91C4A0010BE55 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 005856BB24D91C4A0010BE55 /* GoogleService-Info.plist */; };
 		005856BE24D923630010BE55 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005856BD24D923630010BE55 /* ChatViewController.swift */; };
 		005856C024D924970010BE55 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005856BF24D924970010BE55 /* Message.swift */; };
@@ -24,7 +26,7 @@
 		005856CE24D92FB60010BE55 /* ChatUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005856CD24D92FB60010BE55 /* ChatUser.swift */; };
 		0070DFEA24B0060400E71F46 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0070DFE924B0060400E71F46 /* AppDelegate.swift */; };
 		0070DFEC24B0060400E71F46 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0070DFEB24B0060400E71F46 /* SceneDelegate.swift */; };
-		0070DFEE24B0060400E71F46 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0070DFED24B0060400E71F46 /* HomeViewController.swift */; };
+		0070DFEE24B0060400E71F46 /* HomeCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0070DFED24B0060400E71F46 /* HomeCollectionViewController.swift */; };
 		0070DFF124B0060400E71F46 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0070DFEF24B0060400E71F46 /* Main.storyboard */; };
 		0070DFF324B0060500E71F46 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0070DFF224B0060500E71F46 /* Assets.xcassets */; };
 		0070DFF624B0060500E71F46 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0070DFF424B0060500E71F46 /* LaunchScreen.storyboard */; };
@@ -81,6 +83,8 @@
 		0020D55124DFB1FA00DB20E1 /* ProgressIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressIndicator.swift; sourceTree = "<group>"; };
 		0020D55C24E0A74C00DB20E1 /* ResourceWebStepViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResourceWebStepViewController.swift; sourceTree = "<group>"; };
 		0020D55E24E0A7DB00DB20E1 /* ResourceWebStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResourceWebStep.swift; sourceTree = "<group>"; };
+		0020D56624E263C600DB20E1 /* MatchingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchingViewController.swift; sourceTree = "<group>"; };
+		0020D56924E267B300DB20E1 /* GameCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameCollectionCell.swift; sourceTree = "<group>"; };
 		005856BB24D91C4A0010BE55 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		005856BD24D923630010BE55 /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		005856BF24D924970010BE55 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
@@ -92,7 +96,7 @@
 		0070DFE624B0060400E71F46 /* Jigsaw.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Jigsaw.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0070DFE924B0060400E71F46 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0070DFEB24B0060400E71F46 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		0070DFED24B0060400E71F46 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		0070DFED24B0060400E71F46 /* HomeCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCollectionViewController.swift; sourceTree = "<group>"; };
 		0070DFF024B0060400E71F46 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		0070DFF224B0060500E71F46 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0070DFF524B0060500E71F46 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -275,10 +279,11 @@
 				00D0861E24CD135B00FB7A20 /* RootTabBarController.swift */,
 				00D0862224CD192800FB7A20 /* OnboardingViewController.swift */,
 				00D0862624CD2D9A00FB7A20 /* GameViewController.swift */,
-				0070DFED24B0060400E71F46 /* HomeViewController.swift */,
+				0070DFED24B0060400E71F46 /* HomeCollectionViewController.swift */,
 				00F2197B24CCF99800B72858 /* GameHistoryViewController.swift */,
 				00F2197D24CCF9A200B72858 /* ProfileViewController.swift */,
 				005856BD24D923630010BE55 /* ChatViewController.swift */,
+				0020D56624E263C600DB20E1 /* MatchingViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -300,6 +305,7 @@
 			isa = PBXGroup;
 			children = (
 				0020D55124DFB1FA00DB20E1 /* ProgressIndicator.swift */,
+				0020D56924E267B300DB20E1 /* GameCollectionCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -502,11 +508,13 @@
 				005856C624D92D320010BE55 /* DatabaseRepresentation.swift in Sources */,
 				005856C024D924970010BE55 /* Message.swift in Sources */,
 				0020D55024DFAED000DB20E1 /* GameOfGroup.swift in Sources */,
+				0020D56724E263C600DB20E1 /* MatchingViewController.swift in Sources */,
 				00BA555B24DA5D2A006A207E /* UICollectionView.swift in Sources */,
 				005856BE24D923630010BE55 /* ChatViewController.swift in Sources */,
+				0020D56A24E267B300DB20E1 /* GameCollectionCell.swift in Sources */,
 				005856C924D92E480010BE55 /* UIImage.swift in Sources */,
 				0020D54E24DF95F700DB20E1 /* PopulateGames.swift in Sources */,
-				0070DFEE24B0060400E71F46 /* HomeViewController.swift in Sources */,
+				0070DFEE24B0060400E71F46 /* HomeCollectionViewController.swift in Sources */,
 				0020D55D24E0A74C00DB20E1 /* ResourceWebStepViewController.swift in Sources */,
 				00D0862724CD2D9A00FB7A20 /* GameViewController.swift in Sources */,
 				00BA555D24DA7CF7006A207E /* Genders.swift in Sources */,

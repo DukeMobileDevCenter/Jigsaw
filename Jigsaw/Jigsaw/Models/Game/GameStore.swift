@@ -10,7 +10,7 @@ import Foundation
 import FirebaseFirestore
 import FirebaseFirestoreSwift
 
-class GameStore {
+class GameStore: NSObject {
     // Singleton of the class.
     static let shared = GameStore()
     
@@ -37,5 +37,29 @@ class GameStore {
                 completion(.failure(error))
             }
         }
+    }
+}
+
+extension GameStore: UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return allGames.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "GameCollectionCell", for: indexPath) as! GameCollectionCell
+        
+        let game = GameStore.shared.allGames[indexPath.item]
+        cell.layer.masksToBounds = false
+        cell.nameLabel.text = game.gameName
+        
+        cell.iconImageView.image = UIImage(systemName: "questionmark")!
+        
+        let bgImage = UIImage(named: "placeholder")
+        cell.backgroundImageView.image = bgImage
+        
+        cell.layer.cornerRadius = 5
+        cell.layer.masksToBounds = true
+        
+        return cell
     }
 }
