@@ -31,6 +31,9 @@ class ProfileViewController: FormViewController {
                 cell.view = view
                 cell.view?.backgroundColor = cell.backgroundColor
             }
+            .onCellSelection { [weak self] _, _ in
+                self?.presentAlert(title: "More to add here", message: "Change avatar feature is on the road!")
+            }
             +++ Section(header: "Basic information", footer: "Blah blah blah")
             <<< NameRow { row in
                 row.title = "Display name"
@@ -47,9 +50,9 @@ class ProfileViewController: FormViewController {
                 row.disabled = true
             }
             +++ Section("Demographics")
-            <<< ButtonRow {
-                $0.title = "Update your demographics"
-                $0.presentationMode = .show(controllerProvider: ControllerProvider.callback { return DemographicsViewController() }, onDismiss: { vc in vc.navigationController?.popViewController(animated: true) })
+            <<< ButtonRow { row in
+                row.title = "Update your demographics"
+                row.presentationMode = .show(controllerProvider: ControllerProvider.callback { return DemographicsViewController() }, onDismiss: { vc in vc.navigationController?.popViewController(animated: true) })
             }
             +++ Section("Game history")
             <<< ButtonRow { row in
