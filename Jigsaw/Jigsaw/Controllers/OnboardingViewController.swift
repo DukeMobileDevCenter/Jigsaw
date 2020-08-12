@@ -36,12 +36,9 @@ class OnboardingViewController: ORKTaskViewController {
             OnboardingSteps.instructionStep,
             OnboardingSteps.informedConsentInstructionStep,
             OnboardingSteps.politicalSliderStep,
-            OnboardingSteps.profileStep
+            OnboardingSteps.profileStep,
+            OnboardingSteps.completionStep
         ])
-        let completionStep = ORKOrderedTask.makeCompletionStep()
-        completionStep.title = "Complete"
-        completionStep.text = "Please start to explore the world of Jigsaw."
-        steps.append(completionStep)
         return steps
     }
     

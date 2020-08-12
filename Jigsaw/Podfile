@@ -26,4 +26,8 @@ pod 'MessageKit'
 # Image lazy loading
 pod 'PINRemoteImage'
 
+# Profile forms
+pod 'Eureka'
+pod 'ViewRow'
+
 end

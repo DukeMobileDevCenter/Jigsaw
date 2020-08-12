@@ -8,10 +8,12 @@
 
 import Foundation
 
-struct Profiles: CustomStringConvertible {
+class Profiles: CustomStringConvertible {
     var description: String {
         return "userID: \(Profiles.userID ?? "nil"), displayName: \(Profiles.displayName ?? "nil"), jigsawValue: \(Profiles.jigsawValue)"
     }
+    
+    static var currentPlayer: Player! = nil
     
     private enum SettingKeys: String, CaseIterable {
         case userID

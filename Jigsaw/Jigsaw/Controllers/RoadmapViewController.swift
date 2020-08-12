@@ -1,5 +1,5 @@
 //
-//  ProfileViewController.swift
+//  RoadmapViewController.swift
 //  Jigsaw
 //
 //  Created by Ting Chen on 7/25/20.
@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import ResearchKit
 
-class ProfileViewController: UIViewController {
+class RoadmapViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
     }

@@ -65,6 +65,7 @@ extension RootTabBarController: OnboardingManagerDelegate {
                 if let currentPlayer = try document.data(as: Player.self) {
                     Profiles.displayName = currentPlayer.displayName
                     Profiles.jigsawValue = currentPlayer.jigsawValue
+                    Profiles.currentPlayer = currentPlayer
                     print(Profiles().description)
                 }
             } catch {

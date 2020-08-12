@@ -32,6 +32,10 @@
 		0070DFF624B0060500E71F46 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0070DFF424B0060500E71F46 /* LaunchScreen.storyboard */; };
 		0070E00124B0060500E71F46 /* JigsawTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0070E00024B0060500E71F46 /* JigsawTests.swift */; };
 		0078315224DF557800B35A98 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0078315124DF557800B35A98 /* Player.swift */; };
+		00B0A67424E3CAA800887701 /* DemographicsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B0A67324E3CAA800887701 /* DemographicsViewController.swift */; };
+		00B0A67A24E3CF9600887701 /* ProfileHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 00B0A67924E3CF9600887701 /* ProfileHeaderView.xib */; };
+		00B0A67C24E3D10300887701 /* ProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B0A67B24E3D10300887701 /* ProfileHeaderView.swift */; };
+		00B0A68124E3DB7300887701 /* String+sha256.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B0A68024E3DB7300887701 /* String+sha256.swift */; };
 		00B2AB7024DA5B3100607346 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B2AB6F24DA5B3100607346 /* UIColor.swift */; };
 		00BA555B24DA5D2A006A207E /* UICollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00BA555A24DA5D2A006A207E /* UICollectionView.swift */; };
 		00BA555D24DA7CF7006A207E /* Genders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00BA555C24DA7CF7006A207E /* Genders.swift */; };
@@ -46,7 +50,7 @@
 		00D0862724CD2D9A00FB7A20 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00D0862624CD2D9A00FB7A20 /* GameViewController.swift */; };
 		00F2197624CCEF5D00B72858 /* ResearchKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00F2196B24CCEAEB00B72858 /* ResearchKit.framework */; };
 		00F2197724CCEF5D00B72858 /* ResearchKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 00F2196B24CCEAEB00B72858 /* ResearchKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		00F2197C24CCF99800B72858 /* GameHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F2197B24CCF99800B72858 /* GameHistoryViewController.swift */; };
+		00F2197C24CCF99800B72858 /* RoadmapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F2197B24CCF99800B72858 /* RoadmapViewController.swift */; };
 		00F2197E24CCF9A200B72858 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F2197D24CCF9A200B72858 /* ProfileViewController.swift */; };
 		4C4D65101A3F2EDDFFFD6EE1 /* Pods_Jigsaw.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 601967226BC24AEDC4FA99EE /* Pods_Jigsaw.framework */; };
 /* End PBXBuildFile section */
@@ -105,6 +109,10 @@
 		0070E00024B0060500E71F46 /* JigsawTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JigsawTests.swift; sourceTree = "<group>"; };
 		0070E00224B0060500E71F46 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0078315124DF557800B35A98 /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
+		00B0A67324E3CAA800887701 /* DemographicsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemographicsViewController.swift; sourceTree = "<group>"; };
+		00B0A67924E3CF9600887701 /* ProfileHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileHeaderView.xib; sourceTree = "<group>"; };
+		00B0A67B24E3D10300887701 /* ProfileHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderView.swift; sourceTree = "<group>"; };
+		00B0A68024E3DB7300887701 /* String+sha256.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+sha256.swift"; sourceTree = "<group>"; };
 		00B2AB6F24DA5B3100607346 /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		00BA555A24DA5D2A006A207E /* UICollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UICollectionView.swift; sourceTree = "<group>"; };
 		00BA555C24DA7CF7006A207E /* Genders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Genders.swift; sourceTree = "<group>"; };
@@ -119,7 +127,7 @@
 		00D0862624CD2D9A00FB7A20 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		00F2196B24CCEAEB00B72858 /* ResearchKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ResearchKit.framework; path = Pods/ResearchKit.framework; sourceTree = "<group>"; };
 		00F2197224CCEF3000B72858 /* ResearchKit-simulator.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = "ResearchKit-simulator.framework"; path = "Pods/ResearchKit-simulator.framework"; sourceTree = "<group>"; };
-		00F2197B24CCF99800B72858 /* GameHistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameHistoryViewController.swift; sourceTree = "<group>"; };
+		00F2197B24CCF99800B72858 /* RoadmapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoadmapViewController.swift; sourceTree = "<group>"; };
 		00F2197D24CCF9A200B72858 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		601967226BC24AEDC4FA99EE /* Pods_Jigsaw.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Jigsaw.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B4591A0726378C2FDAC05571 /* Pods-Jigsaw.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Jigsaw.release.xcconfig"; path = "Target Support Files/Pods-Jigsaw/Pods-Jigsaw.release.xcconfig"; sourceTree = "<group>"; };
@@ -232,7 +240,7 @@
 				00CDFF0624B2E908009C789D /* Views */,
 				00CDFF0524B2E8F0009C789D /* Models */,
 				00CDFF0424B2E8E1009C789D /* Controllers */,
-				00CDFF0324B2E8C3009C789D /* UIKit Extension */,
+				00CDFF0324B2E8C3009C789D /* Extensions */,
 				00CDFF0224B2E8AA009C789D /* Storyboard */,
 				0070DFE924B0060400E71F46 /* AppDelegate.swift */,
 				0070DFEB24B0060400E71F46 /* SceneDelegate.swift */,
@@ -252,24 +260,46 @@
 			path = JigsawTests;
 			sourceTree = "<group>";
 		};
+		00B0A67524E3CAD500887701 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				0070DFED24B0060400E71F46 /* HomeCollectionViewController.swift */,
+				0020D56624E263C600DB20E1 /* MatchingViewController.swift */,
+				005856BD24D923630010BE55 /* ChatViewController.swift */,
+				00D0862624CD2D9A00FB7A20 /* GameViewController.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		00B0A67624E3CAF000887701 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				00F2197D24CCF9A200B72858 /* ProfileViewController.swift */,
+				00B0A67324E3CAA800887701 /* DemographicsViewController.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
 		00CDFF0224B2E8AA009C789D /* Storyboard */ = {
 			isa = PBXGroup;
 			children = (
 				0070DFEF24B0060400E71F46 /* Main.storyboard */,
 				0070DFF424B0060500E71F46 /* LaunchScreen.storyboard */,
+				00B0A67924E3CF9600887701 /* ProfileHeaderView.xib */,
 			);
 			path = Storyboard;
 			sourceTree = "<group>";
 		};
-		00CDFF0324B2E8C3009C789D /* UIKit Extension */ = {
+		00CDFF0324B2E8C3009C789D /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
 				00CDFF1124B44797009C789D /* UIViewController.swift */,
 				005856C824D92E480010BE55 /* UIImage.swift */,
 				00B2AB6F24DA5B3100607346 /* UIColor.swift */,
 				00BA555A24DA5D2A006A207E /* UICollectionView.swift */,
+				00B0A68024E3DB7300887701 /* String+sha256.swift */,
 			);
-			path = "UIKit Extension";
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		00CDFF0424B2E8E1009C789D /* Controllers */ = {
@@ -278,12 +308,9 @@
 				0020D55B24E09A6E00DB20E1 /* Custom steps */,
 				00D0861E24CD135B00FB7A20 /* RootTabBarController.swift */,
 				00D0862224CD192800FB7A20 /* OnboardingViewController.swift */,
-				00D0862624CD2D9A00FB7A20 /* GameViewController.swift */,
-				0070DFED24B0060400E71F46 /* HomeCollectionViewController.swift */,
-				00F2197B24CCF99800B72858 /* GameHistoryViewController.swift */,
-				00F2197D24CCF9A200B72858 /* ProfileViewController.swift */,
-				005856BD24D923630010BE55 /* ChatViewController.swift */,
-				0020D56624E263C600DB20E1 /* MatchingViewController.swift */,
+				00B0A67524E3CAD500887701 /* Home */,
+				00B0A67624E3CAF000887701 /* Profile */,
+				00F2197B24CCF99800B72858 /* RoadmapViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -306,6 +333,7 @@
 			children = (
 				0020D55124DFB1FA00DB20E1 /* ProgressIndicator.swift */,
 				0020D56924E267B300DB20E1 /* GameCollectionCell.swift */,
+				00B0A67B24E3D10300887701 /* ProfileHeaderView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -425,6 +453,7 @@
 				005856BC24D91C4A0010BE55 /* GoogleService-Info.plist in Resources */,
 				0070DFF324B0060500E71F46 /* Assets.xcassets in Resources */,
 				0070DFF124B0060400E71F46 /* Main.storyboard in Resources */,
+				00B0A67A24E3CF9600887701 /* ProfileHeaderView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -511,6 +540,7 @@
 				0020D56724E263C600DB20E1 /* MatchingViewController.swift in Sources */,
 				00BA555B24DA5D2A006A207E /* UICollectionView.swift in Sources */,
 				005856BE24D923630010BE55 /* ChatViewController.swift in Sources */,
+				00B0A68124E3DB7300887701 /* String+sha256.swift in Sources */,
 				0020D56A24E267B300DB20E1 /* GameCollectionCell.swift in Sources */,
 				005856C924D92E480010BE55 /* UIImage.swift in Sources */,
 				0020D54E24DF95F700DB20E1 /* PopulateGames.swift in Sources */,
@@ -521,6 +551,7 @@
 				00B2AB7024DA5B3100607346 /* UIColor.swift in Sources */,
 				00F2197E24CCF9A200B72858 /* ProfileViewController.swift in Sources */,
 				005856C424D92CFB0010BE55 /* Chatroom.swift in Sources */,
+				00B0A67424E3CAA800887701 /* DemographicsViewController.swift in Sources */,
 				00D0862524CD24EA00FB7A20 /* OnboardingSteps.swift in Sources */,
 				0020D55F24E0A7DB00DB20E1 /* ResourceWebStep.swift in Sources */,
 				0070DFEA24B0060400E71F46 /* AppDelegate.swift in Sources */,
@@ -531,7 +562,8 @@
 				00CDFF1224B44797009C789D /* UIViewController.swift in Sources */,
 				0070DFEC24B0060400E71F46 /* SceneDelegate.swift in Sources */,
 				0020D54B24DF7A0D00DB20E1 /* Game.swift in Sources */,
-				00F2197C24CCF99800B72858 /* GameHistoryViewController.swift in Sources */,
+				00F2197C24CCF99800B72858 /* RoadmapViewController.swift in Sources */,
+				00B0A67C24E3D10300887701 /* ProfileHeaderView.swift in Sources */,
 				005856C224D9262C0010BE55 /* Profiles.swift in Sources */,
 				00CDFF0D24B4353E009C789D /* Questionnaire.swift in Sources */,
 				0020D55224DFB1FA00DB20E1 /* ProgressIndicator.swift in Sources */,

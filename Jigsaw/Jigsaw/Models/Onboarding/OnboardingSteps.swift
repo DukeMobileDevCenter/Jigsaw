@@ -82,6 +82,13 @@ enum OnboardingSteps {
         return step
     }()
     
+    static let completionStep: ORKCompletionStep = {
+        let completionStep = ORKCompletionStep(identifier: "CompletionStep")
+        completionStep.title = "All Done!"
+        completionStep.detailText = "Please start to explore the world of Jigsaw."
+        return completionStep
+    }()
+    
 //    static let profileStep: ORKFormStep = {
 //        // Gender picker
 //        var genderTextChoices: [ORKTextChoice] = []

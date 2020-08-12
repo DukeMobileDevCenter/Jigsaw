@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="wVN-vJ-fap" customClass="ProfileHeaderView" customModule="Jigsaw" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="472" height="96"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="person.circle" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="p44-Nc-uk8">
+                    <rect key="frame" x="8" y="8.5" width="80" height="79"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="80" id="P1Z-lo-Gvw"/>
+                        <constraint firstAttribute="height" constant="80" id="fIb-CC-4vY"/>
+                    </constraints>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="Johnny Appleseed" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dKb-lz-bdM">
+                    <rect key="frame" x="104" y="32" width="348" height="20.5"/>
+                    <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="dKb-lz-bdM" secondAttribute="trailing" constant="20" symbolic="YES" id="9bN-ei-yt6"/>
+                <constraint firstAttribute="bottom" secondItem="p44-Nc-uk8" secondAttribute="bottom" constant="8" id="GCz-S3-vqq"/>
+                <constraint firstItem="p44-Nc-uk8" firstAttribute="top" secondItem="wVN-vJ-fap" secondAttribute="top" constant="8" id="So2-5s-DJi"/>
+                <constraint firstItem="dKb-lz-bdM" firstAttribute="leading" secondItem="p44-Nc-uk8" secondAttribute="trailing" constant="16" id="UPR-q9-Cy4"/>
+                <constraint firstItem="dKb-lz-bdM" firstAttribute="firstBaseline" secondItem="p44-Nc-uk8" secondAttribute="centerY" id="fb2-gd-rvi"/>
+                <constraint firstItem="p44-Nc-uk8" firstAttribute="leading" secondItem="wVN-vJ-fap" secondAttribute="leading" constant="8" id="vAP-G6-fEB"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="qU7-cM-QdE"/>
+            <connections>
+                <outlet property="avatarImageView" destination="p44-Nc-uk8" id="d7q-g1-haF"/>
+                <outlet property="nameLabel" destination="dKb-lz-bdM" id="E3S-cY-13C"/>
+            </connections>
+            <point key="canvasLocation" x="291" y="-136"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="person.circle" catalog="system" width="128" height="121"/>
+    </resources>
+</document>
