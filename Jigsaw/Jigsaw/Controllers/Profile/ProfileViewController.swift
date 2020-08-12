@@ -43,6 +43,7 @@ class ProfileViewController: FormViewController {
             <<< DecimalRow { row in
                 row.title = "Jigsaw value"
                 row.value = Profiles.jigsawValue
+                row.disabled = true
             }
             <<< DateRow { row in
                 row.title = "Join date"
