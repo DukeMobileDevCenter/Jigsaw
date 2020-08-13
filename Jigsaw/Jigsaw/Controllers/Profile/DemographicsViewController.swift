@@ -13,6 +13,7 @@ import Eureka
 class DemographicsViewController: FormViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
+        title = "Demographics"
         
         let ageRules: RuleSet<Int> = {
             var rules = RuleSet<Int>()

@@ -52,10 +52,23 @@ extension GameStore: UICollectionViewDataSource {
         cell.layer.masksToBounds = false
         cell.nameLabel.text = game.gameName
         
-        cell.iconImageView.image = UIImage(systemName: "questionmark")!
+        // Decide icon image.
+        let iconImage: UIImage
+        switch game.category {
+        case .immigration:
+            iconImage = UIImage(systemName: "hand.raised.slash")!
+        case .education:
+            iconImage = UIImage(systemName: "book")!
+        case .housing:
+            iconImage = UIImage(systemName: "house")!
+        }
+        cell.iconImageView.image = iconImage
         
-        let bgImage = UIImage(named: "placeholder")
-        cell.backgroundImageView.image = bgImage
+//        let bgImage = UIImage(named: "placeholder")
+        // Lazy load background image.
+        cell.backgroundImageView.pin_updateWithProgress = true
+        cell.backgroundImageView.contentMode = .scaleAspectFill
+        cell.backgroundImageView.pin_setImage(from: game.backgroundImageURL)
         
         cell.layer.cornerRadius = 5
         cell.layer.masksToBounds = true

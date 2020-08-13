@@ -24,15 +24,14 @@ class ProfileViewController: FormViewController {
                 //  Construct the view
                 let gravatarHash = Profiles.currentPlayer.userID.sha256
                 let endIndex = gravatarHash.index(gravatarHash.startIndex, offsetBy: 32)
-                let avatarURL = URL(string: "https://www.gravatar.com/avatar/\(gravatarHash[..<endIndex])?d=identicon")!
+                let avatarURL = URL(string: "https://www.gravatar.com/avatar/\(gravatarHash[..<endIndex])?d=wavatar")!
                 print(avatarURL.absoluteString)
                 let view = Bundle.main.loadNibNamed("ProfileHeaderView", owner: self)?.first as! ProfileHeaderView
                 view.setView(name: Profiles.displayName, avatarURL: avatarURL)
                 cell.view = view
-                cell.view?.backgroundColor = cell.backgroundColor
             }
             .onCellSelection { [weak self] _, _ in
-                self?.presentAlert(title: "More to add here", message: "Change avatar feature is on the road!")
+                self?.presentAlert(title: "More to add here", message: "Change avatar feature is on the way!")
             }
             +++ Section(header: "Basic information", footer: "Blah blah blah")
             <<< NameRow { row in
@@ -58,6 +57,9 @@ class ProfileViewController: FormViewController {
             +++ Section("Game history")
             <<< ButtonRow { row in
                 row.title = "Show game history"
+            }
+            .onCellSelection { [weak self] _, _ in
+                self?.presentAlert(title: "More to add here", message: "Show game history is on the way!")
             }
     }
 }

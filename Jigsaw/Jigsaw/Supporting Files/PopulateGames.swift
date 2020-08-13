@@ -32,6 +32,8 @@ class PopulateGames {
       "version": "200808",
       "g1resURL": "https://githubschool.github.io/github-games-yo1995/JigsawBetaHost/USImmigration1/Group1Resource/",
       "g2resURL": "https://githubschool.github.io/github-games-yo1995/JigsawBetaHost/USImmigration1/Group2Resource/",
+      "backgroundImageURL": "https://images.unsplash.com/photo-1559282136-1d3983a48c7b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=600&q=80",
+      "category": "immigration",
       "g1Questionnaire": [
         {
           "questionType": "INSTRUCTION",

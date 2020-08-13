@@ -17,6 +17,8 @@ class MatchingViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        title = "Matching players..."
+        
         let gameOfMyGroup = GameOfGroup(version: game.version, gameName: game.gameName, resourceURL: game.g2resURL, questionnaire: game.g2Questionnaire)
         let taskViewController = GameViewController(game: gameOfMyGroup, taskRun: nil)
         taskViewController.delegate = self
@@ -63,7 +65,10 @@ extension MatchingViewController: ORKTaskViewControllerDelegate {
         switch reason {
         case .discarded, .failed, .saved:
             if let error = error { presentAlert(error: error) }
-            taskViewController.dismiss(animated: true)
+            taskViewController.dismiss(animated: true) { [weak self] in
+                // Also pop the matching VC. Subject to change.
+                self?.navigationController?.popViewController(animated: true)
+            }
         case .completed:
             // Access the first and last name from the review step
             //            if let signatureResult = signatureResult(taskViewController: taskViewController),
@@ -75,7 +80,10 @@ extension MatchingViewController: ORKTaskViewControllerDelegate {
             
             print("✅ completed")
             print(taskViewController.result)
-            taskViewController.dismiss(animated: true, completion: nil)
+            taskViewController.dismiss(animated: true) { [weak self] in
+                // Also pop the matching VC. Subject to change.
+                self?.navigationController?.popViewController(animated: true)
+            }
         @unknown default:
             fatalError("Error: Onboarding task yields unknown result.")
         }

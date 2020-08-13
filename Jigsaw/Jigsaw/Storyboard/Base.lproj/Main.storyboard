@@ -60,7 +60,6 @@
                                         </label>
                                     </subviews>
                                 </view>
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstItem="8Ig-0H-lUk" firstAttribute="leading" secondItem="Go8-ni-fEs" secondAttribute="leading" constant="2" id="0p2-Dg-O9v"/>
                                     <constraint firstItem="X7l-vU-RZw" firstAttribute="height" secondItem="Ly9-LV-qmz" secondAttribute="height" id="61c-Gw-MjD"/>
@@ -110,7 +109,7 @@
         <!--Matching View Controller-->
         <scene sceneID="HvH-yh-Qoo">
             <objects>
-                <viewController id="qIk-Vr-9mo" customClass="MatchingViewController" customModule="Jigsaw" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController hidesBottomBarWhenPushed="YES" id="qIk-Vr-9mo" customClass="MatchingViewController" customModule="Jigsaw" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="UYT-Va-FZ1">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -142,7 +141,6 @@
         <!--Player Profile-->
         <scene sceneID="ZH7-Kp-vrb">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="9fN-l4-P25" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <viewController id="P4k-pc-CCe" customClass="ProfileViewController" customModule="Jigsaw" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="eZx-dT-NlR">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
@@ -152,6 +150,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="Player Profile" id="bOu-nD-ssk"/>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9fN-l4-P25" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1571.0144927536232" y="833.70535714285711"/>
         </scene>
@@ -181,8 +180,8 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Nu6-tE-NdJ" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Games" image="gamecontroller" catalog="system" id="CPe-5h-vOP"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="sHT-qx-WLs">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="sHT-qx-WLs">
+                        <rect key="frame" x="0.0" y="44" width="414" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -197,12 +196,11 @@
         <!--Profile-->
         <scene sceneID="BUY-Wy-Iag">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="7Vs-A8-Jyj" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="zcL-v5-oxf" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Profile" image="person" catalog="system" id="YRA-a0-TyO"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="M4R-Te-ZuO">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="M4R-Te-ZuO">
+                        <rect key="frame" x="0.0" y="44" width="414" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -210,6 +208,7 @@
                         <segue destination="P4k-pc-CCe" kind="relationship" relationship="rootViewController" id="heX-b7-Z86"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7Vs-A8-Jyj" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="660.86956521739137" y="833.70535714285711"/>
         </scene>

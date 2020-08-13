@@ -21,4 +21,15 @@ struct Game: Codable {
     let g1Questionnaire: Questionnaire
     // Group 2 questionnaire.
     let g2Questionnaire: Questionnaire
+    // Category, used for categorize games and display icon.
+    let category: GameCategory
+    // Game card background image URL, can also use for styling.
+    let backgroundImageURL: URL
+}
+
+enum GameCategory: String, CaseIterable, Codable {
+    // Some dummy categories only for demo purposes
+    case immigration
+    case education
+    case housing
 }
