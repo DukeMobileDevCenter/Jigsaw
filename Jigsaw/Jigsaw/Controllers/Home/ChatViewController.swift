@@ -238,15 +238,15 @@ extension ChatViewController: MessagesDisplayDelegate {
             break
         }
     }
+    
+    func configureAvatarView(_ avatarView: AvatarView, for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) {
+        avatarView.pin_setImage(from: message.sender.senderId.gravatarURL)
+    }
 }
 
 // MARK: - MessagesLayoutDelegate
 
 extension ChatViewController: MessagesLayoutDelegate {
-    func avatarSize(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> CGSize {
-        return .zero
-    }
-    
     func footerViewSize(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> CGSize {
         return CGSize(width: 0, height: 8)
     }

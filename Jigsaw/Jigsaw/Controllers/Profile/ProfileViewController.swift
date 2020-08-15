@@ -21,12 +21,8 @@ class ProfileViewController: FormViewController {
         <<< ViewRow<ProfileHeaderView>("view")
         .cellSetup { cell, _ in
             //  Construct the view
-            let gravatarHash = Profiles.currentPlayer.userID.sha256
-            let endIndex = gravatarHash.index(gravatarHash.startIndex, offsetBy: 32)
-            let avatarURL = URL(string: "https://www.gravatar.com/avatar/\(gravatarHash[..<endIndex])?d=wavatar")!
-            print(avatarURL.absoluteString)
             let view = Bundle.main.loadNibNamed("ProfileHeaderView", owner: self)?.first as! ProfileHeaderView
-            view.setView(name: Profiles.displayName, avatarURL: avatarURL)
+            view.setView(name: Profiles.displayName, avatarURL: Profiles.currentPlayer.userID.gravatarURL)
             cell.view = view
         }
         .onCellSelection { [weak self] _, _ in

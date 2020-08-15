@@ -18,4 +18,11 @@ extension String {
         }
         return hash.map { String(format: "%02x", $0) }.joined()
     }
+    
+    var gravatarURL: URL {
+        let gravatarHash = self.sha256
+        let endIndex = gravatarHash.index(gravatarHash.startIndex, offsetBy: 32)
+        let gravatarURL = URL(string: "https://www.gravatar.com/avatar/\(gravatarHash[..<endIndex])?d=wavatar")!
+        return gravatarURL
+    }
 }
