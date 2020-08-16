@@ -27,7 +27,7 @@ pod 'MessageKit'
 pod 'PINRemoteImage'
 
 # Image viewer for chatroom
-pod 'Lightbox'
+pod 'Agrume'
 
 # Profile forms
 pod 'Eureka'

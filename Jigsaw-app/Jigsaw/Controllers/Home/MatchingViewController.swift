@@ -16,6 +16,8 @@ class MatchingViewController: UIViewController {
     var isChatroomShown: Bool = false
     var games: [Game]!
     
+    var queueType: PlayersQueue!
+    
     @IBOutlet var playerCountLabel: UILabel!
     
     private let database = Firestore.firestore()
@@ -31,12 +33,12 @@ class MatchingViewController: UIViewController {
         super.viewDidLoad()
         title = "Matching players"
         
-        let queueReference = database.collection(["Queues", "Immigration", "twoPlayersQueue"].joined(separator: "/"))
+        let queueReference = database.collection(["Queues", "Immigration", queueType.rawValue].joined(separator: "/"))
         queueListener = queueReference.addSnapshotListener { [weak self] querySnapshot, _ in
             self?.playerCountLabel.text = "\(querySnapshot?.documents.count ?? 0)"
         }
         
-        addPlayerToTwoPlayersQueue(queueReference: queueReference)
+        addPlayerToPlayersQueue(queueReference: queueReference)
         
         let gameGroupRef = database.collection("GameGroups")
         gameGroupListener = gameGroupRef.addSnapshotListener { [weak self] querySnapshot, error in
@@ -50,7 +52,7 @@ class MatchingViewController: UIViewController {
         }
     }
     
-    private func addPlayerToTwoPlayersQueue(queueReference: CollectionReference) {
+    private func addPlayerToPlayersQueue(queueReference: CollectionReference) {
         do {
             try queueReference.document(Profiles.currentPlayer.userID).setData(from: Profiles.currentPlayer)
         } catch {
@@ -84,6 +86,12 @@ class MatchingViewController: UIViewController {
                 }
             }
         }
+    }
+    
+    private func removeUserFromQueue() {
+        let queueReference = database.collection(["Queues", "Immigration", queueType.rawValue].joined(separator: "/"))
+        queueReference.document(Profiles.currentPlayer.userID).delete()
+        navigationController?.popViewController(animated: true)
     }
     
     private func handleDocumentChange(_ change: DocumentChange) {
@@ -122,6 +130,9 @@ class MatchingViewController: UIViewController {
     }
     
     deinit {
+        // Stop waiting in queue when player exit the matching page.
+        // There might be some sync bug, if a player just quit a match while he is added to a group.
+        removeUserFromQueue()
         gameGroupListener?.remove()
         chatroomListener?.remove()
         queueListener?.remove()

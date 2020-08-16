@@ -15,6 +15,8 @@ class HomeCollectionViewController: UICollectionViewController {
     /// The flow layout of the collection view.
     @IBOutlet private var collectionViewFlowLayout: UICollectionViewFlowLayout!
     
+    @IBOutlet private var playersCountSegmentedControl: UISegmentedControl!
+    
     @IBAction func testBarButtonTapped(_ sender: UIBarButtonItem) {
         let chatroomRef = Firestore.firestore().collection("Chatrooms")
         chatroomRef.addSnapshotListener { querySnapshot, error in
@@ -30,6 +32,10 @@ class HomeCollectionViewController: UICollectionViewController {
             }
         }
         //        PopulateGames.shared.uploadGame()
+    }
+    
+    @IBAction func segmentedControlValueChanged(_ sender: UISegmentedControl) {
+        title = playersCountSegmentedControl.selectedSegmentIndex == 0 ? "Lobby - 2P" : "Lobby - 4P"
     }
     
     @objc
@@ -103,6 +109,7 @@ class HomeCollectionViewController: UICollectionViewController {
                 print("Index path \(selectedIndexPath).")
                 let destinationVC = segue.destination as! MatchingViewController
                 destinationVC.games = GameStore.shared.allGames
+                destinationVC.queueType = playersCountSegmentedControl.selectedSegmentIndex == 0 ? .twoPlayersQueue : .fourPlayersQueue
             }
         default:
             preconditionFailure("Unexpected segue identifier.")

@@ -44,6 +44,7 @@
 		00CDFF1224B44797009C789D /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00CDFF1124B44797009C789D /* UIViewController.swift */; };
 		00CDFF1424B44C9D009C789D /* LocalErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00CDFF1324B44C9D009C789D /* LocalErrors.swift */; };
 		00CDFF1624B44F4C009C789D /* QuestionStepsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00CDFF1524B44F4C009C789D /* QuestionStepsModel.swift */; };
+		00CF673A24E9E2BC00C502F3 /* PlayersQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00CF673924E9E2BC00C502F3 /* PlayersQueue.swift */; };
 		00D0861F24CD135B00FB7A20 /* RootTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00D0861E24CD135B00FB7A20 /* RootTabBarController.swift */; };
 		00D0862124CD185C00FB7A20 /* OnboardingStateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00D0862024CD185C00FB7A20 /* OnboardingStateManager.swift */; };
 		00D0862324CD192800FB7A20 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00D0862224CD192800FB7A20 /* OnboardingViewController.swift */; };
@@ -122,6 +123,7 @@
 		00CDFF1124B44797009C789D /* UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
 		00CDFF1324B44C9D009C789D /* LocalErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalErrors.swift; sourceTree = "<group>"; };
 		00CDFF1524B44F4C009C789D /* QuestionStepsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionStepsModel.swift; sourceTree = "<group>"; };
+		00CF673924E9E2BC00C502F3 /* PlayersQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayersQueue.swift; sourceTree = "<group>"; };
 		00D0861E24CD135B00FB7A20 /* RootTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootTabBarController.swift; sourceTree = "<group>"; };
 		00D0862024CD185C00FB7A20 /* OnboardingStateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingStateManager.swift; sourceTree = "<group>"; };
 		00D0862224CD192800FB7A20 /* OnboardingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
@@ -198,6 +200,7 @@
 				0020D54A24DF7A0D00DB20E1 /* Game.swift */,
 				0020D54F24DFAED000DB20E1 /* GameOfGroup.swift */,
 				00A06D8C24E8A9B400030649 /* GameGroup.swift */,
+				00CF673924E9E2BC00C502F3 /* PlayersQueue.swift */,
 			);
 			path = Game;
 			sourceTree = "<group>";
@@ -558,6 +561,7 @@
 				0070DFEE24B0060400E71F46 /* HomeCollectionViewController.swift in Sources */,
 				0020D55D24E0A74C00DB20E1 /* ResourceWebStepViewController.swift in Sources */,
 				00D0862724CD2D9A00FB7A20 /* GameViewController.swift in Sources */,
+				00CF673A24E9E2BC00C502F3 /* PlayersQueue.swift in Sources */,
 				00BA555D24DA7CF7006A207E /* Genders.swift in Sources */,
 				00B2AB7024DA5B3100607346 /* UIColor.swift in Sources */,
 				00F2197E24CCF9A200B72858 /* ProfileViewController.swift in Sources */,

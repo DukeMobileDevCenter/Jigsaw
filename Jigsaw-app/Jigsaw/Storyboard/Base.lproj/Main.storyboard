@@ -7,7 +7,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Lobby-->
+        <!--Lobby - 2P-->
         <scene sceneID="RIo-hk-tt8">
             <objects>
                 <collectionViewController id="4a0-lW-Yyi" customClass="HomeCollectionViewController" customModule="Jigsaw" customModuleProvider="target" sceneMemberID="viewController">
@@ -91,15 +91,29 @@
                             <outlet property="delegate" destination="4a0-lW-Yyi" id="Fdj-V6-GIU"/>
                         </connections>
                     </collectionView>
-                    <navigationItem key="navigationItem" title="Lobby" id="UZt-g5-Jhh">
+                    <navigationItem key="navigationItem" title="Lobby - 2P" id="UZt-g5-Jhh">
                         <barButtonItem key="leftBarButtonItem" title="Test" id="vsv-Qs-kfx">
                             <connections>
                                 <action selector="testBarButtonTapped:" destination="4a0-lW-Yyi" id="rgv-xf-AHo"/>
                             </connections>
                         </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" id="wtT-oG-gy1">
+                            <segmentedControl key="customView" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="KsP-MD-Xda">
+                                <rect key="frame" x="302" y="5.5" width="92" height="33"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <segments>
+                                    <segment title="" image="person" catalog="system"/>
+                                    <segment title="" image="person.2" catalog="system"/>
+                                </segments>
+                                <connections>
+                                    <action selector="segmentedControlValueChanged:" destination="4a0-lW-Yyi" eventType="valueChanged" id="Mdb-h8-mMZ"/>
+                                </connections>
+                            </segmentedControl>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="collectionViewFlowLayout" destination="heT-VK-jaX" id="KrV-ad-1QX"/>
+                        <outlet property="playersCountSegmentedControl" destination="KsP-MD-Xda" id="ADk-vn-DWX"/>
                     </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FUz-N4-EiH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -245,5 +259,6 @@
         <image name="arrow.swap" catalog="system" width="128" height="100"/>
         <image name="gamecontroller" catalog="system" width="128" height="82"/>
         <image name="person" catalog="system" width="128" height="117"/>
+        <image name="person.2" catalog="system" width="128" height="81"/>
     </resources>
 </document>

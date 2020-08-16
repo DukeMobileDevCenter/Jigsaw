@@ -18,7 +18,7 @@ import FirebaseStorage
 import MessageKit
 import InputBarAccessoryView
 import PINRemoteImage
-import Lightbox
+import Agrume
 
 class ChatViewController: MessagesViewController {
     private var isSendingPhoto = false {
@@ -270,11 +270,9 @@ extension ChatViewController: MessageCellDelegate {
         let message = messageForItem(at: messagesCollectionView.indexPath(for: cell)!, in: messagesCollectionView)
         switch message.kind {
         case .photo(let media):
-            let image = LightboxImage(imageURL: media.url!)
-            let controller = LightboxController(images: [image])
-            controller.dynamicBackground = true
-            controller.modalPresentationStyle = .fullScreen
-            present(controller, animated: true)
+            let agrume = Agrume(url: media.url!)
+            agrume.background = .blurred(.regular)
+            agrume.show(from: self)
         default:
             break
         }
