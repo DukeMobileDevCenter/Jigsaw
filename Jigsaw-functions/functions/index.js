@@ -52,8 +52,8 @@ exports.makeGameGroup = functions.firestore.document('/Queues/Immigration/twoPla
     "group2": group2
   };
   // Remove players added to a game group.
-  [].concat(group1, group2).forEach((id) => {
-      const res = await ref.doc(id).delete();
+  [].concat(group1, group2).forEach(async (id) => {
+      await ref.doc(id).delete();
   })
   // Add a new document in collection "GameGroups" with generated ID.
   return db.collection('GameGroups').add(gameGroup);
