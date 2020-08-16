@@ -70,9 +70,10 @@ class HomeCollectionViewController: UICollectionViewController {
         switch segue.identifier {
         case "showGame"?:
             if let selectedIndexPath = collectionView.indexPathsForSelectedItems?.first {
-                let game = GameStore.shared.allGames[selectedIndexPath.item]
+                // For future decision on either game or category.
+                print("Index path \(selectedIndexPath).")
                 let destinationVC = segue.destination as! MatchingViewController
-                destinationVC.game = game
+                destinationVC.games = GameStore.shared.allGames
             }
         default:
             preconditionFailure("Unexpected segue identifier.")

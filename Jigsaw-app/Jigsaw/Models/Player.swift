@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import FirebaseFirestoreSwift
 
 struct Player: Codable {
     let userID: String
