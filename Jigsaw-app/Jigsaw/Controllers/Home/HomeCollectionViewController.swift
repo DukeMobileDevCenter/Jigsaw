@@ -9,14 +9,13 @@
 import UIKit
 import FirebaseFirestore
 import FirebaseAuth
+import ProgressHUD
 
 class HomeCollectionViewController: UICollectionViewController {
     /// The flow layout of the collection view.
     @IBOutlet private var collectionViewFlowLayout: UICollectionViewFlowLayout!
     
     @IBAction func testBarButtonTapped(_ sender: UIBarButtonItem) {
-//        show(reviewVC, sender: sender)
-//        let vc = ChatViewController(user: currentUser, chatroom: "zY40mIdv1xnSxyB9GVPK")
         let chatroomRef = Firestore.firestore().collection("Chatrooms")
         chatroomRef.addSnapshotListener { querySnapshot, error in
             guard let snapshot = querySnapshot else {
@@ -30,23 +29,52 @@ class HomeCollectionViewController: UICollectionViewController {
                 }
             }
         }
-//        do {
-//            let chatroom = Chatroom(name: "US1")
-//            _ = try chatroomRef.document(chatroom.id!).setData(from: chatroom)
-//        } catch {
-//            print("Error saving chatroom: \(error.localizedDescription)")
-//        }
-//
+        //        PopulateGames.shared.uploadGame()
+    }
+    
+    @objc
+    func loadGames() {
+        // Asynchronously load the games from Firebase.
+        GameStore.shared.loadGames { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(let games):
+                // Update collection view UI here.
+                DispatchQueue.main.async {
+                    print(games.count)
+                }
+            case .failure(let error):
+                DispatchQueue.main.async {
+                    self.presentAlert(error: error)
+                }
+                print("Error: loading games from remote: \(error)")
+            }
+            // Reload collection view and dismiss the refresh control.
+            DispatchQueue.main.async {
+                self.collectionView.reloadSections(IndexSet(integer: 0))
+                self.collectionView.refreshControl?.endRefreshing()
+            }
+        }
+    }
+    
+    private func configureRefreshControl() {
+        // Add the refresh control to your UIScrollView object.
+        collectionView.refreshControl = UIRefreshControl()
+        collectionView.refreshControl?.addTarget(self, action: #selector(loadGames), for: .valueChanged)
     }
     
     override func viewDidLoad() {
         // Do any additional setup after loading the view.
         super.viewDidLoad()
         
+        // Configure pull to refresh.
+        configureRefreshControl()
+        
         // Set collection view delegates.
         collectionView.delegate = self
         collectionView.dataSource = GameStore.shared
         
+        ProgressHUD.show()
         // Asynchronously load the games from Firebase.
         GameStore.shared.loadGames { [weak self] result in
             guard let self = self else { return }
@@ -63,6 +91,7 @@ class HomeCollectionViewController: UICollectionViewController {
                 print("Error: loading games from remote: \(error)")
             }
             self.collectionView.reloadSections(IndexSet(integer: 0))
+            ProgressHUD.dismiss()
         }
     }
     

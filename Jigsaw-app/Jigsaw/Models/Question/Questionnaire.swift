@@ -12,13 +12,13 @@ import ResearchKit
 // Questionnaire is [Question], i.e. an array of questions.
 typealias Questionnaire = [Question]
 
-struct Question: Codable {
+struct Question: Codable, QuestionEssentialProperty {
     let questionType: QuestionType
     let title: String
     let prompt: String
     let choices: [Choice]
     let custom: String
-    let optional: Bool
+    let isOptional: Bool
 
     init(questionType: String, title: String, prompt: String, choices: [Choice], custom: String, optional: Bool) {
         switch questionType {
@@ -42,21 +42,6 @@ struct Question: Codable {
         self.prompt = prompt
         self.choices = choices
         self.custom = custom
-        self.optional = optional
+        self.isOptional = optional
     }
-}
-
-enum QuestionType: String, Codable {
-    case instruction = "INSTRUCTION"
-    case multipleChoice = "MULTIPLE CHOICE"
-    case singleChoice = "SINGLE CHOICE"
-    case numeric = "NUMERIC"
-    case map = "MAP"
-    case scale = "SCALE"
-    case unknown = "UNKNOWN"
-}
-
-struct Choice: Codable {
-    let text: String
-    let value: String
 }

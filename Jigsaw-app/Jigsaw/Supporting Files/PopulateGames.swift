@@ -16,10 +16,10 @@ class PopulateGames {
     func uploadGame() {
         let data = jsonStringUSImmigration1.data(using: .utf8)!
         let decoder = JSONDecoder()
-        let db = Firestore.firestore()
+        let database = Firestore.firestore()
         do {
             let decoded = try decoder.decode(Game.self, from: data)
-            try db.collection("Games").document(decoded.gameName).setData(from: decoded)
+            try database.collection("Games").document(decoded.gameName).setData(from: decoded)
         } catch {
             print(error)
         }
@@ -38,39 +38,185 @@ class PopulateGames {
         {
           "questionType": "INSTRUCTION",
           "title": "Required Questions",
-          "prompt": "The following questions are essential for the search. Please answer carefully.",
+          "prompt": "The following questions are essential. Please answer carefully.",
           "choices": [],
           "custom": "",
-          "optional": false
+          "isOptional": false
         },
         {
           "questionType": "SINGLE CHOICE",
-          "title": "Q1: Energy",
-          "prompt": "How long can you be active today?",
+          "title": "Q1: Policy",
+          "prompt": "What particular immigration-related policy does Buttigieg explicitly support?",
           "choices": [
             {
-              "text": "20 min or less",
-              "value": "19"
+              "text": "Family-based immigration",
+              "value": "0"
             },
             {
-              "text": "30 min",
-              "value": "29"
+              "text": "Diversity visas",
+              "value": "1"
             },
             {
-              "text": "45 min",
-              "value": "44"
+              "text": "DACA",
+              "value": "2"
             },
             {
-              "text": "60 min",
-              "value": "59"
-            },
-            {
-              "text": "more than 60 min",
-              "value": "999"
+              "text": "Temporary protected status",
+              "value": "3"
             }
           ],
           "custom": "",
-          "optional": false
+          "isOptional": false
+        },
+        {
+          "questionType": "SINGLE CHOICE",
+          "title": "Q2: Law",
+          "prompt": "What kind of law does Buttigieg think Congress should pass?",
+          "choices": [
+            {
+              "text": "A law creating a pathway to citizenship for young undocumented immigrants who entered the country illegally as children.",
+              "value": "0"
+            },
+            {
+              "text": "A law creating a pathway to citizenship for children entering the country illegally.",
+              "value": "1"
+            },
+            {
+              "text": "A law creating a pathway to citizenship for family members of U.S. citizens or green card holders",
+              "value": "2"
+            },
+            {
+              "text": "A law inhibiting refugee immigration to the U.S.",
+              "value": "3"
+            }
+          ],
+          "custom": "",
+          "isOptional": false
+        },
+        {
+          "questionType": "SINGLE CHOICE",
+          "title": "Q3: Campaign",
+          "prompt": "What is one key shortcoming of Buttigieg’s campaign?",
+          "choices": [
+            {
+              "text": "It proposes policies that are not implementable in a reasonable timeframe",
+              "value": "0"
+            },
+            {
+              "text": "It has not outlined any new policy measures",
+              "value": "1"
+            },
+            {
+              "text": "It proposes policies that are too expensive to implement",
+              "value": "2"
+            },
+            {
+              "text": "It has not outlined substantial policy measures that would support his goal of comprehensive immigration reform.",
+              "value": "3"
+            }
+          ],
+          "custom": "",
+          "isOptional": false
+        },
+        {
+          "questionType": "SINGLE CHOICE",
+          "title": "Q4: Values",
+          "prompt": "What values related to immigration does Buttigieg think the U.S. needs to reflect as a nation?",
+          "choices": [
+            {
+              "text": "Equality - especially equal opportunity for all human beings.",
+              "value": "0"
+            },
+            {
+              "text": "Humanitarian values - especially humanitarian relief for refugees.",
+              "value": "1"
+            },
+            {
+              "text": "Values related to liberty - especially the freedom to pursue a better life",
+              "value": "2"
+            },
+            {
+              "text": "Economic values that promote fair wealth distribution.",
+              "value": "3"
+            }
+          ],
+          "custom": "",
+          "isOptional": false
+        },
+        {
+          "questionType": "SINGLE CHOICE",
+          "title": "Q5: Practice",
+          "prompt": "What is one particular immigration-related practice that Buttigieg wants to prevent?",
+          "choices": [
+            {
+              "text": "Refusing entry to refugees.",
+              "value": "0"
+            },
+            {
+              "text": "The separation of families at the U.S.-Mexico border.",
+              "value": "1"
+            },
+            {
+              "text": "Limiting H1-B visas to highly skilled foreign workers.",
+              "value": "2"
+            },
+            {
+              "text": "The arbitrary targeting of immigrant families by ICE.",
+              "value": "3"
+            }
+          ],
+          "custom": "",
+          "isOptional": false
+        },
+        {
+          "questionType": "SINGLE CHOICE",
+          "title": "Q6: Opposition",
+          "prompt": "Buttigeig opposes ___ deportation policies.",
+          "choices": [
+            {
+              "text": "aggressive",
+              "value": "0"
+            },
+            {
+              "text": "inhumane",
+              "value": "1"
+            },
+            {
+              "text": "lenient",
+              "value": "2"
+            },
+            {
+              "text": "unconstitutional",
+              "value": "3"
+            }
+          ],
+          "custom": "",
+          "isOptional": false
+        },
+        {
+          "questionType": "SINGLE CHOICE",
+          "title": "Q7",
+          "prompt": "Castro’s People First Immigration Policy",
+          "choices": [
+            {
+              "text": "provides a pathway to citizenship for people who are in the country unlawfully",
+              "value": "0"
+            },
+            {
+              "text": "Castro has not already unveiled his People First Immigration Policy",
+              "value": "1"
+            },
+            {
+              "text": "Reverses Trump’s travel ban",
+              "value": "2"
+            },
+            {
+              "text": "All of the above",
+              "value": "3"
+            }
+          ],
+          "custom": "",
+          "isOptional": false
         },
         {
           "questionType": "SINGLE CHOICE",
@@ -91,7 +237,7 @@ class PopulateGames {
             }
           ],
           "custom": "",
-          "optional": false
+          "isOptional": false
         },
         {
           "questionType": "NUMERIC",
@@ -99,7 +245,7 @@ class PopulateGames {
           "prompt": "Please provide your age.",
           "choices": [],
           "custom": "unit:years old, range:1-99",
-          "optional": false
+          "isOptional": false
         },
         {
           "questionType": "SINGLE CHOICE",
@@ -124,7 +270,7 @@ class PopulateGames {
             }
           ],
           "custom": "",
-          "optional": false
+          "isOptional": false
         },
         {
           "questionType": "MAP",
@@ -132,15 +278,15 @@ class PopulateGames {
           "prompt": "Please pick a location.",
           "choices": [],
           "custom": "",
-          "optional": false
+          "isOptional": false
         },
         {
           "questionType": "INSTRUCTION",
           "title": "Optional Questions",
-          "prompt": "The following questions are optional. More questions answered, more accurate the result will be.",
+          "prompt": "The following questions are isOptional. More questions answered, more accurate the result will be.",
           "choices": [],
           "custom": "",
-          "optional": false
+          "isOptional": false
         },
         {
           "questionType": "SCALE",
@@ -148,7 +294,7 @@ class PopulateGames {
           "prompt": "Please evaluate how you feel about going outside today.",
           "choices": [],
           "custom": "range:0-10, step:1, default:5, maxdesc:Very likely, mindesc: Very unlikely",
-          "optional": true
+          "isOptional": true
         },
         {
           "questionType": "MULTIPLE CHOICE",
@@ -169,7 +315,7 @@ class PopulateGames {
             }
           ],
           "custom": "",
-          "optional": true
+          "isOptional": true
         }
       ],
       "g2Questionnaire": [
@@ -179,7 +325,7 @@ class PopulateGames {
           "prompt": "The following questions are essential for the search. Please answer carefully.",
           "choices": [],
           "custom": "",
-          "optional": false
+          "isOptional": false
         },
         {
           "questionType": "SINGLE CHOICE",
@@ -208,7 +354,7 @@ class PopulateGames {
             }
           ],
           "custom": "",
-          "optional": false
+          "isOptional": false
         },
         {
           "questionType": "SINGLE CHOICE",
@@ -229,7 +375,7 @@ class PopulateGames {
             }
           ],
           "custom": "",
-          "optional": false
+          "isOptional": false
         },
         {
           "questionType": "NUMERIC",
@@ -237,7 +383,7 @@ class PopulateGames {
           "prompt": "Please provide your age.",
           "choices": [],
           "custom": "unit:years old, range:1-99",
-          "optional": false
+          "isOptional": false
         },
         {
           "questionType": "SINGLE CHOICE",
@@ -262,7 +408,7 @@ class PopulateGames {
             }
           ],
           "custom": "",
-          "optional": false
+          "isOptional": false
         },
         {
           "questionType": "MAP",
@@ -270,15 +416,15 @@ class PopulateGames {
           "prompt": "Please pick a location.",
           "choices": [],
           "custom": "",
-          "optional": false
+          "isOptional": false
         },
         {
           "questionType": "INSTRUCTION",
-          "title": "Optional Questions",
-          "prompt": "The following questions are optional. More questions answered, more accurate the result will be.",
+          "title": "isOptional Questions",
+          "prompt": "The following questions are isOptional. More questions answered, more accurate the result will be.",
           "choices": [],
           "custom": "",
-          "optional": false
+          "isOptional": false
         },
         {
           "questionType": "SCALE",
@@ -286,7 +432,7 @@ class PopulateGames {
           "prompt": "Please evaluate how you feel about going outside today.",
           "choices": [],
           "custom": "range:0-10, step:1, default:5, maxdesc:Very likely, mindesc: Very unlikely",
-          "optional": true
+          "isOptional": true
         },
         {
           "questionType": "MULTIPLE CHOICE",
@@ -307,7 +453,7 @@ class PopulateGames {
             }
           ],
           "custom": "",
-          "optional": true
+          "isOptional": true
         }
       ]
     }

@@ -9,7 +9,7 @@
 import UIKit
 import Photos
 
-// Firebase user, FireStore db, object storage
+// Firebase user, FireStore database, object storage
 import FirebaseAuth
 import FirebaseFirestore
 import FirebaseStorage
@@ -18,6 +18,7 @@ import FirebaseStorage
 import MessageKit
 import InputBarAccessoryView
 import PINRemoteImage
+import Lightbox
 
 class ChatViewController: MessagesViewController {
     private var isSendingPhoto = false {
@@ -32,7 +33,7 @@ class ChatViewController: MessagesViewController {
         }
     }
     
-    private let db = Firestore.firestore()
+    private let database = Firestore.firestore()
     private var reference: CollectionReference?
     private let storage = Storage.storage().reference()
     
@@ -60,13 +61,15 @@ class ChatViewController: MessagesViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        // Don't show bottom tab bar.
+        hidesBottomBarWhenPushed = true
         
         guard let id = chatroom.id else {
             navigationController?.popViewController(animated: true)
             return
         }
         
-        reference = db.collection(["Chatrooms", id, "messages"].joined(separator: "/"))
+        reference = database.collection(["Chatrooms", id, "messages"].joined(separator: "/"))
         
         messageListener = reference?.addSnapshotListener { [weak self] querySnapshot, error in
             guard let snapshot = querySnapshot else {
@@ -110,11 +113,11 @@ class ChatViewController: MessagesViewController {
     private func cameraButtonPressed(_ sender: InputBarButtonItem) {
         let picker = UIImagePickerController()
         picker.delegate = self
-//        if UIImagePickerController.isSourceTypeAvailable(.camera) {
-//            picker.sourceType = .camera
-//        } else {
-//            picker.sourceType = .photoLibrary
-//        }
+        //        if UIImagePickerController.isSourceTypeAvailable(.camera) {
+        //            picker.sourceType = .camera
+        //        } else {
+        //            picker.sourceType = .photoLibrary
+        //        }
         picker.sourceType = .photoLibrary
         present(picker, animated: true, completion: nil)
     }
@@ -261,6 +264,20 @@ extension ChatViewController: MessageCellDelegate {
     
     func didTapBackground(in cell: MessageCollectionViewCell) {
         messageInputBar.inputTextView.resignFirstResponder()
+    }
+    
+    func didTapImage(in cell: MessageCollectionViewCell) {
+        let message = messageForItem(at: messagesCollectionView.indexPath(for: cell)!, in: messagesCollectionView)
+        switch message.kind {
+        case .photo(let media):
+            let image = LightboxImage(imageURL: media.url!)
+            let controller = LightboxController(images: [image])
+            controller.dynamicBackground = true
+            controller.modalPresentationStyle = .fullScreen
+            present(controller, animated: true)
+        default:
+            break
+        }
     }
 }
 

@@ -11,6 +11,8 @@ import FirebaseAuth
 import FirebaseFirestore
 
 class RootTabBarController: UITabBarController {
+    var isFirstAppearance = true
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Sign in anonymously for now. Add other sign in options later.
@@ -32,6 +34,8 @@ class RootTabBarController: UITabBarController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        // Only load player info once per app launch.
+        guard isFirstAppearance == true else { return }
         // First time user
         if !OnboardingStateManager.shared.getOnboardingCompletedState() {
             let onboardingViewController = OnboardingViewController(taskRun: nil)
@@ -42,14 +46,15 @@ class RootTabBarController: UITabBarController {
         } else {
             self.didCompleteOnboarding()
         }
+        isFirstAppearance = false
     }
 }
 
 extension RootTabBarController: OnboardingManagerDelegate {
     func didCompleteOnboarding() {
         // Load from firebase to fill in user info.
-        let db = Firestore.firestore()
-        let docRef = db.collection("Players").document(Profiles.userID)
+        let database = Firestore.firestore()
+        let docRef = database.collection("Players").document(Profiles.userID)
         // Get player info from remote.
         docRef.getDocument { [weak self] document, error in
             guard let self = self else { return }

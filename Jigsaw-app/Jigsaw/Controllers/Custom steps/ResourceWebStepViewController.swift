@@ -8,6 +8,7 @@
 
 import UIKit
 import ResearchKit
+import ProgressHUD
 
 class ResourceWebStepViewController: ORKStepViewController {
     var webView: WKWebView!
@@ -54,10 +55,10 @@ class ResourceWebStepViewController: ORKStepViewController {
 
 extension ResourceWebStepViewController: WKNavigationDelegate {
     func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
-        showSpinner(onView: webView, text: "Loading resources.")
+        ProgressHUD.show("Loading resources.")
     }
     
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-        removeSpinner()
+        ProgressHUD.dismiss()
     }
 }

@@ -18,7 +18,7 @@ class MatchingViewController: UIViewController {
     
     @IBOutlet var playerCountLabel: UILabel!
     
-    private let db = Firestore.firestore()
+    private let database = Firestore.firestore()
     
     private var gameGroupListener: ListenerRegistration?
     private var chatroomListener: ListenerRegistration?
@@ -31,14 +31,14 @@ class MatchingViewController: UIViewController {
         super.viewDidLoad()
         title = "Matching players"
         
-        let queueReference = db.collection(["Queues", "Immigration", "twoPlayersQueue"].joined(separator: "/"))
-        queueListener = queueReference.addSnapshotListener { [weak self] querySnapshot, error in
+        let queueReference = database.collection(["Queues", "Immigration", "twoPlayersQueue"].joined(separator: "/"))
+        queueListener = queueReference.addSnapshotListener { [weak self] querySnapshot, _ in
             self?.playerCountLabel.text = "\(querySnapshot?.documents.count ?? 0)"
         }
         
         addPlayerToTwoPlayersQueue(queueReference: queueReference)
         
-        let gameGroupRef = db.collection("GameGroups")
+        let gameGroupRef = database.collection("GameGroups")
         gameGroupListener = gameGroupRef.addSnapshotListener { [weak self] querySnapshot, error in
             guard let snapshot = querySnapshot else {
                 print("Error listening for channel updates: \(error?.localizedDescription ?? "No error")")
@@ -77,8 +77,8 @@ class MatchingViewController: UIViewController {
     
     private func removeMatchingGroup() {
         // Only let the first player in a game group to clean up, after game is done.
-        if let id = gameGroupID, isFirstPlayer {
-            db.collection("GameGroups").document(id).delete { error in
+        if let groupID = gameGroupID, isFirstPlayer {
+            database.collection("GameGroups").document(groupID).delete { error in
                 if let error = error {
                     self.presentAlert(error: error)
                 }
@@ -98,14 +98,14 @@ class MatchingViewController: UIViewController {
                 }
             }
         } catch {
-            // If dirty data persist in db.
+            // If dirty data persist in database.
             self.presentAlert(error: error)
         }
     }
     
     private func loadChatroom(completion: @escaping (Chatroom?) -> Void) {
         isChatroomShown = false
-        let chatroomsRef = db.collection("Chatrooms")
+        let chatroomsRef = database.collection("Chatrooms")
         chatroomListener = chatroomsRef.addSnapshotListener { querySnapshot, error in
             guard let snapshot = querySnapshot else {
                 print("Error listening for channel updates: \(error?.localizedDescription ?? "No error")")

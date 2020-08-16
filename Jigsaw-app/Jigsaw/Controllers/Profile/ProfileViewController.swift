@@ -49,7 +49,7 @@ class ProfileViewController: FormViewController {
         +++ Section("Demographics")
         <<< ButtonRow { row in
             row.title = "Update your demographics"
-            row.presentationMode = .show(controllerProvider: ControllerProvider.callback { return DemographicsViewController() }, onDismiss: { vc in vc.navigationController?.popViewController(animated: true) })
+            row.presentationMode = .show(controllerProvider: ControllerProvider.callback { return DemographicsViewController() }, onDismiss: { controller in controller.navigationController?.popViewController(animated: true) })
         }
         +++ Section("Game history")
         <<< ButtonRow { row in

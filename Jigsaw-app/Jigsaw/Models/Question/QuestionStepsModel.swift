@@ -24,7 +24,7 @@ enum QuestionStepsModel {
         }
         let answerFormatM: ORKTextChoiceAnswerFormat = ORKAnswerFormat.choiceAnswerFormat(with: .multipleChoice, textChoices: textChoicesM)
         let questionStepM = ORKQuestionStep(identifier: question.title, title: questionStepTitleM, question: question.prompt, answer: answerFormatM)
-        questionStepM.isOptional = question.optional
+        questionStepM.isOptional = question.isOptional
         return questionStepM
     }
     
@@ -36,7 +36,7 @@ enum QuestionStepsModel {
         }
         let answerFormatS: ORKTextChoiceAnswerFormat = ORKAnswerFormat.choiceAnswerFormat(with: .singleChoice, textChoices: textChoicesS)
         let questionStepS = ORKQuestionStep(identifier: question.title, title: questionStepTitleS, question: question.prompt, answer: answerFormatS)
-        questionStepS.isOptional = question.optional
+        questionStepS.isOptional = question.isOptional
         return questionStepS
     }
     
@@ -68,7 +68,7 @@ enum QuestionStepsModel {
         numericAnswerFormat.minimum = min
         numericAnswerFormat.maximum = max
         let questionStep = ORKQuestionStep(identifier: question.title, title: question.title, question: question.prompt, answer: numericAnswerFormat)
-        questionStep.isOptional = question.optional
+        questionStep.isOptional = question.isOptional
         return questionStep
     }
     
@@ -103,9 +103,9 @@ enum QuestionStepsModel {
             } else if tempPair[0] == "step" {
                 step = Int(tempPair[1]) ?? 1
             } else if tempPair[0] == "range" {
-                let t = tempPair[1].components(separatedBy: "-")
-                min = Int(t[0]) ?? 0
-                max = Int(t[1]) ?? 10
+                let pair = tempPair[1].components(separatedBy: "-")
+                min = Int(pair[0]) ?? 0
+                max = Int(pair[1]) ?? 10
             } else if tempPair[0] == "mindesc" {
                 minDesc = tempPair[1].trimmingCharacters(in: .whitespaces)
             } else if tempPair[0] == "maxdesc" {
@@ -120,7 +120,7 @@ enum QuestionStepsModel {
         scaleAnswerFormat.gradientLocations = [0, 0.6, 1]
         scaleAnswerFormat.gradientColors = [.systemBlue, .systemYellow, .systemRed]
         let questionStep = ORKQuestionStep(identifier: "id-Q6", title: question.title, question: question.prompt, answer: scaleAnswerFormat)
-        questionStep.isOptional = question.optional
+        questionStep.isOptional = question.isOptional
         return questionStep
     }
 }

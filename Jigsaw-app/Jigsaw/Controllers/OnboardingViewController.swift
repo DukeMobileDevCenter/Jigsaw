@@ -96,9 +96,9 @@ extension OnboardingViewController: ORKTaskViewControllerDelegate {
             email: nil,
             demographics: [String: String]()
         )
-        let db = Firestore.firestore()
+        let database = Firestore.firestore()
         do {
-            try db.collection("Players").document(userID).setData(from: player)
+            try database.collection("Players").document(userID).setData(from: player)
         } catch {
             presentAlert(error: error)
         }

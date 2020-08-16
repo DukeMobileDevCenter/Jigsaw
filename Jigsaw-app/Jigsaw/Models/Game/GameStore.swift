@@ -17,9 +17,9 @@ class GameStore: NSObject {
     var allGames = [Game]()
     
     func loadGames(completion: @escaping (Result<[Game], Error>) -> Void) {
-        let db = Firestore.firestore()
+        let database = Firestore.firestore()
         var games = [Game]()
-        db.collection("Games").getDocuments { [weak self] querySnapshot, error in
+        database.collection("Games").getDocuments { [weak self] querySnapshot, error in
             if let snapshot = querySnapshot {
                 for document in snapshot.documents {
                     do {

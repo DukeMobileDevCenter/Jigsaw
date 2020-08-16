@@ -26,8 +26,14 @@ pod 'MessageKit'
 # Image lazy loading
 pod 'PINRemoteImage'
 
+# Image viewer for chatroom
+pod 'Lightbox'
+
 # Profile forms
 pod 'Eureka'
 pod 'ViewRow'
+
+# ProgreeHUD
+pod 'ProgressHUD'
 
 end

@@ -11,11 +11,11 @@
 		0020D54B24DF7A0D00DB20E1 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0020D54A24DF7A0D00DB20E1 /* Game.swift */; };
 		0020D54E24DF95F700DB20E1 /* PopulateGames.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0020D54D24DF95F700DB20E1 /* PopulateGames.swift */; };
 		0020D55024DFAED000DB20E1 /* GameOfGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0020D54F24DFAED000DB20E1 /* GameOfGroup.swift */; };
-		0020D55224DFB1FA00DB20E1 /* ProgressIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0020D55124DFB1FA00DB20E1 /* ProgressIndicator.swift */; };
 		0020D55D24E0A74C00DB20E1 /* ResourceWebStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0020D55C24E0A74C00DB20E1 /* ResourceWebStepViewController.swift */; };
 		0020D55F24E0A7DB00DB20E1 /* ResourceWebStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0020D55E24E0A7DB00DB20E1 /* ResourceWebStep.swift */; };
 		0020D56724E263C600DB20E1 /* MatchingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0020D56624E263C600DB20E1 /* MatchingViewController.swift */; };
 		0020D56A24E267B300DB20E1 /* GameCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0020D56924E267B300DB20E1 /* GameCollectionCell.swift */; };
+		0051950F24E9CDD4008F1CE0 /* QuestionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0051950E24E9CDD4008F1CE0 /* QuestionType.swift */; };
 		005856BC24D91C4A0010BE55 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 005856BB24D91C4A0010BE55 /* GoogleService-Info.plist */; };
 		005856BE24D923630010BE55 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005856BD24D923630010BE55 /* ChatViewController.swift */; };
 		005856C024D924970010BE55 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005856BF24D924970010BE55 /* Message.swift */; };
@@ -85,11 +85,11 @@
 		0020D54A24DF7A0D00DB20E1 /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
 		0020D54D24DF95F700DB20E1 /* PopulateGames.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopulateGames.swift; sourceTree = "<group>"; };
 		0020D54F24DFAED000DB20E1 /* GameOfGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameOfGroup.swift; sourceTree = "<group>"; };
-		0020D55124DFB1FA00DB20E1 /* ProgressIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressIndicator.swift; sourceTree = "<group>"; };
 		0020D55C24E0A74C00DB20E1 /* ResourceWebStepViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResourceWebStepViewController.swift; sourceTree = "<group>"; };
 		0020D55E24E0A7DB00DB20E1 /* ResourceWebStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResourceWebStep.swift; sourceTree = "<group>"; };
 		0020D56624E263C600DB20E1 /* MatchingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchingViewController.swift; sourceTree = "<group>"; };
 		0020D56924E267B300DB20E1 /* GameCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameCollectionCell.swift; sourceTree = "<group>"; };
+		0051950E24E9CDD4008F1CE0 /* QuestionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionType.swift; sourceTree = "<group>"; };
 		005856BB24D91C4A0010BE55 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		005856BD24D923630010BE55 /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		005856BF24D924970010BE55 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
@@ -173,6 +173,16 @@
 			path = "Custom steps";
 			sourceTree = "<group>";
 		};
+		0051951024E9CEB2008F1CE0 /* Question */ = {
+			isa = PBXGroup;
+			children = (
+				00CDFF1524B44F4C009C789D /* QuestionStepsModel.swift */,
+				00CDFF0C24B4353E009C789D /* Questionnaire.swift */,
+				0051950E24E9CDD4008F1CE0 /* QuestionType.swift */,
+			);
+			path = Question;
+			sourceTree = "<group>";
+		};
 		005856C724D92D400010BE55 /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
@@ -184,8 +194,6 @@
 		005856CA24D92F820010BE55 /* Game */ = {
 			isa = PBXGroup;
 			children = (
-				00CDFF0C24B4353E009C789D /* Questionnaire.swift */,
-				00CDFF1524B44F4C009C789D /* QuestionStepsModel.swift */,
 				0020D54824DF79CB00DB20E1 /* GameStore.swift */,
 				0020D54A24DF7A0D00DB20E1 /* Game.swift */,
 				0020D54F24DFAED000DB20E1 /* GameOfGroup.swift */,
@@ -321,6 +329,7 @@
 			isa = PBXGroup;
 			children = (
 				00CDFF1324B44C9D009C789D /* LocalErrors.swift */,
+				0051951024E9CEB2008F1CE0 /* Question */,
 				005856CA24D92F820010BE55 /* Game */,
 				005856CB24D92F900010BE55 /* Onboarding */,
 				005856CC24D92F990010BE55 /* Chatroom */,
@@ -334,7 +343,6 @@
 		00CDFF0624B2E908009C789D /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				0020D55124DFB1FA00DB20E1 /* ProgressIndicator.swift */,
 				0020D56924E267B300DB20E1 /* GameCollectionCell.swift */,
 				00B0A67B24E3D10300887701 /* ProfileHeaderView.swift */,
 			);
@@ -563,13 +571,13 @@
 				0020D54924DF79CB00DB20E1 /* GameStore.swift in Sources */,
 				00D0862124CD185C00FB7A20 /* OnboardingStateManager.swift in Sources */,
 				00CDFF1224B44797009C789D /* UIViewController.swift in Sources */,
+				0051950F24E9CDD4008F1CE0 /* QuestionType.swift in Sources */,
 				0070DFEC24B0060400E71F46 /* SceneDelegate.swift in Sources */,
 				0020D54B24DF7A0D00DB20E1 /* Game.swift in Sources */,
 				00F2197C24CCF99800B72858 /* RoadmapViewController.swift in Sources */,
 				00B0A67C24E3D10300887701 /* ProfileHeaderView.swift in Sources */,
 				005856C224D9262C0010BE55 /* Profiles.swift in Sources */,
 				00CDFF0D24B4353E009C789D /* Questionnaire.swift in Sources */,
-				0020D55224DFB1FA00DB20E1 /* ProgressIndicator.swift in Sources */,
 				00D0861F24CD135B00FB7A20 /* RootTabBarController.swift in Sources */,
 				00A06D8D24E8A9B400030649 /* GameGroup.swift in Sources */,
 			);
