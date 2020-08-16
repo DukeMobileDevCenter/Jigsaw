@@ -114,7 +114,7 @@
     // Forces developers to return console logs and http calls in promises. 
     "promise/always-return": 2,
 
-    //Enforces the use of catch() on un-returned promises
+    // Enforces the use of catch() on un-returned promises
     "promise/catch-or-return": 2,
 
     // Warn against nested then() or catch() statements
