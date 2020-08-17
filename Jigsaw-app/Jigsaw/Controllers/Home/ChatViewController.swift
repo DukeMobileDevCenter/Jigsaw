@@ -43,13 +43,25 @@ class ChatViewController: MessagesViewController {
     private let user: User
     private let chatroom: Chatroom
     
+    private var timer: Timer?
+    var timeLeft: TimeInterval?
+    private let timeFormatter: DateComponentsFormatter = {
+        let formatter = DateComponentsFormatter()
+        formatter.allowedUnits = .second
+        formatter.unitsStyle = .abbreviated
+        return formatter
+    }()
+    
     deinit {
+        timer?.invalidate()
+        timer = nil
         messageListener?.remove()
     }
     
-    init(user: User, chatroom: Chatroom) {
+    init(user: User, chatroom: Chatroom, timeLeft: TimeInterval?) {
         self.user = user
         self.chatroom = chatroom
+        self.timeLeft = timeLeft
         super.init(nibName: nil, bundle: nil)
         self.title = chatroom.name
     }
@@ -105,6 +117,19 @@ class ChatViewController: MessagesViewController {
         messageInputBar.leftStackView.alignment = .center
         messageInputBar.setLeftStackViewWidthConstant(to: 50, animated: false)
         messageInputBar.setStackViewItems([cameraItem], forStack: .left, animated: false)
+    }
+    
+    func fireTimer() {
+        // If countdown remaining time specified, create a timer.
+        if timeLeft != nil {
+            timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { [weak self] _ in
+                guard let time = self?.timeLeft else { return }
+                self?.timeLeft = time.advanced(by: -1)
+                DispatchQueue.main.async {
+                    self?.messageInputBar.inputTextView.placeholder = (self?.timeFormatter.string(from: time) ?? "nil") + " remaining"
+                }
+            }
+        }
     }
     
     // MARK: - Actions

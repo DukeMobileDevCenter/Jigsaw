@@ -211,78 +211,24 @@ class PopulateGames {
           "isOptional": false
         },
         {
-          "questionType": "SINGLE CHOICE",
-          "title": "Q2: Indoor",
-          "prompt": "Do you want to be inside or outside?",
-          "choices": [
-            {
-              "text": "inside",
-              "value": "TRUE"
-            },
-            {
-              "text": "outside",
-              "value": "FALSE"
-            },
-            {
-              "text": "either",
-              "value": "BOTH"
-            }
-          ],
+          "questionType": "INSTRUCTION",
+          "title": "Optional Questions",
+          "prompt": "The following questions are optional. Just to demonstrate other question types.",
+          "choices": [],
           "custom": "",
           "isOptional": false
         },
         {
           "questionType": "NUMERIC",
-          "title": "Q3: Age",
+          "title": "Q1: Age",
           "prompt": "Please provide your age.",
           "choices": [],
           "custom": "unit:years old, range:1-99",
           "isOptional": false
         },
         {
-          "questionType": "SINGLE CHOICE",
-          "title": "Q4: Distance",
-          "prompt": "What distance are you willing to travel to be active today",
-          "choices": [
-            {
-              "text": "2 miles",
-              "value": "2"
-            },
-            {
-              "text": "5 miles",
-              "value": "5"
-            },
-            {
-              "text": "10 miles",
-              "value": "10"
-            },
-            {
-              "text": "doesn’t matter",
-              "value": "100"
-            }
-          ],
-          "custom": "",
-          "isOptional": false
-        },
-        {
-          "questionType": "MAP",
-          "title": "Q5: Location",
-          "prompt": "Please pick a location.",
-          "choices": [],
-          "custom": "",
-          "isOptional": false
-        },
-        {
-          "questionType": "INSTRUCTION",
-          "title": "Optional Questions",
-          "prompt": "The following questions are isOptional. More questions answered, more accurate the result will be.",
-          "choices": [],
-          "custom": "",
-          "isOptional": false
-        },
-        {
           "questionType": "SCALE",
-          "title": "Q6: Willingness",
+          "title": "Q2: Willingness",
           "prompt": "Please evaluate how you feel about going outside today.",
           "choices": [],
           "custom": "range:0-10, step:1, default:5, maxdesc:Very likely, mindesc: Very unlikely",
@@ -290,7 +236,7 @@ class PopulateGames {
         },
         {
           "questionType": "MULTIPLE CHOICE",
-          "title": "Q7: Multiple",
+          "title": "Q3: Multiple",
           "prompt": "Just a multiple choice test.",
           "choices": [
             {
@@ -311,14 +257,6 @@ class PopulateGames {
         }
       ],
       "g2Questionnaire": [
-        {
-          "questionType": "INSTRUCTION",
-          "title": "Required Questions",
-          "prompt": "The following questions are essential for the search. Please answer carefully.",
-          "choices": [],
-          "custom": "",
-          "isOptional": false
-        },
         {
           "questionType": "SINGLE CHOICE",
           "title": "Q1: Energy",
@@ -375,39 +313,6 @@ class PopulateGames {
           "prompt": "Please provide your age.",
           "choices": [],
           "custom": "unit:years old, range:1-99",
-          "isOptional": false
-        },
-        {
-          "questionType": "SINGLE CHOICE",
-          "title": "Q4: Distance",
-          "prompt": "What distance are you willing to travel to be active today",
-          "choices": [
-            {
-              "text": "2 miles",
-              "value": "2"
-            },
-            {
-              "text": "5 miles",
-              "value": "5"
-            },
-            {
-              "text": "10 miles",
-              "value": "10"
-            },
-            {
-              "text": "doesn’t matter",
-              "value": "100"
-            }
-          ],
-          "custom": "",
-          "isOptional": false
-        },
-        {
-          "questionType": "MAP",
-          "title": "Q5: Location",
-          "prompt": "Please pick a location.",
-          "choices": [],
-          "custom": "",
           "isOptional": false
         },
         {

@@ -21,6 +21,18 @@ class GameViewController: ORKTaskViewController {
     required init(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    private let chatroomCountdownStep: ORKActiveStep = {
+        let step = ORKActiveStep(identifier: "Countdown")
+        step.stepDuration = TimeInterval(integerLiteral: 30)
+        step.shouldUseNextAsSkipButton = true
+        step.shouldContinueOnFinish = true
+        step.shouldShowDefaultTimer = true
+        step.shouldStartTimerAutomatically = true
+        step.shouldSpeakRemainingTimeAtHalfway = true
+        step.shouldSpeakCountDown = true
+        return step
+    }()
 
     /// The function to create the surveytask from the Questionnaire class (parsed from json)
     ///
@@ -40,13 +52,6 @@ class GameViewController: ORKTaskViewController {
         let readingsStep = ResourceWebStep(identifier: "Resource", url: resourceURL)
         steps.append(readingsStep)
         
-        let chatroomCountdownStep = ORKActiveStep(identifier: "Countdown")
-        chatroomCountdownStep.stepDuration = TimeInterval(integerLiteral: 15)
-        chatroomCountdownStep.shouldUseNextAsSkipButton = true
-        chatroomCountdownStep.shouldContinueOnFinish = true
-        chatroomCountdownStep.shouldShowDefaultTimer = true
-        chatroomCountdownStep.shouldSpeakRemainingTimeAtHalfway = true
-        chatroomCountdownStep.shouldSpeakCountDown = true
         steps.append(chatroomCountdownStep)
         
         let questionsInstructionStep = ORKInstructionStep(identifier: "Questions")

@@ -13,7 +13,7 @@ struct GameGroup: Codable {
     let gameName: String
     let chatroomID: String
     let createdDate: Date
-    var chatroomUserCount: Int
+    var chatroomReadyUserIDs: [String]
     /// An array of player's userIDs.
     let group1: [String]
     /// An array of player's userIDs.

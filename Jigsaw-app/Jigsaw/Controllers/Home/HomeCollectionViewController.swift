@@ -26,12 +26,12 @@ class HomeCollectionViewController: UICollectionViewController {
             }
             snapshot.documentChanges.forEach { change in
                 if let chatroom = Chatroom(document: change.document), chatroom.id == "TestChatroom1" {
-                    let chatroomVC = ChatViewController(user: Auth.auth().currentUser!, chatroom: chatroom)
+                    let chatroomVC = ChatViewController(user: Auth.auth().currentUser!, chatroom: chatroom, timeLeft: nil)
                     self.show(chatroomVC, sender: sender)
                 }
             }
         }
-        //        PopulateGames.shared.uploadGame()
+//        PopulateGames.shared.uploadGame()
     }
     
     @IBAction func segmentedControlValueChanged(_ sender: UISegmentedControl) {

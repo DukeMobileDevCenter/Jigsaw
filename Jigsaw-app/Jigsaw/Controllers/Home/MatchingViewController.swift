@@ -16,13 +16,11 @@ class MatchingViewController: UIViewController {
     var games: [Game]!
     var queueType: PlayersQueue!
     
-    private var chatroomCountdownStartedObservation: NSKeyValueObservation?
-    
-    @objc
-    private weak var chatroomStepVC: ORKActiveStepViewController!
-    
     private var isChatroomShown: Bool = false
-    private var gameGroup: GameGroup!
+    
+    private var chatroomStepVC: ORKActiveStepViewController!
+    private var chatroomVC: ChatViewController!
+    
     @IBOutlet var playerCountLabel: UILabel!
     
     private let database = Firestore.firestore()
@@ -31,7 +29,9 @@ class MatchingViewController: UIViewController {
     private var chatroomListener: ListenerRegistration?
     private var queueListener: ListenerRegistration?
     
+    /// The player's current game group.
     private var gameGroupID: String?
+    private var gameGroup: GameGroup!
     // private var isFirstPlayer: Bool = false
     
     override func viewDidLoad() {
@@ -72,8 +72,11 @@ class MatchingViewController: UIViewController {
             // Current player is allocated to the first group.
             gameOfMyGroup = GameOfGroup(version: game.version, gameName: game.gameName, resourceURL: game.g1resURL, questionnaire: game.g1Questionnaire)
             // isFirstPlayer = group.group1.first == Profiles.userID
-        } else {
+        } else if group.group2.contains(Profiles.userID) {
             gameOfMyGroup = GameOfGroup(version: game.version, gameName: game.gameName, resourceURL: game.g2resURL, questionnaire: game.g2Questionnaire)
+        } else {
+            // Not my group, ignore.
+            return
         }
         let taskViewController = GameViewController(game: gameOfMyGroup, taskRun: nil)
         taskViewController.delegate = self
@@ -103,6 +106,8 @@ class MatchingViewController: UIViewController {
                     gameGroupID = change.document.documentID
                     gameGroup = currentGroup
                     handleMatchingGroup(group: currentGroup)
+                case .modified:
+                    handleReadyPlayerCountUpdate(group: currentGroup)
                 default:
                     break
                 }
@@ -110,6 +115,23 @@ class MatchingViewController: UIViewController {
         } catch {
             // If dirty data persist in database.
             self.presentAlert(error: error)
+        }
+    }
+    
+    private func handleReadyPlayerCountUpdate(group: GameGroup) {
+        if group.group1.contains(Profiles.userID) || group.group2.contains(Profiles.userID) {
+            if group.chatroomReadyUserIDs.count == group.group1.count + group.group2.count {
+                // All players are ready for chat.
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [weak self] in
+                    // Start the timer in chatroom step VC and chatroom VC. Later to only use 1.
+                    self?.chatroomStepVC.start()
+                    self?.chatroomVC.fireTimer()
+                    print("✅ chatroom timer kicked off!")
+                }
+            }
+        } else {
+            // Not my group, ignore.
+            return
         }
     }
     
@@ -129,14 +151,12 @@ class MatchingViewController: UIViewController {
     }
     
     deinit {
-        chatroomCountdownStartedObservation = nil
         // Stop waiting in queue when player exit the matching page.
         // There might be some sync bug, if a player just quit a match while he is added to a group.
         removeUserFromQueue()
         gameGroupListener?.remove()
         chatroomListener?.remove()
         queueListener?.remove()
-        
         print("✅ matching VC deinit")
     }
 }
@@ -145,23 +165,24 @@ extension MatchingViewController: ORKTaskViewControllerDelegate {
     func taskViewController(_ taskViewController: ORKTaskViewController, stepViewControllerWillAppear stepViewController: ORKStepViewController) {
         if stepViewController.step?.identifier == "Countdown" {
             chatroomStepVC = stepViewController as? ORKActiveStepViewController
-            // When the chatroom dismissed, finish the step.
+            // Mark the player who reached chatroom step as ready.
+            if let groupID = gameGroupID {
+                database.collection("GameGroups").document(groupID).updateData([
+                    "chatroomReadyUserIDs": FieldValue.arrayUnion([Profiles.userID!])
+                ])
+            }
+            // When the chatroom is dismissed, finish the step.
             if isChatroomShown {
                 chatroomStepVC.finish()
+                return
             }
-            chatroomCountdownStartedObservation = observe(\.chatroomStepVC.isStarted, options: .new) { [weak self] _, change in
+            loadChatroom { [weak self] chatroom in
                 guard let self = self else { return }
-                if change.newValue == true {
-                    self.loadChatroom { chatroom in
-                        let chatroomVC = ChatViewController(user: Auth.auth().currentUser!, chatroom: chatroom)
-                        self.isChatroomShown = true
-                        stepViewController.title = "Quit chat"
-                        stepViewController.show(chatroomVC, sender: nil)
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                            self.chatroomStepVC.resume()
-                        }
-                    }
-                }
+                self.isChatroomShown = true
+                let chatroomVC = ChatViewController(user: Auth.auth().currentUser!, chatroom: chatroom, timeLeft: self.chatroomStepVC.timeRemaining)
+                self.chatroomVC = chatroomVC
+                stepViewController.title = "Quit chat"
+                stepViewController.show(chatroomVC, sender: nil)
             }
         }
     }
