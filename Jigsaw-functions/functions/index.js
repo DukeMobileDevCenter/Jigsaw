@@ -39,14 +39,16 @@ exports.makeTwoPlayersGameGroup = functions.firestore.document('/Queues/{categor
   const createdDate = admin.firestore.FieldValue.serverTimestamp();
   const chatroomID = "TestChatroom1";
   const gameName = "USImmigration1";
-  
+
+  const groups = [group1, group2];
+  const seed = Math.round(Math.random());
   const gameGroup = {
     "gameName": gameName,
     "chatroomID": chatroomID,
     "chatroomReadyUserIDs": [],
     "createdDate": createdDate,
-    "group1": group1,
-    "group2": group2
+    "group1": groups[seed],
+    "group2": groups[1-seed]
   };
   // Remove players added to a game group.
   [].concat(group1, group2).forEach(async (id) => {
@@ -87,13 +89,15 @@ exports.makeFourPlayersGameGroup = functions.firestore.document('/Queues/{catego
   const chatroomID = "TestChatroom1";
   const gameName = "USImmigration1";
   
+  const groups = [group1, group2];
+  const seed = Math.round(Math.random());
   const gameGroup = {
     "gameName": gameName,
     "chatroomID": chatroomID,
     "chatroomReadyUserIDs": [],
     "createdDate": createdDate,
-    "group1": group1,
-    "group2": group2
+    "group1": groups[seed],
+    "group2": groups[1-seed]
   };
   // Remove players added to a game group.
   [].concat(group1, group2).forEach(async (id) => {
