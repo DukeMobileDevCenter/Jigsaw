@@ -38,13 +38,12 @@ exports.makeTwoPlayersGameGroup = functions.firestore.document('/Queues/{categor
   const group2 = [playerIDs[playersCount-1]];  // , jigsawValueQuery[playersCount-2]]
   const createdDate = admin.firestore.FieldValue.serverTimestamp();
   const chatroomID = "TestChatroom1";
-  const chatroomUserCount = 0;
   const gameName = "USImmigration1";
   
   const gameGroup = {
     "gameName": gameName,
     "chatroomID": chatroomID,
-    "chatroomUserCount": chatroomUserCount,
+    "chatroomReadyUserIDs": [],
     "createdDate": createdDate,
     "group1": group1,
     "group2": group2
@@ -86,13 +85,12 @@ exports.makeFourPlayersGameGroup = functions.firestore.document('/Queues/{catego
   const group2 = [playerIDs[playersCount-2], jigsawValueQuery[playersCount-1]];
   const createdDate = admin.firestore.FieldValue.serverTimestamp();
   const chatroomID = "TestChatroom1";
-  const chatroomUserCount = 0;
   const gameName = "USImmigration1";
   
   const gameGroup = {
     "gameName": gameName,
     "chatroomID": chatroomID,
-    "chatroomUserCount": chatroomUserCount,
+    "chatroomReadyUserIDs": [],
     "createdDate": createdDate,
     "group1": group1,
     "group2": group2
