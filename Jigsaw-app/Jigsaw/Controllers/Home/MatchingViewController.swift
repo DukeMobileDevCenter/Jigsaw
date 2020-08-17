@@ -13,11 +13,16 @@ import FirebaseAuth
 import FirebaseFirestoreSwift
 
 class MatchingViewController: UIViewController {
-    var isChatroomShown: Bool = false
     var games: [Game]!
-    
     var queueType: PlayersQueue!
     
+    private var chatroomCountdownStartedObservation: NSKeyValueObservation?
+    
+    @objc
+    private weak var chatroomStepVC: ORKActiveStepViewController!
+    
+    private var isChatroomShown: Bool = false
+    private var gameGroup: GameGroup!
     @IBOutlet var playerCountLabel: UILabel!
     
     private let database = Firestore.firestore()
@@ -27,7 +32,7 @@ class MatchingViewController: UIViewController {
     private var queueListener: ListenerRegistration?
     
     private var gameGroupID: String?
-    private var isFirstPlayer: Bool = false
+    // private var isFirstPlayer: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -66,7 +71,7 @@ class MatchingViewController: UIViewController {
         if group.group1.contains(Profiles.userID) {
             // Current player is allocated to the first group.
             gameOfMyGroup = GameOfGroup(version: game.version, gameName: game.gameName, resourceURL: game.g1resURL, questionnaire: game.g1Questionnaire)
-            isFirstPlayer = group.group1.first == Profiles.userID
+            // isFirstPlayer = group.group1.first == Profiles.userID
         } else {
             gameOfMyGroup = GameOfGroup(version: game.version, gameName: game.gameName, resourceURL: game.g2resURL, questionnaire: game.g2Questionnaire)
         }
@@ -78,13 +83,9 @@ class MatchingViewController: UIViewController {
     }
     
     private func removeMatchingGroup() {
-        // Only let the first player in a game group to clean up, after game is done.
-        if let groupID = gameGroupID, isFirstPlayer {
-            database.collection("GameGroups").document(groupID).delete { error in
-                if let error = error {
-                    self.presentAlert(error: error)
-                }
-            }
+        // Clean up the game group after game is done.
+        if let groupID = gameGroupID {
+            database.collection("GameGroups").document(groupID).delete()
         }
     }
     
@@ -100,6 +101,7 @@ class MatchingViewController: UIViewController {
                 switch change.type {
                 case .added:
                     gameGroupID = change.document.documentID
+                    gameGroup = currentGroup
                     handleMatchingGroup(group: currentGroup)
                 default:
                     break
@@ -111,47 +113,54 @@ class MatchingViewController: UIViewController {
         }
     }
     
-    private func loadChatroom(completion: @escaping (Chatroom?) -> Void) {
+    private func loadChatroom(completion: @escaping (Chatroom) -> Void) {
         isChatroomShown = false
-        let chatroomsRef = database.collection("Chatrooms")
-        chatroomListener = chatroomsRef.addSnapshotListener { querySnapshot, error in
-            guard let snapshot = querySnapshot else {
-                print("Error listening for channel updates: \(error?.localizedDescription ?? "No error")")
-                completion(nil)
-                return
-            }
-            snapshot.documentChanges.forEach { change in
-                if let chatroom = Chatroom(document: change.document), chatroom.id == "TestChatroom1" {
+        let chatroomsRef = database.collection("Chatrooms").document(gameGroup.chatroomID)
+        chatroomsRef.getDocument { [weak self] document, error in
+            guard let self = self else { return }
+            do {
+                if let chatroom = try document?.data(as: Chatroom.self) {
                     completion(chatroom)
                 }
+            } catch {
+                self.presentAlert(error: error)
             }
-            completion(nil)
         }
     }
     
     deinit {
+        chatroomCountdownStartedObservation = nil
         // Stop waiting in queue when player exit the matching page.
         // There might be some sync bug, if a player just quit a match while he is added to a group.
         removeUserFromQueue()
         gameGroupListener?.remove()
         chatroomListener?.remove()
         queueListener?.remove()
+        
         print("✅ matching VC deinit")
     }
 }
 
 extension MatchingViewController: ORKTaskViewControllerDelegate {
     func taskViewController(_ taskViewController: ORKTaskViewController, stepViewControllerWillAppear stepViewController: ORKStepViewController) {
-        if stepViewController.step?.identifier == "Countdown" && !isChatroomShown {
-            let stepVC = stepViewController as! ORKActiveStepViewController
-            loadChatroom { chatroom in
-                guard let chatroom = chatroom else { return }
-                let chatroomVC = ChatViewController(user: Auth.auth().currentUser!, chatroom: chatroom)
-                self.isChatroomShown = true
-                stepViewController.title = "Quit chat"
-                stepViewController.show(chatroomVC, sender: nil)
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                    stepVC.resume()
+        if stepViewController.step?.identifier == "Countdown" {
+            chatroomStepVC = stepViewController as? ORKActiveStepViewController
+            // When the chatroom dismissed, finish the step.
+            if isChatroomShown {
+                chatroomStepVC.finish()
+            }
+            chatroomCountdownStartedObservation = observe(\.chatroomStepVC.isStarted, options: .new) { [weak self] _, change in
+                guard let self = self else { return }
+                if change.newValue == true {
+                    self.loadChatroom { chatroom in
+                        let chatroomVC = ChatViewController(user: Auth.auth().currentUser!, chatroom: chatroom)
+                        self.isChatroomShown = true
+                        stepViewController.title = "Quit chat"
+                        stepViewController.show(chatroomVC, sender: nil)
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                            self.chatroomStepVC.resume()
+                        }
+                    }
                 }
             }
         }

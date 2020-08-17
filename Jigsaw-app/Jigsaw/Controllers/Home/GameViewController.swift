@@ -42,16 +42,19 @@ class GameViewController: ORKTaskViewController {
         
         let chatroomCountdownStep = ORKActiveStep(identifier: "Countdown")
         chatroomCountdownStep.stepDuration = TimeInterval(integerLiteral: 15)
-        chatroomCountdownStep.isOptional = true
         chatroomCountdownStep.shouldUseNextAsSkipButton = true
         chatroomCountdownStep.shouldContinueOnFinish = true
         chatroomCountdownStep.shouldShowDefaultTimer = true
-        chatroomCountdownStep.shouldPlaySoundOnStart = true
         chatroomCountdownStep.shouldSpeakRemainingTimeAtHalfway = true
-        chatroomCountdownStep.shouldStartTimerAutomatically = true
         chatroomCountdownStep.shouldSpeakCountDown = true
-        chatroomCountdownStep.shouldPlaySoundOnFinish = true
         steps.append(chatroomCountdownStep)
+        
+        let questionsInstructionStep = ORKInstructionStep(identifier: "Questions")
+        questionsInstructionStep.title = "Required Questions"
+        questionsInstructionStep.detailText = "The following questions are essential. Please answer carefully."
+        questionsInstructionStep.iconImage = UIImage(systemName: "exclamationmark.square")
+        questionsInstructionStep.isOptional = false
+        steps.append(questionsInstructionStep)
         
         for question in questionnaire {
             switch question.questionType {

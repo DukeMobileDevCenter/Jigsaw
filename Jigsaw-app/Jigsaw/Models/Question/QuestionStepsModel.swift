@@ -56,9 +56,9 @@ enum QuestionStepsModel {
             if tempPair[0] == "unit" {
                 unit = tempPair[1].trimmingCharacters(in: .whitespaces)
             } else if tempPair[0] == "range" {
-                let t = tempPair[1].components(separatedBy: "-")
-                min = NSNumber(value: Int(t[0]) ?? 0)
-                max = NSNumber(value: Int(t[1]) ?? 10)
+                let pair = tempPair[1].components(separatedBy: "-")
+                min = NSNumber(value: Int(pair[0]) ?? 0)
+                max = NSNumber(value: Int(pair[1]) ?? 10)
             } else {
                 print("debug info: numeric custom str not recognized")
                 continue

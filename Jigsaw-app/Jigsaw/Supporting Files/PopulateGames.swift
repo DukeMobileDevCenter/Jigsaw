@@ -36,14 +36,6 @@ class PopulateGames {
       "category": "immigration",
       "g1Questionnaire": [
         {
-          "questionType": "INSTRUCTION",
-          "title": "Required Questions",
-          "prompt": "The following questions are essential. Please answer carefully.",
-          "choices": [],
-          "custom": "",
-          "isOptional": false
-        },
-        {
           "questionType": "SINGLE CHOICE",
           "title": "Q1: Policy",
           "prompt": "What particular immigration-related policy does Buttigieg explicitly support?",
