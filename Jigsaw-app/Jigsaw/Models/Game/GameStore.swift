@@ -26,12 +26,14 @@ class GameStore: NSObject {
                         if let game = try document.data(as: Game.self) {
                             games.append(game)
                         }
-                        self?.allGames = games
                     } catch {
                         completion(.failure(error))
                         return
                     }
                 }
+                // Sorted by latest added version number.
+                games.sort { g1, g2 in g1.version > g2.version }
+                self?.allGames = games
                 completion(.success(games))
             } else if let error = error {
                 completion(.failure(error))
