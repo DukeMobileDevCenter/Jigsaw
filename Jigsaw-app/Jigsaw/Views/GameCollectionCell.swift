@@ -16,7 +16,18 @@ class GameCollectionCell: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        
         iconBackgroundView.layer.cornerRadius = 25
         iconBackgroundView.layer.masksToBounds = true
+        backgroundImageView.layer.masksToBounds = true
+        backgroundImageView.contentMode = .scaleAspectFill
+        contentView.layer.cornerRadius = 8
+        contentView.clipsToBounds = true
+        
+        layer.shadowOffset = .zero
+        layer.shadowColor = UIColor.black.cgColor
+        layer.shadowRadius = 8
+        layer.shadowOpacity = 0.6
+        layer.masksToBounds = false
     }
 }

@@ -107,9 +107,11 @@ class HomeCollectionViewController: UICollectionViewController {
             if let selectedIndexPath = collectionView.indexPathsForSelectedItems?.first {
                 // For future decision on either game or category.
                 print("Index path \(selectedIndexPath).")
+                let selectedGame = GameStore.shared.allGames[selectedIndexPath.item]
                 let destinationVC = segue.destination as! MatchingViewController
                 destinationVC.games = GameStore.shared.allGames
                 destinationVC.queueType = playersCountSegmentedControl.selectedSegmentIndex == 0 ? .twoPlayersQueue : .fourPlayersQueue
+                destinationVC.selectedGame = selectedGame
             }
         default:
             preconditionFailure("Unexpected segue identifier.")

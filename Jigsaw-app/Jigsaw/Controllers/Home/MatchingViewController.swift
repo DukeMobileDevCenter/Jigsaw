@@ -14,6 +14,7 @@ import FirebaseFirestoreSwift
 
 class MatchingViewController: UIViewController {
     var games: [Game]!
+    var selectedGame: Game!
     var queueType: PlayersQueue!
     
     private var isChatroomShown: Bool = false
@@ -38,7 +39,7 @@ class MatchingViewController: UIViewController {
         super.viewDidLoad()
         title = "Matching players"
         
-        let queueReference = database.collection(["Queues", "Immigration", queueType.rawValue].joined(separator: "/"))
+        let queueReference = database.collection(["Queues", selectedGame.gameName, queueType.rawValue].joined(separator: "/"))
         queueListener = queueReference.addSnapshotListener { [weak self] querySnapshot, _ in
             self?.playerCountLabel.text = "\(querySnapshot?.documents.count ?? 0)"
         }
@@ -93,7 +94,7 @@ class MatchingViewController: UIViewController {
     }
     
     private func removeUserFromQueue() {
-        let queueReference = database.collection(["Queues", "Immigration", queueType.rawValue].joined(separator: "/"))
+        let queueReference = database.collection(["Queues", selectedGame.gameName, queueType.rawValue].joined(separator: "/"))
         queueReference.document(Profiles.currentPlayer.userID).delete()
         navigationController?.popViewController(animated: true)
     }

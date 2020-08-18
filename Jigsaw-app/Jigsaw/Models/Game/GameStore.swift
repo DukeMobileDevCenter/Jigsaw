@@ -49,7 +49,6 @@ extension GameStore: UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "GameCollectionCell", for: indexPath) as! GameCollectionCell
         
         let game = GameStore.shared.allGames[indexPath.item]
-        cell.layer.masksToBounds = false
         cell.nameLabel.text = game.gameName
         
         // Decide icon image.
@@ -64,14 +63,9 @@ extension GameStore: UICollectionViewDataSource {
         }
         cell.iconImageView.image = iconImage
         
-//        let bgImage = UIImage(named: "placeholder")
         // Lazy load background image.
         cell.backgroundImageView.pin_updateWithProgress = true
-        cell.backgroundImageView.contentMode = .scaleAspectFill
         cell.backgroundImageView.pin_setImage(from: game.backgroundImageURL)
-        
-        cell.layer.cornerRadius = 5
-        cell.layer.masksToBounds = true
         
         return cell
     }
