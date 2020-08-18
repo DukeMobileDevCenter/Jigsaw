@@ -11,37 +11,60 @@ admin.initializeApp();
 
 const db = admin.firestore();
 
-// Listens for new players added to /Queues/:documentId/twoPlayersQueue and creates an
-// game group to /GameGroups
-exports.makeTwoPlayersGameGroup = functions.firestore.document('/Queues/{category}/twoPlayersQueue/{userID}').onWrite(async (change, context) => {
+// Listens for new players added to /Queues/:documentId/twoPlayersQueue or fourPlayersQueue
+// and creates a game group to /GameGroups.
+exports.makePlayersGameGroup = functions.firestore.document('/Queues/{gameName}/{queueName}/{userID}').onWrite(async (change, context) => {
   // Reference to the parent.
-  const ref = db.collection('/Queues/' + context.params.category + '/twoPlayersQueue');
+  const ref = db.collection(['Queues', context.params.gameName, context.params.queueName].join('/'));
   
   // Sort the players by their jigsawValue.
   const jigsawValueQuery = await ref.orderBy('jigsawValue').get();
+
+  // An array to keep track of the IDs for all players in the queue.
   const playerIDs = [];
-  // create a map with all children that need to be removed
-  const updates = {};
   jigsawValueQuery.forEach((doc) => {
      playerIDs.push(doc.id)
   })
 
+  // Get total players count in the queue.
   const playersCount = playerIDs.length;
-  // Not enough players to create a game group.
-  if (playersCount === undefined || playersCount < 2) {
+
+  // Create 2 groups of players.
+  const group1 = [];
+  const group2 = [];
+
+  // Decide if it is 2 or 4 players queue.
+  if (context.params.queueName === 'twoPlayersQueue') {
+    if (playersCount === undefined || playersCount < 2) {
+      // Not enough players to create a game group.
+      return null;
+    }
+    group1.push(playerIDs[0]);
+    group2.push(playerIDs[playersCount-1]);
+  } else if (context.params.queueName === 'fourPlayersQueue') {
+    if (playersCount === undefined || playersCount < 4) {
+      // Not enough players to create game group.
+      return null;
+    }
+    group1.push(playerIDs[0], playerIDs[1]);
+    group2.push(playerIDs[playersCount-2], playerIDs[playersCount-1]);
+  } else {
+    // Invalid case, abort.
+    functions.logger.log('Error: Invalid name of queue.');
     return null;
   }
 
   functions.logger.log('Players count = ', playersCount);
+  
   // Generate fields for a game group.
-  const group1 = [playerIDs[0]];  //, jigsawValueQuery[1]];
-  const group2 = [playerIDs[playersCount-1]];  // , jigsawValueQuery[playersCount-2]]
   const createdDate = admin.firestore.FieldValue.serverTimestamp();
   const chatroomID = "TestChatroom1";
-  const gameName = "USImmigration1";
-
+  const gameName = context.params.gameName;
+  // Generate 2 game groups.
   const groups = [group1, group2];
+  // Assign group randomly with questionnaires.
   const seed = Math.round(Math.random());
+
   const gameGroup = {
     "gameName": gameName,
     "chatroomID": chatroomID,
@@ -50,59 +73,14 @@ exports.makeTwoPlayersGameGroup = functions.firestore.document('/Queues/{categor
     "group1": groups[seed],
     "group2": groups[1-seed]
   };
-  // Remove players added to a game group.
-  [].concat(group1, group2).forEach(async (id) => {
-      await ref.doc(id).delete();
-  })
-  // Add a new document in collection "GameGroups" with generated ID.
-  return db.collection('GameGroups').add(gameGroup);
-});
 
-// Listens for new players added to /Queues/:documentId/fourPlayersQueue and creates an
-// game group to /GameGroups
-exports.makeFourPlayersGameGroup = functions.firestore.document('/Queues/{category}/fourPlayersQueue/{userID}').onWrite(async (change, context) => {
-  // Reference to the parent.
-  const ref = db.collection('/Queues/' + context.params.category + '/fourPlayersQueue');
-  
-  // Sort the players by their jigsawValue.
-  const jigsawValueQuery = await ref.orderBy('jigsawValue').get();
-  const playerIDs = [];
-  // create a map with all children that need to be removed
-  const updates = {};
-  jigsawValueQuery.forEach((doc) => {
-     playerIDs.push(doc.id)
-  })
-  functions.logger.log(playerIDs);
+  // Delete players added to a game group in a batch from the players queue.
+  const batch = db.batch();
+  [].concat(group1, group2).forEach((id) => {
+    batch.delete(ref.doc(id));
+  });
+  await batch.commit();
 
-  const playersCount = playerIDs.length;
-  // Not enough players to create a game group.
-  if (playersCount === undefined || playersCount < 4) {
-    functions.logger.log('Not enough players to create game group.');
-    return null;
-  }
-
-  functions.logger.log('Players count = ', playersCount);
-  // Generate fields for a game group.
-  const group1 = [playerIDs[0], jigsawValueQuery[1]];
-  const group2 = [playerIDs[playersCount-2], jigsawValueQuery[playersCount-1]];
-  const createdDate = admin.firestore.FieldValue.serverTimestamp();
-  const chatroomID = "TestChatroom1";
-  const gameName = "USImmigration1";
-  
-  const groups = [group1, group2];
-  const seed = Math.round(Math.random());
-  const gameGroup = {
-    "gameName": gameName,
-    "chatroomID": chatroomID,
-    "chatroomReadyUserIDs": [],
-    "createdDate": createdDate,
-    "group1": groups[seed],
-    "group2": groups[1-seed]
-  };
-  // Remove players added to a game group.
-  [].concat(group1, group2).forEach(async (id) => {
-      await ref.doc(id).delete();
-  })
   // Add a new document in collection "GameGroups" with generated ID.
   return db.collection('GameGroups').add(gameGroup);
 });
