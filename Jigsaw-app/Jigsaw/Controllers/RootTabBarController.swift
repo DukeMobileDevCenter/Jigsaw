@@ -40,8 +40,8 @@ class RootTabBarController: UITabBarController {
         if !OnboardingStateManager.shared.getOnboardingCompletedState() {
             let onboardingViewController = OnboardingViewController(taskRun: nil)
             onboardingViewController.onboardingManagerDelegate = self
-            // don't allow user to dismiss the VC with sliding down.
-            onboardingViewController.modalPresentationStyle = .fullScreen
+            // Disallow dismiss by interactive swipe down in iOS 13.
+            onboardingViewController.isModalInPresentation = true
             present(onboardingViewController, animated: true)
         } else {
             self.didCompleteOnboarding()

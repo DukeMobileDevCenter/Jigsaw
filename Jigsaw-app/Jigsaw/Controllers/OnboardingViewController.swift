@@ -50,6 +50,11 @@ class OnboardingViewController: ORKTaskViewController {
 }
 
 extension OnboardingViewController: ORKTaskViewControllerDelegate {
+    func taskViewController(_ taskViewController: ORKTaskViewController, stepViewControllerWillAppear stepViewController: ORKStepViewController) {
+        // Disable cancel button.
+        stepViewController.cancelButtonItem = UIBarButtonItem()
+    }
+    
     func taskViewController(_ taskViewController: ORKTaskViewController, didFinishWith reason: ORKTaskViewControllerFinishReason, error: Error?) {
         switch reason {
         case .discarded, .failed, .saved:
