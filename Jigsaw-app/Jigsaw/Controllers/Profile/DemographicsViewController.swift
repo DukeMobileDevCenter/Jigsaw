@@ -41,5 +41,15 @@ class DemographicsViewController: FormViewController {
             $0.selectorTitle = "Provide your gender"
             $0.options = Genders.allCases.map { $0.rawValue }
         }
+        <<< ActionSheetRow<String> {
+            $0.title = "Education"
+            $0.selectorTitle = "Provide your education"
+            $0.options = EducationLevels.allCases.map { $0.rawValue }
+        }
+        <<< ActionSheetRow<String> {
+            $0.title = "Ethnicity"
+            $0.selectorTitle = "Provide your ethnic group/identity"
+            $0.options = Ethnicities.allCases.map { $0.rawValue }
+        }
     }
 }

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		000D809D24ECEDBA0070041D /* EducationLevels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000D809C24ECEDBA0070041D /* EducationLevels.swift */; };
+		000D80A024ECEE990070041D /* Ethnicities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000D809F24ECEE990070041D /* Ethnicities.swift */; };
 		0020D54924DF79CB00DB20E1 /* GameStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0020D54824DF79CB00DB20E1 /* GameStore.swift */; };
 		0020D54B24DF7A0D00DB20E1 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0020D54A24DF7A0D00DB20E1 /* Game.swift */; };
 		0020D54E24DF95F700DB20E1 /* PopulateGames.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0020D54D24DF95F700DB20E1 /* PopulateGames.swift */; };
@@ -82,6 +84,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		000D809C24ECEDBA0070041D /* EducationLevels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EducationLevels.swift; sourceTree = "<group>"; };
+		000D809F24ECEE990070041D /* Ethnicities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ethnicities.swift; sourceTree = "<group>"; };
 		0020D54824DF79CB00DB20E1 /* GameStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameStore.swift; sourceTree = "<group>"; };
 		0020D54A24DF7A0D00DB20E1 /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
 		0020D54D24DF95F700DB20E1 /* PopulateGames.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopulateGames.swift; sourceTree = "<group>"; };
@@ -158,6 +162,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		000D809B24ECED5C0070041D /* Roadmap */ = {
+			isa = PBXGroup;
+			children = (
+				00F2197B24CCF99800B72858 /* RoadmapViewController.swift */,
+			);
+			path = Roadmap;
+			sourceTree = "<group>";
+		};
+		000D809E24ECEE6A0070041D /* Demographics */ = {
+			isa = PBXGroup;
+			children = (
+				00BA555C24DA7CF7006A207E /* Genders.swift */,
+				000D809C24ECEDBA0070041D /* EducationLevels.swift */,
+				000D809F24ECEE990070041D /* Ethnicities.swift */,
+			);
+			path = Demographics;
+			sourceTree = "<group>";
+		};
 		0020D54C24DF95CC00DB20E1 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
@@ -323,7 +345,7 @@
 				00D0862224CD192800FB7A20 /* OnboardingViewController.swift */,
 				00B0A67524E3CAD500887701 /* Home */,
 				00B0A67624E3CAF000887701 /* Profile */,
-				00F2197B24CCF99800B72858 /* RoadmapViewController.swift */,
+				000D809B24ECED5C0070041D /* Roadmap */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -336,7 +358,7 @@
 				005856CA24D92F820010BE55 /* Game */,
 				005856CB24D92F900010BE55 /* Onboarding */,
 				005856CC24D92F990010BE55 /* Chatroom */,
-				00BA555C24DA7CF7006A207E /* Genders.swift */,
+				000D809E24ECEE6A0070041D /* Demographics */,
 				0078315124DF557800B35A98 /* Player.swift */,
 				005856C124D9262C0010BE55 /* Profiles.swift */,
 			);
@@ -564,10 +586,12 @@
 				00CF673A24E9E2BC00C502F3 /* PlayersQueue.swift in Sources */,
 				00BA555D24DA7CF7006A207E /* Genders.swift in Sources */,
 				00B2AB7024DA5B3100607346 /* UIColor.swift in Sources */,
+				000D80A024ECEE990070041D /* Ethnicities.swift in Sources */,
 				00F2197E24CCF9A200B72858 /* ProfileViewController.swift in Sources */,
 				005856C424D92CFB0010BE55 /* Chatroom.swift in Sources */,
 				00B0A67424E3CAA800887701 /* DemographicsViewController.swift in Sources */,
 				00D0862524CD24EA00FB7A20 /* OnboardingSteps.swift in Sources */,
+				000D809D24ECEDBA0070041D /* EducationLevels.swift in Sources */,
 				0020D55F24E0A7DB00DB20E1 /* ResourceWebStep.swift in Sources */,
 				0070DFEA24B0060400E71F46 /* AppDelegate.swift in Sources */,
 				00CDFF1624B44F4C009C789D /* QuestionStepsModel.swift in Sources */,
