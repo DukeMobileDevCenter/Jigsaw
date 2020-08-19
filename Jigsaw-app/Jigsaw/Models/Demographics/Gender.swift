@@ -1,5 +1,5 @@
 //
-//  Genders.swift
+//  Gender.swift
 //  Jigsaw
 //
 //  Created by Ting Chen on 8/4/20.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum Genders: String, CaseIterable, Codable {
+enum Gender: String, CaseIterable, Codable {
     case male = "Male"
     case female = "Female"
     case other = "Other"

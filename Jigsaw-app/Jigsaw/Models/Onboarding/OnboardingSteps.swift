@@ -92,7 +92,7 @@ enum OnboardingSteps {
 //    static let profileStep: ORKFormStep = {
 //        // Gender picker
 //        var genderTextChoices: [ORKTextChoice] = []
-//        for gender in Genders.allCases {
+//        for gender in Gender.allCases {
 //            let c = ORKTextChoice(text: gender.rawValue, value: gender.rawValue as NSString)
 //            genderTextChoices.append(c)
 //        }

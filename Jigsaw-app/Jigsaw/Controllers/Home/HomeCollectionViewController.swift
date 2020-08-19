@@ -14,7 +14,7 @@ import ProgressHUD
 class HomeCollectionViewController: UICollectionViewController {
     /// The flow layout of the collection view.
     @IBOutlet private var collectionViewFlowLayout: UICollectionViewFlowLayout!
-    
+    /// The segmented control to switch 2 players or 4 players game.
     @IBOutlet private var playersCountSegmentedControl: UISegmentedControl!
     
     @IBAction func testBarButtonTapped(_ sender: UIBarButtonItem) {
@@ -39,7 +39,7 @@ class HomeCollectionViewController: UICollectionViewController {
     }
     
     @objc
-    func loadGames() {
+    private func loadGames() {
         // Asynchronously load the games from Firebase.
         GameStore.shared.loadGames { [weak self] result in
             guard let self = self else { return }

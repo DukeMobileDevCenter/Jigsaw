@@ -26,10 +26,3 @@ struct Game: Codable {
     // Game card background image URL, can also use for styling.
     let backgroundImageURL: URL
 }
-
-enum GameCategory: String, CaseIterable, Codable {
-    // Some dummy categories only for demo purposes
-    case immigration
-    case education
-    case housing
-}

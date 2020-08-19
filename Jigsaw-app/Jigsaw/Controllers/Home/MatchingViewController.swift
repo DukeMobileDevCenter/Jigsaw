@@ -190,31 +190,24 @@ extension MatchingViewController: ORKTaskViewControllerDelegate {
     
     func taskViewController(_ taskViewController: ORKTaskViewController, didFinishWith reason: ORKTaskViewControllerFinishReason, error: Error?) {
         switch reason {
-        case .discarded, .failed, .saved:
+        case .discarded, .saved:
+            print("💦 Canceled")
+            // Log an unsuccessful game result.
+        case .failed:
             if let error = error { presentAlert(error: error) }
-            taskViewController.dismiss(animated: true) { [weak self] in
-                self?.removeMatchingGroup()
-                // Also pop the matching VC. Subject to change.
-                self?.navigationController?.popViewController(animated: true)
-            }
+            print("❌ Failed")
+            // Log an game error.
         case .completed:
-            // Access the first and last name from the review step
-            //            if let signatureResult = signatureResult(taskViewController: taskViewController),
-            //                let signature = signatureResult.signature {
-            //                let defaults = UserDefaults.standard
-            //                defaults.set(signature.givenName, forKey: "firstName")
-            //                defaults.set(signature.familyName, forKey: "lastName")
-            //            }
-            
             print("✅ completed")
             print(taskViewController.result)
-            taskViewController.dismiss(animated: true) { [weak self] in
-                self?.removeMatchingGroup()
-                // Also pop the matching VC. Subject to change.
-                self?.navigationController?.popViewController(animated: true)
-            }
+            // Log the real game result.
         @unknown default:
             fatalError("Error: Onboarding task yields unknown result.")
+        }
+        taskViewController.dismiss(animated: true) { [weak self] in
+            self?.removeMatchingGroup()
+            // Also pop the matching VC. Subject to change.
+            self?.navigationController?.popViewController(animated: true)
         }
     }
 }

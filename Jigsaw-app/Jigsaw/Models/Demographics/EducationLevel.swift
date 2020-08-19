@@ -1,5 +1,5 @@
 //
-//  EducationLevels.swift
+//  EducationLevel.swift
 //  Jigsaw
 //
 //  Created by Ting Chen on 8/18/20.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum EducationLevels: String, CaseIterable, Codable {
+enum EducationLevel: String, CaseIterable, Codable {
     case highSchool = "High school or less"
     case college = "Some college"
     case graduate = "College graduate"

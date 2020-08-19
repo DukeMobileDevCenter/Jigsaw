@@ -62,6 +62,10 @@ extension GameStore: UICollectionViewDataSource {
             iconImage = UIImage(systemName: "book")!
         case .housing:
             iconImage = UIImage(systemName: "house")!
+        case .medicare:
+            iconImage = UIImage(systemName: "staroflife")!
+        case .taxation:
+            iconImage = UIImage(systemName: "dollarsign.circle")!
         }
         cell.iconImageView.image = iconImage
         

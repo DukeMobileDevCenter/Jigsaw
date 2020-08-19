@@ -1,5 +1,5 @@
 //
-//  Ethnicities.swift
+//  Ethnicity.swift
 //  Jigsaw
 //
 //  Created by Ting Chen on 8/18/20.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum Ethnicities: String, CaseIterable, Codable {
+enum Ethnicity: String, CaseIterable, Codable {
     case white = "White"
     case black = "Black"
     case hispanic = "Hispanic or Latino"

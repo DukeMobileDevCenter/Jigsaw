@@ -8,13 +8,7 @@
 
 import Foundation
 
-protocol QuestionEssentialProperty {
-    var title: String { get }
-    var prompt: String { get }
-    var isOptional: Bool { get }
-}
-
-enum QuestionType: String, Codable {
+enum QuestionType: String, Codable, CaseIterable {
     case instruction = "INSTRUCTION"
     case multipleChoice = "MULTIPLE CHOICE"
     case singleChoice = "SINGLE CHOICE"
@@ -22,9 +16,4 @@ enum QuestionType: String, Codable {
     case map = "MAP"
     case scale = "SCALE"
     case unknown = "UNKNOWN"
-}
-
-struct Choice: Codable {
-    let text: String
-    let value: String
 }

@@ -28,10 +28,12 @@ class ProfileViewController: FormViewController {
     }
     
     private func updatePlayerDisplayName(name: String) {
-        playerDocRef.updateData(["displayName": name]) { error in
+        playerDocRef.updateData(["displayName": name]) { [weak self] error in
             if let error = error {
                 print("❌ Error updating document: \(error)")
                 return
+            } else {
+                self?.profileHeaderRow.cell.view?.nameLabel.text = name
             }
         }
     }
@@ -41,9 +43,8 @@ class ProfileViewController: FormViewController {
         // Get player info from remote.
         playerDocRef.getDocument { [weak self] document, error in
             guard let self = self else { return }
-            // Reload name label and dismiss the refresh control.
+            // Dismiss the refresh control.
             DispatchQueue.main.async {
-                self.profileHeaderRow.cell.view?.nameLabel.text = Profiles.displayName
                 self.tableView.refreshControl?.endRefreshing()
             }
             if let error = error {
