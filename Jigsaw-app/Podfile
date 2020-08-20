@@ -36,4 +36,7 @@ pod 'ViewRow'
 # ProgreeHUD
 pod 'ProgressHUD'
 
+# Game result showing in charts
+pod 'Charts'
+
 end

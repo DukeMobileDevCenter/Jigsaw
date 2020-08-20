@@ -59,6 +59,7 @@
 		00F2197724CCEF5D00B72858 /* ResearchKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 00F2196B24CCEAEB00B72858 /* ResearchKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		00F2197C24CCF99800B72858 /* RoadmapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F2197B24CCF99800B72858 /* RoadmapViewController.swift */; };
 		00F2197E24CCF9A200B72858 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F2197D24CCF9A200B72858 /* ProfileViewController.swift */; };
+		00F6301D24EE2E0000BCAD11 /* ResultStatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F6301C24EE2E0000BCAD11 /* ResultStatsViewController.swift */; };
 		4C4D65101A3F2EDDFFFD6EE1 /* Pods_Jigsaw.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 601967226BC24AEDC4FA99EE /* Pods_Jigsaw.framework */; };
 /* End PBXBuildFile section */
 
@@ -143,6 +144,7 @@
 		00F2197224CCEF3000B72858 /* ResearchKit-simulator.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = "ResearchKit-simulator.framework"; path = "Pods/ResearchKit-simulator.framework"; sourceTree = "<group>"; };
 		00F2197B24CCF99800B72858 /* RoadmapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoadmapViewController.swift; sourceTree = "<group>"; };
 		00F2197D24CCF9A200B72858 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		00F6301C24EE2E0000BCAD11 /* ResultStatsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultStatsViewController.swift; sourceTree = "<group>"; };
 		601967226BC24AEDC4FA99EE /* Pods_Jigsaw.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Jigsaw.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B4591A0726378C2FDAC05571 /* Pods-Jigsaw.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Jigsaw.release.xcconfig"; path = "Target Support Files/Pods-Jigsaw/Pods-Jigsaw.release.xcconfig"; sourceTree = "<group>"; };
 		E489C461B8389ED9A300FE26 /* Pods-Jigsaw.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Jigsaw.debug.xcconfig"; path = "Target Support Files/Pods-Jigsaw/Pods-Jigsaw.debug.xcconfig"; sourceTree = "<group>"; };
@@ -311,6 +313,7 @@
 				0020D56624E263C600DB20E1 /* MatchingViewController.swift */,
 				005856BD24D923630010BE55 /* ChatViewController.swift */,
 				00D0862624CD2D9A00FB7A20 /* GameViewController.swift */,
+				00F6301C24EE2E0000BCAD11 /* ResultStatsViewController.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -604,6 +607,7 @@
 				000D809D24ECEDBA0070041D /* EducationLevel.swift in Sources */,
 				0020D55F24E0A7DB00DB20E1 /* ResourceWebStep.swift in Sources */,
 				0070DFEA24B0060400E71F46 /* AppDelegate.swift in Sources */,
+				00F6301D24EE2E0000BCAD11 /* ResultStatsViewController.swift in Sources */,
 				00CDFF1624B44F4C009C789D /* QuestionStepsModel.swift in Sources */,
 				0047630424ED10FE007767A5 /* QuestionEssentialProperty.swift in Sources */,
 				0078315224DF557800B35A98 /* Player.swift in Sources */,

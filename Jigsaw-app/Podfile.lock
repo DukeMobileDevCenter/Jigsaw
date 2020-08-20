@@ -220,6 +220,9 @@ PODS:
   - BoringSSL-GRPC/Implementation (0.0.7):
     - BoringSSL-GRPC/Interface (= 0.0.7)
   - BoringSSL-GRPC/Interface (0.0.7)
+  - Charts (3.5.0):
+    - Charts/Core (= 3.5.0)
+  - Charts/Core (3.5.0)
   - Eureka (5.2.1)
   - Firebase/Analytics (6.30.0):
     - Firebase/Core
@@ -374,6 +377,7 @@ PODS:
 
 DEPENDENCIES:
   - Agrume
+  - Charts
   - Eureka
   - Firebase/Analytics
   - Firebase/Auth
@@ -391,6 +395,7 @@ SPEC REPOS:
     - abseil
     - Agrume
     - BoringSSL-GRPC
+    - Charts
     - Eureka
     - Firebase
     - FirebaseAnalytics
@@ -424,6 +429,7 @@ SPEC CHECKSUMS:
   abseil: 6c8eb7892aefa08d929b39f9bb108e5367e3228f
   Agrume: 53c2be9b06caef4b4996a2886a56b9e901bcc6c0
   BoringSSL-GRPC: 8edf627ee524575e2f8d19d56f068b448eea3879
+  Charts: 40a08591df1f8ad5c223ddedfb1a06da92f24f7c
   Eureka: c883105488e05bc65539f583246ecf9657cabbfe
   Firebase: 210f41ca352067d83b1ba4fd2e7fb49a0c017397
   FirebaseAnalytics: a299a86ef70fcc6aa011418bc65a7e101fb9636c
@@ -453,6 +459,6 @@ SPEC CHECKSUMS:
   SwiftyGif: e466e86c660d343357ab944a819a101c4127cb40
   ViewRow: 8da541e9c019f3be63f4e28f311a62cac2045ecf
 
-PODFILE CHECKSUM: a2d32071f783cb6f4a820ec6e5b061407e2f5043
+PODFILE CHECKSUM: 25f3a048f447ffcde5ccc121de46a18f4967c67a
 
 COCOAPODS: 1.9.0
