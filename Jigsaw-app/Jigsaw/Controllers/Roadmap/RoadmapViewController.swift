@@ -13,4 +13,10 @@ class RoadmapViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
     }
+    
+    @IBAction func radarChartButtonTapped(_ sender: UIButton) {
+        let controller = GameHistoryRadarChartViewController()
+        controller.hidesBottomBarWhenPushed = true
+        show(controller, sender: sender)
+    }
 }

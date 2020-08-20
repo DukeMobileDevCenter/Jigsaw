@@ -62,6 +62,8 @@
 		00F6301D24EE2E0000BCAD11 /* ResultStatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F6301C24EE2E0000BCAD11 /* ResultStatsViewController.swift */; };
 		00F6302024EE335E00BCAD11 /* ResultStatsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 00F6301F24EE335E00BCAD11 /* ResultStatsViewController.xib */; };
 		00F6302224EE385E00BCAD11 /* AnswerCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F6302124EE385E00BCAD11 /* AnswerCategory.swift */; };
+		00F6302824EE4E8700BCAD11 /* GameHistoryRadarChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F6302724EE4E8700BCAD11 /* GameHistoryRadarChartViewController.swift */; };
+		00F6302A24EE4EE800BCAD11 /* GameHistoryRadarChartViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 00F6302924EE4EE800BCAD11 /* GameHistoryRadarChartViewController.xib */; };
 		4C4D65101A3F2EDDFFFD6EE1 /* Pods_Jigsaw.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 601967226BC24AEDC4FA99EE /* Pods_Jigsaw.framework */; };
 /* End PBXBuildFile section */
 
@@ -149,6 +151,8 @@
 		00F6301C24EE2E0000BCAD11 /* ResultStatsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultStatsViewController.swift; sourceTree = "<group>"; };
 		00F6301F24EE335E00BCAD11 /* ResultStatsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ResultStatsViewController.xib; sourceTree = "<group>"; };
 		00F6302124EE385E00BCAD11 /* AnswerCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswerCategory.swift; sourceTree = "<group>"; };
+		00F6302724EE4E8700BCAD11 /* GameHistoryRadarChartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameHistoryRadarChartViewController.swift; sourceTree = "<group>"; };
+		00F6302924EE4EE800BCAD11 /* GameHistoryRadarChartViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GameHistoryRadarChartViewController.xib; sourceTree = "<group>"; };
 		601967226BC24AEDC4FA99EE /* Pods_Jigsaw.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Jigsaw.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B4591A0726378C2FDAC05571 /* Pods-Jigsaw.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Jigsaw.release.xcconfig"; path = "Target Support Files/Pods-Jigsaw/Pods-Jigsaw.release.xcconfig"; sourceTree = "<group>"; };
 		E489C461B8389ED9A300FE26 /* Pods-Jigsaw.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Jigsaw.debug.xcconfig"; path = "Target Support Files/Pods-Jigsaw/Pods-Jigsaw.debug.xcconfig"; sourceTree = "<group>"; };
@@ -317,7 +321,6 @@
 				0020D56624E263C600DB20E1 /* MatchingViewController.swift */,
 				005856BD24D923630010BE55 /* ChatViewController.swift */,
 				00D0862624CD2D9A00FB7A20 /* GameViewController.swift */,
-				00F6301C24EE2E0000BCAD11 /* ResultStatsViewController.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -334,6 +337,7 @@
 		00CDFF0224B2E8AA009C789D /* Storyboard */ = {
 			isa = PBXGroup;
 			children = (
+				00F6302924EE4EE800BCAD11 /* GameHistoryRadarChartViewController.xib */,
 				00F6301F24EE335E00BCAD11 /* ResultStatsViewController.xib */,
 				0070DFEF24B0060400E71F46 /* Main.storyboard */,
 				0070DFF424B0060500E71F46 /* LaunchScreen.storyboard */,
@@ -360,6 +364,7 @@
 				00D0861E24CD135B00FB7A20 /* RootTabBarController.swift */,
 				00D0862224CD192800FB7A20 /* OnboardingViewController.swift */,
 				0020D55B24E09A6E00DB20E1 /* Custom steps */,
+				00F6302624EE4E6900BCAD11 /* Charts */,
 				00B0A67524E3CAD500887701 /* Home */,
 				00B0A67624E3CAF000887701 /* Profile */,
 				000D809B24ECED5C0070041D /* Roadmap */,
@@ -397,6 +402,15 @@
 			children = (
 			);
 			path = Javascript;
+			sourceTree = "<group>";
+		};
+		00F6302624EE4E6900BCAD11 /* Charts */ = {
+			isa = PBXGroup;
+			children = (
+				00F6301C24EE2E0000BCAD11 /* ResultStatsViewController.swift */,
+				00F6302724EE4E8700BCAD11 /* GameHistoryRadarChartViewController.swift */,
+			);
+			path = Charts;
 			sourceTree = "<group>";
 		};
 		C3C20A15E3D3B23BD23C86AF /* Frameworks */ = {
@@ -504,6 +518,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0070DFF624B0060500E71F46 /* LaunchScreen.storyboard in Resources */,
+				00F6302A24EE4EE800BCAD11 /* GameHistoryRadarChartViewController.xib in Resources */,
 				00F6302024EE335E00BCAD11 /* ResultStatsViewController.xib in Resources */,
 				005856BC24D91C4A0010BE55 /* GoogleService-Info.plist in Resources */,
 				0070DFF324B0060500E71F46 /* Assets.xcassets in Resources */,
@@ -609,6 +624,7 @@
 				000D80A024ECEE990070041D /* Ethnicity.swift in Sources */,
 				00F6302224EE385E00BCAD11 /* AnswerCategory.swift in Sources */,
 				00F2197E24CCF9A200B72858 /* ProfileViewController.swift in Sources */,
+				00F6302824EE4E8700BCAD11 /* GameHistoryRadarChartViewController.swift in Sources */,
 				005856C424D92CFB0010BE55 /* Chatroom.swift in Sources */,
 				00B0A67424E3CAA800887701 /* DemographicsViewController.swift in Sources */,
 				00D0862524CD24EA00FB7A20 /* OnboardingSteps.swift in Sources */,

@@ -184,15 +184,23 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="S1q-g3-JCi">
+                                <rect key="frame" x="157" y="507" width="101" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Or Radar chart"/>
+                                <connections>
+                                    <action selector="radarChartButtonTapped:" destination="JJs-pR-gZw" eventType="touchUpInside" id="bvr-Ny-46a"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="lhO-9s-jMu"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Roadmap" image="arrow.swap" catalog="system" id="Vh5-1M-hEe"/>
+                    <navigationItem key="navigationItem" title="Roadmap" id="oEr-wM-I6K"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gf0-Dy-4fa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="662" y="139"/>
+            <point key="canvasLocation" x="1571.0144927536232" y="138.61607142857142"/>
         </scene>
         <!--Player Profile-->
         <scene sceneID="ZH7-Kp-vrb">
@@ -222,7 +230,7 @@
                     </tabBar>
                     <connections>
                         <segue destination="Nu6-tE-NdJ" kind="relationship" relationship="viewControllers" id="x8f-q0-w41"/>
-                        <segue destination="JJs-pR-gZw" kind="relationship" relationship="viewControllers" id="izP-lQ-aiT"/>
+                        <segue destination="H4S-qx-FML" kind="relationship" relationship="viewControllers" id="izP-lQ-aiT"/>
                         <segue destination="zcL-v5-oxf" kind="relationship" relationship="viewControllers" id="LRr-EH-84z"/>
                     </connections>
                 </tabBarController>
@@ -267,6 +275,25 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7Vs-A8-Jyj" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="660.86956521739137" y="833.70535714285711"/>
+        </scene>
+        <!--Roadmap-->
+        <scene sceneID="5yD-yv-s1x">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="H4S-qx-FML" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Roadmap" image="arrow.swap" catalog="system" id="Vh5-1M-hEe"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="EKV-uM-81v">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="JJs-pR-gZw" kind="relationship" relationship="rootViewController" id="8m5-d3-x46"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qOt-aE-mf2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="660.86956521739137" y="138.61607142857142"/>
         </scene>
     </scenes>
     <resources>
