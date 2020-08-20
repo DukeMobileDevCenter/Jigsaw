@@ -192,6 +192,7 @@ extension MatchingViewController: ORKTaskViewControllerDelegate {
     func taskViewController(_ taskViewController: ORKTaskViewController, didFinishWith reason: ORKTaskViewControllerFinishReason, error: Error?) {
         // Remove matching group from database.
         removeMatchingGroup()
+        taskViewController.dismiss(animated: true)
         switch reason {
         case .discarded, .saved:
             print("💦 Canceled")
@@ -204,19 +205,12 @@ extension MatchingViewController: ORKTaskViewControllerDelegate {
             print("✅ completed")
             print(taskViewController.result)
             // Log the real game result.
-        @unknown default:
-            fatalError("Error: Onboarding task yields unknown result.")
-        }
-        
-        taskViewController.dismiss(animated: true) { [weak self] in
             let controller = ResultStatsViewController()
             controller.resultPairs = [.correct: 3, .skipped: 1, .incorrect: 2]
             controller.hidesBottomBarWhenPushed = true
-            // Pop the matching VC. Subject to change.
-            // self?.navigationController?.popViewController(animated: true)
-            // Show the game results.
-            self?.show(controller, sender: self)
-//            self?.navigationController?.pushViewController(controller, animated: true)
+            show(controller, sender: self)
+        @unknown default:
+            fatalError("Error: Onboarding task yields unknown result.")
         }
     }
 }

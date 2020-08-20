@@ -18,9 +18,9 @@ class HomeCollectionViewController: UICollectionViewController {
     @IBOutlet private var playersCountSegmentedControl: UISegmentedControl!
     
     @IBAction func testBarButtonTapped(_ sender: UIBarButtonItem) {
-//        testShowChatroom()
+        testShowChatroom(sender)
 //        PopulateGames.shared.uploadGame()
-        testShowResultChart(sender)
+//        testShowResultChart(sender)
     }
     
     @IBAction func segmentedControlValueChanged(_ sender: UISegmentedControl) {
@@ -30,6 +30,7 @@ class HomeCollectionViewController: UICollectionViewController {
     private func testShowResultChart(_ sender: UIBarButtonItem) {
         let controller = ResultStatsViewController()
         controller.resultPairs = [.correct: 3, .skipped: 1, .incorrect: 2]
+        controller.hidesBottomBarWhenPushed = true
         self.show(controller, sender: sender)
     }
     
