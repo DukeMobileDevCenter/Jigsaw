@@ -25,6 +25,7 @@ class MatchingViewController: UIViewController {
     @IBOutlet var playerCountLabel: UILabel!
     
     private let database = Firestore.firestore()
+    private lazy var queueReference = database.collection(["Queues", selectedGame.gameName, queueType.rawValue].joined(separator: "/"))
     
     private var gameGroupListener: ListenerRegistration?
     private var chatroomListener: ListenerRegistration?
@@ -39,12 +40,9 @@ class MatchingViewController: UIViewController {
         super.viewDidLoad()
         title = "Matching players"
         
-        let queueReference = database.collection(["Queues", selectedGame.gameName, queueType.rawValue].joined(separator: "/"))
         queueListener = queueReference.addSnapshotListener { [weak self] querySnapshot, _ in
             self?.playerCountLabel.text = "\(querySnapshot?.documents.count ?? 0)"
         }
-        
-        addPlayerToPlayersQueue(queueReference: queueReference)
         
         let gameGroupRef = database.collection("GameGroups")
         gameGroupListener = gameGroupRef.addSnapshotListener { [weak self] querySnapshot, error in
@@ -56,6 +54,10 @@ class MatchingViewController: UIViewController {
                 self?.handleDocumentChange(change)
             }
         }
+    }
+    
+    @IBAction func joinGameButtonTapped(_ sender: UIButton) {
+        addPlayerToPlayersQueue(queueReference: queueReference)
     }
     
     private func addPlayerToPlayersQueue(queueReference: CollectionReference) {
@@ -94,7 +96,6 @@ class MatchingViewController: UIViewController {
     }
     
     private func removeUserFromQueue() {
-        let queueReference = database.collection(["Queues", selectedGame.gameName, queueType.rawValue].joined(separator: "/"))
         queueReference.document(Profiles.currentPlayer.userID).delete()
         navigationController?.popViewController(animated: true)
     }
@@ -189,6 +190,8 @@ extension MatchingViewController: ORKTaskViewControllerDelegate {
     }
     
     func taskViewController(_ taskViewController: ORKTaskViewController, didFinishWith reason: ORKTaskViewControllerFinishReason, error: Error?) {
+        // Remove matching group from database.
+        removeMatchingGroup()
         switch reason {
         case .discarded, .saved:
             print("💦 Canceled")
@@ -204,10 +207,16 @@ extension MatchingViewController: ORKTaskViewControllerDelegate {
         @unknown default:
             fatalError("Error: Onboarding task yields unknown result.")
         }
+        
         taskViewController.dismiss(animated: true) { [weak self] in
-            self?.removeMatchingGroup()
-            // Also pop the matching VC. Subject to change.
-            self?.navigationController?.popViewController(animated: true)
+            let controller = ResultStatsViewController()
+            controller.resultPairs = [.correct: 3, .skipped: 1, .incorrect: 2]
+            controller.hidesBottomBarWhenPushed = true
+            // Pop the matching VC. Subject to change.
+            // self?.navigationController?.popViewController(animated: true)
+            // Show the game results.
+            self?.show(controller, sender: self)
+//            self?.navigationController?.pushViewController(controller, animated: true)
         }
     }
 }

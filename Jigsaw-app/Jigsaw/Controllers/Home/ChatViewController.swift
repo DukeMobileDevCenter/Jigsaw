@@ -73,8 +73,6 @@ class ChatViewController: MessagesViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Don't show bottom tab bar.
-        hidesBottomBarWhenPushed = true
         
         guard let id = chatroom.id else {
             navigationController?.popViewController(animated: true)

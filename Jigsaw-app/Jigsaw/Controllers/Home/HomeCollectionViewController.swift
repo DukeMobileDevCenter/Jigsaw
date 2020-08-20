@@ -18,6 +18,22 @@ class HomeCollectionViewController: UICollectionViewController {
     @IBOutlet private var playersCountSegmentedControl: UISegmentedControl!
     
     @IBAction func testBarButtonTapped(_ sender: UIBarButtonItem) {
+//        testShowChatroom()
+//        PopulateGames.shared.uploadGame()
+        testShowResultChart(sender)
+    }
+    
+    @IBAction func segmentedControlValueChanged(_ sender: UISegmentedControl) {
+        title = playersCountSegmentedControl.selectedSegmentIndex == 0 ? "Lobby - 2P" : "Lobby - 4P"
+    }
+    
+    private func testShowResultChart(_ sender: UIBarButtonItem) {
+        let controller = ResultStatsViewController()
+        controller.resultPairs = [.correct: 3, .skipped: 1, .incorrect: 2]
+        self.show(controller, sender: sender)
+    }
+    
+    private func testShowChatroom(_ sender: UIBarButtonItem) {
         let chatroomRef = Firestore.firestore().collection("Chatrooms")
         chatroomRef.addSnapshotListener { querySnapshot, error in
             guard let snapshot = querySnapshot else {
@@ -27,15 +43,12 @@ class HomeCollectionViewController: UICollectionViewController {
             snapshot.documentChanges.forEach { change in
                 if let chatroom = Chatroom(document: change.document), chatroom.id == "TestChatroom1" {
                     let chatroomVC = ChatViewController(user: Auth.auth().currentUser!, chatroom: chatroom, timeLeft: nil)
+                    // Don't show bottom tab bar.
+                    chatroomVC.hidesBottomBarWhenPushed = true
                     self.show(chatroomVC, sender: sender)
                 }
             }
         }
-//        PopulateGames.shared.uploadGame()
-    }
-    
-    @IBAction func segmentedControlValueChanged(_ sender: UISegmentedControl) {
-        title = playersCountSegmentedControl.selectedSegmentIndex == 0 ? "Lobby - 2P" : "Lobby - 4P"
     }
     
     @objc

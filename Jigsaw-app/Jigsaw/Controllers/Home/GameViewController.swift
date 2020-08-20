@@ -85,8 +85,8 @@ class GameViewController: ORKTaskViewController {
         
         // Completion instruction.
         let completionStep = ORKOrderedTask.makeCompletionStep()
-        completionStep.title = "Survey Complete"
-        completionStep.text = "Your answers will reflect our provided choices."
+        completionStep.title = "Game complete"
+        completionStep.text = "Your answers will be logged in game history."
         steps.append(completionStep)
         return ORKOrderedTask(identifier: "surveyTask", steps: steps)
     }
