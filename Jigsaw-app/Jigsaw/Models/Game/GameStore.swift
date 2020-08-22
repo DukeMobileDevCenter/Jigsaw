@@ -32,7 +32,7 @@ class GameStore: NSObject {
                     }
                 }
                 // Sorted by latest added version number.
-                games.sort { g1, g2 in g1.version > g2.version }
+                games.sort { game1, game2 in game1.version > game2.version }
                 self?.allGames = games
                 completion(.success(games))
             } else if let error = error {
