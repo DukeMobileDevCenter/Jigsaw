@@ -48,13 +48,11 @@ class RootTabBarController: UITabBarController {
         }
         isFirstAppearance = false
     }
-}
-
-extension RootTabBarController: OnboardingManagerDelegate {
-    func didCompleteOnboarding() {
+    
+    private func setCurrentPlayer(with userID: String) {
         // Load from firebase to fill in user info.
         let database = Firestore.firestore()
-        let docRef = database.collection("Players").document(Profiles.userID)
+        let docRef = database.collection("Players").document(userID)
         // Get player info from remote.
         docRef.getDocument { [weak self] document, error in
             guard let self = self else { return }
@@ -77,5 +75,11 @@ extension RootTabBarController: OnboardingManagerDelegate {
                 self.presentAlert(error: error)
             }
         }
+    }
+}
+
+extension RootTabBarController: OnboardingManagerDelegate {
+    func didCompleteOnboarding() {
+        setCurrentPlayer(with: Profiles.userID)
     }
 }

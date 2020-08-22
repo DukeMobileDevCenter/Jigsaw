@@ -14,11 +14,25 @@ import FirebaseFirestore
 class ProfileViewController: FormViewController {
     // Load from firebase to fill in user info.
     private let database = Firestore.firestore()
+    // During onboarding, the form cannot be filled without player info.
+    // In this case, load the form when the view is appearing.
+    private var shouldLoadFormForTheFirstTime = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configureRefreshControl()
-        createForm()
+        if Profiles.currentPlayer != nil {
+            createForm()
+            shouldLoadFormForTheFirstTime = false
+        }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if shouldLoadFormForTheFirstTime {
+            createForm()
+        }
+        shouldLoadFormForTheFirstTime = false
     }
     
     private func configureRefreshControl() {

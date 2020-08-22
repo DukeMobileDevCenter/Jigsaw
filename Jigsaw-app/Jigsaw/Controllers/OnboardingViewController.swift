@@ -84,7 +84,9 @@ extension OnboardingViewController: ORKTaskViewControllerDelegate {
                 Profiles.displayName = "AnonymUser"
             }
             createUserInfo(userID: Profiles.userID, displayName: Profiles.displayName, jigsawValue: Profiles.jigsawValue)
-            presentingViewController?.dismiss(animated: true)
+            presentingViewController?.dismiss(animated: true) {
+                self.onboardingManagerDelegate?.didCompleteOnboarding()
+            }
         @unknown default:
             fatalError("Error: Onboarding task yields unknown result.")
         }
