@@ -99,7 +99,7 @@ extension OnboardingViewController: ORKTaskViewControllerDelegate {
             joinDate: Date(),
             gameHistory: [],
             email: nil,
-            demographics: [String: String]()
+            demographics: [String: String?]()
         )
         let database = Firestore.firestore()
         do {
