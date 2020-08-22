@@ -177,16 +177,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Probably sth like  Duolingo learning roadmap" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sL7-r3-kpQ">
-                                <rect key="frame" x="104" y="428" width="206" height="41"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Probably sth like  Duolingo learning roadmap" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sL7-r3-kpQ">
+                                <rect key="frame" x="104" y="377.5" width="206" height="41"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="S1q-g3-JCi">
-                                <rect key="frame" x="157" y="507" width="101" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="S1q-g3-JCi">
+                                <rect key="frame" x="156.5" y="498.5" width="101" height="30"/>
                                 <state key="normal" title="Or Radar chart"/>
                                 <connections>
                                     <action selector="radarChartButtonTapped:" destination="JJs-pR-gZw" eventType="touchUpInside" id="bvr-Ny-46a"/>
@@ -194,6 +192,12 @@
                             </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="S1q-g3-JCi" firstAttribute="centerX" secondItem="sL7-r3-kpQ" secondAttribute="centerX" id="M1U-HS-acy"/>
+                            <constraint firstItem="sL7-r3-kpQ" firstAttribute="centerY" secondItem="A64-7g-F0X" secondAttribute="centerY" constant="-50" id="Nor-jd-dah"/>
+                            <constraint firstItem="S1q-g3-JCi" firstAttribute="top" secondItem="sL7-r3-kpQ" secondAttribute="bottom" constant="80" id="eKd-hx-y6u"/>
+                            <constraint firstItem="sL7-r3-kpQ" firstAttribute="centerX" secondItem="A64-7g-F0X" secondAttribute="centerX" id="p4M-Le-ZsB"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="lhO-9s-jMu"/>
                     </view>
                     <navigationItem key="navigationItem" title="Roadmap" id="oEr-wM-I6K"/>
