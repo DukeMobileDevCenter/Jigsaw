@@ -13,7 +13,7 @@ import FirebaseFirestore
 
 class ProfileViewController: FormViewController {
     // Load from firebase to fill in user info.
-    private let playerDocRef = Firestore.firestore().collection("Players").document(Profiles.userID)
+    private let database = Firestore.firestore()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,7 +28,7 @@ class ProfileViewController: FormViewController {
     }
     
     private func updatePlayerDisplayName(name: String) {
-        playerDocRef.updateData(["displayName": name]) { [weak self] error in
+        database.collection("Players").document(Profiles.userID).updateData(["displayName": name]) { [weak self] error in
             if let error = error {
                 print("❌ Error updating document: \(error)")
                 return
@@ -41,7 +41,7 @@ class ProfileViewController: FormViewController {
     @objc
     private func loadPlayerProfile() {
         // Get player info from remote.
-        playerDocRef.getDocument { [weak self] document, error in
+        database.collection("Players").document(Profiles.userID).getDocument { [weak self] document, error in
             guard let self = self else { return }
             // Dismiss the refresh control.
             DispatchQueue.main.async {
