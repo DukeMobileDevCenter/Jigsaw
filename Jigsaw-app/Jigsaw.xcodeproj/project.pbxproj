@@ -145,7 +145,6 @@
 		00D0862424CD24EA00FB7A20 /* OnboardingSteps.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingSteps.swift; sourceTree = "<group>"; };
 		00D0862624CD2D9A00FB7A20 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		00F2196B24CCEAEB00B72858 /* ResearchKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ResearchKit.framework; path = Pods/ResearchKit.framework; sourceTree = "<group>"; };
-		00F2197224CCEF3000B72858 /* ResearchKit-simulator.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = "ResearchKit-simulator.framework"; path = "Pods/ResearchKit-simulator.framework"; sourceTree = "<group>"; };
 		00F2197B24CCF99800B72858 /* RoadmapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoadmapViewController.swift; sourceTree = "<group>"; };
 		00F2197D24CCF9A200B72858 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		00F6301C24EE2E0000BCAD11 /* ResultStatsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultStatsViewController.swift; sourceTree = "<group>"; };
@@ -416,7 +415,6 @@
 		C3C20A15E3D3B23BD23C86AF /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				00F2197224CCEF3000B72858 /* ResearchKit-simulator.framework */,
 				00F2196B24CCEAEB00B72858 /* ResearchKit.framework */,
 				601967226BC24AEDC4FA99EE /* Pods_Jigsaw.framework */,
 			);
