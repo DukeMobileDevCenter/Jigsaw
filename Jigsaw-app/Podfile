@@ -39,4 +39,7 @@ pod 'ProgressHUD'
 # Game result showing in charts
 pod 'Charts'
 
+# Questionnaire YAML
+pod 'Yams'
+
 end

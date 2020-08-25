@@ -9,6 +9,7 @@
 import Foundation
 
 protocol QuestionEssentialProperty {
+    var questionType: QuestionType { get }
     var title: String { get }
     var prompt: String { get }
     var isOptional: Bool { get }

@@ -30,10 +30,10 @@ struct Question: Codable, QuestionEssentialProperty {
             self.questionType = .singleChoice
         case "NUMERIC":
             self.questionType = .numeric
-        case "MAP":
-            self.questionType = .map
         case "SCALE":
             self.questionType = .scale
+        case "BOOLEAN":
+            self.questionType = .boolean
         default:
             self.questionType = .unknown
         }

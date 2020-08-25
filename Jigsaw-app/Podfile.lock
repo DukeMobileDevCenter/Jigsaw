@@ -374,6 +374,7 @@ PODS:
   - SwiftyGif (5.3.0)
   - ViewRow (0.8):
     - Eureka (>= 5.0.0)
+  - Yams (4.0.0)
 
 DEPENDENCIES:
   - Agrume
@@ -389,6 +390,7 @@ DEPENDENCIES:
   - PINRemoteImage
   - ProgressHUD
   - ViewRow
+  - Yams
 
 SPEC REPOS:
   trunk:
@@ -424,6 +426,7 @@ SPEC REPOS:
     - PromisesObjC
     - SwiftyGif
     - ViewRow
+    - Yams
 
 SPEC CHECKSUMS:
   abseil: 6c8eb7892aefa08d929b39f9bb108e5367e3228f
@@ -458,7 +461,8 @@ SPEC CHECKSUMS:
   PromisesObjC: b14b1c6b68e306650688599de8a45e49fae81151
   SwiftyGif: e466e86c660d343357ab944a819a101c4127cb40
   ViewRow: 8da541e9c019f3be63f4e28f311a62cac2045ecf
+  Yams: 9d49b85824751ee13d31e9ec6617c4dfb9a8c3cd
 
-PODFILE CHECKSUM: 25f3a048f447ffcde5ccc121de46a18f4967c67a
+PODFILE CHECKSUM: c4e4c02f647b06224827afe44ee5b963bfbda32a
 
 COCOAPODS: 1.9.0
