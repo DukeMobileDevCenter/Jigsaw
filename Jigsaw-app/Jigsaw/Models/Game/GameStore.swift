@@ -19,16 +19,11 @@ class GameStore: NSObject {
     func loadGames(completion: @escaping (Result<[Game], Error>) -> Void) {
         let database = Firestore.firestore()
         var games = [Game]()
-        database.collection("Games").getDocuments { [weak self] querySnapshot, error in
+        database.collection("Games2").getDocuments { [weak self] querySnapshot, error in
             if let snapshot = querySnapshot {
                 for document in snapshot.documents {
-                    do {
-                        if let game = try document.data(as: Game.self) {
-                            games.append(game)
-                        }
-                    } catch {
-                        completion(.failure(error))
-                        return
+                    if let game = Game(document: document) {
+                        games.append(game)
                     }
                 }
                 // Sorted by latest added version number.

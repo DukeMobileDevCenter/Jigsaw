@@ -14,7 +14,7 @@ struct GameOfGroup {
     // Name of the game.
     let gameName: String
     // Group resource URL.
-    let resourceURL: String
+    let resourceURL: URL
     // Group questionnaire.
     let questionnaire: Questionnaire
 }

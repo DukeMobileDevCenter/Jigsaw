@@ -7,16 +7,17 @@
 //
 
 import Foundation
+import FirebaseFirestore
 
-struct Game: Codable {
+struct Game {
     // Game version.
     let version: String
     // Name of the game.
     let gameName: String
     // Group 1 resource URL.
-    let g1resURL: String
+    let g1resURL: URL
     // Group 2 resource URL.
-    let g2resURL: String
+    let g2resURL: URL
     // Group 1 questionnaire.
     let g1Questionnaire: Questionnaire
     // Group 2 questionnaire.
@@ -25,4 +26,62 @@ struct Game: Codable {
     let category: GameCategory
     // Game card background image URL, can also use for styling.
     let backgroundImageURL: URL
+    
+    init?(document: QueryDocumentSnapshot) {
+        let data = document.data()
+        
+        guard
+            let version = data["version"] as? String,
+            let gameName = data["gameName"] as? String,
+            let g1resURL = data["g1resURL"] as? String,
+            let g2resURL = data["g2resURL"] as? String,
+            let backgroundImageURL = data["backgroundImageURL"] as? String,
+            let categoryString = data["category"] as? String,
+            let category = GameCategory(rawValue: categoryString),
+            let g1Questionnaire = data["g1Questionnaire"] as? [[String: Any]],
+            let g2Questionnaire = data["g2Questionnaire"] as? [[String: Any]]
+            else { return nil }
+        
+        self.version = version
+        self.gameName = gameName
+        self.g1resURL = URL(string: g1resURL)!
+        self.g2resURL = URL(string: g2resURL)!
+        self.backgroundImageURL = URL(string: backgroundImageURL)!
+        self.category = category
+        
+        self.g1Questionnaire = Game.decodeQuestionnaireData(data: g1Questionnaire)
+        self.g2Questionnaire = Game.decodeQuestionnaireData(data: g2Questionnaire)
+    }
+    
+    /// Decode an array of dictionaries to a questionnaire.
+    ///
+    /// - Parameter data: An array of `[String: Any]` dictionaries, aka `Array<Dictionary<String, Any>>`.
+    /// - Returns: A `Questionnaire`, aka an array of questions which conform to `QuestionEssentialProperty` protocol.
+    private static func decodeQuestionnaireData(data: [[String: Any]]) -> Questionnaire {
+        return data.compactMap { questionDict in
+            if let questionTypeString = questionDict["questionType"] as? String,
+                let questionType = QuestionType(rawValue: questionTypeString) {
+                let question: QuestionEssentialProperty?
+                switch questionType {
+                case .instruction:
+                    question = InstructionQuestion(data: questionDict)
+                case .singleChoice:
+                    question = SingleChoiceQuestion(data: questionDict)
+                case .multipleChoice:
+                    question = MultipleChoiceQuestion(data: questionDict)
+                case .numeric:
+                    question = NumericQuestion(data: questionDict)
+                case .scale:
+                    question = ScaleQuestion(data: questionDict)
+                case .boolean:
+                    question = BooleanQuestion(data: questionDict)
+                case .unknown:
+                    question = nil
+                }
+                return question
+            } else {
+                return nil
+            }
+        }
+    }
 }
