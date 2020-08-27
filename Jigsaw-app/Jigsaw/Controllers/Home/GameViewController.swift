@@ -13,7 +13,7 @@ class GameViewController: ORKTaskViewController {
     
     init(game: GameOfGroup, taskRun taskRunUUID: UUID?) {
         super.init(task: nil, taskRun: taskRunUUID)
-        resourceURL = URL(string: game.resourceURL)!
+        resourceURL = game.resourceURL
         task = self.createSurveyTaskFromJson(questionnaire: game.questionnaire)
     }
     
@@ -64,22 +64,20 @@ class GameViewController: ORKTaskViewController {
         for question in questionnaire {
             switch question.questionType {
             case .instruction:
-                steps.append(QuestionStepsModel.instructionStep(question: question))
+                steps.append(QuestionStepsModel.instructionStep(question: question as! InstructionQuestion))
             case .multipleChoice:
-                steps.append(QuestionStepsModel.multipleChoiceStep(question: question))
+                steps.append(QuestionStepsModel.multipleChoiceStep(question: question as! MultipleChoiceQuestion))
             case .singleChoice:
-                steps.append(QuestionStepsModel.singleChoiceStep(question: question))
+                steps.append(QuestionStepsModel.singleChoiceStep(question: question as! SingleChoiceQuestion))
             case .numeric:
-                steps.append(QuestionStepsModel.numericStep(question: question))
-//            case .map:
-//                steps.append(QuestionStepsModel.mapStep(question: question))
+                steps.append(QuestionStepsModel.numericStep(question: question as! NumericQuestion))
+            case .boolean:
+                steps.append(QuestionStepsModel.booleanStep(question: question as! BooleanQuestion))
             case .scale:
-                steps.append(QuestionStepsModel.scaleStep(question: question))
+                steps.append(QuestionStepsModel.scaleStep(question: question as! ScaleQuestion))
             case .unknown:
                 print("debug info: i've no idea what is this. unidentified type")
                 continue
-            default:
-                break
             }
         }
         
