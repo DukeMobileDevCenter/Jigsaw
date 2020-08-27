@@ -16,11 +16,11 @@ struct InstructionQuestion: Codable, QuestionEssentialProperty {
     
     init?(data: [String: Any]) {
         guard let title = data["title"] as? String,
-            let prompt = data["prompt"] as? String,
-            let isOptional = data["isOptional"] as? Bool else { return nil }
+            let prompt = data["prompt"] as? String else { return nil }
         self.questionType = .instruction
         self.title = title
         self.prompt = prompt
-        self.isOptional = isOptional
+        // An instruction step is default to non-optional.
+        self.isOptional = false
     }
 }
