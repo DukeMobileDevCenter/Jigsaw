@@ -45,7 +45,6 @@
 		00BA555D24DA7CF7006A207E /* Gender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00BA555C24DA7CF7006A207E /* Gender.swift */; };
 		00CDFF0D24B4353E009C789D /* Questionnaire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00CDFF0C24B4353E009C789D /* Questionnaire.swift */; };
 		00CDFF1224B44797009C789D /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00CDFF1124B44797009C789D /* UIViewController.swift */; };
-		00CDFF1424B44C9D009C789D /* LocalErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00CDFF1324B44C9D009C789D /* LocalErrors.swift */; };
 		00CDFF1624B44F4C009C789D /* QuestionStepsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00CDFF1524B44F4C009C789D /* QuestionStepsModel.swift */; };
 		00CF5DBC24F4DA3100B501BB /* PopulateGamesFromYAML.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00CF5DBB24F4DA3100B501BB /* PopulateGamesFromYAML.swift */; };
 		00CF5DBF24F4DB3C00B501BB /* SingleChoiceQuestion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00CF5DBE24F4DB3C00B501BB /* SingleChoiceQuestion.swift */; };
@@ -139,7 +138,6 @@
 		00BA555C24DA7CF7006A207E /* Gender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gender.swift; sourceTree = "<group>"; };
 		00CDFF0C24B4353E009C789D /* Questionnaire.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Questionnaire.swift; sourceTree = "<group>"; };
 		00CDFF1124B44797009C789D /* UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
-		00CDFF1324B44C9D009C789D /* LocalErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalErrors.swift; sourceTree = "<group>"; };
 		00CDFF1524B44F4C009C789D /* QuestionStepsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionStepsModel.swift; sourceTree = "<group>"; };
 		00CF5DBB24F4DA3100B501BB /* PopulateGamesFromYAML.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopulateGamesFromYAML.swift; sourceTree = "<group>"; };
 		00CF5DBE24F4DB3C00B501BB /* SingleChoiceQuestion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleChoiceQuestion.swift; sourceTree = "<group>"; };
@@ -384,7 +382,6 @@
 		00CDFF0524B2E8F0009C789D /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				00CDFF1324B44C9D009C789D /* LocalErrors.swift */,
 				0051951024E9CEB2008F1CE0 /* Question */,
 				005856CA24D92F820010BE55 /* Game */,
 				005856CB24D92F900010BE55 /* Onboarding */,
@@ -624,7 +621,6 @@
 			files = (
 				005856CE24D92FB60010BE55 /* ChatUser.swift in Sources */,
 				00D0862324CD192800FB7A20 /* OnboardingViewController.swift in Sources */,
-				00CDFF1424B44C9D009C789D /* LocalErrors.swift in Sources */,
 				005856C624D92D320010BE55 /* DatabaseRepresentation.swift in Sources */,
 				00CF5DBC24F4DA3100B501BB /* PopulateGamesFromYAML.swift in Sources */,
 				005856C024D924970010BE55 /* Message.swift in Sources */,

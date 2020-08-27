@@ -26,7 +26,7 @@ class PopulateGamesFromYAML {
                 if let loadedDictionary = data {
                     database.collection("Games2").document(loadedDictionary["gameName"] as! String).setData(loadedDictionary)
                 } else {
-                    print("cannot cast yaml to dictionary")
+                    print("Error: cannot cast yaml to dictionary")
                 }
             } catch {
                 print(error)

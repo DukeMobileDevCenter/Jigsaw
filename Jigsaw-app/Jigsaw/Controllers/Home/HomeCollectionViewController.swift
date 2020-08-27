@@ -18,8 +18,11 @@ class HomeCollectionViewController: UICollectionViewController {
     @IBOutlet private var playersCountSegmentedControl: UISegmentedControl!
     
     @IBAction func testBarButtonTapped(_ sender: UIBarButtonItem) {
-//        testShowChatroom(sender)
-        PopulateGamesFromYAML.shared.uploadGame()
+        // Maybe put a sort or filter button here.
+        // Sort by date or name or category, etc.
+        // filter by name and category.
+        testShowChatroom(sender)
+//        PopulateGamesFromYAML.shared.uploadGame()
 //        PopulateGames.shared.uploadGame()
 //        testShowResultChart(sender)
     }
