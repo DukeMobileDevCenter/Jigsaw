@@ -225,6 +225,7 @@
 		0051951024E9CEB2008F1CE0 /* Question */ = {
 			isa = PBXGroup;
 			children = (
+				00CF5DBD24F4DA8F00B501BB /* YAMLQuestions */,
 				00CDFF1524B44F4C009C789D /* QuestionStepsModel.swift */,
 				00CDFF0C24B4353E009C789D /* Questionnaire.swift */,
 				0051950E24E9CDD4008F1CE0 /* QuestionType.swift */,
@@ -383,7 +384,6 @@
 		00CDFF0524B2E8F0009C789D /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				00CF5DBD24F4DA8F00B501BB /* YAMLQuestions */,
 				00CDFF1324B44C9D009C789D /* LocalErrors.swift */,
 				0051951024E9CEB2008F1CE0 /* Question */,
 				005856CA24D92F820010BE55 /* Game */,
