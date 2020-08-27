@@ -59,7 +59,7 @@ class PopulateGamesFromYAML {
           - "Pick 1"
           - "Pick 2"
           - "Pick 3"
-        correctAnswer:
+        correctAnswers:
           - "Pick 1"
           - "Pick 3"
         isOptional: false
