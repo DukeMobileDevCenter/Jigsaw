@@ -18,4 +18,25 @@ struct NumericQuestion: Codable, QuestionEssentialProperty {
     let correctMinValue: Double
     let correctMaxValue: Double
     let isOptional: Bool
+    
+    init?(data: [String: Any]) {
+        guard let title = data["title"] as? String,
+            let prompt = data["prompt"] as? String,
+            let unit = data["unit"] as? String,
+            let minValue = data["minValue"] as? Double,
+            let maxValue = data["maxValue"] as? Double,
+            let correctMinValue = data["correctMinValue"] as? Double,
+            let correctMaxValue = data["correctMaxValue"] as? Double,
+            let isOptional = data["isOptional"] as? Bool else { return nil }
+        
+        self.questionType = .boolean
+        self.title = title
+        self.prompt = prompt
+        self.isOptional = isOptional
+        self.unit = unit
+        self.minValue = minValue
+        self.maxValue = maxValue
+        self.correctMinValue = correctMinValue
+        self.correctMaxValue = correctMaxValue
+    }
 }

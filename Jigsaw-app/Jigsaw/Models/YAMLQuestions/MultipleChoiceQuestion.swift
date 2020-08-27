@@ -15,4 +15,19 @@ struct MultipleChoiceQuestion: Codable, QuestionEssentialProperty {
     let choices: [String]
     let correctAnswers: [String]
     let isOptional: Bool
+    
+    init?(data: [String: Any]) {
+        guard let title = data["title"] as? String,
+            let prompt = data["prompt"] as? String,
+            let choices = data["choices"] as? [String],
+            let correctAnswers = data["correctAnswers"] as? [String],
+            let isOptional = data["isOptional"] as? Bool else { return nil }
+        
+        self.questionType = .multipleChoice
+        self.title = title
+        self.prompt = prompt
+        self.isOptional = isOptional
+        self.choices = choices
+        self.correctAnswers = correctAnswers
+    }
 }

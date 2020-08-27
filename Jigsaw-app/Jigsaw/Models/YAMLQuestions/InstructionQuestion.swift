@@ -13,4 +13,14 @@ struct InstructionQuestion: Codable, QuestionEssentialProperty {
     let title: String
     let prompt: String
     let isOptional: Bool
+    
+    init?(data: [String: Any]) {
+        guard let title = data["title"] as? String,
+            let prompt = data["prompt"] as? String,
+            let isOptional = data["isOptional"] as? Bool else { return nil }
+        self.questionType = .instruction
+        self.title = title
+        self.prompt = prompt
+        self.isOptional = isOptional
+    }
 }
