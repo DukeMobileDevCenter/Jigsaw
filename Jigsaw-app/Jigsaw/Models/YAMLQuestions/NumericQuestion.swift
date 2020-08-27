@@ -29,7 +29,7 @@ struct NumericQuestion: Codable, QuestionEssentialProperty {
             let correctMaxValue = data["correctMaxValue"] as? Double,
             let isOptional = data["isOptional"] as? Bool else { return nil }
         
-        self.questionType = .boolean
+        self.questionType = .numeric
         self.title = title
         self.prompt = prompt
         self.isOptional = isOptional

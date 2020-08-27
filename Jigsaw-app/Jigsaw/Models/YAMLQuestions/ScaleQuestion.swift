@@ -35,7 +35,7 @@ struct ScaleQuestion: Codable, QuestionEssentialProperty {
             let correctMaxValue = data["correctMaxValue"] as? Int,
             let isOptional = data["isOptional"] as? Bool else { return nil }
         
-        self.questionType = .boolean
+        self.questionType = .scale
         self.title = title
         self.prompt = prompt
         self.isOptional = isOptional
