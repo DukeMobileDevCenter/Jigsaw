@@ -46,6 +46,14 @@ struct GameResult {
         return [.correct: correct, .skipped: skipped, .incorrect: incorrect, .unknown: unknown]
     }
     
+    // swiftlint:disable cyclomatic_complexity
+    
+    /// Judge if the player answer the question correctly.
+    ///
+    /// - Parameters:
+    ///   - question: The original question in questionnaire, which contains the correct answer.
+    ///   - result: The player's answer from the game.
+    /// - Returns: An `AnswerCategory` case.
     private func judgeAnswer(question: QuestionEssentialProperty, result: ORKResult) -> AnswerCategory {
         let outcome: AnswerCategory
         switch question.questionType {
@@ -92,4 +100,5 @@ struct GameResult {
         }
         return outcome
     }
+    // swiftlint:enable cyclomatic_complexity
 }
