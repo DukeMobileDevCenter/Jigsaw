@@ -85,7 +85,11 @@ class ResultStatsViewController: UIViewController {
     
     func setDataCount(from resultPairs: KeyValuePairs<AnswerCategory, Int>) {
         let totalCount = resultPairs.reduce(0) { $0 + $1.1 }
-        let entries = resultPairs.map { (key, value) -> PieChartDataEntry in
+        let entries = resultPairs.compactMap { (key, value) -> PieChartDataEntry? in
+            if key == .unknown && value == 0 {
+                // Omit unknown category if it is empty.
+                return nil
+            }
             return PieChartDataEntry(
                 value: Double(value) / Double(totalCount),
                 label: key.rawValue

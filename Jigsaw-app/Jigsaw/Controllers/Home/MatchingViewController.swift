@@ -209,8 +209,9 @@ extension MatchingViewController: ORKTaskViewControllerDelegate {
             print("✅ completed")
             print(taskViewController.result)
             // Log the real game result.
+            let gameResult = GameResult(taskResult: taskViewController.result, questionnaire: myQuestionnaire)
             let controller = ResultStatsViewController()
-            controller.resultPairs = [.correct: 3, .skipped: 1, .incorrect: 2]
+            controller.resultPairs = gameResult.resultPairs
             controller.hidesBottomBarWhenPushed = true
             show(controller, sender: self)
         @unknown default:
