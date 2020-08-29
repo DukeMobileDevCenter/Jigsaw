@@ -12,4 +12,5 @@ enum AnswerCategory: String, CaseIterable {
     case correct
     case skipped
     case incorrect
+    case unknown
 }
