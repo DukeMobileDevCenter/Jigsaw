@@ -89,13 +89,3 @@ class GameViewController: ORKTaskViewController {
         return ORKOrderedTask(identifier: "surveyTask", steps: steps)
     }
 }
-
-extension GameViewController: ORKReviewViewControllerDelegate {
-    func reviewViewController(_ reviewViewController: ORKReviewViewController, didUpdate updatedResult: ORKTaskResult, source resultSource: ORKTaskResult) {
-        print("✅ updatedResult")
-    }
-    
-    func reviewViewControllerDidSelectIncompleteCell(_ reviewViewController: ORKReviewViewController) {
-        print("✅ incompleted cell selected")
-    }
-}
