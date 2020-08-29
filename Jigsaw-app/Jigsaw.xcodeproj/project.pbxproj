@@ -41,6 +41,7 @@
 		00B0A67C24E3D10300887701 /* ProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B0A67B24E3D10300887701 /* ProfileHeaderView.swift */; };
 		00B0A68124E3DB7300887701 /* String+sha256.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B0A68024E3DB7300887701 /* String+sha256.swift */; };
 		00B2AB7024DA5B3100607346 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B2AB6F24DA5B3100607346 /* UIColor.swift */; };
+		00B6305F24FB0247008975CE /* GameResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B6305E24FB0247008975CE /* GameResult.swift */; };
 		00BA555B24DA5D2A006A207E /* UICollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00BA555A24DA5D2A006A207E /* UICollectionView.swift */; };
 		00BA555D24DA7CF7006A207E /* Gender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00BA555C24DA7CF7006A207E /* Gender.swift */; };
 		00CDFF0D24B4353E009C789D /* Questionnaire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00CDFF0C24B4353E009C789D /* Questionnaire.swift */; };
@@ -134,6 +135,7 @@
 		00B0A67B24E3D10300887701 /* ProfileHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderView.swift; sourceTree = "<group>"; };
 		00B0A68024E3DB7300887701 /* String+sha256.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+sha256.swift"; sourceTree = "<group>"; };
 		00B2AB6F24DA5B3100607346 /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
+		00B6305E24FB0247008975CE /* GameResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameResult.swift; sourceTree = "<group>"; };
 		00BA555A24DA5D2A006A207E /* UICollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UICollectionView.swift; sourceTree = "<group>"; };
 		00BA555C24DA7CF7006A207E /* Gender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gender.swift; sourceTree = "<group>"; };
 		00CDFF0C24B4353E009C789D /* Questionnaire.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Questionnaire.swift; sourceTree = "<group>"; };
@@ -248,7 +250,7 @@
 				0047630524ED1154007767A5 /* GameCategory.swift */,
 				0020D54F24DFAED000DB20E1 /* GameOfGroup.swift */,
 				00A06D8C24E8A9B400030649 /* GameGroup.swift */,
-				00CF673924E9E2BC00C502F3 /* PlayersQueue.swift */,
+				00B6305E24FB0247008975CE /* GameResult.swift */,
 			);
 			path = Game;
 			sourceTree = "<group>";
@@ -387,6 +389,7 @@
 				005856CB24D92F900010BE55 /* Onboarding */,
 				005856CC24D92F990010BE55 /* Chatroom */,
 				000D809E24ECEE6A0070041D /* Demographics */,
+				00CF673924E9E2BC00C502F3 /* PlayersQueue.swift */,
 				0078315124DF557800B35A98 /* Player.swift */,
 				005856C124D9262C0010BE55 /* Profiles.swift */,
 				00F6302124EE385E00BCAD11 /* AnswerCategory.swift */,
@@ -647,6 +650,7 @@
 				00F2197E24CCF9A200B72858 /* ProfileViewController.swift in Sources */,
 				00F6302824EE4E8700BCAD11 /* GameHistoryRadarChartViewController.swift in Sources */,
 				005856C424D92CFB0010BE55 /* Chatroom.swift in Sources */,
+				00B6305F24FB0247008975CE /* GameResult.swift in Sources */,
 				00B0A67424E3CAA800887701 /* DemographicsViewController.swift in Sources */,
 				00D0862524CD24EA00FB7A20 /* OnboardingSteps.swift in Sources */,
 				000D809D24ECEDBA0070041D /* EducationLevel.swift in Sources */,

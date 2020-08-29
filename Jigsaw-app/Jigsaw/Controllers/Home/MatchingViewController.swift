@@ -34,7 +34,8 @@ class MatchingViewController: UIViewController {
     /// The player's current game group.
     private var gameGroupID: String?
     private var gameGroup: GameGroup!
-    // private var isFirstPlayer: Bool = false
+    
+    private var myQuestionnaire: Questionnaire!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -74,9 +75,13 @@ class MatchingViewController: UIViewController {
         if group.group1.contains(Profiles.userID) {
             // Current player is allocated to the first group.
             gameOfMyGroup = GameOfGroup(version: game.version, gameName: game.gameName, resourceURL: game.g1resURL, questionnaire: game.g1Questionnaire)
-            // isFirstPlayer = group.group1.first == Profiles.userID
+            // Hold a reference to my questionnaire to check answers.
+            myQuestionnaire = game.g1Questionnaire
         } else if group.group2.contains(Profiles.userID) {
+            // Current player is allocated to the second group.
             gameOfMyGroup = GameOfGroup(version: game.version, gameName: game.gameName, resourceURL: game.g2resURL, questionnaire: game.g2Questionnaire)
+            // Hold a reference to my questionnaire to check answers.
+            myQuestionnaire = game.g2Questionnaire
         } else {
             // Not my group, ignore.
             return
@@ -97,7 +102,6 @@ class MatchingViewController: UIViewController {
     
     private func removeUserFromQueue() {
         queueReference.document(Profiles.currentPlayer.userID).delete()
-        navigationController?.popViewController(animated: true)
     }
     
     private func handleDocumentChange(_ change: DocumentChange) {
