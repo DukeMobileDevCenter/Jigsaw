@@ -87,7 +87,7 @@ class ResultStatsViewController: UIViewController {
         let totalCount = resultPairs.reduce(0) { $0 + $1.1 }
         let entries = resultPairs.compactMap { (key, value) -> PieChartDataEntry? in
             if key == .unknown && value == 0 {
-                // Omit unknown category if it is empty.
+                // Omit .unknown category if it is empty.
                 return nil
             }
             return PieChartDataEntry(
