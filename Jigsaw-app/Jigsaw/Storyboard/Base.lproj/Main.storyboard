@@ -299,8 +299,8 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="H4S-qx-FML" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Roadmap" image="arrow.swap" catalog="system" id="Vh5-1M-hEe"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="EKV-uM-81v">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="EKV-uM-81v">
+                        <rect key="frame" x="0.0" y="44" width="414" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
