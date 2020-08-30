@@ -23,7 +23,6 @@ class HomeCollectionViewController: UICollectionViewController {
         // filter by name and category.
         testShowChatroom(sender)
 //        PopulateGamesFromYAML.shared.uploadGame()
-//        PopulateGames.shared.uploadGame()
 //        testShowResultChart(sender)
     }
     
