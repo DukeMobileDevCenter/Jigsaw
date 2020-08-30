@@ -217,10 +217,23 @@
                         <viewLayoutGuide key="safeArea" id="1Dh-Uu-8mf"/>
                     </view>
                     <navigationItem key="navigationItem" title="Player Profile" id="bOu-nD-ssk"/>
+                    <connections>
+                        <segue destination="O5P-6S-K8l" kind="show" identifier="showGameHistoryTimelineSegue" id="T9E-P5-fQc"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9fN-l4-P25" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1571.0144927536232" y="833.70535714285711"/>
+        </scene>
+        <!--GameHistoryTimeline-->
+        <scene sceneID="GRg-ty-lqV">
+            <objects>
+                <viewControllerPlaceholder storyboardName="GameHistoryTimeline" id="O5P-6S-K8l" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="CBH-ro-wmK"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qfz-wC-8vT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2441" y="834"/>
         </scene>
         <!--Root Tab Bar Controller-->
         <scene sceneID="VN1-Z6-q2d">

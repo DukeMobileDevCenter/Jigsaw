@@ -46,6 +46,23 @@ struct GameResult {
         return [.correct: correct, .skipped: skipped, .incorrect: incorrect, .unknown: unknown]
     }
     
+    var score: Double {
+        let total: Int = resultPairs
+            .map { key, value in
+                switch key {
+                case .correct, .incorrect, .skipped:
+                    // 3 points for answers that have correct answer.
+                    return 3 * value
+                case .unknown:
+                    // 0 point for unknown answer, should not happen.
+                    return 0
+                }
+            }
+            .reduce(0, +)
+        let scored: Int = resultPairs[0].1 * 3 + resultPairs[1].1 * 1
+        return Double(scored) / Double(total)
+    }
+    
     // swiftlint:disable cyclomatic_complexity
     
     /// Judge if the player answer the question correctly.

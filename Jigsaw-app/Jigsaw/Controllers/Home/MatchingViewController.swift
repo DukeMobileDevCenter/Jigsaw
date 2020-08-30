@@ -69,6 +69,18 @@ class MatchingViewController: UIViewController {
         }
     }
     
+    private func addGameHistory(gameHistory: GameHistory) {
+        let historyRef = database.collection(["Players", Profiles.userID, "gameHistory"].joined(separator: "/"))
+        if let groupID = gameGroupID {
+            do {
+                // Set a history with the group ID.
+                try historyRef.document(groupID).setData(from: gameHistory)
+            } catch {
+                presentAlert(error: error)
+            }
+        }
+    }
+    
     private func handleMatchingGroup(group: GameGroup) {
         let game = games.first { $0.gameName == group.gameName }!
         let gameOfMyGroup: GameOfGroup
@@ -207,11 +219,21 @@ extension MatchingViewController: ORKTaskViewControllerDelegate {
             // Log an game error.
         case .completed:
             print("✅ completed")
-            print(taskViewController.result)
             // Log the real game result.
             let gameResult = GameResult(taskResult: taskViewController.result, questionnaire: myQuestionnaire)
             let controller = ResultStatsViewController()
             controller.resultPairs = gameResult.resultPairs
+            
+            let gameHistory = GameHistory(
+                playedDate: gameGroup.createdDate,
+                gameCategory: selectedGame.category,
+                gameName: selectedGame.gameName,
+                allPlayers: gameGroup.group1 + gameGroup.group2,
+                gameResult: Dictionary(uniqueKeysWithValues: Array(gameResult.resultPairs)),
+                score: gameResult.score
+            )
+            // Add game history to a player's collection.
+            addGameHistory(gameHistory: gameHistory)
             controller.hidesBottomBarWhenPushed = true
             show(controller, sender: self)
         @unknown default:

@@ -42,6 +42,9 @@
 		00B0A68124E3DB7300887701 /* String+sha256.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B0A68024E3DB7300887701 /* String+sha256.swift */; };
 		00B2AB7024DA5B3100607346 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B2AB6F24DA5B3100607346 /* UIColor.swift */; };
 		00B6305F24FB0247008975CE /* GameResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B6305E24FB0247008975CE /* GameResult.swift */; };
+		00B6306124FB1A05008975CE /* GameHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B6306024FB1A05008975CE /* GameHistory.swift */; };
+		00B6306324FB26A8008975CE /* GameHistoryTimeline.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 00B6306224FB26A8008975CE /* GameHistoryTimeline.storyboard */; };
+		00B6306524FB285B008975CE /* GameHistoryTimelineTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B6306424FB285B008975CE /* GameHistoryTimelineTableViewController.swift */; };
 		00BA555B24DA5D2A006A207E /* UICollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00BA555A24DA5D2A006A207E /* UICollectionView.swift */; };
 		00BA555D24DA7CF7006A207E /* Gender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00BA555C24DA7CF7006A207E /* Gender.swift */; };
 		00CDFF0D24B4353E009C789D /* Questionnaire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00CDFF0C24B4353E009C789D /* Questionnaire.swift */; };
@@ -136,6 +139,9 @@
 		00B0A68024E3DB7300887701 /* String+sha256.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+sha256.swift"; sourceTree = "<group>"; };
 		00B2AB6F24DA5B3100607346 /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		00B6305E24FB0247008975CE /* GameResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameResult.swift; sourceTree = "<group>"; };
+		00B6306024FB1A05008975CE /* GameHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameHistory.swift; sourceTree = "<group>"; };
+		00B6306224FB26A8008975CE /* GameHistoryTimeline.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = GameHistoryTimeline.storyboard; sourceTree = "<group>"; };
+		00B6306424FB285B008975CE /* GameHistoryTimelineTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameHistoryTimelineTableViewController.swift; sourceTree = "<group>"; };
 		00BA555A24DA5D2A006A207E /* UICollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UICollectionView.swift; sourceTree = "<group>"; };
 		00BA555C24DA7CF7006A207E /* Gender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gender.swift; sourceTree = "<group>"; };
 		00CDFF0C24B4353E009C789D /* Questionnaire.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Questionnaire.swift; sourceTree = "<group>"; };
@@ -251,6 +257,7 @@
 				0020D54F24DFAED000DB20E1 /* GameOfGroup.swift */,
 				00A06D8C24E8A9B400030649 /* GameGroup.swift */,
 				00B6305E24FB0247008975CE /* GameResult.swift */,
+				00B6306024FB1A05008975CE /* GameHistory.swift */,
 			);
 			path = Game;
 			sourceTree = "<group>";
@@ -339,6 +346,7 @@
 			children = (
 				00F2197D24CCF9A200B72858 /* ProfileViewController.swift */,
 				00B0A67324E3CAA800887701 /* DemographicsViewController.swift */,
+				00B6306424FB285B008975CE /* GameHistoryTimelineTableViewController.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -351,6 +359,7 @@
 				0070DFEF24B0060400E71F46 /* Main.storyboard */,
 				0070DFF424B0060500E71F46 /* LaunchScreen.storyboard */,
 				00B0A67924E3CF9600887701 /* ProfileHeaderView.xib */,
+				00B6306224FB26A8008975CE /* GameHistoryTimeline.storyboard */,
 			);
 			path = Storyboard;
 			sourceTree = "<group>";
@@ -538,6 +547,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				00B6306324FB26A8008975CE /* GameHistoryTimeline.storyboard in Resources */,
 				0070DFF624B0060500E71F46 /* LaunchScreen.storyboard in Resources */,
 				00F6302A24EE4EE800BCAD11 /* GameHistoryRadarChartViewController.xib in Resources */,
 				00F6302024EE335E00BCAD11 /* ResultStatsViewController.xib in Resources */,
@@ -625,6 +635,7 @@
 				005856CE24D92FB60010BE55 /* ChatUser.swift in Sources */,
 				00D0862324CD192800FB7A20 /* OnboardingViewController.swift in Sources */,
 				005856C624D92D320010BE55 /* DatabaseRepresentation.swift in Sources */,
+				00B6306124FB1A05008975CE /* GameHistory.swift in Sources */,
 				00CF5DBC24F4DA3100B501BB /* PopulateGamesFromYAML.swift in Sources */,
 				005856C024D924970010BE55 /* Message.swift in Sources */,
 				00CF5DC124F4DD0200B501BB /* MultipleChoiceQuestion.swift in Sources */,
@@ -660,6 +671,7 @@
 				00CF5DC524F4DDA500B501BB /* ScaleQuestion.swift in Sources */,
 				00CDFF1624B44F4C009C789D /* QuestionStepsModel.swift in Sources */,
 				0047630424ED10FE007767A5 /* QuestionEssentialProperty.swift in Sources */,
+				00B6306524FB285B008975CE /* GameHistoryTimelineTableViewController.swift in Sources */,
 				0078315224DF557800B35A98 /* Player.swift in Sources */,
 				0020D54924DF79CB00DB20E1 /* GameStore.swift in Sources */,
 				00D0862124CD185C00FB7A20 /* OnboardingStateManager.swift in Sources */,

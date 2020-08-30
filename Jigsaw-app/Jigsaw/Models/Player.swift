@@ -13,7 +13,6 @@ struct Player: Codable {
     var displayName: String
     var jigsawValue: Double
     let joinDate: Date
-    var gameHistory: [String]
     var email: String?
     var demographics: [String: String?]
 }

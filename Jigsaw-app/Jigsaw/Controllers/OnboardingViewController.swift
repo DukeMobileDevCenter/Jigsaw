@@ -99,7 +99,6 @@ extension OnboardingViewController: ORKTaskViewControllerDelegate {
             displayName: displayName,
             jigsawValue: jigsawValue,
             joinDate: Date(),
-            gameHistory: [],
             email: nil,
             demographics: [String: String?]()
         )

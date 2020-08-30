@@ -133,7 +133,7 @@ class ProfileViewController: FormViewController {
         form
         +++ Section("Profile")
         <<< profileHeaderRow
-        +++ Section(header: "Basic information", footer: "Blah blah blah")
+        +++ Section(header: "Basic Information", footer: "Blah blah blah")
         <<< displayNameRow
         <<< DecimalRow { row in
             row.title = "Jigsaw value"
@@ -147,15 +147,17 @@ class ProfileViewController: FormViewController {
         }
         +++ Section("Demographics")
         <<< ButtonRow { row in
-            row.title = "Update your demographics"
+            row.title = "Update Demographics"
             row.presentationMode = .show(controllerProvider: ControllerProvider.callback { DemographicsViewController() }, onDismiss: { controller in controller.navigationController?.popViewController(animated: true) })
         }
-        +++ Section("Game history")
+        +++ Section("Game History")
         <<< ButtonRow { row in
-            row.title = "Show game history"
+            row.title = "Show Game History"
         }
         .onCellSelection { [weak self] _, _ in
-            self?.presentAlert(title: "More to add here", message: "Show game history is on the way!")
+            DispatchQueue.main.async {
+                self?.performSegue(withIdentifier: "showGameHistoryTimelineSegue", sender: self)
+            }
         }
     }
 }
