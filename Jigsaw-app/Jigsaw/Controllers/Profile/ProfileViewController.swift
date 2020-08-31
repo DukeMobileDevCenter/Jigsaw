@@ -19,6 +19,8 @@ class ProfileViewController: FormViewController {
     private var shouldLoadFormForTheFirstTime = true
     
     override func viewDidLoad() {
+        // Override the tableview appearance.
+        loadInsetGroupedTableView()
         super.viewDidLoad()
         configureRefreshControl()
         if Profiles.currentPlayer != nil {
@@ -148,7 +150,11 @@ class ProfileViewController: FormViewController {
         +++ Section("Demographics")
         <<< ButtonRow { row in
             row.title = "Update Demographics"
-            row.presentationMode = .show(controllerProvider: ControllerProvider.callback { DemographicsViewController() }, onDismiss: { controller in controller.navigationController?.popViewController(animated: true) })
+            row.presentationMode = .show(controllerProvider: ControllerProvider.callback {
+                let controller = DemographicsViewController()
+                controller.hidesBottomBarWhenPushed = true
+                return controller
+            }, onDismiss: { controller in controller.navigationController?.popViewController(animated: true) })
         }
         +++ Section("Game History")
         <<< ButtonRow { row in

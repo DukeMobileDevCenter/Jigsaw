@@ -18,6 +18,7 @@
 		0020D56A24E267B300DB20E1 /* GameCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0020D56924E267B300DB20E1 /* GameCollectionCell.swift */; };
 		0047630424ED10FE007767A5 /* QuestionEssentialProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0047630324ED10FE007767A5 /* QuestionEssentialProperty.swift */; };
 		0047630624ED1154007767A5 /* GameCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0047630524ED1154007767A5 /* GameCategory.swift */; };
+		004A4B0D24FDB55A000FA2C8 /* FormViewController+insetGrouped.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004A4B0C24FDB55A000FA2C8 /* FormViewController+insetGrouped.swift */; };
 		0051950F24E9CDD4008F1CE0 /* QuestionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0051950E24E9CDD4008F1CE0 /* QuestionType.swift */; };
 		005856BC24D91C4A0010BE55 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 005856BB24D91C4A0010BE55 /* GoogleService-Info.plist */; };
 		005856BE24D923630010BE55 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005856BD24D923630010BE55 /* ChatViewController.swift */; };
@@ -111,6 +112,7 @@
 		0020D56924E267B300DB20E1 /* GameCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameCollectionCell.swift; sourceTree = "<group>"; };
 		0047630324ED10FE007767A5 /* QuestionEssentialProperty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionEssentialProperty.swift; sourceTree = "<group>"; };
 		0047630524ED1154007767A5 /* GameCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameCategory.swift; sourceTree = "<group>"; };
+		004A4B0C24FDB55A000FA2C8 /* FormViewController+insetGrouped.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FormViewController+insetGrouped.swift"; sourceTree = "<group>"; };
 		0051950E24E9CDD4008F1CE0 /* QuestionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionType.swift; sourceTree = "<group>"; };
 		005856BB24D91C4A0010BE55 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		005856BD24D923630010BE55 /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
@@ -372,6 +374,7 @@
 				00B2AB6F24DA5B3100607346 /* UIColor.swift */,
 				00BA555A24DA5D2A006A207E /* UICollectionView.swift */,
 				00B0A68024E3DB7300887701 /* String+sha256.swift */,
+				004A4B0C24FDB55A000FA2C8 /* FormViewController+insetGrouped.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -652,6 +655,7 @@
 				0020D55D24E0A74C00DB20E1 /* ResourceWebStepViewController.swift in Sources */,
 				00D0862724CD2D9A00FB7A20 /* GameViewController.swift in Sources */,
 				00CF673A24E9E2BC00C502F3 /* PlayersQueue.swift in Sources */,
+				004A4B0D24FDB55A000FA2C8 /* FormViewController+insetGrouped.swift in Sources */,
 				0047630624ED1154007767A5 /* GameCategory.swift in Sources */,
 				00BA555D24DA7CF7006A207E /* Gender.swift in Sources */,
 				00B2AB7024DA5B3100607346 /* UIColor.swift in Sources */,

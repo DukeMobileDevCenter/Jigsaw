@@ -74,6 +74,8 @@ class DemographicsViewController: FormViewController {
     }
     
     override func viewDidLoad() {
+        // Override the tableview appearance.
+        loadInsetGroupedTableView()
         super.viewDidLoad()
         title = "Demographics"
         createForm()
