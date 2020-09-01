@@ -9,12 +9,12 @@
 import ResearchKit
 
 class GameViewController: ORKTaskViewController {
-    var resourceURL: URL!
+    private var resourceURL: URL!
     
     init(game: GameOfGroup, taskRun taskRunUUID: UUID?) {
         super.init(task: nil, taskRun: taskRunUUID)
         resourceURL = game.resourceURL
-        task = self.createSurveyTaskFromJson(questionnaire: game.questionnaire)
+        task = createSurveyTask(from: game.questionnaire)
     }
     
     @available(*, unavailable)
@@ -34,24 +34,25 @@ class GameViewController: ORKTaskViewController {
         return step
     }()
 
-    /// The function to create the surveytask from the Questionnaire class (parsed from json)
+    /// Create an `ORKOrderedTask` from the a questionnaire.
     ///
-    /// - Parameter questionnaire: Questionnaire type, which is an array of questions.
-    /// - Returns: an `ORKOrderedTask` surveyTask.
-    func createSurveyTaskFromJson(questionnaire: Questionnaire) -> ORKOrderedTask {
+    /// - Parameter questionnaire: A `Questionnaire`, which is an array of questions.
+    /// - Returns: An `ORKOrderedTask` surveyTask.
+    private func createSurveyTask(from questionnaire: Questionnaire) -> ORKOrderedTask {
         var steps = [ORKStep]()
         
-        // Welcome step
+        // Welcome step.
         let welcomeStep = ORKInstructionStep(identifier: "Welcome")
         welcomeStep.title = "Welcome"
         welcomeStep.detailText = "This is a game blah blah."
         welcomeStep.image = UIImage(named: "onboarding_jigsaw")!
         steps.append(welcomeStep)
         
-        // Resource reading page
+        // Resource reading page.
         let readingsStep = ResourceWebStep(identifier: "Resource", url: resourceURL)
         steps.append(readingsStep)
         
+        // Chatroom step.
         steps.append(chatroomCountdownStep)
         
         let questionsInstructionStep = ORKInstructionStep(identifier: "Questions")
