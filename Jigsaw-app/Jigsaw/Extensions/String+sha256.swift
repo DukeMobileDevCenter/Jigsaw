@@ -24,7 +24,7 @@ extension String {
         return digest.map { String(format: "%02hhx", $0) }.joined()
     }
     
-    var gravatarURL: URL {
+    var wavatarURL: URL {
         let gravatarHash = self.sha256
         let endIndex = gravatarHash.index(gravatarHash.startIndex, offsetBy: 32)
         let gravatarURL = URL(string: "https://www.gravatar.com/avatar/\(gravatarHash[..<endIndex])?d=wavatar")!

@@ -87,7 +87,7 @@ class ProfileViewController: FormViewController {
     
     private var profileHeaderView: ProfileHeaderView {
         let view = Bundle.main.loadNibNamed("ProfileHeaderView", owner: self)?.first as! ProfileHeaderView
-        view.setView(name: Profiles.displayName, avatarURL: Profiles.currentPlayer.userID.gravatarURL)
+        view.setView(name: Profiles.displayName, avatarURL: Profiles.currentPlayer.userID.wavatarURL)
         return view
     }
     
