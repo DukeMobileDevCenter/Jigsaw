@@ -11,20 +11,22 @@ import FirebaseFirestore
 import ProgressHUD
 
 class GameHistoryTimelineTableViewController: UITableViewController {
+    /// A label to display the count of total games played.
+    @IBOutlet var totalCountLabel: UILabel!
+    
     /// The game history records for a player.
-    var gameHistories = [GameHistory]() {
+    private var gameHistories = [GameHistory]() {
         didSet {
             tableView.reloadData()
             totalCountLabel.text = "\(gameHistories.count) game(s) played in total."
         }
     }
     
-    // Load from firebase to fill in user info.
+    /// A reference to the firebase for filling in player game history.
     private let database = Firestore.firestore()
     
-    @IBOutlet var totalCountLabel: UILabel!
-    
-    let percentageFormatter: NumberFormatter = {
+    /// A number formatter to format percentage strings.
+    private let percentageFormatter: NumberFormatter = {
         let formatter = NumberFormatter()
         formatter.multiplier = 100
         formatter.numberStyle = .percent
@@ -32,23 +34,19 @@ class GameHistoryTimelineTableViewController: UITableViewController {
         return formatter
     }()
     
-    let dateFormatter: DateFormatter = {
+    /// A date formatter to format the date of a game record.
+    private let dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "HH:mm, d MMM yy"
         return formatter
     }()
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        title = "Game History"
-        ProgressHUD.show()
-        loadGameHistories { [weak self] histories in
-            self?.gameHistories = histories
-            ProgressHUD.dismiss()
-        }
-    }
-    
-    private func loadGameHistories(completion: @escaping ([GameHistory]) -> Void) {
+    /// Load game history records from database.
+    ///
+    /// - Parameters:
+    ///   - completion: A closure called after fetching data from database that passes an array of `GameHistory`.
+    ///   - gameHistories: An array of `GameHistory`.
+    private func loadGameHistories(completion: @escaping (_ gameHistories: [GameHistory]) -> Void) {
         let historyRef = database.collection(["Players", Profiles.userID, "gameHistory"].joined(separator: "/"))
         var gameHistories: [GameHistory] = []
         historyRef.getDocuments { [weak self] querySnapshot, error in
@@ -63,6 +61,18 @@ class GameHistoryTimelineTableViewController: UITableViewController {
                 self.presentAlert(error: error)
             }
             completion(gameHistories)
+        }
+    }
+    
+    // MARK: UITableViewController
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        title = "Game History"
+        ProgressHUD.show()
+        loadGameHistories { [weak self] histories in
+            self?.gameHistories = histories
+            ProgressHUD.dismiss()
         }
     }
     
