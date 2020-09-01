@@ -10,14 +10,19 @@ import UIKit
 
 extension UIViewController {
     /// Shows an alert with the given title, message, and an OK button.
+    ///
+    /// - Parameters:
+    ///   - title: The title string of the alert.
+    ///   - message: The message string of the alert.
     func presentAlert(title: String? = nil, message: String? = nil) {
         let okAction = UIAlertAction(title: "OK", style: .default)
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert, actions: [okAction])
         present(alertController, animated: true)
     }
     
-    /// Show an alert with the title "Error", the error's `localizedDescription`
-    /// as the message, and an OK button.
+    /// Show an alert with the title "Error", the error's `localizedDescription` as the message, and an OK button.
+    ///
+    /// - Parameter error: The error to show.
     func presentAlert(error: Error) {
         presentAlert(title: "Error", message: error.localizedDescription)
     }
