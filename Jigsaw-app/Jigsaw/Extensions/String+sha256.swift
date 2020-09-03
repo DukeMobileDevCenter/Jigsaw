@@ -27,13 +27,13 @@ extension String {
     var wavatarURL: URL {
         let gravatarHash = self.sha256
         let endIndex = gravatarHash.index(gravatarHash.startIndex, offsetBy: 32)
-        let gravatarURL = URL(string: "https://www.gravatar.com/avatar/\(gravatarHash[..<endIndex])?d=wavatar")!
+        let gravatarURL = URL(string: "https://www.gravatar.com/avatar/\(gravatarHash[..<endIndex])?d=wavatar&s=240")!
         return gravatarURL
     }
     
     /// The official implementation of Gravatar request.
     /// - Note: Refer to [Gravatar Reference](http://en.gravatar.com/site/implement/images/).
     var gravatarEmailURL: URL {
-        URL(string: "https://www.gravatar.com/avatar/\(self.md5)")!
+        URL(string: "https://www.gravatar.com/avatar/\(self.md5)?s=240")!
     }
 }

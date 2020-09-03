@@ -358,9 +358,9 @@
 			children = (
 				00F6302924EE4EE800BCAD11 /* GameHistoryRadarChartViewController.xib */,
 				00F6301F24EE335E00BCAD11 /* ResultStatsViewController.xib */,
+				00B0A67924E3CF9600887701 /* ProfileHeaderView.xib */,
 				0070DFEF24B0060400E71F46 /* Main.storyboard */,
 				0070DFF424B0060500E71F46 /* LaunchScreen.storyboard */,
-				00B0A67924E3CF9600887701 /* ProfileHeaderView.xib */,
 				00B6306224FB26A8008975CE /* GameHistoryTimeline.storyboard */,
 			);
 			path = Storyboard;
