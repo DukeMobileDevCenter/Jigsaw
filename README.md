@@ -10,7 +10,7 @@
 </div>
 
 <div align="center">
-    <h1>Jigsaw</h1>
+    <h2>Jigsaw</h2>
     <h3>collaborate with empathy</h3>
 </div>
 
