@@ -1,12 +1,12 @@
 <div align="center">
-   <img width="256" src="./Jigsaw-app/Jigsaw/Assets.xcassets/AppIcon.appiconset/1024.png" alt="Jigsaw Logo">
+   <img width="256" src="logo.png" alt="Jigsaw Logo">
 </div>
 
 <div align="center">
-    ![Swift](https://img.shields.io/badge/Swift-5.3-orange.svg?style=flat)
-    ![Xcode](https://img.shields.io/badge/Xcode-11.7-blue.svg?style=flat)
-    ![macOS](https://img.shields.io/badge/macOS-10.15.6-green.svg?style=flat)
-    ![version](https://img.shields.io/badge/version-1.0%20build%201-blue.svg?style=flat)
+    <img src="https://img.shields.io/badge/Swift-5.3-orange.svg?style=flat" alt="Swift 5">
+    <img src="https://img.shields.io/badge/Xcode-11.7-blue.svg?style=flat" alt="Xcode 11">
+    <img src="https://img.shields.io/badge/macOS-10.15.6-green.svg?style=flat" alt="macOS Catalina">
+    <img src="https://img.shields.io/badge/version-1.0%20build%201-blue.svg?style=flat" alt="version">
 </div>
 
 <div align="center">
@@ -28,19 +28,29 @@ Jigsaw features
 * [x] Full Dark Mode support
 * [x] ...and many more to be discovered in the app
 
-## Usage
-
 ## Design
+
+*Placeholder*
 
 ### Onboarding
 
+*Placeholder*
+
 ### Games Lobby
-    
+
+*Placeholder*
+
 ### Profile & Game Records
+
+*Placeholder*
 
 ### Achievements
 
+*Placeholder*
+
 ## Progress notes
+
+*Placeholder*
 
 ## Contributing
 
@@ -50,9 +60,10 @@ Fixing any [issues](https://github.com/DukeMobileDevCenter/Jigsaw/issues) in the
 
 ## Requirements
 
-* Xcode 11.0 (or newer)
+* [Xcode](https://apps.apple.com/us/app/xcode/id497799835?mt=12) 11.0 (or newer)
 * [SwiftLint](https://github.com/realm/SwiftLint)
-* [ResearchKit](https://github.com/ResearchKit/ResearchKit) from Apple: https://www.researchandcare.org/researchkit/
+* [ResearchKit](https://github.com/ResearchKit/ResearchKit) from Apple
+    * [Official Website](https://www.researchandcare.org/researchkit/)
 * CocoaPods dependencies
 
 ### Building with CocoaPods
@@ -71,7 +82,5 @@ Jigsaw
 Copyright © Center for Mobile Development 2020
 All rights reserved. 
 ```
-
----
 
 last revision: 200905
