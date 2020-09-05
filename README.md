@@ -15,7 +15,9 @@
 
 [Jigsaw](https://gitlab.oit.duke.edu/MobileCenter/jigsaw) helps reduce bias and miscommunication among people with different political stances.
 
-Originally prototyped by Grant Larson, Mengqian Liu, Shaopeng Zhang and Diego Chamorro. the app was later on continued by Xinyi Hong and Xiaochen Zhou at *Duke's Center for Mobile Development*. Based on previous efforts, @yo1995 refactored the app and made it public on GitHub. The app is sponsored by Department of Philosophy at Duke.
+Originally prototyped by Grant Larson, Mengqian Liu, Shaopeng Zhang and Diego Chamorro. the app was later on continued by Xinyi Hong and Xiaochen Zhou at *Duke's Center for Mobile Development*. Based on previous efforts, Ting(@yo1995) refactored the app and made it public on GitHub. 
+
+The app is sponsored by Department of Philosophy at Duke.
 
 Currently the app is under beta testing.
 
@@ -60,15 +62,15 @@ Fixing any [issues](https://github.com/DukeMobileDevCenter/Jigsaw/issues) in the
 
 ## Requirements
 
-* [Xcode](https://apps.apple.com/us/app/xcode/id497799835?mt=12) 11.0 (or newer)
+* [Xcode 11.0 (or newer)](https://apps.apple.com/us/app/xcode/id497799835)
 * [SwiftLint](https://github.com/realm/SwiftLint)
 * [ResearchKit](https://github.com/ResearchKit/ResearchKit) from Apple
-    * [Official Website](https://www.researchandcare.org/researchkit/)
+    * Official Website: https://www.researchandcare.org/researchkit/
 * CocoaPods dependencies
 
 ### Building with CocoaPods
 
-Please refer to issue https://github.com/DukeMobileDevCenter/Jigsaw/issues/39 for more details.
+Please refer to [issue #39](https://github.com/DukeMobileDevCenter/Jigsaw/issues/39) for more details.
 
 1. Clone or download the repository
 2. Run the `pod install` command in the `Jigsaw-app` folder
