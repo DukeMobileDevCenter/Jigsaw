@@ -68,7 +68,7 @@ Fixing any [issues](https://github.com/DukeMobileDevCenter/Jigsaw/issues) in the
 
 ### Building with CocoaPods
 
-Please refer to issue #39 for more details.
+Please refer to issue https://github.com/DukeMobileDevCenter/Jigsaw/issues/39 for more details.
 
 1. Clone or download the repository
 2. Run the `pod install` command in the `Jigsaw-app` folder
