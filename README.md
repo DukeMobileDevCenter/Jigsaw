@@ -10,8 +10,7 @@
 </div>
 
 <div align="center">
-    <h3>Jigsaw</h3>
-    <p>collaborate with empathy</p>
+    <h1>Jigsaw<br>collaborate with empathy</h1>
 </div>
 
 [Jigsaw](https://gitlab.oit.duke.edu/MobileCenter/jigsaw) helps reduce bias and miscommunication among people with different political stances.
