@@ -120,7 +120,7 @@
                     </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FUz-N4-EiH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-                <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="0.5" id="EXe-JP-k7t">
+                <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="0.2" id="EXe-JP-k7t">
                     <connections>
                         <action selector="longPress:" destination="4a0-lW-Yyi" id="arL-sw-kiG"/>
                     </connections>

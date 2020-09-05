@@ -39,14 +39,15 @@ class HomeCollectionViewController: UICollectionViewController {
         switch gestureRecognizer.state {
         case .began:
             feedbackGenerator.selectionChanged()
-            UIView.animate(withDuration: 0.15) {
-                cell.transform = CGAffineTransform(scaleX: 0.95, y: 0.95)
-            }
-        case .ended:
-            presentAlert(title: "Info", message: "May add a long press event here.")
-            fallthrough
+            UIView.animate(
+                withDuration: 0.3,
+                animations: { cell.transform = CGAffineTransform(scaleX: 0.95, y: 0.95) },
+                completion: { _ in
+                    self.presentAlert(title: "Info", message: "May add a long press event here.")
+                }
+            )
         default:
-            UIView.animate(withDuration: 0.15) {
+            UIView.animate(withDuration: 0.3) {
                 cell.transform = .identity
             }
         }
