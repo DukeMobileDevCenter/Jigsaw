@@ -18,6 +18,10 @@ class ProfileViewController: FormViewController {
     // In this case, load the form when the view is appearing.
     private var shouldLoadFormForTheFirstTime = true
     
+    private let appName = Bundle.main.object(forInfoDictionaryKey: kCFBundleNameKey as String) as? String
+    private let versionNumber = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String
+    private let buildNumber = Bundle.main.object(forInfoDictionaryKey: kCFBundleVersionKey as String) as? String
+    
     override func viewDidLoad() {
         // Override the tableview appearance.
         loadInsetGroupedTableView()
@@ -165,5 +169,6 @@ class ProfileViewController: FormViewController {
                 self?.performSegue(withIdentifier: "showGameHistoryTimelineSegue", sender: self)
             }
         }
+        +++ Section("\(appName!) Version \(versionNumber!) build \(buildNumber!)")
     }
 }
