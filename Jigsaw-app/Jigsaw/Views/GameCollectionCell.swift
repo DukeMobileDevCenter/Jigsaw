@@ -17,10 +17,6 @@ class GameCollectionCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        let longPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(longPressOnCell))
-        longPressGestureRecognizer.minimumPressDuration = 0.05
-        addGestureRecognizer(longPressGestureRecognizer)
-        
         iconBackgroundView.layer.cornerRadius = 25
         iconBackgroundView.layer.masksToBounds = true
         backgroundImageView.layer.masksToBounds = true
@@ -33,21 +29,5 @@ class GameCollectionCell: UICollectionViewCell {
         layer.shadowRadius = 8
         layer.shadowOpacity = 0.6
         layer.masksToBounds = false
-    }
-    
-    @objc
-    func longPressOnCell(_ gestureRecognizer: UILongPressGestureRecognizer) {
-        let feedbackGenerator = UISelectionFeedbackGenerator()
-        switch gestureRecognizer.state {
-        case .began:
-            feedbackGenerator.selectionChanged()
-            UIView.animate(withDuration: 0.15) {
-                self.transform = CGAffineTransform(scaleX: 0.95, y: 0.95)
-            }
-        default:
-            UIView.animate(withDuration: 0.15) {
-                self.transform = .identity
-            }
-        }
     }
 }

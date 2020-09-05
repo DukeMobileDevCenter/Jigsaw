@@ -36,6 +36,7 @@
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="X7l-vU-RZw">
                                             <rect key="frame" x="0.0" y="0.0" width="140" height="140"/>
                                             <color key="backgroundColor" name="darkBackgroundWithOpacity"/>
+                                            <gestureRecognizers/>
                                         </view>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Lqf-nc-OFO">
                                             <rect key="frame" x="45" y="45" width="50" height="50"/>
@@ -90,6 +91,7 @@
                         <connections>
                             <outlet property="dataSource" destination="4a0-lW-Yyi" id="VDa-t8-t32"/>
                             <outlet property="delegate" destination="4a0-lW-Yyi" id="Fdj-V6-GIU"/>
+                            <outletCollection property="gestureRecognizers" destination="EXe-JP-k7t" appends="YES" id="cXB-vg-Hoh"/>
                         </connections>
                     </collectionView>
                     <navigationItem key="navigationItem" title="Lobby - 2P" id="UZt-g5-Jhh">
@@ -118,6 +120,11 @@
                     </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FUz-N4-EiH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="0.5" id="EXe-JP-k7t">
+                    <connections>
+                        <action selector="longPress:" destination="4a0-lW-Yyi" id="arL-sw-kiG"/>
+                    </connections>
+                </pongPressGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1612" y="-552"/>
         </scene>

@@ -30,6 +30,28 @@ class HomeCollectionViewController: UICollectionViewController {
         title = playersCountSegmentedControl.selectedSegmentIndex == 0 ? "Lobby - 2P" : "Lobby - 4P"
     }
     
+    @IBAction func longPress(_ gestureRecognizer: UILongPressGestureRecognizer) {
+        // Get the cell at point you pressed with indexPath.
+        let point = gestureRecognizer.location(in: collectionView)
+        guard let indexPath = collectionView.indexPathForItem(at: point),
+            let cell = collectionView.cellForItem(at: indexPath) else { return }
+        let feedbackGenerator = UISelectionFeedbackGenerator()
+        switch gestureRecognizer.state {
+        case .began:
+            feedbackGenerator.selectionChanged()
+            UIView.animate(withDuration: 0.15) {
+                cell.transform = CGAffineTransform(scaleX: 0.95, y: 0.95)
+            }
+        case .ended:
+            presentAlert(title: "Info", message: "May add a long press event here.")
+            fallthrough
+        default:
+            UIView.animate(withDuration: 0.15) {
+                cell.transform = .identity
+            }
+        }
+    }
+    
     private func testShowResultChart(_ sender: UIBarButtonItem) {
         let controller = ResultStatsViewController()
         controller.resultPairs = [.correct: 3, .skipped: 1, .incorrect: 2]
