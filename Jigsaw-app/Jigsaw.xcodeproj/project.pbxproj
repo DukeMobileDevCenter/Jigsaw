@@ -485,6 +485,7 @@
 				0070E00B24B0066B00E71F46 /* SwiftLint */,
 				0077668142A2BBE2152A00CD /* [CP] Embed Pods Frameworks */,
 				00F2197824CCEF5D00B72858 /* Embed Frameworks */,
+				8D1878805E6A71186CF01A75 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -611,6 +612,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Jigsaw/Pods-Jigsaw-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8D1878805E6A71186CF01A75 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Jigsaw/Pods-Jigsaw-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Jigsaw/Pods-Jigsaw-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Jigsaw/Pods-Jigsaw-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		BCABCBAFB4266F05EE57AD41 /* [CP] Check Pods Manifest.lock */ = {

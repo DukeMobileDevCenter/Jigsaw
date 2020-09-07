@@ -217,7 +217,13 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="1Dh-Uu-8mf"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Player Profile" id="bOu-nD-ssk"/>
+                    <navigationItem key="navigationItem" title="Player Profile" id="bOu-nD-ssk">
+                        <barButtonItem key="rightBarButtonItem" title="Item" image="person.circle" catalog="system" id="hJk-91-mZ3">
+                            <connections>
+                                <action selector="userAccountBarButtonTapped:" destination="P4k-pc-CCe" id="lKz-W1-dUa"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <segue destination="O5P-6S-K8l" kind="show" identifier="showGameHistoryTimelineSegue" id="T9E-P5-fQc"/>
                     </connections>
@@ -319,6 +325,7 @@
         <image name="gamecontroller" catalog="system" width="128" height="82"/>
         <image name="person" catalog="system" width="128" height="117"/>
         <image name="person.2" catalog="system" width="128" height="81"/>
+        <image name="person.circle" catalog="system" width="128" height="121"/>
         <namedColor name="darkBackgroundWithOpacity">
             <color white="0.30000001192092896" alpha="0.60000002384185791" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </namedColor>

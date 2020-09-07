@@ -10,6 +10,7 @@ import UIKit
 import Eureka
 import ViewRow
 import FirebaseFirestore
+import FirebaseUI
 
 class ProfileViewController: FormViewController {
     // Load from firebase to fill in user info.
@@ -22,8 +23,13 @@ class ProfileViewController: FormViewController {
     private let versionNumber = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String
     private let buildNumber = Bundle.main.object(forInfoDictionaryKey: kCFBundleVersionKey as String) as? String
     
+    @IBAction func userAccountBarButtonTapped(_ sender: UIBarButtonItem) {
+        
+    }
+    
     override func viewDidLoad() {
         // Override the tableview appearance.
+        authUI.delegate = self
         loadInsetGroupedTableView()
         super.viewDidLoad()
         configureRefreshControl()

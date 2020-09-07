@@ -8,14 +8,19 @@ target 'Jigsaw' do
   # Comment the next line if you don't want to use dynamic frameworks
   use_frameworks!
 
-# Pods for Jigsaw
+# Firebase framework
 pod 'Firebase/Database'
 pod 'Firebase/Auth'
 pod 'Firebase/Analytics'
 pod 'Firebase/Storage'
 pod 'Firebase/Firestore'
 
-# For Swift Codable
+# Firebase UI for sign up/in
+pod 'FirebaseUI/Auth'
+pod 'FirebaseUI/Google'
+pod 'FirebaseUI/OAuth'  # Used for Sign in with Apple, Twitter, etc
+
+# Swift Codable
 pod 'FirebaseFirestoreSwift'
 
 # pod 'ResearchKit'
