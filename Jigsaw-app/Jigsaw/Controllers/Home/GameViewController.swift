@@ -9,11 +9,11 @@
 import ResearchKit
 
 class GameViewController: ORKTaskViewController {
-    private var resourceURL: URL!
+    private let game: GameOfGroup
     
     init(game: GameOfGroup, taskRun taskRunUUID: UUID?) {
+        self.game = game
         super.init(task: nil, taskRun: taskRunUUID)
-        resourceURL = game.resourceURL
         task = createSurveyTask(from: game.questionnaire)
     }
     
@@ -42,14 +42,14 @@ class GameViewController: ORKTaskViewController {
         var steps = [ORKStep]()
         
         // Welcome step.
-        let welcomeStep = ORKInstructionStep(identifier: "Welcome")
-        welcomeStep.title = "Welcome"
-        welcomeStep.detailText = "This is a game blah blah."
-        welcomeStep.image = UIImage(named: "onboarding_jigsaw")!
+        let welcomeStep = ORKInstructionStep(identifier: "Introduction")
+        welcomeStep.title = "Introduction"
+        welcomeStep.detailText = game.detailText
+        welcomeStep.iconImage = UIImage(systemName: "info.circle")!
         steps.append(welcomeStep)
         
         // Resource reading page.
-        let readingsStep = ResourceWebStep(identifier: "Resource", url: resourceURL)
+        let readingsStep = ResourceWebStep(identifier: "Resource", url: game.resourceURL)
         steps.append(readingsStep)
         
         // Chatroom step.

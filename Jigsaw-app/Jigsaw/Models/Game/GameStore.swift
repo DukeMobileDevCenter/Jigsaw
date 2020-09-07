@@ -47,22 +47,7 @@ extension GameStore: UICollectionViewDataSource {
         
         let game = GameStore.shared.allGames[indexPath.item]
         cell.nameLabel.text = game.gameName
-        
-        // Decide icon image.
-        let iconImage: UIImage
-        switch game.category {
-        case .immigration:
-            iconImage = UIImage(systemName: "hand.raised.slash")!
-        case .education:
-            iconImage = UIImage(systemName: "book")!
-        case .housing:
-            iconImage = UIImage(systemName: "house")!
-        case .medicare:
-            iconImage = UIImage(systemName: "staroflife")!
-        case .taxation:
-            iconImage = UIImage(systemName: "dollarsign.circle")!
-        }
-        cell.iconImageView.image = iconImage
+        cell.iconImageView.image = game.category.iconImage
         
         // Lazy load background image.
         cell.backgroundImageView.pin_updateWithProgress = true

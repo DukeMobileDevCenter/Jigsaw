@@ -10,21 +10,23 @@ import Foundation
 import FirebaseFirestore
 
 struct Game {
-    // Game version.
+    /// Game version.
     let version: String
-    // Name of the game.
+    /// Name of the game.
     let gameName: String
-    // Group 1 resource URL.
+    /// Description detail text.
+    let detailText: String
+    /// Group 1 resource URL.
     let g1resURL: URL
-    // Group 2 resource URL.
+    /// Group 2 resource URL.
     let g2resURL: URL
-    // Group 1 questionnaire.
+    /// Group 1 questionnaire.
     let g1Questionnaire: Questionnaire
-    // Group 2 questionnaire.
+    /// Group 2 questionnaire.
     let g2Questionnaire: Questionnaire
-    // Category, used for categorize games and display icon.
+    /// Category, used for categorize games and display icon.
     let category: GameCategory
-    // Game card background image URL, can also use for styling.
+    /// Game card background image URL, can also use for styling.
     let backgroundImageURL: URL
     
     init?(document: QueryDocumentSnapshot) {
@@ -33,6 +35,7 @@ struct Game {
         guard
             let version = data["version"] as? String,
             let gameName = data["gameName"] as? String,
+            let detailText = data["detailText"] as? String,
             let g1resURL = data["g1resURL"] as? String,
             let g2resURL = data["g2resURL"] as? String,
             let backgroundImageURL = data["backgroundImageURL"] as? String,
@@ -44,6 +47,7 @@ struct Game {
         
         self.version = version
         self.gameName = gameName
+        self.detailText = detailText
         self.g1resURL = URL(string: g1resURL)!
         self.g2resURL = URL(string: g2resURL)!
         self.backgroundImageURL = URL(string: backgroundImageURL)!

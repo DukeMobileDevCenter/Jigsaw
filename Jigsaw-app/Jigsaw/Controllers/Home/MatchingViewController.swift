@@ -87,12 +87,12 @@ class MatchingViewController: UIViewController {
         let gameOfMyGroup: GameOfGroup
         if group.group1.contains(Profiles.userID) {
             // Current player is allocated to the first group.
-            gameOfMyGroup = GameOfGroup(version: game.version, gameName: game.gameName, resourceURL: game.g1resURL, questionnaire: game.g1Questionnaire)
+            gameOfMyGroup = GameOfGroup(version: game.version, gameName: game.gameName, detailText: game.detailText, resourceURL: game.g1resURL, questionnaire: game.g1Questionnaire)
             // Hold a reference to my questionnaire to check answers.
             myQuestionnaire = game.g1Questionnaire
         } else if group.group2.contains(Profiles.userID) {
             // Current player is allocated to the second group.
-            gameOfMyGroup = GameOfGroup(version: game.version, gameName: game.gameName, resourceURL: game.g2resURL, questionnaire: game.g2Questionnaire)
+            gameOfMyGroup = GameOfGroup(version: game.version, gameName: game.gameName, detailText: game.detailText, resourceURL: game.g2resURL, questionnaire: game.g2Questionnaire)
             // Hold a reference to my questionnaire to check answers.
             myQuestionnaire = game.g2Questionnaire
         } else {

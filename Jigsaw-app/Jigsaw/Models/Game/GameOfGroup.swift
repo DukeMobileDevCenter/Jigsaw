@@ -9,12 +9,14 @@
 import Foundation
 
 struct GameOfGroup {
-    // Game version.
+    /// Game version.
     let version: String
-    // Name of the game.
+    /// Name of the game.
     let gameName: String
-    // Group resource URL.
+    /// Description detail text.
+    let detailText: String
+    /// Group resource URL.
     let resourceURL: URL
-    // Group questionnaire.
+    /// Group questionnaire.
     let questionnaire: Questionnaire
 }
