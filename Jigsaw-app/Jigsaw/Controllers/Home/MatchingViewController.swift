@@ -25,7 +25,7 @@ class MatchingViewController: UIViewController {
     @IBOutlet var playerCountLabel: UILabel!
     
     private let database = Firestore.firestore()
-    private lazy var queueReference = database.collection(["Queues", selectedGame.gameName, queueType.rawValue].joined(separator: "/"))
+    private var queuesRef: CollectionReference!
     
     private var gameGroupListener: ListenerRegistration?
     private var chatroomListener: ListenerRegistration?
@@ -41,7 +41,8 @@ class MatchingViewController: UIViewController {
         super.viewDidLoad()
         title = "Matching players"
         
-        queueListener = queueReference.addSnapshotListener { [weak self] querySnapshot, _ in
+        queuesRef = database.collection(["Queues", selectedGame.gameName, queueType.rawValue].joined(separator: "/"))
+        queueListener = queuesRef.addSnapshotListener { [weak self] querySnapshot, _ in
             self?.playerCountLabel.text = "\(querySnapshot?.documents.count ?? 0)"
         }
         
@@ -58,7 +59,7 @@ class MatchingViewController: UIViewController {
     }
     
     @IBAction func joinGameButtonTapped(_ sender: UIButton) {
-        addPlayerToPlayersQueue(queueReference: queueReference)
+        addPlayerToPlayersQueue(queueReference: queuesRef)
     }
     
     private func addPlayerToPlayersQueue(queueReference: CollectionReference) {
@@ -113,7 +114,7 @@ class MatchingViewController: UIViewController {
     }
     
     private func removeUserFromQueue() {
-        queueReference.document(Profiles.currentPlayer.userID).delete()
+        queuesRef.document(Profiles.currentPlayer.userID).delete()
     }
     
     private func handleDocumentChange(_ change: DocumentChange) {

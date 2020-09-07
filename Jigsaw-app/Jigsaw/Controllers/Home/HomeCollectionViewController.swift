@@ -31,29 +31,6 @@ class HomeCollectionViewController: UICollectionViewController {
         title = playersCountSegmentedControl.selectedSegmentIndex == 0 ? "Lobby - 2P" : "Lobby - 4P"
     }
     
-    @IBAction func longPress(_ gestureRecognizer: UILongPressGestureRecognizer) {
-        // Get the cell at point you pressed with indexPath.
-        let point = gestureRecognizer.location(in: collectionView)
-        guard let indexPath = collectionView.indexPathForItem(at: point),
-            let cell = collectionView.cellForItem(at: indexPath) else { return }
-        let feedbackGenerator = UISelectionFeedbackGenerator()
-        switch gestureRecognizer.state {
-        case .began:
-            feedbackGenerator.selectionChanged()
-            UIView.animate(
-                withDuration: 0.3,
-                animations: { cell.transform = CGAffineTransform(scaleX: 0.95, y: 0.95) },
-                completion: { _ in
-                    self.presentAlert(title: "Info", message: "May add a long press event here.")
-                }
-            )
-        default:
-            UIView.animate(withDuration: 0.3) {
-                cell.transform = .identity
-            }
-        }
-    }
-    
     private func testShowResultChart(_ sender: UIBarButtonItem) {
         let controller = ResultStatsViewController()
         controller.resultPairs = [.correct: 3, .skipped: 1, .incorrect: 2]
@@ -126,7 +103,7 @@ class HomeCollectionViewController: UICollectionViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         switch segue.identifier {
         case "showGame"?:
-            if let selectedIndexPath = collectionView.indexPathsForSelectedItems?.first {
+            if let cell = sender as? GameCollectionCell, let selectedIndexPath = collectionView.indexPath(for: cell) {
                 // For future decision on either game or category.
                 print("Index path \(selectedIndexPath).")
                 let selectedGame = GameStore.shared.allGames[selectedIndexPath.item]
@@ -154,5 +131,36 @@ extension HomeCollectionViewController: UICollectionViewDelegateFlowLayout {
             width = (collectionViewSize.width - 3 * spacing) / 2
         }
         return CGSize(width: width, height: width)
+    }
+}
+
+// MARK: - UIContextMenu
+
+extension HomeCollectionViewController {
+    override func collectionView(_ collectionView: UICollectionView, contextMenuConfigurationForItemAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
+        let index = indexPath.item
+        let game = GameStore.shared.allGames[index]
+        let identifier = "\(index)" as NSString
+        
+        return UIContextMenuConfiguration(identifier: identifier, previewProvider: nil) { _ in
+            let previewAction = UIAction(title: "Mark as Played", image: UIImage(systemName: "checkmark.square")) { _ in
+                self.presentAlert(title: "More to add here", message: "Can add a mark as played or favorite feature.")
+            }
+            let shareAction = UIAction(title: "Share", image: UIImage(systemName: "square.and.arrow.up")) { _ in
+                self.presentAlert(title: "More to add here", message: "\(game.gameName) selected. Can add a share game with friend feature.")
+            }
+            return UIMenu(title: "", image: nil, children: [previewAction, shareAction])
+        }
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, willPerformPreviewActionForMenuWith configuration: UIContextMenuConfiguration, animator: UIContextMenuInteractionCommitAnimating) {
+        guard let identifier = configuration.identifier as? String,
+            let item = Int(identifier) else { return }
+        
+        let cell = collectionView.cellForItem(at: IndexPath(item: item, section: 0))
+        
+        animator.addCompletion {
+            self.performSegue(withIdentifier: "showGame", sender: cell)
+        }
     }
 }
