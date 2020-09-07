@@ -64,6 +64,8 @@
 		00D0862324CD192800FB7A20 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00D0862224CD192800FB7A20 /* OnboardingViewController.swift */; };
 		00D0862524CD24EA00FB7A20 /* OnboardingSteps.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00D0862424CD24EA00FB7A20 /* OnboardingSteps.swift */; };
 		00D0862724CD2D9A00FB7A20 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00D0862624CD2D9A00FB7A20 /* GameViewController.swift */; };
+		00D9F5132506DDC900898DFA /* PreviewDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00D9F5122506DDC900898DFA /* PreviewDetailViewController.swift */; };
+		00D9F5162506DEDF00898DFA /* PreviewDetailViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 00D9F5152506DEDF00898DFA /* PreviewDetailViewController.storyboard */; };
 		00F2197624CCEF5D00B72858 /* ResearchKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00F2196B24CCEAEB00B72858 /* ResearchKit.framework */; };
 		00F2197724CCEF5D00B72858 /* ResearchKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 00F2196B24CCEAEB00B72858 /* ResearchKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		00F2197C24CCF99800B72858 /* RoadmapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F2197B24CCF99800B72858 /* RoadmapViewController.swift */; };
@@ -162,6 +164,8 @@
 		00D0862224CD192800FB7A20 /* OnboardingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		00D0862424CD24EA00FB7A20 /* OnboardingSteps.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingSteps.swift; sourceTree = "<group>"; };
 		00D0862624CD2D9A00FB7A20 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
+		00D9F5122506DDC900898DFA /* PreviewDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewDetailViewController.swift; sourceTree = "<group>"; };
+		00D9F5152506DEDF00898DFA /* PreviewDetailViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PreviewDetailViewController.storyboard; sourceTree = "<group>"; };
 		00F2196B24CCEAEB00B72858 /* ResearchKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ResearchKit.framework; path = Pods/ResearchKit.framework; sourceTree = "<group>"; };
 		00F2197B24CCF99800B72858 /* RoadmapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoadmapViewController.swift; sourceTree = "<group>"; };
 		00F2197D24CCF9A200B72858 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
@@ -339,6 +343,7 @@
 				0020D56624E263C600DB20E1 /* MatchingViewController.swift */,
 				005856BD24D923630010BE55 /* ChatViewController.swift */,
 				00D0862624CD2D9A00FB7A20 /* GameViewController.swift */,
+				00D9F5122506DDC900898DFA /* PreviewDetailViewController.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -362,6 +367,7 @@
 				0070DFEF24B0060400E71F46 /* Main.storyboard */,
 				0070DFF424B0060500E71F46 /* LaunchScreen.storyboard */,
 				00B6306224FB26A8008975CE /* GameHistoryTimeline.storyboard */,
+				00D9F5152506DEDF00898DFA /* PreviewDetailViewController.storyboard */,
 			);
 			path = Storyboard;
 			sourceTree = "<group>";
@@ -557,6 +563,7 @@
 				005856BC24D91C4A0010BE55 /* GoogleService-Info.plist in Resources */,
 				0070DFF324B0060500E71F46 /* Assets.xcassets in Resources */,
 				0070DFF124B0060400E71F46 /* Main.storyboard in Resources */,
+				00D9F5162506DEDF00898DFA /* PreviewDetailViewController.storyboard in Resources */,
 				00B0A67A24E3CF9600887701 /* ProfileHeaderView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -643,6 +650,7 @@
 				005856C024D924970010BE55 /* Message.swift in Sources */,
 				00CF5DC124F4DD0200B501BB /* MultipleChoiceQuestion.swift in Sources */,
 				0020D55024DFAED000DB20E1 /* GameOfGroup.swift in Sources */,
+				00D9F5132506DDC900898DFA /* PreviewDetailViewController.swift in Sources */,
 				0020D56724E263C600DB20E1 /* MatchingViewController.swift in Sources */,
 				00BA555B24DA5D2A006A207E /* UICollectionView.swift in Sources */,
 				005856BE24D923630010BE55 /* ChatViewController.swift in Sources */,

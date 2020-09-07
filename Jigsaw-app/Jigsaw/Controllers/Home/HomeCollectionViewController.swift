@@ -140,8 +140,14 @@ extension HomeCollectionViewController {
         let index = indexPath.item
         let game = GameStore.shared.allGames[index]
         let identifier = "\(index)" as NSString
+        let previewControllerProvider = { () -> UIViewController? in
+            let storyboard = UIStoryboard(name: "PreviewDetailViewController", bundle: .main)
+            let controller = storyboard.instantiateInitialViewController() as! PreviewDetailViewController
+            controller.game = game
+            return controller
+        }
         
-        return UIContextMenuConfiguration(identifier: identifier, previewProvider: nil) { _ in
+        return UIContextMenuConfiguration(identifier: identifier, previewProvider: previewControllerProvider) { _ in
             let previewAction = UIAction(title: "Mark as Played", image: UIImage(systemName: "checkmark.square")) { _ in
                 self.presentAlert(title: "More to add here", message: "Can add a mark as played or favorite feature.")
             }
