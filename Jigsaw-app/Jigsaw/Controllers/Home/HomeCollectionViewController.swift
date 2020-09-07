@@ -28,7 +28,7 @@ class HomeCollectionViewController: UICollectionViewController {
     }
     
     @IBAction func segmentedControlValueChanged(_ sender: UISegmentedControl) {
-        title = playersCountSegmentedControl.selectedSegmentIndex == 0 ? "Lobby - 2P" : "Lobby - 4P"
+        navigationItem.title = playersCountSegmentedControl.selectedSegmentIndex == 0 ? "Games - 2P" : "Games - 4P"
     }
     
     private func testShowResultChart(_ sender: UIBarButtonItem) {
@@ -39,19 +39,18 @@ class HomeCollectionViewController: UICollectionViewController {
     }
     
     private func testShowChatroom(_ sender: UIBarButtonItem) {
-        let chatroomRef = Firestore.firestore().collection("Chatrooms")
-        chatroomRef.addSnapshotListener { querySnapshot, error in
-            guard let snapshot = querySnapshot else {
-                print("Error listening for channel updates: \(error?.localizedDescription ?? "No error")")
-                return
-            }
-            snapshot.documentChanges.forEach { change in
-                if let chatroom = Chatroom(document: change.document), chatroom.id == "TestChatroom1" {
+        let chatroomsRef = Firestore.firestore().collection("Chatrooms").document("TestChatroom1")
+        chatroomsRef.getDocument { [weak self] document, error in
+            guard let self = self else { return }
+            do {
+                if let chatroom = try document?.data(as: Chatroom.self) {
                     let chatroomVC = ChatViewController(user: Auth.auth().currentUser!, chatroom: chatroom, timeLeft: nil)
                     // Don't show bottom tab bar.
                     chatroomVC.hidesBottomBarWhenPushed = true
                     self.show(chatroomVC, sender: sender)
                 }
+            } catch {
+                self.presentAlert(error: error)
             }
         }
     }

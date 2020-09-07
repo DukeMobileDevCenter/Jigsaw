@@ -8,7 +8,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Lobby - 2P-->
+        <!--Games - 2P-->
         <scene sceneID="RIo-hk-tt8">
             <objects>
                 <collectionViewController id="4a0-lW-Yyi" customClass="HomeCollectionViewController" customModule="Jigsaw" customModuleProvider="target" sceneMemberID="viewController">
@@ -93,7 +93,7 @@
                             <outlet property="delegate" destination="4a0-lW-Yyi" id="Fdj-V6-GIU"/>
                         </connections>
                     </collectionView>
-                    <navigationItem key="navigationItem" title="Lobby - 2P" id="UZt-g5-Jhh">
+                    <navigationItem key="navigationItem" title="Games - 2P" id="UZt-g5-Jhh">
                         <barButtonItem key="leftBarButtonItem" title="Test" id="vsv-Qs-kfx">
                             <connections>
                                 <action selector="testBarButtonTapped:" destination="4a0-lW-Yyi" id="rgv-xf-AHo"/>

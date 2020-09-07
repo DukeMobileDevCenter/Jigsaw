@@ -123,6 +123,6 @@ private struct ImageMediaItem: MediaItem {
         self.url = url
         self.image = image
         self.size = CGSize(width: 240, height: 160)
-        self.placeholderImage = UIImage(systemName: "questionmark")!
+        self.placeholderImage = UIImage(named: "placeholder")!
     }
 }
