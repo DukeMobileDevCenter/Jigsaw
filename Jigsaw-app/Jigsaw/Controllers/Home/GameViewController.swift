@@ -41,9 +41,8 @@ class GameViewController: ORKTaskViewController {
     private func createSurveyTask(from questionnaire: Questionnaire) -> ORKOrderedTask {
         var steps = [ORKStep]()
         
-        // Welcome step.
         let welcomeStep = ORKInstructionStep(identifier: "Introduction")
-        welcomeStep.title = "Introduction"
+        welcomeStep.title = game.gameName
         welcomeStep.detailText = game.detailText
         welcomeStep.iconImage = UIImage(systemName: "info.circle")!
         steps.append(welcomeStep)
