@@ -8,6 +8,7 @@
 
 import UIKit
 import FirebaseAuth
+import FirebaseAnalytics
 import FirebaseFirestore
 
 class RootTabBarController: UITabBarController {
@@ -35,7 +36,7 @@ class RootTabBarController: UITabBarController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         // Only load player info once per app launch.
-        guard isFirstAppearance == true else { return }
+        guard isFirstAppearance else { return }
         // First time user
         if !OnboardingStateManager.shared.getOnboardingCompletedState() {
             let onboardingViewController = OnboardingViewController(taskRun: nil)
@@ -45,6 +46,7 @@ class RootTabBarController: UITabBarController {
             present(onboardingViewController, animated: true)
         } else {
             self.didCompleteOnboarding()
+            Analytics.setUserID(Profiles.userID)
         }
         isFirstAppearance = false
     }
