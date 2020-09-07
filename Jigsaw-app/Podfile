@@ -42,4 +42,7 @@ pod 'Charts'
 # Questionnaire YAML
 pod 'Yams'
 
+# Markdown to `NSAttributedString`
+pod 'Down'
+
 end

@@ -223,6 +223,7 @@ PODS:
   - Charts (3.5.0):
     - Charts/Core (= 3.5.0)
   - Charts/Core (3.5.0)
+  - Down (0.9.3)
   - Eureka (5.2.1)
   - Firebase/Analytics (6.31.0):
     - Firebase/Core
@@ -379,6 +380,7 @@ PODS:
 DEPENDENCIES:
   - Agrume
   - Charts
+  - Down
   - Eureka
   - Firebase/Analytics
   - Firebase/Auth
@@ -398,6 +400,7 @@ SPEC REPOS:
     - Agrume
     - BoringSSL-GRPC
     - Charts
+    - Down
     - Eureka
     - Firebase
     - FirebaseAnalytics
@@ -433,6 +436,7 @@ SPEC CHECKSUMS:
   Agrume: 4c6fc502f4a4aa8b3dd69c8c2e22bcb282be1032
   BoringSSL-GRPC: 8edf627ee524575e2f8d19d56f068b448eea3879
   Charts: 40a08591df1f8ad5c223ddedfb1a06da92f24f7c
+  Down: 4553b984236807e384fa0ef7c7e360ef9f7c425d
   Eureka: c883105488e05bc65539f583246ecf9657cabbfe
   Firebase: 87483fa19acfdf99244523f2389e931927b91457
   FirebaseAnalytics: 0ca9aa2af7cc4dc92392b7a78bfc49feaa2eb60f
@@ -463,6 +467,6 @@ SPEC CHECKSUMS:
   ViewRow: 8da541e9c019f3be63f4e28f311a62cac2045ecf
   Yams: 9d49b85824751ee13d31e9ec6617c4dfb9a8c3cd
 
-PODFILE CHECKSUM: c4e4c02f647b06224827afe44ee5b963bfbda32a
+PODFILE CHECKSUM: 9d8a6a8960332e40af02e14fb996115d1d89fa10
 
 COCOAPODS: 1.9.0
