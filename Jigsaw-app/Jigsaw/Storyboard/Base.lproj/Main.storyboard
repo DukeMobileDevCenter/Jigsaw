@@ -36,7 +36,6 @@
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="X7l-vU-RZw">
                                             <rect key="frame" x="0.0" y="0.0" width="140" height="140"/>
                                             <color key="backgroundColor" name="darkBackgroundWithOpacity"/>
-                                            <gestureRecognizers/>
                                         </view>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Lqf-nc-OFO">
                                             <rect key="frame" x="45" y="45" width="50" height="50"/>
