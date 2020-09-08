@@ -300,6 +300,8 @@ PODS:
   - FirebaseUI/Auth (8.4.2):
     - Firebase/Auth (~> 6.0)
     - GoogleUtilities/UserDefaults
+  - FirebaseUI/Email (8.4.2):
+    - FirebaseUI/Auth
   - FirebaseUI/Google (8.4.2):
     - FirebaseUI/Auth
     - GoogleSignIn (~> 5.0)
@@ -413,6 +415,7 @@ DEPENDENCIES:
   - Firebase/Storage
   - FirebaseFirestoreSwift
   - FirebaseUI/Auth
+  - FirebaseUI/Email
   - FirebaseUI/Google
   - FirebaseUI/OAuth
   - MessageKit
@@ -502,6 +505,6 @@ SPEC CHECKSUMS:
   ViewRow: 8da541e9c019f3be63f4e28f311a62cac2045ecf
   Yams: 9d49b85824751ee13d31e9ec6617c4dfb9a8c3cd
 
-PODFILE CHECKSUM: dea2f97c3456b5da23a3aad8213f1ebd310303f5
+PODFILE CHECKSUM: 13bc7efa1172d5f2b73d0c7b1b98a13c7cd5977a
 
 COCOAPODS: 1.9.0

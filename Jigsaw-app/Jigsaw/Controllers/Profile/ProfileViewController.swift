@@ -15,6 +15,7 @@ import FirebaseUI
 class ProfileViewController: FormViewController {
     // Load from firebase to fill in user info.
     private let database = Firestore.firestore()
+    private var authUI: FUIAuth!
     // During onboarding, the form cannot be filled without player info.
     // In this case, load the form when the view is appearing.
     private var shouldLoadFormForTheFirstTime = true
@@ -24,15 +25,18 @@ class ProfileViewController: FormViewController {
     private let buildNumber = Bundle.main.object(forInfoDictionaryKey: kCFBundleVersionKey as String) as? String
     
     @IBAction func userAccountBarButtonTapped(_ sender: UIBarButtonItem) {
-        
+        let authViewController = authUI.authViewController()
+        show(authViewController, sender: sender)
     }
     
     override func viewDidLoad() {
         // Override the tableview appearance.
-        authUI.delegate = self
         loadInsetGroupedTableView()
         super.viewDidLoad()
         configureRefreshControl()
+        // Create an authentication UI.
+        authUI = createFirebaseUI()
+        
         if Profiles.currentPlayer != nil {
             createForm()
             shouldLoadFormForTheFirstTime = false
@@ -45,6 +49,19 @@ class ProfileViewController: FormViewController {
             createForm()
         }
         shouldLoadFormForTheFirstTime = false
+    }
+    
+    private func createFirebaseUI() -> FUIAuth {
+        // Init Firebase UI.
+        let authUI = FUIAuth.defaultAuthUI()!
+        authUI.delegate = self
+        let providers: [FUIAuthProvider] = [
+            FUIGoogleAuth(),
+            FUIEmailAuth()
+        ]
+        authUI.providers = providers
+        authUI.shouldAutoUpgradeAnonymousUsers = true
+        return authUI
     }
     
     private func configureRefreshControl() {
@@ -98,6 +115,11 @@ class ProfileViewController: FormViewController {
     private var profileHeaderView: ProfileHeaderView {
         let view = Bundle.main.loadNibNamed("ProfileHeaderView", owner: self)?.first as! ProfileHeaderView
         view.setView(name: Profiles.displayName, avatarURL: Profiles.currentPlayer.userID.wavatarURL)
+        let user = Auth.auth().currentUser!
+        let providerIDs = user.providerData.map { $0.providerID }
+        // Load provider icons
+        view.googleIconView.tintColor = providerIDs.contains(GoogleAuthProviderID) ? .systemRed : .secondaryLabel
+        view.githubIconView.tintColor = providerIDs.contains(GitHubAuthProviderID) ? .systemPurple : .secondaryLabel
         return view
     }
     
@@ -176,5 +198,34 @@ class ProfileViewController: FormViewController {
             }
         }
         +++ Section("\(appName!) Version \(versionNumber!) build \(buildNumber!)")
+    }
+}
+
+extension ProfileViewController: FUIAuthDelegate {
+    func authUI(_ authUI: FUIAuth, didSignInWith authDataResult: AuthDataResult?, error: Error?) {
+        if let error = error as NSError?, error.code == FUIAuthErrorCode.mergeConflict.rawValue {
+            // Merge conflict error, discard the anonymous user and login as the existing
+            // non-anonymous user.
+            guard let credential = error.userInfo[FUIAuthCredentialKey] as? AuthCredential else {
+                print("Received merge conflict error without auth credential!")
+                return
+            }
+            Auth.auth().signIn(with: credential) { _, error in
+                if let error = error as NSError? {
+                    print("Failed to re-login: \(error)")
+                    return
+                }
+                // Handle successful re-login below.
+            }
+        } else if let error = error {
+            // User canceled account linking.
+            print("Failed to log in: \(error.localizedDescription)")
+        } else if let result = authDataResult {
+            // Handle successful login below.
+            let user = result.user
+            user.providerData.forEach { userInfo in
+                print(userInfo.providerID)
+            }
+        }
     }
 }
