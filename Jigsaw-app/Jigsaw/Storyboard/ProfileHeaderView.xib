@@ -26,7 +26,7 @@
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="pX1-Lc-w5E">
+                <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="pX1-Lc-w5E">
                     <rect key="frame" x="104" y="48" width="72" height="32"/>
                     <subviews>
                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="google" translatesAutoresizingMaskIntoConstraints="NO" id="XBu-1T-9FO">
@@ -54,7 +54,9 @@
                 <constraint firstItem="p44-Nc-uk8" firstAttribute="top" secondItem="wVN-vJ-fap" secondAttribute="top" constant="8" id="So2-5s-DJi"/>
                 <constraint firstItem="dKb-lz-bdM" firstAttribute="leading" secondItem="p44-Nc-uk8" secondAttribute="trailing" constant="16" id="UPR-q9-Cy4"/>
                 <constraint firstItem="dKb-lz-bdM" firstAttribute="bottom" secondItem="p44-Nc-uk8" secondAttribute="centerY" constant="-8" id="fb2-gd-rvi"/>
+                <constraint firstItem="pX1-Lc-w5E" firstAttribute="top" secondItem="dKb-lz-bdM" secondAttribute="bottom" constant="8" id="tej-2O-mks"/>
                 <constraint firstItem="p44-Nc-uk8" firstAttribute="leading" secondItem="wVN-vJ-fap" secondAttribute="leading" constant="8" id="vAP-G6-fEB"/>
+                <constraint firstItem="pX1-Lc-w5E" firstAttribute="leading" secondItem="dKb-lz-bdM" secondAttribute="leading" id="y0g-hQ-6uG"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="qU7-cM-QdE"/>
