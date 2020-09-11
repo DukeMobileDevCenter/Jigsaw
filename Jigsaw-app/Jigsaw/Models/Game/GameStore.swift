@@ -22,13 +22,8 @@ class GameStore: NSObject {
         database.collection("Games").getDocuments { [weak self] querySnapshot, error in
             if let snapshot = querySnapshot {
                 for document in snapshot.documents {
-                    do {
-                        if let game = try document.data(as: Game.self) {
-                            games.append(game)
-                        }
-                    } catch {
-                        completion(.failure(error))
-                        return
+                    if let game = Game(document: document) {
+                        games.append(game)
                     }
                 }
                 // Sorted by latest added version number.
@@ -52,22 +47,7 @@ extension GameStore: UICollectionViewDataSource {
         
         let game = GameStore.shared.allGames[indexPath.item]
         cell.nameLabel.text = game.gameName
-        
-        // Decide icon image.
-        let iconImage: UIImage
-        switch game.category {
-        case .immigration:
-            iconImage = UIImage(systemName: "hand.raised.slash")!
-        case .education:
-            iconImage = UIImage(systemName: "book")!
-        case .housing:
-            iconImage = UIImage(systemName: "house")!
-        case .medicare:
-            iconImage = UIImage(systemName: "staroflife")!
-        case .taxation:
-            iconImage = UIImage(systemName: "dollarsign.circle")!
-        }
-        cell.iconImageView.image = iconImage
+        cell.iconImageView.image = game.category.iconImage
         
         // Lazy load background image.
         cell.backgroundImageView.pin_updateWithProgress = true

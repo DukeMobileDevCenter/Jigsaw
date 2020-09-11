@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097.3" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
@@ -21,30 +21,57 @@
                     </constraints>
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="Johnny Appleseed" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dKb-lz-bdM">
-                    <rect key="frame" x="104" y="32" width="348" height="20.5"/>
+                    <rect key="frame" x="104" y="19.5" width="348" height="20.5"/>
                     <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="pX1-Lc-w5E">
+                    <rect key="frame" x="104" y="48" width="72" height="32"/>
+                    <subviews>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="google" translatesAutoresizingMaskIntoConstraints="NO" id="XBu-1T-9FO">
+                            <rect key="frame" x="0.0" y="0.0" width="32" height="32"/>
+                            <constraints>
+                                <constraint firstAttribute="width" secondItem="XBu-1T-9FO" secondAttribute="height" multiplier="1:1" id="dEg-pQ-nQ6"/>
+                                <constraint firstAttribute="width" constant="32" id="owB-km-uJb"/>
+                                <constraint firstAttribute="height" constant="32" id="qma-X0-MCd"/>
+                            </constraints>
+                        </imageView>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="github" translatesAutoresizingMaskIntoConstraints="NO" id="a0V-a7-50t">
+                            <rect key="frame" x="40" y="0.0" width="32" height="32"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="32" id="6k5-Oc-zzx"/>
+                                <constraint firstAttribute="height" constant="32" id="BEJ-vf-J9d"/>
+                                <constraint firstAttribute="width" secondItem="a0V-a7-50t" secondAttribute="height" multiplier="1:1" id="bgG-Q2-Q8x"/>
+                            </constraints>
+                        </imageView>
+                    </subviews>
+                </stackView>
             </subviews>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="dKb-lz-bdM" secondAttribute="trailing" constant="20" symbolic="YES" id="9bN-ei-yt6"/>
                 <constraint firstAttribute="bottom" secondItem="p44-Nc-uk8" secondAttribute="bottom" constant="8" id="GCz-S3-vqq"/>
                 <constraint firstItem="p44-Nc-uk8" firstAttribute="top" secondItem="wVN-vJ-fap" secondAttribute="top" constant="8" id="So2-5s-DJi"/>
                 <constraint firstItem="dKb-lz-bdM" firstAttribute="leading" secondItem="p44-Nc-uk8" secondAttribute="trailing" constant="16" id="UPR-q9-Cy4"/>
-                <constraint firstItem="dKb-lz-bdM" firstAttribute="firstBaseline" secondItem="p44-Nc-uk8" secondAttribute="centerY" id="fb2-gd-rvi"/>
+                <constraint firstItem="dKb-lz-bdM" firstAttribute="bottom" secondItem="p44-Nc-uk8" secondAttribute="centerY" constant="-8" id="fb2-gd-rvi"/>
+                <constraint firstItem="pX1-Lc-w5E" firstAttribute="top" secondItem="dKb-lz-bdM" secondAttribute="bottom" constant="8" id="tej-2O-mks"/>
                 <constraint firstItem="p44-Nc-uk8" firstAttribute="leading" secondItem="wVN-vJ-fap" secondAttribute="leading" constant="8" id="vAP-G6-fEB"/>
+                <constraint firstItem="pX1-Lc-w5E" firstAttribute="leading" secondItem="dKb-lz-bdM" secondAttribute="leading" id="y0g-hQ-6uG"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="qU7-cM-QdE"/>
             <connections>
                 <outlet property="avatarImageView" destination="p44-Nc-uk8" id="d7q-g1-haF"/>
+                <outlet property="githubIconView" destination="a0V-a7-50t" id="rVt-Uw-vhu"/>
+                <outlet property="googleIconView" destination="XBu-1T-9FO" id="qLE-xs-e9G"/>
                 <outlet property="nameLabel" destination="dKb-lz-bdM" id="E3S-cY-13C"/>
             </connections>
             <point key="canvasLocation" x="291" y="-136"/>
         </view>
     </objects>
     <resources>
+        <image name="github" width="256" height="256"/>
+        <image name="google" width="256" height="256"/>
         <image name="person.circle" catalog="system" width="128" height="121"/>
     </resources>
 </document>

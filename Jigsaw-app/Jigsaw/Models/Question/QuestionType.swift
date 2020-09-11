@@ -10,10 +10,10 @@ import Foundation
 
 enum QuestionType: String, Codable, CaseIterable {
     case instruction = "INSTRUCTION"
-    case multipleChoice = "MULTIPLE CHOICE"
     case singleChoice = "SINGLE CHOICE"
+    case multipleChoice = "MULTIPLE CHOICE"
     case numeric = "NUMERIC"
-    case map = "MAP"
     case scale = "SCALE"
+    case boolean = "BOOLEAN"
     case unknown = "UNKNOWN"
 }

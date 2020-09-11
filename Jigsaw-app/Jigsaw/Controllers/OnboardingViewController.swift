@@ -47,6 +47,24 @@ class OnboardingViewController: ORKTaskViewController {
         let steps = makeInstructionSteps()
         return ORKOrderedTask(identifier: "InstructionTaskIdentifier", steps: steps)
     }
+    
+    private func createUserInfo(userID: String, displayName: String, jigsawValue: Double) {
+        // Update the database here. Fill in the 2 fields, and left blank the others.
+        let player = Player(
+            userID: userID,
+            displayName: displayName,
+            jigsawValue: jigsawValue,
+            joinDate: Date(),
+            email: nil,
+            demographics: [String: String?]()
+        )
+        let database = Firestore.firestore()
+        do {
+            try database.collection("Players").document(userID).setData(from: player)
+        } catch {
+            presentAlert(error: error)
+        }
+    }
 }
 
 extension OnboardingViewController: ORKTaskViewControllerDelegate {
@@ -89,25 +107,6 @@ extension OnboardingViewController: ORKTaskViewControllerDelegate {
             }
         @unknown default:
             fatalError("Error: Onboarding task yields unknown result.")
-        }
-    }
-    
-    private func createUserInfo(userID: String, displayName: String, jigsawValue: Double) {
-        // Update the database here. Fill in the 2 fields, and left blank the others.
-        let player = Player(
-            userID: userID,
-            displayName: displayName,
-            jigsawValue: jigsawValue,
-            joinDate: Date(),
-            gameHistory: [],
-            email: nil,
-            demographics: [String: String?]()
-        )
-        let database = Firestore.firestore()
-        do {
-            try database.collection("Players").document(userID).setData(from: player)
-        } catch {
-            presentAlert(error: error)
         }
     }
 }

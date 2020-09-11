@@ -9,12 +9,12 @@
 import ResearchKit
 
 class GameViewController: ORKTaskViewController {
-    var resourceURL: URL!
+    private let game: GameOfGroup
     
     init(game: GameOfGroup, taskRun taskRunUUID: UUID?) {
+        self.game = game
         super.init(task: nil, taskRun: taskRunUUID)
-        resourceURL = URL(string: game.resourceURL)!
-        task = self.createSurveyTaskFromJson(questionnaire: game.questionnaire)
+        task = createSurveyTask(from: game.questionnaire)
     }
     
     @available(*, unavailable)
@@ -34,24 +34,24 @@ class GameViewController: ORKTaskViewController {
         return step
     }()
 
-    /// The function to create the surveytask from the Questionnaire class (parsed from json)
+    /// Create an `ORKOrderedTask` from the a questionnaire.
     ///
-    /// - Parameter questionnaire: Questionnaire type, which is an array of questions.
-    /// - Returns: an `ORKOrderedTask` surveyTask.
-    func createSurveyTaskFromJson(questionnaire: Questionnaire) -> ORKOrderedTask {
+    /// - Parameter questionnaire: A `Questionnaire`, which is an array of questions.
+    /// - Returns: An `ORKOrderedTask` surveyTask.
+    private func createSurveyTask(from questionnaire: Questionnaire) -> ORKOrderedTask {
         var steps = [ORKStep]()
         
-        // Welcome step
-        let welcomeStep = ORKInstructionStep(identifier: "Welcome")
-        welcomeStep.title = "Welcome"
-        welcomeStep.detailText = "This is a game blah blah."
-        welcomeStep.image = UIImage(named: "onboarding_jigsaw")!
+        let welcomeStep = ORKInstructionStep(identifier: "Introduction")
+        welcomeStep.title = game.gameName
+        welcomeStep.detailText = game.detailText
+        welcomeStep.iconImage = UIImage(systemName: "info.circle")!
         steps.append(welcomeStep)
         
-        // Resource reading page
-        let readingsStep = ResourceWebStep(identifier: "Resource", url: resourceURL)
+        // Resource reading page.
+        let readingsStep = ResourceWebStep(identifier: "Resource", url: game.resourceURL)
         steps.append(readingsStep)
         
+        // Chatroom step.
         steps.append(chatroomCountdownStep)
         
         let questionsInstructionStep = ORKInstructionStep(identifier: "Questions")
@@ -64,22 +64,20 @@ class GameViewController: ORKTaskViewController {
         for question in questionnaire {
             switch question.questionType {
             case .instruction:
-                steps.append(QuestionStepsModel.instructionStep(question: question))
+                steps.append(QuestionStepsModel.instructionStep(question: question as! InstructionQuestion))
             case .multipleChoice:
-                steps.append(QuestionStepsModel.multipleChoiceStep(question: question))
+                steps.append(QuestionStepsModel.multipleChoiceStep(question: question as! MultipleChoiceQuestion))
             case .singleChoice:
-                steps.append(QuestionStepsModel.singleChoiceStep(question: question))
+                steps.append(QuestionStepsModel.singleChoiceStep(question: question as! SingleChoiceQuestion))
             case .numeric:
-                steps.append(QuestionStepsModel.numericStep(question: question))
-//            case .map:
-//                steps.append(QuestionStepsModel.mapStep(question: question))
+                steps.append(QuestionStepsModel.numericStep(question: question as! NumericQuestion))
+            case .boolean:
+                steps.append(QuestionStepsModel.booleanStep(question: question as! BooleanQuestion))
             case .scale:
-                steps.append(QuestionStepsModel.scaleStep(question: question))
+                steps.append(QuestionStepsModel.scaleStep(question: question as! ScaleQuestion))
             case .unknown:
                 print("debug info: i've no idea what is this. unidentified type")
                 continue
-            default:
-                break
             }
         }
         
@@ -89,15 +87,5 @@ class GameViewController: ORKTaskViewController {
         completionStep.text = "Your answers will be logged in game history."
         steps.append(completionStep)
         return ORKOrderedTask(identifier: "surveyTask", steps: steps)
-    }
-}
-
-extension GameViewController: ORKReviewViewControllerDelegate {
-    func reviewViewController(_ reviewViewController: ORKReviewViewController, didUpdate updatedResult: ORKTaskResult, source resultSource: ORKTaskResult) {
-        print("✅ updatedResult")
-    }
-    
-    func reviewViewControllerDidSelectIncompleteCell(_ reviewViewController: ORKReviewViewController) {
-        print("✅ incompleted cell selected")
     }
 }

@@ -8,7 +8,9 @@
 
 import Foundation
 
+/// A protocol that a question should conform to.
 protocol QuestionEssentialProperty {
+    var questionType: QuestionType { get }
     var title: String { get }
     var prompt: String { get }
     var isOptional: Bool { get }

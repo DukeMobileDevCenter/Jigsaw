@@ -8,8 +8,9 @@
 
 import Foundation
 
-enum AnswerCategory: String, CaseIterable {
+enum AnswerCategory: String, CaseIterable, Codable {
     case correct
     case skipped
     case incorrect
+    case unknown
 }

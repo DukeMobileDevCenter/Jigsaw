@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Wrc-Ft-HSs">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.3" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Wrc-Ft-HSs">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
@@ -8,7 +8,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Lobby - 2P-->
+        <!--Games - 2P-->
         <scene sceneID="RIo-hk-tt8">
             <objects>
                 <collectionViewController id="4a0-lW-Yyi" customClass="HomeCollectionViewController" customModule="Jigsaw" customModuleProvider="target" sceneMemberID="viewController">
@@ -92,7 +92,7 @@
                             <outlet property="delegate" destination="4a0-lW-Yyi" id="Fdj-V6-GIU"/>
                         </connections>
                     </collectionView>
-                    <navigationItem key="navigationItem" title="Lobby - 2P" id="UZt-g5-Jhh">
+                    <navigationItem key="navigationItem" title="Games - 2P" id="UZt-g5-Jhh">
                         <barButtonItem key="leftBarButtonItem" title="Test" id="vsv-Qs-kfx">
                             <connections>
                                 <action selector="testBarButtonTapped:" destination="4a0-lW-Yyi" id="rgv-xf-AHo"/>
@@ -216,11 +216,30 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="1Dh-Uu-8mf"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Player Profile" id="bOu-nD-ssk"/>
+                    <navigationItem key="navigationItem" title="Player Profile" id="bOu-nD-ssk">
+                        <barButtonItem key="rightBarButtonItem" title="Item" image="person.circle" catalog="system" id="hJk-91-mZ3">
+                            <connections>
+                                <action selector="userAccountBarButtonTapped:" destination="P4k-pc-CCe" id="lKz-W1-dUa"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <segue destination="O5P-6S-K8l" kind="show" identifier="showGameHistoryTimelineSegue" id="T9E-P5-fQc"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9fN-l4-P25" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1571.0144927536232" y="833.70535714285711"/>
+        </scene>
+        <!--GameHistoryTimeline-->
+        <scene sceneID="GRg-ty-lqV">
+            <objects>
+                <viewControllerPlaceholder storyboardName="GameHistoryTimeline" id="O5P-6S-K8l" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="CBH-ro-wmK"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qfz-wC-8vT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2441" y="834"/>
         </scene>
         <!--Root Tab Bar Controller-->
         <scene sceneID="VN1-Z6-q2d">
@@ -286,8 +305,8 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="H4S-qx-FML" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Roadmap" image="arrow.swap" catalog="system" id="Vh5-1M-hEe"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="EKV-uM-81v">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="EKV-uM-81v">
+                        <rect key="frame" x="0.0" y="44" width="414" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -305,6 +324,7 @@
         <image name="gamecontroller" catalog="system" width="128" height="82"/>
         <image name="person" catalog="system" width="128" height="117"/>
         <image name="person.2" catalog="system" width="128" height="81"/>
+        <image name="person.circle" catalog="system" width="128" height="121"/>
         <namedColor name="darkBackgroundWithOpacity">
             <color white="0.30000001192092896" alpha="0.60000002384185791" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </namedColor>

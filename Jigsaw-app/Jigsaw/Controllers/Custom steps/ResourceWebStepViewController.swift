@@ -11,8 +11,8 @@ import ResearchKit
 import ProgressHUD
 
 class ResourceWebStepViewController: ORKStepViewController {
-    var webView: WKWebView!
-    var navigationFooterView: ORKNavigationContainerView!
+    private var webView: WKWebView!
+    private var navigationFooterView: ORKNavigationContainerView!
     
     var webViewStep: ResourceWebStep {
         step as! ResourceWebStep
@@ -32,7 +32,7 @@ class ResourceWebStepViewController: ORKStepViewController {
         setupConstraints()
     }
     
-    func setupNavigationFooterView() {
+    private func setupNavigationFooterView() {
         navigationFooterView = ORKNavigationContainerView()
         navigationFooterView.removeStyling()
         navigationFooterView.continueButtonItem = continueButtonItem
@@ -43,7 +43,7 @@ class ResourceWebStepViewController: ORKStepViewController {
         view.addSubview(navigationFooterView)
     }
     
-    func setupConstraints() {
+    private func setupConstraints() {
         navigationFooterView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             NSLayoutConstraint(item: navigationFooterView!, attribute: .left, relatedBy: .equal, toItem: view, attribute: .left, multiplier: 1, constant: 0),

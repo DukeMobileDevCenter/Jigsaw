@@ -12,6 +12,8 @@ import PINRemoteImage
 class ProfileHeaderView: UIView {
     @IBOutlet var nameLabel: UILabel!
     @IBOutlet var avatarImageView: UIImageView!
+    @IBOutlet var googleIconView: UIImageView!
+    @IBOutlet var githubIconView: UIImageView!
     
     func setView(name: String, avatarURL: URL?) {
         nameLabel.text = name

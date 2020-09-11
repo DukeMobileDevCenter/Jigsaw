@@ -12,10 +12,10 @@ import FirebaseFirestore
 
 class DemographicsViewController: FormViewController {
     // Load from firebase to fill in user info.
-    private let playerDocRef = Firestore.firestore().collection("Players").document(Profiles.userID)
+    private let playersDocRef = Firestore.firestore().collection("Players").document(Profiles.userID)
     
     private func updatePlayerDemographics(demographics: [String: String?]) {
-        playerDocRef.updateData(["demographics": demographics]) { error in
+        playersDocRef.updateData(["demographics": demographics]) { error in
             if let error = error {
                 print("❌ Error updating document: \(error)")
                 return
@@ -74,6 +74,8 @@ class DemographicsViewController: FormViewController {
     }
     
     override func viewDidLoad() {
+        // Override the tableview appearance.
+        loadInsetGroupedTableView()
         super.viewDidLoad()
         title = "Demographics"
         createForm()

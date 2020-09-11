@@ -25,7 +25,7 @@ class MatchingViewController: UIViewController {
     @IBOutlet var playerCountLabel: UILabel!
     
     private let database = Firestore.firestore()
-    private lazy var queueReference = database.collection(["Queues", selectedGame.gameName, queueType.rawValue].joined(separator: "/"))
+    private var queuesRef: CollectionReference!
     
     private var gameGroupListener: ListenerRegistration?
     private var chatroomListener: ListenerRegistration?
@@ -34,13 +34,15 @@ class MatchingViewController: UIViewController {
     /// The player's current game group.
     private var gameGroupID: String?
     private var gameGroup: GameGroup!
-    // private var isFirstPlayer: Bool = false
+    
+    private var myQuestionnaire: Questionnaire!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Matching players"
         
-        queueListener = queueReference.addSnapshotListener { [weak self] querySnapshot, _ in
+        queuesRef = database.collection(["Queues", selectedGame.gameName, queueType.rawValue].joined(separator: "/"))
+        queueListener = queuesRef.addSnapshotListener { [weak self] querySnapshot, _ in
             self?.playerCountLabel.text = "\(querySnapshot?.documents.count ?? 0)"
         }
         
@@ -57,7 +59,7 @@ class MatchingViewController: UIViewController {
     }
     
     @IBAction func joinGameButtonTapped(_ sender: UIButton) {
-        addPlayerToPlayersQueue(queueReference: queueReference)
+        addPlayerToPlayersQueue(queueReference: queuesRef)
     }
     
     private func addPlayerToPlayersQueue(queueReference: CollectionReference) {
@@ -68,15 +70,31 @@ class MatchingViewController: UIViewController {
         }
     }
     
+    private func addGameHistory(gameHistory: GameHistory) {
+        let historyRef = database.collection(["Players", Profiles.userID, "gameHistory"].joined(separator: "/"))
+        if let groupID = gameGroupID {
+            do {
+                // Set a history with the group ID.
+                try historyRef.document(groupID).setData(from: gameHistory)
+            } catch {
+                presentAlert(error: error)
+            }
+        }
+    }
+    
     private func handleMatchingGroup(group: GameGroup) {
         let game = games.first { $0.gameName == group.gameName }!
         let gameOfMyGroup: GameOfGroup
         if group.group1.contains(Profiles.userID) {
             // Current player is allocated to the first group.
-            gameOfMyGroup = GameOfGroup(version: game.version, gameName: game.gameName, resourceURL: game.g1resURL, questionnaire: game.g1Questionnaire)
-            // isFirstPlayer = group.group1.first == Profiles.userID
+            gameOfMyGroup = GameOfGroup(version: game.version, gameName: game.gameName, detailText: game.detailText, resourceURL: game.g1resURL, questionnaire: game.g1Questionnaire)
+            // Hold a reference to my questionnaire to check answers.
+            myQuestionnaire = game.g1Questionnaire
         } else if group.group2.contains(Profiles.userID) {
-            gameOfMyGroup = GameOfGroup(version: game.version, gameName: game.gameName, resourceURL: game.g2resURL, questionnaire: game.g2Questionnaire)
+            // Current player is allocated to the second group.
+            gameOfMyGroup = GameOfGroup(version: game.version, gameName: game.gameName, detailText: game.detailText, resourceURL: game.g2resURL, questionnaire: game.g2Questionnaire)
+            // Hold a reference to my questionnaire to check answers.
+            myQuestionnaire = game.g2Questionnaire
         } else {
             // Not my group, ignore.
             return
@@ -96,8 +114,7 @@ class MatchingViewController: UIViewController {
     }
     
     private func removeUserFromQueue() {
-        queueReference.document(Profiles.currentPlayer.userID).delete()
-        navigationController?.popViewController(animated: true)
+        queuesRef.document(Profiles.currentPlayer.userID).delete()
     }
     
     private func handleDocumentChange(_ change: DocumentChange) {
@@ -203,10 +220,21 @@ extension MatchingViewController: ORKTaskViewControllerDelegate {
             // Log an game error.
         case .completed:
             print("✅ completed")
-            print(taskViewController.result)
             // Log the real game result.
+            let gameResult = GameResult(taskResult: taskViewController.result, questionnaire: myQuestionnaire)
             let controller = ResultStatsViewController()
-            controller.resultPairs = [.correct: 3, .skipped: 1, .incorrect: 2]
+            controller.resultPairs = gameResult.resultPairs
+            
+            let gameHistory = GameHistory(
+                playedDate: gameGroup.createdDate,
+                gameCategory: selectedGame.category,
+                gameName: selectedGame.gameName,
+                allPlayers: gameGroup.group1 + gameGroup.group2,
+                gameResult: Dictionary(uniqueKeysWithValues: Array(gameResult.resultPairs)),
+                score: gameResult.score
+            )
+            // Add game history to a player's collection.
+            addGameHistory(gameHistory: gameHistory)
             controller.hidesBottomBarWhenPushed = true
             show(controller, sender: self)
         @unknown default:
