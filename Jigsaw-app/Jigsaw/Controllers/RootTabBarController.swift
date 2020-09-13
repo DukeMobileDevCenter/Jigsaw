@@ -8,7 +8,6 @@
 
 import UIKit
 import FirebaseAuth
-import FirebaseAnalytics
 import FirebaseFirestore
 
 class RootTabBarController: UITabBarController {
@@ -48,7 +47,6 @@ class RootTabBarController: UITabBarController {
                     self.presentAlert(title: "Something wrong with existing user", message: "This should never happen unless storage is corrupted.")
                 }
                 Profiles.userID = currentUser.uid
-                Analytics.setUserID(Profiles.userID)
             } else {
                 print("❌ Error loading existing user. This shoudn't happen unless user get deleted on remote or log out explicitly.")
                 // handle re-login here.
