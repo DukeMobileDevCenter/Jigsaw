@@ -11,40 +11,54 @@ import ResearchKit
 enum OnboardingSteps {
     static let instructionStep: ORKInstructionStep = {
         let instructionStep = ORKInstructionStep(identifier: "InstructionStepIdentifier")
-        instructionStep.title = "Welcome!"
-        instructionStep.detailText = "Thank you for joining our study. Tap Next to learn more."
-        instructionStep.image = UIImage(named: "onboarding_jigsaw")!
+        instructionStep.title = "Welcome"
+        instructionStep.detailText = "Welcome to the game of Jigsaw - Political Escape Rooms! We will increase our empathy in the collaboration through these escape rooms. Before we start, there are a few steps that get you onboard. Let's get started!"
+        instructionStep.image = UIImage(named: "onboarding_welcome")!
+        instructionStep.imageContentMode = .scaleAspectFill
         return instructionStep
     }()
     
     static let informedConsentInstructionStep: ORKInstructionStep = {
         let informedConsentInstructionStep = ORKInstructionStep(identifier: "ConsentStepIdentifier")
-        informedConsentInstructionStep.title = "Before You Join"
-        informedConsentInstructionStep.detailText = "Lorem ipsum"
+        informedConsentInstructionStep.title = "Before We Start"
+        informedConsentInstructionStep.detailText = "The goal of this game is to escape from a series of rooms. To do so, you will need to cooperate with your team in information-gathering tasks about a political issue or candidate.\n"
         informedConsentInstructionStep.iconImage = UIImage(systemName: "doc.plaintext")
-        //        informedConsentInstructionStep.image = UIImage(named: "placeholder")!
-        let heartBodyItem = ORKBodyItem(
-            text: "lorem ipsum",
+        let infoItem = ORKBodyItem(
+            text: "Each team member will receive a few crucial pieces of information that other team members do not have.",
             detailText: nil,
-            image: UIImage(systemName: "heart.fill"),
+            image: UIImage(systemName: "info"),
             learnMoreItem: nil,
             bodyItemStyle: .image
         )
-        let checkmarkItem = ORKBodyItem(
-            text: "lorem ipsum",
+        let chatItem = ORKBodyItem(
+            text: "After receiving your information, you will have a chance to chat with your teammates in order to share your information and learn about theirs.",
             detailText: nil,
-            image: UIImage(systemName: "checkmark.circle.fill"),
+            image: UIImage(systemName: "bubble.left.and.bubble.right"),
             learnMoreItem: nil,
             bodyItemStyle: .image
         )
-        let signatureItem = ORKBodyItem(
-            text: "lorem ipsum",
+        let quizItem = ORKBodyItem(
+            text: "After the chat, you will each receive a short quiz covering all the information gathered and shared by all of your team members.",
             detailText: nil,
-            image: UIImage(systemName: "signature"),
+            image: UIImage(systemName: "text.badge.checkmark"),
             learnMoreItem: nil,
             bodyItemStyle: .image
         )
-        informedConsentInstructionStep.bodyItems = [heartBodyItem, checkmarkItem, signatureItem]
+        let retryItem = ORKBodyItem(
+            text: "If all members of your team pass the quiz, then you escape that room and go to the next. But if anyone from your team fails the quiz, then you will all be bumped back into a chat to confer about the questions that were missed, and you will have another chance to pass a different quiz and escape on that try.",
+            detailText: nil,
+            image: UIImage(systemName: "repeat"),
+            learnMoreItem: nil,
+            bodyItemStyle: .image
+        )
+        let rankingItem = ORKBodyItem(
+            text: "Teams will be ranked on how quickly they are able to move through all rooms in this series. Success will require effective communication and cooperation.",
+            detailText: nil,
+            image: UIImage(systemName: "list.bullet.indent"),
+            learnMoreItem: nil,
+            bodyItemStyle: .image
+        )
+        informedConsentInstructionStep.bodyItems = [infoItem, chatItem, quizItem, retryItem, rankingItem]
         return informedConsentInstructionStep
     }()
     
@@ -66,7 +80,7 @@ enum OnboardingSteps {
         let politicalSliderStep = ORKQuestionStep(
             identifier: "PoliticalSliderStep",
             title: "Jigsaw value",
-            question: "Please pick a value to reflect your tendency.",
+            question: "Please indicate your political orientation on the slider below.",
             answer: sliderAnswerFormat
         )
         politicalSliderStep.isOptional = false
