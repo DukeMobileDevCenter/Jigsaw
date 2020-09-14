@@ -145,10 +145,10 @@ class ProfileViewController: FormViewController {
             row.title = "Jigsaw piece"
             row.value = Profiles.displayName
             row.selectorTitle = "Pick a puzzle piece as your nickname."
-            row.options = JigsawPiece.allCases.map { $0.rawValue }
+            row.options = JigsawPiece.allCases.map { $0.label }
         }.cellUpdate { [weak self] _, row in
-            if let name = row.value {
-                self?.updatePlayerDisplayName(name: name)
+            if let label = row.value, let jigsawPiece = JigsawPiece(label: label) {
+                self?.updatePlayerDisplayName(name: jigsawPiece.rawValue)
             }
         }
     }

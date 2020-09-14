@@ -8,8 +8,15 @@
 
 import Foundation
 
-enum JigsawPiece: String, CaseIterable {
+enum JigsawPiece: String, CaseIterable, CaseReverseInit {
     case green, orange, purple, yellow, unknown
+    
+    static let mappingDict: [String: Self] = Dictionary(uniqueKeysWithValues: Self.allCases.map { ($0.label, $0) })
+    
+    init?(label: String) {
+        guard let newCase = Self.mappingDict[label] else { return nil }
+        self = newCase
+    }
     
     /// A human readable string of the jigsaw piece name.
     var label: String {
