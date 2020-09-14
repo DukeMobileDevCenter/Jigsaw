@@ -26,38 +26,23 @@ class DemographicsViewController: FormViewController {
         }
     }
     
-    private var ageRow: IntRow {
-        let ageRules: RuleSet<Int> = {
-            var rules = RuleSet<Int>()
-            rules.add(rule: RuleGreaterOrEqualThan(min: 1, msg: "Age must be greater than 1"))
-            rules.add(rule: RuleSmallerThan(max: 130, msg: "Don't pretend to be too old!"))
-            return rules
-        }()
-        
-        return IntRow { row in
-            row.title = "Age"
-            row.tag = "age"
-            row.placeholder = "Tell us your age"
-            if let age = Profiles.currentPlayer.demographics["age"], age != nil {
-                row.value = Int(string: age!)
-            }
-            row.add(ruleSet: ageRules)
-            row.validationOptions = .validatesOnBlur
-        }.cellUpdate { [weak self] cell, row in
-            if !row.isValid {
-                cell.titleLabel?.textColor = .systemRed
-                self?.presentAlert(title: "Invalid input", message: "The value you entered is invalid!")
-                row.value = nil
-            }
-        }
-    }
-    
     private func actionSheetRow(title: String, tag: String, selectorTitle: String, options: [String]) -> ActionSheetRow<String> {
         ActionSheetRow<String> { row in
             row.title = title
             row.tag = tag
-            if let value = Profiles.currentPlayer.demographics[tag] {
-                row.value = value
+            if let value = Profiles.currentPlayer.demographics[tag], value != nil {
+                switch tag {
+                case "age":
+                    row.value = AgeGroup(rawValue: value!)?.label
+                case "gender":
+                    row.value = Gender(rawValue: value!)?.label
+                case "education":
+                    row.value = EducationLevel(rawValue: value!)?.label
+                case "ethnicity":
+                    row.value = Ethnicity(rawValue: value!)?.label
+                default:
+                    break
+                }
             }
             row.selectorTitle = selectorTitle
             row.options = options
@@ -67,10 +52,10 @@ class DemographicsViewController: FormViewController {
     private func createForm() {
         form
         +++ Section(header: "Update your demographics here.", footer: "Blah blah blah all the information are confidential.")
-        <<< ageRow
-        <<< actionSheetRow(title: "Gender", tag: "gender", selectorTitle: "Provide your gender", options: Gender.allCases.map { $0.rawValue })
-        <<< actionSheetRow(title: "Education", tag: "education", selectorTitle: "Provide your education", options: EducationLevel.allCases.map { $0.rawValue })
-        <<< actionSheetRow(title: "Ethnicity", tag: "ethnicity", selectorTitle: "Provide your ethnic group/identity", options: Ethnicity.allCases.map { $0.rawValue })
+        <<< actionSheetRow(title: "Age", tag: "age", selectorTitle: "Provide your age group", options: AgeGroup.allCases.map { $0.label })
+        <<< actionSheetRow(title: "Gender", tag: "gender", selectorTitle: "Provide your gender", options: Gender.allCases.map { $0.label })
+        <<< actionSheetRow(title: "Education", tag: "education", selectorTitle: "Provide your education", options: EducationLevel.allCases.map { $0.label })
+        <<< actionSheetRow(title: "Ethnicity", tag: "ethnicity", selectorTitle: "How your identify your ethnic group", options: Ethnicity.allCases.map { $0.label })
     }
     
     override func viewDidLoad() {
@@ -83,14 +68,19 @@ class DemographicsViewController: FormViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        let formatter = NumberFormatter()
         var demographicsDictionary = [String: String?]()
         for (key, value) in form.values() {
-            if value is Int {
-                demographicsDictionary[key] = formatter.string(from: NSNumber(value: value as! Int))
-            } else if value is String {
-                demographicsDictionary[key] = value as? String
-            } else if value == nil {
+            guard let valueString = value as? String else { continue }
+            switch key {
+            case "age":
+                demographicsDictionary[key] = AgeGroup(label: valueString)?.rawValue
+            case "gender":
+                demographicsDictionary[key] = Gender(label: valueString)?.rawValue
+            case "education":
+                demographicsDictionary[key] = EducationLevel(label: valueString)?.rawValue
+            case "ethnicity":
+                demographicsDictionary[key] = Ethnicity(label: valueString)?.rawValue
+            default:
                 demographicsDictionary[key] = nil
             }
         }

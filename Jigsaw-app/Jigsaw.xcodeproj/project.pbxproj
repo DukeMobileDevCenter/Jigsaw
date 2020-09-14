@@ -17,6 +17,8 @@
 		0020D56724E263C600DB20E1 /* MatchingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0020D56624E263C600DB20E1 /* MatchingViewController.swift */; };
 		0020D56A24E267B300DB20E1 /* GameCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0020D56924E267B300DB20E1 /* GameCollectionCell.swift */; };
 		003CD27A250EE08100BD082E /* JigsawPiece.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003CD279250EE08100BD082E /* JigsawPiece.swift */; };
+		003CD27C250EEC0D00BD082E /* AgeGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003CD27B250EEC0D00BD082E /* AgeGroup.swift */; };
+		003CD27E250EF96B00BD082E /* CaseReverseInit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003CD27D250EF96B00BD082E /* CaseReverseInit.swift */; };
 		0047630424ED10FE007767A5 /* QuestionEssentialProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0047630324ED10FE007767A5 /* QuestionEssentialProperty.swift */; };
 		0047630624ED1154007767A5 /* GameCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0047630524ED1154007767A5 /* GameCategory.swift */; };
 		004A4B0D24FDB55A000FA2C8 /* FormViewController+insetGrouped.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004A4B0C24FDB55A000FA2C8 /* FormViewController+insetGrouped.swift */; };
@@ -114,6 +116,8 @@
 		0020D56624E263C600DB20E1 /* MatchingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchingViewController.swift; sourceTree = "<group>"; };
 		0020D56924E267B300DB20E1 /* GameCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameCollectionCell.swift; sourceTree = "<group>"; };
 		003CD279250EE08100BD082E /* JigsawPiece.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JigsawPiece.swift; sourceTree = "<group>"; };
+		003CD27B250EEC0D00BD082E /* AgeGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgeGroup.swift; sourceTree = "<group>"; };
+		003CD27D250EF96B00BD082E /* CaseReverseInit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaseReverseInit.swift; sourceTree = "<group>"; };
 		0047630324ED10FE007767A5 /* QuestionEssentialProperty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionEssentialProperty.swift; sourceTree = "<group>"; };
 		0047630524ED1154007767A5 /* GameCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameCategory.swift; sourceTree = "<group>"; };
 		004A4B0C24FDB55A000FA2C8 /* FormViewController+insetGrouped.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FormViewController+insetGrouped.swift"; sourceTree = "<group>"; };
@@ -215,6 +219,7 @@
 				00BA555C24DA7CF7006A207E /* Gender.swift */,
 				000D809C24ECEDBA0070041D /* EducationLevel.swift */,
 				000D809F24ECEE990070041D /* Ethnicity.swift */,
+				003CD27B250EEC0D00BD082E /* AgeGroup.swift */,
 			);
 			path = Demographics;
 			sourceTree = "<group>";
@@ -252,6 +257,7 @@
 			children = (
 				005856C524D92D320010BE55 /* DatabaseRepresentation.swift */,
 				0047630324ED10FE007767A5 /* QuestionEssentialProperty.swift */,
+				003CD27D250EF96B00BD082E /* CaseReverseInit.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -698,6 +704,7 @@
 				00B6305F24FB0247008975CE /* GameResult.swift in Sources */,
 				00B0A67424E3CAA800887701 /* DemographicsViewController.swift in Sources */,
 				00D0862524CD24EA00FB7A20 /* OnboardingSteps.swift in Sources */,
+				003CD27C250EEC0D00BD082E /* AgeGroup.swift in Sources */,
 				000D809D24ECEDBA0070041D /* EducationLevel.swift in Sources */,
 				0020D55F24E0A7DB00DB20E1 /* ResourceWebStep.swift in Sources */,
 				0070DFEA24B0060400E71F46 /* AppDelegate.swift in Sources */,
@@ -720,6 +727,7 @@
 				00CF5DBF24F4DB3C00B501BB /* SingleChoiceQuestion.swift in Sources */,
 				00D0861F24CD135B00FB7A20 /* RootTabBarController.swift in Sources */,
 				00A06D8D24E8A9B400030649 /* GameGroup.swift in Sources */,
+				003CD27E250EF96B00BD082E /* CaseReverseInit.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
