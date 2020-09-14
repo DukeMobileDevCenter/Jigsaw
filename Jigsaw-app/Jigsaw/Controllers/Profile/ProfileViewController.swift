@@ -72,11 +72,13 @@ class ProfileViewController: FormViewController {
     
     private func updatePlayerDisplayName(name: String) {
         database.collection("Players").document(Profiles.userID).updateData(["displayName": name]) { [weak self] error in
+            guard let self = self else { return }
             if let error = error {
                 print("❌ Error updating document: \(error)")
-                return
             } else {
-                self?.profileHeaderRow.cell.view?.nameLabel.text = name
+                let playerJigsawPiece = JigsawPiece(rawValue: name)!
+                self.profileHeaderRow.cell.view?.nameLabel.text = playerJigsawPiece.label
+                self.profileHeaderRow.cell.view?.avatarImageView.setImage(UIImage(named: playerJigsawPiece.bundleName)!)
             }
         }
     }
@@ -113,8 +115,10 @@ class ProfileViewController: FormViewController {
     }
     
     private var profileHeaderView: ProfileHeaderView {
+        let playerJigsawPiece = JigsawPiece(rawValue: Profiles.displayName)!
         let view = Bundle.main.loadNibNamed("ProfileHeaderView", owner: self)?.first as! ProfileHeaderView
-        view.setView(name: Profiles.displayName, avatarURL: Profiles.currentPlayer.userID.wavatarURL)
+        view.setView(name: playerJigsawPiece.label, avatarFileName: playerJigsawPiece.bundleName)
+        // view.setView(name: Profiles.displayName, avatarURL: Profiles.currentPlayer.userID.wavatarURL)
         let user = Auth.auth().currentUser!
         let providerIDs = user.providerData.map { $0.providerID }
         // Load provider icons
@@ -126,7 +130,7 @@ class ProfileViewController: FormViewController {
     private lazy var profileHeaderRow: ViewRow<ProfileHeaderView> = {
         ViewRow<ProfileHeaderView>("view")
         .cellSetup { cell, _ in
-            //  Construct the view
+            // Construct the view
             cell.view = self.profileHeaderView
         }
         .onCellSelection { [weak self] _, _ in
@@ -136,29 +140,15 @@ class ProfileViewController: FormViewController {
         }
     }()
     
-    private var displayNameRow: NameRow {
-        let displayNameRules: RuleSet<String> = {
-            var rules = RuleSet<String>()
-            rules.add(rule: RuleMinLength(minLength: 3, msg: "Display name must be longer than 3 characters."))
-            rules.add(rule: RuleMaxLength(maxLength: 10, msg: "Display name must be shorter than 10 characters."))
-            return rules
-        }()
-        
-        return NameRow { row in
-            row.title = "Display name"
-            row.placeholder = "Change your nickname"
+    private var jigsawPieceRow: ActionSheetRow<String> {
+        ActionSheetRow<String> { row in
+            row.title = "Jigsaw piece"
             row.value = Profiles.displayName
-            row.add(ruleSet: displayNameRules)
-            row.validationOptions = .validatesOnBlur
-        }.cellUpdate { [weak self] cell, row in
-            if !row.isValid {
-                cell.titleLabel?.textColor = .systemRed
-                self?.presentAlert(title: "Invalid input", message: "The value you entered is invalid!")
-                row.value = Profiles.displayName
-            } else {
-                if let name = row.value {
-                    self?.updatePlayerDisplayName(name: name)
-                }
+            row.selectorTitle = "Pick a puzzle piece as your nickname."
+            row.options = JigsawPiece.allCases.map { $0.rawValue }
+        }.cellUpdate { [weak self] _, row in
+            if let name = row.value {
+                self?.updatePlayerDisplayName(name: name)
             }
         }
     }
@@ -168,7 +158,7 @@ class ProfileViewController: FormViewController {
         +++ Section("Profile")
         <<< profileHeaderRow
         +++ Section(header: "Basic Information", footer: "Blah blah blah")
-        <<< displayNameRow
+        <<< jigsawPieceRow
         <<< DecimalRow { row in
             row.title = "Jigsaw value"
             row.value = Profiles.jigsawValue

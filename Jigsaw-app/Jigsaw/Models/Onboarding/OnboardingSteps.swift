@@ -12,7 +12,7 @@ enum OnboardingSteps {
     static let instructionStep: ORKInstructionStep = {
         let instructionStep = ORKInstructionStep(identifier: "InstructionStepIdentifier")
         instructionStep.title = "Welcome"
-        instructionStep.detailText = "Welcome to the game of Jigsaw - Political Escape Rooms! We will increase our empathy in the collaboration through these escape rooms. Before we start, there are a few steps that get you onboard. Let's get started!"
+        instructionStep.detailText = "Welcome to the game of Jigsaw - Political Escape Rooms! We will increase our empathy with collaborating through the game. Before we start, there are a few steps that get you onboard. Let's get started!"
         instructionStep.image = UIImage(named: "onboarding_welcome")!
         instructionStep.imageContentMode = .scaleAspectFill
         return instructionStep
@@ -40,7 +40,7 @@ enum OnboardingSteps {
         let quizItem = ORKBodyItem(
             text: "After the chat, you will each receive a short quiz covering all the information gathered and shared by all of your team members.",
             detailText: nil,
-            image: UIImage(systemName: "text.badge.checkmark"),
+            image: UIImage(systemName: "checkmark.rectangle"),
             learnMoreItem: nil,
             bodyItemStyle: .image
         )
@@ -79,7 +79,7 @@ enum OnboardingSteps {
         sliderAnswerFormat.gradientColors = [.systemBlue, .systemYellow, .systemRed]
         let politicalSliderStep = ORKQuestionStep(
             identifier: "PoliticalSliderStep",
-            title: "Jigsaw value",
+            title: "Jigsaw Value",
             question: "Please indicate your political orientation on the slider below.",
             answer: sliderAnswerFormat
         )
@@ -87,63 +87,23 @@ enum OnboardingSteps {
         return politicalSliderStep
     }()
     
-    static let profileStep: ORKQuestionStep = {
-        // Display name
-        let displayNameAnswerFormat = ORKAnswerFormat.textAnswerFormat(withMaximumLength: 10)
-        displayNameAnswerFormat.spellCheckingType = .no
-        displayNameAnswerFormat.autocapitalizationType = .none
-        let step = ORKQuestionStep(identifier: "DisplayNameStep", title: "Display name", question: "Please provide a nickname.", answer: displayNameAnswerFormat)
+    static let nicknameStep: ORKQuestionStep = {
+        let choices: [ORKImageChoice] = JigsawPiece.allCases.compactMap { piece in
+            if piece == .unknown {
+                return nil
+            } else {
+                return ORKImageChoice(normalImage: UIImage(named: piece.bundleName), selectedImage: nil, text: piece.label, value: piece.rawValue as NSString)
+            }
+        }
+        let imageChoiceAnswerFormat = ORKImageChoiceAnswerFormat(imageChoices: choices)
+        let step = ORKQuestionStep(identifier: "NicknameStep", title: "Puzzle piece", question: "Please pick a puzzle piece as your nickname.", answer: imageChoiceAnswerFormat)
         return step
     }()
     
     static let completionStep: ORKCompletionStep = {
         let completionStep = ORKCompletionStep(identifier: "CompletionStep")
-        completionStep.title = "All Done!"
-        completionStep.detailText = "Please start to explore the world of Jigsaw."
+        completionStep.title = "All Done"
+        completionStep.detailText = "Let's start to explore the world of Jigsaw!"
         return completionStep
     }()
-    
-//    static let profileStep: ORKFormStep = {
-//        // Gender picker
-//        var genderTextChoices: [ORKTextChoice] = []
-//        for gender in Gender.allCases {
-//            let c = ORKTextChoice(text: gender.rawValue, value: gender.rawValue as NSString)
-//            genderTextChoices.append(c)
-//        }
-//        let genderAnswerFormat = ORKAnswerFormat.valuePickerAnswerFormat(with: genderTextChoices)
-//        let genderItem = ORKFormItem(identifier: "gender", text: "Gender", answerFormat: genderAnswerFormat, optional: true)
-//        genderItem.isOptional = true
-//
-//        // Age group
-//        let ageAnswerFormat = ORKAnswerFormat.integerAnswerFormat(withUnit: "years old")
-//        ageAnswerFormat.minimum = 1
-//        ageAnswerFormat.maximum = 99
-//        let ageItem = ORKFormItem(identifier: "age", text: "Age", answerFormat: ageAnswerFormat, optional: true)
-//        ageItem.isOptional = true
-//
-//        // Display name
-//        let displayNameAnswerFormat = ORKAnswerFormat.textAnswerFormat(withMaximumLength: 10)
-//        displayNameAnswerFormat.spellCheckingType = .no
-//        displayNameAnswerFormat.autocapitalizationType = .none
-//        let displayNameItem = ORKFormItem(identifier: "displayName", text: "Display name", detailText: "Your nickname in the app", learnMoreItem: nil, showsProgress: false, answerFormat: displayNameAnswerFormat, tagText: nil, optional: true)
-//
-//        // Email
-//        let emailAnswerFormat = ORKAnswerFormat.emailAnswerFormat()
-//        let emailItem = ORKFormItem(identifier: "email", text: "Email Address", answerFormat: emailAnswerFormat, optional: true)
-//
-//        let formStep = ORKFormStep(
-//            identifier: "ProfileStep",
-//            title: "Profile info",
-//            text: "Tell us more about yourself, skipable."
-//        )
-//
-//        formStep.formItems = [
-//            displayNameItem,
-//            emailItem,
-//            genderItem,
-//            ageItem
-//        ]
-//
-//        return formStep
-//    }()
 }

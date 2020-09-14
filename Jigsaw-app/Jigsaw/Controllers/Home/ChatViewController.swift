@@ -266,7 +266,8 @@ extension ChatViewController: MessagesDisplayDelegate {
     }
     
     func configureAvatarView(_ avatarView: AvatarView, for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) {
-        avatarView.pin_setImage(from: message.sender.senderId.wavatarURL)
+        let avatarFileName = JigsawPiece(rawValue: message.sender.displayName)!.bundleName
+        avatarView.setImage(UIImage(named: avatarFileName)!)
     }
 }
 

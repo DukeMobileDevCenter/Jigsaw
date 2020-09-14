@@ -16,6 +16,7 @@
 		0020D55F24E0A7DB00DB20E1 /* ResourceWebStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0020D55E24E0A7DB00DB20E1 /* ResourceWebStep.swift */; };
 		0020D56724E263C600DB20E1 /* MatchingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0020D56624E263C600DB20E1 /* MatchingViewController.swift */; };
 		0020D56A24E267B300DB20E1 /* GameCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0020D56924E267B300DB20E1 /* GameCollectionCell.swift */; };
+		003CD27A250EE08100BD082E /* JigsawPiece.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003CD279250EE08100BD082E /* JigsawPiece.swift */; };
 		0047630424ED10FE007767A5 /* QuestionEssentialProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0047630324ED10FE007767A5 /* QuestionEssentialProperty.swift */; };
 		0047630624ED1154007767A5 /* GameCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0047630524ED1154007767A5 /* GameCategory.swift */; };
 		004A4B0D24FDB55A000FA2C8 /* FormViewController+insetGrouped.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004A4B0C24FDB55A000FA2C8 /* FormViewController+insetGrouped.swift */; };
@@ -112,6 +113,7 @@
 		0020D55E24E0A7DB00DB20E1 /* ResourceWebStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResourceWebStep.swift; sourceTree = "<group>"; };
 		0020D56624E263C600DB20E1 /* MatchingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchingViewController.swift; sourceTree = "<group>"; };
 		0020D56924E267B300DB20E1 /* GameCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameCollectionCell.swift; sourceTree = "<group>"; };
+		003CD279250EE08100BD082E /* JigsawPiece.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JigsawPiece.swift; sourceTree = "<group>"; };
 		0047630324ED10FE007767A5 /* QuestionEssentialProperty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionEssentialProperty.swift; sourceTree = "<group>"; };
 		0047630524ED1154007767A5 /* GameCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameCategory.swift; sourceTree = "<group>"; };
 		004A4B0C24FDB55A000FA2C8 /* FormViewController+insetGrouped.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FormViewController+insetGrouped.swift"; sourceTree = "<group>"; };
@@ -411,6 +413,7 @@
 				0078315124DF557800B35A98 /* Player.swift */,
 				005856C124D9262C0010BE55 /* Profiles.swift */,
 				00F6302124EE385E00BCAD11 /* AnswerCategory.swift */,
+				003CD279250EE08100BD082E /* JigsawPiece.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -670,6 +673,7 @@
 				0020D55024DFAED000DB20E1 /* GameOfGroup.swift in Sources */,
 				00D9F5132506DDC900898DFA /* PreviewDetailViewController.swift in Sources */,
 				0020D56724E263C600DB20E1 /* MatchingViewController.swift in Sources */,
+				003CD27A250EE08100BD082E /* JigsawPiece.swift in Sources */,
 				00BA555B24DA5D2A006A207E /* UICollectionView.swift in Sources */,
 				005856BE24D923630010BE55 /* ChatViewController.swift in Sources */,
 				00B0A68124E3DB7300887701 /* String+sha256.swift in Sources */,
