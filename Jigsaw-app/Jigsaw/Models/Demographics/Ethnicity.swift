@@ -12,8 +12,9 @@ enum Ethnicity: String, CaseIterable, Codable, CaseReverseInit {
     case white
     case black
     case hispanic
+    case native
     case asian
-    case others
+    case other
     case unknown
     
     static let mappingDict: [String: Self] = Dictionary(uniqueKeysWithValues: Self.allCases.map { ($0.label, $0) })
@@ -28,13 +29,15 @@ enum Ethnicity: String, CaseIterable, Codable, CaseReverseInit {
         case .white:
             return "White"
         case .black:
-            return "Black"
+            return "Black or African American"
         case .hispanic:
             return "Hispanic or Latino"
+        case .native:
+            return "American Indian or Alaska Native"
         case .asian:
             return "Asian"
-        case .others:
-            return "Others"
+        case .other:
+            return "Other"
         case .unknown:
             return "Prefer not to answer"
         }

@@ -53,9 +53,9 @@ class DemographicsViewController: FormViewController {
         form
         +++ Section(header: "Update your demographics here.", footer: "Blah blah blah all the information are confidential.")
         <<< actionSheetRow(title: "Age", tag: "age", selectorTitle: "Provide your age group", options: AgeGroup.allCases.map { $0.label })
-        <<< actionSheetRow(title: "Gender", tag: "gender", selectorTitle: "Provide your gender", options: Gender.allCases.map { $0.label })
-        <<< actionSheetRow(title: "Education", tag: "education", selectorTitle: "Provide your education", options: EducationLevel.allCases.map { $0.label })
-        <<< actionSheetRow(title: "Ethnicity", tag: "ethnicity", selectorTitle: "How your identify your ethnic group", options: Ethnicity.allCases.map { $0.label })
+        <<< actionSheetRow(title: "Gender", tag: "gender", selectorTitle: "How you identify your gender", options: Gender.allCases.map { $0.label })
+        <<< actionSheetRow(title: "Education", tag: "education", selectorTitle: "Highest education level so far", options: EducationLevel.allCases.map { $0.label })
+        <<< actionSheetRow(title: "Ethnicity", tag: "ethnicity", selectorTitle: "How you identify your ethnic group", options: Ethnicity.allCases.map { $0.label })
     }
     
     override func viewDidLoad() {
