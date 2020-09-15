@@ -39,17 +39,15 @@ class HomeCollectionViewController: UICollectionViewController {
     }
     
     private func testShowChatroom(_ sender: UIBarButtonItem) {
-        let chatroomsRef = Firestore.firestore().collection("Chatrooms").document("TestChatroom1")
+        let chatroomsRef = Firestore.firestore().collection("Chatrooms").document("TestChatroom")
         chatroomsRef.getDocument { [weak self] document, error in
             guard let self = self else { return }
-            do {
-                if let chatroom = try document?.data(as: Chatroom.self) {
-                    let chatroomVC = ChatViewController(user: Auth.auth().currentUser!, chatroom: chatroom, timeLeft: nil)
-                    // Don't show bottom tab bar.
-                    chatroomVC.hidesBottomBarWhenPushed = true
-                    self.show(chatroomVC, sender: sender)
-                }
-            } catch {
+            if let document = document, let chatroom = Chatroom(document: document) {
+                let chatroomVC = ChatViewController(user: Auth.auth().currentUser!, chatroom: chatroom, timeLeft: nil)
+                // Don't show bottom tab bar.
+                chatroomVC.hidesBottomBarWhenPushed = true
+                self.show(chatroomVC, sender: sender)
+            } else if let error = error {
                 self.presentAlert(error: error)
             }
         }

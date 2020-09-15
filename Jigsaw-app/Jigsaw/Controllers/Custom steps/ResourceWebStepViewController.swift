@@ -51,6 +51,12 @@ class ResourceWebStepViewController: ORKStepViewController {
             NSLayoutConstraint(item: navigationFooterView!, attribute: .bottom, relatedBy: .equal, toItem: view, attribute: .bottom, multiplier: 1, constant: 0)
         ])
     }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        // Dismiss any remaining HUD.
+        ProgressHUD.dismiss()
+    }
 }
 
 extension ResourceWebStepViewController: WKNavigationDelegate {

@@ -113,6 +113,10 @@ class MatchingViewController: UIViewController {
         }
     }
     
+    private func removeChatroom() {
+        database.collection("Chatrooms").document(gameGroup.chatroomID).delete()
+    }
+    
     private func removeUserFromQueue() {
         queuesRef.document(Profiles.currentPlayer.userID).delete()
     }
@@ -159,11 +163,9 @@ class MatchingViewController: UIViewController {
         let chatroomsRef = database.collection("Chatrooms").document(gameGroup.chatroomID)
         chatroomsRef.getDocument { [weak self] document, error in
             guard let self = self else { return }
-            do {
-                if let chatroom = try document?.data(as: Chatroom.self) {
-                    completion(chatroom)
-                }
-            } catch {
+            if let document = document, let chatroom = Chatroom(document: document) {
+                completion(chatroom)
+            } else if let error = error {
                 self.presentAlert(error: error)
             }
         }
@@ -173,6 +175,8 @@ class MatchingViewController: UIViewController {
         // Stop waiting in queue when player exit the matching page.
         // There might be some sync bug, if a player just quit a match while he is added to a group.
         removeUserFromQueue()
+        // Remove the chatroom when a player stops the game.
+        removeChatroom()
         gameGroupListener?.remove()
         chatroomListener?.remove()
         queueListener?.remove()

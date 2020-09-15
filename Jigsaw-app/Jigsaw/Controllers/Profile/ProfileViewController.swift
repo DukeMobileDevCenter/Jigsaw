@@ -142,8 +142,9 @@ class ProfileViewController: FormViewController {
     
     private var jigsawPieceRow: ActionSheetRow<String> {
         ActionSheetRow<String> { row in
+            let playerJigsawPiece = JigsawPiece(rawValue: Profiles.displayName)!
             row.title = "Jigsaw piece"
-            row.value = Profiles.displayName
+            row.value = playerJigsawPiece.label
             row.selectorTitle = "Pick a puzzle piece as your nickname."
             row.options = JigsawPiece.allCases.map { $0.label }
         }.cellUpdate { [weak self] _, row in
