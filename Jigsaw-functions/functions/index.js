@@ -1,19 +1,19 @@
+'use strict';
 // The Cloud Functions for Firebase SDK to create Cloud Functions and setup triggers.
 const functions = require('firebase-functions');
-
 // The Firebase Admin SDK to access Cloud Firestore.
 const admin = require('firebase-admin');
 admin.initializeApp();
+
+const db = admin.firestore();
 
 // Refresh time. When the queue has more than 4 players, a game group will be spawned
 // after 10 seconds.
 // const REFRESH_TIME = 10 * 1000; // 10 seconds in milliseconds.
 
-const db = admin.firestore();
-
-// Listens for new players added to /Queues/:documentId/twoPlayersQueue or fourPlayersQueue
-// and creates a game group to /GameGroups.
-exports.makePlayersGameGroup = functions.firestore.document('/Queues/{gameName}/{queueName}/{userID}').onWrite(async (change, context) => {
+// Listens for new players added to /Queues/:documentId/twoPlayersQueue or
+// fourPlayersQueue and creates a game group to /GameGroups.
+exports.makeGameGroup = functions.firestore.document('/Queues/{gameName}/{queueName}/{userID}').onWrite(async (change, context) => {
   // Reference to the parent.
   const ref = db.collection(['Queues', context.params.gameName, context.params.queueName].join('/'));
   
@@ -58,8 +58,14 @@ exports.makePlayersGameGroup = functions.firestore.document('/Queues/{gameName}/
   
   // Generate fields for a game group.
   const createdDate = admin.firestore.FieldValue.serverTimestamp();
-  const chatroomID = "TestChatroom1";
+  // Get the game name.
   const gameName = context.params.gameName;
+  // Create an anonymous chatroom.
+  const chatroom = await db.collection('Chatrooms').add({
+    name: gameName
+  });
+  // Get the chatroom ID.
+  const chatroomID = chatroom.id;
   // Generate 2 game groups.
   const groups = [group1, group2];
   // Assign group randomly with questionnaires.
