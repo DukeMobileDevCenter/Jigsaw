@@ -45,12 +45,19 @@
     return step;
 }
 
++ (instancetype)webViewStepWithIdentifier:(NSString *)identifier
+                                      url:(NSURL *)url {
+    ORKWebViewStep *step = [[ORKWebViewStep alloc] initWithIdentifier:identifier];
+    step.url = url;
+    return step;
+}
+
 - (void)validateParameters {
     [super validateParameters];
     
-    if (self.html == nil) {
+    if (self.html == nil && self.url == nil) {
         @throw [NSException exceptionWithName:NSInvalidArgumentException
-                                       reason:@"WebViewStep requires html property."
+                                       reason:@"WebViewStep requires html or url property."
                                      userInfo:nil];
     }
 }
@@ -58,6 +65,7 @@
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
     if (self) {
+        ORK_DECODE_URL(aDecoder, url);
         ORK_DECODE_OBJ_CLASS(aDecoder, html, NSString);
         ORK_DECODE_OBJ_CLASS(aDecoder, customCSS, NSString);
         ORK_DECODE_BOOL(aDecoder, showSignatureAfterContent);
@@ -68,6 +76,7 @@
 
 - (void)encodeWithCoder:(NSCoder *)aCoder {
     [super encodeWithCoder:aCoder];
+    ORK_ENCODE_URL(aCoder, url);
     ORK_ENCODE_OBJ(aCoder, html);
     ORK_ENCODE_OBJ(aCoder, customCSS);
     ORK_ENCODE_BOOL(aCoder, showSignatureAfterContent);
@@ -80,6 +89,7 @@
 
 - (instancetype)copyWithZone:(NSZone *)zone {
     ORKWebViewStep *step = [super copyWithZone:zone];
+    step.url = self.url;
     step.html = self.html;
     step.customCSS = self.customCSS;
     step.customViewProvider = self.customViewProvider;
@@ -92,6 +102,7 @@
     
     __typeof(self) castObject = object;
     return (isParentSame &&
+            [self.url isEqual:castObject.url] &&
             [self.html isEqual:castObject.html] &&
             [self.customCSS isEqual:castObject.customCSS] &&
             self.showSignatureAfterContent == castObject.showSignatureAfterContent);

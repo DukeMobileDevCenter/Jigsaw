@@ -126,13 +126,18 @@ static const CGFloat ORKSignatureTopPadding = 37.0;
         _webView = [[WKWebView alloc] initWithFrame:self.view.bounds configuration:config];
         _webView.autoresizingMask = UIViewAutoresizingFlexibleHeight;
         _webView.navigationDelegate = self;
-        _webView.scrollView.scrollEnabled = NO;
+//        _webView.scrollView.scrollEnabled = NO;
         _webView.scrollView.delegate = self;
         
         [_scrollView addSubview:_webView];
         [self setupNavigationFooterView];
         [self setupConstraints];
-        [_webView loadHTMLString:[self webViewStep].html baseURL:nil];
+        if ([self webViewStep].html != nil) {
+            [_webView loadHTMLString:[self webViewStep].html baseURL:nil];
+        } else {
+            NSURLRequest* request = [NSURLRequest requestWithURL:[self webViewStep].url];
+            [_webView loadRequest:request];
+        }
     }
 }
 
@@ -282,8 +287,8 @@ static const CGFloat ORKSignatureTopPadding = 37.0;
         [_constraints addObjectsFromArray:@[
             [NSLayoutConstraint constraintWithItem:_webView
                                          attribute:NSLayoutAttributeBottom
-                                         relatedBy:NSLayoutRelationLessThanOrEqual
-                                            toItem:_scrollView
+                                         relatedBy:NSLayoutRelationEqual
+                                            toItem:self.view
                                          attribute:NSLayoutAttributeBottom
                                         multiplier:1.0
                                           constant:0.0],
@@ -384,7 +389,11 @@ static const CGFloat ORKSignatureTopPadding = 37.0;
         ORKWebViewStepResult *childResult = [[ORKWebViewStepResult alloc] initWithIdentifier:self.step.identifier];
         childResult.result = _result;
         childResult.endDate = parentResult.endDate;
-        childResult.userInfo = @{@"html": [self webViewStep].html};
+        if ([self webViewStep].html != nil) {
+            childResult.userInfo = @{@"html": [self webViewStep].html};
+        } else {
+            childResult.userInfo = @{@"url": [self webViewStep].url.absoluteString};
+        }
         parentResult.results = [parentResult.results arrayByAddingObject:childResult] ? : @[childResult];
         
         if ([[self webViewStep] showSignatureAfterContent] && [_signatureView isComplete]) {

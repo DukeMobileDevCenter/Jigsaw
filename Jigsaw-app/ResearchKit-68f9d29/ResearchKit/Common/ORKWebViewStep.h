@@ -90,11 +90,22 @@ ORK_CLASS_AVAILABLE
                                      html:(NSString *)html;
 
 /**
+ Returns a new web view step that includes the specified identifier and will display the specified URL.
+ 
+ @param identifier    The identifier of the step (a step identifier should be unique within the task).
+ @param url          The url to be displayed in the webview.
+ */
++ (instancetype)webViewStepWithIdentifier:(NSString *)identifier
+                                      url:(NSURL *)url;
+
+/**
  Embedded html used for displaying the webview.
  */
 @property (nonatomic, copy, nullable) NSString *html;
 
 @property (nonatomic, copy, nullable) NSString *customCSS;
+
+@property (nonatomic, copy, nullable) NSURL *url;
 
 @property (nonatomic) BOOL showSignatureAfterContent;
 
