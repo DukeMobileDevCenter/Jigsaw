@@ -74,3 +74,4 @@ line_length: 110
 
 excluded:
 - Pods
+- ResearchKit-68f9d29
