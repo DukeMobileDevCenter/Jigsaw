@@ -77,6 +77,10 @@ Fixing any [issues](https://github.com/DukeMobileDevCenter/Jigsaw/issues) in the
 
 Please refer to [build-setup](docs/build-setup.md) for more details.
 
+### Upload to TestFlight
+
+Please refer to [TestFlight-setup](docs/TestFlight-setup.md) for more details.
+
 ## License
 
 ```
@@ -85,4 +89,4 @@ Copyright © Center for Mobile Development 2020
 All rights reserved. 
 ```
 
-last revision: 200905
+last revision: 200916
