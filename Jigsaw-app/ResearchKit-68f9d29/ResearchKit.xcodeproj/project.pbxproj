@@ -2339,6 +2339,29 @@
 			name = "Custom Vision View";
 			sourceTree = "<group>";
 		};
+		51198798245FC31C004FC2C7 /* 3D Model Manager */ = {
+			isa = PBXGroup;
+			children = (
+				51198799245FC33C004FC2C7 /* ORK3DModelManager.h */,
+				5D26E77724997EA200E53D27 /* ORK3DModelManager_Internal.h */,
+				5119879A245FC33C004FC2C7 /* ORK3DModelManager.m */,
+			);
+			name = "3D Model Manager";
+			sourceTree = "<group>";
+		};
+		511987B624612C95004FC2C7 /* USDZ Model Manager */ = {
+			isa = PBXGroup;
+			children = (
+				51198767245CA50D004FC2C7 /* ORKUSDZModelManagerScene.h */,
+				51198768245CA50D004FC2C7 /* ORKUSDZModelManagerScene.m */,
+				5119879D245FE68D004FC2C7 /* ORKUSDZModelManager.h */,
+				5119879E245FE68D004FC2C7 /* ORKUSDZModelManager.m */,
+				5166E49D247355D500151C57 /* ORKUSDZModelManagerResult.h */,
+				5166E49E247355D500151C57 /* ORKUSDZModelManagerResult.m */,
+			);
+			name = "USDZ Model Manager";
+			sourceTree = "<group>";
+		};
 		511987C024632E33004FC2C7 /* Request Permissions Step */ = {
 			isa = PBXGroup;
 			children = (
@@ -2362,29 +2385,6 @@
 				BA95AA9320ACD05100E7FF8E /* AmslerGrid */,
 			);
 			name = "Vision Tasks";
-			sourceTree = "<group>";
-		};
-		51198798245FC31C004FC2C7 /* 3D Model Manager */ = {
-			isa = PBXGroup;
-			children = (
-				51198799245FC33C004FC2C7 /* ORK3DModelManager.h */,
-				5D26E77724997EA200E53D27 /* ORK3DModelManager_Internal.h */,
-				5119879A245FC33C004FC2C7 /* ORK3DModelManager.m */,
-			);
-			name = "3D Model Manager";
-			sourceTree = "<group>";
-		};
-		511987B624612C95004FC2C7 /* USDZ Model Manager */ = {
-			isa = PBXGroup;
-			children = (
-				51198767245CA50D004FC2C7 /* ORKUSDZModelManagerScene.h */,
-				51198768245CA50D004FC2C7 /* ORKUSDZModelManagerScene.m */,
-				5119879D245FE68D004FC2C7 /* ORKUSDZModelManager.h */,
-				5119879E245FE68D004FC2C7 /* ORKUSDZModelManager.m */,
-				5166E49D247355D500151C57 /* ORKUSDZModelManagerResult.h */,
-				5166E49E247355D500151C57 /* ORKUSDZModelManagerResult.m */,
-			);
-			name = "USDZ Model Manager";
 			sourceTree = "<group>";
 		};
 		5175144B2459EBD3009E8FFC /* 3D Model */ = {
@@ -5362,7 +5362,7 @@
 				GCC_WARN_UNUSED_LABEL = YES;
 				INFOPLIST_FILE = ResearchKit/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MODULEMAP_FILE = ResearchKit/ResearchKit.modulemap;
 				MTL_ENABLE_DEBUG_INFO = YES;
@@ -5374,7 +5374,7 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_TREAT_WARNINGS_AS_ERRORS = NO;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -5408,7 +5408,7 @@
 				GCC_WARN_UNUSED_LABEL = YES;
 				INFOPLIST_FILE = ResearchKit/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MODULEMAP_FILE = ResearchKit/ResearchKit.modulemap;
 				MTL_ENABLE_DEBUG_INFO = NO;
@@ -5418,7 +5418,7 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_TREAT_WARNINGS_AS_ERRORS = NO;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
