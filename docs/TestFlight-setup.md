@@ -12,7 +12,7 @@
 1. Archive the app
 
     Open your project in Xcode, make sure you have done the prerequisites. Choose `Generic iOS Device` in the scheme chooser. Then choose `Product` -> `Archive`. Archiving the app will take a few minutes.
-![After archive](https://user-images.githubusercontent.com/9660181/93394473-223d1f00-f829-11ea-8ccb-2ca90992361b.png)
+![After archive](https://user-images.githubusercontent.com/9660181/93394482-25380f80-f829-11ea-9b6e-23c07b8a1d11.png)
 
     **Note**: if the archive option is grayed out, make sure you've selected the `Generic iOS Device` in scheme.
 
@@ -30,6 +30,7 @@
 ![Auto signing](https://user-images.githubusercontent.com/9660181/93275836-d62fa300-f772-11ea-9769-90b4b1587c11.png)
     
     **Note**: if you see the screenshot below, it means you are not enrolled in the [Apple Developer Program](https://developer.apple.com/programs/enroll/).
+![Not enrolled](https://user-images.githubusercontent.com/9660181/93394473-223d1f00-f829-11ea-8ccb-2ca90992361b.png)
 
 3. Review app signage information
 
@@ -45,7 +46,7 @@
 
 ![Processing](https://user-images.githubusercontent.com/9660181/93276337-1c393680-f774-11ea-83c0-09692d9fad5d.png)
 
-After processing is done, you will receive an email indicating it can be used as a TestFlight version or release to public AppStore. For now we only use it for TestFlight. For `⚠️ Missing Compliance` warning, simply select `No` for now.
+After processing is done, you will receive an email indicating it can be used as a TestFlight version or release to public AppStore. For now we only use it for TestFlight. For ⚠️ `Missing Compliance` warning, simply select `No` for now.
 
 We only want Internal Testers for pre-release beta tests. Add internal testers via `Internal Group` -> `App Store Connect Users` tab on the left. The testers will receive an email about the test version, and they can access it via `TestFlight` which can be downloaded from [AppStore](https://apps.apple.com/us/app/testflight/id899247664).
 
