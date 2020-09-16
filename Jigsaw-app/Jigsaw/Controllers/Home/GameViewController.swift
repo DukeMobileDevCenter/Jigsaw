@@ -48,8 +48,8 @@ class GameViewController: ORKTaskViewController {
         steps.append(welcomeStep)
         
         // Resource reading page.
-        let readingsStep = ResourceWebStep(identifier: "Resource", url: game.resourceURL)
-        steps.append(readingsStep)
+        let webStep = ORKWebViewStep(identifier: "Resource", url: game.resourceURL)
+        steps.append(webStep)
         
         // Chatroom step.
         steps.append(chatroomCountdownStep)
