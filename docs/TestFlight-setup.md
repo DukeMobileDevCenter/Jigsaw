@@ -12,19 +12,24 @@
 1. Archive the app
 
     Open your project in Xcode, make sure you have done the prerequisites. Choose `Generic iOS Device` in the scheme chooser. Then choose `Product` -> `Archive`. Archiving the app will take a few minutes.
-![After archive](not-yet)
+![After archive](https://user-images.githubusercontent.com/9660181/93394473-223d1f00-f829-11ea-8ccb-2ca90992361b.png)
 
     **Note**: if the archive option is grayed out, make sure you've selected the `Generic iOS Device` in scheme.
+
+    It will take more than 10 minutes to archive the current version of the app, due to the Firebase dependencies. During the archive process, You may see warnings as the screenshot below. This is due to an Xcode [issue](https://developer.apple.com/forums/thread/130677) and is safe to ignore for Xcode 11.
+![Warnings](https://user-images.githubusercontent.com/9660181/93305022-c932a400-f7b2-11ea-86bd-4b1083f04378.png)
 
 2. Pre-upload
 
     - If everything is OK with the build, Xcode will open the  Organizer window with your app in the Archives tab. Click `Distribute App` with the correct archive version.
     - In the sheet that appears, select `App Store Connect` as the distribution method, click next and choose `Upload` and click next.
-![App Store Connect](https://user-images.githubusercontent.com/9660181/93275818-cb750e00-f772-11ea-918f-4956f3c8eedf.png)
+![App Store Connect](https://user-images.githubusercontent.com/9660181/93394479-2406e280-f829-11ea-8fad-2bf87f823d21.png)
     - Leave all distribution options checked by default
 ![Default checkboxes](https://user-images.githubusercontent.com/9660181/93275828-d039c200-f772-11ea-9677-c59be4e54734.png)
     - For TestFlight, it is OK to use `Automatically manage signing`. Click next and wait for Apple's magic...
 ![Auto signing](https://user-images.githubusercontent.com/9660181/93275836-d62fa300-f772-11ea-9769-90b4b1587c11.png)
+    
+    **Note**: if you see the screenshot below, it means you are not enrolled in the [Apple Developer Program](https://developer.apple.com/programs/enroll/).
 
 3. Review app signage information
 
@@ -53,5 +58,5 @@ Redeem the test version in app and voilà! Now you can play with the latest vers
 3. [TestFlight Tutorial](https://www.raywenderlich.com/5352-testflight-tutorial-ios-beta-testing)
 
 ```
-version: 20200915 Ting Chen
+version: 20200916 Ting Chen
 ```
