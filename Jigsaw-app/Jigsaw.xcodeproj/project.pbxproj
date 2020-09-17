@@ -12,8 +12,6 @@
 		0020D54924DF79CB00DB20E1 /* GameStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0020D54824DF79CB00DB20E1 /* GameStore.swift */; };
 		0020D54B24DF7A0D00DB20E1 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0020D54A24DF7A0D00DB20E1 /* Game.swift */; };
 		0020D55024DFAED000DB20E1 /* GameOfGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0020D54F24DFAED000DB20E1 /* GameOfGroup.swift */; };
-		0020D55D24E0A74C00DB20E1 /* ResourceWebStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0020D55C24E0A74C00DB20E1 /* ResourceWebStepViewController.swift */; };
-		0020D55F24E0A7DB00DB20E1 /* ResourceWebStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0020D55E24E0A7DB00DB20E1 /* ResourceWebStep.swift */; };
 		0020D56724E263C600DB20E1 /* MatchingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0020D56624E263C600DB20E1 /* MatchingViewController.swift */; };
 		0020D56A24E267B300DB20E1 /* GameCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0020D56924E267B300DB20E1 /* GameCollectionCell.swift */; };
 		003CD27A250EE08100BD082E /* JigsawPiece.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003CD279250EE08100BD082E /* JigsawPiece.swift */; };
@@ -39,6 +37,7 @@
 		0070DFF624B0060500E71F46 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0070DFF424B0060500E71F46 /* LaunchScreen.storyboard */; };
 		0070E00124B0060500E71F46 /* JigsawTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0070E00024B0060500E71F46 /* JigsawTests.swift */; };
 		0078315224DF557800B35A98 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0078315124DF557800B35A98 /* Player.swift */; };
+		009D06852511F16E002E488F /* ResearchKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 009D06822511F15B002E488F /* ResearchKit.framework */; };
 		00A06D8D24E8A9B400030649 /* GameGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A06D8C24E8A9B400030649 /* GameGroup.swift */; };
 		00B0A67424E3CAA800887701 /* DemographicsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B0A67324E3CAA800887701 /* DemographicsViewController.swift */; };
 		00B0A67A24E3CF9600887701 /* ProfileHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 00B0A67924E3CF9600887701 /* ProfileHeaderView.xib */; };
@@ -69,8 +68,6 @@
 		00D0862724CD2D9A00FB7A20 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00D0862624CD2D9A00FB7A20 /* GameViewController.swift */; };
 		00D9F5132506DDC900898DFA /* PreviewDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00D9F5122506DDC900898DFA /* PreviewDetailViewController.swift */; };
 		00D9F5162506DEDF00898DFA /* PreviewDetailViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 00D9F5152506DEDF00898DFA /* PreviewDetailViewController.storyboard */; };
-		00F2197624CCEF5D00B72858 /* ResearchKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00F2196B24CCEAEB00B72858 /* ResearchKit.framework */; };
-		00F2197724CCEF5D00B72858 /* ResearchKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 00F2196B24CCEAEB00B72858 /* ResearchKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		00F2197C24CCF99800B72858 /* RoadmapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F2197B24CCF99800B72858 /* RoadmapViewController.swift */; };
 		00F2197E24CCF9A200B72858 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F2197D24CCF9A200B72858 /* ProfileViewController.swift */; };
 		00F6301D24EE2E0000BCAD11 /* ResultStatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F6301C24EE2E0000BCAD11 /* ResultStatsViewController.swift */; };
@@ -89,21 +86,21 @@
 			remoteGlobalIDString = 0070DFE524B0060400E71F46;
 			remoteInfo = Jigsaw;
 		};
-/* End PBXContainerItemProxy section */
-
-/* Begin PBXCopyFilesBuildPhase section */
-		00F2197824CCEF5D00B72858 /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				00F2197724CCEF5D00B72858 /* ResearchKit.framework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
+		009D06812511F15B002E488F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 009D067B2511F15A002E488F /* ResearchKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = B183A5951A8535D100C76870;
+			remoteInfo = ResearchKit;
 		};
-/* End PBXCopyFilesBuildPhase section */
+		009D06832511F15B002E488F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 009D067B2511F15A002E488F /* ResearchKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 86CC8E9A1AC09332001CCD89;
+			remoteInfo = ResearchKitTests;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		000D809C24ECEDBA0070041D /* EducationLevel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EducationLevel.swift; sourceTree = "<group>"; };
@@ -111,8 +108,6 @@
 		0020D54824DF79CB00DB20E1 /* GameStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameStore.swift; sourceTree = "<group>"; };
 		0020D54A24DF7A0D00DB20E1 /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
 		0020D54F24DFAED000DB20E1 /* GameOfGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameOfGroup.swift; sourceTree = "<group>"; };
-		0020D55C24E0A74C00DB20E1 /* ResourceWebStepViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResourceWebStepViewController.swift; sourceTree = "<group>"; };
-		0020D55E24E0A7DB00DB20E1 /* ResourceWebStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResourceWebStep.swift; sourceTree = "<group>"; };
 		0020D56624E263C600DB20E1 /* MatchingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchingViewController.swift; sourceTree = "<group>"; };
 		0020D56924E267B300DB20E1 /* GameCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameCollectionCell.swift; sourceTree = "<group>"; };
 		003CD279250EE08100BD082E /* JigsawPiece.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JigsawPiece.swift; sourceTree = "<group>"; };
@@ -142,6 +137,7 @@
 		0070E00024B0060500E71F46 /* JigsawTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JigsawTests.swift; sourceTree = "<group>"; };
 		0070E00224B0060500E71F46 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0078315124DF557800B35A98 /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
+		009D067B2511F15A002E488F /* ResearchKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ResearchKit.xcodeproj; path = "ResearchKit-68f9d29/ResearchKit.xcodeproj"; sourceTree = "<group>"; };
 		00A06D8C24E8A9B400030649 /* GameGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameGroup.swift; sourceTree = "<group>"; };
 		00B0A67324E3CAA800887701 /* DemographicsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemographicsViewController.swift; sourceTree = "<group>"; };
 		00B0A67924E3CF9600887701 /* ProfileHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileHeaderView.xib; sourceTree = "<group>"; };
@@ -172,7 +168,6 @@
 		00D0862624CD2D9A00FB7A20 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		00D9F5122506DDC900898DFA /* PreviewDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewDetailViewController.swift; sourceTree = "<group>"; };
 		00D9F5152506DEDF00898DFA /* PreviewDetailViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PreviewDetailViewController.storyboard; sourceTree = "<group>"; };
-		00F2196B24CCEAEB00B72858 /* ResearchKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ResearchKit.framework; path = Pods/ResearchKit.framework; sourceTree = "<group>"; };
 		00F2197B24CCF99800B72858 /* RoadmapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoadmapViewController.swift; sourceTree = "<group>"; };
 		00F2197D24CCF9A200B72858 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		00F6301C24EE2E0000BCAD11 /* ResultStatsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultStatsViewController.swift; sourceTree = "<group>"; };
@@ -190,7 +185,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				00F2197624CCEF5D00B72858 /* ResearchKit.framework in Frameworks */,
+				009D06852511F16E002E488F /* ResearchKit.framework in Frameworks */,
 				4C4D65101A3F2EDDFFFD6EE1 /* Pods_Jigsaw.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -235,8 +230,6 @@
 		0020D55B24E09A6E00DB20E1 /* Custom steps */ = {
 			isa = PBXGroup;
 			children = (
-				0020D55C24E0A74C00DB20E1 /* ResourceWebStepViewController.swift */,
-				0020D55E24E0A7DB00DB20E1 /* ResourceWebStep.swift */,
 			);
 			path = "Custom steps";
 			sourceTree = "<group>";
@@ -298,6 +291,7 @@
 		0070DFDD24B0060400E71F46 = {
 			isa = PBXGroup;
 			children = (
+				009D067B2511F15A002E488F /* ResearchKit.xcodeproj */,
 				0070DFE824B0060400E71F46 /* Jigsaw */,
 				0070DFFF24B0060500E71F46 /* JigsawTests */,
 				0070DFE724B0060400E71F46 /* Products */,
@@ -342,6 +336,15 @@
 				0070E00224B0060500E71F46 /* Info.plist */,
 			);
 			path = JigsawTests;
+			sourceTree = "<group>";
+		};
+		009D067C2511F15A002E488F /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				009D06822511F15B002E488F /* ResearchKit.framework */,
+				009D06842511F15B002E488F /* ResearchKitTests.xctest */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 		00B0A67524E3CAD500887701 /* Home */ = {
@@ -465,7 +468,6 @@
 		C3C20A15E3D3B23BD23C86AF /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				00F2196B24CCEAEB00B72858 /* ResearchKit.framework */,
 				601967226BC24AEDC4FA99EE /* Pods_Jigsaw.framework */,
 			);
 			name = Frameworks;
@@ -493,7 +495,6 @@
 				0070DFE424B0060400E71F46 /* Resources */,
 				0070E00B24B0066B00E71F46 /* SwiftLint */,
 				0077668142A2BBE2152A00CD /* [CP] Embed Pods Frameworks */,
-				00F2197824CCEF5D00B72858 /* Embed Frameworks */,
 				8D1878805E6A71186CF01A75 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
@@ -553,6 +554,12 @@
 			mainGroup = 0070DFDD24B0060400E71F46;
 			productRefGroup = 0070DFE724B0060400E71F46 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 009D067C2511F15A002E488F /* Products */;
+					ProjectRef = 009D067B2511F15A002E488F /* ResearchKit.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				0070DFE524B0060400E71F46 /* Jigsaw */,
@@ -560,6 +567,23 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		009D06822511F15B002E488F /* ResearchKit.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = ResearchKit.framework;
+			remoteRef = 009D06812511F15B002E488F /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		009D06842511F15B002E488F /* ResearchKitTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = ResearchKitTests.xctest;
+			remoteRef = 009D06832511F15B002E488F /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		0070DFE424B0060400E71F46 /* Resources */ = {
@@ -688,7 +712,6 @@
 				00CF5DC724F4DE4000B501BB /* BooleanQuestion.swift in Sources */,
 				005856C924D92E480010BE55 /* UIImage.swift in Sources */,
 				0070DFEE24B0060400E71F46 /* HomeCollectionViewController.swift in Sources */,
-				0020D55D24E0A74C00DB20E1 /* ResourceWebStepViewController.swift in Sources */,
 				00D0862724CD2D9A00FB7A20 /* GameViewController.swift in Sources */,
 				00CF673A24E9E2BC00C502F3 /* PlayersQueue.swift in Sources */,
 				004A4B0D24FDB55A000FA2C8 /* FormViewController+insetGrouped.swift in Sources */,
@@ -706,7 +729,6 @@
 				00D0862524CD24EA00FB7A20 /* OnboardingSteps.swift in Sources */,
 				003CD27C250EEC0D00BD082E /* AgeGroup.swift in Sources */,
 				000D809D24ECEDBA0070041D /* EducationLevel.swift in Sources */,
-				0020D55F24E0A7DB00DB20E1 /* ResourceWebStep.swift in Sources */,
 				0070DFEA24B0060400E71F46 /* AppDelegate.swift in Sources */,
 				00F6301D24EE2E0000BCAD11 /* ResultStatsViewController.swift in Sources */,
 				00CF5DC524F4DDA500B501BB /* ScaleQuestion.swift in Sources */,

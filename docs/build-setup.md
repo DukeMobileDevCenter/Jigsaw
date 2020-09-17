@@ -5,8 +5,8 @@
 ## Download or Pull
 
 - If you prefer pull or clone to download, run `git clone git@github.com:DukeMobileDevCenter/Jigsaw.git` to get the code.
-- If to download, use this link: https://github.com/DukeMobileDevCenter/Jigsaw/archive/Ting/Sprint3-AddRKProject-None.zip
-- Refer to [this](https://github.com/DukeMobileDevCenter/Jigsaw/tree/Ting/Sprint3-AddRKProject-None) branch `Sprint3-AddRKProject-None` for source code.
+- If to download, use this link: https://github.com/DukeMobileDevCenter/Jigsaw/archive/dev.zip
+- Refer to [this](https://github.com/DukeMobileDevCenter/Jigsaw/tree/dev) branch `dev` for source code.
 
 ## Prerequisites
 
