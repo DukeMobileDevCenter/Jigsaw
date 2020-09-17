@@ -45,7 +45,7 @@
                                                 <constraint firstAttribute="width" constant="50" id="oZL-Qe-MBW"/>
                                             </constraints>
                                         </view>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Bkf-Qo-4wd">
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Bkf-Qo-4wd">
                                             <rect key="frame" x="55" y="55" width="30" height="30"/>
                                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
@@ -100,7 +100,7 @@
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" id="wtT-oG-gy1">
                             <segmentedControl key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="KsP-MD-Xda">
-                                <rect key="frame" x="302" y="5.5" width="92" height="33"/>
+                                <rect key="frame" x="302" y="5.6666666666666679" width="92" height="33"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <segments>
                                     <segment title="" image="person" catalog="system"/>
@@ -355,7 +355,7 @@
                                                 <constraint firstAttribute="width" constant="50" id="Yg9-0o-szO"/>
                                             </constraints>
                                         </view>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="q9e-BL-iRP">
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="q9e-BL-iRP">
                                             <rect key="frame" x="55" y="55" width="30" height="30"/>
                                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
