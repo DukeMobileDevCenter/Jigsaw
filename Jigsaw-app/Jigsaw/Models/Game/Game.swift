@@ -12,6 +12,8 @@ import FirebaseFirestore
 struct Game {
     /// Game version.
     let version: String
+    /// Game "room" level. A room with higher level is unlocked after the completion of lower levels.
+    let level: Int
     /// Name of the game.
     let gameName: String
     /// Description detail text.
@@ -34,6 +36,7 @@ struct Game {
         
         guard
             let version = data["version"] as? String,
+            let level = data["level"] as? Int,
             let gameName = data["gameName"] as? String,
             let detailText = data["detailText"] as? String,
             let g1resURL = data["g1resURL"] as? String,
@@ -46,6 +49,7 @@ struct Game {
             else { return nil }
         
         self.version = version
+        self.level = level
         self.gameName = gameName
         self.detailText = detailText
         self.g1resURL = URL(string: g1resURL)!
