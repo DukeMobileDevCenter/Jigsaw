@@ -1,56 +1,26 @@
 //
-//  HomeCollectionViewController.swift
+//  CategoryCollectionViewController.swift
 //  Jigsaw
 //
-//  Created by Ting Chen on 7/3/20.
+//  Created by Ting Chen on 9/16/20.
 //  Copyright © 2020 DukeMobileDevCenter. All rights reserved.
 //
 
 import os
 import UIKit
-import FirebaseFirestore
-import FirebaseAuth
 import ProgressHUD
 
-class HomeCollectionViewController: UICollectionViewController {
+class CategoryCollectionViewController: UICollectionViewController {
     /// The flow layout of the collection view.
     @IBOutlet private var collectionViewFlowLayout: UICollectionViewFlowLayout!
-    /// The segmented control to switch 2 players or 4 players game.
-    @IBOutlet private var playersCountSegmentedControl: UISegmentedControl!
     
-    @IBAction func testBarButtonTapped(_ sender: UIBarButtonItem) {
-        // Maybe put a sort or filter button here.
-        // Sort by date or name or category, etc.
-        // filter by name and category.
-        testShowChatroom(sender)
-//        PopulateGamesFromYAML.shared.uploadGame()
-//        testShowResultChart(sender)
-    }
+    var category: GameCategory!
+    var queueType: PlayersQueue!
     
-    @IBAction func segmentedControlValueChanged(_ sender: UISegmentedControl) {
-        navigationItem.title = playersCountSegmentedControl.selectedSegmentIndex == 0 ? "Games - 2P" : "Games - 4P"
-    }
-    
-    private func testShowResultChart(_ sender: UIBarButtonItem) {
-        let controller = ResultStatsViewController()
-        controller.resultPairs = [.correct: 3, .skipped: 1, .incorrect: 2]
-        controller.hidesBottomBarWhenPushed = true
-        self.show(controller, sender: sender)
-    }
-    
-    private func testShowChatroom(_ sender: UIBarButtonItem) {
-        let chatroomsRef = Firestore.firestore().collection("Chatrooms").document("TestChatroom")
-        chatroomsRef.getDocument { [weak self] document, error in
-            guard let self = self else { return }
-            if let document = document, let chatroom = Chatroom(document: document) {
-                let chatroomVC = ChatViewController(user: Auth.auth().currentUser!, chatroom: chatroom, timeLeft: nil)
-                // Don't show bottom tab bar.
-                chatroomVC.hidesBottomBarWhenPushed = true
-                self.show(chatroomVC, sender: sender)
-            } else if let error = error {
-                self.presentAlert(error: error)
-            }
-        }
+    private func configureRefreshControl() {
+        // Add the refresh control to UIScrollView object.
+        collectionView.refreshControl = UIRefreshControl()
+        collectionView.refreshControl?.addTarget(self, action: #selector(loadGames), for: .valueChanged)
     }
     
     @objc
@@ -78,36 +48,28 @@ class HomeCollectionViewController: UICollectionViewController {
         }
     }
     
-    private func configureRefreshControl() {
-        // Add the refresh control to UIScrollView object.
-        collectionView.refreshControl = UIRefreshControl()
-        collectionView.refreshControl?.addTarget(self, action: #selector(loadGames), for: .valueChanged)
-    }
-    
     override func viewDidLoad() {
         // Do any additional setup after loading the view.
         super.viewDidLoad()
         // Set collection view delegates.
         collectionView.delegate = self
-        collectionView.dataSource = GameCategoryClass.shared
+        collectionView.dataSource = GameStore.shared
         
         // Configure pull to refresh.
         configureRefreshControl()
-        // Load games from remote.
-        loadGames()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         switch segue.identifier {
-        case "showCategory"?:
+        case "showGame"?:
             if let cell = sender as? GameCollectionCell, let selectedIndexPath = collectionView.indexPath(for: cell) {
-                let selectedCategory = GameCategoryClass.shared.allCases[selectedIndexPath.item]
-                let destinationVC = segue.destination as! CategoryCollectionViewController
-                destinationVC.title = selectedCategory.label
-                destinationVC.category = selectedCategory
-                destinationVC.queueType = playersCountSegmentedControl.selectedSegmentIndex == 0 ? .twoPlayersQueue : .fourPlayersQueue
-                // Tell the data source that a category should be displayed.
-                GameStore.shared.selectedCategory = selectedCategory
+                // For future decision on either game or category.
+                print("Index path \(selectedIndexPath).")
+                let selectedGame = GameStore.shared.allGames[selectedIndexPath.item]
+                let destinationVC = segue.destination as! MatchingViewController
+                destinationVC.games = GameStore.shared.allGames
+                destinationVC.queueType = queueType
+                destinationVC.selectedGame = selectedGame
             }
         default:
             preconditionFailure("Unexpected segue identifier.")
@@ -117,7 +79,7 @@ class HomeCollectionViewController: UICollectionViewController {
 
 // MARK: - UICollectionViewDelegateFlowLayout
 
-extension HomeCollectionViewController: UICollectionViewDelegateFlowLayout {
+extension CategoryCollectionViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let collectionViewSize = collectionView.bounds.inset(by: collectionView.safeAreaInsets).size
         let spacing: CGFloat = 10
@@ -133,19 +95,27 @@ extension HomeCollectionViewController: UICollectionViewDelegateFlowLayout {
 
 // MARK: - UIContextMenu
 
-extension HomeCollectionViewController {
+extension CategoryCollectionViewController {
     override func collectionView(_ collectionView: UICollectionView, contextMenuConfigurationForItemAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
         let index = indexPath.item
-        let category = GameCategoryClass.shared.allCases[index]
+        let game = GameStore.shared.allGames[index]
         let identifier = "\(index)" as NSString
         let previewControllerProvider = { () -> UIViewController? in
             let storyboard = UIStoryboard(name: "PreviewDetailViewController", bundle: .main)
             let controller = storyboard.instantiateInitialViewController() as! PreviewDetailViewController
-            controller.structToPreview = category
+            controller.structToPreview = game
             return controller
         }
-        // Return the preview without menu items.
-        return UIContextMenuConfiguration(identifier: identifier, previewProvider: previewControllerProvider)
+        
+        return UIContextMenuConfiguration(identifier: identifier, previewProvider: previewControllerProvider) { _ in
+            let previewAction = UIAction(title: "Mark as Played", image: UIImage(systemName: "checkmark.square")) { _ in
+                self.presentAlert(title: "More to add here", message: "Can add a mark as played or favorite feature.")
+            }
+            let shareAction = UIAction(title: "Share", image: UIImage(systemName: "square.and.arrow.up")) { _ in
+                self.presentAlert(title: "More to add here", message: "\(game.gameName) selected. Can add a share game with friend feature.")
+            }
+            return UIMenu(title: "", image: nil, children: [previewAction, shareAction])
+        }
     }
     
     override func collectionView(_ collectionView: UICollectionView, willPerformPreviewActionForMenuWith configuration: UIContextMenuConfiguration, animator: UIContextMenuInteractionCommitAnimating) {
@@ -155,7 +125,7 @@ extension HomeCollectionViewController {
         let cell = collectionView.cellForItem(at: IndexPath(item: item, section: 0))
         
         animator.addCompletion {
-            self.performSegue(withIdentifier: "showCategory", sender: cell)
+            self.performSegue(withIdentifier: "showGame", sender: cell)
         }
     }
 }

@@ -10,8 +10,8 @@ import UIKit
 import Down
 
 class PreviewDetailViewController: UIViewController {
-    /// A copy of the game being previewed.
-    var game: Game!
+    /// A copy of the struct being previewed.
+    var structToPreview: Any!
     /// The image view to show the game's placeholder image.
     @IBOutlet var imageView: UIImageView!
     /// The label to show the title of the game.
@@ -21,8 +21,19 @@ class PreviewDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        imageView.pin_setImage(from: game.backgroundImageURL)
-        titleLabel.text = game.gameName
-        detailLabel.text = game.detailText
+        loadPreviewFromStruct(structToPreview!)
+        
+    }
+    
+    private func loadPreviewFromStruct(_ item: Any) {
+        if let game = item as? Game {
+            imageView.pin_setImage(from: game.backgroundImageURL)
+            titleLabel.text = game.gameName
+            detailLabel.text = game.detailText
+        } else if let category = item as? GameCategory {
+            imageView.setImage(category.backgroundImage)
+            titleLabel.text = category.label
+            detailLabel.text = category.detailText
+        }
     }
 }
