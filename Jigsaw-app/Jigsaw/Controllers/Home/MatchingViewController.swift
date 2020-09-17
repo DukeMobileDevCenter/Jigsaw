@@ -175,8 +175,7 @@ class MatchingViewController: UIViewController {
         // Stop waiting in queue when player exit the matching page.
         // There might be some sync bug, if a player just quit a match while he is added to a group.
         removeUserFromQueue()
-        // Remove the chatroom when a player stops the game.
-        removeChatroom()
+        
         gameGroupListener?.remove()
         chatroomListener?.remove()
         queueListener?.remove()
@@ -213,6 +212,8 @@ extension MatchingViewController: ORKTaskViewControllerDelegate {
     func taskViewController(_ taskViewController: ORKTaskViewController, didFinishWith reason: ORKTaskViewControllerFinishReason, error: Error?) {
         // Remove matching group from database.
         removeMatchingGroup()
+        // Remove the chatroom when a player stops the game.
+        removeChatroom()
         taskViewController.dismiss(animated: true)
         switch reason {
         case .discarded, .saved:
