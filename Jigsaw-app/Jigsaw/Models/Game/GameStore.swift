@@ -16,6 +16,15 @@ private class GameCollections {
     var lawGames = [Game]()
     var environmentGames = [Game]()
     var healthGames = [Game]()
+    
+    func sortAll() {
+        let levelAscending: (Game, Game) -> Bool = { $0.level < $1.level }
+        immigrationGames.sort(by: levelAscending)
+        economyGames.sort(by: levelAscending)
+        lawGames.sort(by: levelAscending)
+        environmentGames.sort(by: levelAscending)
+        healthGames.sort(by: levelAscending)
+    }
 }
 
 class GameStore: NSObject {
@@ -45,6 +54,7 @@ class GameStore: NSObject {
         }
     }
     
+    // swiftlint:disable cyclomatic_complexity
     func loadGames(completion: @escaping (Result<[Game], Error>) -> Void) {
         let database = Firestore.firestore()
         var games = [Game]()
@@ -73,6 +83,7 @@ class GameStore: NSObject {
                 }
                 // Sorted by latest added version number.
                 games.sort { game1, game2 in game1.level < game2.level }
+                self.collections.sortAll()
                 self.allGames = games
                 completion(.success(games))
             } else if let error = error {
@@ -80,6 +91,7 @@ class GameStore: NSObject {
             }
         }
     }
+    // swiftlint:enable cyclomatic_complexity
 }
 
 extension GameStore: UICollectionViewDataSource {

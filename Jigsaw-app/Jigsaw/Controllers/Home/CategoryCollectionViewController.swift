@@ -63,9 +63,7 @@ class CategoryCollectionViewController: UICollectionViewController {
         switch segue.identifier {
         case "showGame"?:
             if let cell = sender as? GameCollectionCell, let selectedIndexPath = collectionView.indexPath(for: cell) {
-                // For future decision on either game or category.
-                print("Index path \(selectedIndexPath).")
-                let selectedGame = GameStore.shared.allGames[selectedIndexPath.item]
+                let selectedGame = GameStore.shared.getGames(for: category)[selectedIndexPath.item]
                 let destinationVC = segue.destination as! MatchingViewController
                 destinationVC.games = GameStore.shared.allGames
                 destinationVC.queueType = queueType
@@ -98,7 +96,7 @@ extension CategoryCollectionViewController: UICollectionViewDelegateFlowLayout {
 extension CategoryCollectionViewController {
     override func collectionView(_ collectionView: UICollectionView, contextMenuConfigurationForItemAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
         let index = indexPath.item
-        let game = GameStore.shared.allGames[index]
+        let game = GameStore.shared.getGames(for: category)[index]
         let identifier = "\(index)" as NSString
         let previewControllerProvider = { () -> UIViewController? in
             let storyboard = UIStoryboard(name: "PreviewDetailViewController", bundle: .main)

@@ -22,7 +22,6 @@ class PreviewDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         loadPreviewFromStruct(structToPreview!)
-        
     }
     
     private func loadPreviewFromStruct(_ item: Any) {
