@@ -55,7 +55,7 @@ class HomeCollectionViewController: UICollectionViewController {
     
     @objc
     private func loadGames() {
-        ProgressHUD.show()
+        ProgressHUD.show("Loading")
         // Asynchronously load the games from Firebase.
         GameStore.shared.loadGames { [weak self] result in
             ProgressHUD.dismiss()
@@ -70,7 +70,6 @@ class HomeCollectionViewController: UICollectionViewController {
                 }
             }
             DispatchQueue.main.async { [weak self] in
-                self?.collectionView.reloadSections(IndexSet(integer: 0))
                 self?.collectionView.refreshControl?.endRefreshing()
             }
         }
