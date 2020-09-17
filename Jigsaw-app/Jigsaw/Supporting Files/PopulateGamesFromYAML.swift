@@ -13,7 +13,7 @@ import Yams
 class PopulateGamesFromYAML {
     static let shared = PopulateGamesFromYAML()
     private let database = Firestore.firestore()
-    private let gameNames = ["usimmigration1", "usimmigration2", "education", "housing-dilemma", "medicare", "IRS trivia"]
+    private let gameNames = ["usimmigration1", "usimmigration2", "law", "economy", "covid", "climate"]
     
     func uploadGame() {
         let paths = gameNames.compactMap { Bundle.main.path(forResource: $0, ofType: "yml") }
