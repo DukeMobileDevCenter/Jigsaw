@@ -55,7 +55,6 @@ class HomeCollectionViewController: UICollectionViewController {
     
     @objc
     private func loadGames() {
-        // Asynchronously load the games from Firebase.
         ProgressHUD.show()
         // Asynchronously load the games from Firebase.
         GameStore.shared.loadGames { [weak self] result in
@@ -64,7 +63,6 @@ class HomeCollectionViewController: UICollectionViewController {
             switch result {
             case .success(let games):
                 os_log(.info, "games count = %d", games.count)
-                // Update collection view UI here.
             case .failure(let error):
                 os_log(.error, "Error: loading games from remote")
                 DispatchQueue.main.async {

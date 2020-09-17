@@ -17,46 +17,12 @@ class CategoryCollectionViewController: UICollectionViewController {
     var category: GameCategory!
     var queueType: PlayersQueue!
     
-    private func configureRefreshControl() {
-        // Add the refresh control to UIScrollView object.
-        collectionView.refreshControl = UIRefreshControl()
-        collectionView.refreshControl?.addTarget(self, action: #selector(loadGames), for: .valueChanged)
-    }
-    
-    @objc
-    private func loadGames() {
-        // Asynchronously load the games from Firebase.
-        ProgressHUD.show()
-        // Asynchronously load the games from Firebase.
-        GameStore.shared.loadGames { [weak self] result in
-            ProgressHUD.dismiss()
-            guard let self = self else { return }
-            switch result {
-            case .success(let games):
-                os_log(.info, "games count = %d", games.count)
-                // Update collection view UI here.
-            case .failure(let error):
-                os_log(.error, "Error: loading games from remote")
-                DispatchQueue.main.async {
-                    self.presentAlert(error: error)
-                }
-            }
-            DispatchQueue.main.async { [weak self] in
-                self?.collectionView.reloadSections(IndexSet(integer: 0))
-                self?.collectionView.refreshControl?.endRefreshing()
-            }
-        }
-    }
-    
     override func viewDidLoad() {
         // Do any additional setup after loading the view.
         super.viewDidLoad()
         // Set collection view delegates.
         collectionView.delegate = self
         collectionView.dataSource = GameStore.shared
-        
-        // Configure pull to refresh.
-        configureRefreshControl()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
