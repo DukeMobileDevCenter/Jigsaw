@@ -11,10 +11,10 @@ import Yams
 
 class PopulateGamesFromYAML {
     static let shared = PopulateGamesFromYAML()
-    private let gameNames = ["usimmigration1", "usimmigration2", "law", "economy", "covid", "climate"]
+    private let filenames = ["usimmigration1", "usimmigration2", "law", "economy", "covid", "climate"]
     
     func uploadGame() {
-        let paths = gameNames.compactMap { Bundle.main.path(forResource: $0, ofType: "yml") }
+        let paths = filenames.compactMap { Bundle.main.path(forResource: $0, ofType: "yml") }
         for path in paths {
             do {
                 let content = try String(contentsOfFile: path, encoding: .utf8)

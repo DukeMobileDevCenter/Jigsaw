@@ -23,6 +23,14 @@ private class GameCollections {
         environmentGames.sort(by: levelAscending)
         healthGames.sort(by: levelAscending)
     }
+    
+    func removeAll() {
+        immigrationGames.removeAll()
+        economyGames.removeAll()
+        lawGames.removeAll()
+        environmentGames.removeAll()
+        healthGames.removeAll()
+    }
 }
 
 class GameStore: NSObject {
@@ -55,6 +63,8 @@ class GameStore: NSObject {
     // swiftlint:disable cyclomatic_complexity
     func loadGames(completion: @escaping (Result<[Game], Error>) -> Void) {
         var games = [Game]()
+        // Clear all existing games.
+        collections.removeAll()
         FirebaseConstants.shared.games.getDocuments { [weak self] querySnapshot, error in
             guard let self = self else { return }
             if let snapshot = querySnapshot {
