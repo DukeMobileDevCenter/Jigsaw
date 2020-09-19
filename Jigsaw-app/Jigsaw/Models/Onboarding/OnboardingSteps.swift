@@ -12,7 +12,7 @@ enum OnboardingSteps {
     static let instructionStep: ORKInstructionStep = {
         let instructionStep = ORKInstructionStep(identifier: "InstructionStepIdentifier")
         instructionStep.title = "Welcome"
-        instructionStep.detailText = "Welcome to the game of Jigsaw - Political Escape Rooms! We will increase our empathy with collaborating through the game. Before we start, there are a few steps that get you onboard. Let's get started!"
+        instructionStep.detailText = "Welcome to [NAME]! Through a series of interactive games, you'll learn about the presidential candidates' stances on important issues ahead of the election. First, let's get you on board!"
         instructionStep.image = UIImage(named: "onboarding_welcome")!
         instructionStep.imageContentMode = .scaleAspectFill
         return instructionStep
@@ -85,19 +85,6 @@ enum OnboardingSteps {
         )
         politicalSliderStep.isOptional = false
         return politicalSliderStep
-    }()
-    
-    static let nicknameStep: ORKQuestionStep = {
-        let choices: [ORKImageChoice] = JigsawPiece.allCases.compactMap { piece in
-            if piece == .unknown {
-                return nil
-            } else {
-                return ORKImageChoice(normalImage: UIImage(named: piece.bundleName), selectedImage: nil, text: piece.label, value: piece.rawValue as NSString)
-            }
-        }
-        let imageChoiceAnswerFormat = ORKImageChoiceAnswerFormat(imageChoices: choices)
-        let step = ORKQuestionStep(identifier: "NicknameStep", title: "Puzzle piece", question: "Please pick a puzzle piece as your nickname.", answer: imageChoiceAnswerFormat)
-        return step
     }()
     
     static let completionStep: ORKCompletionStep = {

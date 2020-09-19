@@ -38,7 +38,7 @@ class MatchingViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Matching players"
+        title = "Matching \(selectedGame.gameName)"
         
         queuesRef = FirebaseConstants.database.collection(["Queues", selectedGame.gameName, queueType.rawValue].joined(separator: "/"))
         queueListener = queuesRef.addSnapshotListener { [weak self] querySnapshot, _ in
@@ -144,10 +144,11 @@ class MatchingViewController: UIViewController {
         if group.group1.contains(Profiles.userID) || group.group2.contains(Profiles.userID) {
             if group.chatroomReadyUserIDs.count == group.group1.count + group.group2.count {
                 // All players are ready for chat.
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [weak self] in
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [unowned self] in
                     // Start the timer in chatroom step VC and chatroom VC. Later to only use 1.
-                    self?.chatroomStepVC.start()
-                    self?.chatroomVC.fireTimer()
+                    self.chatroomVC.chatroomUserIDs = group.chatroomReadyUserIDs
+                    self.chatroomStepVC.start()
+                    self.chatroomVC.fireTimer()
                     print("✅ chatroom timer kicked off!")
                 }
             }

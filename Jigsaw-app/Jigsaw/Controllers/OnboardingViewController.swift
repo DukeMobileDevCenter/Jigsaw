@@ -35,7 +35,6 @@ class OnboardingViewController: ORKTaskViewController {
             OnboardingSteps.instructionStep,
             OnboardingSteps.informedConsentInstructionStep,
             OnboardingSteps.politicalSliderStep,
-            OnboardingSteps.nicknameStep,
             OnboardingSteps.completionStep
         ])
         return steps
@@ -93,12 +92,7 @@ extension OnboardingViewController: ORKTaskViewControllerDelegate {
                 // Never arrives here.
                 fatalError("Error: Jigsaw slider value not provided.")
             }
-            if let displayNameResult = taskViewController.result.stepResult(forStepIdentifier: "NicknameStep")?.results?.first as? ORKChoiceQuestionResult,
-                let answer = displayNameResult.choiceAnswers?.first {
-                Profiles.displayName = answer as? String
-            } else {
-                Profiles.displayName = JigsawPiece.unknown.rawValue
-            }
+            Profiles.displayName = JigsawPiece.unknown.rawValue
             createUserInfo(userID: Profiles.userID, displayName: Profiles.displayName, jigsawValue: Profiles.jigsawValue)
             presentingViewController?.dismiss(animated: true) {
                 self.onboardingManagerDelegate?.didCompleteOnboarding()

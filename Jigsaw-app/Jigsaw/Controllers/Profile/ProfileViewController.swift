@@ -68,19 +68,6 @@ class ProfileViewController: FormViewController {
         tableView.refreshControl?.addTarget(self, action: #selector(loadPlayerProfile), for: .valueChanged)
     }
     
-    private func updatePlayerDisplayName(name: String) {
-        FirebaseConstants.shared.players.document(Profiles.userID).updateData(["displayName": name]) { [weak self] error in
-            guard let self = self else { return }
-            if let error = error {
-                print("❌ Error updating document: \(error)")
-            } else {
-                let playerJigsawPiece = JigsawPiece(rawValue: name)!
-                self.profileHeaderRow.cell.view?.nameLabel.text = playerJigsawPiece.label
-                self.profileHeaderRow.cell.view?.avatarImageView.setImage(UIImage(named: playerJigsawPiece.bundleName)!)
-            }
-        }
-    }
-    
     @objc
     private func loadPlayerProfile() {
         // Get player info from remote.
@@ -113,10 +100,9 @@ class ProfileViewController: FormViewController {
     }
     
     private var profileHeaderView: ProfileHeaderView {
-        let playerJigsawPiece = JigsawPiece(rawValue: Profiles.displayName)!
+        let piece = JigsawPiece.unknown
         let view = Bundle.main.loadNibNamed("ProfileHeaderView", owner: self)?.first as! ProfileHeaderView
-        view.setView(name: playerJigsawPiece.label, avatarFileName: playerJigsawPiece.bundleName)
-        // view.setView(name: Profiles.displayName, avatarURL: Profiles.currentPlayer.userID.wavatarURL)
+        view.setView(name: piece.label, avatarFileName: piece.bundleName)
         let user = Auth.auth().currentUser!
         let providerIDs = user.providerData.map { $0.providerID }
         // Load provider icons
@@ -138,26 +124,11 @@ class ProfileViewController: FormViewController {
         }
     }()
     
-    private var jigsawPieceRow: ActionSheetRow<String> {
-        ActionSheetRow<String> { row in
-            let playerJigsawPiece = JigsawPiece(rawValue: Profiles.displayName)!
-            row.title = "Jigsaw piece"
-            row.value = playerJigsawPiece.label
-            row.selectorTitle = "Pick a puzzle piece as your nickname."
-            row.options = JigsawPiece.allCases.map { $0.label }
-        }.cellUpdate { [weak self] _, row in
-            if let label = row.value, let jigsawPiece = JigsawPiece(label: label) {
-                self?.updatePlayerDisplayName(name: jigsawPiece.rawValue)
-            }
-        }
-    }
-    
     private func createForm() {
         form
         +++ Section("Profile")
         <<< profileHeaderRow
         +++ Section(header: "Basic Information", footer: "Blah blah blah")
-        <<< jigsawPieceRow
         <<< DecimalRow { row in
             row.title = "Jigsaw value"
             row.value = Profiles.jigsawValue

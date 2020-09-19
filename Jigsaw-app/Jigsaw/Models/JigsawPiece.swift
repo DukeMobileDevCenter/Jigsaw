@@ -18,6 +18,21 @@ enum JigsawPiece: String, CaseIterable, CaseReverseInit {
         self = newCase
     }
     
+    init(index: Int) {
+        switch index {
+        case 0:
+            self = .green
+        case 1:
+            self = .orange
+        case 2:
+            self = .purple
+        case 3:
+            self = .yellow
+        default:
+            self = .unknown
+        }
+    }
+    
     /// A human readable string of the jigsaw piece name.
     var label: String {
         switch self {
