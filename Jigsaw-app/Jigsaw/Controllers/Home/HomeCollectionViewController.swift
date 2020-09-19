@@ -18,6 +18,13 @@ class HomeCollectionViewController: UICollectionViewController {
     /// The segmented control to switch 2 players or 4 players game.
     @IBOutlet private var playersCountSegmentedControl: UISegmentedControl!
     
+    private let database = Firestore.firestore()
+    private var randomGame: Game!
+    
+    private var queueType: PlayersQueue {
+        playersCountSegmentedControl.selectedSegmentIndex == 0 ? .twoPlayersQueue : .fourPlayersQueue
+    }
+    
     @IBAction func testBarButtonTapped(_ sender: UIBarButtonItem) {
         // Maybe put a sort or filter button here.
         // Sort by date or name or category, etc.
@@ -81,6 +88,41 @@ class HomeCollectionViewController: UICollectionViewController {
         collectionView.refreshControl?.addTarget(self, action: #selector(loadGames), for: .valueChanged)
     }
     
+    private func isRandomCell(for indexPath: IndexPath) -> Bool {
+        indexPath.item == 5
+    }
+    
+    private func getGameWithLeastWaitingTime(queueType: PlayersQueue, completion: @escaping (Game) -> Void) {
+        let loadGroup = DispatchGroup()
+        let moduloDivisor = queueType == .twoPlayersQueue ? 2 : 4
+        // An array of (queue's player count mod by queue type) and (game) tuples.
+        var moduloGamePairs = [(queuePlayerCountModulo: Int, game: Game)]()
+        
+        ProgressHUD.show()
+        for game in GameStore.shared.allGames {
+            if game.level != 1 { break }
+            let queuesRef = database.collection(["Queues", game.gameName, queueType.rawValue].joined(separator: "/"))
+            loadGroup.enter()
+            queuesRef.getDocuments { querySnapshot, error in
+                defer {
+                    loadGroup.leave()
+                }
+                if error != nil {
+                    os_log(.error, "Error: finding the quickest game from remote")
+                } else if let querySnapshot = querySnapshot {
+                    let documentsCount = querySnapshot.documents.count
+                    moduloGamePairs.append((documentsCount % moduloDivisor, game))
+                }
+            }
+        }
+        // When all queries are done, dismiss the HUD and pass back the game.
+        loadGroup.notify(queue: .main) {
+            ProgressHUD.dismiss()
+            moduloGamePairs.sort { $0.queuePlayerCountModulo > $1.queuePlayerCountModulo }
+            completion(moduloGamePairs.first!.game)
+        }
+    }
+    
     override func viewDidLoad() {
         // Do any additional setup after loading the view.
         super.viewDidLoad()
@@ -96,18 +138,38 @@ class HomeCollectionViewController: UICollectionViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         switch segue.identifier {
-        case "showCategory"?:
+        case "showCategory":
             if let cell = sender as? GameCollectionCell, let selectedIndexPath = collectionView.indexPath(for: cell) {
                 let selectedCategory = GameCategoryClass.shared.allCases[selectedIndexPath.item]
                 let destinationVC = segue.destination as! CategoryCollectionViewController
                 destinationVC.title = selectedCategory.label
                 destinationVC.category = selectedCategory
-                destinationVC.queueType = playersCountSegmentedControl.selectedSegmentIndex == 0 ? .twoPlayersQueue : .fourPlayersQueue
+                destinationVC.queueType = queueType
                 // Tell the data source that a category should be displayed.
                 GameStore.shared.selectedCategory = selectedCategory
             }
+        case "showRandom":
+            let destinationVC = segue.destination as! MatchingViewController
+            destinationVC.games = GameStore.shared.allGames
+            destinationVC.queueType = queueType
+            destinationVC.selectedGame = randomGame
+            print("Info: Random game is \(randomGame.gameName)")
         default:
             preconditionFailure("Unexpected segue identifier.")
+        }
+    }
+}
+
+extension HomeCollectionViewController {
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let cell = collectionView.cellForItem(at: indexPath)
+        if isRandomCell(for: indexPath) {
+            getGameWithLeastWaitingTime(queueType: queueType) { [unowned self] game in
+                self.randomGame = game
+                self.performSegue(withIdentifier: "showRandom", sender: cell)
+            }
+        } else {
+            performSegue(withIdentifier: "showCategory", sender: cell)
         }
     }
 }
@@ -149,10 +211,12 @@ extension HomeCollectionViewController {
         guard let identifier = configuration.identifier as? String,
             let item = Int(identifier) else { return }
         
-        let cell = collectionView.cellForItem(at: IndexPath(item: item, section: 0))
-        
+        let indexPath = IndexPath(item: item, section: 0)
+        let cell = collectionView.cellForItem(at: indexPath)
+        // Handle the random game cell separately.
+        let segueIdentifier = isRandomCell(for: indexPath) ? "showRandom" : "showCategory"
         animator.addCompletion {
-            self.performSegue(withIdentifier: "showCategory", sender: cell)
+            self.performSegue(withIdentifier: segueIdentifier, sender: cell)
         }
     }
 }

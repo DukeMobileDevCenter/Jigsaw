@@ -83,7 +83,6 @@
                                     <outlet property="iconBackgroundView" destination="Lqf-nc-OFO" id="af9-lI-Bbs"/>
                                     <outlet property="iconImageView" destination="Bkf-Qo-4wd" id="LsJ-X4-qg2"/>
                                     <outlet property="nameLabel" destination="8Ig-0H-lUk" id="og4-yh-b1C"/>
-                                    <segue destination="8h7-tJ-Fxn" kind="show" identifier="showCategory" id="hYn-8d-dnZ"/>
                                 </connections>
                             </collectionViewCell>
                         </cells>
@@ -100,7 +99,7 @@
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" id="wtT-oG-gy1">
                             <segmentedControl key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="KsP-MD-Xda">
-                                <rect key="frame" x="302" y="5.6666666666666679" width="92" height="33"/>
+                                <rect key="frame" x="302" y="5.5" width="92" height="33"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <segments>
                                     <segment title="" image="person" catalog="system"/>
@@ -115,6 +114,8 @@
                     <connections>
                         <outlet property="collectionViewFlowLayout" destination="heT-VK-jaX" id="KrV-ad-1QX"/>
                         <outlet property="playersCountSegmentedControl" destination="KsP-MD-Xda" id="ADk-vn-DWX"/>
+                        <segue destination="8h7-tJ-Fxn" kind="show" identifier="showCategory" id="b8U-v2-sN6"/>
+                        <segue destination="qIk-Vr-9mo" kind="show" identifier="showRandom" id="tOa-KL-BCv"/>
                     </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FUz-N4-EiH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -167,7 +168,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wGu-n6-NeV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3245" y="-552"/>
+            <point key="canvasLocation" x="3464" y="-171"/>
         </scene>
         <!--Roadmap-->
         <scene sceneID="RvK-v8-KTo">
@@ -239,7 +240,7 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qfz-wC-8vT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2441" y="834"/>
+            <point key="canvasLocation" x="2319" y="834"/>
         </scene>
         <!--Root Tab Bar Controller-->
         <scene sceneID="VN1-Z6-q2d">
@@ -409,9 +410,12 @@
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gAS-SY-YTw" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2441" y="-552"/>
+            <point key="canvasLocation" x="2503" y="-552"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="zl6-Sm-1ug"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <image name="arrow.swap" catalog="system" width="128" height="100"/>
         <image name="gamecontroller" catalog="system" width="128" height="82"/>
