@@ -90,7 +90,12 @@ class HomeCollectionViewController: UICollectionViewController {
         indexPath.item == 5
     }
     
-    private func getGameWithLeastWaitingTime(queueType: PlayersQueue, completion: @escaping (Game) -> Void) {
+    /// Find the game queue with least waiting time. See more in #59.
+    /// - Parameters:
+    ///   - queueType: The players queue type, 2 or 4 players.
+    ///   - completion: Return the game after sorting all games by their modulos.
+    ///   - game: The game with the largest modulo.
+    private func getGameWithLeastWaitingTime(queueType: PlayersQueue, completion: @escaping (_ game: Game) -> Void) {
         let loadGroup = DispatchGroup()
         let moduloDivisor = queueType == .twoPlayersQueue ? 2 : 4
         // An array of (queue's player count mod by queue type) and (game) tuples.
