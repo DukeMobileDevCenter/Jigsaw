@@ -24,7 +24,6 @@ class MatchingViewController: UIViewController {
     
     @IBOutlet var playerCountLabel: UILabel!
     
-    private let database = Firestore.firestore()
     private var queuesRef: CollectionReference!
     
     private var gameGroupListener: ListenerRegistration?
@@ -41,12 +40,12 @@ class MatchingViewController: UIViewController {
         super.viewDidLoad()
         title = "Matching players"
         
-        queuesRef = database.collection(["Queues", selectedGame.gameName, queueType.rawValue].joined(separator: "/"))
+        queuesRef = FirebaseConstants.database.collection(["Queues", selectedGame.gameName, queueType.rawValue].joined(separator: "/"))
         queueListener = queuesRef.addSnapshotListener { [weak self] querySnapshot, _ in
             self?.playerCountLabel.text = "\(querySnapshot?.documents.count ?? 0)"
         }
         
-        let gameGroupRef = database.collection("GameGroups")
+        let gameGroupRef = FirebaseConstants.shared.gamegroups
         gameGroupListener = gameGroupRef.addSnapshotListener { [weak self] querySnapshot, error in
             guard let snapshot = querySnapshot else {
                 print("Error listening for channel updates: \(error?.localizedDescription ?? "No error")")
@@ -71,7 +70,7 @@ class MatchingViewController: UIViewController {
     }
     
     private func addGameHistory(gameHistory: GameHistory) {
-        let historyRef = database.collection(["Players", Profiles.userID, "gameHistory"].joined(separator: "/"))
+        let historyRef = FirebaseConstants.database.collection(["Players", Profiles.userID, "gameHistory"].joined(separator: "/"))
         if let groupID = gameGroupID {
             do {
                 // Set a history with the group ID.
@@ -109,12 +108,12 @@ class MatchingViewController: UIViewController {
     private func removeMatchingGroup() {
         // Clean up the game group after game is done.
         if let groupID = gameGroupID {
-            database.collection("GameGroups").document(groupID).delete()
+            FirebaseConstants.shared.gamegroups.document(groupID).delete()
         }
     }
     
     private func removeChatroom() {
-        database.collection("Chatrooms").document(gameGroup.chatroomID).delete()
+        FirebaseConstants.shared.chatrooms.document(gameGroup.chatroomID).delete()
     }
     
     private func removeUserFromQueue() {
@@ -160,7 +159,7 @@ class MatchingViewController: UIViewController {
     
     private func loadChatroom(completion: @escaping (Chatroom) -> Void) {
         isChatroomShown = false
-        let chatroomsRef = database.collection("Chatrooms").document(gameGroup.chatroomID)
+        let chatroomsRef = FirebaseConstants.shared.chatrooms.document(gameGroup.chatroomID)
         chatroomsRef.getDocument { [weak self] document, error in
             guard let self = self else { return }
             if let document = document, let chatroom = Chatroom(document: document) {
@@ -189,7 +188,7 @@ extension MatchingViewController: ORKTaskViewControllerDelegate {
             chatroomStepVC = stepViewController as? ORKActiveStepViewController
             // Mark the player who reached chatroom step as ready.
             if let groupID = gameGroupID {
-                database.collection("GameGroups").document(groupID).updateData([
+                FirebaseConstants.shared.gamegroups.document(groupID).updateData([
                     "chatroomReadyUserIDs": FieldValue.arrayUnion([Profiles.userID!])
                 ])
             }

@@ -33,7 +33,6 @@ class ChatViewController: MessagesViewController {
         }
     }
     
-    private let database = Firestore.firestore()
     private var reference: CollectionReference?
     private let storage = Storage.storage().reference()
     
@@ -79,7 +78,7 @@ class ChatViewController: MessagesViewController {
             return
         }
         
-        reference = database.collection(["Chatrooms", id, "messages"].joined(separator: "/"))
+        reference = FirebaseConstants.database.collection(["Chatrooms", id, "messages"].joined(separator: "/"))
         
         messageListener = reference?.addSnapshotListener { [weak self] querySnapshot, error in
             guard let snapshot = querySnapshot else {

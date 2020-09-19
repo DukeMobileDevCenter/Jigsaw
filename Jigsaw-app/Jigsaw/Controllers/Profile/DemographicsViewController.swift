@@ -8,11 +8,10 @@
 
 import UIKit
 import Eureka
-import FirebaseFirestore
 
 class DemographicsViewController: FormViewController {
     // Load from firebase to fill in user info.
-    private let playersDocRef = Firestore.firestore().collection("Players").document(Profiles.userID)
+    private let playersDocRef = FirebaseConstants.shared.players.document(Profiles.userID)
     
     private func updatePlayerDemographics(demographics: [String: String?]) {
         playersDocRef.updateData(["demographics": demographics]) { error in

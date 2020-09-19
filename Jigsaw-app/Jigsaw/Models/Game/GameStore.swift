@@ -6,9 +6,7 @@
 //  Copyright © 2020 DukeMobileDevCenter. All rights reserved.
 //
 
-import Foundation
-import FirebaseFirestore
-import FirebaseFirestoreSwift
+import UIKit
 
 private class GameCollections {
     var immigrationGames = [Game]()
@@ -56,9 +54,8 @@ class GameStore: NSObject {
     
     // swiftlint:disable cyclomatic_complexity
     func loadGames(completion: @escaping (Result<[Game], Error>) -> Void) {
-        let database = Firestore.firestore()
         var games = [Game]()
-        database.collection("Games").getDocuments { [weak self] querySnapshot, error in
+        FirebaseConstants.shared.games.getDocuments { [weak self] querySnapshot, error in
             guard let self = self else { return }
             if let snapshot = querySnapshot {
                 for document in snapshot.documents {

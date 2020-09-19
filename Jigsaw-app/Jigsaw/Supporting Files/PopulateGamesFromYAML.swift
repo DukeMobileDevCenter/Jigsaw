@@ -7,12 +7,10 @@
 //
 
 import Foundation
-import FirebaseFirestore
 import Yams
 
 class PopulateGamesFromYAML {
     static let shared = PopulateGamesFromYAML()
-    private let database = Firestore.firestore()
     private let gameNames = ["usimmigration1", "usimmigration2", "law", "economy", "covid", "climate"]
     
     func uploadGame() {
@@ -22,7 +20,7 @@ class PopulateGamesFromYAML {
                 let content = try String(contentsOfFile: path, encoding: .utf8)
                 let data = try Yams.load(yaml: content) as? [String: Any]
                 if let loadedDictionary = data {
-                    database.collection("Games").document(loadedDictionary["gameName"] as! String).setData(loadedDictionary)
+                    FirebaseConstants.shared.games.document(loadedDictionary["gameName"] as! String).setData(loadedDictionary)
                 } else {
                     print("Error: cannot cast yaml to dictionary")
                 }

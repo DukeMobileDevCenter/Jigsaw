@@ -7,7 +7,6 @@
 //
 
 import ResearchKit
-import FirebaseFirestore
 
 protocol OnboardingManagerDelegate: AnyObject {
     func didCompleteOnboarding()
@@ -58,9 +57,8 @@ class OnboardingViewController: ORKTaskViewController {
             email: nil,
             demographics: [String: String?]()
         )
-        let database = Firestore.firestore()
         do {
-            try database.collection("Players").document(userID).setData(from: player)
+            try FirebaseConstants.shared.players.document(userID).setData(from: player)
         } catch {
             presentAlert(error: error)
         }

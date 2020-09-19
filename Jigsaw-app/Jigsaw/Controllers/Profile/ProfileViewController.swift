@@ -9,12 +9,10 @@
 import UIKit
 import Eureka
 import ViewRow
-import FirebaseFirestore
 import FirebaseUI
 
 class ProfileViewController: FormViewController {
-    // Load from firebase to fill in user info.
-    private let database = Firestore.firestore()
+    // Firebase UI.
     private var authUI: FUIAuth!
     // During onboarding, the form cannot be filled without player info.
     // In this case, load the form when the view is appearing.
@@ -71,7 +69,7 @@ class ProfileViewController: FormViewController {
     }
     
     private func updatePlayerDisplayName(name: String) {
-        database.collection("Players").document(Profiles.userID).updateData(["displayName": name]) { [weak self] error in
+        FirebaseConstants.shared.players.document(Profiles.userID).updateData(["displayName": name]) { [weak self] error in
             guard let self = self else { return }
             if let error = error {
                 print("❌ Error updating document: \(error)")
@@ -86,7 +84,7 @@ class ProfileViewController: FormViewController {
     @objc
     private func loadPlayerProfile() {
         // Get player info from remote.
-        database.collection("Players").document(Profiles.userID).getDocument { [weak self] document, error in
+        FirebaseConstants.shared.players.document(Profiles.userID).getDocument { [weak self] document, error in
             guard let self = self else { return }
             // Dismiss the refresh control.
             DispatchQueue.main.async {

@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import FirebaseFirestore
 import ProgressHUD
 
 class GameHistoryTimelineTableViewController: UITableViewController {
@@ -21,9 +20,6 @@ class GameHistoryTimelineTableViewController: UITableViewController {
             totalCountLabel.text = "\(gameHistories.count) game(s) played in total."
         }
     }
-    
-    /// A reference to the firebase for filling in player game history.
-    private let database = Firestore.firestore()
     
     /// A number formatter to format percentage strings.
     private let percentageFormatter: NumberFormatter = {
@@ -47,7 +43,7 @@ class GameHistoryTimelineTableViewController: UITableViewController {
     ///   - completion: A closure called after fetching data from database that passes an array of `GameHistory`.
     ///   - gameHistories: An array of `GameHistory`.
     private func loadGameHistories(completion: @escaping (_ gameHistories: [GameHistory]) -> Void) {
-        let historyRef = database.collection(["Players", Profiles.userID, "gameHistory"].joined(separator: "/"))
+        let historyRef = FirebaseConstants.database.collection(["Players", Profiles.userID, "gameHistory"].joined(separator: "/"))
         var gameHistories: [GameHistory] = []
         historyRef.getDocuments { [weak self] querySnapshot, error in
             guard let self = self else { return }

@@ -24,6 +24,7 @@
 		0051950F24E9CDD4008F1CE0 /* QuestionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0051950E24E9CDD4008F1CE0 /* QuestionType.swift */; };
 		005308CA25168A96002A429F /* ResearchKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 009D06822511F15B002E488F /* ResearchKit.framework */; };
 		005308CB25168A96002A429F /* ResearchKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 009D06822511F15B002E488F /* ResearchKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		005308D125168D84002A429F /* FirebaseConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005308D025168D84002A429F /* FirebaseConstants.swift */; };
 		005856BC24D91C4A0010BE55 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 005856BB24D91C4A0010BE55 /* GoogleService-Info.plist */; };
 		005856BE24D923630010BE55 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005856BD24D923630010BE55 /* ChatViewController.swift */; };
 		005856C024D924970010BE55 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005856BF24D924970010BE55 /* Message.swift */; };
@@ -134,6 +135,7 @@
 		0047630524ED1154007767A5 /* GameCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameCategory.swift; sourceTree = "<group>"; };
 		004A4B0C24FDB55A000FA2C8 /* FormViewController+insetGrouped.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FormViewController+insetGrouped.swift"; sourceTree = "<group>"; };
 		0051950E24E9CDD4008F1CE0 /* QuestionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionType.swift; sourceTree = "<group>"; };
+		005308D025168D84002A429F /* FirebaseConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseConstants.swift; sourceTree = "<group>"; };
 		005856BB24D91C4A0010BE55 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		005856BD24D923630010BE55 /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		005856BF24D924970010BE55 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
@@ -433,6 +435,7 @@
 				005856C124D9262C0010BE55 /* Profiles.swift */,
 				00F6302124EE385E00BCAD11 /* AnswerCategory.swift */,
 				003CD279250EE08100BD082E /* JigsawPiece.swift */,
+				005308D025168D84002A429F /* FirebaseConstants.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -711,6 +714,7 @@
 				00CF5DBC24F4DA3100B501BB /* PopulateGamesFromYAML.swift in Sources */,
 				005856C024D924970010BE55 /* Message.swift in Sources */,
 				00CF5DC124F4DD0200B501BB /* MultipleChoiceQuestion.swift in Sources */,
+				005308D125168D84002A429F /* FirebaseConstants.swift in Sources */,
 				0020D55024DFAED000DB20E1 /* GameOfGroup.swift in Sources */,
 				00D9F5132506DDC900898DFA /* PreviewDetailViewController.swift in Sources */,
 				0020D56724E263C600DB20E1 /* MatchingViewController.swift in Sources */,

@@ -8,7 +8,6 @@
 
 import os
 import UIKit
-import FirebaseFirestore
 import FirebaseAuth
 import ProgressHUD
 
@@ -18,7 +17,6 @@ class HomeCollectionViewController: UICollectionViewController {
     /// The segmented control to switch 2 players or 4 players game.
     @IBOutlet private var playersCountSegmentedControl: UISegmentedControl!
     
-    private let database = Firestore.firestore()
     private var randomGame: Game!
     
     private var queueType: PlayersQueue {
@@ -46,7 +44,7 @@ class HomeCollectionViewController: UICollectionViewController {
     }
     
     private func testShowChatroom(_ sender: UIBarButtonItem) {
-        let chatroomsRef = Firestore.firestore().collection("Chatrooms").document("TestChatroom")
+        let chatroomsRef = FirebaseConstants.shared.chatrooms.document("TestChatroom")
         chatroomsRef.getDocument { [weak self] document, error in
             guard let self = self else { return }
             if let document = document, let chatroom = Chatroom(document: document) {
@@ -101,7 +99,7 @@ class HomeCollectionViewController: UICollectionViewController {
         ProgressHUD.show()
         for game in GameStore.shared.allGames {
             if game.level != 1 { break }
-            let queuesRef = database.collection(["Queues", game.gameName, queueType.rawValue].joined(separator: "/"))
+            let queuesRef = FirebaseConstants.database.collection(["Queues", game.gameName, queueType.rawValue].joined(separator: "/"))
             loadGroup.enter()
             queuesRef.getDocuments { querySnapshot, error in
                 defer {
