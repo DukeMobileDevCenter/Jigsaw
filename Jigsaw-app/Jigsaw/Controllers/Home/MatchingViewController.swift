@@ -21,6 +21,7 @@ class MatchingViewController: UIViewController {
     
     private var chatroomStepVC: ORKActiveStepViewController!
     private var chatroomVC: ChatViewController!
+    private var gameVC: GameViewController!
     
     @IBOutlet var playerCountLabel: UILabel!
     
@@ -98,11 +99,11 @@ class MatchingViewController: UIViewController {
             // Not my group, ignore.
             return
         }
-        let taskViewController = GameViewController(game: gameOfMyGroup, taskRun: nil)
-        taskViewController.delegate = self
+        gameVC = GameViewController(game: gameOfMyGroup, taskRun: nil)
+        gameVC.delegate = self
         // Disallow dismiss by interactive swipe in iOS 13.
-        taskViewController.isModalInPresentation = true
-        present(taskViewController, animated: true)
+        gameVC.isModalInPresentation = true
+        present(gameVC, animated: true)
     }
     
     private func removeMatchingGroup() {
@@ -130,6 +131,9 @@ class MatchingViewController: UIViewController {
                     handleMatchingGroup(group: currentGroup)
                 case .modified:
                     handleReadyPlayerCountUpdate(group: currentGroup)
+                case .removed:
+                    // If any player dropped the game, the others cannot play anymore.
+                    taskViewController(gameVC, didFinishWith: .discarded, error: nil)
                 default:
                     break
                 }
@@ -218,6 +222,7 @@ extension MatchingViewController: ORKTaskViewControllerDelegate {
         switch reason {
         case .discarded, .saved:
             print("💦 Canceled")
+            presentAlert(title: "Other player canceled", message: "😢 One of your peers dropped the game.")
             // Log an unsuccessful game result.
         case .failed:
             if let error = error { presentAlert(error: error) }
