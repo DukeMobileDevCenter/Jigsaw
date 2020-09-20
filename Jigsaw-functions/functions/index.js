@@ -75,6 +75,8 @@ exports.makeGameGroup = functions.firestore.document('/Queues/{gameName}/{queueN
     "gameName": gameName,
     "chatroomID": chatroomID,
     "chatroomReadyUserIDs": [],
+    "gameAttemptedUserIDs": [],
+    "gameFinishedUserIDs": [],
     "createdDate": createdDate,
     "group1": groups[seed],
     "group2": groups[1-seed]
