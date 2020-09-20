@@ -11,13 +11,24 @@ import Charts
 
 class ResultStatsViewController: UIViewController {
     @IBOutlet var chartView: PieChartView!
+    @IBOutlet var nextGameLabel: UILabel!
+    @IBOutlet var nextGameButton: UIButton!
     
     var resultPairs: KeyValuePairs<AnswerCategory, Int>!
+    var nextGame: Game?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         title = "Game result"
+        
+        if nextGame != nil {
+            nextGameLabel.text = "Would you like to play the next room?"
+            nextGameButton.isEnabled = true
+        } else {
+            nextGameLabel.text = "Currently there isn't another level.\nTry other topics."
+            nextGameButton.isEnabled = false
+        }
         
         // Setup the half pie chart view.
         setup(pieChartView: chartView)
@@ -26,11 +37,22 @@ class ResultStatsViewController: UIViewController {
         chartView.animate(xAxisDuration: 1.4, easingOption: .easeOutBack)
     }
     
-    func updateChartData() {
+    @IBAction func nextGameButtonTapped(_ sender: UIButton) {
+        print("next game button tapped.")
+        // Pop to home page first.
+        if let homeViewController = navigationController?.viewControllers.first(where: { $0 is HomeCollectionViewController }) as? HomeCollectionViewController {
+            navigationController!.popToViewController(homeViewController, animated: false)
+            // Auto lead to next game.
+            homeViewController.nextGame = nextGame!
+            homeViewController.performSegue(withIdentifier: "showSpecific", sender: nil)
+        }
+    }
+    
+    private func updateChartData() {
         setDataCount(from: resultPairs)
     }
     
-    func setup(pieChartView chartView: PieChartView) {
+    private func setup(pieChartView chartView: PieChartView) {
         chartView.usePercentValuesEnabled = true
         chartView.drawSlicesUnderHoleEnabled = false
         chartView.drawHoleEnabled = true
@@ -83,7 +105,7 @@ class ResultStatsViewController: UIViewController {
         chartView.legend.font = UIFont.systemFont(ofSize: 15)
     }
     
-    func setDataCount(from resultPairs: KeyValuePairs<AnswerCategory, Int>) {
+    private func setDataCount(from resultPairs: KeyValuePairs<AnswerCategory, Int>) {
         let totalCount = resultPairs.reduce(0) { $0 + $1.1 }
         let entries = resultPairs.compactMap { (key, value) -> PieChartDataEntry? in
             if key == .unknown && value == 0 {
