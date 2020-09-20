@@ -255,8 +255,20 @@
 				00CDFF1524B44F4C009C789D /* QuestionStepsModel.swift */,
 				00CDFF0C24B4353E009C789D /* Questionnaire.swift */,
 				0051950E24E9CDD4008F1CE0 /* QuestionType.swift */,
+				00F6302124EE385E00BCAD11 /* AnswerCategory.swift */,
 			);
 			path = Question;
+			sourceTree = "<group>";
+		};
+		005308F32517DB7F002A429F /* Player */ = {
+			isa = PBXGroup;
+			children = (
+				00CF673924E9E2BC00C502F3 /* PlayersQueue.swift */,
+				0078315124DF557800B35A98 /* Player.swift */,
+				005856C124D9262C0010BE55 /* Profiles.swift */,
+				003CD279250EE08100BD082E /* JigsawPiece.swift */,
+			);
+			path = Player;
 			sourceTree = "<group>";
 		};
 		005856C724D92D400010BE55 /* Protocols */ = {
@@ -279,6 +291,7 @@
 				00A06D8C24E8A9B400030649 /* GameGroup.swift */,
 				00B6305E24FB0247008975CE /* GameResult.swift */,
 				00B6306024FB1A05008975CE /* GameHistory.swift */,
+				005308E02516F65F002A429F /* GameError.swift */,
 			);
 			path = Game;
 			sourceTree = "<group>";
@@ -432,13 +445,8 @@
 				005856CB24D92F900010BE55 /* Onboarding */,
 				005856CC24D92F990010BE55 /* Chatroom */,
 				000D809E24ECEE6A0070041D /* Demographics */,
-				00CF673924E9E2BC00C502F3 /* PlayersQueue.swift */,
-				0078315124DF557800B35A98 /* Player.swift */,
-				005856C124D9262C0010BE55 /* Profiles.swift */,
-				00F6302124EE385E00BCAD11 /* AnswerCategory.swift */,
-				003CD279250EE08100BD082E /* JigsawPiece.swift */,
+				005308F32517DB7F002A429F /* Player */,
 				005308D025168D84002A429F /* FirebaseConstants.swift */,
-				005308E02516F65F002A429F /* GameError.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
