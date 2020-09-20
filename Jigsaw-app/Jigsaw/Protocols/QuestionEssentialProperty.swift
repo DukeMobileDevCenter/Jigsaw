@@ -6,8 +6,6 @@
 //  Copyright © 2020 DukeMobileDevCenter. All rights reserved.
 //
 
-import Foundation
-
 /// A protocol that a question should conform to.
 protocol QuestionEssentialProperty {
     var questionType: QuestionType { get }
