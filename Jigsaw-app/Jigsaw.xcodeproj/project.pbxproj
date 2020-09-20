@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0000321125130A85004681AF /* CategoryCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0000321025130A85004681AF /* CategoryCollectionViewController.swift */; };
 		000D809D24ECEDBA0070041D /* EducationLevel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000D809C24ECEDBA0070041D /* EducationLevel.swift */; };
 		000D80A024ECEE990070041D /* Ethnicity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000D809F24ECEE990070041D /* Ethnicity.swift */; };
 		0020D54924DF79CB00DB20E1 /* GameStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0020D54824DF79CB00DB20E1 /* GameStore.swift */; };
@@ -14,10 +15,17 @@
 		0020D55024DFAED000DB20E1 /* GameOfGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0020D54F24DFAED000DB20E1 /* GameOfGroup.swift */; };
 		0020D56724E263C600DB20E1 /* MatchingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0020D56624E263C600DB20E1 /* MatchingViewController.swift */; };
 		0020D56A24E267B300DB20E1 /* GameCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0020D56924E267B300DB20E1 /* GameCollectionCell.swift */; };
+		003CD27A250EE08100BD082E /* JigsawPiece.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003CD279250EE08100BD082E /* JigsawPiece.swift */; };
+		003CD27C250EEC0D00BD082E /* AgeGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003CD27B250EEC0D00BD082E /* AgeGroup.swift */; };
+		003CD27E250EF96B00BD082E /* CaseReverseInit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003CD27D250EF96B00BD082E /* CaseReverseInit.swift */; };
 		0047630424ED10FE007767A5 /* QuestionEssentialProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0047630324ED10FE007767A5 /* QuestionEssentialProperty.swift */; };
 		0047630624ED1154007767A5 /* GameCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0047630524ED1154007767A5 /* GameCategory.swift */; };
 		004A4B0D24FDB55A000FA2C8 /* FormViewController+insetGrouped.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004A4B0C24FDB55A000FA2C8 /* FormViewController+insetGrouped.swift */; };
 		0051950F24E9CDD4008F1CE0 /* QuestionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0051950E24E9CDD4008F1CE0 /* QuestionType.swift */; };
+		005308CA25168A96002A429F /* ResearchKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 009D06822511F15B002E488F /* ResearchKit.framework */; };
+		005308CB25168A96002A429F /* ResearchKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 009D06822511F15B002E488F /* ResearchKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		005308D125168D84002A429F /* FirebaseConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005308D025168D84002A429F /* FirebaseConstants.swift */; };
+		005308E12516F65F002A429F /* GameError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005308E02516F65F002A429F /* GameError.swift */; };
 		005856BC24D91C4A0010BE55 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 005856BB24D91C4A0010BE55 /* GoogleService-Info.plist */; };
 		005856BE24D923630010BE55 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005856BD24D923630010BE55 /* ChatViewController.swift */; };
 		005856C024D924970010BE55 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005856BF24D924970010BE55 /* Message.swift */; };
@@ -34,7 +42,6 @@
 		0070DFF624B0060500E71F46 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0070DFF424B0060500E71F46 /* LaunchScreen.storyboard */; };
 		0070E00124B0060500E71F46 /* JigsawTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0070E00024B0060500E71F46 /* JigsawTests.swift */; };
 		0078315224DF557800B35A98 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0078315124DF557800B35A98 /* Player.swift */; };
-		009D06852511F16E002E488F /* ResearchKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 009D06822511F15B002E488F /* ResearchKit.framework */; };
 		00A06D8D24E8A9B400030649 /* GameGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A06D8C24E8A9B400030649 /* GameGroup.swift */; };
 		00B0A67424E3CAA800887701 /* DemographicsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B0A67324E3CAA800887701 /* DemographicsViewController.swift */; };
 		00B0A67A24E3CF9600887701 /* ProfileHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 00B0A67924E3CF9600887701 /* ProfileHeaderView.xib */; };
@@ -99,7 +106,22 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		005308CC25168A96002A429F /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				005308CB25168A96002A429F /* ResearchKit.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		0000321025130A85004681AF /* CategoryCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCollectionViewController.swift; sourceTree = "<group>"; };
 		000D809C24ECEDBA0070041D /* EducationLevel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EducationLevel.swift; sourceTree = "<group>"; };
 		000D809F24ECEE990070041D /* Ethnicity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ethnicity.swift; sourceTree = "<group>"; };
 		0020D54824DF79CB00DB20E1 /* GameStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameStore.swift; sourceTree = "<group>"; };
@@ -107,10 +129,15 @@
 		0020D54F24DFAED000DB20E1 /* GameOfGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameOfGroup.swift; sourceTree = "<group>"; };
 		0020D56624E263C600DB20E1 /* MatchingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchingViewController.swift; sourceTree = "<group>"; };
 		0020D56924E267B300DB20E1 /* GameCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameCollectionCell.swift; sourceTree = "<group>"; };
+		003CD279250EE08100BD082E /* JigsawPiece.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JigsawPiece.swift; sourceTree = "<group>"; };
+		003CD27B250EEC0D00BD082E /* AgeGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgeGroup.swift; sourceTree = "<group>"; };
+		003CD27D250EF96B00BD082E /* CaseReverseInit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaseReverseInit.swift; sourceTree = "<group>"; };
 		0047630324ED10FE007767A5 /* QuestionEssentialProperty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionEssentialProperty.swift; sourceTree = "<group>"; };
 		0047630524ED1154007767A5 /* GameCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameCategory.swift; sourceTree = "<group>"; };
 		004A4B0C24FDB55A000FA2C8 /* FormViewController+insetGrouped.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FormViewController+insetGrouped.swift"; sourceTree = "<group>"; };
 		0051950E24E9CDD4008F1CE0 /* QuestionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionType.swift; sourceTree = "<group>"; };
+		005308D025168D84002A429F /* FirebaseConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseConstants.swift; sourceTree = "<group>"; };
+		005308E02516F65F002A429F /* GameError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameError.swift; sourceTree = "<group>"; };
 		005856BB24D91C4A0010BE55 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		005856BD24D923630010BE55 /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		005856BF24D924970010BE55 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
@@ -179,7 +206,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				009D06852511F16E002E488F /* ResearchKit.framework in Frameworks */,
+				005308CA25168A96002A429F /* ResearchKit.framework in Frameworks */,
 				4C4D65101A3F2EDDFFFD6EE1 /* Pods_Jigsaw.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -208,6 +235,7 @@
 				00BA555C24DA7CF7006A207E /* Gender.swift */,
 				000D809C24ECEDBA0070041D /* EducationLevel.swift */,
 				000D809F24ECEE990070041D /* Ethnicity.swift */,
+				003CD27B250EEC0D00BD082E /* AgeGroup.swift */,
 			);
 			path = Demographics;
 			sourceTree = "<group>";
@@ -218,13 +246,6 @@
 				00CF5DBB24F4DA3100B501BB /* PopulateGamesFromYAML.swift */,
 			);
 			path = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		0020D55B24E09A6E00DB20E1 /* Custom steps */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "Custom steps";
 			sourceTree = "<group>";
 		};
 		0051951024E9CEB2008F1CE0 /* Question */ = {
@@ -243,6 +264,7 @@
 			children = (
 				005856C524D92D320010BE55 /* DatabaseRepresentation.swift */,
 				0047630324ED10FE007767A5 /* QuestionEssentialProperty.swift */,
+				003CD27D250EF96B00BD082E /* CaseReverseInit.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -343,6 +365,7 @@
 			isa = PBXGroup;
 			children = (
 				0070DFED24B0060400E71F46 /* HomeCollectionViewController.swift */,
+				0000321025130A85004681AF /* CategoryCollectionViewController.swift */,
 				0020D56624E263C600DB20E1 /* MatchingViewController.swift */,
 				005856BD24D923630010BE55 /* ChatViewController.swift */,
 				00D0862624CD2D9A00FB7A20 /* GameViewController.swift */,
@@ -393,7 +416,6 @@
 			children = (
 				00D0861E24CD135B00FB7A20 /* RootTabBarController.swift */,
 				00D0862224CD192800FB7A20 /* OnboardingViewController.swift */,
-				0020D55B24E09A6E00DB20E1 /* Custom steps */,
 				00F6302624EE4E6900BCAD11 /* Charts */,
 				00B0A67524E3CAD500887701 /* Home */,
 				00B0A67624E3CAF000887701 /* Profile */,
@@ -414,6 +436,9 @@
 				0078315124DF557800B35A98 /* Player.swift */,
 				005856C124D9262C0010BE55 /* Profiles.swift */,
 				00F6302124EE385E00BCAD11 /* AnswerCategory.swift */,
+				003CD279250EE08100BD082E /* JigsawPiece.swift */,
+				005308D025168D84002A429F /* FirebaseConstants.swift */,
+				005308E02516F65F002A429F /* GameError.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -487,6 +512,7 @@
 				0070E00B24B0066B00E71F46 /* SwiftLint */,
 				0077668142A2BBE2152A00CD /* [CP] Embed Pods Frameworks */,
 				8D1878805E6A71186CF01A75 /* [CP] Copy Pods Resources */,
+				005308CC25168A96002A429F /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -691,9 +717,11 @@
 				00CF5DBC24F4DA3100B501BB /* PopulateGamesFromYAML.swift in Sources */,
 				005856C024D924970010BE55 /* Message.swift in Sources */,
 				00CF5DC124F4DD0200B501BB /* MultipleChoiceQuestion.swift in Sources */,
+				005308D125168D84002A429F /* FirebaseConstants.swift in Sources */,
 				0020D55024DFAED000DB20E1 /* GameOfGroup.swift in Sources */,
 				00D9F5132506DDC900898DFA /* PreviewDetailViewController.swift in Sources */,
 				0020D56724E263C600DB20E1 /* MatchingViewController.swift in Sources */,
+				003CD27A250EE08100BD082E /* JigsawPiece.swift in Sources */,
 				00BA555B24DA5D2A006A207E /* UICollectionView.swift in Sources */,
 				005856BE24D923630010BE55 /* ChatViewController.swift in Sources */,
 				00B0A68124E3DB7300887701 /* String+sha256.swift in Sources */,
@@ -712,11 +740,13 @@
 				000D80A024ECEE990070041D /* Ethnicity.swift in Sources */,
 				00F6302224EE385E00BCAD11 /* AnswerCategory.swift in Sources */,
 				00F2197E24CCF9A200B72858 /* ProfileViewController.swift in Sources */,
+				005308E12516F65F002A429F /* GameError.swift in Sources */,
 				00F6302824EE4E8700BCAD11 /* GameHistoryRadarChartViewController.swift in Sources */,
 				005856C424D92CFB0010BE55 /* Chatroom.swift in Sources */,
 				00B6305F24FB0247008975CE /* GameResult.swift in Sources */,
 				00B0A67424E3CAA800887701 /* DemographicsViewController.swift in Sources */,
 				00D0862524CD24EA00FB7A20 /* OnboardingSteps.swift in Sources */,
+				003CD27C250EEC0D00BD082E /* AgeGroup.swift in Sources */,
 				000D809D24ECEDBA0070041D /* EducationLevel.swift in Sources */,
 				0070DFEA24B0060400E71F46 /* AppDelegate.swift in Sources */,
 				00F6301D24EE2E0000BCAD11 /* ResultStatsViewController.swift in Sources */,
@@ -730,6 +760,7 @@
 				00CDFF1224B44797009C789D /* UIViewController.swift in Sources */,
 				0051950F24E9CDD4008F1CE0 /* QuestionType.swift in Sources */,
 				0070DFEC24B0060400E71F46 /* SceneDelegate.swift in Sources */,
+				0000321125130A85004681AF /* CategoryCollectionViewController.swift in Sources */,
 				0020D54B24DF7A0D00DB20E1 /* Game.swift in Sources */,
 				00F2197C24CCF99800B72858 /* RoadmapViewController.swift in Sources */,
 				00B0A67C24E3D10300887701 /* ProfileHeaderView.swift in Sources */,
@@ -738,6 +769,7 @@
 				00CF5DBF24F4DB3C00B501BB /* SingleChoiceQuestion.swift in Sources */,
 				00D0861F24CD135B00FB7A20 /* RootTabBarController.swift in Sources */,
 				00A06D8D24E8A9B400030649 /* GameGroup.swift in Sources */,
+				003CD27E250EF96B00BD082E /* CaseReverseInit.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -901,7 +933,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = Y9LL8428U3;
+				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Pods",
@@ -925,7 +957,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = Y9LL8428U3;
+				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Pods",

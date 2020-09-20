@@ -7,22 +7,22 @@
 //
 
 import Foundation
-import FirebaseFirestore
 import Yams
 
 class PopulateGamesFromYAML {
     static let shared = PopulateGamesFromYAML()
-    private let database = Firestore.firestore()
-    private let gameNames = ["usimmigration1", "usimmigration2", "education", "housing-dilemma", "medicare", "IRS trivia"]
+    private let filenames = ["usimmigration1", "usimmigration2", "law", "economy", "covid", "climate"]
     
     func uploadGame() {
-        let paths = gameNames.compactMap { Bundle.main.path(forResource: $0, ofType: "yml") }
+        let paths = filenames.compactMap { Bundle.main.path(forResource: $0, ofType: "yml") }
         for path in paths {
             do {
                 let content = try String(contentsOfFile: path, encoding: .utf8)
                 let data = try Yams.load(yaml: content) as? [String: Any]
                 if let loadedDictionary = data {
-                    database.collection("Games").document(loadedDictionary["gameName"] as! String).setData(loadedDictionary)
+                    // The game ID is gameName_level.
+                    let gameID = loadedDictionary["gameName"] as! String + "_" + String((loadedDictionary["level"] as! Int))
+                    FirebaseConstants.shared.games.document(gameID).setData(loadedDictionary)
                 } else {
                     print("Error: cannot cast yaml to dictionary")
                 }

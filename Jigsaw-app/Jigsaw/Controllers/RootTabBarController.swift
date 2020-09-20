@@ -8,8 +8,6 @@
 
 import UIKit
 import FirebaseAuth
-import FirebaseAnalytics
-import FirebaseFirestore
 
 class RootTabBarController: UITabBarController {
     var isFirstAppearance = true
@@ -48,7 +46,6 @@ class RootTabBarController: UITabBarController {
                     self.presentAlert(title: "Something wrong with existing user", message: "This should never happen unless storage is corrupted.")
                 }
                 Profiles.userID = currentUser.uid
-                Analytics.setUserID(Profiles.userID)
             } else {
                 print("❌ Error loading existing user. This shoudn't happen unless user get deleted on remote or log out explicitly.")
                 // handle re-login here.
@@ -60,8 +57,7 @@ class RootTabBarController: UITabBarController {
     
     private func setCurrentPlayer(with userID: String) {
         // Load from firebase to fill in user info.
-        let database = Firestore.firestore()
-        let docRef = database.collection("Players").document(userID)
+        let docRef = FirebaseConstants.shared.players.document(userID)
         // Get player info from remote.
         docRef.getDocument { [weak self] document, error in
             guard let self = self else { return }

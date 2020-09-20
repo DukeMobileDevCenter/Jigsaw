@@ -7,7 +7,6 @@
 //
 
 import ResearchKit
-import FirebaseFirestore
 
 protocol OnboardingManagerDelegate: AnyObject {
     func didCompleteOnboarding()
@@ -36,7 +35,6 @@ class OnboardingViewController: ORKTaskViewController {
             OnboardingSteps.instructionStep,
             OnboardingSteps.informedConsentInstructionStep,
             OnboardingSteps.politicalSliderStep,
-            OnboardingSteps.profileStep,
             OnboardingSteps.completionStep
         ])
         return steps
@@ -58,9 +56,8 @@ class OnboardingViewController: ORKTaskViewController {
             email: nil,
             demographics: [String: String?]()
         )
-        let database = Firestore.firestore()
         do {
-            try database.collection("Players").document(userID).setData(from: player)
+            try FirebaseConstants.shared.players.document(userID).setData(from: player)
         } catch {
             presentAlert(error: error)
         }
@@ -95,12 +92,7 @@ extension OnboardingViewController: ORKTaskViewControllerDelegate {
                 // Never arrives here.
                 fatalError("Error: Jigsaw slider value not provided.")
             }
-            if let displayNameResult = taskViewController.result.stepResult(forStepIdentifier: "DisplayNameStep")?.results?.first as? ORKTextQuestionResult,
-                let answer = displayNameResult.textAnswer {
-                Profiles.displayName = answer
-            } else {
-                Profiles.displayName = "AnonymUser"
-            }
+            Profiles.displayName = JigsawPiece.unknown.rawValue
             createUserInfo(userID: Profiles.userID, displayName: Profiles.displayName, jigsawValue: Profiles.jigsawValue)
             presentingViewController?.dismiss(animated: true) {
                 self.onboardingManagerDelegate?.didCompleteOnboarding()

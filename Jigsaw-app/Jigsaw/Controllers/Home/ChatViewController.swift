@@ -33,11 +33,10 @@ class ChatViewController: MessagesViewController {
         }
     }
     
-    private let database = Firestore.firestore()
     private var reference: CollectionReference?
     private let storage = Storage.storage().reference()
     
-    private var messages: [Message] = []
+    private var messages = [Message]()
     private var messageListener: ListenerRegistration?
     
     private let user: User
@@ -45,6 +44,8 @@ class ChatViewController: MessagesViewController {
     
     private var timer: Timer?
     var timeLeft: TimeInterval?
+    
+    var chatroomUserIDs = [String]()
     private let timeFormatter: DateComponentsFormatter = {
         let formatter = DateComponentsFormatter()
         formatter.allowedUnits = .second
@@ -53,8 +54,7 @@ class ChatViewController: MessagesViewController {
     }()
     
     deinit {
-        timer?.invalidate()
-        timer = nil
+        finish()
         messageListener?.remove()
     }
     
@@ -79,7 +79,7 @@ class ChatViewController: MessagesViewController {
             return
         }
         
-        reference = database.collection(["Chatrooms", id, "messages"].joined(separator: "/"))
+        reference = FirebaseConstants.database.collection(["Chatrooms", id, "messages"].joined(separator: "/"))
         
         messageListener = reference?.addSnapshotListener { [weak self] querySnapshot, error in
             guard let snapshot = querySnapshot else {
@@ -117,7 +117,7 @@ class ChatViewController: MessagesViewController {
         messageInputBar.setStackViewItems([cameraItem], forStack: .left, animated: false)
     }
     
-    func fireTimer() {
+    func start() {
         // If countdown remaining time specified, create a timer.
         if timeLeft != nil {
             timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { [weak self] _ in
@@ -128,6 +128,21 @@ class ChatViewController: MessagesViewController {
                 }
             }
         }
+    }
+    
+    func finish() {
+        timer?.invalidate()
+        timer = nil
+    }
+    
+    private func getUserPiece(uid: String) -> JigsawPiece {
+        let piece: JigsawPiece
+        if let currentUserIndex = chatroomUserIDs.firstIndex(of: uid) {
+            piece = JigsawPiece(index: currentUserIndex)
+        } else {
+            piece = .unknown
+        }
+        return piece
     }
     
     // MARK: - Actions
@@ -266,7 +281,9 @@ extension ChatViewController: MessagesDisplayDelegate {
     }
     
     func configureAvatarView(_ avatarView: AvatarView, for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) {
-        avatarView.pin_setImage(from: message.sender.senderId.wavatarURL)
+        let piece = getUserPiece(uid: message.sender.senderId)
+        avatarView.setImage(UIImage(named: piece.bundleName)!)
+        avatarView.backgroundColor = .clear
     }
 }
 
@@ -306,7 +323,8 @@ extension ChatViewController: MessageCellDelegate {
 
 extension ChatViewController: MessagesDataSource {
     func currentSender() -> SenderType {
-        ChatUser(senderId: user.uid, displayName: Profiles.displayName, jigsawValue: Profiles.jigsawValue)
+        let piece = getUserPiece(uid: user.uid)
+        return ChatUser(senderId: user.uid, displayName: piece.label, jigsawValue: Profiles.jigsawValue)
     }
     
     func numberOfSections(in messagesCollectionView: MessagesCollectionView) -> Int {
@@ -336,8 +354,9 @@ extension ChatViewController: MessagesDataSource {
     }
     
     func messageTopLabelAttributedText(for message: MessageType, at indexPath: IndexPath) -> NSAttributedString? {
-        NSAttributedString(
-            string: message.sender.displayName,
+        let senderPiece = getUserPiece(uid: message.sender.senderId)
+        return NSAttributedString(
+            string: senderPiece.label,
             attributes: [
                 .font: UIFont.preferredFont(forTextStyle: .caption1),
                 .foregroundColor: UIColor.systemGray3

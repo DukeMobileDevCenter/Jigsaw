@@ -21,4 +21,9 @@ class ProfileHeaderView: UIView {
         avatarImageView.pin_setImage(from: avatarURL)
         avatarImageView.layer.cornerRadius = 40
     }
+    
+    func setView(name: String, avatarFileName: String) {
+        nameLabel.text = name
+        avatarImageView.setImage(UIImage(named: avatarFileName)!)
+    }
 }

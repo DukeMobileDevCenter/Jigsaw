@@ -9,12 +9,10 @@
 import UIKit
 import Eureka
 import ViewRow
-import FirebaseFirestore
 import FirebaseUI
 
 class ProfileViewController: FormViewController {
-    // Load from firebase to fill in user info.
-    private let database = Firestore.firestore()
+    // Firebase UI.
     private var authUI: FUIAuth!
     // During onboarding, the form cannot be filled without player info.
     // In this case, load the form when the view is appearing.
@@ -70,21 +68,10 @@ class ProfileViewController: FormViewController {
         tableView.refreshControl?.addTarget(self, action: #selector(loadPlayerProfile), for: .valueChanged)
     }
     
-    private func updatePlayerDisplayName(name: String) {
-        database.collection("Players").document(Profiles.userID).updateData(["displayName": name]) { [weak self] error in
-            if let error = error {
-                print("❌ Error updating document: \(error)")
-                return
-            } else {
-                self?.profileHeaderRow.cell.view?.nameLabel.text = name
-            }
-        }
-    }
-    
     @objc
     private func loadPlayerProfile() {
         // Get player info from remote.
-        database.collection("Players").document(Profiles.userID).getDocument { [weak self] document, error in
+        FirebaseConstants.shared.players.document(Profiles.userID).getDocument { [weak self] document, error in
             guard let self = self else { return }
             // Dismiss the refresh control.
             DispatchQueue.main.async {
@@ -113,8 +100,9 @@ class ProfileViewController: FormViewController {
     }
     
     private var profileHeaderView: ProfileHeaderView {
+        let piece = JigsawPiece.unknown
         let view = Bundle.main.loadNibNamed("ProfileHeaderView", owner: self)?.first as! ProfileHeaderView
-        view.setView(name: Profiles.displayName, avatarURL: Profiles.currentPlayer.userID.wavatarURL)
+        view.setView(name: piece.label, avatarFileName: piece.bundleName)
         let user = Auth.auth().currentUser!
         let providerIDs = user.providerData.map { $0.providerID }
         // Load provider icons
@@ -126,7 +114,7 @@ class ProfileViewController: FormViewController {
     private lazy var profileHeaderRow: ViewRow<ProfileHeaderView> = {
         ViewRow<ProfileHeaderView>("view")
         .cellSetup { cell, _ in
-            //  Construct the view
+            // Construct the view
             cell.view = self.profileHeaderView
         }
         .onCellSelection { [weak self] _, _ in
@@ -136,39 +124,11 @@ class ProfileViewController: FormViewController {
         }
     }()
     
-    private var displayNameRow: NameRow {
-        let displayNameRules: RuleSet<String> = {
-            var rules = RuleSet<String>()
-            rules.add(rule: RuleMinLength(minLength: 3, msg: "Display name must be longer than 3 characters."))
-            rules.add(rule: RuleMaxLength(maxLength: 10, msg: "Display name must be shorter than 10 characters."))
-            return rules
-        }()
-        
-        return NameRow { row in
-            row.title = "Display name"
-            row.placeholder = "Change your nickname"
-            row.value = Profiles.displayName
-            row.add(ruleSet: displayNameRules)
-            row.validationOptions = .validatesOnBlur
-        }.cellUpdate { [weak self] cell, row in
-            if !row.isValid {
-                cell.titleLabel?.textColor = .systemRed
-                self?.presentAlert(title: "Invalid input", message: "The value you entered is invalid!")
-                row.value = Profiles.displayName
-            } else {
-                if let name = row.value {
-                    self?.updatePlayerDisplayName(name: name)
-                }
-            }
-        }
-    }
-    
     private func createForm() {
         form
         +++ Section("Profile")
         <<< profileHeaderRow
         +++ Section(header: "Basic Information", footer: "Blah blah blah")
-        <<< displayNameRow
         <<< DecimalRow { row in
             row.title = "Jigsaw value"
             row.value = Profiles.jigsawValue

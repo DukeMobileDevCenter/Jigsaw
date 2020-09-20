@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097.3" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
@@ -10,6 +10,8 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ResultStatsViewController" customModule="Jigsaw" customModuleProvider="target">
             <connections>
                 <outlet property="chartView" destination="Oqd-Ej-1xl" id="tSA-aU-J9W"/>
+                <outlet property="nextGameButton" destination="va1-kF-YRx" id="fI2-nj-bye"/>
+                <outlet property="nextGameLabel" destination="wt5-cI-wUS" id="2zQ-TX-gY2"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -19,18 +21,44 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Oqd-Ej-1xl" customClass="PieChartView" customModule="Charts">
-                    <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                    <rect key="frame" x="0.0" y="44" width="414" height="594"/>
+                    <constraints>
+                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="300" id="BPb-nE-ZbU"/>
+                    </constraints>
                 </view>
+                <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="va1-kF-YRx">
+                    <rect key="frame" x="176" y="746" width="62" height="32"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="32" id="09O-8c-Xbg"/>
+                    </constraints>
+                    <state key="normal" title="Continue"/>
+                    <connections>
+                        <action selector="nextGameButtonTapped:" destination="-1" eventType="touchUpInside" id="t1X-tC-OzQ"/>
+                    </connections>
+                </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Next game label here." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wt5-cI-wUS">
+                    <rect key="frame" x="124" y="688" width="166.5" height="50"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="CQr-dM-wD3"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
             <constraints>
                 <constraint firstItem="Oqd-Ej-1xl" firstAttribute="top" secondItem="d1B-K3-luU" secondAttribute="top" id="3NA-if-rAO"/>
+                <constraint firstItem="wt5-cI-wUS" firstAttribute="top" secondItem="Oqd-Ej-1xl" secondAttribute="bottom" constant="50" id="5mP-TC-L5o"/>
                 <constraint firstItem="Oqd-Ej-1xl" firstAttribute="leading" secondItem="d1B-K3-luU" secondAttribute="leading" id="6Mc-iO-BuY"/>
-                <constraint firstItem="d1B-K3-luU" firstAttribute="bottom" secondItem="Oqd-Ej-1xl" secondAttribute="bottom" id="bih-r3-91f"/>
+                <constraint firstItem="va1-kF-YRx" firstAttribute="centerX" secondItem="Oqd-Ej-1xl" secondAttribute="centerX" id="Os3-va-Sc2"/>
+                <constraint firstItem="d1B-K3-luU" firstAttribute="bottom" secondItem="va1-kF-YRx" secondAttribute="bottom" constant="84" id="QiE-xQ-XC4"/>
+                <constraint firstItem="wt5-cI-wUS" firstAttribute="centerX" secondItem="Oqd-Ej-1xl" secondAttribute="centerX" id="Wty-Ku-uan"/>
                 <constraint firstItem="d1B-K3-luU" firstAttribute="trailing" secondItem="Oqd-Ej-1xl" secondAttribute="trailing" id="mC3-xy-2CS"/>
+                <constraint firstItem="va1-kF-YRx" firstAttribute="top" secondItem="wt5-cI-wUS" secondAttribute="bottom" constant="8" symbolic="YES" id="oDB-ws-Htt"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="d1B-K3-luU"/>
-            <point key="canvasLocation" x="157.5" y="222.5"/>
+            <point key="canvasLocation" x="156.52173913043478" y="222.32142857142856"/>
         </view>
     </objects>
 </document>

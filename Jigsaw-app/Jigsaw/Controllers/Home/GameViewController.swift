@@ -11,7 +11,7 @@ import ResearchKit
 class GameViewController: ORKTaskViewController {
     private let game: GameOfGroup
     
-    init(game: GameOfGroup, taskRun taskRunUUID: UUID?) {
+    init(game: GameOfGroup, taskRun taskRunUUID: UUID? = nil) {
         self.game = game
         super.init(task: nil, taskRun: taskRunUUID)
         task = createSurveyTask(from: game.questionnaire)
@@ -22,9 +22,17 @@ class GameViewController: ORKTaskViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    private var welcomeStep: ORKInstructionStep {
+        let welcomeStep = ORKInstructionStep(identifier: "Introduction")
+        welcomeStep.title = game.gameName
+        welcomeStep.detailText = game.detailText
+        welcomeStep.iconImage = UIImage(systemName: "info.circle")!
+        return welcomeStep
+    }
+    
     private let chatroomCountdownStep: ORKActiveStep = {
         let step = ORKActiveStep(identifier: "Countdown")
-        step.stepDuration = TimeInterval(integerLiteral: 30)
+        step.stepDuration = TimeInterval(integerLiteral: 60)
         step.shouldUseNextAsSkipButton = true
         step.shouldContinueOnFinish = true
         step.shouldShowDefaultTimer = true
@@ -33,18 +41,32 @@ class GameViewController: ORKTaskViewController {
         step.shouldSpeakCountDown = true
         return step
     }()
+    
+    private let questionsInstructionStep: ORKInstructionStep = {
+        let questionsInstructionStep = ORKInstructionStep(identifier: "QuestionsInstruction")
+        questionsInstructionStep.title = "Required Questions"
+        questionsInstructionStep.detailText = "The following questions are essential. Please answer carefully."
+        questionsInstructionStep.iconImage = UIImage(systemName: "exclamationmark.square")
+        questionsInstructionStep.isOptional = false
+        return questionsInstructionStep
+    }()
+    
+    private let waitStep: ORKWaitStep = {
+        let step = ORKWaitStep(identifier: "Wait")
+        step.indicatorType = .progressBar
+        step.title = "Please wait"
+        step.detailText = "Please wait for other players to finish."
+        return step
+    }()
 
     /// Create an `ORKOrderedTask` from the a questionnaire.
     ///
     /// - Parameter questionnaire: A `Questionnaire`, which is an array of questions.
     /// - Returns: An `ORKOrderedTask` surveyTask.
-    private func createSurveyTask(from questionnaire: Questionnaire) -> ORKOrderedTask {
+    private func createSurveyTask(from questionnaire: Questionnaire) -> ORKNavigableOrderedTask {
         var steps = [ORKStep]()
         
-        let welcomeStep = ORKInstructionStep(identifier: "Introduction")
-        welcomeStep.title = game.gameName
-        welcomeStep.detailText = game.detailText
-        welcomeStep.iconImage = UIImage(systemName: "info.circle")!
+        // Welcome instruction step.
         steps.append(welcomeStep)
         
         // Resource reading page.
@@ -54,11 +76,7 @@ class GameViewController: ORKTaskViewController {
         // Chatroom step.
         steps.append(chatroomCountdownStep)
         
-        let questionsInstructionStep = ORKInstructionStep(identifier: "Questions")
-        questionsInstructionStep.title = "Required Questions"
-        questionsInstructionStep.detailText = "The following questions are essential. Please answer carefully."
-        questionsInstructionStep.iconImage = UIImage(systemName: "exclamationmark.square")
-        questionsInstructionStep.isOptional = false
+        // Questions instructions step.
         steps.append(questionsInstructionStep)
         
         for question in questionnaire {
@@ -81,11 +99,15 @@ class GameViewController: ORKTaskViewController {
             }
         }
         
+        // Wait step
+        steps.append(waitStep)
+        
         // Completion instruction.
         let completionStep = ORKOrderedTask.makeCompletionStep()
         completionStep.title = "Game complete"
         completionStep.text = "Your answers will be logged in game history."
         steps.append(completionStep)
-        return ORKOrderedTask(identifier: "surveyTask", steps: steps)
+        let task = ORKNavigableOrderedTask(identifier: "surveyTask", steps: steps)
+        return task
     }
 }

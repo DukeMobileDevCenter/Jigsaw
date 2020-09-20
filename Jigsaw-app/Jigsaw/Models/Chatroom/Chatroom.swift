@@ -14,11 +14,6 @@ struct Chatroom: Codable {
     /// The name or title of the chatroom, should be decided by the game.
     let name: String
     
-    init(name: String) {
-        self.id = "TestChatroom1"
-        self.name = name
-    }
-    
     init?(document: QueryDocumentSnapshot) {
         let data = document.data()
         guard let name = data["name"] as? String else {
@@ -27,15 +22,13 @@ struct Chatroom: Codable {
         self.id = document.documentID
         self.name = name
     }
-}
-
-extension Chatroom: DatabaseRepresentation {
-    var representation: [String: Any] {
-        var rep = ["name": name]
-        if let id = id {
-            rep["id"] = id
+    
+    init?(document: DocumentSnapshot) {
+        guard let data = document.data(), let name = data["name"] as? String else {
+            return nil
         }
-        return rep
+        self.id = document.documentID
+        self.name = name
     }
 }
 
