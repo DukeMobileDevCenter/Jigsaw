@@ -18,6 +18,7 @@ class HomeCollectionViewController: UICollectionViewController {
     @IBOutlet private var playersCountSegmentedControl: UISegmentedControl!
     
     private var randomGame: Game!
+    var nextGame: Game!
     
     private var queueType: PlayersQueue {
         playersCountSegmentedControl.selectedSegmentIndex == 0 ? .twoPlayersQueue : .fourPlayersQueue
@@ -142,6 +143,7 @@ class HomeCollectionViewController: UICollectionViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         switch segue.identifier {
         case "showCategory":
+            // Triggered by tapping on a category cell.
             if let cell = sender as? GameCollectionCell, let selectedIndexPath = collectionView.indexPath(for: cell) {
                 let selectedCategory = GameCategoryClass.shared.allCases[selectedIndexPath.item]
                 let destinationVC = segue.destination as! CategoryCollectionViewController
@@ -152,11 +154,16 @@ class HomeCollectionViewController: UICollectionViewController {
                 GameStore.shared.selectedCategory = selectedCategory
             }
         case "showRandom":
+            // Triggered by tapping on the "Random" cell.
             let destinationVC = segue.destination as! MatchingViewController
-            destinationVC.games = GameStore.shared.allGames
             destinationVC.queueType = queueType
             destinationVC.selectedGame = randomGame
             print("Info: Random game is \(randomGame.gameName)")
+        case "showSpecific":
+            let destinationVC = segue.destination as! MatchingViewController
+            destinationVC.queueType = queueType
+            destinationVC.selectedGame = nextGame
+            print("Info: Next game is \(nextGame.gameName)")
         default:
             preconditionFailure("Unexpected segue identifier.")
         }

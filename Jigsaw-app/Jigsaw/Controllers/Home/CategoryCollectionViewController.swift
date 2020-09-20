@@ -31,7 +31,6 @@ class CategoryCollectionViewController: UICollectionViewController {
             if let cell = sender as? GameCollectionCell, let selectedIndexPath = collectionView.indexPath(for: cell) {
                 let selectedGame = GameStore.shared.getGames(for: category)[selectedIndexPath.item]
                 let destinationVC = segue.destination as! MatchingViewController
-                destinationVC.games = GameStore.shared.allGames
                 destinationVC.queueType = queueType
                 destinationVC.selectedGame = selectedGame
             }

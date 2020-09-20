@@ -54,8 +54,7 @@ class ChatViewController: MessagesViewController {
     }()
     
     deinit {
-        timer?.invalidate()
-        timer = nil
+        finish()
         messageListener?.remove()
     }
     
@@ -118,7 +117,7 @@ class ChatViewController: MessagesViewController {
         messageInputBar.setStackViewItems([cameraItem], forStack: .left, animated: false)
     }
     
-    func fireTimer() {
+    func start() {
         // If countdown remaining time specified, create a timer.
         if timeLeft != nil {
             timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { [weak self] _ in
@@ -129,6 +128,11 @@ class ChatViewController: MessagesViewController {
                 }
             }
         }
+    }
+    
+    func finish() {
+        timer?.invalidate()
+        timer = nil
     }
     
     private func getUserPiece(uid: String) -> JigsawPiece {

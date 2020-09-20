@@ -63,6 +63,10 @@ struct GameResult {
         return Double(scored) / Double(total)
     }
     
+    var isPassed: Bool {
+        score > 0.6
+    }
+    
     // swiftlint:disable cyclomatic_complexity
     
     /// Judge if the player answer the question correctly.

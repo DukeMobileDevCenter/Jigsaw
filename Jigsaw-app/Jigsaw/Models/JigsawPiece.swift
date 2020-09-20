@@ -45,7 +45,7 @@ enum JigsawPiece: String, CaseIterable, CaseReverseInit {
         case .yellow:
             return "Yellow piece"
         case .unknown:
-            return "Anonymous piece"
+            return "Jigsaw piece"
         }
     }
     

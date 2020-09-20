@@ -26,6 +26,10 @@ extension UIViewController {
     func presentAlert(error: Error) {
         presentAlert(title: "Error", message: error.localizedDescription)
     }
+    
+    func presentAlert(error: GameError) {
+        presentAlert(title: "Jigsaw broken", message: error.description)
+    }
 }
 
 private extension UIAlertController {
