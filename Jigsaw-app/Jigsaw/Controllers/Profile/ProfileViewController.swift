@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import ResearchKit
 import Eureka
 import ViewRow
 import FirebaseUI
@@ -157,6 +158,19 @@ class ProfileViewController: FormViewController {
                 self?.performSegue(withIdentifier: "showGameHistoryTimelineSegue", sender: self)
             }
         }
+        +++ Section("Game Instructions")
+        <<< ButtonRow { row in
+            row.title = "Review Game Instruction"
+        }
+        .onCellSelection { [weak self] _, _ in
+            DispatchQueue.main.async { [weak self] in
+                let steps = [OnboardingSteps.informedConsentInstructionStep]
+                let task = ORKOrderedTask(identifier: "InstructionTaskInProfile", steps: steps)
+                let controller = ORKTaskViewController(task: task, taskRun: nil)
+                controller.delegate = self
+                self?.present(controller, animated: true)
+            }
+        }
         +++ Section("\(appName!) Version \(versionNumber!) build \(buildNumber!)")
     }
 }
@@ -187,5 +201,11 @@ extension ProfileViewController: FUIAuthDelegate {
                 print(userInfo.providerID)
             }
         }
+    }
+}
+
+extension ProfileViewController: ORKTaskViewControllerDelegate {
+    func taskViewController(_ taskViewController: ORKTaskViewController, didFinishWith reason: ORKTaskViewControllerFinishReason, error: Error?) {
+        taskViewController.dismiss(animated: true)
     }
 }
