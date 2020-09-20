@@ -205,6 +205,12 @@ extension ProfileViewController: FUIAuthDelegate {
 }
 
 extension ProfileViewController: ORKTaskViewControllerDelegate {
+    func taskViewController(_ taskViewController: ORKTaskViewController, stepViewControllerWillAppear stepViewController: ORKStepViewController) {
+        // Disable cancel button for instruction page
+        // Refer to https://github.com/ResearchKit/ResearchKit/issues/1273.
+        stepViewController.cancelButtonItem = UIBarButtonItem()
+    }
+    
     func taskViewController(_ taskViewController: ORKTaskViewController, didFinishWith reason: ORKTaskViewControllerFinishReason, error: Error?) {
         taskViewController.dismiss(animated: true)
     }
