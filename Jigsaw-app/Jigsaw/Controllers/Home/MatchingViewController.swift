@@ -13,7 +13,9 @@ import FirebaseAuth
 import FirebaseFirestoreSwift
 
 class MatchingViewController: UIViewController {
-    var games: [Game]!
+    @IBOutlet var playerCountLabel: UILabel!
+    @IBOutlet var gameNameLabel: UILabel!
+    
     var selectedGame: Game!
     var queueType: PlayersQueue!
     
@@ -23,29 +25,35 @@ class MatchingViewController: UIViewController {
     private var chatroomVC: ChatViewController!
     private var gameVC: GameViewController!
     
-    @IBOutlet var playerCountLabel: UILabel!
-    
     private var queuesRef: CollectionReference!
     
     private var gameGroupListener: ListenerRegistration?
-    private var chatroomListener: ListenerRegistration?
-    private var queueListener: ListenerRegistration?
+    private var queuesListener: ListenerRegistration?
     
     /// The player's current game group.
-    private var gameGroupID: String?
     private var gameGroup: GameGroup!
     
     private var myQuestionnaire: Questionnaire!
     
+    private var attempts = 0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Matching \(selectedGame.gameName)"
+        title = "Matching"
+        gameNameLabel.text = "\(selectedGame.gameName), level \(selectedGame.level)"
         
+        setQueuesListener()
+        setGameGroupListener()
+    }
+    
+    private func setQueuesListener() {
         queuesRef = FirebaseConstants.database.collection(["Queues", selectedGame.gameName, queueType.rawValue].joined(separator: "/"))
-        queueListener = queuesRef.addSnapshotListener { [weak self] querySnapshot, _ in
+        queuesListener = queuesRef.addSnapshotListener { [weak self] querySnapshot, _ in
             self?.playerCountLabel.text = "\(querySnapshot?.documents.count ?? 0)"
         }
-        
+    }
+    
+    private func setGameGroupListener() {
         let gameGroupRef = FirebaseConstants.shared.gamegroups
         gameGroupListener = gameGroupRef.addSnapshotListener { [weak self] querySnapshot, error in
             guard let snapshot = querySnapshot else {
@@ -60,46 +68,51 @@ class MatchingViewController: UIViewController {
     
     @IBAction func joinGameButtonTapped(_ sender: UIButton) {
         addPlayerToPlayersQueue(queueReference: queuesRef)
+        sender.isEnabled = false
     }
     
     private func addPlayerToPlayersQueue(queueReference: CollectionReference) {
         do {
             try queueReference.document(Profiles.currentPlayer.userID).setData(from: Profiles.currentPlayer)
         } catch {
-            presentAlert(error: error)
+            gameVC.presentAlert(error: error)
         }
     }
     
     private func addGameHistory(gameHistory: GameHistory) {
         let historyRef = FirebaseConstants.database.collection(["Players", Profiles.userID, "gameHistory"].joined(separator: "/"))
-        if let groupID = gameGroupID {
-            do {
-                // Set a history with the group ID.
-                try historyRef.document(groupID).setData(from: gameHistory)
-            } catch {
-                presentAlert(error: error)
-            }
+        do {
+            // Set a history with the group ID.
+            try historyRef.document(gameGroup.id!).setData(from: gameHistory)
+        } catch {
+            presentAlert(error: error)
         }
     }
     
-    private func handleMatchingGroup(group: GameGroup) {
-        let game = games.first { $0.gameName == group.gameName }!
-        let gameOfMyGroup: GameOfGroup
-        if group.group1.contains(Profiles.userID) {
-            // Current player is allocated to the first group.
-            gameOfMyGroup = GameOfGroup(version: game.version, gameName: game.gameName, detailText: game.detailText, resourceURL: game.g1resURL, questionnaire: game.g1Questionnaire)
-            // Hold a reference to my questionnaire to check answers.
+    private func handleAddedMatchingGroup(group: GameGroup) {
+        let game = selectedGame!
+        let url: URL
+        // Find which subgroup does current player belong to.
+        switch group.whichGroupContains(userID: Profiles.userID) {
+        case 1:
+            url = game.g1resURL
             myQuestionnaire = game.g1Questionnaire
-        } else if group.group2.contains(Profiles.userID) {
-            // Current player is allocated to the second group.
-            gameOfMyGroup = GameOfGroup(version: game.version, gameName: game.gameName, detailText: game.detailText, resourceURL: game.g2resURL, questionnaire: game.g2Questionnaire)
-            // Hold a reference to my questionnaire to check answers.
+        case 2:
+            url = game.g2resURL
             myQuestionnaire = game.g2Questionnaire
-        } else {
-            // Not my group, ignore.
+        default:
             return
         }
-        gameVC = GameViewController(game: gameOfMyGroup, taskRun: nil)
+        // Create a sub game group for current player.
+        let gameOfMyGroup = GameOfGroup(
+            version: game.version,
+            gameName: game.gameName,
+            detailText: game.detailText,
+            resourceURL: url,
+            questionnaire: myQuestionnaire
+        )
+        
+        gameVC = GameViewController(game: gameOfMyGroup)
         gameVC.delegate = self
         // Disallow dismiss by interactive swipe in iOS 13.
         gameVC.isModalInPresentation = true
@@ -108,9 +121,7 @@ class MatchingViewController: UIViewController {
     
     private func removeMatchingGroup() {
         // Clean up the game group after game is done.
-        if let groupID = gameGroupID {
-            FirebaseConstants.shared.gamegroups.document(groupID).delete()
-        }
+        FirebaseConstants.shared.gamegroups.document(gameGroup.id!).delete()
     }
     
     private func removeChatroom() {
@@ -118,47 +129,72 @@ class MatchingViewController: UIViewController {
     }
     
     private func removeUserFromQueue() {
-        queuesRef.document(Profiles.currentPlayer.userID).delete()
+        queuesRef.document(Profiles.userID).delete()
     }
     
     private func handleDocumentChange(_ change: DocumentChange) {
-        do {
-            if let currentGroup = try change.document.data(as: GameGroup.self) {
-                switch change.type {
-                case .added:
-                    gameGroupID = change.document.documentID
-                    gameGroup = currentGroup
-                    handleMatchingGroup(group: currentGroup)
-                case .modified:
-                    handleReadyPlayerCountUpdate(group: currentGroup)
-                case .removed:
-                    // If any player dropped the game, the others cannot play anymore.
-                    taskViewController(gameVC, didFinishWith: .discarded, error: nil)
-                default:
-                    break
-                }
+        guard let currentGroup = try? change.document.data(as: GameGroup.self),
+            // Only proceed if current player is in the matching group.
+            currentGroup.group1.contains(Profiles.userID) || currentGroup.group2.contains(Profiles.userID) else { return }
+        
+        switch change.type {
+        case .added:
+            handleAddedMatchingGroup(group: currentGroup)
+        case .modified:
+            // Only handle count increment.
+            if currentGroup.chatroomReadyUserIDs.count > gameGroup.chatroomReadyUserIDs.count {
+                handleModifiedReadyPlayerCount(group: currentGroup)
+            } else if currentGroup.gameAttemptedUserIDs.count > gameGroup.gameAttemptedUserIDs.count {
+                handleModifiredAttemptedPlayerCount(group: currentGroup)
+            } else if currentGroup.gameFinishedUserIDs.count > gameGroup.gameFinishedUserIDs.count {
+                handleModifiedFinishedPlayerCount(group: currentGroup)
             }
-        } catch {
-            // If dirty data persist in database.
-            self.presentAlert(error: error)
+        case .removed:
+            // If any player dropped the game before they finish, the others cannot play anymore.
+            if currentGroup.gameFinishedUserIDs.count != currentGroup.userIDCount {
+                taskViewController(gameVC, didFinishWith: .discarded, error: GameError.otherPlayerDropped)
+            }
+        default:
+            break
+        }
+        // Hold a reference to the changed game group.
+        gameGroup = GameGroup(id: change.document.documentID, group: currentGroup)
+    }
+    
+    private func handleModifiedReadyPlayerCount(group: GameGroup) {
+        if group.chatroomReadyUserIDs.count == group.userIDCount {
+            // All players are ready for chat.
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [unowned self] in
+                // Start the timer in chatroom step VC and chatroom VC. Later to only use 1.
+                self.chatroomVC.chatroomUserIDs = group.chatroomReadyUserIDs
+                self.chatroomStepVC.start()
+                self.chatroomVC.start()
+                print("✅ chatroom timer kicked off!")
+            }
         }
     }
     
-    private func handleReadyPlayerCountUpdate(group: GameGroup) {
-        if group.group1.contains(Profiles.userID) || group.group2.contains(Profiles.userID) {
-            if group.chatroomReadyUserIDs.count == group.group1.count + group.group2.count {
-                // All players are ready for chat.
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [unowned self] in
-                    // Start the timer in chatroom step VC and chatroom VC. Later to only use 1.
-                    self.chatroomVC.chatroomUserIDs = group.chatroomReadyUserIDs
-                    self.chatroomStepVC.start()
-                    self.chatroomVC.fireTimer()
-                    print("✅ chatroom timer kicked off!")
-                }
+    private func handleModifiredAttemptedPlayerCount(group: GameGroup) {
+        if group.gameAttemptedUserIDs.count == group.userIDCount {
+            // All players have reached the wait page.
+            if group.gameFinishedUserIDs.count < group.gameAttemptedUserIDs.count {
+                // Some players failed.
+                // Reset the attempted array.
+                FirebaseConstants.shared.gamegroups.document(gameGroup.id!).updateData([
+                    "gameAttemptedUserIDs": FieldValue.arrayRemove([Profiles.userID!])
+                ])
+                // Go back to the chatroom.
+                gameVC.flipToPage(withIdentifier: "Countdown", forward: false, animated: true)
+            } else {
+                // All players have passed.
+                gameVC.goForward()
             }
-        } else {
-            // Not my group, ignore.
-            return
+        }
+    }
+    
+    private func handleModifiedFinishedPlayerCount(group: GameGroup) {
+        if group.gameFinishedUserIDs.count == group.userIDCount {
+            // All player have passed. Do nothing here now.
         }
     }
     
@@ -170,46 +206,93 @@ class MatchingViewController: UIViewController {
             if let document = document, let chatroom = Chatroom(document: document) {
                 completion(chatroom)
             } else if let error = error {
-                self.presentAlert(error: error)
+                self.gameVC.presentAlert(error: error)
             }
         }
     }
     
+    /// Find next level room for current room/game.
+    /// - Parameter currentGame: The room/game the player is currently in.
+    /// - Returns: The next level room.
+    private func nextGame(for currentGame: Game) -> Game? {
+        return GameStore.shared.allGames.first { currentGame.gameName == $0.gameName && currentGame.level + 1 == $0.level }
+    }
+    
     deinit {
-        // Stop waiting in queue when player exit the matching page.
+        // Remove player from queue when it exits the matching page.
         // There might be some sync bug, if a player just quit a match while he is added to a group.
         removeUserFromQueue()
         
         gameGroupListener?.remove()
-        chatroomListener?.remove()
-        queueListener?.remove()
+        queuesListener?.remove()
         print("✅ matching VC deinit")
     }
 }
 
 extension MatchingViewController: ORKTaskViewControllerDelegate {
     func taskViewController(_ taskViewController: ORKTaskViewController, stepViewControllerWillAppear stepViewController: ORKStepViewController) {
-        if stepViewController.step?.identifier == "Countdown" {
-            chatroomStepVC = stepViewController as? ORKActiveStepViewController
-            // Mark the player who reached chatroom step as ready.
-            if let groupID = gameGroupID {
-                FirebaseConstants.shared.gamegroups.document(groupID).updateData([
-                    "chatroomReadyUserIDs": FieldValue.arrayUnion([Profiles.userID!])
-                ])
-            }
-            // When the chatroom is dismissed, finish the step.
+        guard let step = stepViewController.step else { return }
+        switch step.identifier {
+        case "Countdown":
             if isChatroomShown {
                 chatroomStepVC.finish()
+                chatroomVC.finish()
                 return
             }
-            loadChatroom { [weak self] chatroom in
-                guard let self = self else { return }
-                self.isChatroomShown = true
-                let chatroomVC = ChatViewController(user: Auth.auth().currentUser!, chatroom: chatroom, timeLeft: self.chatroomStepVC.timeRemaining)
-                self.chatroomVC = chatroomVC
-                stepViewController.title = "Quit chat"
+            chatroomStepVC = stepViewController as? ORKActiveStepViewController
+            // Mark the player who reached chatroom step as ready.
+            FirebaseConstants.shared.gamegroups.document(gameGroup.id!).updateData([
+                "chatroomReadyUserIDs": FieldValue.arrayUnion([Profiles.userID!])
+            ])
+            // When the chatroom is dismissed, finish the step.
+            
+            if chatroomVC == nil {
+                loadChatroom { [weak self] chatroom in
+                    guard let self = self else { return }
+                    self.isChatroomShown = true
+                    let chatroomVC = ChatViewController(user: Auth.auth().currentUser!, chatroom: chatroom, timeLeft: self.chatroomStepVC.timeRemaining)
+                    self.chatroomVC = chatroomVC
+                    stepViewController.title = "Quit chat"
+                    stepViewController.show(chatroomVC, sender: nil)
+                }
+            } else {
+                isChatroomShown = true
+                chatroomVC.timeLeft = chatroomStepVC.timeRemaining
                 stepViewController.show(chatroomVC, sender: nil)
             }
+        case "QuestionsInstruction":
+            // When current player reached the questions instruction step, remove it from the array.
+            FirebaseConstants.shared.gamegroups.document(gameGroup.id!).updateData([
+                "chatroomReadyUserIDs": FieldValue.arrayRemove([Profiles.userID!])
+            ])
+            // Reset flag for chatroom
+            isChatroomShown = false
+        case "Wait":
+            // Everytime the player reaches wait step, it means he attempted the game.
+            attempts += 1
+            // Mark the player as attempted.
+            let gameResult = GameResult(taskResult: taskViewController.result, questionnaire: myQuestionnaire)
+            let stepVC = stepViewController as! ORKWaitStepViewController
+            let progress = CGFloat(gameGroup.gameAttemptedUserIDs.count + 1) / CGFloat(gameGroup.userIDCount)
+            stepVC.setProgress(progress, animated: true)
+            if !gameResult.isPassed {
+                // Failed to pass the game.
+                if attempts == 2 {
+                    self.taskViewController(taskViewController, didFinishWith: .failed, error: GameError.maxAttemptReached)
+                } else {
+                    taskViewController.presentAlert(error: GameError.currentPlayerFailed)
+                }
+            } else {
+                // Mark the player as finished.
+                FirebaseConstants.shared.gamegroups.document(gameGroup.id!).updateData([
+                    "gameFinishedUserIDs": FieldValue.arrayUnion([Profiles.userID!])
+                ])
+            }
+            FirebaseConstants.shared.gamegroups.document(gameGroup.id!).updateData([
+                "gameAttemptedUserIDs": FieldValue.arrayUnion([Profiles.userID!])
+            ])
+        default:
+            break
         }
     }
     
@@ -218,22 +301,40 @@ extension MatchingViewController: ORKTaskViewControllerDelegate {
         removeMatchingGroup()
         // Remove the chatroom when a player stops the game.
         removeChatroom()
+        // Invalidate any remaining timer.
+        chatroomStepVC.finish()
+        chatroomVC.finish()
+        // Dismiss the game VC.
         taskViewController.dismiss(animated: true)
         switch reason {
+        case .failed:
+            print("❌ Failed")
+            if let error = error {
+                if let gameError = error as? GameError {
+                    presentAlert(error: gameError)
+                } else {
+                    presentAlert(error: error)
+                }
+            }
+            // Log an game error.
         case .discarded, .saved:
             print("💦 Canceled")
-            presentAlert(title: "Other player canceled", message: "😢 One of your peers dropped the game.")
+            if let error = error {
+                if let gameError = error as? GameError {
+                    presentAlert(error: gameError)
+                } else {
+                    presentAlert(error: error)
+                }
+            }
             // Log an unsuccessful game result.
-        case .failed:
-            if let error = error { presentAlert(error: error) }
-            print("❌ Failed")
-            // Log an game error.
         case .completed:
             print("✅ completed")
+            
             // Log the real game result.
             let gameResult = GameResult(taskResult: taskViewController.result, questionnaire: myQuestionnaire)
             let controller = ResultStatsViewController()
             controller.resultPairs = gameResult.resultPairs
+            controller.nextGame = nextGame(for: selectedGame)
             
             let gameHistory = GameHistory(
                 playedDate: gameGroup.createdDate,
