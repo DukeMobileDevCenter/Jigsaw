@@ -116,6 +116,7 @@
                         <outlet property="playersCountSegmentedControl" destination="KsP-MD-Xda" id="ADk-vn-DWX"/>
                         <segue destination="8h7-tJ-Fxn" kind="show" identifier="showCategory" id="b8U-v2-sN6"/>
                         <segue destination="qIk-Vr-9mo" kind="show" identifier="showRandom" id="tOa-KL-BCv"/>
+                        <segue destination="qIk-Vr-9mo" kind="show" identifier="showSpecific" animates="NO" id="uxd-NL-JaG"/>
                     </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FUz-N4-EiH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -143,18 +144,26 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="82k-nw-Y9U">
-                                <rect key="frame" x="158.5" y="492" width="97" height="30"/>
+                                <rect key="frame" x="158.5" y="545" width="97" height="30"/>
                                 <state key="normal" title="Join the game"/>
                                 <connections>
                                     <action selector="joinGameButtonTapped:" destination="qIk-Vr-9mo" eventType="touchUpInside" id="aLV-dt-Pew"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="game name shown here." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SrW-5i-19I">
+                                <rect key="frame" x="113.5" y="492" width="187" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
+                            <constraint firstItem="82k-nw-Y9U" firstAttribute="top" secondItem="SrW-5i-19I" secondAttribute="bottom" constant="32" id="7ZB-DY-jVv"/>
                             <constraint firstItem="9rw-kM-ciH" firstAttribute="top" secondItem="HnM-In-fDm" secondAttribute="bottom" constant="20" id="Q4U-Dw-vSW"/>
+                            <constraint firstItem="SrW-5i-19I" firstAttribute="centerX" secondItem="9rw-kM-ciH" secondAttribute="centerX" id="Rtc-tI-EPu"/>
                             <constraint firstItem="9rw-kM-ciH" firstAttribute="centerX" secondItem="UYT-Va-FZ1" secondAttribute="centerX" id="dsJ-33-Jqe"/>
-                            <constraint firstItem="82k-nw-Y9U" firstAttribute="top" secondItem="9rw-kM-ciH" secondAttribute="bottom" constant="32" id="hVh-T5-g6X"/>
+                            <constraint firstItem="SrW-5i-19I" firstAttribute="top" secondItem="9rw-kM-ciH" secondAttribute="bottom" constant="32" id="mae-CK-D2X"/>
                             <constraint firstItem="9rw-kM-ciH" firstAttribute="centerY" secondItem="UYT-Va-FZ1" secondAttribute="centerY" id="u40-7Q-xua"/>
                             <constraint firstItem="82k-nw-Y9U" firstAttribute="centerX" secondItem="HnM-In-fDm" secondAttribute="centerX" id="wbi-0W-4NS"/>
                             <constraint firstItem="9rw-kM-ciH" firstAttribute="centerX" secondItem="HnM-In-fDm" secondAttribute="centerX" id="x0M-gn-mtf"/>
@@ -163,6 +172,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="pOI-3B-ZJ7"/>
                     <connections>
+                        <outlet property="gameNameLabel" destination="SrW-5i-19I" id="Sm4-Da-u2i"/>
                         <outlet property="playerCountLabel" destination="HnM-In-fDm" id="anW-g6-z0I"/>
                     </connections>
                 </viewController>
@@ -414,7 +424,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="zl6-Sm-1ug"/>
+        <segue reference="uxd-NL-JaG"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="arrow.swap" catalog="system" width="128" height="100"/>
