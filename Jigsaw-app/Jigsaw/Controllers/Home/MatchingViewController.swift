@@ -230,67 +230,78 @@ class MatchingViewController: UIViewController {
 }
 
 extension MatchingViewController: ORKTaskViewControllerDelegate {
+    private func handleCountdownStep(taskViewController: ORKTaskViewController, stepViewController: ORKActiveStepViewController) {
+        if isChatroomShown {
+            chatroomStepVC.finish()
+            chatroomVC.finish()
+            return
+        }
+        chatroomStepVC = stepViewController
+        // Mark the player who reached chatroom step as ready.
+        FirebaseConstants.shared.gamegroups.document(gameGroup.id!).updateData([
+            "chatroomReadyUserIDs": FieldValue.arrayUnion([Profiles.userID!])
+        ])
+        // When the chatroom is dismissed, finish the step.
+        
+        if chatroomVC == nil {
+            loadChatroom { [weak self] chatroom in
+                guard let self = self else { return }
+                self.isChatroomShown = true
+                let chatroomVC = ChatViewController(user: Auth.auth().currentUser!, chatroom: chatroom, timeLeft: self.chatroomStepVC.timeRemaining)
+                self.chatroomVC = chatroomVC
+                stepViewController.title = "Quit chat"
+                stepViewController.show(chatroomVC, sender: nil)
+            }
+        } else {
+            isChatroomShown = true
+            chatroomVC.timeLeft = chatroomStepVC.timeRemaining
+            stepViewController.show(chatroomVC, sender: nil)
+        }
+    }
+    
+    private func handleQuestionsInstructionStep() {
+        // When current player reached the questions instruction step, remove it from the array.
+        FirebaseConstants.shared.gamegroups.document(gameGroup.id!).updateData([
+            "chatroomReadyUserIDs": FieldValue.arrayRemove([Profiles.userID!])
+        ])
+        // Reset flag for chatroom
+        isChatroomShown = false
+    }
+    
+    private func handleWaitStep(taskViewController: ORKTaskViewController, stepViewController: ORKWaitStepViewController) {
+        // Everytime the player reaches wait step, it means he attempted the game.
+        attempts += 1
+        // Mark the player as attempted.
+        let gameResult = GameResult(taskResult: taskViewController.result, questionnaire: myQuestionnaire)
+        let progress = CGFloat(gameGroup.gameAttemptedUserIDs.count + 1) / CGFloat(gameGroup.userIDCount)
+        stepViewController.setProgress(progress, animated: true)
+        if !gameResult.isPassed {
+            // Failed to pass the game.
+            if attempts == 2 {
+                self.taskViewController(taskViewController, didFinishWith: .failed, error: GameError.maxAttemptReached)
+            } else {
+                taskViewController.presentAlert(error: GameError.currentPlayerFailed)
+            }
+        } else {
+            // Mark the player as finished.
+            FirebaseConstants.shared.gamegroups.document(gameGroup.id!).updateData([
+                "gameFinishedUserIDs": FieldValue.arrayUnion([Profiles.userID!])
+            ])
+        }
+        FirebaseConstants.shared.gamegroups.document(gameGroup.id!).updateData([
+            "gameAttemptedUserIDs": FieldValue.arrayUnion([Profiles.userID!])
+        ])
+    }
+    
     func taskViewController(_ taskViewController: ORKTaskViewController, stepViewControllerWillAppear stepViewController: ORKStepViewController) {
         guard let step = stepViewController.step else { return }
         switch step.identifier {
         case "Countdown":
-            if isChatroomShown {
-                chatroomStepVC.finish()
-                chatroomVC.finish()
-                return
-            }
-            chatroomStepVC = stepViewController as? ORKActiveStepViewController
-            // Mark the player who reached chatroom step as ready.
-            FirebaseConstants.shared.gamegroups.document(gameGroup.id!).updateData([
-                "chatroomReadyUserIDs": FieldValue.arrayUnion([Profiles.userID!])
-            ])
-            // When the chatroom is dismissed, finish the step.
-            
-            if chatroomVC == nil {
-                loadChatroom { [weak self] chatroom in
-                    guard let self = self else { return }
-                    self.isChatroomShown = true
-                    let chatroomVC = ChatViewController(user: Auth.auth().currentUser!, chatroom: chatroom, timeLeft: self.chatroomStepVC.timeRemaining)
-                    self.chatroomVC = chatroomVC
-                    stepViewController.title = "Quit chat"
-                    stepViewController.show(chatroomVC, sender: nil)
-                }
-            } else {
-                isChatroomShown = true
-                chatroomVC.timeLeft = chatroomStepVC.timeRemaining
-                stepViewController.show(chatroomVC, sender: nil)
-            }
+            handleCountdownStep(taskViewController: taskViewController, stepViewController: stepViewController as! ORKActiveStepViewController)
         case "QuestionsInstruction":
-            // When current player reached the questions instruction step, remove it from the array.
-            FirebaseConstants.shared.gamegroups.document(gameGroup.id!).updateData([
-                "chatroomReadyUserIDs": FieldValue.arrayRemove([Profiles.userID!])
-            ])
-            // Reset flag for chatroom
-            isChatroomShown = false
+            handleQuestionsInstructionStep()
         case "Wait":
-            // Everytime the player reaches wait step, it means he attempted the game.
-            attempts += 1
-            // Mark the player as attempted.
-            let gameResult = GameResult(taskResult: taskViewController.result, questionnaire: myQuestionnaire)
-            let stepVC = stepViewController as! ORKWaitStepViewController
-            let progress = CGFloat(gameGroup.gameAttemptedUserIDs.count + 1) / CGFloat(gameGroup.userIDCount)
-            stepVC.setProgress(progress, animated: true)
-            if !gameResult.isPassed {
-                // Failed to pass the game.
-                if attempts == 2 {
-                    self.taskViewController(taskViewController, didFinishWith: .failed, error: GameError.maxAttemptReached)
-                } else {
-                    taskViewController.presentAlert(error: GameError.currentPlayerFailed)
-                }
-            } else {
-                // Mark the player as finished.
-                FirebaseConstants.shared.gamegroups.document(gameGroup.id!).updateData([
-                    "gameFinishedUserIDs": FieldValue.arrayUnion([Profiles.userID!])
-                ])
-            }
-            FirebaseConstants.shared.gamegroups.document(gameGroup.id!).updateData([
-                "gameAttemptedUserIDs": FieldValue.arrayUnion([Profiles.userID!])
-            ])
+            handleWaitStep(taskViewController: taskViewController, stepViewController: stepViewController as! ORKWaitStepViewController)
         default:
             break
         }
