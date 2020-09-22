@@ -32,7 +32,21 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Access your photo library to share images in chat.</string>
+	<string>The app wants to access your photo library to share images in chat.</string>
+	<key>NSCameraUsageDescription</key>
+	<string>Apple ResearchKit wants to access your camera for an active task.</string>
+	<key>NSHealthShareUsageDescription</key>
+	<string>Apple ResearchKit wants to access your HealthKit data for an active task.</string>
+	<key>NSHealthUpdateUsageDescription</key>
+	<string>Apple ResearchKit wants to access your HealthKit data for an active task.</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Apple ResearchKit wants to access your location data for an location based question.</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Apple ResearchKit wants to access your microphone for an active task.</string>
+	<key>NSMotionUsageDescription</key>
+	<string>Apple ResearchKit wants to access your motion data for an active task.</string>
+	<key>NSSpeechRecognitionUsageDescription</key>
+	<string>Apple ResearchKit wants to access your voice data for an active task.</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
