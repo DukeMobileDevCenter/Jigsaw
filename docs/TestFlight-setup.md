@@ -6,6 +6,10 @@
 - Update the following properties of the app
     - Build number: Under `Project` -> `Identity`, set `Build` to the current date (formatted `YYYYMMDD`, e.g. `20200915`).
     - Update `Bundle Identifier`: Set Bundle Identifier to `edu.duke.mobilecenter.Jigsaw.beta`. This will allow us to test the app without occupying the Bundle Identifier for release to AppStore (i.e. `edu.duke.mobilecenter.Jigsaw`).
+- If this is the first time to upload the app, be sure the app is also created on App Store Connect.
+    - In the `Apps` [tab](https://appstoreconnect.apple.com/apps), tap the add button to create an app.
+    - Fill in the required information. Please note: it is recommended to use different bundle identifiers for test and release version, so that both versions can live together on a same device, to better serve for testing purpose.
+    - ⚠️ Xcode won't allow you to upload unless you've done this step.
 
 ## Steps
 
