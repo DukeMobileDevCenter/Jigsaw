@@ -49,6 +49,7 @@ class RootTabBarController: UITabBarController {
             } else {
                 print("❌ Error loading existing user. This shoudn't happen unless user get deleted on remote or log out explicitly.")
                 // handle re-login here.
+//                auth.signInAnonymously()
             }
             didCompleteOnboarding()
         }

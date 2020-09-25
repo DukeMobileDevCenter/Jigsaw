@@ -173,6 +173,7 @@
                     <navigationItem key="navigationItem" id="pOI-3B-ZJ7"/>
                     <connections>
                         <outlet property="gameNameLabel" destination="SrW-5i-19I" id="Sm4-Da-u2i"/>
+                        <outlet property="joinGameButton" destination="82k-nw-Y9U" id="elT-dz-n51"/>
                         <outlet property="playerCountLabel" destination="HnM-In-fDm" id="anW-g6-z0I"/>
                     </connections>
                 </viewController>

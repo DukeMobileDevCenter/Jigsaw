@@ -27,8 +27,12 @@ extension UIViewController {
         presentAlert(title: "Error", message: error.localizedDescription)
     }
     
-    func presentAlert(error: GameError) {
-        presentAlert(title: "Jigsaw broken", message: error.description)
+    func presentAlert(gameError: GameError, completion: (() -> Void)? = nil) {
+        let okAction = UIAlertAction(title: "OK", style: .default) { _ in
+            completion?()
+        }
+        let alertController = UIAlertController(title: "Jigsaw broken", message: gameError.description, preferredStyle: .alert, actions: [okAction])
+        present(alertController, animated: true)
     }
 }
 

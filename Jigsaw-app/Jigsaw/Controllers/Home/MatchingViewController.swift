@@ -15,6 +15,7 @@ import FirebaseFirestoreSwift
 class MatchingViewController: UIViewController {
     @IBOutlet var playerCountLabel: UILabel!
     @IBOutlet var gameNameLabel: UILabel!
+    @IBOutlet var joinGameButton: UIButton!
     
     var selectedGame: Game!
     var queueType: PlayersQueue!
@@ -75,7 +76,7 @@ class MatchingViewController: UIViewController {
         do {
             try queueReference.document(Profiles.currentPlayer.userID).setData(from: Profiles.currentPlayer)
         } catch {
-            gameVC.presentAlert(error: error)
+            presentAlert(error: error)
         }
     }
     
@@ -247,14 +248,15 @@ extension MatchingViewController: ORKTaskViewControllerDelegate {
             loadChatroom { [weak self] chatroom in
                 guard let self = self else { return }
                 self.isChatroomShown = true
-                let chatroomVC = ChatViewController(user: Auth.auth().currentUser!, chatroom: chatroom, timeLeft: self.chatroomStepVC.timeRemaining)
+                let chatroomVC = ChatViewController(user: Auth.auth().currentUser!, chatroom: chatroom, timeLeft: stepViewController.timeRemaining)
                 self.chatroomVC = chatroomVC
                 stepViewController.title = "Quit chat"
                 stepViewController.show(chatroomVC, sender: nil)
             }
         } else {
             isChatroomShown = true
-            chatroomVC.timeLeft = chatroomStepVC.timeRemaining
+            chatroomVC.timeLeft = stepViewController.timeRemaining
+            stepViewController.title = "Quit chat"
             stepViewController.show(chatroomVC, sender: nil)
         }
     }
@@ -275,22 +277,30 @@ extension MatchingViewController: ORKTaskViewControllerDelegate {
         let gameResult = GameResult(taskResult: taskViewController.result, questionnaire: myQuestionnaire)
         let progress = CGFloat(gameGroup.gameAttemptedUserIDs.count + 1) / CGFloat(gameGroup.userIDCount)
         stepViewController.setProgress(progress, animated: true)
+        // Add user ID to attempted array.
+        // Note: it must go after the alert is presented. Otherwise it would cause
+        // nav stack bug for not being able to pop while alert is presenting.
+        let completion = { [weak self] in
+            guard let self = self else { return }
+            FirebaseConstants.shared.gamegroups.document(self.gameGroup.id!).updateData([
+                "gameAttemptedUserIDs": FieldValue.arrayUnion([Profiles.userID!])
+            ])
+        }
         if !gameResult.isPassed {
             // Failed to pass the game.
             if attempts == 2 {
                 self.taskViewController(taskViewController, didFinishWith: .failed, error: GameError.maxAttemptReached)
+                completion()
             } else {
-                taskViewController.presentAlert(error: GameError.currentPlayerFailed)
+                stepViewController.presentAlert(gameError: GameError.currentPlayerFailed, completion: completion)
             }
         } else {
             // Mark the player as finished.
             FirebaseConstants.shared.gamegroups.document(gameGroup.id!).updateData([
                 "gameFinishedUserIDs": FieldValue.arrayUnion([Profiles.userID!])
             ])
+            completion()
         }
-        FirebaseConstants.shared.gamegroups.document(gameGroup.id!).updateData([
-            "gameAttemptedUserIDs": FieldValue.arrayUnion([Profiles.userID!])
-        ])
     }
     
     func taskViewController(_ taskViewController: ORKTaskViewController, stepViewControllerWillAppear stepViewController: ORKStepViewController) {
@@ -315,6 +325,9 @@ extension MatchingViewController: ORKTaskViewControllerDelegate {
         // Invalidate any remaining timer.
         chatroomStepVC.finish()
         chatroomVC.finish()
+        chatroomVC = nil
+        // Re-enable the button to allow player to join another game.
+        joinGameButton.isEnabled = true
         // Dismiss the game VC.
         taskViewController.dismiss(animated: true)
         switch reason {
@@ -322,7 +335,7 @@ extension MatchingViewController: ORKTaskViewControllerDelegate {
             print("❌ Failed")
             if let error = error {
                 if let gameError = error as? GameError {
-                    presentAlert(error: gameError)
+                    presentAlert(gameError: gameError)
                 } else {
                     presentAlert(error: error)
                 }
@@ -332,7 +345,7 @@ extension MatchingViewController: ORKTaskViewControllerDelegate {
             print("💦 Canceled")
             if let error = error {
                 if let gameError = error as? GameError {
-                    presentAlert(error: gameError)
+                    presentAlert(gameError: gameError)
                 } else {
                     presentAlert(error: error)
                 }
