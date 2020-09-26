@@ -19,10 +19,6 @@ class ProfileViewController: FormViewController {
     // In this case, load the form when the view is appearing.
     private var shouldLoadFormForTheFirstTime = true
     
-    private let appName = Bundle.main.object(forInfoDictionaryKey: kCFBundleNameKey as String) as? String
-    private let versionNumber = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String
-    private let buildNumber = Bundle.main.object(forInfoDictionaryKey: kCFBundleVersionKey as String) as? String
-    
     @IBAction func userAccountBarButtonTapped(_ sender: UIBarButtonItem) {
         let authViewController = authUI.authViewController()
         show(authViewController, sender: sender)
@@ -171,7 +167,7 @@ class ProfileViewController: FormViewController {
                 self?.present(controller, animated: true)
             }
         }
-        +++ Section("\(appName!) Version \(versionNumber!) build \(buildNumber!)")
+            +++ Section("\(AppInfo.appName) Version \(AppInfo.versionNumber) build \(AppInfo.buildNumber)")
     }
 }
 
