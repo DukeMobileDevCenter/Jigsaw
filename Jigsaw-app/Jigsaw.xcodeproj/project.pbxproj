@@ -348,7 +348,7 @@
 				00CDFF0524B2E8F0009C789D /* Models */,
 				00CDFF0424B2E8E1009C789D /* Controllers */,
 				00CDFF0324B2E8C3009C789D /* Extensions */,
-				00CDFF0224B2E8AA009C789D /* Storyboard */,
+				00CDFF0224B2E8AA009C789D /* Storyboards */,
 				0070DFE924B0060400E71F46 /* AppDelegate.swift */,
 				0070DFEB24B0060400E71F46 /* SceneDelegate.swift */,
 				0070DFF224B0060500E71F46 /* Assets.xcassets */,
@@ -365,6 +365,25 @@
 				0070E00224B0060500E71F46 /* Info.plist */,
 			);
 			path = JigsawTests;
+			sourceTree = "<group>";
+		};
+		0071E91B251FF67B0025702E /* View XIBs */ = {
+			isa = PBXGroup;
+			children = (
+				00B0A67924E3CF9600887701 /* ProfileHeaderView.xib */,
+			);
+			path = "View XIBs";
+			sourceTree = "<group>";
+		};
+		0071E91C251FF6880025702E /* Controller Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				00F029DA251FF4F100CB2A15 /* GameHistoryRadarChartViewController.storyboard */,
+				00F029D8251FF34900CB2A15 /* ResultStatsViewController.storyboard */,
+				00B6306224FB26A8008975CE /* GameHistoryTimeline.storyboard */,
+				00D9F5152506DEDF00898DFA /* PreviewDetailViewController.storyboard */,
+			);
+			path = "Controller Storyboards";
 			sourceTree = "<group>";
 		};
 		009D067C2511F15A002E488F /* Products */ = {
@@ -399,18 +418,15 @@
 			path = Profile;
 			sourceTree = "<group>";
 		};
-		00CDFF0224B2E8AA009C789D /* Storyboard */ = {
+		00CDFF0224B2E8AA009C789D /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
-				00B0A67924E3CF9600887701 /* ProfileHeaderView.xib */,
-				00F029DA251FF4F100CB2A15 /* GameHistoryRadarChartViewController.storyboard */,
-				00F029D8251FF34900CB2A15 /* ResultStatsViewController.storyboard */,
+				0071E91B251FF67B0025702E /* View XIBs */,
+				0071E91C251FF6880025702E /* Controller Storyboards */,
 				0070DFEF24B0060400E71F46 /* Main.storyboard */,
 				0070DFF424B0060500E71F46 /* LaunchScreen.storyboard */,
-				00B6306224FB26A8008975CE /* GameHistoryTimeline.storyboard */,
-				00D9F5152506DEDF00898DFA /* PreviewDetailViewController.storyboard */,
 			);
-			path = Storyboard;
+			path = Storyboards;
 			sourceTree = "<group>";
 		};
 		00CDFF0324B2E8C3009C789D /* Extensions */ = {
