@@ -41,7 +41,7 @@ class HomeCollectionViewController: UICollectionViewController {
         let controller = ResultStatsViewController()
         controller.resultPairs = [.correct: 3, .skipped: 1, .incorrect: 2]
         controller.hidesBottomBarWhenPushed = true
-        self.show(controller, sender: sender)
+        show(controller, sender: sender)
     }
     
     private func testShowChatroom(_ sender: UIBarButtonItem) {
