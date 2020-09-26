@@ -41,7 +41,6 @@ class OnboardingViewController: ORKTaskViewController {
     }
     
     private static func getTask() -> ORKOrderedTask {
-        // completion instruction
         let steps = makeInstructionSteps()
         return ORKOrderedTask(identifier: "InstructionTaskIdentifier", steps: steps)
     }
@@ -77,14 +76,6 @@ extension OnboardingViewController: ORKTaskViewControllerDelegate {
             presentingViewController?.dismiss(animated: false)
         case .completed:
             OnboardingStateManager.shared.setOnboardingCompletedState(state: true)
-            // Access the first and last name from the review step
-//            if let signatureResult = signatureResult(taskViewController: taskViewController),
-//                let signature = signatureResult.signature {
-//                let defaults = UserDefaults.standard
-//                defaults.set(signature.givenName, forKey: "firstName")
-//                defaults.set(signature.familyName, forKey: "lastName")
-//            }
-//            print("✅ completed")
             if let sliderResult = taskViewController.result.stepResult(forStepIdentifier: "PoliticalSliderStep")?.results?.first as? ORKScaleQuestionResult,
                 let answer = sliderResult.scaleAnswer {
                 Profiles.jigsawValue = answer.doubleValue
@@ -94,8 +85,8 @@ extension OnboardingViewController: ORKTaskViewControllerDelegate {
             }
             Profiles.displayName = JigsawPiece.unknown.rawValue
             createUserInfo(userID: Profiles.userID, displayName: Profiles.displayName, jigsawValue: Profiles.jigsawValue)
-            presentingViewController?.dismiss(animated: true) {
-                self.onboardingManagerDelegate?.didCompleteOnboarding()
+            presentingViewController?.dismiss(animated: true) { [weak self] in
+                self?.onboardingManagerDelegate?.didCompleteOnboarding()
             }
         @unknown default:
             fatalError("Error: Onboarding task yields unknown result.")

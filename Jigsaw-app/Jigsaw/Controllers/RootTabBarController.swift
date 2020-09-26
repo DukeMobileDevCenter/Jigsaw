@@ -16,24 +16,12 @@ class RootTabBarController: UITabBarController {
         super.viewDidAppear(animated)
         // Only load player info once per app launch.
         guard isFirstAppearance else { return }
+        // An instance to FirebaseAuth.
         let auth = Auth.auth()
-        // First time user
+        // First time user.
         if !OnboardingStateManager.shared.getOnboardingCompletedState() {
             // Sign in anonymously for now. Add other sign in options later.
-            auth.signInAnonymously { [weak self] result, error in
-                guard let self = self else { return }
-                if let error = error {
-                    self.presentAlert(error: error)
-                    return
-                }
-                guard let user = result?.user else { return }
-                let uid = user.uid
-                if Profiles.userID == nil {
-                    Profiles.userID = uid
-                } else if Profiles.userID != uid {
-                    self.presentAlert(title: "Something wrong with anonymous user", message: "This should never happen unless database is corrupted.")
-                }
-            }
+            signInAnonymously(auth: auth)
             let onboardingViewController = OnboardingViewController(taskRun: nil)
             onboardingViewController.onboardingManagerDelegate = self
             // Disallow dismiss by interactive swipe down in iOS 13.
@@ -43,17 +31,35 @@ class RootTabBarController: UITabBarController {
             // Already went through the new user workflow and have credentials in keychain.
             if let currentUser = auth.currentUser {
                 if Profiles.userID != currentUser.uid {
-                    self.presentAlert(title: "Something wrong with existing user", message: "This should never happen unless storage is corrupted.")
+                    self.presentAlert(title: "❌ Something wrong with existing user", message: "This should never happen unless storage is corrupted.")
                 }
                 Profiles.userID = currentUser.uid
+                
             } else {
                 print("❌ Error loading existing user. This shoudn't happen unless user get deleted on remote or log out explicitly.")
-                // handle re-login here.
-//                auth.signInAnonymously()
+                // Handle re-login here.
             }
             didCompleteOnboarding()
         }
         isFirstAppearance = false
+    }
+    
+    private func signInAnonymously(auth: Auth, completion: (() -> Void)? = nil) {
+        auth.signInAnonymously { [weak self] result, error in
+            guard let self = self else { return }
+            if let error = error {
+                self.presentAlert(error: error)
+                return
+            }
+            guard let user = result?.user else { return }
+            let uid = user.uid
+            if Profiles.userID == nil {
+                Profiles.userID = uid
+            } else if Profiles.userID != uid {
+                self.presentAlert(title: "Something wrong with anonymous user", message: "This should never happen unless database is corrupted.")
+            }
+            completion?()
+        }
     }
     
     private func setCurrentPlayer(with userID: String) {
