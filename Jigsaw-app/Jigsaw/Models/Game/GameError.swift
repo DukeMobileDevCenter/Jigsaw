@@ -16,11 +16,11 @@ enum GameError: LocalizedError, CustomStringConvertible {
     var description: String {
         switch self {
         case .otherPlayerDropped:
-            return "😢 One of your peers dropped or failed the game."
+            return "😢 One of your peers did not pass the game."
         case .maxAttemptReached:
             return "😞 Max attempt reached. Game fails!"
         case .currentPlayerFailed:
-            return "🤨 Uh-oh. You failed to pass the game. Discuss and try again!"
+            return "🤨 Uh-oh. You didn't pass the game. Discuss and try again!"
         }
     }
 }
