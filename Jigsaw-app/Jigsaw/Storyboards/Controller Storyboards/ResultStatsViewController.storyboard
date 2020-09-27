@@ -25,9 +25,9 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9mq-48-YMy" customClass="PieChartView" customModule="Charts">
-                                <rect key="frame" x="0.0" y="44" width="414" height="594"/>
+                                <rect key="frame" x="0.0" y="44" width="414" height="276"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="300" id="Yf7-Ox-oYX"/>
+                                    <constraint firstAttribute="width" secondItem="9mq-48-YMy" secondAttribute="height" multiplier="3:2" id="Nbs-Xg-r6M"/>
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kIe-xY-obD">
@@ -44,11 +44,11 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="kIe-xY-obD" firstAttribute="top" secondItem="iwb-cv-ooB" secondAttribute="bottom" constant="8" symbolic="YES" id="1Co-bh-Zre"/>
+                            <constraint firstItem="9mq-48-YMy" firstAttribute="width" secondItem="UZn-A9-wPv" secondAttribute="width" id="35h-iK-07R"/>
                             <constraint firstItem="iwb-cv-ooB" firstAttribute="centerX" secondItem="9mq-48-YMy" secondAttribute="centerX" id="3Gf-m9-9wz"/>
-                            <constraint firstItem="iwb-cv-ooB" firstAttribute="top" secondItem="9mq-48-YMy" secondAttribute="bottom" constant="50" id="64B-eh-mbm"/>
-                            <constraint firstItem="9mq-48-YMy" firstAttribute="trailing" secondItem="UZn-A9-wPv" secondAttribute="trailing" id="Pxz-FQ-fto"/>
+                            <constraint firstItem="iwb-cv-ooB" firstAttribute="top" relation="greaterThanOrEqual" secondItem="9mq-48-YMy" secondAttribute="bottom" constant="50" id="64B-eh-mbm"/>
                             <constraint firstItem="UZn-A9-wPv" firstAttribute="bottom" secondItem="kIe-xY-obD" secondAttribute="bottom" constant="84" id="S6g-gq-efJ"/>
-                            <constraint firstItem="9mq-48-YMy" firstAttribute="leading" secondItem="UZn-A9-wPv" secondAttribute="leading" id="ThK-rr-YgB"/>
+                            <constraint firstItem="9mq-48-YMy" firstAttribute="centerX" secondItem="UZn-A9-wPv" secondAttribute="centerX" id="afp-k0-Wux"/>
                             <constraint firstItem="kIe-xY-obD" firstAttribute="centerX" secondItem="9mq-48-YMy" secondAttribute="centerX" id="vO7-Xd-JhL"/>
                             <constraint firstItem="9mq-48-YMy" firstAttribute="top" secondItem="UZn-A9-wPv" secondAttribute="top" id="vhH-Mh-giA"/>
                         </constraints>
