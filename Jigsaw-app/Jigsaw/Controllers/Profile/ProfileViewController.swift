@@ -90,13 +90,18 @@ class ProfileViewController: FormViewController {
         let piece = JigsawPiece.unknown
         let view = Bundle.main.loadNibNamed("ProfileHeaderView", owner: self)?.first as! ProfileHeaderView
         view.setView(name: piece.label, avatarFileName: piece.bundleName)
-        let user = FirebaseConstants.shared.currentUser!
-        let providerIDs = user.providerData.map { $0.providerID }
-        // Load provider icons
-        view.googleIconView.tintColor = providerIDs.contains(GoogleAuthProviderID) ? .systemRed : .secondaryLabel
-        view.githubIconView.tintColor = providerIDs.contains(GitHubAuthProviderID) ? .systemPurple : .secondaryLabel
-        view.appleIconView.tintColor = providerIDs.contains("apple.com") ? .systemTeal : .secondaryLabel
-        view.emailIconView.tintColor = providerIDs.contains(EmailAuthProviderID) ? .systemGreen : .secondaryLabel
+        if let user = FirebaseConstants.shared.currentUser {
+            let providerIDs = user.providerData.map { $0.providerID }
+            if let name = user.displayName, let photoURL = user.photoURL {
+                // Display account associated avatar for profile page.
+                view.setView(name: name, avatarURL: photoURL)
+            }
+            // Load provider icons
+            view.googleIconView.tintColor = providerIDs.contains(GoogleAuthProviderID) ? .systemRed : .secondaryLabel
+            view.githubIconView.tintColor = providerIDs.contains(GitHubAuthProviderID) ? .systemPurple : .secondaryLabel
+            view.appleIconView.tintColor = providerIDs.contains("apple.com") ? .systemTeal : .secondaryLabel
+            view.emailIconView.tintColor = providerIDs.contains(EmailAuthProviderID) ? .systemGreen : .secondaryLabel
+        }
         return view
     }
     
