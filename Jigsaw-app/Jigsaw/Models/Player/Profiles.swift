@@ -15,6 +15,8 @@ class Profiles: CustomStringConvertible {
     
     static var currentPlayer: Player! = nil
     
+    static var playedGameIDs = Set<String>()
+    
     private enum SettingKeys: String, CaseIterable {
         case userID
         case displayName

@@ -85,6 +85,8 @@ class MatchingViewController: UIViewController {
         do {
             // Set a history with the group ID.
             try historyRef.document(gameGroup.id!).setData(from: gameHistory)
+            // Insert the played game into history set.
+            Profiles.playedGameIDs.insert(gameHistory.gameID)
         } catch {
             presentAlert(error: error)
         }
@@ -361,6 +363,7 @@ extension MatchingViewController: ORKTaskViewControllerDelegate {
             controller.nextGame = nextGame(for: selectedGame)
             
             let gameHistory = GameHistory(
+                gameID: selectedGame.gameName + "_" + String(selectedGame.level),
                 playedDate: gameGroup.createdDate,
                 gameCategory: selectedGame.category,
                 gameName: selectedGame.gameName,

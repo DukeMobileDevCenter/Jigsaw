@@ -60,6 +60,11 @@ class HomeCollectionViewController: UICollectionViewController {
     }
     
     @objc
+    private func loadFromRemote() {
+        loadGames()
+        loadHistories()
+    }
+    
     private func loadGames() {
         ProgressHUD.show("Loading")
         // Asynchronously load the games from Firebase.
@@ -81,10 +86,25 @@ class HomeCollectionViewController: UICollectionViewController {
         }
     }
     
+    private func loadHistories() {
+        guard Profiles.userID != nil else { return }
+        FirebaseHelper.getGameHistory(userID: Profiles.userID) { [weak self] histories, error in
+            if let histories = histories {
+                histories.forEach { history in
+                    Profiles.playedGameIDs.insert(history.gameID)
+                }
+            } else if let error = error {
+                DispatchQueue.main.async {
+                    self?.presentAlert(error: error)
+                }
+            }
+        }
+    }
+    
     private func configureRefreshControl() {
         // Add the refresh control to UIScrollView object.
         collectionView.refreshControl = UIRefreshControl()
-        collectionView.refreshControl?.addTarget(self, action: #selector(loadGames), for: .valueChanged)
+        collectionView.refreshControl?.addTarget(self, action: #selector(loadFromRemote), for: .valueChanged)
     }
     
     private func isRandomCell(for indexPath: IndexPath) -> Bool {
@@ -136,8 +156,8 @@ class HomeCollectionViewController: UICollectionViewController {
         
         // Configure pull to refresh.
         configureRefreshControl()
-        // Load games from remote.
-        loadGames()
+        // Load games and player's game histories (if exist) from remote.
+        loadFromRemote()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

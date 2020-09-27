@@ -93,7 +93,10 @@ class GameCategoryClass: NSObject, UICollectionViewDataSource {
         cell.nameLabel.text = category.label
         cell.iconImageView.setImage(category.iconImage)
         cell.backgroundImageView.setImage(category.backgroundImage)
-        
+        // Temporarily disable other categories.
+        if category != .immigration {
+            cell.isUserInteractionEnabled = false
+        }
         return cell
     }
 }

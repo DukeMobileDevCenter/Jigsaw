@@ -50,7 +50,7 @@ class SignInViewController: UIViewController {
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
         let alert = UIAlertController(
             title: "Info",
-            message: "If you play anonymously, your game records might be lost afterwards. Consider connect to one of your online accounts.",
+            message: "Playing anonymously might result in losing game records. Connect to one of your online accounts in your profile later.",
             preferredStyle: .alert
         )
         alert.addAction(cancelAction)
@@ -70,9 +70,9 @@ class SignInViewController: UIViewController {
             } else if let result = result {
                 let uid = result.user.uid
                 if Profiles.userID != uid {
-                    os_log(.info, "Sign in as a different anonymous player, user ID is %s", uid)
+                    os_log(.info, "Sign in as a different anonymous player, old is %s, new is %s", Profiles.userID, uid)
+                    Profiles.userID = uid
                 }
-                Profiles.userID = uid
                 // Dismiss current view controller.
                 self.dismiss(animated: true, completion: nil)
                 // Complete the following steps after sign in.

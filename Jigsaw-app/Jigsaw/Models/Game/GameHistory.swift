@@ -12,7 +12,7 @@ struct GameHistory: Codable, CustomStringConvertible {
     var description: String {
         return "On \(playedDate.description), players \(allPlayers) played game \(gameName).\n My score in the game is \(score * 100) and stats are \(gameResult)"
     }
-    
+    let gameID: String
     let playedDate: Date
     let gameCategory: GameCategory
     let gameName: String

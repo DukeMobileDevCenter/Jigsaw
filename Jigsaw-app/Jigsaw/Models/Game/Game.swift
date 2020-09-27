@@ -31,6 +31,15 @@ struct Game {
     /// Game card background image URL, can also use for styling.
     let backgroundImageURL: URL
     
+    var gameID: String {
+        return gameName + "_" + String(level)
+    }
+    
+    var previousLevelGameID: String {
+        let previousLevel = level - 1 > 0 ? level : 1
+        return gameName + "_" + String(previousLevel)
+    }
+    
     init?(document: QueryDocumentSnapshot) {
         let data = document.data()
         

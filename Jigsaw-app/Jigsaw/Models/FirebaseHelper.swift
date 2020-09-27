@@ -54,4 +54,25 @@ enum FirebaseHelper {
     static func setPlayer(userID: String, player: Player) {
         try? FirebaseConstants.shared.players.document(userID).setData(from: player)
     }
+    
+    /// Load game history records for a player.
+    /// - Parameters:
+    ///   - userID: The user ID of the player.
+    ///   - completion: A closure that passes back an array of `GameHistory`.
+    static func getGameHistory(userID: String, completion: @escaping ([GameHistory]?, Error?) -> Void) {
+        let historyRef = FirebaseConstants.database.collection(["Players", userID, "gameHistory"].joined(separator: "/"))
+        var gameHistories: [GameHistory] = []
+        historyRef.getDocuments { querySnapshot, error in
+            if let historyRecords = querySnapshot {
+                for gameHistory in historyRecords.documents {
+                    if let history = try? gameHistory.data(as: GameHistory.self) {
+                        gameHistories.append(history)
+                    }
+                }
+                completion(gameHistories, nil)
+            } else if let error = error {
+                completion(nil, error)
+            }
+        }
+    }
 }
