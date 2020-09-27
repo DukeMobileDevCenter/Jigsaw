@@ -108,22 +108,20 @@ extension GameStore: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "GameCollectionCell", for: indexPath) as! GameCollectionCell
-        
+        // Find game.
         let game = getGames(for: selectedCategory)[indexPath.item]
-        // Enable the level 1 rooms as well as other unlocked games.
-        let isEnabled = game.isEnabled
         // Set subtitle.
-        cell.nameLabel.text = isEnabled ? "\(game.gameName) room \(game.level)" : "???"
+        cell.nameLabel.text = game.isEnabled ? "\(game.gameName) room \(game.level)" : "???"
         // Set lock icon.
-        cell.iconImageView.image = isEnabled ? UIImage(systemName: "lock.open")! : UIImage(systemName: "lock")!
-        
-        if isEnabled {
+        cell.iconImageView.image = game.isEnabled ? UIImage(systemName: "lock.open")! : UIImage(systemName: "lock")!
+        // Set background image.
+        if game.isEnabled {
             // Lazy load background image.
             cell.backgroundImageView.pin_updateWithProgress = true
             cell.backgroundImageView.pin_setImage(from: game.backgroundImageURL)
         }
         // Disable higher levels that a player hasn't reached.
-        cell.isUserInteractionEnabled = isEnabled
+        cell.isUserInteractionEnabled = game.isEnabled
         
         return cell
     }

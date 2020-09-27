@@ -20,13 +20,13 @@ class SignInViewController: UIViewController {
     /// The sign in button.
     @IBOutlet var signInButton: UIButton! {
         didSet {
-            signInButton.layer.cornerRadius = 5
+            signInButton.layer.cornerRadius = 8
         }
     }
     /// The play anonymously button.
     @IBOutlet var playAnonymouslyButton: UIButton! {
         didSet {
-            playAnonymouslyButton.layer.cornerRadius = 5
+            playAnonymouslyButton.layer.cornerRadius = 8
         }
     }
     
@@ -93,6 +93,7 @@ class SignInViewController: UIViewController {
         let providers: [FUIAuthProvider] = [
             FUIGoogleAuth(),
             FUIOAuth.appleAuthProvider(),
+            FUIOAuth.githubAuthProvider(),
             FUIEmailAuth()
         ]
         authUI.providers = providers

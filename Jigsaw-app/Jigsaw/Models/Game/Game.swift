@@ -12,7 +12,8 @@ import FirebaseFirestore
 struct Game {
     /// Game version.
     let version: String
-    /// Game "room" level. A room with higher level is unlocked after the completion of lower levels.
+    /// Game "room" level with natural index, i.e. starting from level 1.
+    /// A room with higher level is unlocked after the completion of lower levels.
     let level: Int
     /// Name of the game.
     let gameName: String
@@ -40,7 +41,8 @@ struct Game {
         return gameName + "_" + String(previousLevel)
     }
     
-    /// Determine if a game is enabled for play.
+    /// Determine if a game/room is enabled for play.
+    /// Enable all level 1 rooms as well as other unlocked rooms.
     var isEnabled: Bool {
         level == 1 || Profiles.playedGameIDs.contains(previousLevelGameID)
     }

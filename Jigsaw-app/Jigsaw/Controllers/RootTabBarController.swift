@@ -19,6 +19,13 @@ class RootTabBarController: UITabBarController {
         super.viewDidAppear(animated)
         // Only load sign in page once per app launch.
         guard isFirstLaunch else { return }
+        // Present sign in page and handle auth.
+        handlePresentSignInPage()
+        // Set the first launch flag to false to avoid calling sign in again.
+        isFirstLaunch = false
+    }
+    
+    func handlePresentSignInPage() {
         // An FirebaseAuth object that handles user sign in.
         let auth = FirebaseConstants.auth
         // Present the sign in view controller as the first page.
@@ -30,11 +37,9 @@ class RootTabBarController: UITabBarController {
         
         ProgressHUD.show()
         // Check if the user is signed in.
-        auth.addStateDidChangeListener { [weak self, unowned controller] auth, user in
+        auth.addStateDidChangeListener { [weak self, unowned controller] _, user in
             ProgressHUD.dismiss()
             guard let self = self else { return }
-            // Unsafely updated the controller's auth.
-            controller.auth = auth
             if let user = user {
                 // User is signed in, dismiss the sign in page.
                 controller.dismiss(animated: true) { [weak self] in
@@ -43,7 +48,6 @@ class RootTabBarController: UITabBarController {
             }
             // Retain the sign in page when no user is signed in.
         }
-        isFirstLaunch = false
     }
     
     private func handleAfterSignIn(user: User) {
@@ -61,7 +65,7 @@ class RootTabBarController: UITabBarController {
             controller.onboardingManagerDelegate = self
             // Disallow dismiss-by-interactive-swipe-down for iOS 13 and above.
             controller.isModalInPresentation = true
-            present(controller, animated: false)
+            present(controller, animated: true)
         }
     }
     
@@ -72,7 +76,7 @@ class RootTabBarController: UITabBarController {
                 Profiles.displayName = currentPlayer.displayName
                 Profiles.jigsawValue = currentPlayer.jigsawValue
                 Profiles.currentPlayer = currentPlayer
-                print(Profiles().description)
+                os_log(.info, "Current player's profile: %s", Profiles().description)
             } else if let error = error {
                 self.presentAlert(error: error)
                 os_log(.error, "Failed to get player from remote: %@", error.localizedDescription)

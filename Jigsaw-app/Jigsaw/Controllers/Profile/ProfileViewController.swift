@@ -6,6 +6,7 @@
 //  Copyright © 2020 DukeMobileDevCenter. All rights reserved.
 //
 
+import os
 import UIKit
 import ResearchKit
 import Eureka
@@ -13,29 +14,15 @@ import ViewRow
 import FirebaseUI
 
 class ProfileViewController: FormViewController {
-    // Firebase UI.
-    private var authUI: FUIAuth!
     // During onboarding, the form cannot be filled without player info.
     // In this case, load the form when the view is appearing.
     private var shouldLoadFormForTheFirstTime = true
-    
-    @IBAction func userAccountBarButtonTapped(_ sender: UIBarButtonItem) {
-        let authViewController = authUI.authViewController()
-        show(authViewController, sender: sender)
-    }
     
     override func viewDidLoad() {
         // Override the tableview appearance.
         loadInsetGroupedTableView()
         super.viewDidLoad()
         configureRefreshControl()
-        // Create an authentication UI.
-        authUI = createFirebaseUI()
-        
-        if Profiles.currentPlayer != nil {
-            createForm()
-            shouldLoadFormForTheFirstTime = false
-        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -44,19 +31,6 @@ class ProfileViewController: FormViewController {
             createForm()
         }
         shouldLoadFormForTheFirstTime = false
-    }
-    
-    private func createFirebaseUI() -> FUIAuth {
-        // Init Firebase UI.
-        let authUI = FUIAuth.defaultAuthUI()!
-        authUI.delegate = self
-        let providers: [FUIAuthProvider] = [
-            FUIGoogleAuth(),
-            FUIEmailAuth()
-        ]
-        authUI.providers = providers
-        authUI.shouldAutoUpgradeAnonymousUsers = true
-        return authUI
     }
     
     private func configureRefreshControl() {
@@ -78,7 +52,7 @@ class ProfileViewController: FormViewController {
                 Profiles.displayName = currentPlayer.displayName
                 Profiles.jigsawValue = currentPlayer.jigsawValue
                 Profiles.currentPlayer = currentPlayer
-                print(Profiles().description)
+                os_log(.info, "Current player's profile: %s", Profiles().description)
             } else if let error = error {
                 self.presentAlert(error: error)
                 os_log(.error, "Failed to get player from remote: %@", error.localizedDescription)
@@ -105,22 +79,17 @@ class ProfileViewController: FormViewController {
         return view
     }
     
-    private lazy var profileHeaderRow: ViewRow<ProfileHeaderView> = {
+    private var profileHeaderRow: ViewRow<ProfileHeaderView> {
         ViewRow<ProfileHeaderView>("view")
         .cellSetup { cell, _ in
             // Construct the view
             cell.view = self.profileHeaderView
         }
-        .onCellSelection { [weak self] _, _ in
-            DispatchQueue.main.async {
-                self?.presentAlert(title: "More to add here", message: "Change avatar feature is on the way!")
-            }
-        }
-    }()
+    }
     
     private func createForm() {
         form
-        +++ Section("Profile")
+        +++ Section(header: "Profile", footer: "uid: " + (FirebaseConstants.shared.currentUser?.uid ?? "nil error"))
         <<< profileHeaderRow
         +++ Section(header: "Basic Information", footer: "Blah blah blah")
         <<< DecimalRow { row in
@@ -169,25 +138,104 @@ class ProfileViewController: FormViewController {
     }
 }
 
+// MARK: Firebase Auth and account connection
+
+extension ProfileViewController {
+    @IBAction func userAccountBarButtonTapped(_ sender: UIBarButtonItem) {
+        // An action sheet for multiple actions.
+        let alertController = UIAlertController(
+            title: nil,
+            message: nil,
+            preferredStyle: .actionSheet
+        )
+        // Connect action.
+        if let user = FirebaseConstants.shared.currentUser, let authUI = createFirebaseUI(for: user) {
+            // Only add connectAction when it is able to connect.
+            let connectAction = UIAlertAction(title: "Connect Online Accounts", style: .default) { _ in
+                // Create an authentication UI if user exists and haven't connect all accounts.
+                let authViewController = authUI.authViewController()
+                self.show(authViewController, sender: sender)
+            }
+            alertController.addAction(connectAction)
+        }
+        // Sign out action.
+        let signOutAction = UIAlertAction(title: "Sign Out", style: .destructive) { _ in
+            let alert = UIAlertController(
+                title: "Be careful",
+                message: "Sign out from anonymous account will lose all your data. Please confirm before proceed.",
+                preferredStyle: .alert
+            )
+            let signOutAction = UIAlertAction(title: "Sign Out", style: .destructive) { _ in
+                // Sign out here.
+                do {
+                    try FirebaseConstants.auth.signOut()
+                    let tabBar = self.tabBarController as! RootTabBarController
+                    tabBar.handlePresentSignInPage()
+                } catch {
+                    self.presentAlert(error: error)
+                }
+            }
+            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+            alert.addAction(cancelAction)
+            alert.addAction(signOutAction)
+            alert.preferredAction = cancelAction
+            self.present(alert, animated: true)
+        }
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+        alertController.addAction(signOutAction)
+        alertController.addAction(cancelAction)
+        alertController.popoverPresentationController?.barButtonItem = sender
+        present(alertController, animated: true)
+    }
+    
+    private func createFirebaseUI(for user: User) -> FUIAuth? {
+        // Init Firebase UI.
+        let authUI = FUIAuth.defaultAuthUI()!
+        
+        let existingProviderIDs = user.providerData.map { $0.providerID }
+        // Only add additional providers to the connect page.
+        var providers = [FUIAuthProvider]()
+        if existingProviderIDs.contains(GoogleAuthProviderID) {
+            providers.append(FUIGoogleAuth())
+        }
+        if existingProviderIDs.contains(GitHubAuthProviderID) {
+            providers.append(FUIOAuth.githubAuthProvider())
+        }
+        if existingProviderIDs.contains("apple.com") {
+            providers.append(FUIOAuth.appleAuthProvider())
+        }
+        if existingProviderIDs.contains(EmailAuthProviderID) {
+            providers.append(FUIEmailAuth())
+        }
+        // Do not create the FUI if no additional providers are available.
+        if providers.isEmpty { return nil }
+        authUI.providers = providers
+        authUI.delegate = self
+        authUI.shouldAutoUpgradeAnonymousUsers = true
+        return authUI
+    }
+}
+
 extension ProfileViewController: FUIAuthDelegate {
     func authUI(_ authUI: FUIAuth, didSignInWith authDataResult: AuthDataResult?, error: Error?) {
         if let error = error as NSError?, error.code == FUIAuthErrorCode.mergeConflict.rawValue {
             // Merge conflict error, discard the anonymous user and login as the existing
             // non-anonymous user.
             guard let credential = error.userInfo[FUIAuthCredentialKey] as? AuthCredential else {
-                print("Received merge conflict error without auth credential!")
+                os_log(.error, "Received merge conflict error without auth credential!")
                 return
             }
             FirebaseConstants.auth.signIn(with: credential) { _, error in
                 if let error = error as NSError? {
-                    print("Failed to re-login: \(error)")
+                    os_log(.error, "Failed to re-login: %@", error.localizedDescription)
                     return
                 }
                 // Handle successful re-login below.
             }
         } else if let error = error {
             // User canceled account linking.
-            print("Failed to log in: \(error.localizedDescription)")
+            os_log(.error, "Failed to log in: %@", error.localizedDescription)
         } else if let result = authDataResult {
             // Handle successful login below.
             let user = result.user
