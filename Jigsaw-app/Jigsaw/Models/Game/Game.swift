@@ -41,6 +41,10 @@ struct Game {
         return gameName + "_" + String(previousLevel)
     }
     
+    var nextLevelGameID: String {
+        gameName + "_" + String(level + 1)
+    }
+    
     /// Determine if a game/room is enabled for play.
     /// Enable all level 1 rooms as well as other unlocked rooms.
     var isEnabled: Bool {
