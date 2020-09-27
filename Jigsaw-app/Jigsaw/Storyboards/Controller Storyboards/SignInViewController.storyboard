@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.3" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="N4T-se-iqT">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Sign In View Controller-->
+        <scene sceneID="LNw-Ji-agc">
+            <objects>
+                <viewController id="N4T-se-iqT" customClass="SignInViewController" customModule="Jigsaw" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="ohf-of-Cea">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="jigsawLaunchScreen" translatesAutoresizingMaskIntoConstraints="NO" id="Qp2-h6-9Fh">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                            </imageView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="center" spacing="7" translatesAutoresizingMaskIntoConstraints="NO" id="PAi-K8-KUE">
+                                <rect key="frame" x="103.5" y="721" width="207" height="119"/>
+                                <subviews>
+                                    <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TM3-1z-6VN">
+                                        <rect key="frame" x="0.0" y="0.0" width="207" height="56"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                        <state key="normal" title="Sign In">
+                                            <color key="titleColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="signInButtonTapped:" destination="N4T-se-iqT" eventType="primaryActionTriggered" id="tIL-pC-TGb"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fva-zk-Fxk">
+                                        <rect key="frame" x="0.0" y="63" width="207" height="56"/>
+                                        <color key="backgroundColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="20"/>
+                                        <inset key="contentEdgeInsets" minX="16" minY="16" maxX="16" maxY="16"/>
+                                        <state key="normal" title="Play Anonymously">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="playAnonymouslyButtonTapped:" destination="N4T-se-iqT" eventType="primaryActionTriggered" id="i7e-GT-Dem"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="TM3-1z-6VN" firstAttribute="leading" secondItem="PAi-K8-KUE" secondAttribute="leading" id="1Fk-vD-XkN"/>
+                                    <constraint firstAttribute="trailing" secondItem="TM3-1z-6VN" secondAttribute="trailing" id="hGx-MC-EPt"/>
+                                </constraints>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="8sU-xD-mpr" firstAttribute="bottom" secondItem="PAi-K8-KUE" secondAttribute="bottom" constant="22" id="8l3-KZ-K7i"/>
+                            <constraint firstAttribute="bottom" secondItem="Qp2-h6-9Fh" secondAttribute="bottom" id="D22-lL-gH3"/>
+                            <constraint firstItem="Qp2-h6-9Fh" firstAttribute="trailing" secondItem="ohf-of-Cea" secondAttribute="trailing" id="Kth-qy-3r7"/>
+                            <constraint firstItem="PAi-K8-KUE" firstAttribute="centerX" secondItem="8sU-xD-mpr" secondAttribute="centerX" id="YCs-mK-tuA"/>
+                            <constraint firstItem="Qp2-h6-9Fh" firstAttribute="top" secondItem="ohf-of-Cea" secondAttribute="top" id="r22-0r-D2L"/>
+                            <constraint firstItem="Qp2-h6-9Fh" firstAttribute="leading" secondItem="ohf-of-Cea" secondAttribute="leading" id="u1T-lz-VOC"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="8sU-xD-mpr"/>
+                    </view>
+                    <connections>
+                        <outlet property="playAnonymouslyButton" destination="fva-zk-Fxk" id="VXY-1I-c7c"/>
+                        <outlet property="signInButton" destination="TM3-1z-6VN" id="aSK-PR-ov8"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="I1i-tZ-wz9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="139" y="139"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="jigsawLaunchScreen" width="2048" height="2048"/>
+    </resources>
+</document>

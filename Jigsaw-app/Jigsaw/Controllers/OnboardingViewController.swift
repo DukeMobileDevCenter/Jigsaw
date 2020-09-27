@@ -42,7 +42,7 @@ class OnboardingViewController: ORKTaskViewController {
     
     private static func getTask() -> ORKOrderedTask {
         let steps = makeInstructionSteps()
-        return ORKOrderedTask(identifier: "InstructionTaskIdentifier", steps: steps)
+        return ORKOrderedTask(identifier: "OnboardingTask", steps: steps)
     }
     
     private func createUserInfo(userID: String, displayName: String, jigsawValue: Double) {
@@ -55,11 +55,7 @@ class OnboardingViewController: ORKTaskViewController {
             email: nil,
             demographics: [String: String?]()
         )
-        do {
-            try FirebaseConstants.shared.players.document(userID).setData(from: player)
-        } catch {
-            presentAlert(error: error)
-        }
+        FirebaseHelper.setPlayer(userID: userID, player: player)
     }
 }
 
@@ -72,15 +68,15 @@ extension OnboardingViewController: ORKTaskViewControllerDelegate {
     func taskViewController(_ taskViewController: ORKTaskViewController, didFinishWith reason: ORKTaskViewControllerFinishReason, error: Error?) {
         switch reason {
         case .discarded, .failed, .saved:
-            if let error = error { presentAlert(error: error) }
-            presentingViewController?.dismiss(animated: false)
+            // Never comes here as the cancel button is removed.
+            fatalError("Error: Onboarding controller failed.")
         case .completed:
             OnboardingStateManager.shared.setOnboardingCompletedState(state: true)
             if let sliderResult = taskViewController.result.stepResult(forStepIdentifier: "PoliticalSliderStep")?.results?.first as? ORKScaleQuestionResult,
                 let answer = sliderResult.scaleAnswer {
                 Profiles.jigsawValue = answer.doubleValue
             } else {
-                // Never arrives here.
+                // Never comes here.
                 fatalError("Error: Jigsaw slider value not provided.")
             }
             Profiles.displayName = JigsawPiece.unknown.rawValue

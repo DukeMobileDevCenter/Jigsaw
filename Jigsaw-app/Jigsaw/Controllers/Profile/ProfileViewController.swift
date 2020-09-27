@@ -68,30 +68,20 @@ class ProfileViewController: FormViewController {
     @objc
     private func loadPlayerProfile() {
         // Get player info from remote.
-        FirebaseConstants.shared.players.document(Profiles.userID).getDocument { [weak self] document, error in
+        FirebaseHelper.getPlayer(userID: Profiles.userID) { [weak self] player, error in
             guard let self = self else { return }
             // Dismiss the refresh control.
             DispatchQueue.main.async {
                 self.tableView.refreshControl?.endRefreshing()
             }
-            if let error = error {
+            if let currentPlayer = player {
+                Profiles.displayName = currentPlayer.displayName
+                Profiles.jigsawValue = currentPlayer.jigsawValue
+                Profiles.currentPlayer = currentPlayer
+                print(Profiles().description)
+            } else if let error = error {
                 self.presentAlert(error: error)
-                return
-            }
-            guard let document = document, document.exists else {
-                // Impossible to come here.
-                self.presentAlert(title: "❌ Error: player doesn't exist.")
-                return
-            }
-            do {
-                if let currentPlayer = try document.data(as: Player.self) {
-                    Profiles.displayName = currentPlayer.displayName
-                    Profiles.jigsawValue = currentPlayer.jigsawValue
-                    Profiles.currentPlayer = currentPlayer
-                    print("✅ Player info loaded,", Profiles().description)
-                }
-            } catch {
-                self.presentAlert(error: error)
+                os_log(.error, "Failed to get player from remote: %@", error.localizedDescription)
             }
         }
     }
@@ -167,7 +157,8 @@ class ProfileViewController: FormViewController {
                 self?.present(controller, animated: true)
             }
         }
-            +++ Section("\(AppInfo.appName) Version \(AppInfo.versionNumber) build \(AppInfo.buildNumber)")
+        // Add app info to the end of this page.
+        +++ Section("\(AppInfo.appName) ❤️ Version \(AppInfo.versionNumber) build \(AppInfo.buildNumber)")
     }
 }
 

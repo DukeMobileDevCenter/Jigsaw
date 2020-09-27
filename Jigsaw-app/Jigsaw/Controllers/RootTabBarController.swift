@@ -6,85 +6,76 @@
 //  Copyright © 2020 DukeMobileDevCenter. All rights reserved.
 //
 
+import os
 import UIKit
 import FirebaseAuth
+import ProgressHUD
 
 class RootTabBarController: UITabBarController {
-    var isFirstAppearance = true
+    /// A boolean to record if the tab bar controller is seen for the first time.
+    private var isFirstLaunch = true
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        // Only load player info once per app launch.
-        guard isFirstAppearance else { return }
-        // An instance to FirebaseAuth.
+        // Only load sign in page once per app launch.
+        guard isFirstLaunch else { return }
+        // An FirebaseAuth object that handles user sign in.
         let auth = Auth.auth()
-        // First time user.
-        if !OnboardingStateManager.shared.getOnboardingCompletedState() {
-            // Sign in anonymously for now. Add other sign in options later.
-            signInAnonymously(auth: auth)
-            let onboardingViewController = OnboardingViewController(taskRun: nil)
-            onboardingViewController.onboardingManagerDelegate = self
-            // Disallow dismiss by interactive swipe down in iOS 13.
-            onboardingViewController.isModalInPresentation = true
-            present(onboardingViewController, animated: true)
-        } else {
-            // Already went through the new user workflow and have credentials in keychain.
-            if let currentUser = auth.currentUser {
-                if Profiles.userID != currentUser.uid {
-                    self.presentAlert(title: "❌ Something wrong with existing user", message: "This should never happen unless storage is corrupted.")
+        // Present the sign in view controller as the first page.
+        let controller = UIStoryboard(name: "SignInViewController", bundle: .main).instantiateInitialViewController() as! SignInViewController
+        controller.auth = auth
+        controller.signInManagerDelegate = self
+        controller.modalPresentationStyle = .fullScreen
+        present(controller, animated: false)
+        
+        ProgressHUD.show()
+        // Check if the user is signed in.
+        auth.addStateDidChangeListener { [weak self, unowned controller] auth, user in
+            ProgressHUD.dismiss()
+            guard let self = self else { return }
+            // Unsafely updated the controller's auth.
+            controller.auth = auth
+            if let user = user {
+                // User is signed in, dismiss the sign in page.
+                controller.dismiss(animated: true) { [weak self] in
+                    self?.handleAfterSignIn(user: user)
                 }
-                Profiles.userID = currentUser.uid
-                
-            } else {
-                print("❌ Error loading existing user. This shoudn't happen unless user get deleted on remote or log out explicitly.")
-                // Handle re-login here.
             }
-            didCompleteOnboarding()
+            // Retain the sign in page when no user is signed in.
         }
-        isFirstAppearance = false
+        isFirstLaunch = false
     }
     
-    private func signInAnonymously(auth: Auth, completion: (() -> Void)? = nil) {
-        auth.signInAnonymously { [weak self] result, error in
-            guard let self = self else { return }
-            if let error = error {
-                self.presentAlert(error: error)
-                return
+    private func handleAfterSignIn(user: User) {
+        switch OnboardingStateManager.shared.getOnboardingCompletedState() {
+        case true:
+            // Existing user, fetch from remote directly.
+            if Profiles.userID != user.uid {
+                // A new user signed in.
+                Profiles.userID = user.uid
             }
-            guard let user = result?.user else { return }
-            let uid = user.uid
-            if Profiles.userID == nil {
-                Profiles.userID = uid
-            } else if Profiles.userID != uid {
-                self.presentAlert(title: "Something wrong with anonymous user", message: "This should never happen unless database is corrupted.")
-            }
-            completion?()
+            didCompleteOnboarding()
+        case false:
+            // Newly signed in user.
+            let controller = OnboardingViewController(taskRun: nil)
+            controller.onboardingManagerDelegate = self
+            // Disallow dismiss-by-interactive-swipe-down for iOS 13 and above.
+            controller.isModalInPresentation = true
+            present(controller, animated: false)
         }
     }
     
     private func setCurrentPlayer(with userID: String) {
-        // Load from firebase to fill in user info.
-        let docRef = FirebaseConstants.shared.players.document(userID)
-        // Get player info from remote.
-        docRef.getDocument { [weak self] document, error in
+        FirebaseHelper.getPlayer(userID: userID) { [weak self] player, error in
             guard let self = self else { return }
-            if let error = error {
+            if let currentPlayer = player {
+                Profiles.displayName = currentPlayer.displayName
+                Profiles.jigsawValue = currentPlayer.jigsawValue
+                Profiles.currentPlayer = currentPlayer
+                print(Profiles().description)
+            } else if let error = error {
                 self.presentAlert(error: error)
-            }
-            guard let document = document, document.exists else {
-                // Impossible to come here.
-                self.presentAlert(title: "Error: player doesn't exist.")
-                return
-            }
-            do {
-                if let currentPlayer = try document.data(as: Player.self) {
-                    Profiles.displayName = currentPlayer.displayName
-                    Profiles.jigsawValue = currentPlayer.jigsawValue
-                    Profiles.currentPlayer = currentPlayer
-                    print(Profiles().description)
-                }
-            } catch {
-                self.presentAlert(error: error)
+                os_log(.error, "Failed to get player from remote: %@", error.localizedDescription)
             }
         }
     }
@@ -93,5 +84,23 @@ class RootTabBarController: UITabBarController {
 extension RootTabBarController: OnboardingManagerDelegate {
     func didCompleteOnboarding() {
         setCurrentPlayer(with: Profiles.userID)
+    }
+}
+
+extension RootTabBarController: SignInManagerDelegate {
+    func didCompleteSignIn(withAnonymousUser user: User) {
+        // If a device user explicitly signs in as an anonymous user,
+        // then we can safely assume she wants to play as a new player.
+        // Set the onboarding state to false to go through it again.
+        OnboardingStateManager.shared.setOnboardingCompletedState(state: false)
+        handleAfterSignIn(user: user)
+    }
+    
+    func didCompleteSignIn(with user: User, providerIDs: [String]) {
+        FirebaseHelper.checkPlayerExists(userID: user.uid) { [weak self] exists in
+            // An existing player doesn't need to onboard again.
+            OnboardingStateManager.shared.setOnboardingCompletedState(state: exists)
+            self?.handleAfterSignIn(user: user)
+        }
     }
 }

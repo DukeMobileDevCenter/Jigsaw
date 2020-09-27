@@ -6,13 +6,112 @@
 //  Copyright © 2020 DukeMobileDevCenter. All rights reserved.
 //
 
+import os
 import UIKit
+import FirebaseUI
+import ProgressHUD
+
+protocol SignInManagerDelegate: AnyObject {
+    func didCompleteSignIn(withAnonymousUser user: User)
+    func didCompleteSignIn(with user: User, providerIDs: [String])
+}
 
 class SignInViewController: UIViewController {
+    /// The sign in button.
+    @IBOutlet var signInButton: UIButton! {
+        didSet {
+            signInButton.layer.cornerRadius = 5
+        }
+    }
+    /// The play anonymously button.
+    @IBOutlet var playAnonymouslyButton: UIButton! {
+        didSet {
+            playAnonymouslyButton.layer.cornerRadius = 5
+        }
+    }
     
+    /// A delegate to inform its parent controller after sign in completed.
+    weak var signInManagerDelegate: SignInManagerDelegate?
     
-    @available(*, unavailable)
-    required init(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+    /// An Firebase Auth object passed from the root tab bar controller.
+    var auth: Auth!
+    
+    @IBAction func signInButtonTapped(_ sender: UIButton) {
+        let authUI = createFirebaseUI()
+        let authViewController = authUI.authViewController()
+        show(authViewController, sender: sender)
+    }
+    
+    @IBAction func playAnonymouslyButtonTapped(_ sender: UIButton) {
+        let continueAction = UIAlertAction(title: "Continue", style: .default) { _ in
+            // Sign in as an anonymous player.
+            self.signInAnonymously(auth: self.auth)
+        }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+        let alert = UIAlertController(
+            title: "Info",
+            message: "If you play anonymously, your game records might be lost afterwards. Consider connect to one of your online accounts.",
+            preferredStyle: .alert
+        )
+        alert.addAction(cancelAction)
+        alert.addAction(continueAction)
+        alert.preferredAction = continueAction
+        present(alert, animated: true)
+    }
+    
+    private func signInAnonymously(auth: Auth) {
+        ProgressHUD.show()
+        auth.signInAnonymously { [weak self] result, error in
+            ProgressHUD.dismiss()
+            guard let self = self else { return }
+            if let error = error {
+                self.presentAlert(error: error)
+                os_log(.error, "Failed to sign in anonymously: %@", error.localizedDescription)
+            } else if let result = result {
+                let uid = result.user.uid
+                if Profiles.userID != uid {
+                    os_log(.info, "Sign in as a different anonymous player, user ID is %s", uid)
+                }
+                Profiles.userID = uid
+                // Dismiss current view controller.
+                self.dismiss(animated: true, completion: nil)
+                // Complete the following steps after sign in.
+                self.signInManagerDelegate?.didCompleteSignIn(withAnonymousUser: result.user)
+            }
+        }
+    }
+    
+    /// Create a pre-built Firebase sign in UI.
+    ///
+    /// - Note: Please read more at [Sign in with a pre-built UI](https://firebase.google.com/docs/auth/ios/firebaseui#sign_in).
+    /// - Returns: An `FUIAuth` object to create the sign in view controller.
+    private func createFirebaseUI() -> FUIAuth {
+        // Init Firebase UI.
+        let authUI = FUIAuth.defaultAuthUI()!
+        // Assign delegate to receive sign in result.
+        authUI.delegate = self
+        let providers: [FUIAuthProvider] = [
+            FUIGoogleAuth(),
+            FUIOAuth.appleAuthProvider(),
+            FUIEmailAuth()
+        ]
+        authUI.providers = providers
+        return authUI
+    }
+}
+
+extension SignInViewController: FUIAuthDelegate {
+    func authUI(_ authUI: FUIAuth, didSignInWith authDataResult: AuthDataResult?, error: Error?) {
+        if let error = error {
+            // Log an error.
+            os_log(.error, "Failed to sign in with one provider: %@", error.localizedDescription)
+        } else if let result = authDataResult {
+            // Handle successful login below.
+            let user = result.user
+            let providerIDs = user.providerData.map { $0.providerID }
+            // Dismiss current view controller.
+            dismiss(animated: true, completion: nil)
+            signInManagerDelegate?.didCompleteSignIn(with: user, providerIDs: providerIDs)
+        }
     }
 }

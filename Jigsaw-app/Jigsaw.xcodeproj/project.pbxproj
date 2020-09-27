@@ -41,6 +41,9 @@
 		0070DFF324B0060500E71F46 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0070DFF224B0060500E71F46 /* Assets.xcassets */; };
 		0070DFF624B0060500E71F46 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0070DFF424B0060500E71F46 /* LaunchScreen.storyboard */; };
 		0070E00124B0060500E71F46 /* JigsawTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0070E00024B0060500E71F46 /* JigsawTests.swift */; };
+		0071E91E251FF6F50025702E /* SignInViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0071E91D251FF6F50025702E /* SignInViewController.storyboard */; };
+		0071E920252003880025702E /* AppInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0071E91F252003880025702E /* AppInfo.swift */; };
+		0071E9232520161F0025702E /* FirebaseHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0071E9222520161F0025702E /* FirebaseHelper.swift */; };
 		0078315224DF557800B35A98 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0078315124DF557800B35A98 /* Player.swift */; };
 		00A06D8D24E8A9B400030649 /* GameGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A06D8C24E8A9B400030649 /* GameGroup.swift */; };
 		00B0A67424E3CAA800887701 /* DemographicsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B0A67324E3CAA800887701 /* DemographicsViewController.swift */; };
@@ -158,6 +161,10 @@
 		0070DFFC24B0060500E71F46 /* JigsawTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JigsawTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0070E00024B0060500E71F46 /* JigsawTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JigsawTests.swift; sourceTree = "<group>"; };
 		0070E00224B0060500E71F46 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0071E91D251FF6F50025702E /* SignInViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SignInViewController.storyboard; sourceTree = "<group>"; };
+		0071E91F252003880025702E /* AppInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppInfo.swift; sourceTree = "<group>"; };
+		0071E921252005780025702E /* Jigsaw.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Jigsaw.entitlements; sourceTree = "<group>"; };
+		0071E9222520161F0025702E /* FirebaseHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseHelper.swift; sourceTree = "<group>"; };
 		0078315124DF557800B35A98 /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		009D067B2511F15A002E488F /* ResearchKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ResearchKit.xcodeproj; path = "ResearchKit-68f9d29/ResearchKit.xcodeproj"; sourceTree = "<group>"; };
 		00A06D8C24E8A9B400030649 /* GameGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameGroup.swift; sourceTree = "<group>"; };
@@ -353,6 +360,7 @@
 				0070DFEB24B0060400E71F46 /* SceneDelegate.swift */,
 				0070DFF224B0060500E71F46 /* Assets.xcassets */,
 				005856BB24D91C4A0010BE55 /* GoogleService-Info.plist */,
+				0071E921252005780025702E /* Jigsaw.entitlements */,
 				0070DFF724B0060500E71F46 /* Info.plist */,
 			);
 			path = Jigsaw;
@@ -378,6 +386,7 @@
 		0071E91C251FF6880025702E /* Controller Storyboards */ = {
 			isa = PBXGroup;
 			children = (
+				0071E91D251FF6F50025702E /* SignInViewController.storyboard */,
 				00F029DA251FF4F100CB2A15 /* GameHistoryRadarChartViewController.storyboard */,
 				00F029D8251FF34900CB2A15 /* ResultStatsViewController.storyboard */,
 				00B6306224FB26A8008975CE /* GameHistoryTimeline.storyboard */,
@@ -466,6 +475,8 @@
 				000D809E24ECEE6A0070041D /* Demographics */,
 				005308F32517DB7F002A429F /* Player */,
 				005308D025168D84002A429F /* FirebaseConstants.swift */,
+				0071E9222520161F0025702E /* FirebaseHelper.swift */,
+				0071E91F252003880025702E /* AppInfo.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -635,6 +646,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				00B6306324FB26A8008975CE /* GameHistoryTimeline.storyboard in Resources */,
+				0071E91E251FF6F50025702E /* SignInViewController.storyboard in Resources */,
 				0070DFF624B0060500E71F46 /* LaunchScreen.storyboard in Resources */,
 				00F029D9251FF34900CB2A15 /* ResultStatsViewController.storyboard in Resources */,
 				005856BC24D91C4A0010BE55 /* GoogleService-Info.plist in Resources */,
@@ -770,6 +782,7 @@
 				00F029D4251FF25700CB2A15 /* SignInViewController.swift in Sources */,
 				005308E12516F65F002A429F /* GameError.swift in Sources */,
 				00F6302824EE4E8700BCAD11 /* GameHistoryRadarChartViewController.swift in Sources */,
+				0071E920252003880025702E /* AppInfo.swift in Sources */,
 				005856C424D92CFB0010BE55 /* Chatroom.swift in Sources */,
 				00B6305F24FB0247008975CE /* GameResult.swift in Sources */,
 				00B0A67424E3CAA800887701 /* DemographicsViewController.swift in Sources */,
@@ -785,6 +798,7 @@
 				0078315224DF557800B35A98 /* Player.swift in Sources */,
 				0020D54924DF79CB00DB20E1 /* GameStore.swift in Sources */,
 				00D0862124CD185C00FB7A20 /* OnboardingStateManager.swift in Sources */,
+				0071E9232520161F0025702E /* FirebaseHelper.swift in Sources */,
 				00CDFF1224B44797009C789D /* UIViewController.swift in Sources */,
 				0051950F24E9CDD4008F1CE0 /* QuestionType.swift in Sources */,
 				0070DFEC24B0060400E71F46 /* SceneDelegate.swift in Sources */,
@@ -960,6 +974,7 @@
 			baseConfigurationReference = E489C461B8389ED9A300FE26 /* Pods-Jigsaw.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Jigsaw/Jigsaw.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -984,6 +999,7 @@
 			baseConfigurationReference = B4591A0726378C2FDAC05571 /* Pods-Jigsaw.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Jigsaw/Jigsaw.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = (
