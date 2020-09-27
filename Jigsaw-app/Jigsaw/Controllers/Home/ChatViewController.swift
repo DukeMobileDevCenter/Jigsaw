@@ -33,7 +33,7 @@ class ChatViewController: MessagesViewController {
         }
     }
     
-    private var reference: CollectionReference?
+    private var messagesReference: CollectionReference?
     private let storage = Storage.storage().reference()
     
     private var messages = [Message]()
@@ -79,9 +79,9 @@ class ChatViewController: MessagesViewController {
             return
         }
         
-        reference = FirebaseConstants.database.collection(["Chatrooms", id, "messages"].joined(separator: "/"))
+        messagesReference = FirebaseConstants.database.collection(["Chatrooms", id, "messages"].joined(separator: "/"))
         
-        messageListener = reference?.addSnapshotListener { [weak self] querySnapshot, error in
+        messageListener = messagesReference?.addSnapshotListener { [weak self] querySnapshot, error in
             guard let snapshot = querySnapshot else {
                 print("Error listening for channel updates: \(error?.localizedDescription ?? "No error")")
                 return
@@ -163,7 +163,7 @@ class ChatViewController: MessagesViewController {
     // MARK: - Helpers
     
     private func save(_ message: Message) {
-        reference?.addDocument(data: message.representation) { [weak self] error in
+        messagesReference?.addDocument(data: message.representation) { [weak self] error in
             if let error = error {
                 self?.presentAlert(error: error)
                 return
