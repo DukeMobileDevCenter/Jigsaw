@@ -35,19 +35,19 @@ class RootTabBarController: UITabBarController {
         controller.modalPresentationStyle = .fullScreen
         present(controller, animated: false)
         
-        ProgressHUD.show()
         // Check if the user is signed in.
-        auth.addStateDidChangeListener { [weak self, unowned controller] _, user in
-            ProgressHUD.dismiss()
-            guard let self = self else { return }
-            if let user = user {
+        if let user = FirebaseConstants.auth.currentUser {
+            if user.uid != Profiles.userID {
+                // Something went wrong. Force user to sign in again.
+                try? auth.signOut()
+            } else {
                 // User is signed in, dismiss the sign in page.
                 controller.dismiss(animated: true) { [weak self] in
                     self?.handleAfterSignIn(user: user)
                 }
             }
-            // Retain the sign in page when no user is signed in.
         }
+        // Retain the sign in page when no user is signed in.
     }
     
     private func handleAfterSignIn(user: User) {

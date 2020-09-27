@@ -22,6 +22,4 @@ class FirebaseConstants: NSObject {
     let players = FirebaseConstants.database.collection("Players")
     let queues = FirebaseConstants.database.collection("Queues")
     let gamegroups = FirebaseConstants.database.collection("GameGroups")
-    
-    let currentUser = FirebaseConstants.auth.currentUser
 }

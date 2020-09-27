@@ -64,7 +64,7 @@ class ProfileViewController: FormViewController {
         let piece = JigsawPiece.unknown
         let view = Bundle.main.loadNibNamed("ProfileHeaderView", owner: self)?.first as! ProfileHeaderView
         view.setView(name: piece.label, avatarFileName: piece.bundleName)
-        if let user = FirebaseConstants.shared.currentUser {
+        if let user = FirebaseConstants.auth.currentUser {
             let providerIDs = user.providerData.map { $0.providerID }
             if let name = user.displayName, let photoURL = user.photoURL {
                 // Display account associated avatar for profile page.
@@ -89,7 +89,7 @@ class ProfileViewController: FormViewController {
     
     private func createForm() {
         form
-        +++ Section(header: "Profile", footer: "uid: " + (FirebaseConstants.shared.currentUser?.uid ?? "nil error"))
+        +++ Section(header: "Profile", footer: "uid: " + (FirebaseConstants.auth.currentUser?.uid ?? "nil error"))
         <<< profileHeaderRow
         +++ Section(header: "Basic Information", footer: "Blah blah blah")
         <<< DecimalRow { row in
@@ -149,9 +149,9 @@ extension ProfileViewController {
             preferredStyle: .actionSheet
         )
         // Connect action.
-        if let user = FirebaseConstants.shared.currentUser, let authUI = createFirebaseUI(for: user) {
+        if let user = FirebaseConstants.auth.currentUser, let authUI = createFirebaseUI(for: user) {
             // Only add connectAction when it is able to connect.
-            let connectAction = UIAlertAction(title: "Connect Online Accounts", style: .default) { _ in
+            let connectAction = UIAlertAction(title: "Connect Online Account", style: .default) { _ in
                 // Create an authentication UI if user exists and haven't connect all accounts.
                 let authViewController = authUI.authViewController()
                 self.show(authViewController, sender: sender)
@@ -193,23 +193,17 @@ extension ProfileViewController {
         // Init Firebase UI.
         let authUI = FUIAuth.defaultAuthUI()!
         
+        // Do not create the FUI if already linked to one of the providers.
         let existingProviderIDs = user.providerData.map { $0.providerID }
-        // Only add additional providers to the connect page.
-        var providers = [FUIAuthProvider]()
-        if existingProviderIDs.contains(GoogleAuthProviderID) {
-            providers.append(FUIGoogleAuth())
-        }
-        if existingProviderIDs.contains(GitHubAuthProviderID) {
-            providers.append(FUIOAuth.githubAuthProvider())
-        }
-        if existingProviderIDs.contains("apple.com") {
-            providers.append(FUIOAuth.appleAuthProvider())
-        }
-        if existingProviderIDs.contains(EmailAuthProviderID) {
-            providers.append(FUIEmailAuth())
-        }
-        // Do not create the FUI if no additional providers are available.
-        if providers.isEmpty { return nil }
+        if !existingProviderIDs.isEmpty { return nil }
+        
+        let providers: [FUIAuthProvider] = [
+            FUIGoogleAuth(),
+            FUIOAuth.appleAuthProvider(),
+            FUIOAuth.githubAuthProvider(),
+            FUIEmailAuth()
+        ]
+        
         authUI.providers = providers
         authUI.delegate = self
         authUI.shouldAutoUpgradeAnonymousUsers = true
@@ -235,7 +229,7 @@ extension ProfileViewController: FUIAuthDelegate {
             }
         } else if let error = error {
             // User canceled account linking.
-            os_log(.error, "Failed to log in: %@", error.localizedDescription)
+            os_log(.error, "Failed to log in or canceled: %@", error.localizedDescription)
         } else if let result = authDataResult {
             // Handle successful login below.
             let user = result.user
