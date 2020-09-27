@@ -319,7 +319,7 @@ extension MatchingViewController: ORKTaskViewControllerDelegate {
         }
     }
     
-    func taskViewController(_ taskViewController: ORKTaskViewController, didFinishWith reason: ORKTaskViewControllerFinishReason, error: Error?) {
+    private func cleanUpAfterGameEnds() {
         // Remove matching group from database.
         removeMatchingGroup()
         // Remove the chatroom when a player stops the game.
@@ -328,6 +328,11 @@ extension MatchingViewController: ORKTaskViewControllerDelegate {
         chatroomStepVC.finish()
         chatroomVC.finish()
         chatroomVC = nil
+    }
+    
+    func taskViewController(_ taskViewController: ORKTaskViewController, didFinishWith reason: ORKTaskViewControllerFinishReason, error: Error?) {
+        // Clean ups.
+        cleanUpAfterGameEnds()
         // Re-enable the button to allow player to join another game.
         joinGameButton.isEnabled = true
         // Dismiss the game VC.
@@ -363,7 +368,7 @@ extension MatchingViewController: ORKTaskViewControllerDelegate {
             controller.nextGame = nextGame(for: selectedGame)
             
             let gameHistory = GameHistory(
-                gameID: selectedGame.gameName + "_" + String(selectedGame.level),
+                gameID: selectedGame.gameID,
                 playedDate: gameGroup.createdDate,
                 gameCategory: selectedGame.category,
                 gameName: selectedGame.gameName,
