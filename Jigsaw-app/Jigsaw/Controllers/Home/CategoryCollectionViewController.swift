@@ -62,6 +62,9 @@ extension CategoryCollectionViewController {
     override func collectionView(_ collectionView: UICollectionView, contextMenuConfigurationForItemAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
         let index = indexPath.item
         let game = GameStore.shared.getGames(for: category)[index]
+        // Disable context menu if the game isn't unlocked yet.
+        if !game.isEnabled { return nil }
+        
         let identifier = "\(index)" as NSString
         let previewControllerProvider = { () -> UIViewController? in
             let storyboard = UIStoryboard(name: "PreviewDetailViewController", bundle: .main)

@@ -111,7 +111,7 @@ extension GameStore: UICollectionViewDataSource {
         
         let game = getGames(for: selectedCategory)[indexPath.item]
         // Enable the level 1 rooms as well as other unlocked games.
-        let isEnabled = game.level == 1 || Profiles.playedGameIDs.contains(game.previousLevelGameID)
+        let isEnabled = game.isEnabled
         // Set subtitle.
         cell.nameLabel.text = isEnabled ? "\(game.gameName) room \(game.level)" : "???"
         // Set lock icon.

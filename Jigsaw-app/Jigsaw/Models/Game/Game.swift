@@ -32,12 +32,21 @@ struct Game {
     let backgroundImageURL: URL
     
     var gameID: String {
-        return gameName + "_" + String(level)
+        gameName + "_" + String(level)
     }
     
-    var previousLevelGameID: String {
+    private var previousLevelGameID: String {
         let previousLevel = level - 1 > 0 ? level : 1
         return gameName + "_" + String(previousLevel)
+    }
+    
+    /// Determine if a game is enabled for play.
+    var isEnabled: Bool {
+        level == 1 || Profiles.playedGameIDs.contains(previousLevelGameID)
+    }
+    
+    var isPlayed: Bool {
+        Profiles.playedGameIDs.contains(gameID)
     }
     
     init?(document: QueryDocumentSnapshot) {
