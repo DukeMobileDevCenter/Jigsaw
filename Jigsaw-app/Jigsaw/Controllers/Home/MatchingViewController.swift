@@ -363,7 +363,7 @@ extension MatchingViewController: ORKTaskViewControllerDelegate {
             
             // Log the real game result.
             let gameResult = GameResult(taskResult: taskViewController.result, questionnaire: myQuestionnaire)
-            let controller = ResultStatsViewController()
+            let controller = UIStoryboard(name: "ResultStatsViewController", bundle: .main).instantiateInitialViewController() as! ResultStatsViewController
             controller.resultPairs = gameResult.resultPairs
             controller.nextGame = nextGame(for: selectedGame)
             
