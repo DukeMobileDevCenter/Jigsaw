@@ -27,7 +27,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="pX1-Lc-w5E">
-                    <rect key="frame" x="104" y="48" width="72" height="32"/>
+                    <rect key="frame" x="104" y="48" width="152" height="32"/>
                     <subviews>
                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="google" translatesAutoresizingMaskIntoConstraints="NO" id="XBu-1T-9FO">
                             <rect key="frame" x="0.0" y="0.0" width="32" height="32"/>
@@ -45,7 +45,27 @@
                                 <constraint firstAttribute="width" secondItem="a0V-a7-50t" secondAttribute="height" multiplier="1:1" id="bgG-Q2-Q8x"/>
                             </constraints>
                         </imageView>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="apple" translatesAutoresizingMaskIntoConstraints="NO" id="Tia-6r-HdB">
+                            <rect key="frame" x="80" y="0.0" width="32" height="32"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="32" id="0Bm-XO-Ppc"/>
+                                <constraint firstAttribute="height" constant="32" id="Dq3-79-yKp"/>
+                                <constraint firstAttribute="width" secondItem="Tia-6r-HdB" secondAttribute="height" multiplier="1:1" id="I89-Cu-qfS"/>
+                            </constraints>
+                        </imageView>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="email" translatesAutoresizingMaskIntoConstraints="NO" id="LfA-As-Ewx">
+                            <rect key="frame" x="120" y="0.0" width="32" height="32"/>
+                            <constraints>
+                                <constraint firstAttribute="width" secondItem="LfA-As-Ewx" secondAttribute="height" multiplier="1:1" id="10o-Az-A2X"/>
+                                <constraint firstAttribute="height" constant="32" id="50T-Dj-rZi"/>
+                                <constraint firstAttribute="width" constant="32" id="sem-gZ-4cZ"/>
+                            </constraints>
+                        </imageView>
                     </subviews>
+                    <constraints>
+                        <constraint firstItem="Tia-6r-HdB" firstAttribute="width" secondItem="Tia-6r-HdB" secondAttribute="height" multiplier="1:1" id="Krw-V7-J7v"/>
+                        <constraint firstItem="LfA-As-Ewx" firstAttribute="width" secondItem="LfA-As-Ewx" secondAttribute="height" multiplier="1:1" id="hBW-JU-wGe"/>
+                    </constraints>
                 </stackView>
             </subviews>
             <constraints>
@@ -61,7 +81,9 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="qU7-cM-QdE"/>
             <connections>
+                <outlet property="appleIconView" destination="Tia-6r-HdB" id="G8s-Rb-tgB"/>
                 <outlet property="avatarImageView" destination="p44-Nc-uk8" id="d7q-g1-haF"/>
+                <outlet property="emailIconView" destination="LfA-As-Ewx" id="HAl-UI-Gox"/>
                 <outlet property="githubIconView" destination="a0V-a7-50t" id="rVt-Uw-vhu"/>
                 <outlet property="googleIconView" destination="XBu-1T-9FO" id="qLE-xs-e9G"/>
                 <outlet property="nameLabel" destination="dKb-lz-bdM" id="E3S-cY-13C"/>
@@ -70,6 +92,8 @@
         </view>
     </objects>
     <resources>
+        <image name="apple" width="256" height="256"/>
+        <image name="email" width="256" height="256"/>
         <image name="github" width="256" height="256"/>
         <image name="google" width="256" height="256"/>
         <image name="person.circle" catalog="system" width="128" height="121"/>

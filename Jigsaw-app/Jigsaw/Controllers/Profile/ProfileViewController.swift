@@ -90,11 +90,13 @@ class ProfileViewController: FormViewController {
         let piece = JigsawPiece.unknown
         let view = Bundle.main.loadNibNamed("ProfileHeaderView", owner: self)?.first as! ProfileHeaderView
         view.setView(name: piece.label, avatarFileName: piece.bundleName)
-        let user = Auth.auth().currentUser!
+        let user = FirebaseConstants.shared.currentUser!
         let providerIDs = user.providerData.map { $0.providerID }
         // Load provider icons
         view.googleIconView.tintColor = providerIDs.contains(GoogleAuthProviderID) ? .systemRed : .secondaryLabel
         view.githubIconView.tintColor = providerIDs.contains(GitHubAuthProviderID) ? .systemPurple : .secondaryLabel
+        view.appleIconView.tintColor = providerIDs.contains("apple.com") ? .systemTeal : .secondaryLabel
+        view.emailIconView.tintColor = providerIDs.contains(EmailAuthProviderID) ? .systemGreen : .secondaryLabel
         return view
     }
     
@@ -171,7 +173,7 @@ extension ProfileViewController: FUIAuthDelegate {
                 print("Received merge conflict error without auth credential!")
                 return
             }
-            Auth.auth().signIn(with: credential) { _, error in
+            FirebaseConstants.auth.signIn(with: credential) { _, error in
                 if let error = error as NSError? {
                     print("Failed to re-login: \(error)")
                     return

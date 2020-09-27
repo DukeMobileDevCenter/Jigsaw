@@ -1,7 +1,7 @@
 {
   "images" : [
     {
-      "filename" : "google (1).png",
+      "filename" : "GitHub.png",
       "idiom" : "universal"
     },
     {
@@ -11,7 +11,7 @@
           "value" : "dark"
         }
       ],
-      "filename" : "google.png",
+      "filename" : "GitHub-dark.png",
       "idiom" : "universal"
     }
   ],
