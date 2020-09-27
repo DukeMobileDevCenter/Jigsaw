@@ -214,13 +214,6 @@ class MatchingViewController: UIViewController {
         }
     }
     
-    /// Find next level room for current room/game.
-    /// - Parameter currentGame: The room/game the player is currently in.
-    /// - Returns: The next level room.
-    private func nextGame(for currentGame: Game) -> Game? {
-        return GameStore.shared.allGames.first { currentGame.gameName == $0.gameName && currentGame.level + 1 == $0.level }
-    }
-    
     deinit {
         // Remove player from queue when it exits the matching page.
         // There might be some sync bug, if a player just quit a match while he is added to a group.
@@ -250,7 +243,7 @@ extension MatchingViewController: ORKTaskViewControllerDelegate {
             loadChatroom { [weak self] chatroom in
                 guard let self = self else { return }
                 self.isChatroomShown = true
-                let chatroomVC = ChatViewController(user: FirebaseConstants.shared.currentUser!, chatroom: chatroom, timeLeft: stepViewController.timeRemaining)
+                let chatroomVC = ChatViewController(user: FirebaseConstants.auth.currentUser!, chatroom: chatroom, timeLeft: stepViewController.timeRemaining)
                 self.chatroomVC = chatroomVC
                 stepViewController.title = "Quit chat"
                 stepViewController.show(chatroomVC, sender: nil)
@@ -325,8 +318,8 @@ extension MatchingViewController: ORKTaskViewControllerDelegate {
         // Remove the chatroom when a player stops the game.
         removeChatroom()
         // Invalidate any remaining timer.
-        chatroomStepVC.finish()
-        chatroomVC.finish()
+        chatroomStepVC?.finish()
+        chatroomVC?.finish()
         chatroomVC = nil
     }
     
@@ -365,7 +358,7 @@ extension MatchingViewController: ORKTaskViewControllerDelegate {
             let gameResult = GameResult(taskResult: taskViewController.result, questionnaire: myQuestionnaire)
             let controller = UIStoryboard(name: "ResultStatsViewController", bundle: .main).instantiateInitialViewController() as! ResultStatsViewController
             controller.resultPairs = gameResult.resultPairs
-            controller.nextGame = nextGame(for: selectedGame)
+            controller.nextGame = GameStore.shared.nextGame(for: selectedGame)
             
             let gameHistory = GameHistory(
                 gameID: selectedGame.gameID,
