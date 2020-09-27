@@ -1,18 +1,54 @@
 'use strict';
-// The Cloud Functions for Firebase SDK to create Cloud Functions and setup triggers.
+// For Firebase SDK to create Cloud Functions and setup triggers.
 const functions = require('firebase-functions');
 // The Firebase Admin SDK to access Cloud Firestore.
 const admin = require('firebase-admin');
+// Initialize the app.
 admin.initializeApp();
 
+// A reference to Cloud Firestore.
 const db = admin.firestore();
 
 // Refresh time. When the queue has more than 4 players, a game group will be spawned
 // after 10 seconds.
 // const REFRESH_TIME = 10 * 1000; // 10 seconds in milliseconds.
 
-// Listens for new players added to /Queues/:documentId/twoPlayersQueue or
-// fourPlayersQueue and creates a game group to /GameGroups.
+// A helper function to compare if 2 dates are in the same day.
+function sameDay(d1, d2) {
+  return d1.getFullYear() === d2.getFullYear() &&
+    d1.getMonth() === d2.getMonth() &&
+    d1.getDate() === d2.getDate();
+}
+
+/*
+  By setting the date of "lastCleaned" field of "/CleanUps/chatrooms" to today,
+  the function get called and remove all temporary chatrooms.
+
+  Note: this function should be only called when no active games are in effect.
+*/
+exports.cleanUpChatrooms = functions.firestore.document('/CleanUps/chatrooms').onWrite(async (change, context) => {
+  const doc = await db.collection('CleanUps').doc('chatrooms').get();
+  
+  if (doc.exists && sameDay(new Date(), doc.data().lastCleaned.toDate())) {
+    // Reference to the Chatrooms collection.
+    const ref = db.collection('Chatrooms');
+    // A batch to remove all unneeded chatrooms.
+    const batch = db.batch();
+    // Get all document IDs from Chatrooms collection.
+    const snapshot = await ref.get();
+    snapshot.forEach(doc => {
+      if (!doc.id.includes('Test')) {
+        batch.delete(ref.doc(doc.id));
+      }
+    });
+    await batch.commit();
+  }
+});
+
+/*
+  Listens for new players added to /Queues/:documentId/twoPlayersQueue or
+  fourPlayersQueue and creates a game group to /GameGroups.
+*/
 exports.makeGameGroup = functions.firestore.document('/Queues/{gameName}/{queueName}/{userID}').onWrite(async (change, context) => {
   // Reference to the parent.
   const ref = db.collection(['Queues', context.params.gameName, context.params.queueName].join('/'));
@@ -22,7 +58,7 @@ exports.makeGameGroup = functions.firestore.document('/Queues/{gameName}/{queueN
 
   // An array to keep track of the IDs for all players in the queue.
   const playerIDs = [];
-  jigsawValueQuery.forEach((doc) => {
+  jigsawValueQuery.forEach(doc => {
      playerIDs.push(doc.id)
   })
 
