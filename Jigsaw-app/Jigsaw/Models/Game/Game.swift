@@ -37,7 +37,7 @@ struct Game {
     }
     
     private var previousLevelGameID: String {
-        let previousLevel = level - 1 > 0 ? level : 1
+        let previousLevel = level > 1 ? level - 1 : 1
         return gameName + "_" + String(previousLevel)
     }
     

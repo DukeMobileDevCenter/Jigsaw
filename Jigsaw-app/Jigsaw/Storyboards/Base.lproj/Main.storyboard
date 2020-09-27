@@ -229,7 +229,7 @@
                         <viewLayoutGuide key="safeArea" id="1Dh-Uu-8mf"/>
                     </view>
                     <navigationItem key="navigationItem" title="Player Profile" id="bOu-nD-ssk">
-                        <barButtonItem key="rightBarButtonItem" enabled="NO" title="Item" image="person.circle" catalog="system" id="hJk-91-mZ3">
+                        <barButtonItem key="rightBarButtonItem" title="Item" image="person.circle" catalog="system" id="hJk-91-mZ3">
                             <connections>
                                 <action selector="userAccountBarButtonTapped:" destination="P4k-pc-CCe" id="lKz-W1-dUa"/>
                             </connections>
