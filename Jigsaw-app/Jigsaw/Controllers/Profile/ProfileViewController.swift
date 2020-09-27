@@ -158,7 +158,7 @@ class ProfileViewController: FormViewController {
             }
         }
         // Add app info to the end of this page.
-        +++ Section("\(AppInfo.appName) ❤️ Version \(AppInfo.versionNumber) build \(AppInfo.buildNumber)")
+        +++ Section("\(AppInfo.appName) 🧩 Version \(AppInfo.versionNumber) build \(AppInfo.buildNumber)")
     }
 }
 
