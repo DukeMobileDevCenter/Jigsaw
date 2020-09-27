@@ -20,7 +20,7 @@ class RootTabBarController: UITabBarController {
         // Only load sign in page once per app launch.
         guard isFirstLaunch else { return }
         // An FirebaseAuth object that handles user sign in.
-        let auth = Auth.auth()
+        let auth = FirebaseConstants.auth
         // Present the sign in view controller as the first page.
         let controller = UIStoryboard(name: "SignInViewController", bundle: .main).instantiateInitialViewController() as! SignInViewController
         controller.auth = auth

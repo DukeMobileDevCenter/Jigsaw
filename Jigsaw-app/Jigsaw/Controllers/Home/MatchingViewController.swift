@@ -250,7 +250,7 @@ extension MatchingViewController: ORKTaskViewControllerDelegate {
             loadChatroom { [weak self] chatroom in
                 guard let self = self else { return }
                 self.isChatroomShown = true
-                let chatroomVC = ChatViewController(user: Auth.auth().currentUser!, chatroom: chatroom, timeLeft: stepViewController.timeRemaining)
+                let chatroomVC = ChatViewController(user: FirebaseConstants.shared.currentUser!, chatroom: chatroom, timeLeft: stepViewController.timeRemaining)
                 self.chatroomVC = chatroomVC
                 stepViewController.title = "Quit chat"
                 stepViewController.show(chatroomVC, sender: nil)
