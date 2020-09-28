@@ -12,7 +12,8 @@ import FirebaseFirestore
 struct Game {
     /// Game version.
     let version: String
-    /// Game "room" level. A room with higher level is unlocked after the completion of lower levels.
+    /// Game "room" level with natural index, i.e. starting from level 1.
+    /// A room with higher level is unlocked after the completion of lower levels.
     let level: Int
     /// Name of the game.
     let gameName: String
@@ -30,6 +31,29 @@ struct Game {
     let category: GameCategory
     /// Game card background image URL, can also use for styling.
     let backgroundImageURL: URL
+    
+    var gameID: String {
+        gameName + "_" + String(level)
+    }
+    
+    private var previousLevelGameID: String {
+        let previousLevel = level > 1 ? level - 1 : 1
+        return gameName + "_" + String(previousLevel)
+    }
+    
+    var nextLevelGameID: String {
+        gameName + "_" + String(level + 1)
+    }
+    
+    /// Determine if a game/room is enabled for play.
+    /// Enable all level 1 rooms as well as other unlocked rooms.
+    var isEnabled: Bool {
+        level == 1 || Profiles.playedGameIDs.contains(previousLevelGameID)
+    }
+    
+    var isPlayed: Bool {
+        Profiles.playedGameIDs.contains(gameID)
+    }
     
     init?(document: QueryDocumentSnapshot) {
         let data = document.data()

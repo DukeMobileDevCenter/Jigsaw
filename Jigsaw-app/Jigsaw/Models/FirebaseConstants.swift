@@ -8,12 +8,14 @@
 
 import Foundation
 import FirebaseFirestore
+import FirebaseAuth
 
 class FirebaseConstants: NSObject {
     // Singleton of the class.
     static let shared = FirebaseConstants()
     
     static let database = Firestore.firestore()
+    static let auth = Auth.auth()
     
     let chatrooms = FirebaseConstants.database.collection("Chatrooms")
     let games = FirebaseConstants.database.collection("Games")

@@ -41,7 +41,7 @@ class HomeCollectionViewController: UICollectionViewController {
         let controller = ResultStatsViewController()
         controller.resultPairs = [.correct: 3, .skipped: 1, .incorrect: 2]
         controller.hidesBottomBarWhenPushed = true
-        self.show(controller, sender: sender)
+        show(controller, sender: sender)
     }
     
     private func testShowChatroom(_ sender: UIBarButtonItem) {
@@ -49,7 +49,7 @@ class HomeCollectionViewController: UICollectionViewController {
         chatroomsRef.getDocument { [weak self] document, error in
             guard let self = self else { return }
             if let document = document, let chatroom = Chatroom(document: document) {
-                let chatroomVC = ChatViewController(user: Auth.auth().currentUser!, chatroom: chatroom, timeLeft: nil)
+                let chatroomVC = ChatViewController(user: FirebaseConstants.auth.currentUser!, chatroom: chatroom, timeLeft: nil)
                 // Don't show bottom tab bar.
                 chatroomVC.hidesBottomBarWhenPushed = true
                 self.show(chatroomVC, sender: sender)
@@ -60,6 +60,11 @@ class HomeCollectionViewController: UICollectionViewController {
     }
     
     @objc
+    private func loadFromRemote() {
+        loadGames()
+        loadHistories()
+    }
+    
     private func loadGames() {
         ProgressHUD.show("Loading")
         // Asynchronously load the games from Firebase.
@@ -81,10 +86,25 @@ class HomeCollectionViewController: UICollectionViewController {
         }
     }
     
+    private func loadHistories() {
+        guard Profiles.userID != nil else { return }
+        FirebaseHelper.getGameHistory(userID: Profiles.userID) { [weak self] histories, error in
+            if let histories = histories {
+                histories.forEach { history in
+                    Profiles.playedGameIDs.insert(history.gameID)
+                }
+            } else if let error = error {
+                DispatchQueue.main.async {
+                    self?.presentAlert(error: error)
+                }
+            }
+        }
+    }
+    
     private func configureRefreshControl() {
         // Add the refresh control to UIScrollView object.
         collectionView.refreshControl = UIRefreshControl()
-        collectionView.refreshControl?.addTarget(self, action: #selector(loadGames), for: .valueChanged)
+        collectionView.refreshControl?.addTarget(self, action: #selector(loadFromRemote), for: .valueChanged)
     }
     
     private func isRandomCell(for indexPath: IndexPath) -> Bool {
@@ -92,6 +112,7 @@ class HomeCollectionViewController: UICollectionViewController {
     }
     
     /// Find the game queue with least waiting time. See more in #59.
+    /// 
     /// - Parameters:
     ///   - queueType: The players queue type, 2 or 4 players.
     ///   - completion: Return the game after sorting all games by their modulos.
@@ -136,8 +157,8 @@ class HomeCollectionViewController: UICollectionViewController {
         
         // Configure pull to refresh.
         configureRefreshControl()
-        // Load games from remote.
-        loadGames()
+        // Load games and player's game histories (if exist) from remote.
+        loadFromRemote()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

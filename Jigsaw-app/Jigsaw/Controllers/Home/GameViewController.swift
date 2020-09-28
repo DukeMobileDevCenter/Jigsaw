@@ -32,7 +32,7 @@ class GameViewController: ORKTaskViewController {
     
     private let chatroomCountdownStep: ORKActiveStep = {
         let step = ORKActiveStep(identifier: "Countdown")
-        step.stepDuration = TimeInterval(integerLiteral: 60)
+        step.stepDuration = TimeInterval(integerLiteral: 240)
         step.shouldUseNextAsSkipButton = true
         step.shouldContinueOnFinish = true
         step.shouldShowDefaultTimer = true

@@ -34,13 +34,13 @@ private class GameCollections {
 }
 
 class GameStore: NSObject {
-    // Singleton of the class.
+    /// Singleton of the `GameStore` class.
     static let shared = GameStore()
-    
+    /// A reference singleton to the `GameCollections` class.
     private let collections = GameCollections()
-    
+    /// An array that holds all games fetched from Firebase.
     var allGames = [Game]()
-    
+    /// The category which the GameStore should provide datasource.
     var selectedCategory: GameCategory!
     
     func getGames(for category: GameCategory) -> [Game] {
@@ -61,6 +61,10 @@ class GameStore: NSObject {
     }
     
     // swiftlint:disable cyclomatic_complexity
+    
+    /// Load all games from Firebase and save to respective categories.
+    ///
+    /// - Parameter completion: A closure that passes back an array of Games/rooms or an error.
     func loadGames(completion: @escaping (Result<[Game], Error>) -> Void) {
         var games = [Game]()
         // Clear all existing games.
@@ -99,6 +103,14 @@ class GameStore: NSObject {
         }
     }
     // swiftlint:enable cyclomatic_complexity
+    
+    /// Find next level room for current room/game.
+    ///
+    /// - Parameter currentGame: The room/game the player is currently in.
+    /// - Returns: The next level room if exists.
+    func nextGame(for currentGame: Game) -> Game? {
+        return allGames.first { $0.gameID == currentGame.nextLevelGameID }
+    }
 }
 
 extension GameStore: UICollectionViewDataSource {
@@ -108,14 +120,20 @@ extension GameStore: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "GameCollectionCell", for: indexPath) as! GameCollectionCell
-        
+        // Find game.
         let game = getGames(for: selectedCategory)[indexPath.item]
-        cell.nameLabel.text = game.gameName
-        cell.iconImageView.image = game.category.iconImage
-        
-        // Lazy load background image.
-        cell.backgroundImageView.pin_updateWithProgress = true
-        cell.backgroundImageView.pin_setImage(from: game.backgroundImageURL)
+        // Set subtitle.
+        cell.nameLabel.text = game.isEnabled ? "\(game.gameName) room \(game.level)" : "???"
+        // Set lock icon.
+        cell.iconImageView.image = game.isEnabled ? UIImage(systemName: "lock.open")! : UIImage(systemName: "lock")!
+        // Set background image.
+        if game.isEnabled {
+            // Lazy load background image.
+            cell.backgroundImageView.pin_updateWithProgress = true
+            cell.backgroundImageView.pin_setImage(from: game.backgroundImageURL)
+        }
+        // Disable higher levels that a player hasn't reached.
+        cell.isUserInteractionEnabled = game.isEnabled
         
         return cell
     }

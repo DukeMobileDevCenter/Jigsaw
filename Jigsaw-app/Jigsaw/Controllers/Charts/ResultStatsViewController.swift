@@ -10,7 +10,12 @@ import UIKit
 import Charts
 
 class ResultStatsViewController: UIViewController {
-    @IBOutlet var chartView: PieChartView!
+    @IBOutlet var chartView: PieChartView! {
+        didSet {
+            // Setup the half pie chart view.
+            setup(pieChartView: chartView)
+        }
+    }
     @IBOutlet var nextGameLabel: UILabel!
     @IBOutlet var nextGameButton: UIButton!
     
@@ -30,15 +35,12 @@ class ResultStatsViewController: UIViewController {
             nextGameButton.isEnabled = false
         }
         
-        // Setup the half pie chart view.
-        setup(pieChartView: chartView)
         updateChartData()
         // Lead in rotating animation.
         chartView.animate(xAxisDuration: 1.4, easingOption: .easeOutBack)
     }
     
     @IBAction func nextGameButtonTapped(_ sender: UIButton) {
-        print("next game button tapped.")
         // Pop to home page first.
         if let homeViewController = navigationController?.viewControllers.first(where: { $0 is HomeCollectionViewController }) as? HomeCollectionViewController {
             navigationController!.popToViewController(homeViewController, animated: false)
@@ -51,6 +53,26 @@ class ResultStatsViewController: UIViewController {
     private func updateChartData() {
         setDataCount(from: resultPairs)
     }
+    
+    private let centerText: NSMutableAttributedString = {
+        // Center text settings.
+        let centerText = NSMutableAttributedString(string: "Results\nby Jigsaw")
+        centerText.setAttributes(
+            [
+                .font: UIFont.systemFont(ofSize: 15),
+                .foregroundColor: UIColor.label
+            ],
+            range: NSRange(location: 0, length: centerText.length)
+        )
+        centerText.addAttributes(
+            [
+                .font: UIFont(name: "HelveticaNeue-Light", size: 13)!,
+                .foregroundColor: UIColor.systemBlue
+            ],
+            range: NSRange(location: centerText.length - 6, length: 6)
+        )
+        return centerText
+    }()
     
     private func setup(pieChartView chartView: PieChartView) {
         chartView.usePercentValuesEnabled = true
@@ -71,22 +93,6 @@ class ResultStatsViewController: UIViewController {
         chartView.maxAngle = 180 // Half chart
         chartView.rotationAngle = 180 // Rotate to make the half on the upper side
         chartView.centerTextOffset = CGPoint(x: 0, y: -25)
-        // Center text settings.
-        let centerText = NSMutableAttributedString(string: "Results\nby Jigsaw")
-        centerText.setAttributes(
-            [
-                .font: UIFont.systemFont(ofSize: 15),
-                .foregroundColor: UIColor.label
-            ],
-            range: NSRange(location: 0, length: centerText.length)
-        )
-        centerText.addAttributes(
-            [
-                .font: UIFont(name: "HelveticaNeue-Light", size: 13)!,
-                .foregroundColor: UIColor.systemBlue
-            ],
-            range: NSRange(location: centerText.length - 6, length: 6)
-        )
         
         let paragraphStyle = NSParagraphStyle.default.mutableCopy() as! NSMutableParagraphStyle
         paragraphStyle.lineBreakMode = .byTruncatingTail

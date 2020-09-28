@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.3" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="KXb-Pf-7Vr">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Result Stats View Controller-->
+        <scene sceneID="ln7-nh-I0O">
+            <objects>
+                <viewController id="KXb-Pf-7Vr" customClass="ResultStatsViewController" customModule="Jigsaw" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="ZEp-9M-Zim">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Next game label here." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iwb-cv-ooB">
+                                <rect key="frame" x="124" y="688" width="166.5" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="NFE-WB-5Uj"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9mq-48-YMy" customClass="PieChartView" customModule="Charts">
+                                <rect key="frame" x="0.0" y="44" width="414" height="276"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="9mq-48-YMy" secondAttribute="height" multiplier="3:2" id="Nbs-Xg-r6M"/>
+                                </constraints>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kIe-xY-obD">
+                                <rect key="frame" x="176" y="746" width="62" height="32"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="32" id="PWV-37-c4e"/>
+                                </constraints>
+                                <state key="normal" title="Continue"/>
+                                <connections>
+                                    <action selector="nextGameButtonTapped:" destination="KXb-Pf-7Vr" eventType="touchUpInside" id="9Pc-hc-1P3"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="kIe-xY-obD" firstAttribute="top" secondItem="iwb-cv-ooB" secondAttribute="bottom" constant="8" symbolic="YES" id="1Co-bh-Zre"/>
+                            <constraint firstItem="9mq-48-YMy" firstAttribute="width" secondItem="UZn-A9-wPv" secondAttribute="width" id="35h-iK-07R"/>
+                            <constraint firstItem="iwb-cv-ooB" firstAttribute="centerX" secondItem="9mq-48-YMy" secondAttribute="centerX" id="3Gf-m9-9wz"/>
+                            <constraint firstItem="iwb-cv-ooB" firstAttribute="top" relation="greaterThanOrEqual" secondItem="9mq-48-YMy" secondAttribute="bottom" constant="50" id="64B-eh-mbm"/>
+                            <constraint firstItem="UZn-A9-wPv" firstAttribute="bottom" secondItem="kIe-xY-obD" secondAttribute="bottom" constant="84" id="S6g-gq-efJ"/>
+                            <constraint firstItem="9mq-48-YMy" firstAttribute="centerX" secondItem="UZn-A9-wPv" secondAttribute="centerX" id="afp-k0-Wux"/>
+                            <constraint firstItem="kIe-xY-obD" firstAttribute="centerX" secondItem="9mq-48-YMy" secondAttribute="centerX" id="vO7-Xd-JhL"/>
+                            <constraint firstItem="9mq-48-YMy" firstAttribute="top" secondItem="UZn-A9-wPv" secondAttribute="top" id="vhH-Mh-giA"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="UZn-A9-wPv"/>
+                    </view>
+                    <connections>
+                        <outlet property="chartView" destination="9mq-48-YMy" id="y4B-KI-Cta"/>
+                        <outlet property="nextGameButton" destination="kIe-xY-obD" id="kE0-92-c11"/>
+                        <outlet property="nextGameLabel" destination="iwb-cv-ooB" id="LCB-nY-ri8"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8U2-yn-rxb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="547" y="-139"/>
+        </scene>
+    </scenes>
+</document>

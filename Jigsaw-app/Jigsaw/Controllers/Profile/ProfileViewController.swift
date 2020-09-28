@@ -6,6 +6,7 @@
 //  Copyright © 2020 DukeMobileDevCenter. All rights reserved.
 //
 
+import os
 import UIKit
 import ResearchKit
 import Eureka
@@ -13,19 +14,12 @@ import ViewRow
 import FirebaseUI
 
 class ProfileViewController: FormViewController {
-    // Firebase UI.
-    private var authUI: FUIAuth!
     // During onboarding, the form cannot be filled without player info.
     // In this case, load the form when the view is appearing.
     private var shouldLoadFormForTheFirstTime = true
     
-    private let appName = Bundle.main.object(forInfoDictionaryKey: kCFBundleNameKey as String) as? String
-    private let versionNumber = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String
-    private let buildNumber = Bundle.main.object(forInfoDictionaryKey: kCFBundleVersionKey as String) as? String
-    
-    @IBAction func userAccountBarButtonTapped(_ sender: UIBarButtonItem) {
-        let authViewController = authUI.authViewController()
-        show(authViewController, sender: sender)
+    private var uidString: String {
+        "uid: " + (FirebaseConstants.auth.currentUser?.uid ?? "nil error")
     }
     
     override func viewDidLoad() {
@@ -33,13 +27,6 @@ class ProfileViewController: FormViewController {
         loadInsetGroupedTableView()
         super.viewDidLoad()
         configureRefreshControl()
-        // Create an authentication UI.
-        authUI = createFirebaseUI()
-        
-        if Profiles.currentPlayer != nil {
-            createForm()
-            shouldLoadFormForTheFirstTime = false
-        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -48,19 +35,6 @@ class ProfileViewController: FormViewController {
             createForm()
         }
         shouldLoadFormForTheFirstTime = false
-    }
-    
-    private func createFirebaseUI() -> FUIAuth {
-        // Init Firebase UI.
-        let authUI = FUIAuth.defaultAuthUI()!
-        authUI.delegate = self
-        let providers: [FUIAuthProvider] = [
-            FUIGoogleAuth(),
-            FUIEmailAuth()
-        ]
-        authUI.providers = providers
-        authUI.shouldAutoUpgradeAnonymousUsers = true
-        return authUI
     }
     
     private func configureRefreshControl() {
@@ -72,70 +46,87 @@ class ProfileViewController: FormViewController {
     @objc
     private func loadPlayerProfile() {
         // Get player info from remote.
-        FirebaseConstants.shared.players.document(Profiles.userID).getDocument { [weak self] document, error in
+        FirebaseHelper.getPlayer(userID: Profiles.userID) { [weak self] player, error in
             guard let self = self else { return }
+            if let currentPlayer = player {
+                Profiles.displayName = currentPlayer.displayName
+                Profiles.jigsawValue = currentPlayer.jigsawValue
+                Profiles.currentPlayer = currentPlayer
+                os_log(.info, "Current player's profile: %s", Profiles().description)
+            } else if let error = error {
+                self.presentAlert(error: error)
+                os_log(.error, "Failed to get player from remote: %@", error.localizedDescription)
+            }
             // Dismiss the refresh control.
             DispatchQueue.main.async {
                 self.tableView.refreshControl?.endRefreshing()
+                self.reloadRows()
             }
-            if let error = error {
-                self.presentAlert(error: error)
-                return
+        }
+    }
+    
+    private func reloadRows() {
+        // Reload the header part.
+        let headerRow = form.rowBy(tag: "ProfileHeaderRow") as! ViewRow<ProfileHeaderView>
+        configureHeaderView(view: headerRow.view!)
+        headerRow.section?.footer?.title = uidString
+        headerRow.reload()
+        // Reload the jigsaw value row.
+        let jigsawValueRow = form.rowBy(tag: "JigsawValueRow") as! DecimalRow
+        jigsawValueRow.value = Profiles.jigsawValue
+        jigsawValueRow.reload()
+        // Reload the join date row.
+        let joinDateRow = form.rowBy(tag: "JoinDateRow") as! DateRow
+        joinDateRow.value = Profiles.currentPlayer.joinDate
+        joinDateRow.reload()
+    }
+    
+    private func configureHeaderView(view: ProfileHeaderView) {
+        let piece = JigsawPiece.unknown
+        view.setView(name: piece.label, avatarFileName: piece.bundleName)
+        if let user = FirebaseConstants.auth.currentUser {
+            let providerIDs = user.providerData.map { $0.providerID }
+            if let name = user.displayName, let photoURL = user.photoURL {
+                // Display account associated avatar for profile page.
+                view.setView(name: name, avatarURL: photoURL)
             }
-            guard let document = document, document.exists else {
-                // Impossible to come here.
-                self.presentAlert(title: "❌ Error: player doesn't exist.")
-                return
-            }
-            do {
-                if let currentPlayer = try document.data(as: Player.self) {
-                    Profiles.displayName = currentPlayer.displayName
-                    Profiles.jigsawValue = currentPlayer.jigsawValue
-                    Profiles.currentPlayer = currentPlayer
-                    print("✅ Player info loaded,", Profiles().description)
-                }
-            } catch {
-                self.presentAlert(error: error)
-            }
+            // Load provider icons
+            view.googleIconView.tintColor = providerIDs.contains(GoogleAuthProviderID) ? .systemRed : .secondaryLabel
+            view.githubIconView.tintColor = providerIDs.contains(GitHubAuthProviderID) ? .systemPurple : .secondaryLabel
+            view.appleIconView.tintColor = providerIDs.contains("apple.com") ? .systemTeal : .secondaryLabel
+            view.emailIconView.tintColor = providerIDs.contains(EmailAuthProviderID) ? .systemGreen : .secondaryLabel
         }
     }
     
     private var profileHeaderView: ProfileHeaderView {
-        let piece = JigsawPiece.unknown
         let view = Bundle.main.loadNibNamed("ProfileHeaderView", owner: self)?.first as! ProfileHeaderView
-        view.setView(name: piece.label, avatarFileName: piece.bundleName)
-        let user = Auth.auth().currentUser!
-        let providerIDs = user.providerData.map { $0.providerID }
-        // Load provider icons
-        view.googleIconView.tintColor = providerIDs.contains(GoogleAuthProviderID) ? .systemRed : .secondaryLabel
-        view.githubIconView.tintColor = providerIDs.contains(GitHubAuthProviderID) ? .systemPurple : .secondaryLabel
+        configureHeaderView(view: view)
         return view
     }
     
-    private lazy var profileHeaderRow: ViewRow<ProfileHeaderView> = {
-        ViewRow<ProfileHeaderView>("view")
+    private var profileHeaderRow: ViewRow<ProfileHeaderView> {
+        let row = ViewRow<ProfileHeaderView>("view")
         .cellSetup { cell, _ in
             // Construct the view
             cell.view = self.profileHeaderView
         }
-        .onCellSelection { [weak self] _, _ in
-            DispatchQueue.main.async {
-                self?.presentAlert(title: "More to add here", message: "Change avatar feature is on the way!")
-            }
-        }
-    }()
+        row.tag = "ProfileHeaderRow"
+        return row
+    }
     
     private func createForm() {
         form
-        +++ Section("Profile")
+        +++ Section(header: "Profile", footer: uidString)
         <<< profileHeaderRow
-        +++ Section(header: "Basic Information", footer: "Blah blah blah")
+        +++ Section(header: "Basic Information", footer: "These values cannot be changed")
         <<< DecimalRow { row in
+            row.tag = "JigsawValueRow"
             row.title = "Jigsaw value"
             row.value = Profiles.jigsawValue
             row.disabled = true
         }
         <<< DateRow { row in
+            row.tag = "JoinDateRow"
             row.title = "Join date"
             row.value = Profiles.currentPlayer.joinDate
             row.disabled = true
@@ -171,7 +162,84 @@ class ProfileViewController: FormViewController {
                 self?.present(controller, animated: true)
             }
         }
-        +++ Section("\(appName!) Version \(versionNumber!) build \(buildNumber!)")
+        // Add app info to the end of this page.
+        +++ Section("\(AppInfo.appName) app 🧩 Version \(AppInfo.versionNumber) build \(AppInfo.buildNumber)")
+    }
+}
+
+// MARK: Firebase Auth and account connection
+
+extension ProfileViewController {
+    @IBAction func userAccountBarButtonTapped(_ sender: UIBarButtonItem) {
+        // An action sheet for multiple actions.
+        let alertController = UIAlertController(
+            title: nil,
+            message: nil,
+            preferredStyle: .actionSheet
+        )
+        // Connect action.
+        if let user = FirebaseConstants.auth.currentUser, let authUI = createFirebaseUI(for: user) {
+            // Only add connectAction when it is able to connect.
+            let connectAction = UIAlertAction(title: "Connect Online Account", style: .default) { _ in
+                // Create an authentication UI if user exists and haven't connect all accounts.
+                let authViewController = authUI.authViewController()
+                self.show(authViewController, sender: sender)
+            }
+            alertController.addAction(connectAction)
+        }
+        // Sign out action.
+        let signOutAction = UIAlertAction(title: "Sign Out", style: .destructive) { _ in
+            let alert = UIAlertController(
+                title: "Be careful",
+                message: "Sign out from anonymous account will lose all your data. Please confirm before proceed.",
+                preferredStyle: .alert
+            )
+            let signOutAction = UIAlertAction(title: "Sign Out", style: .destructive) { _ in
+                // Sign out here.
+                do {
+                    // Sign out and reset local profile.
+                    try FirebaseConstants.auth.signOut()
+                    Profiles.resetProfiles()
+                    // Present the sign in page by the root tab bar.
+                    let tabBar = self.tabBarController as! RootTabBarController
+                    tabBar.handlePresentSignInPage(animated: true)
+                } catch {
+                    self.presentAlert(error: error)
+                }
+            }
+            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+            alert.addAction(cancelAction)
+            alert.addAction(signOutAction)
+            alert.preferredAction = cancelAction
+            self.present(alert, animated: true)
+        }
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+        alertController.addAction(signOutAction)
+        alertController.addAction(cancelAction)
+        alertController.popoverPresentationController?.barButtonItem = sender
+        present(alertController, animated: true)
+    }
+    
+    private func createFirebaseUI(for user: User) -> FUIAuth? {
+        // Init Firebase UI.
+        let authUI = FUIAuth.defaultAuthUI()!
+        
+        // Do not create the FUI if already linked to one of the providers.
+        let existingProviderIDs = user.providerData.map { $0.providerID }
+        if !existingProviderIDs.isEmpty { return nil }
+        
+        let providers: [FUIAuthProvider] = [
+            FUIGoogleAuth(),
+            FUIOAuth.appleAuthProvider(),
+            FUIOAuth.githubAuthProvider(),
+            FUIEmailAuth()
+        ]
+        
+        authUI.providers = providers
+        authUI.delegate = self
+        authUI.shouldAutoUpgradeAnonymousUsers = true
+        return authUI
     }
 }
 
@@ -181,19 +249,19 @@ extension ProfileViewController: FUIAuthDelegate {
             // Merge conflict error, discard the anonymous user and login as the existing
             // non-anonymous user.
             guard let credential = error.userInfo[FUIAuthCredentialKey] as? AuthCredential else {
-                print("Received merge conflict error without auth credential!")
+                os_log(.error, "Received merge conflict error without auth credential!")
                 return
             }
-            Auth.auth().signIn(with: credential) { _, error in
+            FirebaseConstants.auth.signIn(with: credential) { _, error in
                 if let error = error as NSError? {
-                    print("Failed to re-login: \(error)")
+                    os_log(.error, "Failed to re-login: %@", error.localizedDescription)
                     return
                 }
                 // Handle successful re-login below.
             }
         } else if let error = error {
             // User canceled account linking.
-            print("Failed to log in: \(error.localizedDescription)")
+            os_log(.error, "Failed to log in or canceled: %@", error.localizedDescription)
         } else if let result = authDataResult {
             // Handle successful login below.
             let user = result.user

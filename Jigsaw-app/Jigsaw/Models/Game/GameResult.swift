@@ -67,6 +67,11 @@ struct GameResult {
         score > 0.6
     }
     
+    var wrongCount: Int {
+        // Incorrect is the third case.
+        resultPairs[2].1
+    }
+    
     // swiftlint:disable cyclomatic_complexity
     
     /// Judge if the player answer the question correctly.

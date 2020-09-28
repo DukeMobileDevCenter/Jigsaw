@@ -85,6 +85,8 @@ class MatchingViewController: UIViewController {
         do {
             // Set a history with the group ID.
             try historyRef.document(gameGroup.id!).setData(from: gameHistory)
+            // Insert the played game into history set.
+            Profiles.playedGameIDs.insert(gameHistory.gameID)
         } catch {
             presentAlert(error: error)
         }
@@ -212,13 +214,6 @@ class MatchingViewController: UIViewController {
         }
     }
     
-    /// Find next level room for current room/game.
-    /// - Parameter currentGame: The room/game the player is currently in.
-    /// - Returns: The next level room.
-    private func nextGame(for currentGame: Game) -> Game? {
-        return GameStore.shared.allGames.first { currentGame.gameName == $0.gameName && currentGame.level + 1 == $0.level }
-    }
-    
     deinit {
         // Remove player from queue when it exits the matching page.
         // There might be some sync bug, if a player just quit a match while he is added to a group.
@@ -248,7 +243,7 @@ extension MatchingViewController: ORKTaskViewControllerDelegate {
             loadChatroom { [weak self] chatroom in
                 guard let self = self else { return }
                 self.isChatroomShown = true
-                let chatroomVC = ChatViewController(user: Auth.auth().currentUser!, chatroom: chatroom, timeLeft: stepViewController.timeRemaining)
+                let chatroomVC = ChatViewController(user: FirebaseConstants.auth.currentUser!, chatroom: chatroom, timeLeft: stepViewController.timeRemaining)
                 self.chatroomVC = chatroomVC
                 stepViewController.title = "Quit chat"
                 stepViewController.show(chatroomVC, sender: nil)
@@ -292,7 +287,7 @@ extension MatchingViewController: ORKTaskViewControllerDelegate {
                 self.taskViewController(taskViewController, didFinishWith: .failed, error: GameError.maxAttemptReached)
                 completion()
             } else {
-                stepViewController.presentAlert(gameError: GameError.currentPlayerFailed, completion: completion)
+                stepViewController.presentAlert(gameError: GameError.currentPlayerFailed(gameResult.wrongCount), completion: completion)
             }
         } else {
             // Mark the player as finished.
@@ -317,15 +312,20 @@ extension MatchingViewController: ORKTaskViewControllerDelegate {
         }
     }
     
-    func taskViewController(_ taskViewController: ORKTaskViewController, didFinishWith reason: ORKTaskViewControllerFinishReason, error: Error?) {
+    private func cleanUpAfterGameEnds() {
         // Remove matching group from database.
         removeMatchingGroup()
         // Remove the chatroom when a player stops the game.
         removeChatroom()
         // Invalidate any remaining timer.
-        chatroomStepVC.finish()
-        chatroomVC.finish()
+        chatroomStepVC?.finish()
+        chatroomVC?.finish()
         chatroomVC = nil
+    }
+    
+    func taskViewController(_ taskViewController: ORKTaskViewController, didFinishWith reason: ORKTaskViewControllerFinishReason, error: Error?) {
+        // Clean ups.
+        cleanUpAfterGameEnds()
         // Re-enable the button to allow player to join another game.
         joinGameButton.isEnabled = true
         // Dismiss the game VC.
@@ -356,11 +356,12 @@ extension MatchingViewController: ORKTaskViewControllerDelegate {
             
             // Log the real game result.
             let gameResult = GameResult(taskResult: taskViewController.result, questionnaire: myQuestionnaire)
-            let controller = ResultStatsViewController()
+            let controller = UIStoryboard(name: "ResultStatsViewController", bundle: .main).instantiateInitialViewController() as! ResultStatsViewController
             controller.resultPairs = gameResult.resultPairs
-            controller.nextGame = nextGame(for: selectedGame)
+            controller.nextGame = GameStore.shared.nextGame(for: selectedGame)
             
             let gameHistory = GameHistory(
+                gameID: selectedGame.gameID,
                 playedDate: gameGroup.createdDate,
                 gameCategory: selectedGame.category,
                 gameName: selectedGame.gameName,

@@ -37,38 +37,22 @@ class GameHistoryTimelineTableViewController: UITableViewController {
         return formatter
     }()
     
-    /// Load game history records from database.
-    ///
-    /// - Parameters:
-    ///   - completion: A closure called after fetching data from database that passes an array of `GameHistory`.
-    ///   - gameHistories: An array of `GameHistory`.
-    private func loadGameHistories(completion: @escaping (_ gameHistories: [GameHistory]) -> Void) {
-        let historyRef = FirebaseConstants.database.collection(["Players", Profiles.userID, "gameHistory"].joined(separator: "/"))
-        var gameHistories: [GameHistory] = []
-        historyRef.getDocuments { [weak self] querySnapshot, error in
-            guard let self = self else { return }
-            if let historyRecords = querySnapshot {
-                for gameHistory in historyRecords.documents {
-                    if let history = try? gameHistory.data(as: GameHistory.self) {
-                        gameHistories.append(history)
-                    }
-                }
-            } else if let error = error {
-                self.presentAlert(error: error)
-            }
-            completion(gameHistories)
-        }
-    }
-    
     // MARK: UITableViewController
     
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Game History"
         ProgressHUD.show()
-        loadGameHistories { [weak self] histories in
-            self?.gameHistories = histories
+        FirebaseHelper.getGameHistory(userID: Profiles.userID) { [weak self] histories, error in
             ProgressHUD.dismiss()
+            if let histories = histories {
+                self?.gameHistories = histories
+                histories.forEach { history in
+                    Profiles.playedGameIDs.insert(history.gameID)
+                }
+            } else if let error = error {
+                self?.presentAlert(error: error)
+            }
         }
     }
     
