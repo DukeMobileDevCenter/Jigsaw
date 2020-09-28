@@ -11,16 +11,16 @@ import Foundation
 enum GameError: LocalizedError, CustomStringConvertible {
     case otherPlayerDropped
     case maxAttemptReached
-    case currentPlayerFailed
+    case currentPlayerFailed(Int)
     
     var description: String {
         switch self {
         case .otherPlayerDropped:
-            return "😢 One of your peers did not pass the game."
+            return "😢 One of your peers didn't pass the game."
         case .maxAttemptReached:
-            return "😞 Max attempt reached. Game fails!"
-        case .currentPlayerFailed:
-            return "🤨 Uh-oh. You didn't pass the game. Discuss and try again!"
+            return "😞 Max attempts reached."
+        case .currentPlayerFailed(let wrongCount):
+            return "🤨 Uh-oh. You didn't pass the game with \(wrongCount) wrong answers.\nDiscuss and try again!"
         }
     }
 }

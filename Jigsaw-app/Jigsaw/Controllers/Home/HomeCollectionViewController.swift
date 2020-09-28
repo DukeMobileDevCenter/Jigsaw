@@ -112,6 +112,7 @@ class HomeCollectionViewController: UICollectionViewController {
     }
     
     /// Find the game queue with least waiting time. See more in #59.
+    /// 
     /// - Parameters:
     ///   - queueType: The players queue type, 2 or 4 players.
     ///   - completion: Return the game after sorting all games by their modulos.

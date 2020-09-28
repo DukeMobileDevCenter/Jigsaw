@@ -287,7 +287,7 @@ extension MatchingViewController: ORKTaskViewControllerDelegate {
                 self.taskViewController(taskViewController, didFinishWith: .failed, error: GameError.maxAttemptReached)
                 completion()
             } else {
-                stepViewController.presentAlert(gameError: GameError.currentPlayerFailed, completion: completion)
+                stepViewController.presentAlert(gameError: GameError.currentPlayerFailed(gameResult.wrongCount), completion: completion)
             }
         } else {
             // Mark the player as finished.
