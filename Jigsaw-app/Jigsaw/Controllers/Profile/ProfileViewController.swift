@@ -18,6 +18,10 @@ class ProfileViewController: FormViewController {
     // In this case, load the form when the view is appearing.
     private var shouldLoadFormForTheFirstTime = true
     
+    private var uidString: String {
+        "uid: " + (FirebaseConstants.auth.currentUser?.uid ?? "nil error")
+    }
+    
     override func viewDidLoad() {
         // Override the tableview appearance.
         loadInsetGroupedTableView()
@@ -44,10 +48,6 @@ class ProfileViewController: FormViewController {
         // Get player info from remote.
         FirebaseHelper.getPlayer(userID: Profiles.userID) { [weak self] player, error in
             guard let self = self else { return }
-            // Dismiss the refresh control.
-            DispatchQueue.main.async {
-                self.tableView.refreshControl?.endRefreshing()
-            }
             if let currentPlayer = player {
                 Profiles.displayName = currentPlayer.displayName
                 Profiles.jigsawValue = currentPlayer.jigsawValue
@@ -57,12 +57,32 @@ class ProfileViewController: FormViewController {
                 self.presentAlert(error: error)
                 os_log(.error, "Failed to get player from remote: %@", error.localizedDescription)
             }
+            // Dismiss the refresh control.
+            DispatchQueue.main.async {
+                self.tableView.refreshControl?.endRefreshing()
+                self.reloadRows()
+            }
         }
     }
     
-    private var profileHeaderView: ProfileHeaderView {
+    private func reloadRows() {
+        // Reload the header part.
+        let headerRow = form.rowBy(tag: "ProfileHeaderRow") as! ViewRow<ProfileHeaderView>
+        configureHeaderView(view: headerRow.view!)
+        headerRow.section?.footer?.title = uidString
+        headerRow.reload()
+        // Reload the jigsaw value row.
+        let jigsawValueRow = form.rowBy(tag: "JigsawValueRow") as! DecimalRow
+        jigsawValueRow.value = Profiles.jigsawValue
+        jigsawValueRow.reload()
+        // Reload the join date row.
+        let joinDateRow = form.rowBy(tag: "JoinDateRow") as! DateRow
+        joinDateRow.value = Profiles.currentPlayer.joinDate
+        joinDateRow.reload()
+    }
+    
+    private func configureHeaderView(view: ProfileHeaderView) {
         let piece = JigsawPiece.unknown
-        let view = Bundle.main.loadNibNamed("ProfileHeaderView", owner: self)?.first as! ProfileHeaderView
         view.setView(name: piece.label, avatarFileName: piece.bundleName)
         if let user = FirebaseConstants.auth.currentUser {
             let providerIDs = user.providerData.map { $0.providerID }
@@ -76,28 +96,37 @@ class ProfileViewController: FormViewController {
             view.appleIconView.tintColor = providerIDs.contains("apple.com") ? .systemTeal : .secondaryLabel
             view.emailIconView.tintColor = providerIDs.contains(EmailAuthProviderID) ? .systemGreen : .secondaryLabel
         }
+    }
+    
+    private var profileHeaderView: ProfileHeaderView {
+        let view = Bundle.main.loadNibNamed("ProfileHeaderView", owner: self)?.first as! ProfileHeaderView
+        configureHeaderView(view: view)
         return view
     }
     
     private var profileHeaderRow: ViewRow<ProfileHeaderView> {
-        ViewRow<ProfileHeaderView>("view")
+        let row = ViewRow<ProfileHeaderView>("view")
         .cellSetup { cell, _ in
             // Construct the view
             cell.view = self.profileHeaderView
         }
+        row.tag = "ProfileHeaderRow"
+        return row
     }
     
     private func createForm() {
         form
-        +++ Section(header: "Profile", footer: "uid: " + (FirebaseConstants.auth.currentUser?.uid ?? "nil error"))
+        +++ Section(header: "Profile", footer: uidString)
         <<< profileHeaderRow
-        +++ Section(header: "Basic Information", footer: "Blah blah blah")
+        +++ Section(header: "Basic Information", footer: "These values cannot be changed")
         <<< DecimalRow { row in
+            row.tag = "JigsawValueRow"
             row.title = "Jigsaw value"
             row.value = Profiles.jigsawValue
             row.disabled = true
         }
         <<< DateRow { row in
+            row.tag = "JoinDateRow"
             row.title = "Join date"
             row.value = Profiles.currentPlayer.joinDate
             row.disabled = true
@@ -134,7 +163,7 @@ class ProfileViewController: FormViewController {
             }
         }
         // Add app info to the end of this page.
-        +++ Section("\(AppInfo.appName) 🧩 Version \(AppInfo.versionNumber) build \(AppInfo.buildNumber)")
+        +++ Section("\(AppInfo.appName) app 🧩 Version \(AppInfo.versionNumber) build \(AppInfo.buildNumber)")
     }
 }
 
@@ -168,9 +197,12 @@ extension ProfileViewController {
             let signOutAction = UIAlertAction(title: "Sign Out", style: .destructive) { _ in
                 // Sign out here.
                 do {
+                    // Sign out and reset local profile.
                     try FirebaseConstants.auth.signOut()
+                    Profiles.resetProfiles()
+                    // Present the sign in page by the root tab bar.
                     let tabBar = self.tabBarController as! RootTabBarController
-                    tabBar.handlePresentSignInPage()
+                    tabBar.handlePresentSignInPage(animated: true)
                 } catch {
                     self.presentAlert(error: error)
                 }

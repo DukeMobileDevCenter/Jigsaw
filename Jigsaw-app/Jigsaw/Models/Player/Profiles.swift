@@ -9,12 +9,23 @@
 import Foundation
 
 class Profiles: CustomStringConvertible {
+    /// A custom description that prints out basic info.
     var description: String {
         return "userID: \(Profiles.userID ?? "nil"), displayName: \(Profiles.displayName ?? "nil"), jigsawValue: \(Profiles.jigsawValue)"
     }
     
-    static var currentPlayer: Player! = nil
+    /// A class function to clear away all info.
+    static func resetProfiles() {
+        userID = nil
+        displayName = nil
+        jigsawValue = 0.5
+        playedGameIDs.removeAll()
+        currentPlayer = nil
+    }
     
+    /// A copy of the current `Player` struct.
+    static var currentPlayer: Player! = nil
+    /// A set of strings for IDs of played game.
     static var playedGameIDs = Set<String>()
     
     private enum SettingKeys: String, CaseIterable {
