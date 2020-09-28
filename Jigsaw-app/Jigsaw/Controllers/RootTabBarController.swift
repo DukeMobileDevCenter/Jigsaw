@@ -25,7 +25,7 @@ class RootTabBarController: UITabBarController {
         isFirstLaunch = false
     }
     
-    func handlePresentSignInPage() {
+    func handlePresentSignInPage(animated: Bool = false) {
         // An FirebaseAuth object that handles user sign in.
         let auth = FirebaseConstants.auth
         // Present the sign in view controller as the first page.
@@ -33,13 +33,18 @@ class RootTabBarController: UITabBarController {
         controller.auth = auth
         controller.signInManagerDelegate = self
         controller.modalPresentationStyle = .fullScreen
-        present(controller, animated: false)
+        present(controller, animated: animated)
         
         // Check if the user is signed in.
         if let user = FirebaseConstants.auth.currentUser {
             if user.uid != Profiles.userID {
                 // Something went wrong. Force user to sign in again.
-                try? auth.signOut()
+                do {
+                    try auth.signOut()
+                    Profiles.resetProfiles()
+                } catch {
+                    presentAlert(error: error)
+                }
             } else {
                 // User is signed in, dismiss the sign in page.
                 controller.dismiss(animated: true) { [weak self] in
@@ -51,13 +56,13 @@ class RootTabBarController: UITabBarController {
     }
     
     private func handleAfterSignIn(user: User) {
+        if Profiles.userID != user.uid {
+            // A new user signed in.
+            Profiles.userID = user.uid
+        }
         switch OnboardingStateManager.shared.getOnboardingCompletedState() {
         case true:
-            // Existing user, fetch from remote directly.
-            if Profiles.userID != user.uid {
-                // A new user signed in.
-                Profiles.userID = user.uid
-            }
+            // Existing user, fetch data from remote directly.
             didCompleteOnboarding()
         case false:
             // Newly signed in user.
