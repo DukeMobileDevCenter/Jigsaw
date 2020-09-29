@@ -70,7 +70,7 @@ class SignInViewController: UIViewController {
             } else if let result = result {
                 let uid = result.user.uid
                 if Profiles.userID != uid {
-                    os_log(.info, "Sign in as a different anonymous player, old is %s, new is %s", Profiles.userID, uid)
+                    os_log(.info, "Sign in as a different anonymous player, old is %s, new is %s", (Profiles.userID ?? "nil"), uid)
                     Profiles.userID = uid
                 }
                 // Dismiss current view controller.
