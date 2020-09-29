@@ -108,7 +108,21 @@ class HomeCollectionViewController: UICollectionViewController {
     }
     
     private func isRandomCell(for indexPath: IndexPath) -> Bool {
-        indexPath.item == 5
+        indexPath.item == GameCategory.allCases.count - 1
+    }
+    
+    private func handleRandomPerform(for indexPath: IndexPath) {
+        let cell = collectionView.cellForItem(at: indexPath)
+        if isRandomCell(for: indexPath) {
+            // Handle random cell specifically.
+            getGameWithLeastWaitingTime(queueType: queueType) { [unowned self] game in
+                self.randomGame = game
+                self.performSegue(withIdentifier: "showRandom", sender: cell)
+            }
+        } else {
+            // Do the normal synchronous performSegue.
+            performSegue(withIdentifier: "showCategory", sender: cell)
+        }
     }
     
     /// Find the game queue with least waiting time. See more in #59.
@@ -193,15 +207,7 @@ class HomeCollectionViewController: UICollectionViewController {
 
 extension HomeCollectionViewController {
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let cell = collectionView.cellForItem(at: indexPath)
-        if isRandomCell(for: indexPath) {
-            getGameWithLeastWaitingTime(queueType: queueType) { [unowned self] game in
-                self.randomGame = game
-                self.performSegue(withIdentifier: "showRandom", sender: cell)
-            }
-        } else {
-            performSegue(withIdentifier: "showCategory", sender: cell)
-        }
+        handleRandomPerform(for: indexPath)
     }
 }
 
@@ -243,11 +249,9 @@ extension HomeCollectionViewController {
             let item = Int(identifier) else { return }
         
         let indexPath = IndexPath(item: item, section: 0)
-        let cell = collectionView.cellForItem(at: indexPath)
         // Handle the random game cell separately.
-        let segueIdentifier = isRandomCell(for: indexPath) ? "showRandom" : "showCategory"
         animator.addCompletion {
-            self.performSegue(withIdentifier: segueIdentifier, sender: cell)
+            self.handleRandomPerform(for: indexPath)
         }
     }
 }
