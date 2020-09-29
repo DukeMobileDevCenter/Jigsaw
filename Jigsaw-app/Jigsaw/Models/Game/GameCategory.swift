@@ -13,9 +13,10 @@ enum GameCategory: String, CaseIterable, Codable {
     // Some dummy categories only for demo purposes
     case immigration
     case economy
-    case law
+    case justice
     case environment
     case health
+    case international
     case random
     
     var iconImage: UIImage {
@@ -25,12 +26,14 @@ enum GameCategory: String, CaseIterable, Codable {
             iconImage = UIImage(systemName: "hand.raised.slash")!
         case .economy:
             iconImage = UIImage(systemName: "dollarsign.circle")!
-        case .law:
+        case .justice:
             iconImage = UIImage(systemName: "shield.lefthalf.fill")!
         case .environment:
             iconImage = UIImage(systemName: "cloud.sun")!
         case .health:
             iconImage = UIImage(systemName: "staroflife")!
+        case .international:
+            iconImage = UIImage(systemName: "globe")!
         case .random:
             iconImage = UIImage(systemName: "questionmark")!
         }
@@ -47,12 +50,14 @@ enum GameCategory: String, CaseIterable, Codable {
             return "Immigration"
         case .economy:
             return "Economy"
-        case .law:
-            return "Law"
+        case .justice:
+            return "Justice"
         case .environment:
             return "Environment"
         case .health:
             return "Health"
+        case .international:
+            return "International"
         case .random:
             return "Random"
         }
@@ -64,12 +69,14 @@ enum GameCategory: String, CaseIterable, Codable {
             return "Immigration is the international movement of people to a destination country of which they are not natives or where they do not possess citizenship in order to settle as permanent residents or naturalized citizens."
         case .economy:
             return "Economy is defined as a social domain that emphasize the practices, discourses, and material expressions associated with the production, use, and management of resources."
-        case .law:
+        case .justice:
             return "Law commonly refers to a system of rules created and enforced through social or governmental institutions to regulate behavior."
         case .environment:
             return "The natural environment encompasses all living and non-living things occurring naturally, meaning in this case not artificial."
         case .health:
             return "Health is a state of physical, mental and social well-being in which disease and infirmity are absent."
+        case .international:
+            return "International is an adjective (also used as a noun) meaning \"between nations\"."
         case .random:
             return "Lead me to a random topic!"
         }
@@ -94,7 +101,7 @@ class GameCategoryClass: NSObject, UICollectionViewDataSource {
         cell.iconImageView.setImage(category.iconImage)
         cell.backgroundImageView.setImage(category.backgroundImage)
         // Temporarily disable other categories.
-        if category != .immigration {
+        if category != .immigration && category != .economy {
             cell.isUserInteractionEnabled = false
         }
         return cell
