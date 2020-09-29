@@ -11,7 +11,8 @@ import Yams
 
 class PopulateGamesFromYAML {
     static let shared = PopulateGamesFromYAML()
-    private let filenames = ["usimmigration1", "usimmigration2", "law", "economy", "covid", "climate"]
+//    private let filenames = ["usimmigration1", "usimmigration2", "law", "economy", "covid", "climate"]
+    private let filenames = ["economy_1", "economy_2", "economy_3", "economy_4", "economy_5"]
     
     func uploadGame() {
         let paths = filenames.compactMap { Bundle.main.path(forResource: $0, ofType: "yml") }

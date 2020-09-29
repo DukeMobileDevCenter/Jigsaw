@@ -11,25 +11,28 @@ import UIKit
 private class GameCollections {
     var immigrationGames = [Game]()
     var economyGames = [Game]()
-    var lawGames = [Game]()
+    var justiceGames = [Game]()
     var environmentGames = [Game]()
     var healthGames = [Game]()
+    var internationalGames = [Game]()
     
     func sortAll() {
         let levelAscending: (Game, Game) -> Bool = { $0.level < $1.level }
         immigrationGames.sort(by: levelAscending)
         economyGames.sort(by: levelAscending)
-        lawGames.sort(by: levelAscending)
+        justiceGames.sort(by: levelAscending)
         environmentGames.sort(by: levelAscending)
         healthGames.sort(by: levelAscending)
+        internationalGames.sort(by: levelAscending)
     }
     
     func removeAll() {
         immigrationGames.removeAll()
         economyGames.removeAll()
-        lawGames.removeAll()
+        justiceGames.removeAll()
         environmentGames.removeAll()
         healthGames.removeAll()
+        internationalGames.removeAll()
     }
 }
 
@@ -49,12 +52,14 @@ class GameStore: NSObject {
             return collections.immigrationGames
         case .economy:
             return collections.economyGames
-        case .law:
-            return collections.lawGames
+        case .justice:
+            return collections.justiceGames
         case .environment:
             return collections.environmentGames
         case .health:
             return collections.healthGames
+        case .international:
+            return collections.internationalGames
         case .random:
             return []
         }
@@ -80,12 +85,14 @@ class GameStore: NSObject {
                             self.collections.immigrationGames.append(game)
                         case .economy:
                             self.collections.economyGames.append(game)
-                        case .law:
-                            self.collections.lawGames.append(game)
+                        case .justice:
+                            self.collections.justiceGames.append(game)
                         case .environment:
                             self.collections.environmentGames.append(game)
                         case .health:
                             self.collections.healthGames.append(game)
+                        case .international:
+                            self.collections.internationalGames.append(game)
                         case .random:
                             continue
                         }
