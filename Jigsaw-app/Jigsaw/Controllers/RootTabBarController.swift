@@ -60,7 +60,7 @@ class RootTabBarController: UITabBarController {
             // A new user signed in.
             Profiles.userID = user.uid
         }
-        switch OnboardingStateManager.shared.getOnboardingCompletedState() {
+        switch Profiles.onboardingCompleted {
         case true:
             // Existing user, fetch data from remote directly.
             didCompleteOnboarding()
@@ -101,14 +101,14 @@ extension RootTabBarController: SignInManagerDelegate {
         // If a device user explicitly signs in as an anonymous user,
         // then we can safely assume she wants to play as a new player.
         // Set the onboarding state to false to go through it again.
-        OnboardingStateManager.shared.setOnboardingCompletedState(state: false)
+        Profiles.onboardingCompleted = false
         handleAfterSignIn(user: user)
     }
     
     func didCompleteSignIn(with user: User, providerIDs: [String]) {
         FirebaseHelper.checkPlayerExists(userID: user.uid) { [weak self] exists in
             // An existing player doesn't need to onboard again.
-            OnboardingStateManager.shared.setOnboardingCompletedState(state: exists)
+            Profiles.onboardingCompleted = exists
             self?.handleAfterSignIn(user: user)
         }
     }

@@ -69,7 +69,6 @@
 		00CF5DC924F4DE9900B501BB /* InstructionQuestion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00CF5DC824F4DE9900B501BB /* InstructionQuestion.swift */; };
 		00CF673A24E9E2BC00C502F3 /* PlayersQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00CF673924E9E2BC00C502F3 /* PlayersQueue.swift */; };
 		00D0861F24CD135B00FB7A20 /* RootTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00D0861E24CD135B00FB7A20 /* RootTabBarController.swift */; };
-		00D0862124CD185C00FB7A20 /* OnboardingStateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00D0862024CD185C00FB7A20 /* OnboardingStateManager.swift */; };
 		00D0862324CD192800FB7A20 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00D0862224CD192800FB7A20 /* OnboardingViewController.swift */; };
 		00D0862524CD24EA00FB7A20 /* OnboardingSteps.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00D0862424CD24EA00FB7A20 /* OnboardingSteps.swift */; };
 		00D0862724CD2D9A00FB7A20 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00D0862624CD2D9A00FB7A20 /* GameViewController.swift */; };
@@ -191,7 +190,6 @@
 		00CF5DC824F4DE9900B501BB /* InstructionQuestion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstructionQuestion.swift; sourceTree = "<group>"; };
 		00CF673924E9E2BC00C502F3 /* PlayersQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayersQueue.swift; sourceTree = "<group>"; };
 		00D0861E24CD135B00FB7A20 /* RootTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootTabBarController.swift; sourceTree = "<group>"; };
-		00D0862024CD185C00FB7A20 /* OnboardingStateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingStateManager.swift; sourceTree = "<group>"; };
 		00D0862224CD192800FB7A20 /* OnboardingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		00D0862424CD24EA00FB7A20 /* OnboardingSteps.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingSteps.swift; sourceTree = "<group>"; };
 		00D0862624CD2D9A00FB7A20 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
@@ -308,7 +306,6 @@
 		005856CB24D92F900010BE55 /* Onboarding */ = {
 			isa = PBXGroup;
 			children = (
-				00D0862024CD185C00FB7A20 /* OnboardingStateManager.swift */,
 				00D0862424CD24EA00FB7A20 /* OnboardingSteps.swift */,
 			);
 			path = Onboarding;
@@ -797,7 +794,6 @@
 				00B6306524FB285B008975CE /* GameHistoryTimelineTableViewController.swift in Sources */,
 				0078315224DF557800B35A98 /* Player.swift in Sources */,
 				0020D54924DF79CB00DB20E1 /* GameStore.swift in Sources */,
-				00D0862124CD185C00FB7A20 /* OnboardingStateManager.swift in Sources */,
 				0071E9232520161F0025702E /* FirebaseHelper.swift in Sources */,
 				00CDFF1224B44797009C789D /* UIViewController.swift in Sources */,
 				0051950F24E9CDD4008F1CE0 /* QuestionType.swift in Sources */,

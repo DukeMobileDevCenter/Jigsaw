@@ -71,7 +71,7 @@ extension OnboardingViewController: ORKTaskViewControllerDelegate {
             // Never comes here as the cancel button is removed.
             fatalError("Error: Onboarding controller failed.")
         case .completed:
-            OnboardingStateManager.shared.setOnboardingCompletedState(state: true)
+            Profiles.onboardingCompleted = true
             if let sliderResult = taskViewController.result.stepResult(forStepIdentifier: "PoliticalSliderStep")?.results?.first as? ORKScaleQuestionResult,
                 let answer = sliderResult.scaleAnswer {
                 Profiles.jigsawValue = answer.doubleValue

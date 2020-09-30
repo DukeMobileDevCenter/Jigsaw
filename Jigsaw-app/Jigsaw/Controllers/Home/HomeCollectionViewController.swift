@@ -59,6 +59,7 @@ class HomeCollectionViewController: UICollectionViewController {
         }
     }
     
+    /// Load games and player's game histories (if exist) from remote.
     @objc
     private func loadFromRemote() {
         loadGames()
@@ -74,6 +75,7 @@ class HomeCollectionViewController: UICollectionViewController {
             switch result {
             case .success(let games):
                 os_log(.info, "games count = %d", games.count)
+                Profiles.lastLoadGameDate = Date()
             case .failure(let error):
                 os_log(.error, "Error: loading games from remote")
                 DispatchQueue.main.async {
@@ -99,6 +101,24 @@ class HomeCollectionViewController: UICollectionViewController {
                 }
             }
         }
+    }
+    
+    /// Read from `UserDefaults` to get last load game date. If the date is before today, reload the game and player histories.
+    /// This is assuming the app session is not killed overnight, and should check daily if new games/histories are added.
+    private func reloadFromRemoteIfNeeded() {
+        guard let lastLoadGameDate = Profiles.lastLoadGameDate else {
+            // Last date does not exist. Load anyway.
+            loadFromRemote()
+            return
+        }
+        let dateNow = Date()
+        let startOfToday = Calendar.current.startOfDay(for: dateNow)
+        let interval = dateNow.timeIntervalSince(lastLoadGameDate)
+        if interval > dateNow.timeIntervalSince(startOfToday) {
+            // If the game is last loaded before today.
+            loadFromRemote()
+        }
+        // Do nothing if the games are up-to-date.
     }
     
     private func configureRefreshControl() {
@@ -162,6 +182,12 @@ class HomeCollectionViewController: UICollectionViewController {
         }
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        // Check if reload from remote is needed everytime when the view will appear.
+        reloadFromRemoteIfNeeded()
+    }
+    
     override func viewDidLoad() {
         // Do any additional setup after loading the view.
         super.viewDidLoad()
@@ -171,8 +197,6 @@ class HomeCollectionViewController: UICollectionViewController {
         
         // Configure pull to refresh.
         configureRefreshControl()
-        // Load games and player's game histories (if exist) from remote.
-        loadFromRemote()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
