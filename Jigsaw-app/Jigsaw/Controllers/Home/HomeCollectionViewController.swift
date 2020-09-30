@@ -197,6 +197,8 @@ class HomeCollectionViewController: UICollectionViewController {
         
         // Configure pull to refresh.
         configureRefreshControl()
+        // Load games and player's game histories (if exist) from remote.
+        loadFromRemote()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
