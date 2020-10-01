@@ -17,34 +17,35 @@ class MatchingViewController: UIViewController {
     @IBOutlet var gameNameLabel: UILabel!
     @IBOutlet var joinGameButton: UIButton!
     
+    // MARK: Properties that do not change between sessions
+    
     var selectedGame: Game!
     var queueType: PlayersQueue!
     
+    private var queuesRef: CollectionReference!
+    
+    /// The player's current game group.
+    private var gameGroup: GameGroup!
+    /// The questionnaire for current game/room.
+    private var myQuestionnaire: Questionnaire!
+    
+    // MARK: Properties that require reset for each session
+    
     private var isChatroomShown: Bool = false
+    private var attempts = 0
+    private var gameGroupListener: ListenerRegistration?
+    private var queuesListener: ListenerRegistration?
     
     private var chatroomStepVC: ORKActiveStepViewController!
     private var chatroomVC: ChatViewController!
     private var gameVC: GameViewController!
     
-    private var queuesRef: CollectionReference!
-    
-    private var gameGroupListener: ListenerRegistration?
-    private var queuesListener: ListenerRegistration?
-    
-    /// The player's current game group.
-    private var gameGroup: GameGroup!
-    
-    private var myQuestionnaire: Questionnaire!
-    
-    private var attempts = 0
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Matching"
         gameNameLabel.text = "\(selectedGame.gameName), level \(selectedGame.level)"
-        
+        // Always listen to the waiting queue updates when in the matching page.
         setQueuesListener()
-        setGameGroupListener()
     }
     
     private func setQueuesListener() {
@@ -69,6 +70,8 @@ class MatchingViewController: UIViewController {
     
     @IBAction func joinGameButtonTapped(_ sender: UIButton) {
         addPlayerToPlayersQueue(queueReference: queuesRef)
+        // Only start to listen to game group updates after the player joins a game/room.
+        setGameGroupListener()
         sender.isEnabled = false
     }
     
@@ -220,8 +223,7 @@ class MatchingViewController: UIViewController {
         // Remove player from queue when it exits the matching page.
         // There might be some sync bug, if a player just quit a match while he is added to a group.
         removeUserFromQueue()
-        
-        gameGroupListener?.remove()
+        // Remove the waiting queue listener when exiting the matching page.
         queuesListener?.remove()
         print("✅ matching VC deinit")
     }
@@ -289,12 +291,15 @@ extension MatchingViewController: ORKTaskViewControllerDelegate {
             FirebaseConstants.shared.gamegroups.document(self.gameGroup.id!).updateData([
                 "gameAttemptedUserIDs": FieldValue.arrayUnion([Profiles.userID!])
             ])
+            return
         }
         if !gameResult.isPassed {
             // Failed to pass the game.
             if attempts == 2 {
-                self.taskViewController(taskViewController, didFinishWith: .failed, error: GameError.maxAttemptReached)
+                // First go to completion to notify the other players.
                 completion()
+                // Then fail the local game and abort.
+                self.taskViewController(taskViewController, didFinishWith: .failed, error: GameError.maxAttemptReached)
             } else {
                 stepViewController.presentAlert(gameError: GameError.currentPlayerFailed(gameResult.wrongCount), completion: completion)
             }
@@ -322,6 +327,8 @@ extension MatchingViewController: ORKTaskViewControllerDelegate {
     }
     
     private func cleanUpAfterGameEnds() {
+        // Stop listen to further updates to game groups.
+        gameGroupListener?.remove()
         // Remove matching group from database.
         removeMatchingGroup()
         // Remove the chatroom when a player stops the game.
@@ -329,7 +336,13 @@ extension MatchingViewController: ORKTaskViewControllerDelegate {
         // Invalidate any remaining timer.
         chatroomStepVC?.finish()
         chatroomVC?.finish()
+        // Reset VCs.
+        chatroomStepVC = nil
         chatroomVC = nil
+        // Reset attempts.
+        attempts = 0
+        // Reset flag for chatroom.
+        isChatroomShown = false
     }
     
     func taskViewController(_ taskViewController: ORKTaskViewController, didFinishWith reason: ORKTaskViewControllerFinishReason, error: Error?) {
