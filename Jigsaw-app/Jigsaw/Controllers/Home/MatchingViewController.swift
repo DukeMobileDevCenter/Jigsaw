@@ -33,7 +33,7 @@ class MatchingViewController: UIViewController {
     /// The questionnaire for current game/room.
     private var myQuestionnaire: Questionnaire!
     
-    private var isChatroomShown: Bool = false
+    private var isChatroomShown = false
     private var attempts = 0
     private var gameGroupListener: ListenerRegistration?
     private var queuesListener: ListenerRegistration?
