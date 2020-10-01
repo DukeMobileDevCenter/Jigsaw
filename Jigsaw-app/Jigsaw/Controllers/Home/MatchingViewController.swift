@@ -13,15 +13,26 @@ import FirebaseAuth
 import FirebaseFirestoreSwift
 
 class MatchingViewController: UIViewController {
+    // MARK: Storyboard views
+    
+    /// The label to show current players count in the waiting queue.
     @IBOutlet var playerCountLabel: UILabel!
-    @IBOutlet var gameNameLabel: UILabel!
+    /// The label to show the game name and level.
+    @IBOutlet var gameNameLabel: UILabel! {
+        didSet {
+            gameNameLabel.text = "\(selectedGame.gameName), level \(selectedGame.level)"
+        }
+    }
+    /// The button to join the waiting queue.
     @IBOutlet var joinGameButton: UIButton!
     
     // MARK: Properties that do not change between sessions
     
+    /// The selected game set by parent view controller.
     var selectedGame: Game!
+    /// The queue type set by parent view controller.
     var queueType: PlayersQueue!
-    
+    /// A collection reference to the waiting queue.
     private var queuesRef: CollectionReference {
         FirebaseConstants.database.collection(["Queues", selectedGame.gameName, queueType.rawValue].joined(separator: "/"))
     }
@@ -45,7 +56,6 @@ class MatchingViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Matching"
-        gameNameLabel.text = "\(selectedGame.gameName), level \(selectedGame.level)"
         // Always listen to the waiting queue updates when in the matching page.
         setQueuesListener()
     }
