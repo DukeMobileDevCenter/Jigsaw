@@ -47,9 +47,8 @@ class GameHistoryTimelineTableViewController: UITableViewController {
             ProgressHUD.dismiss()
             if let histories = histories {
                 self?.gameHistories = histories
-                histories.forEach { history in
-                    Profiles.playedGameIDs.insert(history.gameID)
-                }
+                // Add all remote histories to the set.
+                Profiles.playedGameIDs = Set(histories.map { $0.gameID })
             } else if let error = error {
                 self?.presentAlert(error: error)
             }

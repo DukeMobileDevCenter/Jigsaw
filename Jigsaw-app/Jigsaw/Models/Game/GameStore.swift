@@ -138,6 +138,9 @@ extension GameStore: UICollectionViewDataSource {
             // Lazy load background image.
             cell.backgroundImageView.pin_updateWithProgress = true
             cell.backgroundImageView.pin_setImage(from: game.backgroundImageURL)
+        } else {
+            // Clear the image for reusing the cell.
+            cell.backgroundImageView.image = nil
         }
         // Disable higher levels that a player hasn't reached.
         cell.isUserInteractionEnabled = game.isEnabled

@@ -92,9 +92,8 @@ class HomeCollectionViewController: UICollectionViewController {
         guard Profiles.userID != nil else { return }
         FirebaseHelper.getGameHistory(userID: Profiles.userID) { [weak self] histories, error in
             if let histories = histories {
-                histories.forEach { history in
-                    Profiles.playedGameIDs.insert(history.gameID)
-                }
+                // Add all remote histories to the set.
+                Profiles.playedGameIDs = Set(histories.map { $0.gameID })
             } else if let error = error {
                 DispatchQueue.main.async {
                     self?.presentAlert(error: error)
