@@ -22,14 +22,16 @@ class MatchingViewController: UIViewController {
     var selectedGame: Game!
     var queueType: PlayersQueue!
     
-    private var queuesRef: CollectionReference!
+    private var queuesRef: CollectionReference {
+        FirebaseConstants.database.collection(["Queues", selectedGame.gameName, queueType.rawValue].joined(separator: "/"))
+    }
+    
+    // MARK: Properties that require reset for each session
     
     /// The player's current game group.
     private var gameGroup: GameGroup!
     /// The questionnaire for current game/room.
     private var myQuestionnaire: Questionnaire!
-    
-    // MARK: Properties that require reset for each session
     
     private var isChatroomShown: Bool = false
     private var attempts = 0
@@ -49,7 +51,6 @@ class MatchingViewController: UIViewController {
     }
     
     private func setQueuesListener() {
-        queuesRef = FirebaseConstants.database.collection(["Queues", selectedGame.gameName, queueType.rawValue].joined(separator: "/"))
         queuesListener = queuesRef.addSnapshotListener { [weak self] querySnapshot, _ in
             self?.playerCountLabel.text = "\(querySnapshot?.documents.count ?? 0)"
         }
