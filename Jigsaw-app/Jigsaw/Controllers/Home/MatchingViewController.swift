@@ -169,10 +169,12 @@ class MatchingViewController: UIViewController {
             // All players are ready for chat.
             DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [unowned self] in
                 // Start the timer in chatroom step VC and chatroom VC. Later to only use 1.
-                self.chatroomVC.chatroomUserIDs = group.chatroomReadyUserIDs
+                self.chatroomVC.chatroomUserIDs = group.chatroomReadyUserIDs.sorted()
                 self.chatroomStepVC.start()
                 self.chatroomVC.start()
                 print("✅ chatroom timer kicked off!")
+                // Show the back button if players want to terminate early.
+                self.chatroomVC.navigationItem.hidesBackButton = false
             }
         }
     }
@@ -233,11 +235,6 @@ extension MatchingViewController: ORKTaskViewControllerDelegate {
             return
         }
         chatroomStepVC = stepViewController
-        // Mark the player who reached chatroom step as ready.
-        FirebaseConstants.shared.gamegroups.document(gameGroup.id!).updateData([
-            "chatroomReadyUserIDs": FieldValue.arrayUnion([Profiles.userID!])
-        ])
-        // When the chatroom is dismissed, finish the step.
         
         if chatroomVC == nil {
             loadChatroom { [weak self] chatroom in
@@ -247,12 +244,24 @@ extension MatchingViewController: ORKTaskViewControllerDelegate {
                 self.chatroomVC = chatroomVC
                 stepViewController.title = "Quit chat"
                 stepViewController.show(chatroomVC, sender: nil)
+                // Mark the player who reached chatroom step as ready.
+                FirebaseConstants.shared.gamegroups.document(self.gameGroup.id!).updateData([
+                    "chatroomReadyUserIDs": FieldValue.arrayUnion([Profiles.userID!])
+                ])
+                // Hide the back button until all players join the chatroom.
+                chatroomVC.navigationItem.hidesBackButton = true
             }
         } else {
             isChatroomShown = true
             chatroomVC.timeLeft = stepViewController.timeRemaining
             stepViewController.title = "Quit chat"
             stepViewController.show(chatroomVC, sender: nil)
+            // Mark the player who reached chatroom step as ready.
+            FirebaseConstants.shared.gamegroups.document(gameGroup.id!).updateData([
+                "chatroomReadyUserIDs": FieldValue.arrayUnion([Profiles.userID!])
+            ])
+            // Hide the back button until all players join the chatroom.
+            chatroomVC.navigationItem.hidesBackButton = true
         }
     }
     
