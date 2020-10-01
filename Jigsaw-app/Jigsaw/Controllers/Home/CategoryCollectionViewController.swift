@@ -25,6 +25,13 @@ class CategoryCollectionViewController: UICollectionViewController {
         collectionView.dataSource = GameStore.shared
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        // Coming back from a room does not refresh the page. Locked room still appears as locked.
+        // Reload the data will make the cells look correct. #91
+        collectionView.reloadData()
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         switch segue.identifier {
         case "showGame"?:
