@@ -23,6 +23,5 @@ class MetricsViewController: UIViewController {
     }
     
     @IBAction func profilesButtonTapped(_ sender: UIButton) {
-        
     }
 }

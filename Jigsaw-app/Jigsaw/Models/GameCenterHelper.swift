@@ -37,4 +37,3 @@ class GameCenterHelper: NSObject, GKLocalPlayerListener {
 extension Notification.Name {
     static let authenticationChanged = Notification.Name(rawValue: "authenticationChanged")
 }
-
