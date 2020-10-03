@@ -4451,7 +4451,7 @@
 			attributes = {
 				CLASSPREFIX = ORK;
 				LastSwiftUpdateCheck = 1020;
-				LastUpgradeCheck = 1220;
+				LastUpgradeCheck = 1200;
 				ORGANIZATIONNAME = researchkit.org;
 				TargetAttributes = {
 					86CC8E991AC09332001CCD89 = {
