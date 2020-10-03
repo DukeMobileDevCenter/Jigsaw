@@ -65,25 +65,26 @@ class GameStore: NSObject {
         }
     }
     
-    // swiftlint:disable cyclomatic_complexity
+    // swiftlint:disable cyclomatic_complexity function_body_length
     
     /// Load all games from Firebase and save to respective categories.
     ///
     /// - Parameter completion: A closure that passes back an array of Games/rooms or an error.
     func loadGames(completion: @escaping (Result<[Game], Error>) -> Void) {
-        // Create copies to avoid async race condition.
-        var games = [Game]()
-        
-        var immigrationGames = [Game]()
-        var economyGames = [Game]()
-        var justiceGames = [Game]()
-        var environmentGames = [Game]()
-        var healthGames = [Game]()
-        var internationalGames = [Game]()
         // Clear all existing games.
         collections.removeAll()
         FirebaseConstants.shared.games.getDocuments { [weak self] querySnapshot, error in
             guard let self = self else { return }
+            // Create copies to avoid async race condition.
+            var games = [Game]()
+            
+            var immigrationGames = [Game]()
+            var economyGames = [Game]()
+            var justiceGames = [Game]()
+            var environmentGames = [Game]()
+            var healthGames = [Game]()
+            var internationalGames = [Game]()
+            
             if let snapshot = querySnapshot {
                 for document in snapshot.documents {
                     if let game = Game(document: document) {
@@ -126,7 +127,7 @@ class GameStore: NSObject {
             }
         }
     }
-    // swiftlint:enable cyclomatic_complexity
+    // swiftlint:enable cyclomatic_complexity function_body_length
     
     /// Find next level room for current room/game.
     ///
