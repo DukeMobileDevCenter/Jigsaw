@@ -71,7 +71,15 @@ class GameStore: NSObject {
     ///
     /// - Parameter completion: A closure that passes back an array of Games/rooms or an error.
     func loadGames(completion: @escaping (Result<[Game], Error>) -> Void) {
+        // Create copies to avoid async race condition.
         var games = [Game]()
+        
+        var immigrationGames = [Game]()
+        var economyGames = [Game]()
+        var justiceGames = [Game]()
+        var environmentGames = [Game]()
+        var healthGames = [Game]()
+        var internationalGames = [Game]()
         // Clear all existing games.
         collections.removeAll()
         FirebaseConstants.shared.games.getDocuments { [weak self] querySnapshot, error in
@@ -82,17 +90,17 @@ class GameStore: NSObject {
                         let category = game.category
                         switch category {
                         case .immigration:
-                            self.collections.immigrationGames.append(game)
+                            immigrationGames.append(game)
                         case .economy:
-                            self.collections.economyGames.append(game)
+                            economyGames.append(game)
                         case .justice:
-                            self.collections.justiceGames.append(game)
+                            justiceGames.append(game)
                         case .environment:
-                            self.collections.environmentGames.append(game)
+                            environmentGames.append(game)
                         case .health:
-                            self.collections.healthGames.append(game)
+                            healthGames.append(game)
                         case .international:
-                            self.collections.internationalGames.append(game)
+                            internationalGames.append(game)
                         case .random:
                             continue
                         }
@@ -101,8 +109,17 @@ class GameStore: NSObject {
                 }
                 // Sorted by latest added version number.
                 games.sort { game1, game2 in game1.level < game2.level }
-                self.collections.sortAll()
+                // Assign the games in whole to avoid race condition.
                 self.allGames = games
+                
+                self.collections.immigrationGames = immigrationGames
+                self.collections.economyGames = economyGames
+                self.collections.justiceGames = justiceGames
+                self.collections.environmentGames = environmentGames
+                self.collections.healthGames = healthGames
+                self.collections.internationalGames = internationalGames
+                self.collections.sortAll()
+                
                 completion(.success(games))
             } else if let error = error {
                 completion(.failure(error))
