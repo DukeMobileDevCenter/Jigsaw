@@ -183,38 +183,62 @@
             </objects>
             <point key="canvasLocation" x="3464" y="-171"/>
         </scene>
-        <!--Roadmap-->
+        <!--Metrics-->
         <scene sceneID="RvK-v8-KTo">
             <objects>
-                <viewController id="JJs-pR-gZw" customClass="RoadmapViewController" customModule="Jigsaw" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="JJs-pR-gZw" customClass="MetricsViewController" customModule="Jigsaw" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="A64-7g-F0X">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Probably sth like  Duolingo learning roadmap" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sL7-r3-kpQ">
-                                <rect key="frame" x="104.5" y="377.5" width="205" height="41"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="S1q-g3-JCi">
-                                <rect key="frame" x="156.5" y="498.5" width="101" height="30"/>
-                                <state key="normal" title="Or Radar chart"/>
-                                <connections>
-                                    <action selector="radarChartButtonTapped:" destination="JJs-pR-gZw" eventType="touchUpInside" id="bvr-Ny-46a"/>
-                                </connections>
-                            </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="center" spacing="32" translatesAutoresizingMaskIntoConstraints="NO" id="4Ln-AQ-wkd">
+                                <rect key="frame" x="107.5" y="332" width="199" height="232"/>
+                                <subviews>
+                                    <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KZW-8V-vKi">
+                                        <rect key="frame" x="0.0" y="0.0" width="199" height="56"/>
+                                        <color key="backgroundColor" systemColor="systemGreenColor"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="20"/>
+                                        <inset key="contentEdgeInsets" minX="16" minY="16" maxX="16" maxY="16"/>
+                                        <state key="normal" title="Leaderboard">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                    </button>
+                                    <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JGl-oF-f0g">
+                                        <rect key="frame" x="0.0" y="88" width="199" height="56"/>
+                                        <color key="backgroundColor" systemColor="systemOrangeColor"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="20"/>
+                                        <inset key="contentEdgeInsets" minX="32" minY="16" maxX="32" maxY="16"/>
+                                        <state key="normal" title="Achievements">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                    </button>
+                                    <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vcg-yh-1Mu">
+                                        <rect key="frame" x="0.0" y="176" width="199" height="56"/>
+                                        <color key="backgroundColor" systemColor="systemPurpleColor"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="20"/>
+                                        <inset key="contentEdgeInsets" minX="16" minY="16" maxX="16" maxY="16"/>
+                                        <state key="normal" title="Metrics">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="metricsButtonTapped:" destination="JJs-pR-gZw" eventType="primaryActionTriggered" id="9Lh-Af-hby"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="KZW-8V-vKi" firstAttribute="width" secondItem="JGl-oF-f0g" secondAttribute="width" id="kFW-yE-mmd"/>
+                                    <constraint firstItem="Vcg-yh-1Mu" firstAttribute="width" secondItem="JGl-oF-f0g" secondAttribute="width" id="no0-pC-2D6"/>
+                                </constraints>
+                            </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="lhO-9s-jMu"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="S1q-g3-JCi" firstAttribute="centerX" secondItem="sL7-r3-kpQ" secondAttribute="centerX" id="M1U-HS-acy"/>
-                            <constraint firstItem="sL7-r3-kpQ" firstAttribute="centerY" secondItem="A64-7g-F0X" secondAttribute="centerY" constant="-50" id="Nor-jd-dah"/>
-                            <constraint firstItem="S1q-g3-JCi" firstAttribute="top" secondItem="sL7-r3-kpQ" secondAttribute="bottom" constant="80" id="eKd-hx-y6u"/>
-                            <constraint firstItem="sL7-r3-kpQ" firstAttribute="centerX" secondItem="A64-7g-F0X" secondAttribute="centerX" id="p4M-Le-ZsB"/>
+                            <constraint firstItem="4Ln-AQ-wkd" firstAttribute="centerY" secondItem="A64-7g-F0X" secondAttribute="centerY" id="cVP-yz-PrJ"/>
+                            <constraint firstItem="4Ln-AQ-wkd" firstAttribute="centerX" secondItem="A64-7g-F0X" secondAttribute="centerX" id="pvN-X2-54Q"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Roadmap" id="oEr-wM-I6K"/>
+                    <navigationItem key="navigationItem" title="Metrics" id="oEr-wM-I6K"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gf0-Dy-4fa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -313,11 +337,11 @@
             </objects>
             <point key="canvasLocation" x="660.86956521739137" y="833.70535714285711"/>
         </scene>
-        <!--Roadmap-->
+        <!--Metrics-->
         <scene sceneID="5yD-yv-s1x">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="H4S-qx-FML" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Roadmap" image="arrow.swap" catalog="system" id="Vh5-1M-hEe"/>
+                    <tabBarItem key="tabBarItem" title="Metrics" image="chart.bar" catalog="system" id="Vh5-1M-hEe"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="EKV-uM-81v">
                         <rect key="frame" x="0.0" y="44" width="414" height="96"/>
@@ -430,7 +454,7 @@
         <segue reference="uxd-NL-JaG"/>
     </inferredMetricsTieBreakers>
     <resources>
-        <image name="arrow.swap" catalog="system" width="128" height="100"/>
+        <image name="chart.bar" catalog="system" width="128" height="90"/>
         <image name="gamecontroller" catalog="system" width="128" height="80"/>
         <image name="person" catalog="system" width="128" height="117"/>
         <image name="person.2" catalog="system" width="128" height="81"/>
@@ -440,6 +464,15 @@
         </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGreenColor">
+            <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemOrangeColor">
+            <color red="1" green="0.58431372549019611" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemPurpleColor">
+            <color red="0.68627450980392157" green="0.32156862745098042" blue="0.87058823529411766" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

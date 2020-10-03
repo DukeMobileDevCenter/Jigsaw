@@ -77,7 +77,7 @@
 		00F029D4251FF25700CB2A15 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F029D3251FF25700CB2A15 /* SignInViewController.swift */; };
 		00F029D9251FF34900CB2A15 /* ResultStatsViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 00F029D8251FF34900CB2A15 /* ResultStatsViewController.storyboard */; };
 		00F029DB251FF4F100CB2A15 /* GameHistoryRadarChartViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 00F029DA251FF4F100CB2A15 /* GameHistoryRadarChartViewController.storyboard */; };
-		00F2197C24CCF99800B72858 /* RoadmapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F2197B24CCF99800B72858 /* RoadmapViewController.swift */; };
+		00F2197C24CCF99800B72858 /* MetricsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F2197B24CCF99800B72858 /* MetricsViewController.swift */; };
 		00F2197E24CCF9A200B72858 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F2197D24CCF9A200B72858 /* ProfileViewController.swift */; };
 		00F6301D24EE2E0000BCAD11 /* ResultStatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F6301C24EE2E0000BCAD11 /* ResultStatsViewController.swift */; };
 		00F6302224EE385E00BCAD11 /* AnswerCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F6302124EE385E00BCAD11 /* AnswerCategory.swift */; };
@@ -198,7 +198,7 @@
 		00F029D3251FF25700CB2A15 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		00F029D8251FF34900CB2A15 /* ResultStatsViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ResultStatsViewController.storyboard; sourceTree = "<group>"; };
 		00F029DA251FF4F100CB2A15 /* GameHistoryRadarChartViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = GameHistoryRadarChartViewController.storyboard; sourceTree = "<group>"; };
-		00F2197B24CCF99800B72858 /* RoadmapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoadmapViewController.swift; sourceTree = "<group>"; };
+		00F2197B24CCF99800B72858 /* MetricsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetricsViewController.swift; sourceTree = "<group>"; };
 		00F2197D24CCF9A200B72858 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		00F6301C24EE2E0000BCAD11 /* ResultStatsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultStatsViewController.swift; sourceTree = "<group>"; };
 		00F6302124EE385E00BCAD11 /* AnswerCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswerCategory.swift; sourceTree = "<group>"; };
@@ -228,12 +228,12 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		000D809B24ECED5C0070041D /* Roadmap */ = {
+		000D809B24ECED5C0070041D /* Metrics */ = {
 			isa = PBXGroup;
 			children = (
-				00F2197B24CCF99800B72858 /* RoadmapViewController.swift */,
+				00F2197B24CCF99800B72858 /* MetricsViewController.swift */,
 			);
-			path = Roadmap;
+			path = Metrics;
 			sourceTree = "<group>";
 		};
 		000D809E24ECEE6A0070041D /* Demographics */ = {
@@ -457,7 +457,7 @@
 				00F6302624EE4E6900BCAD11 /* Charts */,
 				00B0A67524E3CAD500887701 /* Home */,
 				00B0A67624E3CAF000887701 /* Profile */,
-				000D809B24ECED5C0070041D /* Roadmap */,
+				000D809B24ECED5C0070041D /* Metrics */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -800,7 +800,7 @@
 				0070DFEC24B0060400E71F46 /* SceneDelegate.swift in Sources */,
 				0000321125130A85004681AF /* CategoryCollectionViewController.swift in Sources */,
 				0020D54B24DF7A0D00DB20E1 /* Game.swift in Sources */,
-				00F2197C24CCF99800B72858 /* RoadmapViewController.swift in Sources */,
+				00F2197C24CCF99800B72858 /* MetricsViewController.swift in Sources */,
 				00B0A67C24E3D10300887701 /* ProfileHeaderView.swift in Sources */,
 				005856C224D9262C0010BE55 /* Profiles.swift in Sources */,
 				00CDFF0D24B4353E009C789D /* Questionnaire.swift in Sources */,

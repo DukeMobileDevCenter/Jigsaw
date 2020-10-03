@@ -1,5 +1,5 @@
 //
-//  RoadmapViewController.swift
+//  MetricsViewController.swift
 //  Jigsaw
 //
 //  Created by Ting Chen on 7/25/20.
@@ -9,12 +9,12 @@
 import UIKit
 import ResearchKit
 
-class RoadmapViewController: UIViewController {
+class MetricsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
     }
     
-    @IBAction func radarChartButtonTapped(_ sender: UIButton) {
+    @IBAction func metricsButtonTapped(_ sender: UIButton) {
         let controller = UIStoryboard(name: "GameHistoryRadarChartViewController", bundle: .main).instantiateInitialViewController() as! GameHistoryRadarChartViewController
         controller.hidesBottomBarWhenPushed = true
         show(controller, sender: sender)
