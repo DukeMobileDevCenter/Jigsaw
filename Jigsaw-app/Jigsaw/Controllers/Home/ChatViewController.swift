@@ -9,7 +9,7 @@
 import UIKit
 import Photos
 
-// Firebase user, FireStore database, object storage
+// Firebase User, FireStore realtime database, object storage
 import FirebaseAuth
 import FirebaseFirestore
 import FirebaseStorage
