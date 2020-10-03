@@ -192,7 +192,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="center" spacing="32" translatesAutoresizingMaskIntoConstraints="NO" id="4Ln-AQ-wkd">
-                                <rect key="frame" x="107.5" y="332" width="199" height="232"/>
+                                <rect key="frame" x="107.5" y="288" width="199" height="320"/>
                                 <subviews>
                                     <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KZW-8V-vKi">
                                         <rect key="frame" x="0.0" y="0.0" width="199" height="56"/>
@@ -224,10 +224,23 @@
                                             <action selector="metricsButtonTapped:" destination="JJs-pR-gZw" eventType="primaryActionTriggered" id="9Lh-Af-hby"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="thI-7o-9SD">
+                                        <rect key="frame" x="0.0" y="264" width="199" height="56"/>
+                                        <color key="backgroundColor" systemColor="systemGrayColor"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="20"/>
+                                        <inset key="contentEdgeInsets" minX="16" minY="16" maxX="16" maxY="16"/>
+                                        <state key="normal" title="Profiles">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="profilesButtonTapped:" destination="JJs-pR-gZw" eventType="primaryActionTriggered" id="HUG-rJ-gfs"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="KZW-8V-vKi" firstAttribute="width" secondItem="JGl-oF-f0g" secondAttribute="width" id="kFW-yE-mmd"/>
                                     <constraint firstItem="Vcg-yh-1Mu" firstAttribute="width" secondItem="JGl-oF-f0g" secondAttribute="width" id="no0-pC-2D6"/>
+                                    <constraint firstItem="thI-7o-9SD" firstAttribute="width" secondItem="JGl-oF-f0g" secondAttribute="width" id="ybp-eP-PqT"/>
                                 </constraints>
                             </stackView>
                         </subviews>
@@ -464,6 +477,9 @@
         </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGrayColor">
+            <color red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGreenColor">
             <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
