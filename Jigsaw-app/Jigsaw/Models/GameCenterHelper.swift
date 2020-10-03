@@ -17,6 +17,15 @@ class GameCenterHelper: NSObject, GKLocalPlayerListener {
         return GKLocalPlayer.local.isAuthenticated
     }
     
+    private let averageScoreLeaderboardID = "edu.duke.mobilecenter.JigsawBeta.averageScore"
+    private let economyFinishedAchievementID = "edu.duke.mobilecenter.JigsawBeta.economyFinished"
+    
+    private lazy var gameCenterViewController: GKGameCenterViewController = {
+        let controller = GKGameCenterViewController()
+        controller.gameCenterDelegate = self
+        return controller
+    }()
+    
     override init() {
         super.init()
         
@@ -28,12 +37,29 @@ class GameCenterHelper: NSObject, GKLocalPlayerListener {
             } else if let vc = gcAuthVC {
                 self.viewController?.present(vc, animated: true)
             } else if let error = error {
-                print("Error authentication to GameCenter: \(error.localizedDescription)")
+                self.viewController?.presentAlert(error: error)
             }
         }
     }
+    
+    func presentLeaderBoard() {
+        gameCenterViewController.viewState = .leaderboards
+        gameCenterViewController.leaderboardIdentifier = averageScoreLeaderboardID
+        viewController?.present(gameCenterViewController, animated: true)
+    }
+    
+    func presentAchievements() {
+        gameCenterViewController.viewState = .achievements
+        viewController?.present(gameCenterViewController, animated: true)
+    }
 }
 
-extension Notification.Name {
+extension GameCenterHelper: GKGameCenterControllerDelegate {
+    func gameCenterViewControllerDidFinish(_ gameCenterViewController: GKGameCenterViewController) {
+        gameCenterViewController.dismiss(animated: true)
+    }
+}
+
+private extension Notification.Name {
     static let authenticationChanged = Notification.Name(rawValue: "authenticationChanged")
 }

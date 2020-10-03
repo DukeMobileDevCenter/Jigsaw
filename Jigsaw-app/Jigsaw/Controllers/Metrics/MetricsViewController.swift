@@ -22,6 +22,11 @@ class MetricsViewController: UIViewController {
         show(controller, sender: sender)
     }
     
-    @IBAction func profilesButtonTapped(_ sender: UIButton) {
+    @IBAction func leaderBoardButtonTapped(_ sender: UIButton) {
+        GameCenterHelper.shared.presentLeaderBoard()
+    }
+    
+    @IBAction func achievementsButtonTapped(_ sender: UIButton) {
+        GameCenterHelper.shared.presentAchievements()
     }
 }
