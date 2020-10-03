@@ -8,46 +8,55 @@ target 'Jigsaw' do
   # Comment the next line if you don't want to use dynamic frameworks
   use_frameworks!
 
-# Firebase framework
-pod 'Firebase/Database'
-pod 'Firebase/Auth'
-pod 'Firebase/Storage'
-pod 'Firebase/Firestore'
+  # Firebase framework
+  pod 'Firebase/Database'
+  pod 'Firebase/Auth'
+  pod 'Firebase/Storage'
+  pod 'Firebase/Firestore'
 
-# Firebase UI for sign up/in
-pod 'FirebaseUI/Auth'
-pod 'FirebaseUI/Google'
-pod 'FirebaseUI/Email'
-pod 'FirebaseUI/OAuth'  # Used for Sign in with Apple, Twitter, etc
+  # Firebase UI for sign up/in
+  pod 'FirebaseUI/Auth'
+  pod 'FirebaseUI/Google'
+  pod 'FirebaseUI/Email'
+  pod 'FirebaseUI/OAuth'  # Used for Sign in with Apple, Twitter, etc
 
-# Swift Codable
-pod 'FirebaseFirestoreSwift'
+  # Swift Codable
+  pod 'FirebaseFirestoreSwift'
 
-# pod 'ResearchKit'
+  # pod 'ResearchKit'
 
-# Messaging UI
-pod 'MessageKit'
+  # Messaging UI
+  pod 'MessageKit'
 
-# Image lazy loading
-pod 'PINRemoteImage'
+  # Image lazy loading
+  pod 'PINRemoteImage'
 
-# Image viewer for chatroom
-pod 'Agrume'
+  # Image viewer for chatroom
+  pod 'Agrume'
 
-# Profile forms
-pod 'Eureka'
-pod 'ViewRow'
+  # Profile forms
+  pod 'Eureka'
+  pod 'ViewRow'
 
-# ProgreeHUD
-pod 'ProgressHUD'
+  # ProgreeHUD
+  pod 'ProgressHUD'
 
-# Game result showing in charts
-pod 'Charts'
+  # Game result showing in charts
+  pod 'Charts'
 
-# Questionnaire YAML
-pod 'Yams'
+  # Questionnaire YAML
+  pod 'Yams'
 
-# Markdown to `NSAttributedString`
-pod 'Down'
+  # Markdown to `NSAttributedString`
+  pod 'Down'
 
+end
+
+# Bump all Pod minimum target to iOS 13, to cope with Xcode 12
+post_install do |pi|
+  pi.pods_project.targets.each do |t|
+    t.build_configurations.each do |bc|
+      bc.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '13.0'
+    end
+  end
 end
