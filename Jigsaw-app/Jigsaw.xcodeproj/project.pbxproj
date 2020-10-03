@@ -46,6 +46,7 @@
 		0071E9232520161F0025702E /* FirebaseHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0071E9222520161F0025702E /* FirebaseHelper.swift */; };
 		0078315224DF557800B35A98 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0078315124DF557800B35A98 /* Player.swift */; };
 		00A06D8D24E8A9B400030649 /* GameGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A06D8C24E8A9B400030649 /* GameGroup.swift */; };
+		00A88312252924CF00186BED /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00A88311252924CF00186BED /* GameKit.framework */; };
 		00B0A67424E3CAA800887701 /* DemographicsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B0A67324E3CAA800887701 /* DemographicsViewController.swift */; };
 		00B0A67A24E3CF9600887701 /* ProfileHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 00B0A67924E3CF9600887701 /* ProfileHeaderView.xib */; };
 		00B0A67C24E3D10300887701 /* ProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B0A67B24E3D10300887701 /* ProfileHeaderView.swift */; };
@@ -167,6 +168,7 @@
 		0078315124DF557800B35A98 /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		009D067B2511F15A002E488F /* ResearchKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ResearchKit.xcodeproj; path = "ResearchKit-68f9d29/ResearchKit.xcodeproj"; sourceTree = "<group>"; };
 		00A06D8C24E8A9B400030649 /* GameGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameGroup.swift; sourceTree = "<group>"; };
+		00A88311252924CF00186BED /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
 		00B0A67324E3CAA800887701 /* DemographicsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemographicsViewController.swift; sourceTree = "<group>"; };
 		00B0A67924E3CF9600887701 /* ProfileHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileHeaderView.xib; sourceTree = "<group>"; };
 		00B0A67B24E3D10300887701 /* ProfileHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderView.swift; sourceTree = "<group>"; };
@@ -213,6 +215,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				00A88312252924CF00186BED /* GameKit.framework in Frameworks */,
 				005308CA25168A96002A429F /* ResearchKit.framework in Frameworks */,
 				4C4D65101A3F2EDDFFFD6EE1 /* Pods_Jigsaw.framework in Frameworks */,
 			);
@@ -519,6 +522,7 @@
 		C3C20A15E3D3B23BD23C86AF /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				00A88311252924CF00186BED /* GameKit.framework */,
 				601967226BC24AEDC4FA99EE /* Pods_Jigsaw.framework */,
 			);
 			name = Frameworks;
