@@ -14,14 +14,12 @@ class GameCenterHelper: NSObject, GKLocalPlayerListener {
     /// The view controller to present GameCenterViewController.
     var viewController: UIViewController?
     
+    // Not used yet.
+    private var achievements = [GKAchievement]()
+    
     static var isAuthenticated: Bool {
         return GKLocalPlayer.local.isAuthenticated
     }
-    
-    // MARK: Constants
-    
-    private let averageScoreLeaderboardID = "edu.duke.mobilecenter.JigsawBeta.averageScore"
-    private let economyFinishedAchievementID = "edu.duke.mobilecenter.JigsawBeta.economyFinished"
     
     /// The GameCenterViewController that displays player stats.
     private lazy var gameCenterViewController: GKGameCenterViewController = {
@@ -46,9 +44,19 @@ class GameCenterHelper: NSObject, GKLocalPlayerListener {
         }
     }
     
+    // Not used yet.
+    private func loadAchievements() {
+        GKAchievement.loadAchievements { achievements, error in
+            if let achievements = achievements {
+                self.achievements = achievements
+            } else if let error = error {
+                print(error.localizedDescription)
+            }
+        }
+    }
+    
     func presentLeaderBoard() {
         gameCenterViewController.viewState = .leaderboards
-        gameCenterViewController.leaderboardIdentifier = averageScoreLeaderboardID
         viewController?.present(gameCenterViewController, animated: true)
     }
     
@@ -58,13 +66,46 @@ class GameCenterHelper: NSObject, GKLocalPlayerListener {
     }
     
     func submitAverageScore(_ score: Double) {
-        let averageScore = GKScore(leaderboardIdentifier: averageScoreLeaderboardID)
+        let averageScore = GKScore(leaderboardIdentifier: GameCenterConstants.averageScoreLeaderboardID)
         averageScore.value = Int64(score)
         GKScore.report([averageScore]) { error in
             if let error = error {
                 print(error.localizedDescription)
             } else {
                 print("✅ Average score reported.")
+            }
+        }
+    }
+    
+    func submitGamesPlayed(_ count: Int) {
+        let gamesPlayed = GKScore(leaderboardIdentifier: GameCenterConstants.gamesPlayedLeaderboardID)
+        gamesPlayed.value = Int64(count)
+        GKScore.report([gamesPlayed]) { error in
+            if let error = error {
+                print(error.localizedDescription)
+            } else {
+                print("✅ Games played reported.")
+            }
+        }
+    }
+    
+    /// Submit the progress for category/topic finished achievements.
+    ///
+    /// - Note: Please refer to percent complete [doc](https://developer.apple.com/documentation/gamekit/gkachievement/1520939-percentcomplete).
+    ///
+    /// - Parameters:
+    ///   - category: The category of the achievement.
+    ///   - percentComplete: The percentage of the achievement, i.e. (rooms played)/(total rooms count).
+    func submitFinishedAchievement(for category: GameCategory, progress percentComplete: Double) {
+        guard let achievementID = GameCenterConstants.getFinishedAchievementID(for: category) else { return }
+        let achievement = GKAchievement(identifier: achievementID)
+        achievement.percentComplete = percentComplete
+        achievement.showsCompletionBanner = true
+        GKAchievement.report([achievement]) { error in
+            if let error = error {
+                print(error.localizedDescription)
+            } else {
+                print("✅ Achievement reported for \(category.label).")
             }
         }
     }

@@ -23,6 +23,7 @@ class GameHistoryTimelineTableViewController: UITableViewController {
     @IBAction func submitScoreButtonTapped(_ sender: UIBarButtonItem) {
         // When the data is pulled from remote, submit the score to Game Center.
         GameCenterHelper.shared.submitAverageScore(averageScore * 1000)
+        GameCenterHelper.shared.submitGamesPlayed(gameHistories.count)
     }
     
     /// The game history records for a player.
@@ -50,9 +51,10 @@ class GameHistoryTimelineTableViewController: UITableViewController {
         return formatter
     }()
     
-    /// The average score times 100.
+    /// The average score times.
     private var averageScore: Double {
-        gameHistories.map { $0.score }.reduce(0, +) / Double(gameHistories.count)
+        if gameHistories.isEmpty { return 0 }
+        return gameHistories.map { $0.score }.reduce(0, +) / Double(gameHistories.count)
     }
     
     // MARK: UITableViewController

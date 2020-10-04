@@ -48,6 +48,7 @@
 		00A06D8D24E8A9B400030649 /* GameGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A06D8C24E8A9B400030649 /* GameGroup.swift */; };
 		00A88312252924CF00186BED /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00A88311252924CF00186BED /* GameKit.framework */; };
 		00A8831525292D4E00186BED /* GameCenterHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A8831425292D4E00186BED /* GameCenterHelper.swift */; };
+		00A8832B2529747100186BED /* GameCenterConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A8832A2529747100186BED /* GameCenterConstants.swift */; };
 		00B0A67424E3CAA800887701 /* DemographicsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B0A67324E3CAA800887701 /* DemographicsViewController.swift */; };
 		00B0A67A24E3CF9600887701 /* ProfileHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 00B0A67924E3CF9600887701 /* ProfileHeaderView.xib */; };
 		00B0A67C24E3D10300887701 /* ProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B0A67B24E3D10300887701 /* ProfileHeaderView.swift */; };
@@ -169,6 +170,7 @@
 		00A06D8C24E8A9B400030649 /* GameGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameGroup.swift; sourceTree = "<group>"; };
 		00A88311252924CF00186BED /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
 		00A8831425292D4E00186BED /* GameCenterHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameCenterHelper.swift; sourceTree = "<group>"; };
+		00A8832A2529747100186BED /* GameCenterConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameCenterConstants.swift; sourceTree = "<group>"; };
 		00B0A67324E3CAA800887701 /* DemographicsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemographicsViewController.swift; sourceTree = "<group>"; };
 		00B0A67924E3CF9600887701 /* ProfileHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileHeaderView.xib; sourceTree = "<group>"; };
 		00B0A67B24E3D10300887701 /* ProfileHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderView.swift; sourceTree = "<group>"; };
@@ -475,6 +477,7 @@
 				0071E9222520161F0025702E /* FirebaseHelper.swift */,
 				0071E91F252003880025702E /* AppInfo.swift */,
 				00A8831425292D4E00186BED /* GameCenterHelper.swift */,
+				00A8832A2529747100186BED /* GameCenterConstants.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -795,6 +798,7 @@
 				0078315224DF557800B35A98 /* Player.swift in Sources */,
 				0020D54924DF79CB00DB20E1 /* GameStore.swift in Sources */,
 				0071E9232520161F0025702E /* FirebaseHelper.swift in Sources */,
+				00A8832B2529747100186BED /* GameCenterConstants.swift in Sources */,
 				00CDFF1224B44797009C789D /* UIViewController.swift in Sources */,
 				0051950F24E9CDD4008F1CE0 /* QuestionType.swift in Sources */,
 				0070DFEC24B0060400E71F46 /* SceneDelegate.swift in Sources */,

@@ -51,6 +51,8 @@ struct Game {
         level == 1 || Profiles.playedGameIDs.contains(previousLevelGameID)
     }
     
+    /// Check if a game is played.
+    /// - Note: This is not a good practice! A model struct should not rely on another object.
     var isPlayed: Bool {
         Profiles.playedGameIDs.contains(gameID)
     }
