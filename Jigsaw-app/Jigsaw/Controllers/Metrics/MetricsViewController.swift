@@ -10,6 +10,7 @@ import UIKit
 import GameKit
 import ResearchKit
 import Charts
+import ProgressHUD
 
 class MetricsViewController: UIViewController {
     @IBOutlet var chartView: RadarChartView!
@@ -31,7 +32,9 @@ class MetricsViewController: UIViewController {
     }
     
     /// All category labels except Random.
-    private let categories = GameCategory.allCases.compactMap { $0 != .random ? $0.label : nil }
+    private let categoryLabels = GameCategory.allCases.compactMap { $0 != .random ? $0.label : nil }
+    
+    private let categories = GameCategory.allCases.filter { $0 != .random }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,8 +49,35 @@ class MetricsViewController: UIViewController {
         )
         
         setup(radarChartView: chartView)
-        setChartData()
+        
+        FirebaseHelper.getGameHistory(userID: Profiles.userID) { [weak self] histories, error in
+            ProgressHUD.dismiss()
+            guard let self = self else { return }
+            if let histories = histories {
+                // Add all remote histories to the set.
+                Profiles.playedGameIDs = Set(histories.map { $0.gameID })
+                let block: (Int) -> RadarChartDataEntry = { _ in return RadarChartDataEntry(value: Double.random(in: 0..<80) + 20) }
+                let entries2 = (0..<self.categoryLabels.count).map(block)
+                self.setChartData(entries1: self.historiesToEntries(histories: histories), entries2: entries2)
+            } else if let error = error {
+                self.presentAlert(error: error)
+            }
+        }
+        
         chartView.animate(xAxisDuration: 1.4, yAxisDuration: 1.4, easingOption: .easeOutBack)
+    }
+    
+    private func historiesToEntries(histories: [GameHistory]) -> [RadarChartDataEntry] {
+        categories.map { category in
+            let categoryHistories = histories.filter { $0.gameCategory == category }
+            let value: Double
+            if categoryHistories.isEmpty {
+                value = 0
+            } else {
+                value = categoryHistories.map { $0.score }.reduce(0, +) / Double(categoryHistories.count)
+            }
+            return RadarChartDataEntry(value: value * 100)
+        }
     }
     
     @IBAction func leaderBoardButtonTapped(_ sender: UIButton) {
@@ -101,15 +131,8 @@ extension MetricsViewController: ChartViewDelegate {
         legend.textColor = .label
     }
     
-    func setChartData() {
-        let min: Double = 20
-        let cnt = categories.count
-        
-        let block: (Int) -> RadarChartDataEntry = { _ in return RadarChartDataEntry(value: Double.random(in: 0..<80) + min) }
-        let entries1 = (0..<cnt).map(block)
-        let entries2 = (0..<cnt).map(block)
-        
-        let set1 = RadarChartDataSet(entries: entries1, label: "Jigsaw average")
+    func setChartData(entries1: [RadarChartDataEntry], entries2: [RadarChartDataEntry]) {
+        let set1 = RadarChartDataSet(entries: entries1, label: "My Scores")
         set1.setColor(UIColor(red: 103 / 255, green: 110 / 255, blue: 129 / 255, alpha: 1))
         set1.fillColor = UIColor(red: 103 / 255, green: 110 / 255, blue: 129 / 255, alpha: 1)
         set1.drawFilledEnabled = true
@@ -118,7 +141,7 @@ extension MetricsViewController: ChartViewDelegate {
         set1.drawHighlightCircleEnabled = true
         set1.setDrawHighlightIndicators(false)
         
-        let set2 = RadarChartDataSet(entries: entries2, label: "My scores")
+        let set2 = RadarChartDataSet(entries: entries2, label: "Jigsaw Average")
         set2.setColor(UIColor(red: 121 / 255, green: 162 / 255, blue: 175 / 255, alpha: 1))
         set2.fillColor = UIColor(red: 121 / 255, green: 162 / 255, blue: 175 / 255, alpha: 1)
         set2.drawFilledEnabled = true
@@ -138,6 +161,6 @@ extension MetricsViewController: ChartViewDelegate {
 
 extension MetricsViewController: IAxisValueFormatter {
     func stringForValue(_ value: Double, axis: AxisBase?) -> String {
-        return categories[Int(value) % categories.count]
+        return categoryLabels[Int(value) % categoryLabels.count]
     }
 }
