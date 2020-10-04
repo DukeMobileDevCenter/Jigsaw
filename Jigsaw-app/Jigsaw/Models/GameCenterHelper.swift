@@ -76,6 +76,6 @@ extension GameCenterHelper: GKGameCenterControllerDelegate {
     }
 }
 
-private extension Notification.Name {
+extension Notification.Name {
     static let authenticationChanged = Notification.Name(rawValue: "authenticationChanged")
 }
