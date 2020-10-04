@@ -6,6 +6,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -191,54 +192,66 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="center" spacing="32" translatesAutoresizingMaskIntoConstraints="NO" id="4Ln-AQ-wkd">
-                                <rect key="frame" x="107.5" y="332" width="199" height="232"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Oxg-07-LMQ">
+                                <rect key="frame" x="82" y="721" width="250" height="76"/>
                                 <subviews>
-                                    <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KZW-8V-vKi">
-                                        <rect key="frame" x="0.0" y="0.0" width="199" height="56"/>
+                                    <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KZW-8V-vKi">
+                                        <rect key="frame" x="0.0" y="0.0" width="250" height="34"/>
                                         <color key="backgroundColor" systemColor="systemGreenColor"/>
-                                        <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="20"/>
-                                        <inset key="contentEdgeInsets" minX="16" minY="16" maxX="16" maxY="16"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="12" maxX="8" maxY="12"/>
                                         <state key="normal" title="Leaderboard">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
+                                        <connections>
+                                            <action selector="leaderBoardButtonTapped:" destination="JJs-pR-gZw" eventType="primaryActionTriggered" id="v5k-3C-fjF"/>
+                                        </connections>
                                     </button>
-                                    <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JGl-oF-f0g">
-                                        <rect key="frame" x="0.0" y="88" width="199" height="56"/>
+                                    <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JGl-oF-f0g">
+                                        <rect key="frame" x="0.0" y="42" width="250" height="34"/>
                                         <color key="backgroundColor" systemColor="systemOrangeColor"/>
-                                        <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="20"/>
-                                        <inset key="contentEdgeInsets" minX="32" minY="16" maxX="32" maxY="16"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="250" id="x47-Wf-tTU"/>
+                                        </constraints>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="12" maxX="8" maxY="12"/>
                                         <state key="normal" title="Achievements">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
-                                    </button>
-                                    <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vcg-yh-1Mu">
-                                        <rect key="frame" x="0.0" y="176" width="199" height="56"/>
-                                        <color key="backgroundColor" systemColor="systemPurpleColor"/>
-                                        <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="20"/>
-                                        <inset key="contentEdgeInsets" minX="16" minY="16" maxX="16" maxY="16"/>
-                                        <state key="normal" title="Metrics">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        </state>
                                         <connections>
-                                            <action selector="metricsButtonTapped:" destination="JJs-pR-gZw" eventType="primaryActionTriggered" id="9Lh-Af-hby"/>
+                                            <action selector="achievementsButtonTapped:" destination="JJs-pR-gZw" eventType="primaryActionTriggered" id="SGm-2E-UNV"/>
                                         </connections>
                                     </button>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="KZW-8V-vKi" firstAttribute="width" secondItem="JGl-oF-f0g" secondAttribute="width" id="kFW-yE-mmd"/>
-                                    <constraint firstItem="Vcg-yh-1Mu" firstAttribute="width" secondItem="JGl-oF-f0g" secondAttribute="width" id="no0-pC-2D6"/>
+                                    <constraint firstItem="KZW-8V-vKi" firstAttribute="height" secondItem="JGl-oF-f0g" secondAttribute="height" id="4kn-13-pSm"/>
+                                    <constraint firstItem="KZW-8V-vKi" firstAttribute="width" secondItem="JGl-oF-f0g" secondAttribute="width" id="AYg-Mv-WHu"/>
                                 </constraints>
                             </stackView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zag-mg-ztD" customClass="RadarChartView" customModule="Charts">
+                                <rect key="frame" x="0.0" y="140" width="414" height="517.5"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="zag-mg-ztD" secondAttribute="height" multiplier="4:5" id="kFj-c0-gIe"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="lhO-9s-jMu"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" systemColor="secondarySystemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="4Ln-AQ-wkd" firstAttribute="centerY" secondItem="A64-7g-F0X" secondAttribute="centerY" id="cVP-yz-PrJ"/>
-                            <constraint firstItem="4Ln-AQ-wkd" firstAttribute="centerX" secondItem="A64-7g-F0X" secondAttribute="centerX" id="pvN-X2-54Q"/>
+                            <constraint firstItem="Oxg-07-LMQ" firstAttribute="top" relation="greaterThanOrEqual" secondItem="zag-mg-ztD" secondAttribute="bottom" constant="8" symbolic="YES" id="7jS-a5-4dW"/>
+                            <constraint firstItem="zag-mg-ztD" firstAttribute="centerX" secondItem="A64-7g-F0X" secondAttribute="centerX" id="nBf-8N-beo"/>
+                            <constraint firstItem="Oxg-07-LMQ" firstAttribute="centerX" secondItem="zag-mg-ztD" secondAttribute="centerX" id="nt8-eK-jij"/>
+                            <constraint firstItem="zag-mg-ztD" firstAttribute="width" secondItem="A64-7g-F0X" secondAttribute="width" id="xrp-18-8Bn"/>
+                            <constraint firstItem="zag-mg-ztD" firstAttribute="top" secondItem="lhO-9s-jMu" secondAttribute="top" id="y8R-jl-dKU"/>
+                            <constraint firstItem="lhO-9s-jMu" firstAttribute="bottom" secondItem="Oxg-07-LMQ" secondAttribute="bottom" constant="16" id="yo6-rh-wvH"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Metrics" id="oEr-wM-I6K"/>
+                    <connections>
+                        <outlet property="achievementsButton" destination="JGl-oF-f0g" id="wXy-EB-IaB"/>
+                        <outlet property="chartView" destination="zag-mg-ztD" id="sGw-gb-5ct"/>
+                        <outlet property="leaderboardButton" destination="KZW-8V-vKi" id="sBD-Gf-KKl"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gf0-Dy-4fa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -462,6 +475,9 @@
         <namedColor name="darkBackgroundWithOpacity">
             <color white="0.30000001192092896" alpha="0.60000002384185791" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </namedColor>
+        <systemColor name="secondarySystemBackgroundColor">
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
@@ -470,9 +486,6 @@
         </systemColor>
         <systemColor name="systemOrangeColor">
             <color red="1" green="0.58431372549019611" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
-        <systemColor name="systemPurpleColor">
-            <color red="0.68627450980392157" green="0.32156862745098042" blue="0.87058823529411766" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

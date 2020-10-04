@@ -23,6 +23,11 @@ class CategoryCollectionViewController: UICollectionViewController {
         // Set collection view delegates.
         collectionView.delegate = self
         collectionView.dataSource = GameStore.shared
+        // Every time enter a category page, report the progress to GameCenter.
+        if GameCenterHelper.isAuthenticated {
+            let percentComplete = GameStore.shared.percentComplete(for: category)
+            GameCenterHelper.shared.submitFinishedAchievement(for: category, progress: percentComplete)
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {

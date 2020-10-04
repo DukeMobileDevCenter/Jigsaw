@@ -60,7 +60,7 @@ struct GameResult {
             }
             .reduce(0, +)
         let scored: Int = resultPairs[0].1 * 3 + resultPairs[1].1 * 1
-        return Double(scored) / Double(total)
+        return total != 0 ? Double(scored) / Double(total) : 0
     }
     
     var isPassed: Bool {

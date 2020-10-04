@@ -12,12 +12,26 @@ import ProgressHUD
 class GameHistoryTimelineTableViewController: UITableViewController {
     /// A label to display the count of total games played.
     @IBOutlet var totalCountLabel: UILabel!
+    /// A bar button to upload the average score to GameCenter.
+    @IBOutlet var submitScoreBarButtonItem: UIBarButtonItem! {
+        didSet {
+            submitScoreBarButtonItem.isEnabled = GameCenterHelper.isAuthenticated
+        }
+    }
+    
+    /// Tap button to upload average score to GameCenter.
+    @IBAction func submitScoreButtonTapped(_ sender: UIBarButtonItem) {
+        // When the data is pulled from remote, submit the score to Game Center.
+        GameCenterHelper.shared.submitAverageScore(averageScore * 1000)
+        GameCenterHelper.shared.submitGamesPlayed(gameHistories.count)
+    }
     
     /// The game history records for a player.
     private var gameHistories = [GameHistory]() {
         didSet {
             tableView.reloadData()
-            totalCountLabel.text = "\(gameHistories.count) game(s) played in total."
+            let scoreText = percentageFormatter.string(from: NSNumber(value: averageScore))!
+            totalCountLabel.text = "\(gameHistories.count) game(s) played, average score = \(scoreText)."
         }
     }
     
@@ -36,6 +50,12 @@ class GameHistoryTimelineTableViewController: UITableViewController {
         formatter.dateFormat = "HH:mm, d MMM yy"
         return formatter
     }()
+    
+    /// The average score times.
+    private var averageScore: Double {
+        if gameHistories.isEmpty { return 0 }
+        return gameHistories.map { $0.score }.reduce(0, +) / Double(gameHistories.count)
+    }
     
     // MARK: UITableViewController
     

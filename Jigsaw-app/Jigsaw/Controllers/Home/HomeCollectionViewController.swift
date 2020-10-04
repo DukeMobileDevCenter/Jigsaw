@@ -62,8 +62,10 @@ class HomeCollectionViewController: UICollectionViewController {
     /// Load games and player's game histories (if exist) from remote.
     @objc
     private func loadFromRemote() {
-        loadGames()
-        loadHistories()
+        // Load history first, then load games.
+        loadHistories { [weak self] in
+            self?.loadGames()
+        }
     }
     
     private func loadGames() {
@@ -88,12 +90,13 @@ class HomeCollectionViewController: UICollectionViewController {
         }
     }
     
-    private func loadHistories() {
+    private func loadHistories(completion: (() -> Void)? = nil) {
         guard Profiles.userID != nil else { return }
         FirebaseHelper.getGameHistory(userID: Profiles.userID) { [weak self] histories, error in
             if let histories = histories {
                 // Add all remote histories to the set.
                 Profiles.playedGameIDs = Set(histories.map { $0.gameID })
+                completion?()
             } else if let error = error {
                 DispatchQueue.main.async {
                     self?.presentAlert(error: error)

@@ -112,6 +112,7 @@ class ResultStatsViewController: UIViewController {
     }
     
     private func setDataCount(from resultPairs: KeyValuePairs<AnswerCategory, Int>) {
+        // Assuming there are no games with 0 questions.
         let totalCount = resultPairs.reduce(0) { $0 + $1.1 }
         let entries = resultPairs.compactMap { (key, value) -> PieChartDataEntry? in
             if key == .unknown && value == 0 {

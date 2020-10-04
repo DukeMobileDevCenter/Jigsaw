@@ -136,6 +136,16 @@ class GameStore: NSObject {
     func nextGame(for currentGame: Game) -> Game? {
         return allGames.first { $0.gameID == currentGame.nextLevelGameID }
     }
+    
+    /// Get the played games ratio, i.e. (rooms played)/(total rooms count), for a category.
+    ///
+    /// - Parameter category: The category of rooms.
+    /// - Returns: The percentage between 0.0 and 100.0.
+    func percentComplete(for category: GameCategory) -> Double {
+        let games = getGames(for: category)
+        if games.isEmpty { return 0 }
+        return Double(games.filter { $0.isPlayed }.count) / Double(games.count) * 100
+    }
 }
 
 extension GameStore: UICollectionViewDataSource {
