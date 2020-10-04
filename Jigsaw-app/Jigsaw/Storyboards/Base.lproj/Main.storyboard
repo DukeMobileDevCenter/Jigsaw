@@ -257,7 +257,7 @@
             </objects>
             <point key="canvasLocation" x="1571.0144927536232" y="138.61607142857142"/>
         </scene>
-        <!--Player Profile-->
+        <!--Profiles-->
         <scene sceneID="ZH7-Kp-vrb">
             <objects>
                 <viewController id="P4k-pc-CCe" customClass="ProfileViewController" customModule="Jigsaw" customModuleProvider="target" sceneMemberID="viewController">
@@ -267,7 +267,7 @@
                         <viewLayoutGuide key="safeArea" id="1Dh-Uu-8mf"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Player Profile" id="bOu-nD-ssk">
+                    <navigationItem key="navigationItem" title="Profiles" id="bOu-nD-ssk">
                         <barButtonItem key="rightBarButtonItem" title="Item" image="person.circle" catalog="system" id="hJk-91-mZ3">
                             <connections>
                                 <action selector="userAccountBarButtonTapped:" destination="P4k-pc-CCe" id="lKz-W1-dUa"/>
@@ -331,11 +331,11 @@
             </objects>
             <point key="canvasLocation" x="661" y="-552"/>
         </scene>
-        <!--Profile-->
+        <!--Profiles-->
         <scene sceneID="BUY-Wy-Iag">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="zcL-v5-oxf" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Profile" image="person" catalog="system" id="YRA-a0-TyO"/>
+                    <tabBarItem key="tabBarItem" title="Profiles" image="person" catalog="system" id="YRA-a0-TyO"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="M4R-Te-ZuO">
                         <rect key="frame" x="0.0" y="44" width="414" height="96"/>
