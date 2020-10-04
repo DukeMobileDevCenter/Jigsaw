@@ -78,12 +78,10 @@
 		00D9F5162506DEDF00898DFA /* PreviewDetailViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 00D9F5152506DEDF00898DFA /* PreviewDetailViewController.storyboard */; };
 		00F029D4251FF25700CB2A15 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F029D3251FF25700CB2A15 /* SignInViewController.swift */; };
 		00F029D9251FF34900CB2A15 /* ResultStatsViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 00F029D8251FF34900CB2A15 /* ResultStatsViewController.storyboard */; };
-		00F029DB251FF4F100CB2A15 /* GameHistoryRadarChartViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 00F029DA251FF4F100CB2A15 /* GameHistoryRadarChartViewController.storyboard */; };
 		00F2197C24CCF99800B72858 /* MetricsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F2197B24CCF99800B72858 /* MetricsViewController.swift */; };
 		00F2197E24CCF9A200B72858 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F2197D24CCF9A200B72858 /* ProfileViewController.swift */; };
 		00F6301D24EE2E0000BCAD11 /* ResultStatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F6301C24EE2E0000BCAD11 /* ResultStatsViewController.swift */; };
 		00F6302224EE385E00BCAD11 /* AnswerCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F6302124EE385E00BCAD11 /* AnswerCategory.swift */; };
-		00F6302824EE4E8700BCAD11 /* GameHistoryRadarChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F6302724EE4E8700BCAD11 /* GameHistoryRadarChartViewController.swift */; };
 		4C4D65101A3F2EDDFFFD6EE1 /* Pods_Jigsaw.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 601967226BC24AEDC4FA99EE /* Pods_Jigsaw.framework */; };
 /* End PBXBuildFile section */
 
@@ -201,12 +199,10 @@
 		00D9F5152506DEDF00898DFA /* PreviewDetailViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PreviewDetailViewController.storyboard; sourceTree = "<group>"; };
 		00F029D3251FF25700CB2A15 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		00F029D8251FF34900CB2A15 /* ResultStatsViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ResultStatsViewController.storyboard; sourceTree = "<group>"; };
-		00F029DA251FF4F100CB2A15 /* GameHistoryRadarChartViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = GameHistoryRadarChartViewController.storyboard; sourceTree = "<group>"; };
 		00F2197B24CCF99800B72858 /* MetricsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetricsViewController.swift; sourceTree = "<group>"; };
 		00F2197D24CCF9A200B72858 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		00F6301C24EE2E0000BCAD11 /* ResultStatsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultStatsViewController.swift; sourceTree = "<group>"; };
 		00F6302124EE385E00BCAD11 /* AnswerCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswerCategory.swift; sourceTree = "<group>"; };
-		00F6302724EE4E8700BCAD11 /* GameHistoryRadarChartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameHistoryRadarChartViewController.swift; sourceTree = "<group>"; };
 		601967226BC24AEDC4FA99EE /* Pods_Jigsaw.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Jigsaw.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B4591A0726378C2FDAC05571 /* Pods-Jigsaw.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Jigsaw.release.xcconfig"; path = "Target Support Files/Pods-Jigsaw/Pods-Jigsaw.release.xcconfig"; sourceTree = "<group>"; };
 		E489C461B8389ED9A300FE26 /* Pods-Jigsaw.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Jigsaw.debug.xcconfig"; path = "Target Support Files/Pods-Jigsaw/Pods-Jigsaw.debug.xcconfig"; sourceTree = "<group>"; };
@@ -389,7 +385,6 @@
 			isa = PBXGroup;
 			children = (
 				0071E91D251FF6F50025702E /* SignInViewController.storyboard */,
-				00F029DA251FF4F100CB2A15 /* GameHistoryRadarChartViewController.storyboard */,
 				00F029D8251FF34900CB2A15 /* ResultStatsViewController.storyboard */,
 				00B6306224FB26A8008975CE /* GameHistoryTimeline.storyboard */,
 				00D9F5152506DEDF00898DFA /* PreviewDetailViewController.storyboard */,
@@ -517,7 +512,6 @@
 			isa = PBXGroup;
 			children = (
 				00F6301C24EE2E0000BCAD11 /* ResultStatsViewController.swift */,
-				00F6302724EE4E8700BCAD11 /* GameHistoryRadarChartViewController.swift */,
 			);
 			path = Charts;
 			sourceTree = "<group>";
@@ -655,7 +649,6 @@
 				00F029D9251FF34900CB2A15 /* ResultStatsViewController.storyboard in Resources */,
 				005856BC24D91C4A0010BE55 /* GoogleService-Info.plist in Resources */,
 				0070DFF324B0060500E71F46 /* Assets.xcassets in Resources */,
-				00F029DB251FF4F100CB2A15 /* GameHistoryRadarChartViewController.storyboard in Resources */,
 				0070DFF124B0060400E71F46 /* Main.storyboard in Resources */,
 				00D9F5162506DEDF00898DFA /* PreviewDetailViewController.storyboard in Resources */,
 				00B0A67A24E3CF9600887701 /* ProfileHeaderView.xib in Resources */,
@@ -786,7 +779,6 @@
 				00A8831525292D4E00186BED /* GameCenterHelper.swift in Sources */,
 				00F029D4251FF25700CB2A15 /* SignInViewController.swift in Sources */,
 				005308E12516F65F002A429F /* GameError.swift in Sources */,
-				00F6302824EE4E8700BCAD11 /* GameHistoryRadarChartViewController.swift in Sources */,
 				0071E920252003880025702E /* AppInfo.swift in Sources */,
 				005856C424D92CFB0010BE55 /* Chatroom.swift in Sources */,
 				00B6305F24FB0247008975CE /* GameResult.swift in Sources */,
