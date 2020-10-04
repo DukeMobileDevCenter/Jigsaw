@@ -17,7 +17,10 @@ class GameHistoryTimelineTableViewController: UITableViewController {
     private var gameHistories = [GameHistory]() {
         didSet {
             tableView.reloadData()
-            totalCountLabel.text = "\(gameHistories.count) game(s) played in total."
+            let averageScore = self.averageScore
+            totalCountLabel.text = "\(gameHistories.count) game(s) played, average score = \(averageScore)."
+            // When the data is pulled from remote, submit the score to Game Center.
+            GameCenterHelper.shared.submitAverageScore(averageScore * 10)
         }
     }
     
@@ -36,6 +39,11 @@ class GameHistoryTimelineTableViewController: UITableViewController {
         formatter.dateFormat = "HH:mm, d MMM yy"
         return formatter
     }()
+    
+    /// The average score times 100.
+    private var averageScore: Double {
+        gameHistories.map { $0.score }.reduce(0, +) / Double(gameHistories.count) * 100
+    }
     
     // MARK: UITableViewController
     

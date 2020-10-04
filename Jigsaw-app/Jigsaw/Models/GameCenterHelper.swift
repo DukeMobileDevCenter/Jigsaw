@@ -9,17 +9,21 @@
 import GameKit
 
 class GameCenterHelper: NSObject, GKLocalPlayerListener {
+    /// A singleton of the helper class.
     static let shared = GameCenterHelper()
-    
+    /// The view controller to present GameCenterViewController.
     var viewController: UIViewController?
     
     static var isAuthenticated: Bool {
         return GKLocalPlayer.local.isAuthenticated
     }
     
+    // MARK: Constants
+    
     private let averageScoreLeaderboardID = "edu.duke.mobilecenter.JigsawBeta.averageScore"
     private let economyFinishedAchievementID = "edu.duke.mobilecenter.JigsawBeta.economyFinished"
     
+    /// The GameCenterViewController that displays player stats.
     private lazy var gameCenterViewController: GKGameCenterViewController = {
         let controller = GKGameCenterViewController()
         controller.gameCenterDelegate = self
@@ -51,6 +55,18 @@ class GameCenterHelper: NSObject, GKLocalPlayerListener {
     func presentAchievements() {
         gameCenterViewController.viewState = .achievements
         viewController?.present(gameCenterViewController, animated: true)
+    }
+    
+    func submitAverageScore(_ score: Double) {
+        let averageScore = GKScore(leaderboardIdentifier: averageScoreLeaderboardID)
+        averageScore.value = Int64(score)
+        GKScore.report([averageScore]) { error in
+            if let error = error {
+                print(error.localizedDescription)
+            } else {
+                print("✅ Average score reported.")
+            }
+        }
     }
 }
 
