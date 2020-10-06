@@ -22,11 +22,12 @@ class GameCenterHelper: NSObject, GKLocalPlayerListener {
     }
     
     /// The GameCenterViewController that displays player stats.
-    private lazy var gameCenterViewController: GKGameCenterViewController = {
+    /// Create it everytime so the controller have correct appearances.
+    private var gameCenterViewController: GKGameCenterViewController {
         let controller = GKGameCenterViewController()
         controller.gameCenterDelegate = self
         return controller
-    }()
+    }
     
     override init() {
         super.init()
