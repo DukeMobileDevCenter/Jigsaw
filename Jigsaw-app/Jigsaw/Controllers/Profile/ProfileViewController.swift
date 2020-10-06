@@ -204,8 +204,14 @@ extension ProfileViewController {
             let signOutAction = UIAlertAction(title: "Sign Out", style: .destructive) { _ in
                 // Sign out here.
                 do {
-                    // Sign out and reset local profile.
+                    // Sign out, delete if anonymous, and reset local profile.
+                    let isAnonymous = FirebaseConstants.auth.currentUser?.isAnonymous ?? false
+                    let userID = FirebaseConstants.auth.currentUser?.uid
                     try FirebaseConstants.auth.signOut()
+                    if isAnonymous, let userID = userID {
+                        FirebaseHelper.deleteAnonymousPlayer(userID: userID)
+                    }
+                    
                     Profiles.resetProfiles()
                     // Present the sign in page by the root tab bar.
                     let tabBar = self.tabBarController as! RootTabBarController

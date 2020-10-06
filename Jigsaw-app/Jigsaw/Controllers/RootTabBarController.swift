@@ -40,7 +40,13 @@ class RootTabBarController: UITabBarController {
             if user.uid != Profiles.userID {
                 // Something went wrong. Force user to sign in again.
                 do {
+                    // Sign out, delete if anonymous, and reset local profile.
+                    let isAnonymous = FirebaseConstants.auth.currentUser?.isAnonymous ?? false
+                    let userID = FirebaseConstants.auth.currentUser?.uid
                     try auth.signOut()
+                    if isAnonymous, let userID = userID {
+                        FirebaseHelper.deleteAnonymousPlayer(userID: userID)
+                    }
                     Profiles.resetProfiles()
                 } catch {
                     presentAlert(error: error)

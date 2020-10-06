@@ -55,6 +55,13 @@ enum FirebaseHelper {
         try? FirebaseConstants.shared.players.document(userID).setData(from: player)
     }
     
+    /// Delete a user from Players collection.
+    ///
+    /// - Parameter userID: A user ID, which should have been checked to be anonymous.
+    static func deleteAnonymousPlayer(userID: String) {
+        FirebaseConstants.shared.players.document(userID).delete()
+    }
+    
     /// Load game history records for a player.
     /// - Parameters:
     ///   - userID: The user ID of the player.
