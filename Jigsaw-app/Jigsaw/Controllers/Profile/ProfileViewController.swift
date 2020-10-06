@@ -34,6 +34,12 @@ class ProfileViewController: FormViewController {
         if shouldLoadFormForTheFirstTime {
             createForm()
         }
+        if let headerRow = form.rowBy(tag: "ProfileHeaderRow") as? ViewRow<ProfileHeaderView>,
+           headerRow.section?.footer?.title != uidString {
+            // Reload profile if UI and datasource is inconsistent.
+            // This typically happen after player switched account.
+            loadPlayerProfile()
+        }
         shouldLoadFormForTheFirstTime = false
     }
     
@@ -70,6 +76,7 @@ class ProfileViewController: FormViewController {
         let headerRow = form.rowBy(tag: "ProfileHeaderRow") as! ViewRow<ProfileHeaderView>
         configureHeaderView(view: headerRow.view!)
         headerRow.section?.footer?.title = uidString
+        headerRow.section?.reload()
         headerRow.reload()
         // Reload the jigsaw value row.
         let jigsawValueRow = form.rowBy(tag: "JigsawValueRow") as! DecimalRow
