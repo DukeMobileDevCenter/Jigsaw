@@ -52,7 +52,7 @@ enum OnboardingSteps {
             bodyItemStyle: .image
         )
         let rankingItem = ORKBodyItem(
-            text: "Teams will be ranked on how quickly they are able to move through all rooms in this series. Success will require effective communication and cooperation.",
+            text: "Teams will be ranked on the percentage of quiz questions that the team gets correct. Ties will be broken by how quickly the team ws able to move through all of the rooms in this series.",
             detailText: nil,
             image: UIImage(systemName: "list.bullet.indent"),
             learnMoreItem: nil,
