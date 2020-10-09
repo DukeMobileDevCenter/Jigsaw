@@ -170,6 +170,7 @@ extension GameStore: UICollectionViewDataSource {
             // Set subtitle.
             cell.nameLabel.text = "???"
             // Set lock icon.
+            cell.iconImageView.isHidden = false
             cell.iconImageView.image = UIImage(systemName: "lock")!
             cell.iconBackgroundView.isHidden = false
             // Clear the image for reusing the cell.
