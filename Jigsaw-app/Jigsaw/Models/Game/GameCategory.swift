@@ -87,7 +87,8 @@ class GameCategoryClass: NSObject, UICollectionViewDataSource {
     // Singleton of the class.
     static let shared = GameCategoryClass()
     // A wrapper to all of the enum cases.
-    let allCases = GameCategory.allCases
+    // Edit: for beta testing, we don't include the random option.
+    let allCases = GameCategory.allCases.dropLast()
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         allCases.count
