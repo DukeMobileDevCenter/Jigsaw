@@ -157,16 +157,21 @@ extension GameStore: UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "GameCollectionCell", for: indexPath) as! GameCollectionCell
         // Find game.
         let game = getGames(for: selectedCategory)[indexPath.item]
-        // Set subtitle.
-        cell.nameLabel.text = game.isEnabled ? "\(game.gameName) room \(game.level)" : "???"
-        // Set lock icon.
-        cell.iconImageView.image = game.isEnabled ? UIImage(systemName: "lock.open")! : UIImage(systemName: "lock")!
-        // Set background image.
+        
         if game.isEnabled {
+            cell.nameLabel.text = "\(game.gameName) room \(game.level)"
+            // Do not show the icon when the game is enabled.
+            cell.iconImageView.isHidden = true
+            cell.iconBackgroundView.isHidden = true
             // Lazy load background image.
             cell.backgroundImageView.pin_updateWithProgress = true
             cell.backgroundImageView.pin_setImage(from: game.backgroundImageURL)
         } else {
+            // Set subtitle.
+            cell.nameLabel.text = "???"
+            // Set lock icon.
+            cell.iconImageView.image = UIImage(systemName: "lock")!
+            cell.iconBackgroundView.isHidden = false
             // Clear the image for reusing the cell.
             cell.backgroundImageView.image = nil
         }
