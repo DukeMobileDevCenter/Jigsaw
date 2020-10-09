@@ -44,8 +44,8 @@ class GameViewController: ORKTaskViewController {
     
     private let questionsInstructionStep: ORKInstructionStep = {
         let questionsInstructionStep = ORKInstructionStep(identifier: "QuestionsInstruction")
-        questionsInstructionStep.title = "Required Questions"
-        questionsInstructionStep.detailText = "The following questions are essential. Please answer carefully."
+        questionsInstructionStep.title = "Quiz"
+        questionsInstructionStep.detailText = "You can escape this room if your team answers all of the following questions correctly. Good luck!"
         questionsInstructionStep.iconImage = UIImage(systemName: "exclamationmark.square")
         questionsInstructionStep.isOptional = false
         return questionsInstructionStep

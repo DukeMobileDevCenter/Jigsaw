@@ -71,6 +71,12 @@ class ChatViewController: MessagesViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        // Clear the pasteboard to avoid cheating.
+        UIPasteboard.general.string = ""
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -385,13 +391,6 @@ extension ChatViewController: InputBarAccessoryViewDelegate {
         save(message)
         // Clear the input field after sending the message.
         inputBar.inputTextView.text = ""
-    }
-    
-    override func canPerformAction(_ action: Selector, withSender sender: Any?) -> Bool {
-        if action == #selector(UIResponderStandardEditActions.paste(_:)) {
-            return false
-        }
-        return super.canPerformAction(action, withSender: sender)
     }
 }
 
