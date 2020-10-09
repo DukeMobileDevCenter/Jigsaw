@@ -79,11 +79,11 @@ class MatchingViewController: UIViewController {
         }
     }
     
-    @IBAction func joinGameButtonTapped(_ sender: UIButton) {
+    @IBAction func joinGameButtonTapped(_ sender: UIButton?) {
         addPlayerToPlayersQueue(queueReference: queuesRef)
         // Only start to listen to game group updates after the player joins a game/room.
         setGameGroupListener()
-        sender.isEnabled = false
+        sender?.isEnabled = false
     }
     
     private func addPlayerToPlayersQueue(queueReference: CollectionReference) {

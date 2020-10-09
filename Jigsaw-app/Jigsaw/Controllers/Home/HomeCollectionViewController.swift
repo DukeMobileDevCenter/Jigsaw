@@ -226,6 +226,10 @@ class HomeCollectionViewController: UICollectionViewController {
             let destinationVC = segue.destination as! MatchingViewController
             destinationVC.queueType = queueType
             destinationVC.selectedGame = nextGame
+//            // Auto join the next level room.
+//            if let resultTabSenderID = sender as? String, resultTabSenderID == "ResultStatsViewController" {
+//                destinationVC.joinGameButtonTapped(nil)
+//            }
             print("Info: Next game is \(nextGame.gameName)")
         default:
             preconditionFailure("Unexpected segue identifier.")

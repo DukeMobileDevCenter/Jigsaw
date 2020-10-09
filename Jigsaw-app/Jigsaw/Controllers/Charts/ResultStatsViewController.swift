@@ -46,7 +46,7 @@ class ResultStatsViewController: UIViewController {
             navigationController!.popToViewController(homeViewController, animated: false)
             // Auto lead to next game.
             homeViewController.nextGame = nextGame!
-            homeViewController.performSegue(withIdentifier: "showSpecific", sender: nil)
+            homeViewController.performSegue(withIdentifier: "showSpecific", sender: "ResultStatsViewController")
         }
     }
     
