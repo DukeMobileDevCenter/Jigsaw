@@ -224,7 +224,7 @@ class ChatViewController: MessagesViewController {
         metadata.contentType = "image/jpeg"
         
         let imageName = [UUID().uuidString, String(Date().timeIntervalSince1970)].joined()
-        let imageRef = FirebaseConstants.storage.reference().child(channelID).child(imageName)
+        let imageRef = FirebaseConstants.shared.chatroomStorage.child(channelID).child(imageName)
         imageRef.putData(data, metadata: metadata) { metadata, _ in
             guard metadata != nil else {
                 completion(nil)
@@ -303,10 +303,9 @@ extension ChatViewController: MessagesLayoutDelegate {
 // MARK: - MessageCellDelegate
 
 extension ChatViewController: MessageCellDelegate {
-    func didTapAvatar(in cell: MessageCollectionViewCell) {
-        print("Avatar tapped")
-    }
-    
+//    func didTapAvatar(in cell: MessageCollectionViewCell) {
+//        print("Avatar tapped")
+//    }
     func didTapBackground(in cell: MessageCollectionViewCell) {
         messageInputBar.inputTextView.resignFirstResponder()
     }

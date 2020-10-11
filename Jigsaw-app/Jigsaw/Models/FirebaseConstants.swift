@@ -25,4 +25,5 @@ class FirebaseConstants: NSObject {
     let gamegroups = database.collection("GameGroups")
     
     let gamesStorage = storage.reference(withPath: "Games")
+    let chatroomStorage = storage.reference(withPath: "Chatrooms")
 }
