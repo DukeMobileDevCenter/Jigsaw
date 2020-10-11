@@ -140,15 +140,15 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Players are waiting in queue" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9rw-kM-ciH">
-                                <rect key="frame" x="86" y="436" width="242.5" height="24"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Players are ready to play" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9rw-kM-ciH">
+                                <rect key="frame" x="100.5" y="436" width="213" height="24"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="82k-nw-Y9U">
-                                <rect key="frame" x="158.5" y="545" width="97" height="30"/>
-                                <state key="normal" title="Join the game"/>
+                                <rect key="frame" x="171" y="545" width="72" height="30"/>
+                                <state key="normal" title="I'm Ready!"/>
                                 <connections>
                                     <action selector="joinGameButtonTapped:" destination="qIk-Vr-9mo" eventType="touchUpInside" id="aLV-dt-Pew"/>
                                 </connections>
