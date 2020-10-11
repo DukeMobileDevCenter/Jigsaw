@@ -17,16 +17,16 @@ struct Game {
     let level: Int
     /// Name of the game.
     let gameName: String
-    /// Description detail text.
+    /// Description for the first page/preview page.
     let detailText: String
-    /// Group 1 resource URL.
-    let g1resURL: URL
+    /// Group 1 resource URLs.
+    let group1resourceURLs: [URL]
     /// Group 2 resource URL.
-    let g2resURL: URL
-    /// Group 1 questionnaire.
-    let g1Questionnaire: Questionnaire
-    /// Group 2 questionnaire.
-    let g2Questionnaire: Questionnaire
+    let group2resourceURLs: [URL]
+    /// Group 1 questionnaires.
+    let group1Questionnaires: [Questionnaire]
+    /// Group 2 questionnaires.
+    let group2Questionnaires: [Questionnaire]
     /// Category, used for categorize games and display icon.
     let category: GameCategory
     /// Game card background image URL, can also use for styling.
@@ -57,34 +57,45 @@ struct Game {
         Profiles.playedGameIDs.contains(gameID)
     }
     
-    init?(document: QueryDocumentSnapshot) {
-        let data = document.data()
-        
+    init?(data: [String: Any]) {
         guard
             let version = data["version"] as? String,
             let level = data["level"] as? Int,
             let gameName = data["gameName"] as? String,
             let detailText = data["detailText"] as? String,
-            let g1resURL = data["g1resURL"] as? String,
-            let g2resURL = data["g2resURL"] as? String,
+            let group1resourceURLs = data["group1resourceURLs"] as? [String],
+            let group2resourceURLs = data["group2resourceURLs"] as? [String],
             let backgroundImageURL = data["backgroundImageURL"] as? String,
             let categoryString = data["category"] as? String,
-            let category = GameCategory(rawValue: categoryString),
-            let g1Questionnaire = data["g1Questionnaire"] as? [[String: Any]],
-            let g2Questionnaire = data["g2Questionnaire"] as? [[String: Any]]
-            else { return nil }
+            let category = GameCategory(rawValue: categoryString),  // Avoid unknown category.
+            let group1Questionnaires = data["group1Questionnaires"] as? [[[String: Any]]],
+            let group2Questionnaires = data["group2Questionnaires"] as? [[[String: Any]]]
+        else { return nil }
+        
+        // Check if the game has correct amount of room content pairs.
+        guard
+            Set([group1resourceURLs.count,
+                 group2resourceURLs.count,
+                 group1Questionnaires.count,
+                 group2Questionnaires.count]).count == 1
+        else { return nil }
         
         self.version = version
         self.level = level
         self.gameName = gameName
         self.detailText = detailText
-        self.g1resURL = URL(string: g1resURL)!
-        self.g2resURL = URL(string: g2resURL)!
+        self.group1resourceURLs = group1resourceURLs.compactMap { URL(string: $0) }
+        self.group2resourceURLs = group2resourceURLs.compactMap { URL(string: $0) }
         self.backgroundImageURL = URL(string: backgroundImageURL)!
         self.category = category
         
-        self.g1Questionnaire = Game.decodeQuestionnaireData(data: g1Questionnaire)
-        self.g2Questionnaire = Game.decodeQuestionnaireData(data: g2Questionnaire)
+        self.group1Questionnaires = group1Questionnaires.compactMap { Game.decodeQuestionnaireData(data: $0) }
+        self.group2Questionnaires = group2Questionnaires.compactMap { Game.decodeQuestionnaireData(data: $0) }
+    }
+    
+    init?(document: QueryDocumentSnapshot) {
+        let data = document.data()
+        self.init(data: data)
     }
     
     /// Decode an array of dictionaries to a questionnaire.
