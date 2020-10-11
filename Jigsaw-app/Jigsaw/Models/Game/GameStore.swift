@@ -180,15 +180,16 @@ extension GameStore: UICollectionViewDataSource {
         // Find game.
         let game = getGames(for: selectedCategory)[indexPath.item]
         if game.isPlayed {
-            cell.nameLabel.text = "\(game.gameName) room \(game.level)"
+            cell.nameLabel.text = "\(game.gameName) level \(game.level)"
             // Show a 🎉 emoji when the game is played.
+            cell.iconImageView.isHidden = false
             cell.iconImageView.image = "🎉".toEmojiImage()
             cell.iconBackgroundView.isHidden = false
             // Lazy load background image.
             cell.backgroundImageView.pin_updateWithProgress = true
             cell.backgroundImageView.pin_setImage(from: game.backgroundImageURL)
         } else if game.isEnabled {
-            cell.nameLabel.text = "\(game.gameName) room \(game.level)"
+            cell.nameLabel.text = "\(game.gameName) level \(game.level)"
             // Do not show the icon when the game is enabled.
             cell.iconImageView.isHidden = true
             cell.iconBackgroundView.isHidden = true
@@ -196,7 +197,7 @@ extension GameStore: UICollectionViewDataSource {
             cell.backgroundImageView.pin_updateWithProgress = true
             cell.backgroundImageView.pin_setImage(from: game.backgroundImageURL)
         } else {
-            // Set subtitle.
+            // Set subtitle to ??? to hide the real name.
             cell.nameLabel.text = "???"
             // Set lock icon.
             cell.iconImageView.isHidden = false
