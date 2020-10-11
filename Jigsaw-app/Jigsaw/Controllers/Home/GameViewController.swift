@@ -7,6 +7,7 @@
 //
 
 import ResearchKit
+import Down
 
 class GameViewController: ORKTaskViewController {
     private let game: GameOfGroup
@@ -25,7 +26,7 @@ class GameViewController: ORKTaskViewController {
     private var welcomeStep: ORKInstructionStep {
         let welcomeStep = ORKInstructionStep(identifier: "Introduction")
         welcomeStep.title = game.gameName
-        welcomeStep.detailText = game.detailText
+        welcomeStep.attributedDetailText = try? Down(markdownString: game.detailText).toAttributedString()
         welcomeStep.iconImage = UIImage(systemName: "info.circle")!
         return welcomeStep
     }
