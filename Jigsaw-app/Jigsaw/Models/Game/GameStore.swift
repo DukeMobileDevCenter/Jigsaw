@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Yams
 
 private class GameCollections {
     var immigrationGames = [Game]()
@@ -73,8 +74,12 @@ class GameStore: NSObject {
     func loadGames(completion: @escaping (Result<[Game], Error>) -> Void) {
         // Clear all existing games.
         collections.removeAll()
-        FirebaseConstants.shared.games.getDocuments { [weak self] querySnapshot, error in
+        FirebaseConstants.shared.gamesStorage.listAll { [weak self] storageListResult, error in
             guard let self = self else { return }
+            if let error = error {
+                completion(.failure(error))
+                return
+            }
             // Create copies to avoid async race condition.
             var games = [Game]()
             
@@ -85,29 +90,48 @@ class GameStore: NSObject {
             var healthGames = [Game]()
             var internationalGames = [Game]()
             
-            if let snapshot = querySnapshot {
-                for document in snapshot.documents {
-                    if let game = Game(document: document) {
-                        let category = game.category
-                        switch category {
-                        case .immigration:
-                            immigrationGames.append(game)
-                        case .economy:
-                            economyGames.append(game)
-                        case .justice:
-                            justiceGames.append(game)
-                        case .environment:
-                            environmentGames.append(game)
-                        case .health:
-                            healthGames.append(game)
-                        case .international:
-                            internationalGames.append(game)
-                        case .random:
-                            continue
+            let downloadGroup = DispatchGroup()
+            
+            for item in storageListResult.items {
+                downloadGroup.enter()
+                // Download in memory with a maximum allowed size of 1MB (1 * 1024 * 1024 bytes)
+                item.getData(maxSize: 1 * 1024 * 1024) { data, error in
+                    // Leave after the call finishes.
+                    defer { downloadGroup.leave() }
+                    
+                    if let error = error {
+                        completion(.failure(error))
+                        return
+                    }
+                    if let data = data,
+                       let content = String(data: data, encoding: .utf8),
+                       let dataDict = try? Yams.load(yaml: content) as? [String: Any] {
+                        if let game = Game(data: dataDict) {
+                            let category = game.category
+                            switch category {
+                            case .immigration:
+                                immigrationGames.append(game)
+                            case .economy:
+                                economyGames.append(game)
+                            case .justice:
+                                justiceGames.append(game)
+                            case .environment:
+                                environmentGames.append(game)
+                            case .health:
+                                healthGames.append(game)
+                            case .international:
+                                internationalGames.append(game)
+                            case .random:
+                                break
+                            }
+                            games.append(game)
                         }
-                        games.append(game)
                     }
                 }
+            }
+            // Only callback success when all downloads are successful.
+            downloadGroup.notify(queue: .main) { [weak self] in
+                guard let self = self else { return }
                 // Sorted by latest added version number.
                 games.sort { game1, game2 in game1.level < game2.level }
                 // Assign the games in whole to avoid race condition.
@@ -122,8 +146,6 @@ class GameStore: NSObject {
                 self.collections.sortAll()
                 
                 completion(.success(games))
-            } else if let error = error {
-                completion(.failure(error))
             }
         }
     }
