@@ -19,6 +19,6 @@ struct GameOfGroup {
     /// Group resource URLs.
     let resourceURLs: [URL]
     /// Group questionnaires.
-    let questionnaire: [Questionnaire]
+    let questionnaires: [Questionnaire]
     let category: GameCategory
 }

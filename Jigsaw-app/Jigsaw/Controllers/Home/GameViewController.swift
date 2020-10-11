@@ -7,15 +7,14 @@
 //
 
 import ResearchKit
-import Down
 
 class GameViewController: ORKTaskViewController {
     private let game: GameOfGroup
     
-    init(game: GameOfGroup, taskRun taskRunUUID: UUID? = nil) {
+    init(game: GameOfGroup, currentRoom: Int, taskRun taskRunUUID: UUID? = nil) {
         self.game = game
         super.init(task: nil, taskRun: taskRunUUID)
-        task = createSurveyTask(from: game.questionnaire)
+        task = createSurveyTask(from: game, currentRoom: currentRoom)
     }
     
     @available(*, unavailable)
@@ -23,33 +22,34 @@ class GameViewController: ORKTaskViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private var welcomeStep: ORKInstructionStep {
-        let welcomeStep = ORKInstructionStep(identifier: "Introduction")
-        welcomeStep.title = game.gameName
-        welcomeStep.attributedDetailText = try? Down(markdownString: game.detailText).toAttributedString()
-        welcomeStep.iconImage = UIImage(systemName: "info.circle")!
-        return welcomeStep
+    private var chatroomInstructionStep: ORKInstructionStep {
+        let step = ORKInstructionStep(identifier: "ChatroomInstruction")
+        step.title = "Chatroom next"
+        step.detailText =
+        """
+        You'll see a chatroom on the next screen. Share what you learned with your peers.
+        After everyone have joined the chatroom, you can quit the chat and move forward.
+        """
+        step.iconImage = UIImage(systemName: "bubble.left.and.bubble.right")!
+        return step
     }
     
     private let chatroomCountdownStep: ORKActiveStep = {
         let step = ORKActiveStep(identifier: "Countdown")
-        step.stepDuration = TimeInterval(integerLiteral: 240)
+//        step.stepDuration = TimeInterval(integerLiteral: 240)
+//        step.shouldShowDefaultTimer = true
+//        step.shouldStartTimerAutomatically = true
         step.shouldUseNextAsSkipButton = true
         step.shouldContinueOnFinish = true
-        step.shouldShowDefaultTimer = true
-        step.shouldStartTimerAutomatically = true
-        step.shouldSpeakRemainingTimeAtHalfway = true
-        step.shouldSpeakCountDown = true
         return step
     }()
     
     private let questionsInstructionStep: ORKInstructionStep = {
-        let questionsInstructionStep = ORKInstructionStep(identifier: "QuestionsInstruction")
-        questionsInstructionStep.title = "Quiz"
-        questionsInstructionStep.detailText = "You can escape this room if your team answers all of the following questions correctly. Good luck!"
-        questionsInstructionStep.iconImage = UIImage(systemName: "exclamationmark.square")
-        questionsInstructionStep.isOptional = false
-        return questionsInstructionStep
+        let step = ORKInstructionStep(identifier: "QuestionsInstruction")
+        step.title = "Quiz"
+        step.detailText = "You can escape this room if your team answers all of the following questions correctly. Good luck!"
+        step.iconImage = UIImage(systemName: "exclamationmark.square")
+        return step
     }()
     
     private let waitStep: ORKWaitStep = {
@@ -59,20 +59,22 @@ class GameViewController: ORKTaskViewController {
         step.detailText = "Please wait for other players to finish."
         return step
     }()
-
-    /// Create an `ORKOrderedTask` from the a questionnaire.
+    
+    /// Create an `ORKOrderedTask` from the a game.
     ///
-    /// - Parameter questionnaire: A `Questionnaire`, which is an array of questions.
+    /// - Parameters:
+    ///   - game: A `GameOfGroup` that contains a series of room content.
+    ///   - currentRoom: The current room (sub-level) of the current game.
     /// - Returns: An `ORKOrderedTask` surveyTask.
-    private func createSurveyTask(from questionnaire: Questionnaire) -> ORKNavigableOrderedTask {
+    private func createSurveyTask(from game: GameOfGroup, currentRoom: Int) -> ORKNavigableOrderedTask {
         var steps = [ORKStep]()
         
-        // Welcome instruction step.
-        steps.append(welcomeStep)
-        
         // Resource reading page.
-        let webStep = ORKWebViewStep(identifier: "Resource", url: game.resourceURL)
+        let webStep = ORKWebViewStep(identifier: "Resource", url: game.resourceURLs[currentRoom])
         steps.append(webStep)
+        
+        // Chatroom instruction step.
+        steps.append(chatroomInstructionStep)
         
         // Chatroom step.
         steps.append(chatroomCountdownStep)
@@ -80,7 +82,7 @@ class GameViewController: ORKTaskViewController {
         // Questions instructions step.
         steps.append(questionsInstructionStep)
         
-        for question in questionnaire {
+        for question in game.questionnaires[currentRoom] {
             switch question.questionType {
             case .instruction:
                 steps.append(QuestionStepsModel.instructionStep(question: question as! InstructionQuestion))
@@ -95,7 +97,6 @@ class GameViewController: ORKTaskViewController {
             case .scale:
                 steps.append(QuestionStepsModel.scaleStep(question: question as! ScaleQuestion))
             case .unknown:
-                print("debug info: i've no idea what is this. unidentified type")
                 continue
             }
         }
@@ -105,8 +106,8 @@ class GameViewController: ORKTaskViewController {
         
         // Completion instruction.
         let completionStep = ORKOrderedTask.makeCompletionStep()
-        completionStep.title = "Game complete"
-        completionStep.text = "Your answers will be logged in game history."
+        completionStep.title = "Room complete"
+        completionStep.text = "Congratulations on finishing room \(currentRoom)! 🎉\nKeep going!"
         steps.append(completionStep)
         let task = ORKNavigableOrderedTask(identifier: "surveyTask", steps: steps)
         return task
