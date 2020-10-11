@@ -23,11 +23,11 @@ class CategoryCollectionViewController: UICollectionViewController {
         // Set collection view delegates.
         collectionView.delegate = self
         collectionView.dataSource = GameStore.shared
-        // Every time enter a category page, report the progress to GameCenter.
-        if GameCenterHelper.isAuthenticated {
-            let percentComplete = GameStore.shared.percentComplete(for: category)
-            GameCenterHelper.shared.submitFinishedAchievement(for: category, progress: percentComplete)
-        }
+        // FIXME: Every time enter a category page, report the progress to GameCenter.
+//        if GameCenterHelper.isAuthenticated {
+//            let percentComplete = GameStore.shared.percentComplete(for: category)
+//            GameCenterHelper.shared.submitFinishedAchievement(for: category, progress: percentComplete)
+//        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -85,15 +85,7 @@ extension CategoryCollectionViewController {
             return controller
         }
         
-        return UIContextMenuConfiguration(identifier: identifier, previewProvider: previewControllerProvider) { _ in
-            let previewAction = UIAction(title: "Mark as Played", image: UIImage(systemName: "checkmark.square")) { _ in
-                self.presentAlert(title: "More to add here", message: "Can add a mark as played or favorite feature.")
-            }
-            let shareAction = UIAction(title: "Share", image: UIImage(systemName: "square.and.arrow.up")) { _ in
-                self.presentAlert(title: "More to add here", message: "\(game.gameName) selected. Can add a share game with friend feature.")
-            }
-            return UIMenu(title: "", image: nil, children: [previewAction, shareAction])
-        }
+        return UIContextMenuConfiguration(identifier: identifier, previewProvider: previewControllerProvider)
     }
     
     override func collectionView(_ collectionView: UICollectionView, willPerformPreviewActionForMenuWith configuration: UIContextMenuConfiguration, animator: UIContextMenuInteractionCommitAnimating) {
