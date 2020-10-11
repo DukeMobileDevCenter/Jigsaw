@@ -15,7 +15,7 @@ enum GameCenterConstants {
         case .economy:
             return "edu.duke.mobilecenter.JigsawBeta.economyFinished"
         case .justice, .immigration, .environment, .health, .international:
-            // temporary disable these categories as no available achievements yet.
+            // FIXME: temporary disable these categories as no available achievements yet.
             return nil
         case .random:
             return nil
