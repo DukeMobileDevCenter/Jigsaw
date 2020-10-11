@@ -179,8 +179,15 @@ extension GameStore: UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "GameCollectionCell", for: indexPath) as! GameCollectionCell
         // Find game.
         let game = getGames(for: selectedCategory)[indexPath.item]
-        
-        if game.isEnabled {
+        if game.isPlayed {
+            cell.nameLabel.text = "\(game.gameName) room \(game.level)"
+            // Show a 🎉 emoji when the game is played.
+            cell.iconImageView.image = "🎉".toEmojiImage()
+            cell.iconBackgroundView.isHidden = false
+            // Lazy load background image.
+            cell.backgroundImageView.pin_updateWithProgress = true
+            cell.backgroundImageView.pin_setImage(from: game.backgroundImageURL)
+        } else if game.isEnabled {
             cell.nameLabel.text = "\(game.gameName) room \(game.level)"
             // Do not show the icon when the game is enabled.
             cell.iconImageView.isHidden = true

@@ -76,6 +76,7 @@
 		00D0862724CD2D9A00FB7A20 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00D0862624CD2D9A00FB7A20 /* GameViewController.swift */; };
 		00D9F5132506DDC900898DFA /* PreviewDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00D9F5122506DDC900898DFA /* PreviewDetailViewController.swift */; };
 		00D9F5162506DEDF00898DFA /* PreviewDetailViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 00D9F5152506DEDF00898DFA /* PreviewDetailViewController.storyboard */; };
+		00E6A86E2533C828000D54B3 /* String+toEmojiImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E6A86D2533C828000D54B3 /* String+toEmojiImage.swift */; };
 		00F029D4251FF25700CB2A15 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F029D3251FF25700CB2A15 /* SignInViewController.swift */; };
 		00F029D9251FF34900CB2A15 /* ResultStatsViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 00F029D8251FF34900CB2A15 /* ResultStatsViewController.storyboard */; };
 		00F2197C24CCF99800B72858 /* MetricsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F2197B24CCF99800B72858 /* MetricsViewController.swift */; };
@@ -197,6 +198,7 @@
 		00D0862624CD2D9A00FB7A20 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		00D9F5122506DDC900898DFA /* PreviewDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewDetailViewController.swift; sourceTree = "<group>"; };
 		00D9F5152506DEDF00898DFA /* PreviewDetailViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PreviewDetailViewController.storyboard; sourceTree = "<group>"; };
+		00E6A86D2533C828000D54B3 /* String+toEmojiImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+toEmojiImage.swift"; sourceTree = "<group>"; };
 		00F029D3251FF25700CB2A15 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		00F029D8251FF34900CB2A15 /* ResultStatsViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ResultStatsViewController.storyboard; sourceTree = "<group>"; };
 		00F2197B24CCF99800B72858 /* MetricsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetricsViewController.swift; sourceTree = "<group>"; };
@@ -443,6 +445,7 @@
 				00BA555A24DA5D2A006A207E /* UICollectionView.swift */,
 				00B0A68024E3DB7300887701 /* String+sha256.swift */,
 				004A4B0C24FDB55A000FA2C8 /* FormViewController+insetGrouped.swift */,
+				00E6A86D2533C828000D54B3 /* String+toEmojiImage.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -786,6 +789,7 @@
 				003CD27C250EEC0D00BD082E /* AgeGroup.swift in Sources */,
 				000D809D24ECEDBA0070041D /* EducationLevel.swift in Sources */,
 				0070DFEA24B0060400E71F46 /* AppDelegate.swift in Sources */,
+				00E6A86E2533C828000D54B3 /* String+toEmojiImage.swift in Sources */,
 				00F6301D24EE2E0000BCAD11 /* ResultStatsViewController.swift in Sources */,
 				00CF5DC524F4DDA500B501BB /* ScaleQuestion.swift in Sources */,
 				00CDFF1624B44F4C009C789D /* QuestionStepsModel.swift in Sources */,
