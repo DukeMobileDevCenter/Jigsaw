@@ -34,7 +34,6 @@ class ChatViewController: MessagesViewController {
     }
     
     private var messagesReference: CollectionReference?
-    private let storage = Storage.storage().reference()
     
     private var messages = [Message]()
     private var messageListener: ListenerRegistration?
@@ -225,7 +224,7 @@ class ChatViewController: MessagesViewController {
         metadata.contentType = "image/jpeg"
         
         let imageName = [UUID().uuidString, String(Date().timeIntervalSince1970)].joined()
-        let imageRef = storage.child(channelID).child(imageName)
+        let imageRef = FirebaseConstants.storage.reference().child(channelID).child(imageName)
         imageRef.putData(data, metadata: metadata) { metadata, _ in
             guard metadata != nil else {
                 completion(nil)
