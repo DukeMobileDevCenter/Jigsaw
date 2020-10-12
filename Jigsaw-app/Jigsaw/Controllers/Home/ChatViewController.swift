@@ -286,16 +286,12 @@ extension ChatViewController: MessagesLayoutDelegate {
 // MARK: - MessageCellDelegate
 
 extension ChatViewController: MessageCellDelegate {
-    func didTapAvatar(in cell: MessageCollectionViewCell) {
-        if let avatarView = (cell as? MessageContentCell)?.avatarView {
-            
-        }
-    }
-    
+    /// Dismiss the keyboard when tapping on the background.
     func didTapBackground(in cell: MessageCollectionViewCell) {
         messageInputBar.inputTextView.resignFirstResponder()
     }
     
+    /// Preview the image with Argume when tapping an image.
     func didTapImage(in cell: MessageCollectionViewCell) {
         let message = messageForItem(at: messagesCollectionView.indexPath(for: cell)!, in: messagesCollectionView)
         switch message.kind {
