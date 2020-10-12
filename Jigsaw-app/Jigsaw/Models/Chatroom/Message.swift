@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Firebase
 import FirebaseAuth
 import FirebaseFirestore
 import MessageKit
@@ -18,12 +17,14 @@ struct Message: MessageType {
     let sentDate: Date
     let senderJigsawValue: Double
     
-    var kind: MessageKind
+    let downloadURL: URL?
+    
+    let kind: MessageKind
+    private let user: ChatUser
+    
     var sender: SenderType {
         return user
     }
-    
-    var user: ChatUser
     
     var data: MessageKind {
         if let downloadURL = downloadURL {
@@ -37,14 +38,38 @@ struct Message: MessageType {
         return id ?? UUID().uuidString
     }
     
-    var downloadURL: URL?
-    
     init(user: User, content: String) {
         self.user = ChatUser(senderId: user.uid, displayName: Profiles.displayName, jigsawValue: Profiles.jigsawValue)
         self.content = content
         self.sentDate = Date()
         self.id = nil
         self.kind = .text(content)
+        self.downloadURL = nil
+        self.senderJigsawValue = Profiles.jigsawValue
+    }
+    
+    /// An initializer to replace a text message's content with a new string.
+    ///
+    /// - Parameters:
+    ///   - message: The original message.
+    ///   - content: The new content string to replace the old one.
+    init(message: Message, content: String) {
+        self.user = message.user
+        self.content = content
+        self.sentDate = message.sentDate
+        self.id = message.id
+        self.kind = message.kind
+        self.downloadURL = message.downloadURL
+        self.senderJigsawValue = message.senderJigsawValue
+    }
+    
+    init(user: User, controlMetaMessage: ControlMetaMessage) {
+        self.user = ChatUser(senderId: user.uid, displayName: Profiles.displayName, jigsawValue: Profiles.jigsawValue)
+        self.content = controlMetaMessage.rawValue
+        self.sentDate = Date()
+        self.id = nil
+        self.kind = .text(controlMetaMessage.rawValue)
+        self.downloadURL = nil
         self.senderJigsawValue = Profiles.jigsawValue
     }
     
@@ -54,27 +79,28 @@ struct Message: MessageType {
         self.sentDate = Date()
         self.id = nil
         self.kind = .photo(ImageMediaItem(url: imageURL, image: nil))
+        self.downloadURL = imageURL
         self.senderJigsawValue = Profiles.jigsawValue
     }
     
     init?(document: QueryDocumentSnapshot) {
-        let data = document.data()
+        let docData = document.data()
         id = document.documentID
         
-        guard let docSenderID = data["senderID"] as? String,
-            let docSenderName = data["senderName"] as? String,
-            let jigsawValue = data["senderJigsawValue"] as? Double,
-            let docSentDate = data["created"] as? Timestamp else { return nil }
+        guard let docSenderID = docData["senderID"] as? String,
+            let docSenderName = docData["senderName"] as? String,
+            let jigsawValue = docData["senderJigsawValue"] as? Double,
+            let docSentDate = docData["created"] as? Timestamp else { return nil }
         
         self.sentDate = docSentDate.dateValue()
         self.user = ChatUser(senderId: docSenderID, displayName: docSenderName, jigsawValue: jigsawValue)
         self.senderJigsawValue = jigsawValue
         
-        if let text = data["content"] as? String {
-            self.content = text
+        if let text = docData["content"] as? String {
             downloadURL = nil
+            self.content = text
             self.kind = .text(text)
-        } else if let urlString = data["url"] as? String, let url = URL(string: urlString) {
+        } else if let urlString = docData["url"] as? String, let url = URL(string: urlString) {
             downloadURL = url
             self.content = ""
             self.kind = .photo(ImageMediaItem(url: url, image: nil))
@@ -114,15 +140,30 @@ extension Message: Comparable {
 }
 
 private struct ImageMediaItem: MediaItem {
-    var url: URL?
-    var image: UIImage?
-    var placeholderImage: UIImage
-    var size: CGSize
+    let url: URL?
+    let image: UIImage?
+    let size: CGSize
+    let placeholderImage: UIImage
 
     init(url: URL, image: UIImage?) {
         self.url = url
         self.image = image
         self.size = CGSize(width: 240, height: 160)
         self.placeholderImage = UIImage(named: "placeholder")!
+    }
+}
+
+/// A enum to leverage text message to send metadata info, such as user joined or left the chatroom.
+enum ControlMetaMessage: String {
+    case join = "****join****"
+    case leave = "****leave****"
+    
+    var label: String {
+        switch self {
+        case .join:
+            return "joined"
+        case .leave:
+            return "left"
+        }
     }
 }
