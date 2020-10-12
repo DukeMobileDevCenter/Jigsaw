@@ -21,24 +21,28 @@ import PINRemoteImage
 import Agrume
 
 class ChatViewController: MessagesViewController {
+    // MARK: Properties
+    
+    /// An array of chatroom users, set by the parent view controller.
     var chatroomUserIDs = [String]()
     
     private var isSendingPhoto = false {
         didSet {
             DispatchQueue.main.async {
-                self.messageInputBar.leftStackViewItems.forEach { item in
-                    if let inputBarButtonItem = item as? InputBarButtonItem {
-                        inputBarButtonItem.isEnabled = !self.isSendingPhoto
-                    }
-                }
+                // Disable user interaction when sending photo.
+                self.messageInputBar.isUserInteractionEnabled = !self.isSendingPhoto
+                // Set the bar to semi-transparent when sending photo.
+                self.messageInputBar.alpha = !self.isSendingPhoto ? 1 : 0.5
             }
         }
     }
-    
+    /// A reference to the chatroom messages collection.
     private var messagesReference: CollectionReference?
+    /// A listener to the messages collection.
     private var messageListener: ListenerRegistration?
-    
+    /// The current user in the chatroom.
     private let user: User
+    /// The current chatroom struct.
     private let chatroom: Chatroom
     private var messages = [Message]()
     
@@ -48,6 +52,8 @@ class ChatViewController: MessagesViewController {
         formatter.unitsStyle = .abbreviated
         return formatter
     }()
+    
+    // MARK: Initializers
     
     deinit {
         messageListener?.remove()
@@ -65,10 +71,20 @@ class ChatViewController: MessagesViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: UIViewController
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         // Clear the pasteboard to avoid cheating.
         UIPasteboard.general.string = ""
+        // Add a join message to the chatroom.
+        sendControlMessage(type: .join)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        // Send a left message when leaving the chatroom.
+        sendControlMessage(type: .leave)
     }
     
     override func viewDidLoad() {
@@ -82,18 +98,13 @@ class ChatViewController: MessagesViewController {
         messagesReference = FirebaseConstants.database.collection(["Chatrooms", id, "messages"].joined(separator: "/"))
         
         messageListener = messagesReference?.addSnapshotListener { [weak self] querySnapshot, error in
-            guard let snapshot = querySnapshot else {
-                print("Error listening for channel updates: \(error?.localizedDescription ?? "No error")")
-                return
-            }
+            guard let snapshot = querySnapshot else { return }
             snapshot.documentChanges.forEach { change in
                 self?.handleDocumentChange(change)
             }
         }
         
         maintainPositionOnKeyboardFrameChanged = true
-        //        messageInputBar.inputTextView.tintColor = .accentColor
-        //        messageInputBar.sendButton.setTitleColor(.accentColor, for: .normal)
         messageInputBar.sendButton.setTitle("", for: .normal)
         messageInputBar.sendButton.setImage(UIImage(systemName: "paperplane"), for: .normal)
         messageInputBar.delegate = self
@@ -117,6 +128,20 @@ class ChatViewController: MessagesViewController {
         messageInputBar.setStackViewItems([cameraItem], forStack: .left, animated: false)
     }
     
+    // MARK: - Actions
+    
+    @objc
+    private func cameraButtonPressed(_ sender: InputBarButtonItem) {
+        let picker = UIImagePickerController()
+        picker.delegate = self
+        picker.sourceType = .photoLibrary
+        present(picker, animated: true, completion: nil)
+    }
+}
+
+// MARK: - Helpers
+
+extension ChatViewController {
     private func getUserPiece(uid: String) -> JigsawPiece {
         let piece: JigsawPiece
         if let currentUserIndex = chatroomUserIDs.firstIndex(of: uid) {
@@ -127,26 +152,15 @@ class ChatViewController: MessagesViewController {
         return piece
     }
     
-    // MARK: - Actions
-    
-    @objc
-    private func cameraButtonPressed(_ sender: InputBarButtonItem) {
-        let picker = UIImagePickerController()
-        picker.delegate = self
-        picker.sourceType = .photoLibrary
-        present(picker, animated: true, completion: nil)
-    }
-    
-    // MARK: - Helpers
-    
     private func save(_ message: Message) {
         messagesReference?.addDocument(data: message.representation) { [weak self] error in
+            guard let self = self else { return }
             if let error = error {
-                self?.presentAlert(error: error)
+                self.presentAlert(error: error)
                 return
             }
-            self?.messagesCollectionView.scrollToBottom()
-            self?.messageInputBar.sendButton.stopAnimating()
+            self.messagesCollectionView.scrollToBottom()
+            self.messageInputBar.sendButton.stopAnimating()
         }
     }
     
@@ -232,11 +246,11 @@ class ChatViewController: MessagesViewController {
 
 extension ChatViewController: MessagesDisplayDelegate {
     func backgroundColor(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> UIColor {
-        return isFromCurrentSender(message: message) ? messagesCollectionView.tintColor : .systemGray3
+        isFromCurrentSender(message: message) ? messagesCollectionView.tintColor : .systemGray3
     }
     
     func shouldDisplayHeader(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> Bool {
-        return false
+        false
     }
     
     func messageStyle(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> MessageStyle {
@@ -265,7 +279,7 @@ extension ChatViewController: MessagesDisplayDelegate {
 
 extension ChatViewController: MessagesLayoutDelegate {
     func footerViewSize(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> CGSize {
-        return CGSize(width: 0, height: 8)
+        CGSize(width: 0, height: 8)
     }
 }
 
@@ -356,19 +370,18 @@ extension ChatViewController: MessagesDataSource {
     }
     
     func cellTopLabelHeight(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> CGFloat {
-        let height = UIFont.boldSystemFont(ofSize: 10).capHeight * 2
         // Display control metadata.
         switch message.kind {
         case .text(let controlMetaMessage):
             if ControlMetaMessage(rawValue: controlMetaMessage) != nil {
-                return height
+                return UIFont.systemFont(ofSize: 10).capHeight * 2
             }
         default:
             break
         }
         // Display send date.
         if indexPath.section % 10 == 0 {
-            return height
+            return UIFont.boldSystemFont(ofSize: 10).capHeight * 2
         }
         // Do not display top label.
         return 0
