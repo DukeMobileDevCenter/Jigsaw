@@ -286,9 +286,12 @@ extension ChatViewController: MessagesLayoutDelegate {
 // MARK: - MessageCellDelegate
 
 extension ChatViewController: MessageCellDelegate {
-//    func didTapAvatar(in cell: MessageCollectionViewCell) {
-//        print("Avatar tapped")
-//    }
+    func didTapAvatar(in cell: MessageCollectionViewCell) {
+        if let avatarView = (cell as? MessageContentCell)?.avatarView {
+            
+        }
+    }
+    
     func didTapBackground(in cell: MessageCollectionViewCell) {
         messageInputBar.inputTextView.resignFirstResponder()
     }
