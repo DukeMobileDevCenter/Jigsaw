@@ -46,20 +46,12 @@ class MatchingViewController: UIViewController {
     /// A collection reference to the waiting queue.
     private var queuesRef: CollectionReference!
     
-    // MARK: Properties that require reset
+    // Properties that require reset
     
     private var gameGroupListener: ListenerRegistration?
     private var queuesListener: ListenerRegistration?
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        queuesRef = FirebaseConstants.database.collection(["Queues", selectedGame.gameName, queueType.rawValue].joined(separator: "/"))
-        // Listen to the waiting queue updates when in the matching page.
-        queuesListener = queuesRef.addSnapshotListener { [weak self] querySnapshot, _ in
-            guard let snapshot = querySnapshot else { return }
-            self?.playerCountLabel.text = "\(snapshot.documents.count)"
-        }
-    }
+    // MARK: Methods to handle player matching
     
     private func setGameGroupListener() {
         // Listen to game group changes when the player joined a waiting queue.
@@ -69,13 +61,6 @@ class MatchingViewController: UIViewController {
                 self?.handleDocumentChange(change)
             }
         }
-    }
-    
-    @IBAction func joinGameButtonTapped(_ sender: UIButton) {
-        addPlayerToPlayersQueue(queueReference: queuesRef)
-        // Only start to listen to game group updates after the player joins a game/room.
-        setGameGroupListener()
-        sender.isEnabled = false
     }
     
     private func addPlayerToPlayersQueue(queueReference: CollectionReference) {
@@ -130,11 +115,32 @@ class MatchingViewController: UIViewController {
         }
     }
     
+    // MARK: Actions
+    
+    @IBAction func joinGameButtonTapped(_ sender: UIButton) {
+        addPlayerToPlayersQueue(queueReference: queuesRef)
+        // Only start to listen to game group updates after the player joins a game/room.
+        setGameGroupListener()
+        sender.isEnabled = false
+    }
+    
+    // MARK: UIViewController
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showProgress" {
             let destinationVC = segue.destination as! RoomProgressViewController
             destinationVC.gameGroup = gameGroup
             destinationVC.gameOfMyGroup = gameOfMyGroup
+        }
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        queuesRef = FirebaseConstants.database.collection(["Queues", selectedGame.gameName, queueType.rawValue].joined(separator: "/"))
+        // Listen to the waiting queue updates when in the matching page.
+        queuesListener = queuesRef.addSnapshotListener { [weak self] querySnapshot, _ in
+            guard let snapshot = querySnapshot else { return }
+            self?.playerCountLabel.text = "\(snapshot.documents.count)"
         }
     }
     
