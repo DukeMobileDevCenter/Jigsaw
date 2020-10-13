@@ -10,8 +10,8 @@ import Foundation
 import ResearchKit
 
 struct GameResult {
-    let taskResult: ORKTaskResult
-    let questionnaire: Questionnaire
+    let taskResults: [ORKTaskResult]
+    let questionnaires: [Questionnaire]
     
     var resultPairs: KeyValuePairs<AnswerCategory, Int> {
         // If a question is skipped, it has a result but the answer is nil.
@@ -19,28 +19,33 @@ struct GameResult {
         var correct = 0
         var incorrect = 0
         var unknown = 0
-        
-        for question in questionnaire {
-            if question.questionType == .instruction {
-                // Instruction result is always empty.
-                continue
-            }
-            guard let result = taskResult.stepResult(forStepIdentifier: question.title)?.results?.first else {
-                continue
-            }
-            // Judge if the answer is correct from the correct answer in questionnaire
-            // and the player result from game.
-            let outcome = judgeAnswer(question: question, result: result)
-            // Sum up the stats.
-            switch outcome {
-            case .correct:
-                correct += 1
-            case .skipped:
-                skipped += 1
-            case .incorrect:
-                incorrect += 1
-            case .unknown:
-                unknown += 1
+        // Calculate the result based on how many rooms are played.
+        // For example, a player reached room 3 but failed there, then there are 3 task results,
+        // so the result pairs are calculated based on the first 3 questionnaires in the game.
+        let roomsCount = taskResults.count
+        for (taskResult, questionnaire) in zip(taskResults, questionnaires[..<roomsCount]) {
+            for question in questionnaire {
+                if question.questionType == .instruction {
+                    // Instruction result is always empty.
+                    continue
+                }
+                guard let result = taskResult.stepResult(forStepIdentifier: question.title)?.results?.first else {
+                    continue
+                }
+                // Judge if the answer is correct from the correct answer in questionnaire
+                // and the player result from game.
+                let outcome = judgeAnswer(question: question, result: result)
+                // Sum up the stats.
+                switch outcome {
+                case .correct:
+                    correct += 1
+                case .skipped:
+                    skipped += 1
+                case .incorrect:
+                    incorrect += 1
+                case .unknown:
+                    unknown += 1
+                }
             }
         }
         return [.correct: correct, .skipped: skipped, .incorrect: incorrect, .unknown: unknown]

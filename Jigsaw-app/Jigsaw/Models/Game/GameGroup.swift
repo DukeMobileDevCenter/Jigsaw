@@ -37,12 +37,12 @@ struct GameGroup: Codable {
         group1.count + group2.count
     }
     
-    func whichGroupContains(userID: String) -> Int {
+    func whichGroupContains(userID: String) -> Int? {
         if group1.contains(userID) {
             return 1
         } else if group2.contains(userID) {
             return 2
         }
-        return 0
+        return nil
     }
 }

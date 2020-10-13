@@ -49,7 +49,7 @@ class HomeCollectionViewController: UICollectionViewController {
         chatroomsRef.getDocument { [weak self] document, error in
             guard let self = self else { return }
             if let document = document, let chatroom = Chatroom(document: document) {
-                let chatroomVC = ChatViewController(user: FirebaseConstants.auth.currentUser!, chatroom: chatroom, timeLeft: nil)
+                let chatroomVC = ChatViewController(user: FirebaseConstants.auth.currentUser!, chatroom: chatroom)
                 // Don't show bottom tab bar.
                 chatroomVC.hidesBottomBarWhenPushed = true
                 self.show(chatroomVC, sender: sender)

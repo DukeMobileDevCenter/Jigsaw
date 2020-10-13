@@ -126,7 +126,7 @@
             </objects>
             <point key="canvasLocation" x="1571" y="-552"/>
         </scene>
-        <!--Matching View Controller-->
+        <!--Matching-->
         <scene sceneID="HvH-yh-Qoo">
             <objects>
                 <viewController hidesBottomBarWhenPushed="YES" id="qIk-Vr-9mo" customClass="MatchingViewController" customModule="Jigsaw" customModuleProvider="target" sceneMemberID="viewController">
@@ -203,17 +203,46 @@
                         <viewLayoutGuide key="safeArea" id="1rd-Jw-YuJ"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
-                    <navigationItem key="navigationItem" id="pOI-3B-ZJ7"/>
+                    <navigationItem key="navigationItem" title="Matching" id="pOI-3B-ZJ7"/>
                     <connections>
                         <outlet property="detailTextLabel" destination="uVo-kd-Rpu" id="I9M-Zp-sKk"/>
                         <outlet property="gameNameLabel" destination="SrW-5i-19I" id="Sm4-Da-u2i"/>
                         <outlet property="joinGameButton" destination="82k-nw-Y9U" id="elT-dz-n51"/>
                         <outlet property="playerCountLabel" destination="HnM-In-fDm" id="anW-g6-z0I"/>
+                        <segue destination="3YO-EV-HVF" kind="show" identifier="showProgress" id="WzB-cC-e1D"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wGu-n6-NeV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3446" y="-169"/>
+        </scene>
+        <!--Progress-->
+        <scene sceneID="lLC-EH-0bx">
+            <objects>
+                <viewController hidesBottomBarWhenPushed="YES" id="3YO-EV-HVF" customClass="RoomProgressViewController" customModule="Jigsaw" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="viT-hV-WEb">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0jn-tq-vfH">
+                                <rect key="frame" x="186" y="755" width="42" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="Zdd-gh-Lz6"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Progress" id="ESA-5H-qDc"/>
+                    <connections>
+                        <outlet property="roomLevelLabel" destination="0jn-tq-vfH" id="s4W-Ss-nMT"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dF0-Gs-Eqs" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4380" y="-169"/>
         </scene>
         <!--Metrics-->
         <scene sceneID="RvK-v8-KTo">
@@ -341,7 +370,7 @@
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jkP-gE-iqY" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-329" y="834"/>
+            <point key="canvasLocation" x="-294" y="834"/>
         </scene>
         <!--Games-->
         <scene sceneID="Z2A-Se-NWt">

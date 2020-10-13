@@ -45,6 +45,7 @@
 		0071E920252003880025702E /* AppInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0071E91F252003880025702E /* AppInfo.swift */; };
 		0071E9232520161F0025702E /* FirebaseHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0071E9222520161F0025702E /* FirebaseHelper.swift */; };
 		0078315224DF557800B35A98 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0078315124DF557800B35A98 /* Player.swift */; };
+		007FC9542536202B00D8D9A1 /* RoomProgressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007FC9532536202B00D8D9A1 /* RoomProgressViewController.swift */; };
 		00A06D8D24E8A9B400030649 /* GameGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A06D8C24E8A9B400030649 /* GameGroup.swift */; };
 		00A88312252924CF00186BED /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00A88311252924CF00186BED /* GameKit.framework */; };
 		00A8831525292D4E00186BED /* GameCenterHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A8831425292D4E00186BED /* GameCenterHelper.swift */; };
@@ -166,6 +167,7 @@
 		0071E921252005780025702E /* Jigsaw.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Jigsaw.entitlements; sourceTree = "<group>"; };
 		0071E9222520161F0025702E /* FirebaseHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseHelper.swift; sourceTree = "<group>"; };
 		0078315124DF557800B35A98 /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
+		007FC9532536202B00D8D9A1 /* RoomProgressViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomProgressViewController.swift; sourceTree = "<group>"; };
 		009D067B2511F15A002E488F /* ResearchKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ResearchKit.xcodeproj; path = "ResearchKit-68f9d29/ResearchKit.xcodeproj"; sourceTree = "<group>"; };
 		00A06D8C24E8A9B400030649 /* GameGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameGroup.swift; sourceTree = "<group>"; };
 		00A88311252924CF00186BED /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
@@ -408,8 +410,9 @@
 				0070DFED24B0060400E71F46 /* HomeCollectionViewController.swift */,
 				0000321025130A85004681AF /* CategoryCollectionViewController.swift */,
 				0020D56624E263C600DB20E1 /* MatchingViewController.swift */,
-				005856BD24D923630010BE55 /* ChatViewController.swift */,
+				007FC9532536202B00D8D9A1 /* RoomProgressViewController.swift */,
 				00D0862624CD2D9A00FB7A20 /* GameViewController.swift */,
+				005856BD24D923630010BE55 /* ChatViewController.swift */,
 				00D9F5122506DDC900898DFA /* PreviewDetailViewController.swift */,
 			);
 			path = Home;
@@ -773,6 +776,7 @@
 				004A4B0D24FDB55A000FA2C8 /* FormViewController+insetGrouped.swift in Sources */,
 				0047630624ED1154007767A5 /* GameCategory.swift in Sources */,
 				00BA555D24DA7CF7006A207E /* Gender.swift in Sources */,
+				007FC9542536202B00D8D9A1 /* RoomProgressViewController.swift in Sources */,
 				00B2AB7024DA5B3100607346 /* UIColor.swift in Sources */,
 				00CF5DC924F4DE9900B501BB /* InstructionQuestion.swift in Sources */,
 				000D80A024ECEE990070041D /* Ethnicity.swift in Sources */,
