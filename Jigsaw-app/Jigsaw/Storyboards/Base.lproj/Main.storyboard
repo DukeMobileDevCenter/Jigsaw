@@ -97,7 +97,7 @@
                         </connections>
                     </collectionView>
                     <navigationItem key="navigationItem" title="Games - 2P" id="UZt-g5-Jhh">
-                        <barButtonItem key="leftBarButtonItem" title="Test" id="vsv-Qs-kfx">
+                        <barButtonItem key="leftBarButtonItem" enabled="NO" title="Test" id="vsv-Qs-kfx">
                             <connections>
                                 <action selector="testBarButtonTapped:" destination="4a0-lW-Yyi" id="rgv-xf-AHo"/>
                             </connections>
@@ -140,31 +140,31 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bb6-1P-OcK">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="369.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="372"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="28" translatesAutoresizingMaskIntoConstraints="NO" id="1I7-Qy-U85">
-                                                <rect key="frame" x="100.5" y="0.0" width="213" height="277"/>
+                                                <rect key="frame" x="92" y="0.0" width="230.5" height="279.5"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HnM-In-fDm">
-                                                        <rect key="frame" x="78.5" y="0.0" width="56" height="116.5"/>
+                                                        <rect key="frame" x="87" y="0.0" width="56" height="116.5"/>
                                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="100"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Players are ready to play" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9rw-kM-ciH">
-                                                        <rect key="frame" x="0.0" y="144.5" width="213" height="24"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                        <rect key="frame" x="0.0" y="144.5" width="230.5" height="26.5"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="game name shown here." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SrW-5i-19I">
-                                                        <rect key="frame" x="13.5" y="196.5" width="186" height="20.5"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                        <rect key="frame" x="18.5" y="199" width="193.5" height="20.5"/>
+                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="82k-nw-Y9U">
-                                                        <rect key="frame" x="68" y="245" width="77" height="32"/>
+                                                        <rect key="frame" x="76.5" y="247.5" width="77" height="32"/>
                                                         <fontDescription key="fontDescription" style="UICTFontTextStyleCallout"/>
                                                         <state key="normal" title="I'm Ready!"/>
                                                         <connections>
@@ -174,7 +174,7 @@
                                                 </subviews>
                                             </stackView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Game detail text is shown here." lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uVo-kd-Rpu">
-                                                <rect key="frame" x="20" y="313" width="374" height="20.5"/>
+                                                <rect key="frame" x="20" y="315.5" width="374" height="20.5"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -310,6 +310,13 @@
                                                     <action selector="nextRoomButtonTapped:" destination="3YO-EV-HVF" eventType="primaryActionTriggered" id="axs-Zc-gk3"/>
                                                 </connections>
                                             </button>
+                                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="H2e-gw-yxt">
+                                                <rect key="frame" x="0.0" y="556" width="394" height="0.0"/>
+                                                <state key="normal" title="Fill out this survey"/>
+                                                <connections>
+                                                    <action selector="surveyButtonTapped:" destination="3YO-EV-HVF" eventType="primaryActionTriggered" id="z3t-XG-5u4"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                     </stackView>
                                 </subviews>
@@ -339,6 +346,7 @@
                         <outlet property="collectionView" destination="ePA-Ae-Jpk" id="lUc-rG-HdG"/>
                         <outlet property="nextRoomButton" destination="UTC-HK-7Oi" id="HH9-at-kRa"/>
                         <outlet property="roomLevelLabel" destination="0jn-tq-vfH" id="s4W-Ss-nMT"/>
+                        <outlet property="surveyButton" destination="H2e-gw-yxt" id="hcb-ez-BIW"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dF0-Gs-Eqs" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

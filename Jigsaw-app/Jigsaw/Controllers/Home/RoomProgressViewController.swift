@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SafariServices
 import ResearchKit
 import FirebaseFirestore
 import ProgressHUD
@@ -18,6 +19,8 @@ class RoomProgressViewController: UIViewController {
     /// The button to initiate next room. Enabled when room 0 is done.
     @IBOutlet var nextRoomButton: UIButton!
     
+    @IBOutlet var surveyButton: UIButton!
+    
     @IBOutlet var collectionView: UICollectionView! {
         didSet {
             collectionView.dataSource = self
@@ -27,6 +30,11 @@ class RoomProgressViewController: UIViewController {
     
     @IBAction func nextRoomButtonTapped(_ sender: UIButton) {
         presentRoom(room: currentRoom!)
+    }
+    
+    @IBAction func surveyButtonTapped(_ sender: UIButton) {
+        let controller = SFSafariViewController(url: AppConstants.feedbackFormURL)
+        present(controller, animated: true)
     }
     
     @IBOutlet var chartView: PieChartView! {
@@ -246,6 +254,7 @@ class RoomProgressViewController: UIViewController {
             addGameHistory(gameHistory: gameHistory)
             navigationItem.hidesBackButton = false
             nextRoomButton.isHidden = true
+            surveyButton.isHidden = false
         }
     }
     
@@ -360,6 +369,7 @@ extension RoomProgressViewController: ORKTaskViewControllerDelegate {
                 }
             }
             if isMeDropped { cleanUpRemoteAfterGameEnds() }
+            surveyButton.isHidden = false
             navigationItem.hidesBackButton = false
             // Log an unsuccessful game result.
         case .completed:

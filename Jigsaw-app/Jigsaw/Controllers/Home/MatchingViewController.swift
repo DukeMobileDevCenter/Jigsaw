@@ -17,7 +17,7 @@ class MatchingViewController: UIViewController {
     /// The label to show the detail text of a game.
     @IBOutlet var detailTextLabel: UILabel! {
         didSet {
-            let attributedText = try? Down(markdownString: selectedGame.detailText).toAttributedString(.default, stylesheet: stylesheet)
+            let attributedText = try? Down(markdownString: selectedGame.detailText).toAttributedString(.default, stylesheet: AppConstants.simpleStylesheet)
             detailTextLabel.attributedText = attributedText?.labelColorAttributedString
         }
     }
@@ -26,23 +26,13 @@ class MatchingViewController: UIViewController {
     /// The label to show the game name and level.
     @IBOutlet var gameNameLabel: UILabel! {
         didSet {
-            gameNameLabel.text = "\(selectedGame.gameName), level \(selectedGame.level)"
+            gameNameLabel.text = "\(selectedGame.gameName), level \(selectedGame.level). Good luck! 😉"
         }
     }
     /// The button to join the waiting queue.
     @IBOutlet var joinGameButton: UIButton!
     
     // MARK: Properties
-    
-    /// A style sheet for displaying detail instruction text.
-    private let stylesheet =
-    """
-    body { font: -apple-system-body }
-    h1 { font: -apple-system-title1 }
-    h2 { font: -apple-system-title2 }
-    h3 { font: -apple-system-title3 }
-    h4, h5, h6 { font: -apple-system-headline }
-    """
     
     /// The selected game set by the parent view controller.
     var selectedGame: Game!

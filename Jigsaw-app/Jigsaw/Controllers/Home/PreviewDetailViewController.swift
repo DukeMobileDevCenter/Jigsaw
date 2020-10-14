@@ -24,20 +24,11 @@ class PreviewDetailViewController: UIViewController {
         loadPreviewFromStruct(structToPreview!)
     }
     
-    private let stylesheet =
-    """
-    body { font: -apple-system-body }
-    h1 { font: -apple-system-title1 }
-    h2 { font: -apple-system-title2 }
-    h3 { font: -apple-system-title3 }
-    h4, h5, h6 { font: -apple-system-headline }
-    """
-    
     private func loadPreviewFromStruct(_ item: Any) {
         if let game = item as? Game {
             imageView.pin_setImage(from: game.backgroundImageURL)
             titleLabel.text = game.gameName
-            let attributedText = try? Down(markdownString: game.detailText).toAttributedString(.default, stylesheet: stylesheet)
+            let attributedText = try? Down(markdownString: game.detailText).toAttributedString(.default, stylesheet: AppConstants.simpleStylesheet)
             detailLabel.attributedText = attributedText?.labelColorAttributedString
         } else if let category = item as? GameCategory {
             imageView.setImage(category.backgroundImage)

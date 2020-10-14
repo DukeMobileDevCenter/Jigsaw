@@ -8,6 +8,7 @@
 
 import os
 import UIKit
+import SafariServices
 import ResearchKit
 import Eureka
 import ViewRow
@@ -121,6 +122,7 @@ class ProfileViewController: FormViewController {
         return row
     }
     
+    // swiftlint:disable function_body_length
     private func createForm() {
         form
         +++ Section(header: "Profile", footer: uidString)
@@ -169,9 +171,20 @@ class ProfileViewController: FormViewController {
                 self?.present(controller, animated: true)
             }
         }
+        <<< ButtonRow { row in
+            row.title = "Provide Feedback"
+        }
+        .onCellSelection { [weak self] _, _ in
+            DispatchQueue.main.async { [weak self] in
+                let controller = SFSafariViewController(url: AppConstants.feedbackFormURL)
+                self?.present(controller, animated: true)
+            }
+        }
+        
         // Add app info to the end of this page.
         +++ Section("\(AppInfo.appName) app 🧩 Version \(AppInfo.versionNumber) build \(AppInfo.buildNumber)")
     }
+    // swiftlint:enable function_body_length
 }
 
 // MARK: Firebase Auth and account connection

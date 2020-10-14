@@ -81,6 +81,7 @@
 		00D9F5162506DEDF00898DFA /* PreviewDetailViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 00D9F5152506DEDF00898DFA /* PreviewDetailViewController.storyboard */; };
 		00E6A86E2533C828000D54B3 /* String+toEmojiImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E6A86D2533C828000D54B3 /* String+toEmojiImage.swift */; };
 		00E8BA502536D8B100863F7D /* NSAttributedString+DarkMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E8BA4F2536D8B100863F7D /* NSAttributedString+DarkMode.swift */; };
+		00E8BA562536DEF900863F7D /* AppConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E8BA552536DEF900863F7D /* AppConstants.swift */; };
 		00F029D4251FF25700CB2A15 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F029D3251FF25700CB2A15 /* SignInViewController.swift */; };
 		00F2197C24CCF99800B72858 /* MetricsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F2197B24CCF99800B72858 /* MetricsViewController.swift */; };
 		00F2197E24CCF9A200B72858 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F2197D24CCF9A200B72858 /* ProfileViewController.swift */; };
@@ -205,6 +206,7 @@
 		00D9F5152506DEDF00898DFA /* PreviewDetailViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PreviewDetailViewController.storyboard; sourceTree = "<group>"; };
 		00E6A86D2533C828000D54B3 /* String+toEmojiImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+toEmojiImage.swift"; sourceTree = "<group>"; };
 		00E8BA4F2536D8B100863F7D /* NSAttributedString+DarkMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSAttributedString+DarkMode.swift"; sourceTree = "<group>"; };
+		00E8BA552536DEF900863F7D /* AppConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConstants.swift; sourceTree = "<group>"; };
 		00F029D3251FF25700CB2A15 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		00F2197B24CCF99800B72858 /* MetricsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetricsViewController.swift; sourceTree = "<group>"; };
 		00F2197D24CCF9A200B72858 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
@@ -352,7 +354,7 @@
 			isa = PBXGroup;
 			children = (
 				0020D54C24DF95CC00DB20E1 /* Supporting Files */,
-				00CDFF0724B2E90E009C789D /* Javascript */,
+				00CDFF0724B2E90E009C789D /* JavaScript */,
 				005856C724D92D400010BE55 /* Protocols */,
 				00CDFF0624B2E908009C789D /* Views */,
 				00CDFF0524B2E8F0009C789D /* Models */,
@@ -477,11 +479,12 @@
 				005856CC24D92F990010BE55 /* Chatroom */,
 				000D809E24ECEE6A0070041D /* Demographics */,
 				005308F32517DB7F002A429F /* Player */,
-				005308D025168D84002A429F /* FirebaseConstants.swift */,
 				0071E9222520161F0025702E /* FirebaseHelper.swift */,
-				0071E91F252003880025702E /* AppInfo.swift */,
 				00A8831425292D4E00186BED /* GameCenterHelper.swift */,
+				005308D025168D84002A429F /* FirebaseConstants.swift */,
 				00A8832A2529747100186BED /* GameCenterConstants.swift */,
+				0071E91F252003880025702E /* AppInfo.swift */,
+				00E8BA552536DEF900863F7D /* AppConstants.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -496,12 +499,12 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
-		00CDFF0724B2E90E009C789D /* Javascript */ = {
+		00CDFF0724B2E90E009C789D /* JavaScript */ = {
 			isa = PBXGroup;
 			children = (
 				00C89D08253673BB0078E328 /* github-markdown.css */,
 			);
-			path = Javascript;
+			path = JavaScript;
 			sourceTree = "<group>";
 		};
 		00CF5DBD24F4DA8F00B501BB /* YAMLQuestions */ = {
@@ -772,6 +775,7 @@
 				006089B425368EF500430707 /* DoorCollectionCell.swift in Sources */,
 				0047630624ED1154007767A5 /* GameCategory.swift in Sources */,
 				00BA555D24DA7CF7006A207E /* Gender.swift in Sources */,
+				00E8BA562536DEF900863F7D /* AppConstants.swift in Sources */,
 				007FC9542536202B00D8D9A1 /* RoomProgressViewController.swift in Sources */,
 				00B2AB7024DA5B3100607346 /* UIColor.swift in Sources */,
 				00CF5DC924F4DE9900B501BB /* InstructionQuestion.swift in Sources */,

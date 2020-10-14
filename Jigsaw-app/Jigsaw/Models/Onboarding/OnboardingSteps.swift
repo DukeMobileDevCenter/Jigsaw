@@ -45,7 +45,7 @@ enum OnboardingSteps {
             bodyItemStyle: .image
         )
         let retryItem = ORKBodyItem(
-            text: "If all members of your team pass the quiz, then you escape that room and go to the next. But if anyone from your team fails the quiz, then you will all be bumped back into a chat to confer about the questions that were missed, and you will have another chance to pass a different quiz and escape on that try.",
+            text: "If all members of your team pass the quiz, then you escape that room and go to the next. If you do not all pass the quiz, you will have a chance to go back into the chat and talk as a team about the questions that were missed. Then you will have another chance to escape the room by passing a quiz on the same quotations.",
             detailText: nil,
             image: UIImage(systemName: "repeat"),
             learnMoreItem: nil,
