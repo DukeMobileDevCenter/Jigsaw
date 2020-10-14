@@ -150,20 +150,30 @@ class MatchingViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         queuesRef = FirebaseConstants.database.collection(["Queues", selectedGame.gameName, queueType.rawValue].joined(separator: "/"))
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         // Listen to the waiting queue updates when in the matching page.
         queuesListener = queuesRef.addSnapshotListener { [weak self] querySnapshot, _ in
             guard let snapshot = querySnapshot else { return }
             self?.playerCountLabel.text = "\(snapshot.documents.count)"
         }
+        joinGameButton.isEnabled = true
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        // When matching page is not showing anymore:
+        // Remove the waiting queue listener.
+        queuesListener?.remove()
+        // Stop listen to further updates to game groups.
+        gameGroupListener?.remove()
     }
     
     deinit {
         // Remove player from queue when it exits the matching page.
         queuesRef.document(Profiles.userID).delete()
-        // Remove the waiting queue listener when exiting the matching page.
-        queuesListener?.remove()
-        // Stop listen to further updates to game groups.
-        gameGroupListener?.remove()
         print("✅ matching VC deinit")
     }
 }

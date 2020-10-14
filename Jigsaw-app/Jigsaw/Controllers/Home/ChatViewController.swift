@@ -77,13 +77,13 @@ class ChatViewController: MessagesViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         // Clear the pasteboard to avoid cheating.
-        UIPasteboard.general.string = ""
+        UIPasteboard.general.string?.removeAll()
         // Add a join message to the chatroom.
         sendControlMessage(type: .join)
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
         // Send a left message when leaving the chatroom.
         sendControlMessage(type: .leave)
     }
