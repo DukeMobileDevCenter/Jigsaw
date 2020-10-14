@@ -26,15 +26,13 @@ class RoomProgressViewController: UIViewController {
     }
     
     @IBAction func nextRoomButtonTapped(_ sender: UIButton) {
-        presentCurrentRoom()
+        presentRoom(room: currentRoom!)
     }
     
     @IBOutlet var chartView: PieChartView! {
         didSet {
             // Setup the half pie chart view.
             setup(pieChartView: chartView)
-            // Update the chart with an empty result.
-            setChartData(from: [.correct: 0, .skipped: 1, .incorrect: 0])
         }
     }
     
@@ -87,11 +85,10 @@ class RoomProgressViewController: UIViewController {
     
     private var gameGroupListener: ListenerRegistration?
     
-    private func presentCurrentRoom() {
-        gameViewController = GameViewController(game: gameOfMyGroup, currentRoom: currentRoom!)
+    private func presentRoom(room: Int) {
+        gameViewController = GameViewController(game: gameOfMyGroup, currentRoom: room)
         gameViewController.delegate = self
-        // Disallow dismiss by interactive swipe in iOS 13.
-        gameViewController.isModalInPresentation = true
+        gameViewController.modalPresentationStyle = .fullScreen
         present(gameViewController, animated: true)
     }
     
@@ -214,40 +211,38 @@ class RoomProgressViewController: UIViewController {
         loadChatroom { [unowned self] in
             ProgressHUD.dismiss()
             // After the chatroom is loaded, present the first room.
-            self.presentCurrentRoom()
+            self.presentRoom(room: currentRoom!)
         }
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        // Disable the button when the first room is not done yet or the game is dropped.
-        
-        // Update the chart with all the up-to-date rooms results.
-        let allPreviosGameResult = GameResult(taskResults: roomResults, questionnaires: gameOfMyGroup.questionnaires)
-        
-        let gameHistory = GameHistory(
-            gameID: gameOfMyGroup.gameID,
-            playedDate: gameGroup.createdDate,
-            gameCategory: gameOfMyGroup.category,
-            gameName: gameOfMyGroup.gameName,
-            allPlayers: gameGroup.allPlayersUserIDs,
-            gameResult: Dictionary(uniqueKeysWithValues: Array(allPreviosGameResult.resultPairs)),
-            score: allPreviosGameResult.score
-        )
-        
-        setChartData(from: allPreviosGameResult.resultPairs)
+        // Reload doors collection view.
         collectionView.reloadData()
         
-        // The group failed.
-        if currentRoom == nil {
-            // Add game history to a player's histories collection.
-            addGameHistory(gameHistory: gameHistory)
+        let allPreviosGameResult = GameResult(taskResults: roomResults, questionnaires: gameOfMyGroup.questionnaires)
+        
+        if roomResults.isEmpty {
+            // Update the chart with an empty source.
+            setChartData(from: [.correct: 0, .skipped: 1, .incorrect: 0])
+        } else {
+            // Update the chart with all the up-to-date rooms results.
+            setChartData(from: allPreviosGameResult.resultPairs)
         }
         
         // All rooms passed, add the records to player's game history.
         if currentRoom == gameOfMyGroup.questionnaires.count {
             cleanUpRemoteAfterGameEnds()
             // Add game history to a player's histories collection.
+            let gameHistory = GameHistory(
+                gameID: gameOfMyGroup.gameID,
+                playedDate: gameGroup.createdDate,
+                gameCategory: gameOfMyGroup.category,
+                gameName: gameOfMyGroup.gameName,
+                allPlayers: gameGroup.allPlayersUserIDs,
+                gameResult: Dictionary(uniqueKeysWithValues: Array(allPreviosGameResult.resultPairs)),
+                score: allPreviosGameResult.score
+            )
             addGameHistory(gameHistory: gameHistory)
             navigationItem.hidesBackButton = false
             nextRoomButton.isHidden = true
@@ -398,8 +393,12 @@ extension RoomProgressViewController: UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "DoorCollectionCell", for: indexPath) as! DoorCollectionCell
         let room = indexPath.item
         let doorImage: UIImage
-        if (currentRoom ?? 0) >= room {
+        let currentLevel = currentRoom ?? -1
+        if currentLevel > room {
             doorImage = UIImage(named: "door-open")!
+            cell.doorImageView.tintColor = .systemPurple
+        } else if currentLevel == room {
+            doorImage = UIImage(named: "door-locked")!
             cell.doorImageView.tintColor = .systemGreen
         } else {
             doorImage = UIImage(named: "door-locked")!
@@ -408,6 +407,14 @@ extension RoomProgressViewController: UICollectionViewDataSource {
         cell.doorImageView.setImage(doorImage)
         cell.nameLabel.text = "Room \(room + 1)"
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let room = indexPath.item
+        let currentLevel = currentRoom ?? -1
+        if currentLevel == room {
+            presentRoom(room: room)
+        }
     }
 }
 

@@ -80,6 +80,7 @@
 		00D9F5132506DDC900898DFA /* PreviewDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00D9F5122506DDC900898DFA /* PreviewDetailViewController.swift */; };
 		00D9F5162506DEDF00898DFA /* PreviewDetailViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 00D9F5152506DEDF00898DFA /* PreviewDetailViewController.storyboard */; };
 		00E6A86E2533C828000D54B3 /* String+toEmojiImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E6A86D2533C828000D54B3 /* String+toEmojiImage.swift */; };
+		00E8BA502536D8B100863F7D /* NSAttributedString+DarkMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E8BA4F2536D8B100863F7D /* NSAttributedString+DarkMode.swift */; };
 		00F029D4251FF25700CB2A15 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F029D3251FF25700CB2A15 /* SignInViewController.swift */; };
 		00F2197C24CCF99800B72858 /* MetricsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F2197B24CCF99800B72858 /* MetricsViewController.swift */; };
 		00F2197E24CCF9A200B72858 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F2197D24CCF9A200B72858 /* ProfileViewController.swift */; };
@@ -203,6 +204,7 @@
 		00D9F5122506DDC900898DFA /* PreviewDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewDetailViewController.swift; sourceTree = "<group>"; };
 		00D9F5152506DEDF00898DFA /* PreviewDetailViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PreviewDetailViewController.storyboard; sourceTree = "<group>"; };
 		00E6A86D2533C828000D54B3 /* String+toEmojiImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+toEmojiImage.swift"; sourceTree = "<group>"; };
+		00E8BA4F2536D8B100863F7D /* NSAttributedString+DarkMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSAttributedString+DarkMode.swift"; sourceTree = "<group>"; };
 		00F029D3251FF25700CB2A15 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		00F2197B24CCF99800B72858 /* MetricsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetricsViewController.swift; sourceTree = "<group>"; };
 		00F2197D24CCF9A200B72858 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
@@ -448,6 +450,7 @@
 				00B0A68024E3DB7300887701 /* String+sha256.swift */,
 				004A4B0C24FDB55A000FA2C8 /* FormViewController+insetGrouped.swift */,
 				00E6A86D2533C828000D54B3 /* String+toEmojiImage.swift */,
+				00E8BA4F2536D8B100863F7D /* NSAttributedString+DarkMode.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -794,6 +797,7 @@
 				0078315224DF557800B35A98 /* Player.swift in Sources */,
 				0020D54924DF79CB00DB20E1 /* GameStore.swift in Sources */,
 				0071E9232520161F0025702E /* FirebaseHelper.swift in Sources */,
+				00E8BA502536D8B100863F7D /* NSAttributedString+DarkMode.swift in Sources */,
 				00A8832B2529747100186BED /* GameCenterConstants.swift in Sources */,
 				00CDFF1224B44797009C789D /* UIViewController.swift in Sources */,
 				0051950F24E9CDD4008F1CE0 /* QuestionType.swift in Sources */,

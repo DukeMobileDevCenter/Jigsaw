@@ -17,7 +17,8 @@ class MatchingViewController: UIViewController {
     /// The label to show the detail text of a game.
     @IBOutlet var detailTextLabel: UILabel! {
         didSet {
-            detailTextLabel.attributedText = try? Down(markdownString: selectedGame.detailText).toAttributedString(.default, stylesheet: stylesheet)
+            let attributedText = try? Down(markdownString: selectedGame.detailText).toAttributedString(.default, stylesheet: stylesheet)
+            detailTextLabel.attributedText = attributedText?.labelColorAttributedString
         }
     }
     /// The label to show current players count in the waiting queue.
