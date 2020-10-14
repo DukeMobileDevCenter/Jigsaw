@@ -24,7 +24,7 @@ class GameViewController: ORKTaskViewController {
     
     private var chatroomInstructionStep: ORKInstructionStep {
         let step = ORKInstructionStep(identifier: "ChatroomInstruction")
-        step.title = "Chatroom next"
+        step.title = "Chatroom"
         step.detailText =
         """
         You'll see a chatroom on the next screen. Share what you learned with your peers.
@@ -55,7 +55,7 @@ class GameViewController: ORKTaskViewController {
     private let waitStep: ORKWaitStep = {
         let step = ORKWaitStep(identifier: "Wait")
         step.indicatorType = .progressBar
-        step.title = "Please wait"
+        step.title = "Please Wait"
         step.detailText = "Please wait for other players to finish."
         return step
     }()
@@ -71,6 +71,7 @@ class GameViewController: ORKTaskViewController {
         
         // Resource reading page.
         let webStep = ORKWebViewStep(identifier: "Resource", url: game.resourceURLs[currentRoom])
+        webStep.title = "Quotation"
         steps.append(webStep)
         
         // Chatroom instruction step.
@@ -106,9 +107,9 @@ class GameViewController: ORKTaskViewController {
         
         // Completion instruction.
         let completionStep = ORKOrderedTask.makeCompletionStep()
-        completionStep.title = "Room complete"
+        completionStep.title = "Room Complete"
         // Add 1 to current room to display human readable index.
-        completionStep.text = "Congratulations on finishing room \(currentRoom + 1)! 🎉\nKeep going!"
+        completionStep.text = "Congratulations on finishing Room \(currentRoom + 1)! 🎉\nKeep going!"
         steps.append(completionStep)
         let task = ORKNavigableOrderedTask(identifier: "surveyTask", steps: steps)
         return task
