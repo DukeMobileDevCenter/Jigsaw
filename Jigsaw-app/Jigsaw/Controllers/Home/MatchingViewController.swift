@@ -17,7 +17,7 @@ class MatchingViewController: UIViewController {
     /// The label to show the detail text of a game.
     @IBOutlet var detailTextLabel: UILabel! {
         didSet {
-            detailTextLabel.attributedText = try? Down(markdownString: selectedGame.detailText).toAttributedString()
+            detailTextLabel.attributedText = try? Down(markdownString: selectedGame.detailText).toAttributedString(.default, stylesheet: stylesheet)
         }
     }
     /// The label to show current players count in the waiting queue.
@@ -32,6 +32,16 @@ class MatchingViewController: UIViewController {
     @IBOutlet var joinGameButton: UIButton!
     
     // MARK: Properties
+    
+    /// A style sheet for displaying detail instruction text.
+    private let stylesheet =
+    """
+    body { font: -apple-system-body }
+    h1 { font: -apple-system-title1 }
+    h2 { font: -apple-system-title2 }
+    h3 { font: -apple-system-title3 }
+    h4, h5, h6 { font: -apple-system-headline }
+    """
     
     /// The selected game set by the parent view controller.
     var selectedGame: Game!
@@ -90,6 +100,8 @@ class MatchingViewController: UIViewController {
         gameOfMyGroup = GameOfGroup(
             version: game.version,
             level: game.level,
+            maxAttempts: game.maxAttempts,
+            gameID: game.gameID,
             gameName: game.gameName,
             detailText: game.detailText,
             resourceURLs: urls,
@@ -110,6 +122,7 @@ class MatchingViewController: UIViewController {
         switch change.type {
         case .added:
             handleAddedMatchingGroup(group: currentGroup)
+            gameGroup = GameGroup(id: change.document.documentID, group: currentGroup)
         default:
             break
         }

@@ -10,15 +10,21 @@ import Foundation
 import FirebaseFirestore
 
 struct Game {
+    /// Name of the game.
+    let gameName: String
+    /// Category or topic, used for categorize games and display icon.
+    let category: GameCategory
     /// Game version.
     let version: String
     /// Game "room" level with natural index, i.e. starting from level 1.
     /// A room with higher level is unlocked after the completion of lower levels.
     let level: Int
-    /// Name of the game.
-    let gameName: String
+    /// The maximal attempts for a each room in a game.
+    let maxAttempts: Int
     /// Description for the first page/preview page.
     let detailText: String
+    /// Game card background image URL, can also use for styling.
+    let backgroundImageURL: URL
     /// Group 1 resource URLs.
     let group1resourceURLs: [URL]
     /// Group 2 resource URL.
@@ -27,10 +33,6 @@ struct Game {
     let group1Questionnaires: [Questionnaire]
     /// Group 2 questionnaires.
     let group2Questionnaires: [Questionnaire]
-    /// Category, used for categorize games and display icon.
-    let category: GameCategory
-    /// Game card background image URL, can also use for styling.
-    let backgroundImageURL: URL
     
     var gameID: String {
         gameName + "_" + String(level)
@@ -61,6 +63,7 @@ struct Game {
         guard
             let version = data["version"] as? String,
             let level = data["level"] as? Int,
+            let maxAttempts = data["maxAttempts"] as? Int,
             let gameName = data["gameName"] as? String,
             let detailText = data["detailText"] as? String,
             let group1resourceURLs = data["group1resourceURLs"] as? [String],
@@ -82,6 +85,7 @@ struct Game {
         
         self.version = version
         self.level = level
+        self.maxAttempts = maxAttempts
         self.gameName = gameName
         self.detailText = detailText
         self.group1resourceURLs = group1resourceURLs.compactMap { URL(string: $0) }

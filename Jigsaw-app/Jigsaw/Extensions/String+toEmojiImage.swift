@@ -15,7 +15,7 @@ extension String {
     /// - Returns: An optional `UIImage` of the emoji.
     func toEmojiImage(pointSize: CGFloat = 32) -> UIImage? {
         var count = 0
-        enumerateSubstrings(in: startIndex..<endIndex, options: .byComposedCharacterSequences) { _,_,_,_  in count += 1 }
+        enumerateSubstrings(in: startIndex..<endIndex, options: .byComposedCharacterSequences) { _, _, _, _  in count += 1 }
         if count != 1 { return nil }
         
         let nsString = (self as NSString)
@@ -25,7 +25,7 @@ extension String {
 
         UIGraphicsBeginImageContextWithOptions(imageSize, false, 0)
         UIColor.clear.set()
-        UIRectFill(CGRect(origin:.zero, size: imageSize))
+        UIRectFill(CGRect(origin: .zero, size: imageSize))
         nsString.draw(at: CGPoint.zero, withAttributes: stringAttributes)
         let image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()

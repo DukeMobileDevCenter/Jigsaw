@@ -33,10 +33,16 @@ struct GameGroup: Codable {
         self.group2 = group.group2
     }
     
-    var userIDCount: Int {
-        group1.count + group2.count
+    /// A sorted array of all players' IDs in current game group.
+    /// - Note: The count of all players can be 2 or 4.
+    var allPlayersUserIDs: [String] {
+        (group1 + group2).sorted()
     }
     
+    /// Check which group is the player in.
+    ///
+    /// - Parameter userID: The user ID of the player.
+    /// - Returns: Return 1 or 2 if player in subgroup 1 or subgroup 2, or return nil if the player is not in current game group.
     func whichGroupContains(userID: String) -> Int? {
         if group1.contains(userID) {
             return 1

@@ -55,10 +55,12 @@ struct Message: MessageType {
     ///   - content: The new content string to replace the old one.
     init(message: Message, content: String) {
         self.user = message.user
-        self.content = content
+        // The content string is the control message.
+        self.content = message.content
         self.sentDate = message.sentDate
         self.id = message.id
-        self.kind = message.kind
+        // The kind enum case is the emoji string.
+        self.kind = .text(content)
         self.downloadURL = message.downloadURL
         self.senderJigsawValue = message.senderJigsawValue
     }

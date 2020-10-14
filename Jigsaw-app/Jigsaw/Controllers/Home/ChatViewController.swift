@@ -44,7 +44,8 @@ class ChatViewController: MessagesViewController {
     private let user: User
     /// The current chatroom struct.
     private let chatroom: Chatroom
-    private var messages = [Message]()
+    /// An array to hold all chat messages.
+    private var chatMessages = [Message]()
     
     private let timeFormatter: DateComponentsFormatter = {
         let formatter = DateComponentsFormatter()
@@ -97,7 +98,7 @@ class ChatViewController: MessagesViewController {
         
         messagesReference = FirebaseConstants.database.collection(["Chatrooms", id, "messages"].joined(separator: "/"))
         
-        messageListener = messagesReference?.addSnapshotListener { [weak self] querySnapshot, error in
+        messageListener = messagesReference?.addSnapshotListener { [weak self] querySnapshot, _ in
             guard let snapshot = querySnapshot else { return }
             snapshot.documentChanges.forEach { change in
                 self?.handleDocumentChange(change)
@@ -152,6 +153,11 @@ extension ChatViewController {
         return piece
     }
     
+    private func getMetaMessage(at indexPath: IndexPath) -> ControlMetaMessage? {
+        let message = chatMessages[indexPath.section]
+        return ControlMetaMessage(rawValue: message.content)
+    }
+    
     private func save(_ message: Message) {
         messagesReference?.addDocument(data: message.representation) { [weak self] error in
             guard let self = self else { return }
@@ -166,12 +172,12 @@ extension ChatViewController {
     
     private func insertNewMessage(_ message: Message) {
         // Anti network jitter.
-        guard !messages.contains(message) else { return }
+        guard !chatMessages.contains(message) else { return }
         
-        messages.append(message)
-        messages.sort()
+        chatMessages.append(message)
+        chatMessages.sort()
         
-        let isLatestMessage = messages.firstIndex(of: message) == (messages.count - 1)
+        let isLatestMessage = chatMessages.firstIndex(of: message) == (chatMessages.count - 1)
         let shouldScrollToBottom = messagesCollectionView.isAtBottom && isLatestMessage
         
         messagesCollectionView.reloadData()
@@ -314,15 +320,15 @@ extension ChatViewController: MessagesDataSource {
     }
     
     func numberOfSections(in messagesCollectionView: MessagesCollectionView) -> Int {
-        messages.count
+        chatMessages.count
     }
     
     func numberOfMessages(in messagesCollectionView: MessagesCollectionView) -> Int {
-        messages.count
+        chatMessages.count
     }
     
     func messageForItem(at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> MessageType {
-        let message = messages[indexPath.section]
+        let message = chatMessages[indexPath.section]
         if let metaMessage = ControlMetaMessage(rawValue: message.content) {
             // Replace the control message with emoji.
             switch metaMessage {
@@ -339,11 +345,11 @@ extension ChatViewController: MessagesDataSource {
     func cellTopLabelAttributedText(for message: MessageType, at indexPath: IndexPath) -> NSAttributedString? {
         // Display control metadata.
         switch message.kind {
-        case .text(let controlMetaMessage):
+        case .text:
             let piece = getUserPiece(uid: message.sender.senderId)
-            if let metaType = ControlMetaMessage(rawValue: controlMetaMessage) {
+            if let metaMessage = getMetaMessage(at: indexPath) {
                 return NSAttributedString(
-                    string: "\(piece.label) \(metaType.label) the conversation",
+                    string: "\(piece.label) \(metaMessage.label) the conversation",
                     attributes: [
                         .font: UIFont.systemFont(ofSize: 10),
                         .foregroundColor: UIColor.darkGray
@@ -371,8 +377,8 @@ extension ChatViewController: MessagesDataSource {
     func cellTopLabelHeight(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> CGFloat {
         // Display control metadata.
         switch message.kind {
-        case .text(let controlMetaMessage):
-            if ControlMetaMessage(rawValue: controlMetaMessage) != nil {
+        case .text:
+            if getMetaMessage(at: indexPath) != nil {
                 return UIFont.systemFont(ofSize: 10).capHeight * 2
             }
         default:

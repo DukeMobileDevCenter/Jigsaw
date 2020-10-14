@@ -61,6 +61,7 @@
 		00B6306524FB285B008975CE /* GameHistoryTimelineTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B6306424FB285B008975CE /* GameHistoryTimelineTableViewController.swift */; };
 		00BA555B24DA5D2A006A207E /* UICollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00BA555A24DA5D2A006A207E /* UICollectionView.swift */; };
 		00BA555D24DA7CF7006A207E /* Gender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00BA555C24DA7CF7006A207E /* Gender.swift */; };
+		00C89D0C253673BB0078E328 /* github-markdown.css in Resources */ = {isa = PBXBuildFile; fileRef = 00C89D08253673BB0078E328 /* github-markdown.css */; };
 		00CDFF0D24B4353E009C789D /* Questionnaire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00CDFF0C24B4353E009C789D /* Questionnaire.swift */; };
 		00CDFF1224B44797009C789D /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00CDFF1124B44797009C789D /* UIViewController.swift */; };
 		00CDFF1624B44F4C009C789D /* QuestionStepsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00CDFF1524B44F4C009C789D /* QuestionStepsModel.swift */; };
@@ -184,6 +185,7 @@
 		00B6306424FB285B008975CE /* GameHistoryTimelineTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameHistoryTimelineTableViewController.swift; sourceTree = "<group>"; };
 		00BA555A24DA5D2A006A207E /* UICollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UICollectionView.swift; sourceTree = "<group>"; };
 		00BA555C24DA7CF7006A207E /* Gender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gender.swift; sourceTree = "<group>"; };
+		00C89D08253673BB0078E328 /* github-markdown.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = "github-markdown.css"; sourceTree = "<group>"; };
 		00CDFF0C24B4353E009C789D /* Questionnaire.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Questionnaire.swift; sourceTree = "<group>"; };
 		00CDFF1124B44797009C789D /* UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
 		00CDFF1524B44F4C009C789D /* QuestionStepsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionStepsModel.swift; sourceTree = "<group>"; };
@@ -497,6 +499,7 @@
 		00CDFF0724B2E90E009C789D /* Javascript */ = {
 			isa = PBXGroup;
 			children = (
+				00C89D08253673BB0078E328 /* github-markdown.css */,
 			);
 			path = Javascript;
 			sourceTree = "<group>";
@@ -654,6 +657,7 @@
 				0070DFF624B0060500E71F46 /* LaunchScreen.storyboard in Resources */,
 				00F029D9251FF34900CB2A15 /* ResultStatsViewController.storyboard in Resources */,
 				005856BC24D91C4A0010BE55 /* GoogleService-Info.plist in Resources */,
+				00C89D0C253673BB0078E328 /* github-markdown.css in Resources */,
 				0070DFF324B0060500E71F46 /* Assets.xcassets in Resources */,
 				0070DFF124B0060400E71F46 /* Main.storyboard in Resources */,
 				00D9F5162506DEDF00898DFA /* PreviewDetailViewController.storyboard in Resources */,
