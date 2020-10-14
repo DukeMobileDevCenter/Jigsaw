@@ -77,8 +77,6 @@ class ChatViewController: MessagesViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        // Clear the pasteboard to avoid cheating.
-        UIPasteboard.general.items.removeAll()
         // Add a join message to the chatroom.
         sendControlMessage(type: .join)
     }
