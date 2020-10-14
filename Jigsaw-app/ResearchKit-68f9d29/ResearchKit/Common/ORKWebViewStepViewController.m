@@ -108,7 +108,8 @@ static const CGFloat ORKSignatureTopPadding = 37.0;
         NSString *backgroundColorString = [self hexStringForColor:backgroundColor];
         NSString *textColorString = [self hexStringForColor:textColor];
         
-        NSString *css = [NSString stringWithFormat:@"body { margin: 0px; font-size: 17px; font-family: \"-apple-system\"; padding-left: %fpx; padding-right: %fpx; background-color: %@; color: %@; }",
+        // Disable copy from web view.
+        NSString *css = [NSString stringWithFormat:@"body { margin: 0px; font-size: 17px; font-family: \"-apple-system\"; padding-left: %fpx; padding-right: %fpx; background-color: %@; color: %@; -webkit-touch-callout: none; -webkit-user-select: none;}",
                          _leftRightPadding,
                          _leftRightPadding,
                          backgroundColorString,

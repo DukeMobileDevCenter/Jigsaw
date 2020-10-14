@@ -39,7 +39,7 @@ class GameViewController: ORKTaskViewController {
 //        step.stepDuration = TimeInterval(integerLiteral: 240)
 //        step.shouldShowDefaultTimer = true
 //        step.shouldStartTimerAutomatically = true
-        step.shouldUseNextAsSkipButton = true
+//        step.shouldUseNextAsSkipButton = true
         step.shouldContinueOnFinish = true
         return step
     }()
@@ -107,7 +107,8 @@ class GameViewController: ORKTaskViewController {
         // Completion instruction.
         let completionStep = ORKOrderedTask.makeCompletionStep()
         completionStep.title = "Room complete"
-        completionStep.text = "Congratulations on finishing room \(currentRoom)! 🎉\nKeep going!"
+        // Add 1 to current room to display human readable index.
+        completionStep.text = "Congratulations on finishing room \(currentRoom + 1)! 🎉\nKeep going!"
         steps.append(completionStep)
         let task = ORKNavigableOrderedTask(identifier: "surveyTask", steps: steps)
         return task

@@ -18,9 +18,45 @@ class RoomProgressViewController: UIViewController {
     /// The button to initiate next room. Enabled when room 0 is done.
     @IBOutlet var nextRoomButton: UIButton!
     
+    @IBOutlet var collectionView: UICollectionView! {
+        didSet {
+            collectionView.dataSource = self
+            collectionView.delegate = self
+        }
+    }
+    
     @IBAction func nextRoomButtonTapped(_ sender: UIButton) {
         presentCurrentRoom()
     }
+    
+    @IBOutlet var chartView: PieChartView! {
+        didSet {
+            // Setup the half pie chart view.
+            setup(pieChartView: chartView)
+            // Update the chart with an empty result.
+            setChartData(from: [.correct: 0, .skipped: 1, .incorrect: 0])
+        }
+    }
+    
+    private let chartCenterText: NSMutableAttributedString = {
+        // Center text settings.
+        let centerText = NSMutableAttributedString(string: "Results\nby Jigsaw")
+        centerText.setAttributes(
+            [
+                .font: UIFont.systemFont(ofSize: 15),
+                .foregroundColor: UIColor.label
+            ],
+            range: NSRange(location: 0, length: centerText.length)
+        )
+        centerText.addAttributes(
+            [
+                .font: UIFont(name: "HelveticaNeue-Light", size: 13)!,
+                .foregroundColor: UIColor.systemBlue
+            ],
+            range: NSRange(location: centerText.length - 6, length: 6)
+        )
+        return centerText
+    }()
     
     /// The player's current game group set by the parent view controller.
     var gameGroup: GameGroup!
@@ -37,10 +73,10 @@ class RoomProgressViewController: UIViewController {
     private var currentRoom: Int? = 0 {
         didSet {
             if let room = currentRoom {
-                roomLevelLabel.text = "Room \(room)"
+                roomLevelLabel.text = "You are in room \(room + 1)"
                 nextRoomButton.isEnabled = room > 0
             } else {
-                roomLevelLabel.text = "Failed"
+                roomLevelLabel.text = "Jigsaw broken 😞"
                 nextRoomButton.isEnabled = false
             }
         }
@@ -138,30 +174,29 @@ class RoomProgressViewController: UIViewController {
     
     private func handleModifiedFinishedPlayerCount(group: GameGroup) {
         if group.gameFinishedUserIDs.count == group.allPlayersUserIDs.count {
-            // All player have passed.
-            guard let userID = Profiles.userID else { return }
-            // Reset the all arrays.
-            FirebaseConstants.shared.gamegroups.document(gameGroup.id!).updateData([
-                "gameAttemptedUserIDs": FieldValue.arrayRemove([userID]),
-                "gameFinishedUserIDs": FieldValue.arrayRemove([userID])
-            ])
+            // Do nothing here now.
         }
     }
     
     private func loadChatroom(completion: @escaping () -> Void) {
         let chatroomsRef = FirebaseConstants.shared.chatrooms.document(gameGroup.chatroomID)
-        chatroomsRef.getDocument { [weak self] document, _ in
+        chatroomsRef.getDocument { [weak self] document, error in
             guard let self = self else { return }
             if let document = document, let chatroom = Chatroom(document: document) {
                 let controller = ChatViewController(user: FirebaseConstants.auth.currentUser!, chatroom: chatroom)
                 controller.chatroomUserIDs = self.gameGroup.allPlayersUserIDs
                 self.chatroomViewController = controller
+            } else if let error = error {
+                self.presentAlert(error: error)
+                self.navigationItem.hidesBackButton = false
             }
             completion()
         }
     }
     
     private func cleanUpRemoteAfterGameEnds() {
+        // Stop listen to further updates to game groups.
+        gameGroupListener?.remove()
         // Remove matching game group from database after game is done.
         FirebaseConstants.shared.gamegroups.document(gameGroup.id!).delete()
         // Remove the chatroom when a player stops the game.
@@ -174,6 +209,8 @@ class RoomProgressViewController: UIViewController {
         setGameGroupListener()
         // Load chatroom once for each game.
         ProgressHUD.show("Loading Rooms...")
+        // Hide nav button to disallow players accidentally drop the game.
+        navigationItem.hidesBackButton = true
         loadChatroom { [unowned self] in
             ProgressHUD.dismiss()
             // After the chatroom is loaded, present the first room.
@@ -198,6 +235,9 @@ class RoomProgressViewController: UIViewController {
             score: allPreviosGameResult.score
         )
         
+        setChartData(from: allPreviosGameResult.resultPairs)
+        collectionView.reloadData()
+        
         // The group failed.
         if currentRoom == nil {
             // Add game history to a player's histories collection.
@@ -209,12 +249,12 @@ class RoomProgressViewController: UIViewController {
             cleanUpRemoteAfterGameEnds()
             // Add game history to a player's histories collection.
             addGameHistory(gameHistory: gameHistory)
+            navigationItem.hidesBackButton = false
+            nextRoomButton.isHidden = true
         }
     }
     
     deinit {
-        // Stop listen to further updates to game groups.
-        gameGroupListener?.remove()
         // Reset VCs.
         chatroomViewController = nil
         gameViewController = nil
@@ -232,6 +272,9 @@ extension RoomProgressViewController: ORKTaskViewControllerDelegate {
             ])
             // Reset flag for chatroom.
             isChatroomShown = false
+            // Call finish to automatically move to next screen. (Not valid for no timer step.)
+            // stepViewController.finish()
+            stepViewController.goForward()
             return
         }
         
@@ -305,11 +348,15 @@ extension RoomProgressViewController: ORKTaskViewControllerDelegate {
     func taskViewController(_ taskViewController: ORKTaskViewController, didFinishWith reason: ORKTaskViewControllerFinishReason, error: Error?) {
         // Hold current room's result.
         roomResults.append(taskViewController.result)
-        // Dismiss the game VC.
-        taskViewController.dismiss(animated: true)
+        
+        // Decide what is the outcome of current room.
         switch reason {
         case .failed, .discarded, .saved:
             print("❌ Failed or 💦 Canceled")
+            // Set room level to invalid.
+            currentRoom = nil
+            // Dismiss the game controller to avoid presenting issues.
+            taskViewController.dismiss(animated: true)
             if let error = error {
                 if let gameError = error as? GameError {
                     presentAlert(gameError: gameError)
@@ -318,17 +365,130 @@ extension RoomProgressViewController: ORKTaskViewControllerDelegate {
                 }
             }
             if isMeDropped { cleanUpRemoteAfterGameEnds() }
-            // Set room level to invalid.
-            currentRoom = nil
+            navigationItem.hidesBackButton = false
             // Log an unsuccessful game result.
         case .completed:
             print("✅ completed")
             // When a room is completed by all players in the group, go to next room.
-            currentRoom? += 1
+            currentRoom! += 1
             // Reset attempts.
             attempts = 0
+            // Player has passed. Reset the all arrays.
+            guard let userID = Profiles.userID else { return }
+            FirebaseConstants.shared.gamegroups.document(gameGroup.id!).updateData([
+                "gameAttemptedUserIDs": FieldValue.arrayRemove([userID]),
+                "gameFinishedUserIDs": FieldValue.arrayRemove([userID])
+            ])
+            // Dismiss the game controller.
+            taskViewController.dismiss(animated: true)
         @unknown default:
             fatalError("Error: Onboarding task yields unknown result.")
         }
+    }
+}
+
+// MARK: - UICollectionView
+
+extension RoomProgressViewController: UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        gameOfMyGroup.questionnaires.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "DoorCollectionCell", for: indexPath) as! DoorCollectionCell
+        let room = indexPath.item
+        let doorImage: UIImage
+        if (currentRoom ?? 0) >= room {
+            doorImage = UIImage(named: "door-open")!
+            cell.doorImageView.tintColor = .systemGreen
+        } else {
+            doorImage = UIImage(named: "door-locked")!
+            cell.doorImageView.tintColor = .systemGray
+        }
+        cell.doorImageView.setImage(doorImage)
+        cell.nameLabel.text = "Room \(room + 1)"
+        return cell
+    }
+}
+
+extension RoomProgressViewController: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        CGSize(width: 96, height: 128)
+    }
+}
+
+// MARK: - ChartView
+
+extension RoomProgressViewController: ChartViewDelegate {
+    private func setup(pieChartView chartView: PieChartView) {
+        chartView.usePercentValuesEnabled = true
+        chartView.drawSlicesUnderHoleEnabled = false
+        chartView.drawHoleEnabled = true
+        chartView.highlightPerTapEnabled = true
+        chartView.holeRadiusPercent = 0.58
+        chartView.transparentCircleRadiusPercent = 0.61
+        chartView.chartDescription?.enabled = false
+        chartView.setExtraOffsets(left: 5, top: 10, right: 5, bottom: 5)
+        
+        chartView.delegate = self
+        
+        chartView.holeColor = .clear
+        chartView.transparentCircleColor = UIColor.systemBackground.withAlphaComponent(0.5)
+        chartView.rotationEnabled = false
+        
+        chartView.maxAngle = 180 // Half chart
+        chartView.rotationAngle = 180 // Rotate to make the half on the upper side
+        chartView.centerTextOffset = CGPoint(x: 0, y: -25)
+        
+        let paragraphStyle = NSParagraphStyle.default.mutableCopy() as! NSMutableParagraphStyle
+        paragraphStyle.lineBreakMode = .byTruncatingTail
+        paragraphStyle.alignment = .center
+        
+        chartView.drawCenterTextEnabled = true
+        chartView.centerAttributedText = chartCenterText
+        // Legend settings.
+        chartView.legend.horizontalAlignment = .right
+        chartView.legend.verticalAlignment = .top
+        chartView.legend.orientation = .horizontal
+        chartView.legend.drawInside = false
+        chartView.legend.xEntrySpace = 7
+        chartView.legend.yEntrySpace = 0
+        chartView.legend.yOffset = 0
+        chartView.legend.font = UIFont.systemFont(ofSize: 15)
+    }
+    
+    private func setChartData(from resultPairs: KeyValuePairs<AnswerCategory, Int>) {
+        // Assuming there are no games with 0 questions.
+        let totalCount = resultPairs.reduce(0) { $0 + $1.1 }
+        let entries = resultPairs.compactMap { (key, value) -> PieChartDataEntry? in
+            if key == .unknown && value == 0 {
+                // Omit .unknown category if it is empty.
+                return nil
+            }
+            return PieChartDataEntry(
+                value: Double(value) / Double(totalCount),
+                label: key.rawValue
+            )
+        }
+        
+        let set = PieChartDataSet(entries: entries, label: "")
+        set.sliceSpace = 3
+        set.selectionShift = 10
+        set.colors = ChartColorTemplates.material()
+        
+        let data = PieChartData(dataSet: set)
+        
+        let percentageFormatter = NumberFormatter()
+        percentageFormatter.numberStyle = .percent
+        percentageFormatter.maximumFractionDigits = 1
+        percentageFormatter.multiplier = 1
+        percentageFormatter.percentSymbol = "%"
+        data.setValueFormatter(DefaultValueFormatter(formatter: percentageFormatter))
+    
+        data.setValueFont(UIFont(name: "HelveticaNeue-Light", size: 13)!)
+        data.setValueTextColor(.white)
+        
+        chartView.data = data
+        chartView.setNeedsDisplay()
     }
 }

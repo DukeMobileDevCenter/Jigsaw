@@ -31,7 +31,7 @@ extension UIViewController {
         let okAction = UIAlertAction(title: "OK", style: .default) { _ in
             completion?()
         }
-        let alertController = UIAlertController(title: "Jigsaw broken", message: gameError.description, preferredStyle: .alert, actions: [okAction])
+        let alertController = UIAlertController(title: "Jigsaw Broken", message: gameError.description, preferredStyle: .alert, actions: [okAction])
         present(alertController, animated: true)
     }
 }

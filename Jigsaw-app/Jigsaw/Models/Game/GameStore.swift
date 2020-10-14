@@ -188,6 +188,7 @@ extension GameStore: UICollectionViewDataSource {
             // Lazy load background image.
             cell.backgroundImageView.pin_updateWithProgress = true
             cell.backgroundImageView.pin_setImage(from: game.backgroundImageURL)
+            cell.isUserInteractionEnabled = false
         } else if game.isEnabled {
             cell.nameLabel.text = "\(game.gameName) level \(game.level)"
             // Do not show the icon when the game is enabled.
@@ -196,6 +197,7 @@ extension GameStore: UICollectionViewDataSource {
             // Lazy load background image.
             cell.backgroundImageView.pin_updateWithProgress = true
             cell.backgroundImageView.pin_setImage(from: game.backgroundImageURL)
+            cell.isUserInteractionEnabled = true
         } else {
             // Set subtitle to ??? to hide the real name.
             cell.nameLabel.text = "???"
@@ -205,9 +207,8 @@ extension GameStore: UICollectionViewDataSource {
             cell.iconBackgroundView.isHidden = false
             // Clear the image for reusing the cell.
             cell.backgroundImageView.image = nil
+            cell.isUserInteractionEnabled = false
         }
-        // Disable higher levels that a player hasn't reached.
-        cell.isUserInteractionEnabled = game.isEnabled
         
         return cell
     }

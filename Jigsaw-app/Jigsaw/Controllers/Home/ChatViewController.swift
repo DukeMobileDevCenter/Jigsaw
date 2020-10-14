@@ -58,6 +58,7 @@ class ChatViewController: MessagesViewController {
     
     deinit {
         messageListener?.remove()
+        print("✅ chatroom deinit")
     }
     
     init(user: User, chatroom: Chatroom) {
@@ -77,7 +78,7 @@ class ChatViewController: MessagesViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         // Clear the pasteboard to avoid cheating.
-        UIPasteboard.general.string?.removeAll()
+        UIPasteboard.general.items.removeAll()
         // Add a join message to the chatroom.
         sendControlMessage(type: .join)
     }

@@ -30,18 +30,10 @@ class HomeCollectionViewController: UICollectionViewController {
         // filter by name and category.
         testShowChatroom(sender)
 //        PopulateGamesFromYAML.shared.uploadGame()
-//        testShowResultChart(sender)
     }
     
     @IBAction func segmentedControlValueChanged(_ sender: UISegmentedControl) {
         navigationItem.title = playersCountSegmentedControl.selectedSegmentIndex == 0 ? "Games - 2P" : "Games - 4P"
-    }
-    
-    private func testShowResultChart(_ sender: UIBarButtonItem) {
-        let controller = ResultStatsViewController()
-        controller.resultPairs = [.correct: 3, .skipped: 1, .incorrect: 2]
-        controller.hidesBottomBarWhenPushed = true
-        show(controller, sender: sender)
     }
     
     private func testShowChatroom(_ sender: UIBarButtonItem) {

@@ -118,11 +118,11 @@ class MatchingViewController: UIViewController {
         guard let currentGroup = try? change.document.data(as: GameGroup.self),
               // Only proceed if current player is in the matching group.
               currentGroup.whichGroupContains(userID: Profiles.userID) != nil else { return }
+        gameGroup = GameGroup(id: change.document.documentID, group: currentGroup)
         // Only listen to added matching gamegroup events.
         switch change.type {
         case .added:
             handleAddedMatchingGroup(group: currentGroup)
-            gameGroup = GameGroup(id: change.document.documentID, group: currentGroup)
         default:
             break
         }
