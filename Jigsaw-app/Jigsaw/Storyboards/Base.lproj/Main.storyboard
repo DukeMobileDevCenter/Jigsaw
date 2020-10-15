@@ -312,7 +312,7 @@
                                             </button>
                                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="H2e-gw-yxt">
                                                 <rect key="frame" x="0.0" y="543" width="374" height="0.0"/>
-                                                <state key="normal" title="Fill out this survey"/>
+                                                <state key="normal" title="👉Fill out this survey👈"/>
                                                 <connections>
                                                     <action selector="surveyButtonTapped:" destination="3YO-EV-HVF" eventType="primaryActionTriggered" id="z3t-XG-5u4"/>
                                                 </connections>
