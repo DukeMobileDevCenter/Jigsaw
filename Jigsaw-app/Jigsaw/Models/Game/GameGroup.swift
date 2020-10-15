@@ -14,8 +14,9 @@ struct GameGroup: Codable {
     let chatroomID: String
     let createdDate: Date
     var chatroomReadyUserIDs: [String]
-    var gameAttemptedUserIDs: [String]
-    var gameFinishedUserIDs: [String]
+    var roomAttemptedUserIDs: [String]
+    var roomFinishedUserIDs: [String]
+    var allRoomsFinishedUserScores: [Double]
     /// An array of player's userIDs.
     let group1: [String]
     /// An array of player's userIDs.
@@ -27,8 +28,9 @@ struct GameGroup: Codable {
         self.chatroomID = group.chatroomID
         self.createdDate = group.createdDate
         self.chatroomReadyUserIDs = group.chatroomReadyUserIDs
-        self.gameAttemptedUserIDs = group.gameAttemptedUserIDs
-        self.gameFinishedUserIDs = group.gameFinishedUserIDs
+        self.roomAttemptedUserIDs = group.roomAttemptedUserIDs
+        self.roomFinishedUserIDs = group.roomFinishedUserIDs
+        self.allRoomsFinishedUserScores = group.allRoomsFinishedUserScores
         self.group1 = group.group1
         self.group2 = group.group2
     }

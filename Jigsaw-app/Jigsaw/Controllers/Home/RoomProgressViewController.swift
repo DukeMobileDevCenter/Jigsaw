@@ -132,14 +132,14 @@ class RoomProgressViewController: UIViewController {
             // Only handle increment.
             if currentGroup.chatroomReadyUserIDs.count > gameGroup.chatroomReadyUserIDs.count {
                 handleModifiedReadyPlayerCount(group: currentGroup)
-            } else if currentGroup.gameAttemptedUserIDs.count > gameGroup.gameAttemptedUserIDs.count {
+            } else if currentGroup.roomAttemptedUserIDs.count > gameGroup.roomAttemptedUserIDs.count {
                 handleModifiedAttemptedPlayerCount(group: currentGroup)
-            } else if currentGroup.gameFinishedUserIDs.count > gameGroup.gameFinishedUserIDs.count {
+            } else if currentGroup.roomFinishedUserIDs.count > gameGroup.roomFinishedUserIDs.count {
                 handleModifiedFinishedPlayerCount(group: currentGroup)
             }
         case .removed:
             // If any player dropped the game before they finish, the others cannot play anymore.
-            if currentGroup.gameFinishedUserIDs.count != currentGroup.allPlayersUserIDs.count {
+            if currentGroup.roomFinishedUserIDs.count != currentGroup.allPlayersUserIDs.count {
                 isMeDropped = false
                 taskViewController(gameViewController, didFinishWith: .discarded, error: GameError.otherPlayerDropped)
             }
@@ -159,14 +159,14 @@ class RoomProgressViewController: UIViewController {
     }
     
     private func handleModifiedAttemptedPlayerCount(group: GameGroup) {
-        if group.gameAttemptedUserIDs.count == group.allPlayersUserIDs.count {
+        if group.roomAttemptedUserIDs.count == group.allPlayersUserIDs.count {
             // All players have reached the wait page.
-            if group.gameFinishedUserIDs.count < group.gameAttemptedUserIDs.count {
+            if group.roomFinishedUserIDs.count < group.roomAttemptedUserIDs.count {
                 // Some players failed.
                 // Reset the attempted and finished array.
                 FirebaseConstants.shared.gamegroups.document(gameGroup.id!).updateData([
-                    "gameAttemptedUserIDs": FieldValue.arrayRemove([Profiles.userID!]),
-                    "gameFinishedUserIDs": FieldValue.arrayRemove([Profiles.userID!])
+                    "roomAttemptedUserIDs": FieldValue.arrayRemove([Profiles.userID!]),
+                    "roomFinishedUserIDs": FieldValue.arrayRemove([Profiles.userID!])
                 ])
                 // Go back to the resource page.
                 gameViewController.flipToPage(withIdentifier: "Resource", forward: false, animated: true)
@@ -178,7 +178,7 @@ class RoomProgressViewController: UIViewController {
     }
     
     private func handleModifiedFinishedPlayerCount(group: GameGroup) {
-        if group.gameFinishedUserIDs.count == group.allPlayersUserIDs.count {
+        if group.roomFinishedUserIDs.count == group.allPlayersUserIDs.count {
             // Do nothing here now.
         }
     }
@@ -202,7 +202,7 @@ class RoomProgressViewController: UIViewController {
     private func cleanUpRemoteAfterGameEnds() {
         // Stop listen to further updates to game groups.
         gameGroupListener?.remove()
-        // Remove matching game group from database after game is done.
+        // Remove matching game group from database after game is dropped.
         FirebaseConstants.shared.gamegroups.document(gameGroup.id!).delete()
         // Remove the chatroom when a player stops the game.
         FirebaseConstants.shared.chatrooms.document(gameGroup.chatroomID).delete()
@@ -213,7 +213,7 @@ class RoomProgressViewController: UIViewController {
         // Listen to modification and removal of the game groups.
         setGameGroupListener()
         // Load chatroom once for each game.
-        ProgressHUD.show("Loading Rooms...", interaction: false)
+        ProgressHUD.show("Loading Rooms", interaction: false)
         // Hide nav button to disallow players accidentally drop the game.
         navigationItem.hidesBackButton = true
         loadChatroom { [unowned self] in
@@ -240,7 +240,12 @@ class RoomProgressViewController: UIViewController {
         
         // All rooms passed, add the records to player's game history.
         if currentRoom == gameOfMyGroup.questionnaires.count {
-            cleanUpRemoteAfterGameEnds()
+            // Mark the player as all rooms finished.
+            FirebaseConstants.shared.gamegroups.document(gameGroup.id!).updateData([
+                "allRoomsFinishedUserScores": FieldValue.arrayUnion([allPreviosGameResult.score])
+            ])
+            // Stop listen to further updates to game groups.
+            gameGroupListener?.remove()
             // Add game history to a player's histories collection.
             let gameHistory = GameHistory(
                 gameID: gameOfMyGroup.gameID,
@@ -300,7 +305,7 @@ extension RoomProgressViewController: ORKTaskViewControllerDelegate {
         attempts += 1
         // Calculate the game result for current room.
         let gameResult = GameResult(taskResults: [taskVC.result], questionnaires: [gameOfMyGroup.questionnaires[currentRoom!]])
-        let progress = CGFloat(gameGroup.gameAttemptedUserIDs.count + 1) / CGFloat(gameGroup.allPlayersUserIDs.count)
+        let progress = CGFloat(gameGroup.roomAttemptedUserIDs.count + 1) / CGFloat(gameGroup.allPlayersUserIDs.count)
         stepVC.setProgress(progress, animated: true)
         
         // Add user ID to attempted array.
@@ -309,7 +314,7 @@ extension RoomProgressViewController: ORKTaskViewControllerDelegate {
         let completion = { [weak self] in
             guard let self = self else { return }
             FirebaseConstants.shared.gamegroups.document(self.gameGroup.id!).updateData([
-                "gameAttemptedUserIDs": FieldValue.arrayUnion([Profiles.userID!])
+                "roomAttemptedUserIDs": FieldValue.arrayUnion([Profiles.userID!])
             ])
         }
         
@@ -328,11 +333,11 @@ extension RoomProgressViewController: ORKTaskViewControllerDelegate {
         } else {
             // First mark the player as finished.
             FirebaseConstants.shared.gamegroups.document(gameGroup.id!).updateData([
-                "gameFinishedUserIDs": FieldValue.arrayUnion([Profiles.userID!])
+                "roomFinishedUserIDs": FieldValue.arrayUnion([Profiles.userID!])
             ])
             // Then mark the player as attempted.
             FirebaseConstants.shared.gamegroups.document(gameGroup.id!).updateData([
-                "gameAttemptedUserIDs": FieldValue.arrayUnion([Profiles.userID!])
+                "roomAttemptedUserIDs": FieldValue.arrayUnion([Profiles.userID!])
             ])
         }
     }
@@ -381,8 +386,8 @@ extension RoomProgressViewController: ORKTaskViewControllerDelegate {
             // Player has passed. Reset the all arrays.
             guard let userID = Profiles.userID else { return }
             FirebaseConstants.shared.gamegroups.document(gameGroup.id!).updateData([
-                "gameAttemptedUserIDs": FieldValue.arrayRemove([userID]),
-                "gameFinishedUserIDs": FieldValue.arrayRemove([userID])
+                "roomAttemptedUserIDs": FieldValue.arrayRemove([userID]),
+                "roomFinishedUserIDs": FieldValue.arrayRemove([userID])
             ])
             // Dismiss the game controller.
             taskViewController.dismiss(animated: true)

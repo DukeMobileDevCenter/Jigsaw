@@ -82,6 +82,7 @@
 		00E6A86E2533C828000D54B3 /* String+toEmojiImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E6A86D2533C828000D54B3 /* String+toEmojiImage.swift */; };
 		00E8BA502536D8B100863F7D /* NSAttributedString+DarkMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E8BA4F2536D8B100863F7D /* NSAttributedString+DarkMode.swift */; };
 		00E8BA562536DEF900863F7D /* AppConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E8BA552536DEF900863F7D /* AppConstants.swift */; };
+		00E8BA752537E94F00863F7D /* TeamRanking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E8BA742537E94F00863F7D /* TeamRanking.swift */; };
 		00F029D4251FF25700CB2A15 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F029D3251FF25700CB2A15 /* SignInViewController.swift */; };
 		00F2197C24CCF99800B72858 /* MetricsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F2197B24CCF99800B72858 /* MetricsViewController.swift */; };
 		00F2197E24CCF9A200B72858 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F2197D24CCF9A200B72858 /* ProfileViewController.swift */; };
@@ -207,6 +208,7 @@
 		00E6A86D2533C828000D54B3 /* String+toEmojiImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+toEmojiImage.swift"; sourceTree = "<group>"; };
 		00E8BA4F2536D8B100863F7D /* NSAttributedString+DarkMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSAttributedString+DarkMode.swift"; sourceTree = "<group>"; };
 		00E8BA552536DEF900863F7D /* AppConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConstants.swift; sourceTree = "<group>"; };
+		00E8BA742537E94F00863F7D /* TeamRanking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamRanking.swift; sourceTree = "<group>"; };
 		00F029D3251FF25700CB2A15 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		00F2197B24CCF99800B72858 /* MetricsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetricsViewController.swift; sourceTree = "<group>"; };
 		00F2197D24CCF9A200B72858 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
@@ -485,6 +487,7 @@
 				00A8832A2529747100186BED /* GameCenterConstants.swift */,
 				0071E91F252003880025702E /* AppInfo.swift */,
 				00E8BA552536DEF900863F7D /* AppConstants.swift */,
+				00E8BA742537E94F00863F7D /* TeamRanking.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -798,6 +801,7 @@
 				00CDFF1624B44F4C009C789D /* QuestionStepsModel.swift in Sources */,
 				0047630424ED10FE007767A5 /* QuestionEssentialProperty.swift in Sources */,
 				00B6306524FB285B008975CE /* GameHistoryTimelineTableViewController.swift in Sources */,
+				00E8BA752537E94F00863F7D /* TeamRanking.swift in Sources */,
 				0078315224DF557800B35A98 /* Player.swift in Sources */,
 				0020D54924DF79CB00DB20E1 /* GameStore.swift in Sources */,
 				0071E9232520161F0025702E /* FirebaseHelper.swift in Sources */,
