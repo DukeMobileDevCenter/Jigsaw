@@ -8,7 +8,6 @@
 
 import os
 import UIKit
-import ProgressHUD
 
 class CategoryCollectionViewController: UICollectionViewController {
     /// The flow layout of the collection view.

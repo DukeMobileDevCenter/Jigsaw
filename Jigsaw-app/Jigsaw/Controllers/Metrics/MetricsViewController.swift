@@ -50,6 +50,7 @@ class MetricsViewController: UIViewController {
         
         setup(radarChartView: chartView)
         
+        ProgressHUD.show(interaction: false)
         FirebaseHelper.getGameHistory(userID: Profiles.userID) { [weak self] histories, error in
             ProgressHUD.dismiss()
             guard let self = self else { return }

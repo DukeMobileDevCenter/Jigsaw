@@ -347,8 +347,15 @@ extension ChatViewController: MessagesDataSource {
         case .text:
             let piece = getUserPiece(uid: message.sender.senderId)
             if let metaMessage = getMetaMessage(at: indexPath) {
+                let string: String
+                switch metaMessage {
+                case .join:
+                    string = "\(piece.label) joined the conversation"
+                case .leave:
+                    string = "\(piece.label) has moved on to the quiz"
+                }
                 return NSAttributedString(
-                    string: "\(piece.label) \(metaMessage.label) the conversation",
+                    string: string,
                     attributes: [
                         .font: UIFont.systemFont(ofSize: 10),
                         .foregroundColor: UIColor.darkGray

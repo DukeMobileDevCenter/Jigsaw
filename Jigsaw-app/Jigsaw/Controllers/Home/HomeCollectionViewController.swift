@@ -61,7 +61,7 @@ class HomeCollectionViewController: UICollectionViewController {
     }
     
     private func loadGames() {
-        ProgressHUD.show("Loading")
+        ProgressHUD.show("Loading", interaction: false)
         // Asynchronously load the games from Firebase.
         GameStore.shared.loadGames { [weak self] result in
             ProgressHUD.dismiss()
@@ -151,7 +151,7 @@ class HomeCollectionViewController: UICollectionViewController {
         // An array of (queue's player count mod by queue type) and (game) tuples.
         var moduloGamePairs = [(queuePlayerCountModulo: Int, game: Game)]()
         
-        ProgressHUD.show()
+        ProgressHUD.show(interaction: false)
         for game in GameStore.shared.allGames {
             if game.level != 1 { break }
             let queuesRef = FirebaseConstants.database.collection(["Queues", game.gameName, queueType.rawValue].joined(separator: "/"))

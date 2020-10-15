@@ -213,7 +213,7 @@ class RoomProgressViewController: UIViewController {
         // Listen to modification and removal of the game groups.
         setGameGroupListener()
         // Load chatroom once for each game.
-        ProgressHUD.show("Loading Rooms...")
+        ProgressHUD.show("Loading Rooms...", interaction: false)
         // Hide nav button to disallow players accidentally drop the game.
         navigationItem.hidesBackButton = true
         loadChatroom { [unowned self] in
