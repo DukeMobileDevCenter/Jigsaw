@@ -22,7 +22,8 @@ class CategoryCollectionViewController: UICollectionViewController {
         // Set collection view delegates.
         collectionView.delegate = self
         collectionView.dataSource = GameStore.shared
-        // FIXME: Every time enter a category page, report the progress to GameCenter.
+        // FIXME: not reporting achievement for beta.
+        // Every time enter a category page, report the progress to GameCenter.
         // We can come up with better strategy.
 //        if GameCenterHelper.isAuthenticated {
 //            let percentComplete = GameStore.shared.percentComplete(for: category)
