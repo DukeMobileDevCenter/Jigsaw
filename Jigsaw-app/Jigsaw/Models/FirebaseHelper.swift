@@ -70,13 +70,33 @@ enum FirebaseHelper {
         let historyRef = FirebaseConstants.database.collection(["Players", userID, "gameHistory"].joined(separator: "/"))
         var gameHistories: [GameHistory] = []
         historyRef.getDocuments { querySnapshot, error in
-            if let historyRecords = querySnapshot {
-                for gameHistory in historyRecords.documents {
+            if let snapshot = querySnapshot {
+                for gameHistory in snapshot.documents {
                     if let history = try? gameHistory.data(as: GameHistory.self) {
                         gameHistories.append(history)
                     }
                 }
                 completion(gameHistories, nil)
+            } else if let error = error {
+                completion(nil, error)
+            }
+        }
+    }
+    
+    /// Load top 25 team rankings.
+    /// - Parameter completion: A closure that passes back an array of `TeamRanking`.
+    static func getTeamRankings(completion: @escaping ([TeamRanking]?, Error?) -> Void) {
+        let rankingsRef = FirebaseConstants.shared.teamRankings
+        var rankings: [TeamRanking] = []
+        let query = rankingsRef.order(by: "score", descending: true).limit(to: 25)
+        query.getDocuments { querySnapshot, error in
+            if let snapshot = querySnapshot {
+                for ranking in snapshot.documents {
+                    if let rank = try? ranking.data(as: TeamRanking.self) {
+                        rankings.append(rank)
+                    }
+                }
+                completion(rankings, nil)
             } else if let error = error {
                 completion(nil, error)
             }

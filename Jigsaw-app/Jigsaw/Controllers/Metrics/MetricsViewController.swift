@@ -17,17 +17,19 @@ class MetricsViewController: UIViewController {
     
     @IBOutlet var achievementsButton: UIButton! {
         didSet {
-            achievementsButton.setImage(UIImage(#imageLiteral(resourceName: "Glyph - Achievements")), for: .normal)
-            achievementsButton.imageView?.contentMode = .scaleAspectFit
             achievementsButton.layer.cornerRadius = 8
         }
     }
     
     @IBOutlet var leaderboardButton: UIButton! {
         didSet {
-            leaderboardButton.setImage(UIImage(#imageLiteral(resourceName: "Glyph - Leaderboard")), for: .normal)
-            leaderboardButton.imageView?.contentMode = .scaleAspectFit
             leaderboardButton.layer.cornerRadius = 8
+        }
+    }
+    
+    @IBOutlet var teamRankingsButton: UIButton! {
+        didSet {
+            teamRankingsButton.layer.cornerRadius = 8
         }
     }
     
@@ -99,6 +101,8 @@ class MetricsViewController: UIViewController {
 extension MetricsViewController: ChartViewDelegate {
     func setup(radarChartView chartView: RadarChartView) {
         chartView.delegate = self
+        chartView.backgroundColor = .systemBackground
+        chartView.layer.cornerRadius = 20
         
         chartView.chartDescription?.enabled = false
         chartView.webLineWidth = 1
