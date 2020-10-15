@@ -107,9 +107,9 @@ class GameViewController: ORKTaskViewController {
         
         // Completion instruction.
         let completionStep = ORKOrderedTask.makeCompletionStep()
-        completionStep.title = "Room Complete"
+        completionStep.title = "Room Escaped 🎉"
         // Add 1 to current room to display human readable index.
-        completionStep.text = "Congratulations on finishing Room \(currentRoom + 1)! 🎉\nKeep going!"
+        completionStep.text = "Congratulations on escaping from Room \(currentRoom + 1).\nKeep going!"
         steps.append(completionStep)
         let task = ORKNavigableOrderedTask(identifier: "surveyTask", steps: steps)
         return task
