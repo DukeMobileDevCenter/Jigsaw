@@ -9,7 +9,6 @@
 import os
 import UIKit
 import FirebaseAuth
-import ProgressHUD
 
 class RootTabBarController: UITabBarController {
     /// A boolean to record if the tab bar controller is seen for the first time.

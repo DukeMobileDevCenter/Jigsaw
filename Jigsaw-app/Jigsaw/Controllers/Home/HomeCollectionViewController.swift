@@ -30,18 +30,10 @@ class HomeCollectionViewController: UICollectionViewController {
         // filter by name and category.
         testShowChatroom(sender)
 //        PopulateGamesFromYAML.shared.uploadGame()
-//        testShowResultChart(sender)
     }
     
     @IBAction func segmentedControlValueChanged(_ sender: UISegmentedControl) {
         navigationItem.title = playersCountSegmentedControl.selectedSegmentIndex == 0 ? "Games - 2P" : "Games - 4P"
-    }
-    
-    private func testShowResultChart(_ sender: UIBarButtonItem) {
-        let controller = ResultStatsViewController()
-        controller.resultPairs = [.correct: 3, .skipped: 1, .incorrect: 2]
-        controller.hidesBottomBarWhenPushed = true
-        show(controller, sender: sender)
     }
     
     private func testShowChatroom(_ sender: UIBarButtonItem) {
@@ -49,7 +41,7 @@ class HomeCollectionViewController: UICollectionViewController {
         chatroomsRef.getDocument { [weak self] document, error in
             guard let self = self else { return }
             if let document = document, let chatroom = Chatroom(document: document) {
-                let chatroomVC = ChatViewController(user: FirebaseConstants.auth.currentUser!, chatroom: chatroom, timeLeft: nil)
+                let chatroomVC = ChatViewController(user: FirebaseConstants.auth.currentUser!, chatroom: chatroom)
                 // Don't show bottom tab bar.
                 chatroomVC.hidesBottomBarWhenPushed = true
                 self.show(chatroomVC, sender: sender)
@@ -69,7 +61,7 @@ class HomeCollectionViewController: UICollectionViewController {
     }
     
     private func loadGames() {
-        ProgressHUD.show("Loading")
+        ProgressHUD.show("Loading", interaction: false)
         // Asynchronously load the games from Firebase.
         GameStore.shared.loadGames { [weak self] result in
             ProgressHUD.dismiss()
@@ -159,7 +151,7 @@ class HomeCollectionViewController: UICollectionViewController {
         // An array of (queue's player count mod by queue type) and (game) tuples.
         var moduloGamePairs = [(queuePlayerCountModulo: Int, game: Game)]()
         
-        ProgressHUD.show()
+        ProgressHUD.show(interaction: false)
         for game in GameStore.shared.allGames {
             if game.level != 1 { break }
             let queuesRef = FirebaseConstants.database.collection(["Queues", game.gameName, queueType.rawValue].joined(separator: "/"))

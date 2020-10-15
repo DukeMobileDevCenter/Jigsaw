@@ -14,8 +14,9 @@ struct GameGroup: Codable {
     let chatroomID: String
     let createdDate: Date
     var chatroomReadyUserIDs: [String]
-    var gameAttemptedUserIDs: [String]
-    var gameFinishedUserIDs: [String]
+    var roomAttemptedUserIDs: [String]
+    var roomFinishedUserIDs: [String]
+    var allRoomsFinishedUserScores: [Double]
     /// An array of player's userIDs.
     let group1: [String]
     /// An array of player's userIDs.
@@ -27,22 +28,29 @@ struct GameGroup: Codable {
         self.chatroomID = group.chatroomID
         self.createdDate = group.createdDate
         self.chatroomReadyUserIDs = group.chatroomReadyUserIDs
-        self.gameAttemptedUserIDs = group.gameAttemptedUserIDs
-        self.gameFinishedUserIDs = group.gameFinishedUserIDs
+        self.roomAttemptedUserIDs = group.roomAttemptedUserIDs
+        self.roomFinishedUserIDs = group.roomFinishedUserIDs
+        self.allRoomsFinishedUserScores = group.allRoomsFinishedUserScores
         self.group1 = group.group1
         self.group2 = group.group2
     }
     
-    var userIDCount: Int {
-        group1.count + group2.count
+    /// A sorted array of all players' IDs in current game group.
+    /// - Note: The count of all players can be 2 or 4.
+    var allPlayersUserIDs: [String] {
+        (group1 + group2).sorted()
     }
     
-    func whichGroupContains(userID: String) -> Int {
+    /// Check which group is the player in.
+    ///
+    /// - Parameter userID: The user ID of the player.
+    /// - Returns: Return 1 or 2 if player in subgroup 1 or subgroup 2, or return nil if the player is not in current game group.
+    func whichGroupContains(userID: String) -> Int? {
         if group1.contains(userID) {
             return 1
         } else if group2.contains(userID) {
             return 2
         }
-        return 0
+        return nil
     }
 }

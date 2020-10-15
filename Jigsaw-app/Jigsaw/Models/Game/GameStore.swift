@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Yams
 
 private class GameCollections {
     var immigrationGames = [Game]()
@@ -73,8 +74,12 @@ class GameStore: NSObject {
     func loadGames(completion: @escaping (Result<[Game], Error>) -> Void) {
         // Clear all existing games.
         collections.removeAll()
-        FirebaseConstants.shared.games.getDocuments { [weak self] querySnapshot, error in
+        FirebaseConstants.shared.gamesStorage.listAll { [weak self] storageListResult, error in
             guard let self = self else { return }
+            if let error = error {
+                completion(.failure(error))
+                return
+            }
             // Create copies to avoid async race condition.
             var games = [Game]()
             
@@ -85,29 +90,48 @@ class GameStore: NSObject {
             var healthGames = [Game]()
             var internationalGames = [Game]()
             
-            if let snapshot = querySnapshot {
-                for document in snapshot.documents {
-                    if let game = Game(document: document) {
-                        let category = game.category
-                        switch category {
-                        case .immigration:
-                            immigrationGames.append(game)
-                        case .economy:
-                            economyGames.append(game)
-                        case .justice:
-                            justiceGames.append(game)
-                        case .environment:
-                            environmentGames.append(game)
-                        case .health:
-                            healthGames.append(game)
-                        case .international:
-                            internationalGames.append(game)
-                        case .random:
-                            continue
+            let downloadGroup = DispatchGroup()
+            
+            for item in storageListResult.items {
+                downloadGroup.enter()
+                // Download in memory with a maximum allowed size of 1MB (1 * 1024 * 1024 bytes)
+                item.getData(maxSize: 1 * 1024 * 1024) { data, error in
+                    // Leave after the call finishes.
+                    defer { downloadGroup.leave() }
+                    
+                    if let error = error {
+                        completion(.failure(error))
+                        return
+                    }
+                    if let data = data,
+                       let content = String(data: data, encoding: .utf8),
+                       let dataDict = try? Yams.load(yaml: content) as? [String: Any] {
+                        if let game = Game(data: dataDict) {
+                            let category = game.category
+                            switch category {
+                            case .immigration:
+                                immigrationGames.append(game)
+                            case .economy:
+                                economyGames.append(game)
+                            case .justice:
+                                justiceGames.append(game)
+                            case .environment:
+                                environmentGames.append(game)
+                            case .health:
+                                healthGames.append(game)
+                            case .international:
+                                internationalGames.append(game)
+                            case .random:
+                                break
+                            }
+                            games.append(game)
                         }
-                        games.append(game)
                     }
                 }
+            }
+            // Only callback success when all downloads are successful.
+            downloadGroup.notify(queue: .main) { [weak self] in
+                guard let self = self else { return }
                 // Sorted by latest added version number.
                 games.sort { game1, game2 in game1.level < game2.level }
                 // Assign the games in whole to avoid race condition.
@@ -122,8 +146,6 @@ class GameStore: NSObject {
                 self.collections.sortAll()
                 
                 completion(.success(games))
-            } else if let error = error {
-                completion(.failure(error))
             }
         }
     }
@@ -157,17 +179,27 @@ extension GameStore: UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "GameCollectionCell", for: indexPath) as! GameCollectionCell
         // Find game.
         let game = getGames(for: selectedCategory)[indexPath.item]
-        
-        if game.isEnabled {
-            cell.nameLabel.text = "\(game.gameName) room \(game.level)"
+        if game.isPlayed {
+            cell.nameLabel.text = "\(game.gameName) level \(game.level)"
+            // Show a 🎉 emoji when the game is played.
+            cell.iconImageView.isHidden = false
+            cell.iconImageView.image = "🎉".toEmojiImage()
+            cell.iconBackgroundView.isHidden = false
+            // Lazy load background image.
+            cell.backgroundImageView.pin_updateWithProgress = true
+            cell.backgroundImageView.pin_setImage(from: game.backgroundImageURL)
+            cell.isUserInteractionEnabled = false
+        } else if game.isEnabled {
+            cell.nameLabel.text = "\(game.gameName) level \(game.level)"
             // Do not show the icon when the game is enabled.
             cell.iconImageView.isHidden = true
             cell.iconBackgroundView.isHidden = true
             // Lazy load background image.
             cell.backgroundImageView.pin_updateWithProgress = true
             cell.backgroundImageView.pin_setImage(from: game.backgroundImageURL)
+            cell.isUserInteractionEnabled = true
         } else {
-            // Set subtitle.
+            // Set subtitle to ??? to hide the real name.
             cell.nameLabel.text = "???"
             // Set lock icon.
             cell.iconImageView.isHidden = false
@@ -175,9 +207,8 @@ extension GameStore: UICollectionViewDataSource {
             cell.iconBackgroundView.isHidden = false
             // Clear the image for reusing the cell.
             cell.backgroundImageView.image = nil
+            cell.isUserInteractionEnabled = false
         }
-        // Disable higher levels that a player hasn't reached.
-        cell.isUserInteractionEnabled = game.isEnabled
         
         return cell
     }

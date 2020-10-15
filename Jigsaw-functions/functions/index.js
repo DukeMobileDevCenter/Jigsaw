@@ -79,8 +79,9 @@ exports.makeGameGroup = functions.firestore.document('/Queues/{gameName}/{queueN
     "gameName": gameName,
     "chatroomID": chatroomID,
     "chatroomReadyUserIDs": [],
-    "gameAttemptedUserIDs": [],
-    "gameFinishedUserIDs": [],
+    "roomAttemptedUserIDs": [],
+    "roomFinishedUserIDs": [],
+    "allRoomsFinishedUserScores": [],
     "createdDate": createdDate,
     "group1": groups[seed],
     "group2": groups[1-seed]
@@ -95,4 +96,35 @@ exports.makeGameGroup = functions.firestore.document('/Queues/{gameName}/{queueN
 
   // Add a new document in collection "GameGroups" with generated ID.
   return db.collection('GameGroups').add(gameGroup);
+});
+
+/*
+  Listens for "allRoomsFinishedUserScores" field changes in /GameGroups/:groupID,
+  creates a team ranking to /TeamRankings and remove the game group.
+*/
+exports.addTeamRankingAndRemoveMatchGroup = functions.firestore.document('/GameGroups/{groupID}').onUpdate(async (change, context) => {
+  // Get newValue from the update.
+  const newValue = change.after.data();
+  
+  const group1 = newValue.group1;
+  const group2 = newValue.group2;
+  const groupPlayerCount = group1.length + group2.length;
+  const allScores = newValue.allRoomsFinishedUserScores;
+  // All players have finished the game.
+
+  if (allScores.length === groupPlayerCount) {  // eslint let me check object eq...
+    // Create a TeamRanking object.
+    const averageScore = allScores.reduce((a,b) => (a+b)) / allScores.length;
+    const teamRanking = {
+      "teamName": "Jigsaw Team",
+      "playerIDs": [].concat(group1, group2),
+      "gameName": newValue.gameName,
+      "score": averageScore,
+      "playedDate": newValue.createdDate
+    };
+    // Delete the game group.
+    const res1 = await db.collection('GameGroups').doc(context.params.groupID).delete();
+    // Add the team ranking in collection "TeamRankings" with generated ID.
+    const res2 = await db.collection('TeamRankings').add(teamRanking);
+  }
 });

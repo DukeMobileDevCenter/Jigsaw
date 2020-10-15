@@ -8,6 +8,7 @@
 
 import Foundation
 import FirebaseFirestore
+import FirebaseStorage
 import FirebaseAuth
 
 class FirebaseConstants: NSObject {
@@ -15,11 +16,16 @@ class FirebaseConstants: NSObject {
     static let shared = FirebaseConstants()
     
     static let database = Firestore.firestore()
+    static let storage = Storage.storage()
     static let auth = Auth.auth()
     
-    let chatrooms = FirebaseConstants.database.collection("Chatrooms")
-    let games = FirebaseConstants.database.collection("Games")
-    let players = FirebaseConstants.database.collection("Players")
-    let queues = FirebaseConstants.database.collection("Queues")
-    let gamegroups = FirebaseConstants.database.collection("GameGroups")
+    let chatrooms = database.collection("Chatrooms")
+    let players = database.collection("Players")
+    let queues = database.collection("Queues")
+    let gamegroups = database.collection("GameGroups")
+    /// A collection of team ranking stats.
+    let teamRankings = database.collection("TeamRankings")
+    
+    let gamesStorage = storage.reference(withPath: "Games")
+    let chatroomStorage = storage.reference(withPath: "Chatrooms")
 }

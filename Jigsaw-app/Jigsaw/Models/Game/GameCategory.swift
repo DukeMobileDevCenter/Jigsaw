@@ -10,7 +10,6 @@ import Foundation
 import UIKit
 
 enum GameCategory: String, CaseIterable, Codable {
-    // Some dummy categories only for demo purposes
     case immigration
     case economy
     case justice
@@ -86,8 +85,9 @@ enum GameCategory: String, CaseIterable, Codable {
 class GameCategoryClass: NSObject, UICollectionViewDataSource {
     // Singleton of the class.
     static let shared = GameCategoryClass()
-    // A wrapper to all of the enum cases.
-    // Edit: for beta testing, we don't include the random option.
+    
+    // FIXME: for beta testing, don't include the random option.
+    /// A wrapper to all of the enum cases.
     let allCases = GameCategory.allCases.dropLast()
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -96,15 +96,10 @@ class GameCategoryClass: NSObject, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "GameCollectionCell", for: indexPath) as! GameCollectionCell
-        
         let category = allCases[indexPath.item]
         cell.nameLabel.text = category.label
         cell.iconImageView.setImage(category.iconImage)
         cell.backgroundImageView.setImage(category.backgroundImage)
-        // Temporarily disable other categories.
-        if category != .immigration && category != .economy {
-            cell.isUserInteractionEnabled = false
-        }
         return cell
     }
 }

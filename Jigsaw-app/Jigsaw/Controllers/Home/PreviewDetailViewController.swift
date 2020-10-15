@@ -28,7 +28,8 @@ class PreviewDetailViewController: UIViewController {
         if let game = item as? Game {
             imageView.pin_setImage(from: game.backgroundImageURL)
             titleLabel.text = game.gameName
-            detailLabel.text = game.detailText
+            let attributedText = try? Down(markdownString: game.detailText).toAttributedString(.default, stylesheet: AppConstants.simpleStylesheet)
+            detailLabel.attributedText = attributedText?.labelColorAttributedString
         } else if let category = item as? GameCategory {
             imageView.setImage(category.backgroundImage)
             titleLabel.text = category.label
