@@ -67,4 +67,22 @@ enum QuestionStepsModel {
         questionStep.isOptional = question.isOptional
         return questionStep
     }
+    
+    static func continuousScaleStep(question: ContinuousScaleQuestion) -> ORKStep {
+        let continuousScaleAnswerFormat = ORKContinuousScaleAnswerFormat(
+            maximumValue: Double(question.maxValue),
+            minimumValue: Double(question.minValue),
+            defaultValue: Double(question.defaultValue),
+            maximumFractionDigits: 1,
+            vertical: true,
+            maximumValueDescription: question.maxDescription,
+            minimumValueDescription: question.minDescription
+        )
+        
+        continuousScaleAnswerFormat.gradientLocations = [0, 0.6, 1]
+        continuousScaleAnswerFormat.gradientColors = [.systemBlue, .systemYellow, .systemRed]
+        let questionStep = ORKQuestionStep(identifier: question.title, title: question.title, question: question.prompt, answer: continuousScaleAnswerFormat)
+        questionStep.isOptional = question.isOptional
+        return questionStep
+    }
 }

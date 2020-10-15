@@ -85,7 +85,7 @@ struct GameResult {
         resultPairs[2].1
     }
     
-    // swiftlint:disable cyclomatic_complexity
+    // swiftlint:disable cyclomatic_complexity function_body_length
     
     /// Judge if the player answer the question correctly.
     ///
@@ -132,6 +132,15 @@ struct GameResult {
                     return .unknown
             }
             outcome = (correctMin...correctMax).contains(answer.intValue) ? .correct : .incorrect
+        case .continuousScale:
+            guard let answer = (result as? ORKScaleQuestionResult)?.scaleAnswer else {
+                return .skipped
+            }
+            guard let correctMin = (question as? ScaleQuestion)?.correctMinValue,
+                let correctMax = (question as? ScaleQuestion)?.correctMaxValue else {
+                    return .unknown
+            }
+            outcome = (correctMin...correctMax).contains(answer.intValue) ? .correct : .incorrect
         case .unknown, .instruction:
             // Instruction should never come here.
             print("Error: unknown question type, no result.")
@@ -139,5 +148,5 @@ struct GameResult {
         }
         return outcome
     }
-    // swiftlint:enable cyclomatic_complexity
+    // swiftlint:enable cyclomatic_complexity function_body_length
 }

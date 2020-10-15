@@ -122,6 +122,8 @@ struct Game {
                     question = NumericQuestion(data: questionDict)
                 case .scale:
                     question = ScaleQuestion(data: questionDict)
+                case .continuousScale:
+                    question = ContinuousScaleQuestion(data: questionDict)
                 case .boolean:
                     question = BooleanQuestion(data: questionDict)
                 case .unknown:

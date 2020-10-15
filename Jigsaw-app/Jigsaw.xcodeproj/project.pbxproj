@@ -84,6 +84,7 @@
 		00E8BA562536DEF900863F7D /* AppConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E8BA552536DEF900863F7D /* AppConstants.swift */; };
 		00E8BA752537E94F00863F7D /* TeamRanking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E8BA742537E94F00863F7D /* TeamRanking.swift */; };
 		00E8BA7B25380B0600863F7D /* TeamRankingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E8BA7A25380B0600863F7D /* TeamRankingsViewController.swift */; };
+		00E8BA8625382C4E00863F7D /* ContinuousScaleQuestion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E8BA8525382C4E00863F7D /* ContinuousScaleQuestion.swift */; };
 		00F029D4251FF25700CB2A15 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F029D3251FF25700CB2A15 /* SignInViewController.swift */; };
 		00F2197C24CCF99800B72858 /* MetricsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F2197B24CCF99800B72858 /* MetricsViewController.swift */; };
 		00F2197E24CCF9A200B72858 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F2197D24CCF9A200B72858 /* ProfileViewController.swift */; };
@@ -211,6 +212,7 @@
 		00E8BA552536DEF900863F7D /* AppConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConstants.swift; sourceTree = "<group>"; };
 		00E8BA742537E94F00863F7D /* TeamRanking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamRanking.swift; sourceTree = "<group>"; };
 		00E8BA7A25380B0600863F7D /* TeamRankingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamRankingsViewController.swift; sourceTree = "<group>"; };
+		00E8BA8525382C4E00863F7D /* ContinuousScaleQuestion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContinuousScaleQuestion.swift; sourceTree = "<group>"; };
 		00F029D3251FF25700CB2A15 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		00F2197B24CCF99800B72858 /* MetricsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetricsViewController.swift; sourceTree = "<group>"; };
 		00F2197D24CCF9A200B72858 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
@@ -520,6 +522,7 @@
 				00CF5DC024F4DD0200B501BB /* MultipleChoiceQuestion.swift */,
 				00CF5DC224F4DD2F00B501BB /* NumericQuestion.swift */,
 				00CF5DC424F4DDA500B501BB /* ScaleQuestion.swift */,
+				00E8BA8525382C4E00863F7D /* ContinuousScaleQuestion.swift */,
 				00CF5DC624F4DE4000B501BB /* BooleanQuestion.swift */,
 				00CF5DC824F4DE9900B501BB /* InstructionQuestion.swift */,
 			);
@@ -774,6 +777,7 @@
 				00CF5DC324F4DD2F00B501BB /* NumericQuestion.swift in Sources */,
 				00E8BA7B25380B0600863F7D /* TeamRankingsViewController.swift in Sources */,
 				00CF5DC724F4DE4000B501BB /* BooleanQuestion.swift in Sources */,
+				00E8BA8625382C4E00863F7D /* ContinuousScaleQuestion.swift in Sources */,
 				005856C924D92E480010BE55 /* UIImage.swift in Sources */,
 				0070DFEE24B0060400E71F46 /* HomeCollectionViewController.swift in Sources */,
 				00D0862724CD2D9A00FB7A20 /* GameViewController.swift in Sources */,

@@ -97,6 +97,8 @@ class GameViewController: ORKTaskViewController {
                 steps.append(QuestionStepsModel.booleanStep(question: question as! BooleanQuestion))
             case .scale:
                 steps.append(QuestionStepsModel.scaleStep(question: question as! ScaleQuestion))
+            case .continuousScale:
+                steps.append(QuestionStepsModel.continuousScaleStep(question: question as! ContinuousScaleQuestion))
             case .unknown:
                 continue
             }

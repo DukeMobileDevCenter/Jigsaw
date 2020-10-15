@@ -14,6 +14,7 @@ enum QuestionType: String, Codable, CaseIterable {
     case multipleChoice = "MULTIPLE CHOICE"
     case numeric = "NUMERIC"
     case scale = "SCALE"
+    case continuousScale = "CONTINUOUS SCALE"
     case boolean = "BOOLEAN"
     case unknown = "UNKNOWN"
 }
