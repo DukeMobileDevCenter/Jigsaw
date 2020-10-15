@@ -73,7 +73,7 @@ enum QuestionStepsModel {
             maximumValue: Double(question.maxValue),
             minimumValue: Double(question.minValue),
             defaultValue: Double(question.defaultValue),
-            maximumFractionDigits: 1,
+            maximumFractionDigits: 0,  // No fractional to make it easier to choose.
             vertical: true,
             maximumValueDescription: question.maxDescription,
             minimumValueDescription: question.minDescription
