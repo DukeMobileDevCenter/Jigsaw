@@ -27,8 +27,8 @@ class GameViewController: ORKTaskViewController {
         step.title = "Chatroom"
         step.detailText =
         """
-        You'll see a chatroom on the next screen. Share what you learned with your peers.
-        After everyone have joined the chatroom, you can quit the chat and move forward.
+        Hi team! You can now chat about what you've just seen.
+        Remember that different team members have seen different quotations from different candidates' websites, and the whole team needs to know about all of these quotations in order to escape to the next room.
         """
         step.iconImage = UIImage(systemName: "bubble.left.and.bubble.right")!
         return step
