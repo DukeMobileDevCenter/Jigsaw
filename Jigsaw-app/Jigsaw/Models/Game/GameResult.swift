@@ -51,6 +51,14 @@ struct GameResult {
         return [.correct: correct, .skipped: skipped, .incorrect: incorrect, .unknown: unknown]
     }
     
+    var summary: String {
+        """
+        Correct: \(resultPairs[0].1)
+        Skipped: \(resultPairs[1].1)
+        Incorrect: \(resultPairs[2].1)
+        """
+    }
+    
     var score: Double {
         let total: Int = resultPairs
             .map { key, value in
@@ -69,7 +77,7 @@ struct GameResult {
     }
     
     var isPassed: Bool {
-        score > 0.6
+        score > 0.75
     }
     
     var wrongCount: Int {

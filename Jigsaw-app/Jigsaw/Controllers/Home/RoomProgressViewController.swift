@@ -307,6 +307,7 @@ extension RoomProgressViewController: ORKTaskViewControllerDelegate {
         let gameResult = GameResult(taskResults: [taskVC.result], questionnaires: [gameOfMyGroup.questionnaires[currentRoom!]])
         let progress = CGFloat(gameGroup.roomAttemptedUserIDs.count + 1) / CGFloat(gameGroup.allPlayersUserIDs.count)
         stepVC.setProgress(progress, animated: true)
+        stepVC.updateText("Below is a summary of current room:\n\(gameResult.summary)")
         
         // Add user ID to attempted array.
         // Note: it must go after the alert is presented. Otherwise it would cause
