@@ -250,8 +250,9 @@ class RoomProgressViewController: UIViewController {
             FirebaseConstants.shared.gamegroups.document(gameGroup.id!).updateData([
                 "allRoomsFinishedUserScores": FieldValue.arrayUnion([allPreviosGameResult.score])
             ])
-            // Stop listen to further updates to game groups.
-            gameGroupListener?.remove()
+//            // Stop listen to further updates to game groups.
+//            gameGroupListener?.remove()
+            cleanUpRemoteAfterGameEnds()
             // Add game history to a player's histories collection.
             let gameHistory = GameHistory(
                 gameID: gameOfMyGroup.gameID,
