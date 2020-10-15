@@ -101,7 +101,7 @@ class MetricsViewController: UIViewController {
 extension MetricsViewController: ChartViewDelegate {
     func setup(radarChartView chartView: RadarChartView) {
         chartView.delegate = self
-        chartView.backgroundColor = .systemBackground
+        chartView.backgroundColor = .secondarySystemBackground
         chartView.layer.cornerRadius = 20
         
         chartView.chartDescription?.enabled = false

@@ -369,7 +369,7 @@
                                         <subviews>
                                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zag-mg-ztD" customClass="RadarChartView" customModule="Charts">
                                                 <rect key="frame" x="0.0" y="0.0" width="374" height="467.5"/>
-                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                <color key="backgroundColor" systemColor="secondarySystemBackgroundColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="zag-mg-ztD" secondAttribute="height" multiplier="4:5" id="kFj-c0-gIe"/>
                                                 </constraints>
@@ -440,7 +440,7 @@
                             </scrollView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="lhO-9s-jMu"/>
-                        <color key="backgroundColor" systemColor="secondarySystemBackgroundColor"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="it3-ZO-4m6" secondAttribute="bottom" id="8zF-Ex-nkB"/>
                             <constraint firstItem="it3-ZO-4m6" firstAttribute="leading" secondItem="A64-7g-F0X" secondAttribute="leading" id="BA4-t6-d1M"/>
