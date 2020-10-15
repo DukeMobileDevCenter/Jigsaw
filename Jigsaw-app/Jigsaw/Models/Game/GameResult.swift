@@ -136,8 +136,8 @@ struct GameResult {
             guard let answer = (result as? ORKScaleQuestionResult)?.scaleAnswer else {
                 return .skipped
             }
-            guard let correctMin = (question as? ScaleQuestion)?.correctMinValue,
-                let correctMax = (question as? ScaleQuestion)?.correctMaxValue else {
+            guard let correctMin = (question as? ContinuousScaleQuestion)?.correctMinValue,
+                let correctMax = (question as? ContinuousScaleQuestion)?.correctMaxValue else {
                     return .unknown
             }
             outcome = (correctMin...correctMax).contains(answer.intValue) ? .correct : .incorrect

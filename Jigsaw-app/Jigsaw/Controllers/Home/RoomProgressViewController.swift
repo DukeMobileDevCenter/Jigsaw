@@ -35,6 +35,7 @@ class RoomProgressViewController: UIViewController {
     @IBAction func surveyButtonTapped(_ sender: UIButton) {
         let controller = SFSafariViewController(url: AppConstants.feedbackFormURL)
         present(controller, animated: true)
+        isSurveyShown = true
     }
     
     @IBOutlet var chartView: PieChartView! {
@@ -73,6 +74,7 @@ class RoomProgressViewController: UIViewController {
     private var roomResults = [ORKTaskResult]()
     
     private var isChatroomShown = false
+    private var isSurveyShown = false
     private var isMeDropped = true
     
     private var attempts = 0
@@ -225,6 +227,10 @@ class RoomProgressViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        // Do nothing if the player has already seen the survey, which means
+        // he either failed or finished the game.
+        guard !isSurveyShown else { return }
+        
         // Reload doors collection view.
         collectionView.reloadData()
         
