@@ -99,31 +99,30 @@ exports.makeGameGroup = functions.firestore.document('/Queues/{gameName}/{queueN
 });
 
 /*
-  Listens for "allRoomsFinishedUserScores" field changes in /GameGroups/:groupID,
+  Listens for deletes in /GameGroups/:groupID,
   creates a team ranking to /TeamRankings and remove the game group.
 */
-exports.addTeamRankingAndRemoveMatchGroup = functions.firestore.document('/GameGroups/{groupID}').onUpdate(async (change, context) => {
-  // Get newValue from the update.
-  const newValue = change.after.data();
+exports.addTeamRankingAndRemoveMatchGroup = functions.firestore.document('/GameGroups/{groupID}').onDelete(async (snap, context) => {
+  // Get deleted value.
+  const deletedValue = snap.data();
   
-  const group1 = newValue.group1;
-  const group2 = newValue.group2;
-  const groupPlayerCount = group1.length + group2.length;
-  const allScores = newValue.allRoomsFinishedUserScores;
+  // Actually it is a few random scores from the team.
+  const allScores = deletedValue.allRoomsFinishedUserScores;
   // All players have finished the game.
 
-  if (allScores.length === groupPlayerCount) {  // eslint let me check object eq...
+  if (allScores.length > 0) {
+    functions.logger.log('Finished count = ', allScores.length);
     // Create a TeamRanking object.
     const averageScore = allScores.reduce((a,b) => (a+b)) / allScores.length;
     const teamRanking = {
       "teamName": "Jigsaw Team",
       "playerIDs": [].concat(group1, group2),
-      "gameName": newValue.gameName,
+      "gameName": deletedValue.gameName,
       "score": averageScore,
-      "playedDate": newValue.createdDate
+      "playedDate": deletedValue.createdDate
     };
     // Delete the game group.
-    const res1 = await db.collection('GameGroups').doc(context.params.groupID).delete();
+    // const res1 = await db.collection('GameGroups').doc(context.params.groupID).delete();
     // Add the team ranking in collection "TeamRankings" with generated ID.
     const res2 = await db.collection('TeamRankings').add(teamRanking);
   }
