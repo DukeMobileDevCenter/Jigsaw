@@ -221,7 +221,7 @@ class RoomProgressViewController: UIViewController {
         loadChatroom { [unowned self] in
             ProgressHUD.dismiss()
             // After the chatroom is loaded, present the first room.
-            self.presentRoom(room: currentRoom!)
+            presentRoom(room: currentRoom!)
         }
     }
     
@@ -252,6 +252,9 @@ class RoomProgressViewController: UIViewController {
             ])
             
             // FIXME: more comments needed here.
+            // Should change to sth like this: when done, add to finished array.
+            // when array has less than 3 in len, remove the listener but dont delete the group
+            // when array has 3, both remove the listener and delete the group.
             cleanUpRemoteAfterGameEnds()
             // Add game history to a player's histories collection.
             let gameHistory = GameHistory(
