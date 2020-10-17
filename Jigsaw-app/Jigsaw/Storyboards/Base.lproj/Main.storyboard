@@ -121,7 +121,6 @@
                         <outlet property="playersCountSegmentedControl" destination="KsP-MD-Xda" id="ADk-vn-DWX"/>
                         <segue destination="8h7-tJ-Fxn" kind="show" identifier="showCategory" id="b8U-v2-sN6"/>
                         <segue destination="qIk-Vr-9mo" kind="show" identifier="showRandom" id="tOa-KL-BCv"/>
-                        <segue destination="qIk-Vr-9mo" kind="show" identifier="showSpecific" animates="NO" id="uxd-NL-JaG"/>
                     </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FUz-N4-EiH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -714,7 +713,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="uxd-NL-JaG"/>
+        <segue reference="zl6-Sm-1ug"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="arrow.right.circle" catalog="system" width="128" height="121"/>
