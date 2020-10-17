@@ -210,7 +210,7 @@ class HomeCollectionViewController: UICollectionViewController {
             let destinationVC = segue.destination as! MatchingViewController
             destinationVC.queueType = queueType
             destinationVC.selectedGame = randomGame
-            print("Info: Random game is \(randomGame.gameName)")
+            os_log(.info, "Random game is %s", randomGame.gameName)
         default:
             preconditionFailure("Unexpected segue identifier.")
         }
