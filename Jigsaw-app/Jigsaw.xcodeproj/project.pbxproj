@@ -306,9 +306,9 @@
 		005856CA24D92F820010BE55 /* Game */ = {
 			isa = PBXGroup;
 			children = (
-				0020D54824DF79CB00DB20E1 /* GameStore.swift */,
 				0020D54A24DF7A0D00DB20E1 /* Game.swift */,
 				0047630524ED1154007767A5 /* GameCategory.swift */,
+				0020D54824DF79CB00DB20E1 /* GameStore.swift */,
 				0020D54F24DFAED000DB20E1 /* GameOfGroup.swift */,
 				00A06D8C24E8A9B400030649 /* GameGroup.swift */,
 				00B6305E24FB0247008975CE /* GameResult.swift */,
