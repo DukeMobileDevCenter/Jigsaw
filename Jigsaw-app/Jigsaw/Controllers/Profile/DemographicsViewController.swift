@@ -50,7 +50,7 @@ class DemographicsViewController: FormViewController {
     
     private func createForm() {
         form
-        +++ Section(header: "Update your demographics here.", footer: "Blah blah blah all the information are confidential.")
+        +++ Section(header: "Update your demographics here.", footer: "All the information are confidential and only used for research purposes.")
         <<< actionSheetRow(title: "Age", tag: "age", selectorTitle: "Provide your age group", options: AgeGroup.allCases.map { $0.label })
         <<< actionSheetRow(title: "Gender", tag: "gender", selectorTitle: "How you identify your gender", options: Gender.allCases.map { $0.label })
         <<< actionSheetRow(title: "Education", tag: "education", selectorTitle: "Highest education level so far", options: EducationLevel.allCases.map { $0.label })
