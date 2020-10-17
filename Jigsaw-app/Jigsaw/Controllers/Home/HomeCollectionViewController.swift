@@ -129,8 +129,13 @@ class HomeCollectionViewController: UICollectionViewController {
         if isRandomCell(for: indexPath) {
             // Handle random cell specifically.
             getGameWithLeastWaitingTime(queueType: queueType) { [unowned self] game in
-                self.randomGame = game
-                self.performSegue(withIdentifier: "showRandom", sender: cell)
+                if let game = game {
+                    self.randomGame = game
+                    self.performSegue(withIdentifier: "showRandom", sender: cell)
+                } else {
+                    // If the query returns empty game result, show an alert.
+                    presentAlert(title: "Info", message: "No random game available.")
+                }
             }
         } else {
             // Do the normal synchronous performSegue.
@@ -144,24 +149,21 @@ class HomeCollectionViewController: UICollectionViewController {
     ///   - queueType: The players queue type, 2 or 4 players.
     ///   - completion: Return the game after sorting all games by their modulos.
     ///   - game: The game with the largest modulo.
-    private func getGameWithLeastWaitingTime(queueType: PlayersQueue, completion: @escaping (_ game: Game) -> Void) {
+    private func getGameWithLeastWaitingTime(queueType: PlayersQueue, completion: @escaping (_ game: Game?) -> Void) {
         let loadGroup = DispatchGroup()
         let moduloDivisor = queueType == .twoPlayersQueue ? 2 : 4
         // An array of (queue's player count mod by queue type) and (game) tuples.
         var moduloGamePairs = [(queuePlayerCountModulo: Int, game: Game)]()
         
         ProgressHUD.show(interaction: false)
-        for game in GameStore.shared.allGames {
-            if game.level != 1 { break }
+        for game in GameStore.shared.allGames where game.isEnabled {
             let queuesRef = FirebaseConstants.database.collection(["Queues", game.gameName, queueType.rawValue].joined(separator: "/"))
             loadGroup.enter()
-            queuesRef.getDocuments { querySnapshot, error in
+            queuesRef.getDocuments { querySnapshot, _ in
                 defer {
                     loadGroup.leave()
                 }
-                if error != nil {
-                    os_log(.error, "Error: finding the quickest game from remote")
-                } else if let querySnapshot = querySnapshot {
+                if let querySnapshot = querySnapshot {
                     let documentsCount = querySnapshot.documents.count
                     moduloGamePairs.append((documentsCount % moduloDivisor, game))
                 }
@@ -171,7 +173,7 @@ class HomeCollectionViewController: UICollectionViewController {
         loadGroup.notify(queue: .main) {
             ProgressHUD.dismiss()
             moduloGamePairs.sort { $0.queuePlayerCountModulo > $1.queuePlayerCountModulo }
-            completion(moduloGamePairs.first!.game)
+            completion(moduloGamePairs.first?.game)
         }
     }
     
