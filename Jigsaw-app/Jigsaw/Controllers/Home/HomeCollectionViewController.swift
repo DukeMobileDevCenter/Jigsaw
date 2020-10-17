@@ -23,13 +23,9 @@ class HomeCollectionViewController: UICollectionViewController {
         playersCountSegmentedControl.selectedSegmentIndex == 0 ? .twoPlayersQueue : .fourPlayersQueue
     }
     
-    @IBAction func testBarButtonTapped(_ sender: UIBarButtonItem) {
-        // Maybe put a sort or filter button here.
-        // Sort by date or name or category, etc.
-        // filter by name and category.
-        testShowChatroom(sender)
-//        PopulateGamesFromYAML.shared.uploadGame()
-    }
+//    @IBAction func testBarButtonTapped(_ sender: UIBarButtonItem) {
+//        testShowChatroom(sender)
+//    }
     
     @IBAction func segmentedControlValueChanged(_ sender: UISegmentedControl) {
         navigationItem.title = playersCountSegmentedControl.selectedSegmentIndex == 0 ? "Games - 2P" : "Games - 4P"
