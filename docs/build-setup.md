@@ -46,9 +46,9 @@ It should take a few to ten more minutes to setup these dependencies. (13 minute
 
 ## Build and run the app
 
-Simply click run button in the project. Rename the bundle identifier if you need to sign and install on a device. (Don't use the no "-beta" bundle id yet - I want to reserve it for release. 😅) I didn't really test it on a real device, but I assume it would work.
+Simply click run button in the project. Rename the bundle identifier if you need to sign and install on a device. (Don't use the bundle id without beta - I want to reserve it for release. 😅)
 
-The interface design is based on iPhone 11, and I encourage you to check if they also look good with other dimensions.
+The interface design is based on iPhone 11, and it is encouraged to check if they also look good with other dimensions.
 
 ## Play with the app
 
@@ -60,4 +60,4 @@ Most of the steps should be intuitive.
 
 ---
 
-Last update: 200910
+Last update: 201017
