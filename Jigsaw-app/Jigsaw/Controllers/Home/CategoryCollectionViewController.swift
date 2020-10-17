@@ -6,7 +6,6 @@
 //  Copyright © 2020 DukeMobileDevCenter. All rights reserved.
 //
 
-import os
 import UIKit
 
 class CategoryCollectionViewController: UICollectionViewController {
