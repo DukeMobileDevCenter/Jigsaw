@@ -81,8 +81,12 @@ class RoomProgressViewController: UIViewController {
     private var currentRoom: Int? = 0 {
         didSet {
             if let room = currentRoom {
-                roomLevelLabel.text = "You are in room \(room + 1)"
-                nextRoomButton.isEnabled = room > 0
+                if gameCompleted {
+                    roomLevelLabel.text = "You've completed the game! 🎉"
+                } else {
+                    roomLevelLabel.text = "You are in room \(room + 1)"
+                    nextRoomButton.isEnabled = true
+                }
             } else {
                 roomLevelLabel.text = "Jigsaw broken 😞"
                 nextRoomButton.isEnabled = false
@@ -94,6 +98,13 @@ class RoomProgressViewController: UIViewController {
     private var gameViewController: GameViewController!
     
     private var gameGroupListener: ListenerRegistration?
+    
+    private var gameCompleted: Bool {
+        guard let room = currentRoom, room >= gameOfMyGroup.questionnaires.count else {
+            return false
+        }
+        return true
+    }
     
     private func presentRoom(room: Int) {
         gameViewController = GameViewController(game: gameOfMyGroup, currentRoom: room)
@@ -245,7 +256,7 @@ class RoomProgressViewController: UIViewController {
         }
         
         // All rooms passed, add the records to player's game history.
-        if currentRoom == gameOfMyGroup.questionnaires.count {
+        if gameCompleted {
             // Mark the player as all rooms finished.
             FirebaseConstants.shared.gamegroups.document(gameGroup.id!).updateData([
                 "allRoomsFinishedUserScores": FieldValue.arrayUnion([allPreviosGameResult.score])
