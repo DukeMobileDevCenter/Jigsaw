@@ -17,7 +17,7 @@ const db = admin.firestore();
   Listens for new players added to /Queues/:documentId/twoPlayersQueue or
   fourPlayersQueue and creates a game group to /GameGroups.
 */
-exports.makeGameGroup = functions.firestore.document('/Queues/{gameName}/{queueName}/{userID}').onWrite(async (change, context) => {
+exports.makeGameGroup = functions.firestore.document('/Queues/{gameName}/{queueName}/{userID}').onCreate(async (change, context) => {
   // Reference to the parent.
   const ref = db.collection(['Queues', context.params.gameName, context.params.queueName].join('/'));
   
