@@ -66,7 +66,8 @@ exports.makeGameGroup = functions.firestore.document('/Queues/{gameName}/{queueN
   const gameName = context.params.gameName;
   // Create an anonymous chatroom.
   const chatroom = await db.collection('Chatrooms').add({
-    name: gameName
+    "name": gameName,
+    "playerIDs": [].concat(group1, group2)
   });
   // Get the chatroom ID.
   const chatroomID = chatroom.id;
@@ -106,14 +107,15 @@ exports.addTeamRankingAndRemoveMatchGroup = functions.firestore.document('/GameG
   // Get deleted value.
   const deletedValue = snap.data();
   
-  // Actually it is a few random scores from the team.
   const allScores = deletedValue.allRoomsFinishedUserScores;
-  // All players have finished the game.
 
+  // Some/All players have finished the game.
   if (allScores.length > 0) {
     functions.logger.log('Finished count = ', allScores.length);
     // Create a TeamRanking object.
     const averageScore = allScores.reduce((a,b) => (a+b)) / allScores.length;
+    const group1 = deletedValue.group1;
+    const group2 = deletedValue.group2;
     const teamRanking = {
       "teamName": "Jigsaw Team",
       "playerIDs": [].concat(group1, group2),
@@ -127,3 +129,20 @@ exports.addTeamRankingAndRemoveMatchGroup = functions.firestore.document('/GameG
     const res2 = await db.collection('TeamRankings').add(teamRanking);
   }
 });
+
+/*
+  Take the text parameter "groupID" passed to this HTTP endpoint
+  and purge the game group in Firestore under /GameGroups/:groupID
+*/
+exports.removeGameGroup = functions.https.onRequest(async (req, res) => {
+  // Grab the text parameter.
+  const groupID = req.query.groupID;
+  // Push the new message into Cloud Firestore using the Firebase Admin SDK.
+  const deleteResult = await db.collection('GameGroups').doc(groupID).delete();
+  // Send back an empty 200 status.
+  res.status(200).send();
+});
+
+// https://firebase.google.com/docs/firestore/manage-data/delete-data
+// To add:
+// - Delete messages
