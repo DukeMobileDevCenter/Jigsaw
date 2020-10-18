@@ -86,7 +86,7 @@ class GameCategoryClass: NSObject, UICollectionViewDataSource {
     // Singleton of the class.
     static let shared = GameCategoryClass()
     
-    // FIXME: for beta testing, don't include the random option.
+    // FIXME: for beta, don't include the random option.
     /// A wrapper to all of the enum cases.
     let allCases = GameCategory.allCases.dropLast()
     

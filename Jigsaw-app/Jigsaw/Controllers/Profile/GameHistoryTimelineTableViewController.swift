@@ -24,7 +24,7 @@ class GameHistoryTimelineTableViewController: UITableViewController {
         // When the data is pulled from remote, submit the score to Game Center.
         GameCenterHelper.shared.submitAverageScore(averageScore * 1000)
         GameCenterHelper.shared.submitGamesPlayed(gameHistories.count)
-        // FIXME: not reporting achievement for beta.
+        // FIXME: for beta, do not reporting achievement.
         // Every time enter a category page, report the progress to GameCenter.
         // We can come up with better strategy.
         // This page will be eventually redesigned to a place to view all records in a timeline
