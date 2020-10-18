@@ -27,6 +27,8 @@ class Profiles: CustomStringConvertible {
     static var currentPlayer: Player! = nil
     /// A set of strings for IDs of played game.
     static var playedGameIDs = Set<String>()
+    /// The game group's ID where the current player is in. If the player is not in a game, then it is nil.
+    static var currentGroupID: String?
     
     private enum SettingKeys: String, CaseIterable {
         // User info.

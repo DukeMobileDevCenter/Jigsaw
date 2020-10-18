@@ -9,6 +9,7 @@
 import UIKit
 import Firebase
 import FirebaseUI
+import FirebaseFunctions
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -42,7 +43,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
     }
     
-    /// - Note: https://firebase.google.com/docs/auth/ios/firebaseui?authuser=1
+    // - Note: https://firebase.google.com/docs/auth/ios/firebaseui?authuser=1
     func application(_ application: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey: Any]) -> Bool {
         let sourceApplication = options[UIApplication.OpenURLOptionsKey.sourceApplication] as! String?
         if FUIAuth.defaultAuthUI()?.handleOpen(url, sourceApplication: sourceApplication) ?? false {
@@ -50,5 +51,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         // Other URL handling goes here.
         return false
+    }
+    
+    // - Note: https://developer.apple.com/documentation/uikit/uiapplicationdelegate/1623111-applicationwillterminate
+    func applicationWillTerminate(_ application: UIApplication) {
+        if let groupID = Profiles.currentGroupID {
+            // If the player is currently in a game group.
+            let functions = Functions.functions()
+            // Call the cloud function and ignore the result.
+            functions.httpsCallable("removeGameGroup").call(["groupID": groupID], completion: { _, _ in })
+        }
     }
 }
