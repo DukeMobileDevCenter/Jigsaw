@@ -13,4 +13,17 @@ enum AnswerCategory: String, CaseIterable, Codable {
     case skipped
     case incorrect
     case unknown
+    
+    var label: String {
+        switch self {
+        case .correct:
+            return "Correct"
+        case .skipped:
+            return "Skipped"
+        case .incorrect:
+            return "Incorrect"
+        case .unknown:
+            return "Unknown"
+        }
+    }
 }

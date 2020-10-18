@@ -9,4 +9,13 @@
 enum PlayersQueue: String {
     case twoPlayersQueue
     case fourPlayersQueue
+    
+    var playerCount: Int {
+        switch self {
+        case .twoPlayersQueue:
+            return 2
+        case .fourPlayersQueue:
+            return 4
+        }
+    }
 }

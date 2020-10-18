@@ -147,7 +147,7 @@ class HomeCollectionViewController: UICollectionViewController {
     ///   - game: The game with the largest modulo.
     private func getGameWithLeastWaitingTime(queueType: PlayersQueue, completion: @escaping (_ game: Game?) -> Void) {
         let loadGroup = DispatchGroup()
-        let moduloDivisor = queueType == .twoPlayersQueue ? 2 : 4
+        let moduloDivisor = queueType.playerCount
         // An array of (queue's player count mod by queue type) and (game) tuples.
         var moduloGamePairs = [(queuePlayerCountModulo: Int, game: Game)]()
         

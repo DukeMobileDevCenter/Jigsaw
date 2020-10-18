@@ -511,7 +511,7 @@ extension RoomProgressViewController: ChartViewDelegate {
             }
             return PieChartDataEntry(
                 value: Double(value) / Double(totalCount),
-                label: key.rawValue
+                label: key.label
             )
         }
         
