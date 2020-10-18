@@ -30,7 +30,12 @@ extension UIViewController {
     func presentAlert(gameError: GameError) {
         let okAction = UIAlertAction(title: "OK", style: .default)
         let alertController = UIAlertController(title: "Jigsaw Broken", message: gameError.description, preferredStyle: .alert, actions: [okAction])
-        present(alertController, animated: true)
+        if let controller = presentedViewController {
+            // Dismiss existing alert before present.
+            controller.dismiss(animated: false, completion: { [weak self] in self?.present(alertController, animated: true) })
+        } else {
+            present(alertController, animated: true)
+        }
     }
 }
 
