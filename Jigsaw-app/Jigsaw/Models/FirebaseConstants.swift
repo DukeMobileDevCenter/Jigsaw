@@ -11,23 +11,20 @@ import FirebaseFirestore
 import FirebaseStorage
 import FirebaseAuth
 
-class FirebaseConstants: NSObject {
-    // Singleton of the class.
-    static let shared = FirebaseConstants()
-    
+enum FirebaseConstants {
     static let database = Firestore.firestore()
     static let storage = Storage.storage()
     static let auth = Auth.auth()
     
-    let chatrooms = database.collection("Chatrooms")
-    let players = database.collection("Players")
-    let queues = database.collection("Queues")
-    let gamegroups = database.collection("GameGroups")
+    static let chatrooms = database.collection("Chatrooms")
+    static let players = database.collection("Players")
+    static let queues = database.collection("Queues")
+    static let gamegroups = database.collection("GameGroups")
     /// A collection of team ranking stats.
-    let teamRankings = database.collection("TeamRankings")
+    static let teamRankings = database.collection("TeamRankings")
     
-    let gamesStorage = storage.reference(withPath: "Games")
-    let chatroomStorage = storage.reference(withPath: "Chatrooms")
+    static let gamesStorage = storage.reference(withPath: "Games")
+    static let chatroomStorage = storage.reference(withPath: "Chatrooms")
     
     static func chatroomMessagesRef(chatroomID: String) -> CollectionReference {
         database.collection(["Chatrooms", chatroomID, "messages"].joined(separator: "/"))

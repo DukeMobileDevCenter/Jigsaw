@@ -11,7 +11,7 @@ import Eureka
 
 class DemographicsViewController: FormViewController {
     // Load from firebase to fill in user info.
-    private let playersDocRef = FirebaseConstants.shared.players.document(Profiles.userID)
+    private let playersDocRef = FirebaseConstants.players.document(Profiles.userID)
     
     private func updatePlayerDemographics(demographics: [String: String?]) {
         playersDocRef.updateData(["demographics": demographics]) { error in

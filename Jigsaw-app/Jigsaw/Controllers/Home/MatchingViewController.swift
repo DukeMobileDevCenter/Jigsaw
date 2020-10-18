@@ -56,7 +56,7 @@ class MatchingViewController: UIViewController {
     
     private func setGameGroupListener() {
         // Listen to game group changes when the player joined a waiting queue.
-        gameGroupListener = FirebaseConstants.shared.gamegroups.addSnapshotListener { [weak self] querySnapshot, _ in
+        gameGroupListener = FirebaseConstants.gamegroups.addSnapshotListener { [weak self] querySnapshot, _ in
             guard let snapshot = querySnapshot else { return }
             snapshot.documentChanges.forEach { change in
                 self?.handleDocumentChange(change)

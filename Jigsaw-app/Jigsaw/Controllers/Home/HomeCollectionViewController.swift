@@ -32,7 +32,7 @@ class HomeCollectionViewController: UICollectionViewController {
     }
     
     private func testShowChatroom(_ sender: UIBarButtonItem) {
-        let chatroomsRef = FirebaseConstants.shared.chatrooms.document("TestChatroom")
+        let chatroomsRef = FirebaseConstants.chatrooms.document("TestChatroom")
         chatroomsRef.getDocument { [weak self] document, error in
             guard let self = self else { return }
             if let document = document, let chatroom = Chatroom(document: document) {
