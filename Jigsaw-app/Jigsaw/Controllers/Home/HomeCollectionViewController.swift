@@ -217,15 +217,13 @@ class HomeCollectionViewController: UICollectionViewController {
     }
 }
 
-extension HomeCollectionViewController {
+// MARK: - UICollectionView
+
+extension HomeCollectionViewController: UICollectionViewDelegateFlowLayout {
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         handleRandomPerform(for: indexPath)
     }
-}
-
-// MARK: - UICollectionViewDelegateFlowLayout
-
-extension HomeCollectionViewController: UICollectionViewDelegateFlowLayout {
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let collectionViewSize = collectionView.bounds.inset(by: collectionView.safeAreaInsets).size
         let spacing: CGFloat = 10
