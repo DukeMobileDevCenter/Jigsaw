@@ -554,8 +554,8 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0070E00524B0060500E71F46 /* Build configuration list for PBXNativeTarget "Jigsaw" */;
 			buildPhases = (
-				006EB049253BA63E00FE5D8A /* Set Bundle Build Version to date */,
 				BCABCBAFB4266F05EE57AD41 /* [CP] Check Pods Manifest.lock */,
+				006EB049253BA63E00FE5D8A /* Set Bundle Build Version to date */,
 				0070DFE224B0060400E71F46 /* Sources */,
 				0070DFE324B0060400E71F46 /* Frameworks */,
 				0070DFE424B0060400E71F46 /* Resources */,
