@@ -51,12 +51,4 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Other URL handling goes here.
         return false
     }
-    
-    // - Note: https://developer.apple.com/documentation/uikit/uiapplicationdelegate/1623111-applicationwillterminate
-    func applicationWillTerminate(_ application: UIApplication) {
-        if let groupID = Profiles.currentGroupID {
-            // Remove matching game group from database after game is dropped.
-            FirebaseConstants.gamegroups.document(groupID).delete()
-        }
-    }
 }
