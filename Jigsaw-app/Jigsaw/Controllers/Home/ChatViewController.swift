@@ -95,7 +95,7 @@ class ChatViewController: MessagesViewController {
             return
         }
         
-        messagesReference = FirebaseConstants.database.collection(["Chatrooms", id, "messages"].joined(separator: "/"))
+        messagesReference = FirebaseConstants.chatroomMessagesRef(chatroomID: id)
         
         messageListener = messagesReference?.addSnapshotListener { [weak self] querySnapshot, _ in
             guard let snapshot = querySnapshot else { return }

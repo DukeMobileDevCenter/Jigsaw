@@ -135,12 +135,14 @@ class MatchingViewController: UIViewController {
             let destinationVC = segue.destination as! RoomProgressViewController
             destinationVC.gameGroup = gameGroup
             destinationVC.gameOfMyGroup = gameOfMyGroup
+            // Record the game group ID to handle crash.
+            Profiles.currentGroupID = gameGroup.id
         }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        queuesRef = FirebaseConstants.database.collection(["Queues", selectedGame.gameName, queueType.rawValue].joined(separator: "/"))
+        queuesRef = FirebaseConstants.gameQueueRef(gameName: selectedGame.gameName, queueType: queueType)
     }
     
     override func viewWillAppear(_ animated: Bool) {

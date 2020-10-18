@@ -114,7 +114,7 @@ class RoomProgressViewController: UIViewController {
     }
     
     private func addGameHistory(gameHistory: GameHistory) {
-        let historyRef = FirebaseConstants.database.collection(["Players", Profiles.userID, "gameHistory"].joined(separator: "/"))
+        let historyRef = FirebaseConstants.playerGameHistoryRef(userID: Profiles.userID)
         do {
             // Set a history with the group ID.
             try historyRef.document(gameGroup.id!).setData(from: gameHistory)
@@ -288,6 +288,8 @@ class RoomProgressViewController: UIViewController {
         // Reset VCs.
         chatroomViewController = nil
         gameViewController = nil
+        // Clear group ID.
+        Profiles.currentGroupID = nil
         print("✅ room vc deinit")
     }
 }

@@ -67,7 +67,7 @@ enum FirebaseHelper {
     ///   - userID: The user ID of the player.
     ///   - completion: A closure that passes back an array of `GameHistory`.
     static func getGameHistory(userID: String, completion: @escaping ([GameHistory]?, Error?) -> Void) {
-        let historyRef = FirebaseConstants.database.collection(["Players", userID, "gameHistory"].joined(separator: "/"))
+        let historyRef = FirebaseConstants.playerGameHistoryRef(userID: userID)
         var gameHistories: [GameHistory] = []
         historyRef.getDocuments { querySnapshot, error in
             if let snapshot = querySnapshot {

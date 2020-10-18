@@ -153,7 +153,7 @@ class HomeCollectionViewController: UICollectionViewController {
         
         ProgressHUD.show(interaction: false)
         for game in GameStore.shared.allGames where game.isEnabled {
-            let queuesRef = FirebaseConstants.database.collection(["Queues", game.gameName, queueType.rawValue].joined(separator: "/"))
+            let queuesRef = FirebaseConstants.gameQueueRef(gameName: game.gameName, queueType: queueType)
             loadGroup.enter()
             queuesRef.getDocuments { querySnapshot, _ in
                 defer {
