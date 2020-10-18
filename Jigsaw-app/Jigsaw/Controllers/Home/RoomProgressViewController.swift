@@ -78,7 +78,7 @@ class RoomProgressViewController: UIViewController {
                     surveyButton.isHidden = false
                     navigationItem.hidesBackButton = false
                 } else {
-                    roomLevelLabel.text = "You are in room \(room + 1)"
+                    roomLevelLabel.text = "You are now in room \(room + 1)"
                     nextRoomButton.isEnabled = true
                 }
             } else {
@@ -224,7 +224,10 @@ class RoomProgressViewController: UIViewController {
     }
     
     private func handleAllRoomFinished(group: GameGroup) {
-        // Do nothing here now.
+        if group.allRoomsFinishedUserScores.count == group.allPlayersUserIDs.count {
+            // Only 1 player will be notified with this change, and he takes care of clean up.
+            cleanUpRemoteAfterGameEnds()
+        }
     }
     
     // MARK: UIViewController
@@ -251,6 +254,7 @@ class RoomProgressViewController: UIViewController {
     private func cleanUpRemoteAfterGameEnds() {
         // Stop listen to further updates to game groups.
         gameGroupListener?.remove()
+        gameGroupListener = nil
         // Remove matching game group from database after game is dropped.
         FirebaseConstants.gamegroups.document(gameGroup.id!).delete()
         // Remove the chatroom when a player stops the game.
@@ -282,19 +286,19 @@ class RoomProgressViewController: UIViewController {
             attempts = 0
             // All rooms passed, add the records to player's game history.
             if gameCompleted {
-                if gameGroup.allRoomsFinishedUserScores.count == gameGroup.allPlayersUserIDs.count - 1 {
+                if gameGroup.allRoomsFinishedUserScores.count < gameGroup.allPlayersUserIDs.count - 1 {
                     // When all player finished array has 1 or 3, this is the last player to finish.
+                    // He will be notified by listener and take care of the clean ups.
                     
-                    // Mark the player as all rooms finished.
-                    FirebaseConstants.gamegroups.document(gameGroup.id!).updateData([
-                        "allRoomsFinishedUserScores": FieldValue.arrayUnion([allRoomsResult.score])
-                    ])
-                    cleanUpRemoteAfterGameEnds()
-                } else {
                     // when array has less than 3 in len, remove the listener but dont delete the group.
                     // Stop listen to further updates to game groups.
                     gameGroupListener?.remove()
+                    gameGroupListener = nil
                 }
+                // Mark the player as all rooms finished.
+                FirebaseConstants.gamegroups.document(gameGroup.id!).updateData([
+                    "allRoomsFinishedUserScores": FieldValue.arrayUnion([allRoomsResult.score])
+                ])
                 
                 // Add game history to a player's histories collection.
                 let gameHistory = GameHistory(
@@ -390,14 +394,17 @@ extension RoomProgressViewController: ORKTaskViewControllerDelegate {
                 taskViewController(taskVC, didFinishWith: .failed, error: GameError.maxAttemptReached)
             }
         } else {
+            let groupID = gameGroup.id!
+            let userID = Profiles.userID!
             // First mark the player as finished.
-            FirebaseConstants.gamegroups.document(gameGroup.id!).updateData([
-                "roomFinishedUserIDs": FieldValue.arrayUnion([Profiles.userID!])
-            ])
-            // Then mark the player as attempted.
-            FirebaseConstants.gamegroups.document(gameGroup.id!).updateData([
-                "roomAttemptedUserIDs": FieldValue.arrayUnion([Profiles.userID!])
-            ])
+            FirebaseConstants.gamegroups.document(groupID).updateData([
+                "roomFinishedUserIDs": FieldValue.arrayUnion([userID])
+            ]) { _ in
+                // Then mark the player as attempted.
+                FirebaseConstants.gamegroups.document(groupID).updateData([
+                    "roomAttemptedUserIDs": FieldValue.arrayUnion([userID])
+                ])
+            }
         }
     }
     
