@@ -11,13 +11,14 @@ import UIKit
 private let kAnimationLayerKey = "com.nshipster.animationLayer"
 
 /// A view that emits confetti.
-public final class ConfettiView: UIView {
-    public init() {
+final class ConfettiView: UIView, CAAnimationDelegate {
+    init() {
         super.init(frame: .zero)
         commonInit()
     }
     
-    required public init?(coder aDecoder: NSCoder) {
+    @available(*, unavailable)
+    required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         commonInit()
     }
@@ -30,16 +31,17 @@ public final class ConfettiView: UIView {
     /// - Parameters:
     ///   - contents: The contents to be emitted as confetti.
     ///   - duration: The amount of time in seconds to emit confetti before fading out; 3.0 seconds by default.
-    public func emit(with contents: [Content], for duration: TimeInterval = 3.0) {
+    func emit(_ contents: [Content], for duration: TimeInterval = 3.0) {
+        guard duration.isFinite else { return }
+        
         let layer = Layer()
         layer.configure(with: contents)
-        layer.frame = self.bounds
+        layer.frame = bounds
         layer.needsDisplayOnBoundsChange = true
         self.layer.addSublayer(layer)
         
-        guard duration.isFinite else { return }
-        
-        let animation = CAKeyframeAnimation(keyPath: #keyPath(CAEmitterLayer.birthRate))
+        let animation = CAKeyframeAnimation()
+        animation.keyPath = #keyPath(Layer.birthRate)
         animation.duration = duration
         animation.timingFunction = CAMediaTimingFunction(name: .easeIn)
         animation.fillMode = .forwards
@@ -47,46 +49,52 @@ public final class ConfettiView: UIView {
         animation.keyTimes = [0, 0.5, 1]
         animation.isRemovedOnCompletion = false
         
-        layer.beginTime = CACurrentMediaTime()
+//        layer.beginTime = CACurrentMediaTime()
         layer.birthRate = 1.0
+        layer.add(animation, forKey: kAnimationLayerKey)  // nil if fade out transition.
         
-        CATransaction.begin()
-        CATransaction.setCompletionBlock {
-            let transition = CATransition()
-            transition.delegate = self
-            transition.type = .fade
-            transition.duration = 1
-            transition.timingFunction = CAMediaTimingFunction(name: .easeOut)
-            transition.setValue(layer, forKey: kAnimationLayerKey)
-            transition.isRemovedOnCompletion = false
-            
-            layer.add(transition, forKey: nil)
-            
-            layer.opacity = 0
+        // Note: there are some issue with the code below that causes
+        // the animation not to stop.
+//        CATransaction.begin()
+//        CATransaction.setCompletionBlock { [unowned self, unowned layer] in
+//            let transition = CATransition()
+//            transition.delegate = self
+//            transition.type = .fade
+//            transition.duration = 1
+//            transition.timingFunction = CAMediaTimingFunction(name: .easeOut)
+//            transition.setValue(layer, forKey: kAnimationLayerKey)
+//            transition.isRemovedOnCompletion = false
+//
+//            layer.add(transition, forKey: nil)
+//
+//            layer.opacity = 0
+//        }
+//        CATransaction.commit()
+    }
+    
+    func animationDidStop(_ animation: CAAnimation, finished flag: Bool) {
+        if let layer = animation.value(forKey: kAnimationLayerKey) as? Layer {
+            layer.removeAllAnimations()
+            layer.removeFromSuperlayer()
         }
-        layer.add(animation, forKey: nil)
-        CATransaction.commit()
     }
     
     // MARK: UIView
     
-    override public func willMove(toSuperview newSuperview: UIView?) {
+    override func willMove(toSuperview newSuperview: UIView?) {
         guard let superview = newSuperview else { return }
         frame = superview.bounds
         isUserInteractionEnabled = false
     }
     
+    // swiftlint:disable nesting
+    
     /// Content to be emitted as confetti
-    public enum Content {
+    enum Content {
         /// Confetti shapes
-        public enum Shape {
-            /// A circle.
+        enum Shape {
             case circle
-            
-            /// A triangle.
             case triangle
-            
-            /// A square.
             case square
             
             // A custom shape.
@@ -95,13 +103,12 @@ public final class ConfettiView: UIView {
         
         /// A shape with a particular color.
         case shape(Shape, UIColor)
-        
         /// An image with an optional tint color.
         case image(UIImage, UIColor?)
-        
         /// A string of characters.
         case text(String)
     }
+    // swiftlint:enable nesting
     
     private final class Layer: CAEmitterLayer {
         func configure(with contents: [Content]) {
@@ -136,17 +143,6 @@ public final class ConfettiView: UIView {
             emitterShape = .line
             emitterSize = CGSize(width: frame.size.width, height: 1.0)
             emitterPosition = CGPoint(x: frame.size.width / 2.0, y: 0)
-        }
-    }
-}
-
-// MARK: - CAAnimationDelegate
-
-extension ConfettiView: CAAnimationDelegate {
-    public func animationDidStop(_ animation: CAAnimation, finished flag: Bool) {
-        if let layer = animation.value(forKey: kAnimationLayerKey) as? CALayer {
-            layer.removeAllAnimations()
-            layer.removeFromSuperlayer()
         }
     }
 }
