@@ -167,6 +167,5 @@ class MatchingViewController: UIViewController {
     deinit {
         // Remove player from queue when it exits the matching page.
         queuesRef.document(Profiles.userID).delete()
-        print("✅ matching VC deinit")
     }
 }
