@@ -14,19 +14,91 @@ import ProgressHUD
 import Charts
 
 class RoomProgressViewController: UIViewController {
-    /// The label to show current room level, debug only.
-    @IBOutlet var roomLevelLabel: UILabel!
-    /// The button to initiate next room. Enabled when room 0 is done.
-    @IBOutlet var nextRoomButton: UIButton!
+    // MARK: Storyboard views
     
-    @IBOutlet var surveyButton: UIButton!
-    
+    /// The collection view to display a series of doors.
     @IBOutlet var collectionView: UICollectionView! {
         didSet {
             collectionView.dataSource = self
             collectionView.delegate = self
         }
     }
+    /// The chart view for game results.
+    @IBOutlet var chartView: PieChartView! {
+        didSet {
+            // Setup the half pie chart view.
+            setup(pieChartView: chartView)
+        }
+    }
+    /// The label to show current room level, debug only.
+    @IBOutlet var roomLevelLabel: UILabel!
+    /// The button to initiate next room. Enabled when room 0 is done.
+    @IBOutlet var nextRoomButton: UIButton! {
+        didSet {
+            nextRoomButton.layer.cornerRadius = 15
+        }
+    }
+    /// The button to fill out the beta survey.
+    @IBOutlet var surveyButton: UIButton!
+    
+    // MARK: Properties
+    
+    /// The player's current game group set by the parent view controller.
+    var gameGroup: GameGroup!
+    /// The allocated game resources for current player set by the parent view controller. Only set once.
+    var gameOfMyGroup: GameOfGroup!
+    
+    private let confettiView = ConfettiView()
+    
+    /// The game results collected from each room.
+    private var roomResults = [ORKTaskResult]()
+    /// A copy of wait step results in current room, to decide if the player passed the room.
+    private var currentWaitStepRoomResult: GameResult!
+    /// A reference to the chatroom controller shared by all rooms in current game.
+    private var chatroomViewController: ChatViewController!
+    /// A reference to the room controller, i.e. the RK questionnaires.
+    private var roomViewController: GameViewController!
+    /// A FireStore listener on "GameGroups" collection.
+    private var gameGroupListener: ListenerRegistration?
+    
+    /// A flag to indicate if chatroom is shown for current room.
+    private var isChatroomShown = false
+    /// A flag to indicate if the game failure is caused by the current player.
+    private var isMeDropped = true
+    
+    /// The attempts count for each room.
+    private var attempts = 0
+    /// The index of current room, e.g. 0, 1, 2, 3...
+    private var currentRoom: Int? = 0 {
+        didSet {
+            if let room = currentRoom {
+                if gameCompleted {
+                    roomLevelLabel.text = "You've completed the game! 🎉"
+                    nextRoomButton.isHidden = true
+                    surveyButton.isHidden = false
+                    navigationItem.hidesBackButton = false
+                } else {
+                    roomLevelLabel.text = "You are in room \(room + 1)"
+                    nextRoomButton.isEnabled = true
+                }
+            } else {
+                roomLevelLabel.text = "Jigsaw broken 😞"
+                nextRoomButton.isEnabled = false
+                surveyButton.isHidden = false
+                navigationItem.hidesBackButton = false
+            }
+        }
+    }
+    
+    /// A boolean to indicate if all rooms are done in a game.
+    private var gameCompleted: Bool {
+        guard let room = currentRoom, room >= gameOfMyGroup.questionnaires.count else {
+            return false
+        }
+        return true
+    }
+    
+    // MARK: Actions
     
     @IBAction func nextRoomButtonTapped(_ sender: UIButton) {
         presentRoom(room: currentRoom!)
@@ -35,94 +107,25 @@ class RoomProgressViewController: UIViewController {
     @IBAction func surveyButtonTapped(_ sender: UIButton) {
         let controller = SFSafariViewController(url: AppConstants.feedbackFormURL)
         present(controller, animated: true)
-        isSurveyShown = true
-    }
-    
-    @IBOutlet var chartView: PieChartView! {
-        didSet {
-            // Setup the half pie chart view.
-            setup(pieChartView: chartView)
-        }
-    }
-    
-    private let chartCenterText: NSMutableAttributedString = {
-        // Center text settings.
-        let centerText = NSMutableAttributedString(string: "Results\nby Jigsaw")
-        centerText.setAttributes(
-            [
-                .font: UIFont.systemFont(ofSize: 15),
-                .foregroundColor: UIColor.label
-            ],
-            range: NSRange(location: 0, length: centerText.length)
-        )
-        centerText.addAttributes(
-            [
-                .font: UIFont(name: "HelveticaNeue-Light", size: 13)!,
-                .foregroundColor: UIColor.systemBlue
-            ],
-            range: NSRange(location: centerText.length - 6, length: 6)
-        )
-        return centerText
-    }()
-    
-    /// The player's current game group set by the parent view controller.
-    var gameGroup: GameGroup!
-    /// The allocated game resources for current player set by the parent view controller. Only set once.
-    var gameOfMyGroup: GameOfGroup!
-    
-    /// The game results collected from each room.
-    private var roomResults = [ORKTaskResult]()
-    
-    private var isChatroomShown = false
-    private var isSurveyShown = false
-    private var isMeDropped = true
-    
-    private var attempts = 0
-    private var currentRoom: Int? = 0 {
-        didSet {
-            if let room = currentRoom {
-                if gameCompleted {
-                    roomLevelLabel.text = "You've completed the game! 🎉"
-                } else {
-                    roomLevelLabel.text = "You are in room \(room + 1)"
-                    nextRoomButton.isEnabled = true
-                }
-            } else {
-                roomLevelLabel.text = "Jigsaw broken 😞"
-                nextRoomButton.isEnabled = false
-            }
-        }
-    }
-    
-    private var chatroomViewController: ChatViewController!
-    private var gameViewController: GameViewController!
-    
-    private var gameGroupListener: ListenerRegistration?
-    
-    private var gameCompleted: Bool {
-        guard let room = currentRoom, room >= gameOfMyGroup.questionnaires.count else {
-            return false
-        }
-        return true
+        surveyButton.isHidden = true
     }
     
     private func presentRoom(room: Int) {
-        gameViewController = GameViewController(game: gameOfMyGroup, currentRoom: room)
-        gameViewController.delegate = self
-        gameViewController.modalPresentationStyle = .fullScreen
-        present(gameViewController, animated: true)
+        roomViewController = GameViewController(game: gameOfMyGroup, currentRoom: room)
+        roomViewController.delegate = self
+        // Disallow dismiss-by-interactive-swipe-down for iOS 13 and above.
+        roomViewController.isModalInPresentation = true
+        present(roomViewController, animated: true)
     }
+    
+    // MARK: Methods
     
     private func addGameHistory(gameHistory: GameHistory) {
         let historyRef = FirebaseConstants.playerGameHistoryRef(userID: Profiles.userID)
-        do {
-            // Set a history with the group ID.
-            try historyRef.document(gameGroup.id!).setData(from: gameHistory)
-            // Insert the played game into history set.
-            Profiles.playedGameIDs.insert(gameHistory.gameID)
-        } catch {
-            presentAlert(error: error)
-        }
+        // Set a history with the group ID.
+        try? historyRef.document(gameGroup.id!).setData(from: gameHistory)
+        // Insert the played game into history set.
+        Profiles.playedGameIDs.insert(gameHistory.gameID)
     }
     
     private func setGameGroupListener() {
@@ -134,6 +137,24 @@ class RoomProgressViewController: UIViewController {
             }
         }
     }
+    
+    private func loadChatroom(completion: @escaping () -> Void) {
+        let chatroomsRef = FirebaseConstants.chatrooms.document(gameGroup.chatroomID)
+        chatroomsRef.getDocument { [weak self] document, error in
+            guard let self = self else { return }
+            if let document = document, let chatroom = Chatroom(document: document) {
+                let controller = ChatViewController(user: FirebaseConstants.auth.currentUser!, chatroom: chatroom)
+                controller.chatroomUserIDs = self.gameGroup.allPlayersUserIDs
+                self.chatroomViewController = controller
+            } else if let error = error {
+                self.presentAlert(error: error)
+                self.currentRoom = nil
+            }
+            completion()
+        }
+    }
+    
+    // MARK: FireStore listener related methods
     
     private func handleDocumentChange(_ change: DocumentChange) {
         guard let currentGroup = try? change.document.data(as: GameGroup.self),
@@ -149,12 +170,14 @@ class RoomProgressViewController: UIViewController {
                 handleModifiedAttemptedPlayerCount(group: currentGroup)
             } else if currentGroup.roomFinishedUserIDs.count > gameGroup.roomFinishedUserIDs.count {
                 handleModifiedFinishedPlayerCount(group: currentGroup)
+            } else if currentGroup.allRoomsFinishedUserScores.count > gameGroup.allRoomsFinishedUserScores.count {
+                handleAllRoomFinished(group: currentGroup)
             }
         case .removed:
             // If any player dropped the game before they finish, the others cannot play anymore.
-            if currentGroup.roomFinishedUserIDs.count != currentGroup.allPlayersUserIDs.count {
+            if currentGroup.allRoomsFinishedUserScores.count != currentGroup.allPlayersUserIDs.count {
                 isMeDropped = false
-                taskViewController(gameViewController, didFinishWith: .discarded, error: GameError.otherPlayerDropped)
+                taskViewController(roomViewController, didFinishWith: .failed, error: GameError.otherPlayerDropped)
             }
         default:
             break
@@ -182,33 +205,46 @@ class RoomProgressViewController: UIViewController {
                     "roomFinishedUserIDs": FieldValue.arrayRemove([Profiles.userID!])
                 ])
                 // Go back to the resource page.
-                gameViewController.flipToPage(withIdentifier: "Resource", forward: false, animated: true)
-            } else {
-                // All players have passed.
-                gameViewController.goForward()
+                roomViewController.flipToPage(withIdentifier: "Resource", forward: false, animated: true)
+                // Not me failed, present room failure type.
+                if currentWaitStepRoomResult.isPassed {
+                    roomViewController.presentAlert(gameError: .otherPlayerFailed)
+                } else {
+                    roomViewController.presentAlert(gameError: .currentPlayerFailed(currentWaitStepRoomResult.wrongCount))
+                }
             }
         }
     }
     
     private func handleModifiedFinishedPlayerCount(group: GameGroup) {
         if group.roomFinishedUserIDs.count == group.allPlayersUserIDs.count {
-            // Do nothing here now.
+            // All players have passed. Move forward from the wait step.
+            roomViewController.goForward()
         }
     }
     
-    private func loadChatroom(completion: @escaping () -> Void) {
-        let chatroomsRef = FirebaseConstants.chatrooms.document(gameGroup.chatroomID)
-        chatroomsRef.getDocument { [weak self] document, error in
-            guard let self = self else { return }
-            if let document = document, let chatroom = Chatroom(document: document) {
-                let controller = ChatViewController(user: FirebaseConstants.auth.currentUser!, chatroom: chatroom)
-                controller.chatroomUserIDs = self.gameGroup.allPlayersUserIDs
-                self.chatroomViewController = controller
-            } else if let error = error {
-                self.presentAlert(error: error)
-                self.navigationItem.hidesBackButton = false
-            }
-            completion()
+    private func handleAllRoomFinished(group: GameGroup) {
+        // Do nothing here now.
+    }
+    
+    // MARK: UIViewController
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        // Listen to modification and removal of the game groups.
+        setGameGroupListener()
+        // Update the chart with an empty source.
+        setChartData(from: [.correct: 0, .skipped: 0, .incorrect: 0, .unknown: 1])
+        // Hide nav button to disallow players accidentally drop the game.
+        navigationItem.hidesBackButton = true
+        // Add confetti view to the main view.
+        view.addSubview(confettiView)
+        // Load chatroom once for each game.
+        ProgressHUD.show("Loading Rooms", interaction: false)
+        loadChatroom { [unowned self] in
+            ProgressHUD.dismiss()
+            // After the chatroom is loaded, present the first room.
+            presentRoom(room: currentRoom!)
         }
     }
     
@@ -223,83 +259,86 @@ class RoomProgressViewController: UIViewController {
         FirebaseHelper.deleteMessages(chatroomID: chatroomId) { [weak self] error in
             if let error = error {
                 self?.presentAlert(error: error)
+            } else {
+                FirebaseConstants.chatrooms.document(chatroomId).delete()
             }
-            FirebaseConstants.chatrooms.document(chatroomId).delete()
         }
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Listen to modification and removal of the game groups.
-        setGameGroupListener()
-        // Load chatroom once for each game.
-        ProgressHUD.show("Loading Rooms", interaction: false)
-        // Hide nav button to disallow players accidentally drop the game.
-        navigationItem.hidesBackButton = true
-        loadChatroom { [unowned self] in
-            ProgressHUD.dismiss()
-            // After the chatroom is loaded, present the first room.
-            presentRoom(room: currentRoom!)
-        }
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        // Do nothing if the player has already seen the survey, which means
-        // he either failed or finished the game.
-        guard !isSurveyShown else { return }
-        
+    private func roomDidFinish(withResult result: Result<Int, GameError>) {
         // Reload doors collection view.
         collectionView.reloadData()
+        // Reload chart datasource.
+        let allRoomsResult = GameResult(taskResults: roomResults, questionnaires: gameOfMyGroup.questionnaires)
         
-        let allPreviosGameResult = GameResult(taskResults: roomResults, questionnaires: gameOfMyGroup.questionnaires)
+        // Update the chart with all the up-to-date rooms results.
+        setChartData(from: allRoomsResult.resultPairs)
         
-        if roomResults.isEmpty {
-            // Update the chart with an empty source.
-            setChartData(from: [.correct: 0, .skipped: 1, .incorrect: 0])
-        } else {
-            // Update the chart with all the up-to-date rooms results.
-            setChartData(from: allPreviosGameResult.resultPairs)
-        }
-        
-        // All rooms passed, add the records to player's game history.
-        if gameCompleted {
-            // Mark the player as all rooms finished.
-            FirebaseConstants.gamegroups.document(gameGroup.id!).updateData([
-                "allRoomsFinishedUserScores": FieldValue.arrayUnion([allPreviosGameResult.score])
-            ])
-            
-            // FIXME: more comments needed here.
-            // Should change to sth like this: when done, add to finished array.
-            // when array has less than 3 in len, remove the listener but dont delete the group
-            // when array has 3, both remove the listener and delete the group.
-            cleanUpRemoteAfterGameEnds()
-            // Add game history to a player's histories collection.
-            let gameHistory = GameHistory(
-                gameID: gameOfMyGroup.gameID,
-                playedDate: gameGroup.createdDate,
-                gameCategory: gameOfMyGroup.category,
-                gameName: gameOfMyGroup.gameName,
-                allPlayers: gameGroup.allPlayersUserIDs,
-                gameResult: Dictionary(uniqueKeysWithValues: Array(allPreviosGameResult.resultPairs)),
-                score: allPreviosGameResult.score
-            )
-            addGameHistory(gameHistory: gameHistory)
-            navigationItem.hidesBackButton = false
-            nextRoomButton.isHidden = true
-            surveyButton.isHidden = false
+        switch result {
+        case .success(let currentRoomLevel):
+            // Increase room count to go to next room.
+            currentRoom = currentRoomLevel + 1
+            // Reset attempts.
+            attempts = 0
+            // All rooms passed, add the records to player's game history.
+            if gameCompleted {
+                if gameGroup.allRoomsFinishedUserScores.count == gameGroup.allPlayersUserIDs.count - 1 {
+                    // When all player finished array has 1 or 3, this is the last player to finish.
+                    
+                    // Mark the player as all rooms finished.
+                    FirebaseConstants.gamegroups.document(gameGroup.id!).updateData([
+                        "allRoomsFinishedUserScores": FieldValue.arrayUnion([allRoomsResult.score])
+                    ])
+                    cleanUpRemoteAfterGameEnds()
+                } else {
+                    // when array has less than 3 in len, remove the listener but dont delete the group.
+                    // Stop listen to further updates to game groups.
+                    gameGroupListener?.remove()
+                }
+                
+                // Add game history to a player's histories collection.
+                let gameHistory = GameHistory(
+                    gameID: gameOfMyGroup.gameID,
+                    playedDate: gameGroup.createdDate,
+                    gameCategory: gameOfMyGroup.category,
+                    gameName: gameOfMyGroup.gameName,
+                    allPlayers: gameGroup.allPlayersUserIDs,
+                    gameResult: Dictionary(uniqueKeysWithValues: Array(allRoomsResult.resultPairs)),
+                    score: allRoomsResult.score
+                )
+                addGameHistory(gameHistory: gameHistory)
+                // Emit some confetti.
+                confettiView.emit([
+                    .text("🧩"),
+                    .text("🧩")
+                ], for: 5)
+            } else {
+                // Emit some confetti.
+                confettiView.emit([
+                    .text("🎊"),
+                    .text("🎉")
+                ], for: 3)
+            }
+        case .failure(let gameError):
+            // Set room level to invalid.
+            currentRoom = nil
+            // Present the game failure type.
+            presentAlert(gameError: gameError)
+            if isMeDropped { cleanUpRemoteAfterGameEnds() }
         }
     }
     
     deinit {
         // Reset VCs.
         chatroomViewController = nil
-        gameViewController = nil
+        roomViewController = nil
         // Clear group ID.
         Profiles.currentGroupID = nil
         print("✅ room vc deinit")
     }
 }
+
+// MARK: - ORKTaskViewControllerDelegate
 
 extension RoomProgressViewController: ORKTaskViewControllerDelegate {
     private func handleCountdownStep(taskViewController: ORKTaskViewController, stepViewController: ORKActiveStepViewController) {
@@ -309,57 +348,46 @@ extension RoomProgressViewController: ORKTaskViewControllerDelegate {
             FirebaseConstants.gamegroups.document(gameGroup.id!).updateData([
                 "chatroomReadyUserIDs": FieldValue.arrayRemove([Profiles.userID!])
             ])
-            // Reset flag for chatroom.
-            isChatroomShown = false
             // Call finish to automatically move to next screen. (Not valid for no timer step.)
             // stepViewController.finish()
             stepViewController.goForward()
-            return
+            // Reset flag for chatroom. Not using `.toggle()` for clarity. :-)
+            isChatroomShown = false
+        } else {
+            // Mark the player who reached chatroom step as ready.
+            FirebaseConstants.gamegroups.document(gameGroup.id!).updateData([
+                "chatroomReadyUserIDs": FieldValue.arrayUnion([Profiles.userID!])
+            ])
+            stepViewController.title = "Leave Chat"
+            stepViewController.show(chatroomViewController, sender: nil)
+            // Hide the back button until all players join the chatroom.
+            chatroomViewController.navigationItem.hidesBackButton = true
+            // Mark chatrooom is shown for current room level.
+            isChatroomShown = true
         }
-        
-        // Mark the player who reached chatroom step as ready.
-        FirebaseConstants.gamegroups.document(gameGroup.id!).updateData([
-            "chatroomReadyUserIDs": FieldValue.arrayUnion([Profiles.userID!])
-        ])
-        stepViewController.title = "Leave Chat"
-        stepViewController.show(chatroomViewController, sender: nil)
-        
-        // Hide the back button until all players join the chatroom.
-        chatroomViewController.navigationItem.hidesBackButton = true
-        // Mark chatrooom is shown for current room level.
-        isChatroomShown = true
     }
     
     private func handleWaitStep(taskVC: ORKTaskViewController, stepVC: ORKWaitStepViewController) {
         // Everytime the player reaches wait step, add attempts count.
         attempts += 1
         // Calculate the game result for current room.
-        let gameResult = GameResult(taskResults: [taskVC.result], questionnaires: [gameOfMyGroup.questionnaires[currentRoom!]])
+        currentWaitStepRoomResult = GameResult(taskResults: [taskVC.result], questionnaires: [gameOfMyGroup.questionnaires[currentRoom!]])
         let progress = CGFloat(gameGroup.roomAttemptedUserIDs.count + 1) / CGFloat(gameGroup.allPlayersUserIDs.count)
-        stepVC.updateText("Below is a summary of current room (for debug, UI needs update):\n\(gameResult.summary)")
+        stepVC.updateText("Below is a summary of current room (for debug, UI needs update):\n\(currentWaitStepRoomResult.summary)")
         stepVC.setProgress(progress, animated: true)
         
-        // Add user ID to attempted array.
-        // Note: it must go after the alert is presented. Otherwise it would cause
-        // nav stack bug for not being able to pop while alert is presenting.
-        let completion = { [weak self] in
-            guard let self = self else { return }
+        if !currentWaitStepRoomResult.isPassed {
+            // Failed to pass the game.
+            
+            // First notify the other players that current player has attempted.
             FirebaseConstants.gamegroups.document(self.gameGroup.id!).updateData([
                 "roomAttemptedUserIDs": FieldValue.arrayUnion([Profiles.userID!])
             ])
-        }
-        
-        if !gameResult.isPassed {
-            // Failed to pass the game.
+            
             if attempts == gameOfMyGroup.maxAttempts {
-                // First go to completion to notify the other players.
-                completion()
-                // Then fail the local game and abort.
+                // Then fail the local game and abort if max attempt reached.
                 isMeDropped = true
                 taskViewController(taskVC, didFinishWith: .failed, error: GameError.maxAttemptReached)
-            } else {
-                // The player failed the room with wrongCount of wrong answers.
-                stepVC.presentAlert(gameError: GameError.currentPlayerFailed(gameResult.wrongCount), completion: completion)
             }
         } else {
             // First mark the player as finished.
@@ -380,6 +408,9 @@ extension RoomProgressViewController: ORKTaskViewControllerDelegate {
             handleCountdownStep(taskViewController: taskViewController, stepViewController: stepViewController as! ORKActiveStepViewController)
         case "Wait":
             handleWaitStep(taskVC: taskViewController, stepVC: stepViewController as! ORKWaitStepViewController)
+        case "conclusion":
+            // Don't allow going back to wait step from completion step.
+            stepViewController.navigationItem.hidesBackButton = true
         default:
             break
         }
@@ -393,27 +424,23 @@ extension RoomProgressViewController: ORKTaskViewControllerDelegate {
         switch reason {
         case .failed, .discarded, .saved:
             print("❌ Failed or 💦 Canceled")
-            // Set room level to invalid.
-            currentRoom = nil
             // Dismiss the game controller to avoid presenting issues.
             taskViewController.dismiss(animated: true)
-            if let error = error {
-                if let gameError = error as? GameError {
-                    presentAlert(gameError: gameError)
-                } else {
-                    presentAlert(error: error)
-                }
+            // Call the did finish function to handle remaining clean up.
+            if let error = error, let gameError = error as? GameError {
+                roomDidFinish(withResult: .failure(gameError))
+            } else if reason == .discarded {
+                // Current player dropped the game.
+                isMeDropped = true
+                roomDidFinish(withResult: .failure(.currentPlayerDropped))
+            } else {
+                // This should never happen.
+                isMeDropped = true
+                roomDidFinish(withResult: .failure(.unknown))
             }
-            if isMeDropped { cleanUpRemoteAfterGameEnds() }
-            surveyButton.isHidden = false
-            navigationItem.hidesBackButton = false
             // Log an unsuccessful game result.
         case .completed:
             print("✅ completed")
-            // When a room is completed by all players in the group, go to next room.
-            currentRoom! += 1
-            // Reset attempts.
-            attempts = 0
             // Player has passed. Reset the all arrays.
             guard let userID = Profiles.userID else { return }
             FirebaseConstants.gamegroups.document(gameGroup.id!).updateData([
@@ -422,15 +449,16 @@ extension RoomProgressViewController: ORKTaskViewControllerDelegate {
             ])
             // Dismiss the game controller.
             taskViewController.dismiss(animated: true)
+            roomDidFinish(withResult: .success(currentRoom!))
         @unknown default:
-            fatalError("Error: Onboarding task yields unknown result.")
+            fatalError("Error: Game task yields unknown result.")
         }
     }
 }
 
 // MARK: - UICollectionView
 
-extension RoomProgressViewController: UICollectionViewDataSource {
+extension RoomProgressViewController: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         gameOfMyGroup.questionnaires.count
     }
@@ -457,14 +485,11 @@ extension RoomProgressViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let room = indexPath.item
-        let currentLevel = currentRoom ?? -1
-        if currentLevel == room {
+        if let currentLevel = currentRoom, currentLevel == room {
             presentRoom(room: room)
         }
     }
-}
-
-extension RoomProgressViewController: UICollectionViewDelegateFlowLayout {
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         CGSize(width: 96, height: 128)
     }
@@ -473,6 +498,20 @@ extension RoomProgressViewController: UICollectionViewDelegateFlowLayout {
 // MARK: - ChartView
 
 extension RoomProgressViewController: ChartViewDelegate {
+    private var chartCenterText: NSMutableAttributedString {
+        // Center text settings.
+        let centerText = NSMutableAttributedString(string: "Results\nby Jigsaw")
+        centerText.setAttributes(
+            [.font: UIFont.systemFont(ofSize: 15), .foregroundColor: UIColor.label],
+            range: NSRange(location: 0, length: centerText.length)
+        )
+        centerText.addAttributes(
+            [.font: UIFont(name: "HelveticaNeue-Light", size: 13)!, .foregroundColor: UIColor.systemBlue],
+            range: NSRange(location: centerText.length - 6, length: 6)
+        )
+        return centerText
+    }
+    
     private func setup(pieChartView chartView: PieChartView) {
         chartView.usePercentValuesEnabled = true
         chartView.drawSlicesUnderHoleEnabled = false
@@ -512,8 +551,14 @@ extension RoomProgressViewController: ChartViewDelegate {
     
     private func setChartData(from resultPairs: KeyValuePairs<AnswerCategory, Int>) {
         // Assuming there are no games with 0 questions.
-        let totalCount = resultPairs.reduce(0) { $0 + $1.1 }
-        let entries = resultPairs.compactMap { (key, value) -> PieChartDataEntry? in
+        var pairs = resultPairs
+        var totalCount = pairs.reduce(0) { $0 + $1.1 }
+        // Show an unknown chart if no results.
+        if totalCount == 0 {
+            pairs = [.correct: 0, .skipped: 0, .incorrect: 0, .unknown: 1]
+            totalCount = pairs.reduce(0) { $0 + $1.1 }
+        }
+        let entries = pairs.compactMap { (key, value) -> PieChartDataEntry? in
             if key == .unknown && value == 0 {
                 // Omit .unknown category if it is empty.
                 return nil
