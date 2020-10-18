@@ -113,10 +113,13 @@ enum FirebaseHelper {
                     batch.deleteDocument(message.reference)
                 }
                 batch.commit { error in
-                    if let error = error { completion(error) }
+                    if let error = error {
+                        completion(error)
+                    } else {
+                        // Deletion succeeded.
+                        completion(nil)
+                    }
                 }
-                // Deletion succeeded.
-                completion(nil)
             } else if let error = error {
                 completion(error)
             }
