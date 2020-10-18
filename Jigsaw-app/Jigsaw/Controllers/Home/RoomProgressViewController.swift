@@ -219,8 +219,11 @@ class RoomProgressViewController: UIViewController {
         FirebaseConstants.gamegroups.document(gameGroup.id!).delete()
         // Remove the chatroom when a player stops the game.
         let chatroomId = gameGroup.chatroomID
+        // First remove all the messages, then remove the chatroom itself.
         FirebaseHelper.deleteMessages(chatroomID: chatroomId) { [weak self] error in
-            self?.presentAlert(error: error)
+            if let error = error {
+                self?.presentAlert(error: error)
+            }
             FirebaseConstants.chatrooms.document(chatroomId).delete()
         }
     }

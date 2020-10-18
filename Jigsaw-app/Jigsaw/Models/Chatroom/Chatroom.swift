@@ -13,14 +13,22 @@ struct Chatroom: Codable {
     let id: String?
     /// The name or title of the chatroom, should be decided by the game.
     let name: String
+    /// The players in current chatroom.
+    let playerIDs: [String]?
     
     init?(document: QueryDocumentSnapshot) {
         let data = document.data()
         guard let name = data["name"] as? String else {
             return nil
         }
+        
         self.id = document.documentID
         self.name = name
+        if let playerIDs = data["playerIDs"] as? [String] {
+            self.playerIDs = playerIDs
+        } else {
+            self.playerIDs = nil
+        }
     }
     
     init?(document: DocumentSnapshot) {
@@ -29,6 +37,11 @@ struct Chatroom: Codable {
         }
         self.id = document.documentID
         self.name = name
+        if let playerIDs = data["playerIDs"] as? [String] {
+            self.playerIDs = playerIDs
+        } else {
+            self.playerIDs = nil
+        }
     }
 }
 

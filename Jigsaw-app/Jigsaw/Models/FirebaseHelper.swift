@@ -104,7 +104,7 @@ enum FirebaseHelper {
     /// - Parameters:
     ///   - chatroomID: The ID of the chatroom.
     ///   - completion: A closure that passes back any error.
-    static func deleteMessages(chatroomID: String, completion: @escaping (Error) -> Void) {
+    static func deleteMessages(chatroomID: String, completion: @escaping (Error?) -> Void) {
         let messagesRef = FirebaseConstants.chatroomMessagesRef(chatroomID: chatroomID)
         messagesRef.getDocuments { querySnapshot, error in
             if let snapshot = querySnapshot, !snapshot.isEmpty {
@@ -115,6 +115,8 @@ enum FirebaseHelper {
                 batch.commit { error in
                     if let error = error { completion(error) }
                 }
+                // Deletion succeeded.
+                completion(nil)
             } else if let error = error {
                 completion(error)
             }

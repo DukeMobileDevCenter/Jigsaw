@@ -9,7 +9,6 @@
 import UIKit
 import Firebase
 import FirebaseUI
-import FirebaseFunctions
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -56,10 +55,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // - Note: https://developer.apple.com/documentation/uikit/uiapplicationdelegate/1623111-applicationwillterminate
     func applicationWillTerminate(_ application: UIApplication) {
         if let groupID = Profiles.currentGroupID {
-            // If the player is currently in a game group.
-            let functions = Functions.functions()
-            // Call the cloud function and ignore the result.
-            functions.httpsCallable("removeGameGroup").call(["groupID": groupID], completion: { _, _ in })
+            // Remove matching game group from database after game is dropped.
+            FirebaseConstants.gamegroups.document(groupID).delete()
         }
     }
 }
