@@ -101,6 +101,7 @@ class MatchingViewController: UIViewController {
         )
         // Stop listen to further updates to game groups.
         gameGroupListener?.remove()
+        gameGroupListener = nil
         // Show the room progress view controller.
         performSegue(withIdentifier: "showProgress", sender: nil)
     }
@@ -152,7 +153,6 @@ class MatchingViewController: UIViewController {
             guard let snapshot = querySnapshot else { return }
             self?.playerCountLabel.text = "\(snapshot.documents.count)"
         }
-        joinGameButton.isEnabled = true
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -160,8 +160,10 @@ class MatchingViewController: UIViewController {
         // When matching page is not showing anymore:
         // Remove the waiting queue listener.
         queuesListener?.remove()
+        queuesListener = nil
         // Stop listen to further updates to game groups.
         gameGroupListener?.remove()
+        gameGroupListener = nil
     }
     
     deinit {
