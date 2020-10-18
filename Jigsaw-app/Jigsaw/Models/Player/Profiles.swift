@@ -11,7 +11,7 @@ import Foundation
 class Profiles: CustomStringConvertible {
     /// A custom description that prints out basic info.
     var description: String {
-        return "userID: \(Profiles.userID ?? "nil"), displayName: \(Profiles.displayName ?? "nil"), jigsawValue: \(Profiles.jigsawValue).\nLast time game loaded at \(Profiles.lastLoadGameDate.description)."
+        return "userID: \(Profiles.userID ?? "nil"), displayName: \(Profiles.displayName ?? "nil"), jigsawValue: \(Profiles.jigsawValue). Last time game loaded at \(Profiles.lastLoadGameDate.description)."
     }
     
     /// A class function to clear away all info.
