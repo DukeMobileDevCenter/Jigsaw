@@ -30,7 +30,7 @@ enum GameError: LocalizedError, CustomStringConvertible {
         case .otherPlayerFailed:
             return "🤨 Uh-oh. Your peers didn't pass the room.\nHelp them and try again!"
         case .unknown:
-            return "🤐 Unknown error. Developers are trembling."
+            return "🤐 Unknown error. Developers are trembling. 🤯"
         }
     }
 }
