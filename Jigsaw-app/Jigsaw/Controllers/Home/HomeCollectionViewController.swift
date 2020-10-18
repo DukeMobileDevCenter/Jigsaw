@@ -49,6 +49,9 @@ class HomeCollectionViewController: UICollectionViewController {
     /// Load games and player's game histories (if exist) from remote.
     @objc
     private func loadFromRemote() {
+        // Aggressively set last load date, even if if fails to load, to avoid
+        // additional bandwidth cost.
+        Profiles.lastLoadGameDate = Date()
         // Load history first, then load games.
         loadHistories { [weak self] in
             self?.loadGames()
@@ -64,7 +67,6 @@ class HomeCollectionViewController: UICollectionViewController {
             switch result {
             case .success(let games):
                 os_log(.info, "games count = %d", games.count)
-                Profiles.lastLoadGameDate = Date()
             case .failure(let error):
                 os_log(.error, "Error: loading games from remote")
                 DispatchQueue.main.async {
