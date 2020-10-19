@@ -128,8 +128,8 @@ class HomeCollectionViewController: UICollectionViewController {
             // Handle random cell specifically.
             getGameWithLeastWaitingTime(queueType: queueType) { [unowned self] game in
                 if let game = game {
-                    self.randomGame = game
-                    self.performSegue(withIdentifier: "showRandom", sender: cell)
+                    randomGame = game
+                    performSegue(withIdentifier: "showRandom", sender: cell)
                 } else {
                     // If the query returns empty game result, show an alert.
                     presentAlert(title: "Info", message: "No random game available.")
