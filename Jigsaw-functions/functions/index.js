@@ -27,7 +27,7 @@ exports.makeGameGroup = functions.firestore.document('/Queues/{gameName}/{queueN
   // An array to keep track of the IDs for all players in the queue.
   const playerIDs = [];
   jigsawValueQuery.forEach(doc => {
-     playerIDs.push(doc.id)
+      playerIDs.push(doc.id)
   })
 
   // Get total players count in the queue.
@@ -107,23 +107,38 @@ exports.addTeamRankingAndRemoveMatchGroup = functions.firestore.document('/GameG
   // Get deleted value.
   const deletedValue = snap.data();
   
-  const allScores = deletedValue.allRoomsFinishedUserScores;
+  const allScoreStrings = deletedValue.allRoomsFinishedUserScores;
+  const group1 = deletedValue.group1;
+  const group2 = deletedValue.group2;
+  const playerIDs = [].concat(group1, group2);
+
+  functions.logger.log('Finished count = ', allScoreStrings.length);
+  functions.logger.log('Players count = ', playerIDs.length);
 
   // Some/All players have finished the game.
-  if (allScores.length > 0) {
-    functions.logger.log('Finished count = ', allScores.length);
+  if (allScoreStrings.length > 0) {
+    // An array to keep track of the scores of all players in the queue.
+  
+    // Note: to work around the "arrayunion" function, Ting created a
+    // score string as "userID + "@" + String(format: "%.6f", score)"
+    // So here we split the string by the at symbol, and convert the 
+    // trailing value into a decimal number.
+    const allScores = [];
+    allScoreStrings.forEach(str => {
+        const res = str.split("@");
+        allScores.push(parseFloat(res[res.length - 1]));
+    })
     // Create a TeamRanking object.
     const averageScore = allScores.reduce((a,b) => (a+b)) / allScores.length;
-    const group1 = deletedValue.group1;
-    const group2 = deletedValue.group2;
+    
     const teamRanking = {
       "teamName": "Jigsaw Team",
-      "playerIDs": [].concat(group1, group2),
+      "playerIDs": playerIDs,
       "gameName": deletedValue.gameName,
       "score": averageScore,
       "playedDate": deletedValue.createdDate
     };
-    // Delete the game group.
+    // Delete the game group to avoid issues.
     // const res1 = await db.collection('GameGroups').doc(context.params.groupID).delete();
     // Add the team ranking in collection "TeamRankings" with generated ID.
     const res2 = await db.collection('TeamRankings').add(teamRanking);
