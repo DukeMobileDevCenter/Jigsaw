@@ -122,6 +122,9 @@ enum FirebaseHelper {
                 }
             } else if let error = error {
                 completion(error)
+            } else {
+                // No deletion happened.
+                completion(nil)
             }
         }
     }

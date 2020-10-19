@@ -170,12 +170,14 @@ class RoomProgressViewController: UIViewController {
                 handleModifiedAttemptedPlayerCount(group: currentGroup)
             } else if currentGroup.roomFinishedUserIDs.count > gameGroup.roomFinishedUserIDs.count {
                 handleModifiedFinishedPlayerCount(group: currentGroup)
-            } else if currentGroup.allRoomsFinishedUserScores.count > gameGroup.allRoomsFinishedUserScores.count {
+            }
+            // Handle deletion when players finished all the rooms.
+            if currentGroup.allRoomsFinishedUserScores.count > gameGroup.allRoomsFinishedUserScores.count {
                 handleAllRoomFinished(group: currentGroup)
             }
         case .removed:
             // If any player dropped the game before they finish, the others cannot play anymore.
-            if currentGroup.allRoomsFinishedUserScores.count != currentGroup.allPlayersUserIDs.count {
+            if currentGroup.allRoomsFinishedUserScores.count < currentGroup.allPlayersUserIDs.count {
                 isMeDropped = false
                 taskViewController(roomViewController, didFinishWith: .failed, error: GameError.otherPlayerDropped)
             }
@@ -225,7 +227,7 @@ class RoomProgressViewController: UIViewController {
     
     private func handleAllRoomFinished(group: GameGroup) {
         if group.allRoomsFinishedUserScores.count == group.allPlayersUserIDs.count {
-            // Only 1 player will be notified with this change, and he takes care of clean up.
+            // Might be called by multiple players to take care of clean up.
             cleanUpRemoteAfterGameEnds()
         }
     }
@@ -286,20 +288,11 @@ class RoomProgressViewController: UIViewController {
             attempts = 0
             // All rooms passed, add the records to player's game history.
             if gameCompleted {
-                if gameGroup.allRoomsFinishedUserScores.count < gameGroup.allPlayersUserIDs.count - 1 {
-                    // When all player finished array has 1 or 3, this is the last player to finish.
-                    // He will be notified by listener and take care of the clean ups.
-                    
-                    // when array has less than 3 in len, remove the listener but dont delete the group.
-                    // Stop listen to further updates to game groups.
-                    gameGroupListener?.remove()
-                    gameGroupListener = nil
-                }
                 // Mark the player as all rooms finished.
+                let userScoreString = gameGroup.userScoreString(userID: Profiles.userID, score: allRoomsResult.score)
                 FirebaseConstants.gamegroups.document(gameGroup.id!).updateData([
-                    "allRoomsFinishedUserScores": FieldValue.arrayUnion([allRoomsResult.score])
+                    "allRoomsFinishedUserScores": FieldValue.arrayUnion([userScoreString])
                 ])
-                
                 // Add game history to a player's histories collection.
                 let gameHistory = GameHistory(
                     gameID: gameOfMyGroup.gameID,
@@ -333,6 +326,9 @@ class RoomProgressViewController: UIViewController {
     }
     
     deinit {
+        // Stop listen to further updates to game groups.
+        gameGroupListener?.remove()
+        gameGroupListener = nil
         // Reset VCs.
         chatroomViewController = nil
         roomViewController = nil
