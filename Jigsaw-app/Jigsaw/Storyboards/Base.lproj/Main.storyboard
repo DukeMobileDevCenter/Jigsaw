@@ -97,11 +97,6 @@
                         </connections>
                     </collectionView>
                     <navigationItem key="navigationItem" title="Games - 2P" id="UZt-g5-Jhh">
-                        <barButtonItem key="leftBarButtonItem" enabled="NO" title="Test" id="vsv-Qs-kfx">
-                            <connections>
-                                <action selector="testBarButtonTapped:" destination="4a0-lW-Yyi" id="rgv-xf-AHo"/>
-                            </connections>
-                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" id="wtT-oG-gy1">
                             <segmentedControl key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="KsP-MD-Xda">
                                 <rect key="frame" x="302" y="5.5" width="92" height="33"/>
@@ -121,7 +116,6 @@
                         <outlet property="playersCountSegmentedControl" destination="KsP-MD-Xda" id="ADk-vn-DWX"/>
                         <segue destination="8h7-tJ-Fxn" kind="show" identifier="showCategory" id="b8U-v2-sN6"/>
                         <segue destination="qIk-Vr-9mo" kind="show" identifier="showRandom" id="tOa-KL-BCv"/>
-                        <segue destination="qIk-Vr-9mo" kind="show" identifier="showSpecific" animates="NO" id="uxd-NL-JaG"/>
                     </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FUz-N4-EiH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -235,7 +229,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="32" translatesAutoresizingMaskIntoConstraints="NO" id="LOa-rs-QeJ">
-                                        <rect key="frame" x="20" y="0.0" width="374" height="543"/>
+                                        <rect key="frame" x="20" y="0.0" width="374" height="572"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HA6-LZ-aPL" customClass="PieChartView" customModule="Charts">
                                                 <rect key="frame" x="0.0" y="0.0" width="374" height="249.5"/>
@@ -300,9 +294,13 @@
                                                     </collectionViewCell>
                                                 </cells>
                                             </collectionView>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UTC-HK-7Oi">
-                                                <rect key="frame" x="0.0" y="516" width="374" height="27"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UTC-HK-7Oi">
+                                                <rect key="frame" x="0.0" y="516" width="374" height="56"/>
+                                                <color key="backgroundColor" systemColor="linkColor"/>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <inset key="contentEdgeInsets" minX="0.0" minY="16" maxX="0.0" maxY="16"/>
+                                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="8" maxY="0.0"/>
                                                 <state key="normal" title="Next Room">
                                                     <imageReference key="image" image="arrow.right.circle" catalog="system" symbolScale="large"/>
                                                 </state>
@@ -311,7 +309,8 @@
                                                 </connections>
                                             </button>
                                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="H2e-gw-yxt">
-                                                <rect key="frame" x="0.0" y="543" width="374" height="0.0"/>
+                                                <rect key="frame" x="0.0" y="572" width="374" height="0.0"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                                 <state key="normal" title="👉Fill out this survey👈"/>
                                                 <connections>
                                                     <action selector="surveyButtonTapped:" destination="3YO-EV-HVF" eventType="primaryActionTriggered" id="z3t-XG-5u4"/>
@@ -365,7 +364,7 @@
                                 <rect key="frame" x="0.0" y="140" width="414" height="756"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="63" translatesAutoresizingMaskIntoConstraints="NO" id="DFf-2z-yPq">
-                                        <rect key="frame" x="20" y="0.0" width="374" height="648.5"/>
+                                        <rect key="frame" x="20" y="0.0" width="374" height="708.5"/>
                                         <subviews>
                                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zag-mg-ztD" customClass="RadarChartView" customModule="Charts">
                                                 <rect key="frame" x="0.0" y="0.0" width="374" height="467.5"/>
@@ -375,26 +374,22 @@
                                                 </constraints>
                                             </view>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Oxg-07-LMQ">
-                                                <rect key="frame" x="62" y="530.5" width="250" height="118"/>
+                                                <rect key="frame" x="93.5" y="530.5" width="187" height="178"/>
                                                 <subviews>
                                                     <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KZW-8V-vKi">
-                                                        <rect key="frame" x="0.0" y="0.0" width="250" height="34"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="187" height="54"/>
                                                         <color key="backgroundColor" systemColor="systemGreenColor"/>
                                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <inset key="imageEdgeInsets" minX="0.0" minY="12" maxX="8" maxY="12"/>
                                                         <state key="normal" title="Leaderboard"/>
                                                         <connections>
                                                             <action selector="leaderBoardButtonTapped:" destination="JJs-pR-gZw" eventType="primaryActionTriggered" id="v5k-3C-fjF"/>
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JGl-oF-f0g">
-                                                        <rect key="frame" x="0.0" y="42" width="250" height="34"/>
+                                                        <rect key="frame" x="0.0" y="62" width="187" height="54"/>
                                                         <color key="backgroundColor" systemColor="systemOrangeColor"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="250" id="x47-Wf-tTU"/>
-                                                        </constraints>
                                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <inset key="imageEdgeInsets" minX="0.0" minY="12" maxX="8" maxY="12"/>
+                                                        <inset key="contentEdgeInsets" minX="16" minY="16" maxX="16" maxY="16"/>
                                                         <state key="normal" title="Achievements">
                                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         </state>
@@ -403,10 +398,9 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="duO-pe-hhf">
-                                                        <rect key="frame" x="0.0" y="84" width="250" height="34"/>
+                                                        <rect key="frame" x="0.0" y="124" width="187" height="54"/>
                                                         <color key="backgroundColor" systemColor="systemPurpleColor"/>
                                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <inset key="imageEdgeInsets" minX="0.0" minY="12" maxX="8" maxY="12"/>
                                                         <state key="normal" title="Team Rankings">
                                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         </state>
@@ -419,11 +413,15 @@
                                                     <constraint firstItem="KZW-8V-vKi" firstAttribute="height" secondItem="JGl-oF-f0g" secondAttribute="height" id="4kn-13-pSm"/>
                                                     <constraint firstItem="KZW-8V-vKi" firstAttribute="width" secondItem="JGl-oF-f0g" secondAttribute="width" id="AYg-Mv-WHu"/>
                                                     <constraint firstItem="duO-pe-hhf" firstAttribute="width" secondItem="JGl-oF-f0g" secondAttribute="width" id="MAo-Fc-TbS"/>
+                                                    <constraint firstAttribute="width" relation="lessThanOrEqual" constant="400" id="OdG-IK-PBZ"/>
                                                     <constraint firstItem="duO-pe-hhf" firstAttribute="height" secondItem="JGl-oF-f0g" secondAttribute="height" id="Peq-PH-ekd"/>
+                                                    <constraint firstAttribute="trailing" secondItem="JGl-oF-f0g" secondAttribute="trailing" id="hA4-ci-mhz"/>
+                                                    <constraint firstItem="JGl-oF-f0g" firstAttribute="leading" secondItem="Oxg-07-LMQ" secondAttribute="leading" id="kfJ-pM-iTl"/>
                                                 </constraints>
                                             </stackView>
                                         </subviews>
                                         <constraints>
+                                            <constraint firstItem="Oxg-07-LMQ" firstAttribute="width" secondItem="zag-mg-ztD" secondAttribute="width" multiplier="0.5" priority="750" id="M1g-HR-hxL"/>
                                             <constraint firstItem="zag-mg-ztD" firstAttribute="width" secondItem="DFf-2z-yPq" secondAttribute="width" id="QJH-8G-UJx"/>
                                         </constraints>
                                     </stackView>
@@ -715,7 +713,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="uxd-NL-JaG"/>
+        <segue reference="tOa-KL-BCv"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="arrow.right.circle" catalog="system" width="128" height="121"/>
@@ -727,6 +725,9 @@
         <namedColor name="darkBackgroundWithOpacity">
             <color white="0.30000001192092896" alpha="0.60000002384185791" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </namedColor>
+        <systemColor name="linkColor">
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
         <systemColor name="secondarySystemBackgroundColor">
             <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>

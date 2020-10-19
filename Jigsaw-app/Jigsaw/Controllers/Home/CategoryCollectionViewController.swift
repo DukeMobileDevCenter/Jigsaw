@@ -6,7 +6,6 @@
 //  Copyright © 2020 DukeMobileDevCenter. All rights reserved.
 //
 
-import os
 import UIKit
 
 class CategoryCollectionViewController: UICollectionViewController {
@@ -22,13 +21,6 @@ class CategoryCollectionViewController: UICollectionViewController {
         // Set collection view delegates.
         collectionView.delegate = self
         collectionView.dataSource = GameStore.shared
-        // FIXME: not reporting achievement for beta.
-        // Every time enter a category page, report the progress to GameCenter.
-        // We can come up with better strategy.
-//        if GameCenterHelper.isAuthenticated {
-//            let percentComplete = GameStore.shared.percentComplete(for: category)
-//            GameCenterHelper.shared.submitFinishedAchievement(for: category, progress: percentComplete)
-//        }
     }
     
     override func viewWillAppear(_ animated: Bool) {

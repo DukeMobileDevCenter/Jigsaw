@@ -95,7 +95,7 @@ class ChatViewController: MessagesViewController {
             return
         }
         
-        messagesReference = FirebaseConstants.database.collection(["Chatrooms", id, "messages"].joined(separator: "/"))
+        messagesReference = FirebaseConstants.chatroomMessagesRef(chatroomID: id)
         
         messageListener = messagesReference?.addSnapshotListener { [weak self] querySnapshot, _ in
             guard let snapshot = querySnapshot else { return }
@@ -215,7 +215,7 @@ extension ChatViewController {
         metadata.contentType = "image/jpeg"
         
         let imageName = [UUID().uuidString, String(Date().timeIntervalSince1970)].joined()
-        let imageRef = FirebaseConstants.shared.chatroomStorage.child(channelID).child(imageName)
+        let imageRef = FirebaseConstants.chatroomStorage.child(channelID).child(imageName)
         imageRef.putData(data, metadata: metadata) { metadata, _ in
             guard metadata != nil else {
                 completion(nil)

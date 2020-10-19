@@ -17,7 +17,7 @@ const db = admin.firestore();
   Listens for new players added to /Queues/:documentId/twoPlayersQueue or
   fourPlayersQueue and creates a game group to /GameGroups.
 */
-exports.makeGameGroup = functions.firestore.document('/Queues/{gameName}/{queueName}/{userID}').onWrite(async (change, context) => {
+exports.makeGameGroup = functions.firestore.document('/Queues/{gameName}/{queueName}/{userID}').onCreate(async (change, context) => {
   // Reference to the parent.
   const ref = db.collection(['Queues', context.params.gameName, context.params.queueName].join('/'));
   
@@ -27,7 +27,7 @@ exports.makeGameGroup = functions.firestore.document('/Queues/{gameName}/{queueN
   // An array to keep track of the IDs for all players in the queue.
   const playerIDs = [];
   jigsawValueQuery.forEach(doc => {
-     playerIDs.push(doc.id)
+      playerIDs.push(doc.id)
   })
 
   // Get total players count in the queue.
@@ -66,7 +66,8 @@ exports.makeGameGroup = functions.firestore.document('/Queues/{gameName}/{queueN
   const gameName = context.params.gameName;
   // Create an anonymous chatroom.
   const chatroom = await db.collection('Chatrooms').add({
-    name: gameName
+    "name": gameName,
+    "playerIDs": [].concat(group1, group2)
   });
   // Get the chatroom ID.
   const chatroomID = chatroom.id;
@@ -106,24 +107,57 @@ exports.addTeamRankingAndRemoveMatchGroup = functions.firestore.document('/GameG
   // Get deleted value.
   const deletedValue = snap.data();
   
-  // Actually it is a few random scores from the team.
-  const allScores = deletedValue.allRoomsFinishedUserScores;
-  // All players have finished the game.
+  const allScoreStrings = deletedValue.allRoomsFinishedUserScores;
+  const group1 = deletedValue.group1;
+  const group2 = deletedValue.group2;
+  const playerIDs = [].concat(group1, group2);
 
-  if (allScores.length > 0) {
-    functions.logger.log('Finished count = ', allScores.length);
+  functions.logger.log('Finished count = ', allScoreStrings.length);
+  functions.logger.log('Players count = ', playerIDs.length);
+
+  // Some/All players have finished the game.
+  if (allScoreStrings.length > 0) {
+    // An array to keep track of the scores of all players in the queue.
+  
+    // Note: to work around the "arrayunion" function, Ting created a
+    // score string as "userID + "@" + String(format: "%.6f", score)"
+    // So here we split the string by the at symbol, and convert the 
+    // trailing value into a decimal number.
+    const allScores = [];
+    allScoreStrings.forEach(str => {
+        const res = str.split("@");
+        allScores.push(parseFloat(res[res.length - 1]));
+    })
     // Create a TeamRanking object.
     const averageScore = allScores.reduce((a,b) => (a+b)) / allScores.length;
+    
     const teamRanking = {
       "teamName": "Jigsaw Team",
-      "playerIDs": [].concat(group1, group2),
+      "playerIDs": playerIDs,
       "gameName": deletedValue.gameName,
       "score": averageScore,
       "playedDate": deletedValue.createdDate
     };
-    // Delete the game group.
+    // Delete the game group to avoid issues.
     // const res1 = await db.collection('GameGroups').doc(context.params.groupID).delete();
     // Add the team ranking in collection "TeamRankings" with generated ID.
     const res2 = await db.collection('TeamRankings').add(teamRanking);
   }
 });
+
+/*
+  Take the text parameter "groupID" passed to this HTTP endpoint
+  and purge the game group in Firestore under /GameGroups/:groupID
+*/
+exports.removeGameGroup = functions.https.onRequest(async (req, res) => {
+  // Grab the text parameter.
+  const groupID = req.query.groupID;
+  // Push the new message into Cloud Firestore using the Firebase Admin SDK.
+  const deleteResult = await db.collection('GameGroups').doc(groupID).delete();
+  // Send back an empty 200 status.
+  res.status(200).send();
+});
+
+// https://firebase.google.com/docs/firestore/manage-data/delete-data
+// To add:
+// - Delete messages

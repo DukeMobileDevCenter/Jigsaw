@@ -13,6 +13,7 @@ target 'Jigsaw' do
   pod 'Firebase/Auth'
   pod 'Firebase/Storage'
   pod 'Firebase/Firestore'
+  pod 'Firebase/Functions'
 
   # Firebase UI for sign up/in
   pod 'FirebaseUI/Auth'

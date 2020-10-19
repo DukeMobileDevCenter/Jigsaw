@@ -55,7 +55,7 @@ class TeamRankingsViewController: UITableViewController {
         if rank.isMyTeam {
             cell.accessoryType = .checkmark
         }
-        cell.textLabel?.text = rank.teamName + dateFormatter.string(from: rank.playedDate)
+        cell.textLabel?.text = rank.teamName + "@" + dateFormatter.string(from: rank.playedDate)
         return cell
     }
     

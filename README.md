@@ -4,7 +4,7 @@
 
 <div align="center">
     <img src="https://img.shields.io/badge/Swift-5.3-orange.svg?style=flat" alt="Swift 5">
-    <img src="https://img.shields.io/badge/Xcode-11.7-blue.svg?style=flat" alt="Xcode 11">
+    <img src="https://img.shields.io/badge/Xcode-12.0-blue.svg?style=flat" alt="Xcode 11">
     <img src="https://img.shields.io/badge/macOS-10.15.6-green.svg?style=flat" alt="macOS Catalina">
     <img src="https://img.shields.io/badge/version-1.0%20build%201-blue.svg?style=flat" alt="version">
 </div>
@@ -62,7 +62,7 @@ Fixing any [issues](https://github.com/DukeMobileDevCenter/Jigsaw/issues) in the
 
 ## Requirements
 
-* [Xcode 11.0 (or newer)](https://apps.apple.com/us/app/xcode/id497799835)
+* [Xcode 12.0 (or newer)](https://apps.apple.com/us/app/xcode/id497799835)
 * [SwiftLint](https://github.com/realm/SwiftLint)
 * [ResearchKit](https://github.com/ResearchKit/ResearchKit) from Apple
     * Official Website: https://www.researchandcare.org/researchkit/
@@ -89,4 +89,4 @@ Copyright © Center for Mobile Development 2020
 All rights reserved. 
 ```
 
-last revision: 200916
+last revision: 201017

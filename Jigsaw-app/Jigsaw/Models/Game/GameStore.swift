@@ -74,7 +74,7 @@ class GameStore: NSObject {
     func loadGames(completion: @escaping (Result<[Game], Error>) -> Void) {
         // Clear all existing games.
         collections.removeAll()
-        FirebaseConstants.shared.gamesStorage.listAll { [weak self] storageListResult, error in
+        FirebaseConstants.gamesStorage.listAll { [weak self] storageListResult, error in
             guard let self = self else { return }
             if let error = error {
                 completion(.failure(error))

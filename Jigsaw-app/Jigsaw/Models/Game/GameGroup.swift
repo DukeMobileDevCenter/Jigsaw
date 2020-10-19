@@ -16,7 +16,7 @@ struct GameGroup: Codable {
     var chatroomReadyUserIDs: [String]
     var roomAttemptedUserIDs: [String]
     var roomFinishedUserIDs: [String]
-    var allRoomsFinishedUserScores: [Double]
+    var allRoomsFinishedUserScores: [String]
     /// An array of player's userIDs.
     let group1: [String]
     /// An array of player's userIDs.
@@ -52,5 +52,9 @@ struct GameGroup: Codable {
             return 2
         }
         return nil
+    }
+    
+    func userScoreString(userID: String, score: Double) -> String {
+        return userID + "@" + String(format: "%.6f", score)
     }
 }

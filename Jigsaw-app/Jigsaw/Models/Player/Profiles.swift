@@ -11,7 +11,7 @@ import Foundation
 class Profiles: CustomStringConvertible {
     /// A custom description that prints out basic info.
     var description: String {
-        return "userID: \(Profiles.userID ?? "nil"), displayName: \(Profiles.displayName ?? "nil"), jigsawValue: \(Profiles.jigsawValue).\nLast time game loaded at \(Profiles.lastLoadGameDate.description)."
+        return "userID: \(Profiles.userID ?? "nil"), displayName: \(Profiles.displayName ?? "nil"), jigsawValue: \(Profiles.jigsawValue). Last time game loaded at \(Profiles.lastLoadGameDate.description)."
     }
     
     /// A class function to clear away all info.
@@ -27,6 +27,8 @@ class Profiles: CustomStringConvertible {
     static var currentPlayer: Player! = nil
     /// A set of strings for IDs of played game.
     static var playedGameIDs = Set<String>()
+    /// The game group's ID where the current player is in. If the player is not in a game, then it is nil.
+    static var currentGroupID: String?
     
     private enum SettingKeys: String, CaseIterable {
         // User info.

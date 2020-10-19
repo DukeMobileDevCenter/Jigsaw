@@ -18,26 +18,21 @@ class HomeCollectionViewController: UICollectionViewController {
     @IBOutlet private var playersCountSegmentedControl: UISegmentedControl!
     
     private var randomGame: Game!
-    var nextGame: Game!
     
     private var queueType: PlayersQueue {
         playersCountSegmentedControl.selectedSegmentIndex == 0 ? .twoPlayersQueue : .fourPlayersQueue
     }
     
-    @IBAction func testBarButtonTapped(_ sender: UIBarButtonItem) {
-        // Maybe put a sort or filter button here.
-        // Sort by date or name or category, etc.
-        // filter by name and category.
-        testShowChatroom(sender)
-//        PopulateGamesFromYAML.shared.uploadGame()
-    }
+//    @IBAction func testBarButtonTapped(_ sender: UIBarButtonItem) {
+//        testShowChatroom(sender)
+//    }
     
     @IBAction func segmentedControlValueChanged(_ sender: UISegmentedControl) {
         navigationItem.title = playersCountSegmentedControl.selectedSegmentIndex == 0 ? "Games - 2P" : "Games - 4P"
     }
     
     private func testShowChatroom(_ sender: UIBarButtonItem) {
-        let chatroomsRef = FirebaseConstants.shared.chatrooms.document("TestChatroom")
+        let chatroomsRef = FirebaseConstants.chatrooms.document("TestChatroom")
         chatroomsRef.getDocument { [weak self] document, error in
             guard let self = self else { return }
             if let document = document, let chatroom = Chatroom(document: document) {
@@ -54,6 +49,9 @@ class HomeCollectionViewController: UICollectionViewController {
     /// Load games and player's game histories (if exist) from remote.
     @objc
     private func loadFromRemote() {
+        // Aggressively set last load date, even if if fails to load, to avoid
+        // additional bandwidth cost.
+        Profiles.lastLoadGameDate = Date()
         // Load history first, then load games.
         loadHistories { [weak self] in
             self?.loadGames()
@@ -69,7 +67,6 @@ class HomeCollectionViewController: UICollectionViewController {
             switch result {
             case .success(let games):
                 os_log(.info, "games count = %d", games.count)
-                Profiles.lastLoadGameDate = Date()
             case .failure(let error):
                 os_log(.error, "Error: loading games from remote")
                 DispatchQueue.main.async {
@@ -130,8 +127,13 @@ class HomeCollectionViewController: UICollectionViewController {
         if isRandomCell(for: indexPath) {
             // Handle random cell specifically.
             getGameWithLeastWaitingTime(queueType: queueType) { [unowned self] game in
-                self.randomGame = game
-                self.performSegue(withIdentifier: "showRandom", sender: cell)
+                if let game = game {
+                    randomGame = game
+                    performSegue(withIdentifier: "showRandom", sender: cell)
+                } else {
+                    // If the query returns empty game result, show an alert.
+                    presentAlert(title: "Info", message: "No random game available.")
+                }
             }
         } else {
             // Do the normal synchronous performSegue.
@@ -145,24 +147,21 @@ class HomeCollectionViewController: UICollectionViewController {
     ///   - queueType: The players queue type, 2 or 4 players.
     ///   - completion: Return the game after sorting all games by their modulos.
     ///   - game: The game with the largest modulo.
-    private func getGameWithLeastWaitingTime(queueType: PlayersQueue, completion: @escaping (_ game: Game) -> Void) {
+    private func getGameWithLeastWaitingTime(queueType: PlayersQueue, completion: @escaping (_ game: Game?) -> Void) {
         let loadGroup = DispatchGroup()
-        let moduloDivisor = queueType == .twoPlayersQueue ? 2 : 4
+        let moduloDivisor = queueType.playerCount
         // An array of (queue's player count mod by queue type) and (game) tuples.
         var moduloGamePairs = [(queuePlayerCountModulo: Int, game: Game)]()
         
         ProgressHUD.show(interaction: false)
-        for game in GameStore.shared.allGames {
-            if game.level != 1 { break }
-            let queuesRef = FirebaseConstants.database.collection(["Queues", game.gameName, queueType.rawValue].joined(separator: "/"))
+        for game in GameStore.shared.allGames where game.isEnabled {
+            let queuesRef = FirebaseConstants.gameQueueRef(gameName: game.gameName, queueType: queueType)
             loadGroup.enter()
-            queuesRef.getDocuments { querySnapshot, error in
+            queuesRef.getDocuments { querySnapshot, _ in
                 defer {
                     loadGroup.leave()
                 }
-                if error != nil {
-                    os_log(.error, "Error: finding the quickest game from remote")
-                } else if let querySnapshot = querySnapshot {
+                if let querySnapshot = querySnapshot {
                     let documentsCount = querySnapshot.documents.count
                     moduloGamePairs.append((documentsCount % moduloDivisor, game))
                 }
@@ -172,7 +171,7 @@ class HomeCollectionViewController: UICollectionViewController {
         loadGroup.notify(queue: .main) {
             ProgressHUD.dismiss()
             moduloGamePairs.sort { $0.queuePlayerCountModulo > $1.queuePlayerCountModulo }
-            completion(moduloGamePairs.first!.game)
+            completion(moduloGamePairs.first?.game)
         }
     }
     
@@ -213,31 +212,20 @@ class HomeCollectionViewController: UICollectionViewController {
             let destinationVC = segue.destination as! MatchingViewController
             destinationVC.queueType = queueType
             destinationVC.selectedGame = randomGame
-            print("Info: Random game is \(randomGame.gameName)")
-        case "showSpecific":
-            let destinationVC = segue.destination as! MatchingViewController
-            destinationVC.queueType = queueType
-            destinationVC.selectedGame = nextGame
-//            // Auto join the next level room.
-//            if let resultTabSenderID = sender as? String, resultTabSenderID == "ResultStatsViewController" {
-//                destinationVC.joinGameButtonTapped(nil)
-//            }
-            print("Info: Next game is \(nextGame.gameName)")
+            os_log(.info, "Random game is %s", randomGame.gameName)
         default:
             preconditionFailure("Unexpected segue identifier.")
         }
     }
 }
 
-extension HomeCollectionViewController {
+// MARK: - UICollectionView
+
+extension HomeCollectionViewController: UICollectionViewDelegateFlowLayout {
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         handleRandomPerform(for: indexPath)
     }
-}
-
-// MARK: - UICollectionViewDelegateFlowLayout
-
-extension HomeCollectionViewController: UICollectionViewDelegateFlowLayout {
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let collectionViewSize = collectionView.bounds.inset(by: collectionView.safeAreaInsets).size
         let spacing: CGFloat = 10

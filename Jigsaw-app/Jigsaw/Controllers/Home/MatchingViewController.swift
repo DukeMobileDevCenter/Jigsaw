@@ -56,7 +56,7 @@ class MatchingViewController: UIViewController {
     
     private func setGameGroupListener() {
         // Listen to game group changes when the player joined a waiting queue.
-        gameGroupListener = FirebaseConstants.shared.gamegroups.addSnapshotListener { [weak self] querySnapshot, _ in
+        gameGroupListener = FirebaseConstants.gamegroups.addSnapshotListener { [weak self] querySnapshot, _ in
             guard let snapshot = querySnapshot else { return }
             snapshot.documentChanges.forEach { change in
                 self?.handleDocumentChange(change)
@@ -101,6 +101,7 @@ class MatchingViewController: UIViewController {
         )
         // Stop listen to further updates to game groups.
         gameGroupListener?.remove()
+        gameGroupListener = nil
         // Show the room progress view controller.
         performSegue(withIdentifier: "showProgress", sender: nil)
     }
@@ -135,12 +136,14 @@ class MatchingViewController: UIViewController {
             let destinationVC = segue.destination as! RoomProgressViewController
             destinationVC.gameGroup = gameGroup
             destinationVC.gameOfMyGroup = gameOfMyGroup
+            // Record the game group ID to handle crash.
+            Profiles.currentGroupID = gameGroup.id
         }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        queuesRef = FirebaseConstants.database.collection(["Queues", selectedGame.gameName, queueType.rawValue].joined(separator: "/"))
+        queuesRef = FirebaseConstants.gameQueueRef(gameName: selectedGame.gameName, queueType: queueType)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -150,7 +153,6 @@ class MatchingViewController: UIViewController {
             guard let snapshot = querySnapshot else { return }
             self?.playerCountLabel.text = "\(snapshot.documents.count)"
         }
-        joinGameButton.isEnabled = true
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -158,13 +160,14 @@ class MatchingViewController: UIViewController {
         // When matching page is not showing anymore:
         // Remove the waiting queue listener.
         queuesListener?.remove()
+        queuesListener = nil
         // Stop listen to further updates to game groups.
         gameGroupListener?.remove()
+        gameGroupListener = nil
     }
     
     deinit {
         // Remove player from queue when it exits the matching page.
         queuesRef.document(Profiles.userID).delete()
-        print("✅ matching VC deinit")
     }
 }

@@ -182,7 +182,7 @@ class ProfileViewController: FormViewController {
         }
         
         // Add app info to the end of this page.
-        +++ Section("\(AppInfo.appName) app 🧩 Version \(AppInfo.versionNumber) build \(AppInfo.buildNumber)")
+        +++ Section("\(AppInfo.appName) app 🧩 Version \(AppInfo.versionNumber) (\(AppInfo.buildNumber))")
     }
     // swiftlint:enable function_body_length
 }

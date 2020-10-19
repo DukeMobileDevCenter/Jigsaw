@@ -35,6 +35,7 @@
 		005856C924D92E480010BE55 /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005856C824D92E480010BE55 /* UIImage.swift */; };
 		005856CE24D92FB60010BE55 /* ChatUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005856CD24D92FB60010BE55 /* ChatUser.swift */; };
 		006089B425368EF500430707 /* DoorCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006089B325368EF500430707 /* DoorCollectionCell.swift */; };
+		006EB0AD253C217B00FE5D8A /* ConfettiView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006EB0AC253C217B00FE5D8A /* ConfettiView.swift */; };
 		0070DFEA24B0060400E71F46 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0070DFE924B0060400E71F46 /* AppDelegate.swift */; };
 		0070DFEC24B0060400E71F46 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0070DFEB24B0060400E71F46 /* SceneDelegate.swift */; };
 		0070DFEE24B0060400E71F46 /* HomeCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0070DFED24B0060400E71F46 /* HomeCollectionViewController.swift */; };
@@ -157,6 +158,7 @@
 		005856C824D92E480010BE55 /* UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
 		005856CD24D92FB60010BE55 /* ChatUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatUser.swift; sourceTree = "<group>"; };
 		006089B325368EF500430707 /* DoorCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoorCollectionCell.swift; sourceTree = "<group>"; };
+		006EB0AC253C217B00FE5D8A /* ConfettiView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfettiView.swift; sourceTree = "<group>"; };
 		0070DFE624B0060400E71F46 /* Jigsaw.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Jigsaw.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0070DFE924B0060400E71F46 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0070DFEB24B0060400E71F46 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -306,9 +308,9 @@
 		005856CA24D92F820010BE55 /* Game */ = {
 			isa = PBXGroup;
 			children = (
-				0020D54824DF79CB00DB20E1 /* GameStore.swift */,
 				0020D54A24DF7A0D00DB20E1 /* Game.swift */,
 				0047630524ED1154007767A5 /* GameCategory.swift */,
+				0020D54824DF79CB00DB20E1 /* GameStore.swift */,
 				0020D54F24DFAED000DB20E1 /* GameOfGroup.swift */,
 				00A06D8C24E8A9B400030649 /* GameGroup.swift */,
 				00B6305E24FB0247008975CE /* GameResult.swift */,
@@ -503,6 +505,7 @@
 				0020D56924E267B300DB20E1 /* GameCollectionCell.swift */,
 				00B0A67B24E3D10300887701 /* ProfileHeaderView.swift */,
 				006089B325368EF500430707 /* DoorCollectionCell.swift */,
+				006EB0AC253C217B00FE5D8A /* ConfettiView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -555,6 +558,7 @@
 			buildConfigurationList = 0070E00524B0060500E71F46 /* Build configuration list for PBXNativeTarget "Jigsaw" */;
 			buildPhases = (
 				BCABCBAFB4266F05EE57AD41 /* [CP] Check Pods Manifest.lock */,
+				006EB049253BA63E00FE5D8A /* Set Bundle Build Version to date */,
 				0070DFE224B0060400E71F46 /* Sources */,
 				0070DFE324B0060400E71F46 /* Frameworks */,
 				0070DFE424B0060400E71F46 /* Resources */,
@@ -678,6 +682,24 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		006EB049253BA63E00FE5D8A /* Set Bundle Build Version to date */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Set Bundle Build Version to date";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nformatDate=$(date \"+%y%m%d\")\nbuildNumber=\"${formatDate}\"\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\" \"$INFOPLIST_FILE\"\n";
+		};
 		0070E00B24B0066B00E71F46 /* SwiftLint */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -796,6 +818,7 @@
 				00A8831525292D4E00186BED /* GameCenterHelper.swift in Sources */,
 				00F029D4251FF25700CB2A15 /* SignInViewController.swift in Sources */,
 				005308E12516F65F002A429F /* GameError.swift in Sources */,
+				006EB0AD253C217B00FE5D8A /* ConfettiView.swift in Sources */,
 				0071E920252003880025702E /* AppInfo.swift in Sources */,
 				005856C424D92CFB0010BE55 /* Chatroom.swift in Sources */,
 				00B6305F24FB0247008975CE /* GameResult.swift in Sources */,
@@ -992,6 +1015,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Jigsaw/Jigsaw.entitlements;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1017,6 +1041,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Jigsaw/Jigsaw.entitlements;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",

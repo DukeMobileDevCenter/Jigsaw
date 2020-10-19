@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.3" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="N4T-se-iqT">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="N4T-se-iqT">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -21,20 +23,20 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="center" spacing="7" translatesAutoresizingMaskIntoConstraints="NO" id="PAi-K8-KUE">
                                 <rect key="frame" x="103.5" y="721" width="207" height="119"/>
                                 <subviews>
-                                    <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TM3-1z-6VN">
+                                    <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TM3-1z-6VN">
                                         <rect key="frame" x="0.0" y="0.0" width="207" height="56"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                         <state key="normal" title="Sign In">
-                                            <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="titleColor" systemColor="darkTextColor"/>
                                         </state>
                                         <connections>
                                             <action selector="signInButtonTapped:" destination="N4T-se-iqT" eventType="primaryActionTriggered" id="tIL-pC-TGb"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fva-zk-Fxk">
+                                    <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fva-zk-Fxk">
                                         <rect key="frame" x="0.0" y="63" width="207" height="56"/>
-                                        <color key="backgroundColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="backgroundColor" systemColor="systemGreenColor"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="20"/>
                                         <inset key="contentEdgeInsets" minX="16" minY="16" maxX="16" maxY="16"/>
                                         <state key="normal" title="Play Anonymously">
@@ -47,20 +49,23 @@
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="TM3-1z-6VN" firstAttribute="leading" secondItem="PAi-K8-KUE" secondAttribute="leading" id="1Fk-vD-XkN"/>
+                                    <constraint firstItem="fva-zk-Fxk" firstAttribute="width" secondItem="TM3-1z-6VN" secondAttribute="width" id="6SA-vq-Kst"/>
+                                    <constraint firstAttribute="width" relation="lessThanOrEqual" constant="400" id="Qv8-k8-sqM"/>
                                     <constraint firstAttribute="trailing" secondItem="TM3-1z-6VN" secondAttribute="trailing" id="hGx-MC-EPt"/>
                                 </constraints>
                             </stackView>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="8sU-xD-mpr"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="8sU-xD-mpr" firstAttribute="bottom" secondItem="PAi-K8-KUE" secondAttribute="bottom" constant="22" id="8l3-KZ-K7i"/>
                             <constraint firstAttribute="bottom" secondItem="Qp2-h6-9Fh" secondAttribute="bottom" id="D22-lL-gH3"/>
                             <constraint firstItem="Qp2-h6-9Fh" firstAttribute="trailing" secondItem="ohf-of-Cea" secondAttribute="trailing" id="Kth-qy-3r7"/>
                             <constraint firstItem="PAi-K8-KUE" firstAttribute="centerX" secondItem="8sU-xD-mpr" secondAttribute="centerX" id="YCs-mK-tuA"/>
+                            <constraint firstItem="PAi-K8-KUE" firstAttribute="width" secondItem="ohf-of-Cea" secondAttribute="width" multiplier="0.5" priority="750" id="hds-Er-HKn"/>
                             <constraint firstItem="Qp2-h6-9Fh" firstAttribute="top" secondItem="ohf-of-Cea" secondAttribute="top" id="r22-0r-D2L"/>
                             <constraint firstItem="Qp2-h6-9Fh" firstAttribute="leading" secondItem="ohf-of-Cea" secondAttribute="leading" id="u1T-lz-VOC"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="8sU-xD-mpr"/>
                     </view>
                     <connections>
                         <outlet property="playAnonymouslyButton" destination="fva-zk-Fxk" id="VXY-1I-c7c"/>
@@ -74,5 +79,14 @@
     </scenes>
     <resources>
         <image name="jigsawLaunchScreen" width="2048" height="2048"/>
+        <systemColor name="darkTextColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGreenColor">
+            <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
     </resources>
 </document>
