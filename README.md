@@ -10,10 +10,10 @@
 </div>
 
 <div align="center">
-    <h1>Jigsaw<br><i><sup>collaborate with empathy</sup></i></h1>
+    <h1>Jigsaw<br><i><sup>depolarization by collaboration</sup></i></h1>
 </div>
 
-[Jigsaw](https://gitlab.oit.duke.edu/MobileCenter/jigsaw) helps reduce bias and miscommunication among people with different political stances.
+[Jigsaw](https://gitlab.oit.duke.edu/MobileCenter/jigsaw) helps reduce bias and miscommunication among people with different political stances. Collaborate with empathy, depolarization by collaboration.
 
 Originally prototyped by Grant Larson, Mengqian Liu, Shaopeng Zhang and Diego Chamorro, the app was later on continued by Xinyi Hong and Xiaochen Zhou at *Duke's Center for Mobile Development*. Based on previous efforts, Ting(@yo1995) refactored the app and made it public on GitHub. 
 
