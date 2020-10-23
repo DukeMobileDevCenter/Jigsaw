@@ -52,8 +52,9 @@ class ProfileViewController: FormViewController {
     
     @objc
     private func loadPlayerProfile() {
+        guard let playerID = Profiles.userID else { return }
         // Get player info from remote.
-        FirebaseHelper.getPlayer(userID: Profiles.userID) { [weak self] player, error in
+        FirebaseHelper.getPlayer(userID: playerID) { [weak self] player, error in
             guard let self = self else { return }
             if let currentPlayer = player {
                 Profiles.displayName = currentPlayer.displayName
