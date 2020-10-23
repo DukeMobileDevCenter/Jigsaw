@@ -249,7 +249,7 @@ class RoomProgressViewController: UIViewController {
         loadChatroom { [unowned self] in
             ProgressHUD.dismiss()
             // After the chatroom is loaded, present the first room.
-            presentRoom(room: currentRoom!)
+            self.presentRoom(room: self.currentRoom!)
         }
     }
     
