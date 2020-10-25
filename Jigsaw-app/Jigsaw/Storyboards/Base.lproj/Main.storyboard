@@ -99,7 +99,7 @@
                     <navigationItem key="navigationItem" title="Games - 2P" id="UZt-g5-Jhh">
                         <barButtonItem key="rightBarButtonItem" id="wtT-oG-gy1">
                             <segmentedControl key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="KsP-MD-Xda">
-                                <rect key="frame" x="302" y="5.6666666666666679" width="92" height="33"/>
+                                <rect key="frame" x="302" y="5.5" width="92" height="33"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <segments>
                                     <segment title="" image="person" catalog="system"/>
@@ -234,7 +234,9 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HA6-LZ-aPL" customClass="PieChartView" customModule="Charts">
                                                 <rect key="frame" x="0.0" y="0.0" width="374" height="249.5"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" secondItem="HA6-LZ-aPL" secondAttribute="height" multiplier="3:2" id="XLU-3l-6uL"/>
+                                                    <constraint firstAttribute="width" secondItem="HA6-LZ-aPL" secondAttribute="height" multiplier="3:2" id="XLU-3l-6uL">
+                                                        <variation key="heightClass=regular-widthClass=regular" constant="150"/>
+                                                    </constraint>
                                                 </constraints>
                                             </view>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Next game info shown here" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0jn-tq-vfH">
