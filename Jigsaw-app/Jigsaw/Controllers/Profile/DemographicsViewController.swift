@@ -16,8 +16,7 @@ class DemographicsViewController: FormViewController {
     private func updatePlayerDemographics(demographics: [String: String?]) {
         playersDocRef.updateData(["demographics": demographics]) { error in
             if let error = error {
-                print("❌ Error updating document: \(error)")
-                return
+                print("❌ Error updating demographics document: \(error)")
             } else {
                 // Only sync up when remote write succeeds.
                 Profiles.currentPlayer.demographics = demographics

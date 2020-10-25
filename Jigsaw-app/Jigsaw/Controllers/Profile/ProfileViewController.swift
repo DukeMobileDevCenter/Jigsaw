@@ -299,10 +299,8 @@ extension ProfileViewController: FUIAuthDelegate {
             os_log(.error, "Failed to log in or canceled: %@", error.localizedDescription)
         } else if let result = authDataResult {
             // Handle successful login below.
-            let user = result.user
-            user.providerData.forEach { userInfo in
-                print(userInfo.providerID)
-            }
+            let providerIDs = result.user.providerData.map { $0.providerID }.joined(separator: ", ")
+            os_log(.info, "Current providers are: %@", providerIDs)
         }
     }
 }

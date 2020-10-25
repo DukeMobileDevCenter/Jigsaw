@@ -143,7 +143,6 @@ struct GameResult {
             outcome = (correctMin...correctMax).contains(answer.intValue) ? .correct : .incorrect
         case .unknown, .instruction:
             // Instruction should never come here.
-            print("Error: unknown question type, no result.")
             return .unknown
         }
         return outcome

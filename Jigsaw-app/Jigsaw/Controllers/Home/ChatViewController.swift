@@ -6,6 +6,7 @@
 //  Copyright © 2020 DukeMobileDevCenter. All rights reserved.
 //
 
+import os
 import UIKit
 import Photos
 
@@ -58,7 +59,7 @@ class ChatViewController: MessagesViewController {
     
     deinit {
         messageListener?.remove()
-        print("✅ chatroom deinit")
+        os_log(.info, "✅ chatroom deinit")
     }
     
     init(user: User, chatroom: Chatroom) {

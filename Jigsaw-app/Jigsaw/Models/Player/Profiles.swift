@@ -9,7 +9,7 @@
 import Foundation
 
 class Profiles: CustomStringConvertible {
-    /// A custom description that prints out basic info.
+    /// A custom description of basic info.
     var description: String {
         return "userID: \(Profiles.userID ?? "nil"), displayName: \(Profiles.displayName ?? "nil"), jigsawValue: \(Profiles.jigsawValue). Last time game loaded at \(Profiles.lastLoadGameDate.description)."
     }

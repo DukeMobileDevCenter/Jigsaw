@@ -334,7 +334,7 @@ class RoomProgressViewController: UIViewController {
         roomViewController = nil
         // Clear group ID.
         Profiles.currentGroupID = nil
-        print("✅ room vc deinit")
+        os_log(.info, "✅ room vc deinit")
     }
 }
 
@@ -430,7 +430,7 @@ extension RoomProgressViewController: ORKTaskViewControllerDelegate {
         // Decide what is the outcome of current room.
         switch reason {
         case .failed, .discarded, .saved:
-            print("❌ Failed or 💦 Canceled")
+            os_log(.info, "❌ Game failed or 💦 Canceled")
             // Dismiss the game controller to avoid presenting issues.
             taskViewController.dismiss(animated: true)
             // Call the did finish function to handle remaining clean up.
@@ -447,7 +447,7 @@ extension RoomProgressViewController: ORKTaskViewControllerDelegate {
             }
             // Log an unsuccessful game result.
         case .completed:
-            print("✅ completed")
+            os_log(.info, "✅ Game completed")
             // Player has passed. Reset the all arrays.
             guard let userID = Profiles.userID else { return }
             FirebaseConstants.gamegroups.document(gameGroup.id!).updateData([
