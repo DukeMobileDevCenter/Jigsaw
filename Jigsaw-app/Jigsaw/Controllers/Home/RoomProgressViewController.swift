@@ -410,7 +410,10 @@ extension RoomProgressViewController: ORKTaskViewControllerDelegate {
         case "Countdown":
             handleCountdownStep(taskViewController: taskViewController, stepViewController: stepViewController as! ORKActiveStepViewController)
         case "Wait":
-            handleWaitStep(taskVC: taskViewController, stepVC: stepViewController as! ORKWaitStepViewController)
+            // Mitigate #116.
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [weak self] in
+                self?.handleWaitStep(taskVC: taskViewController, stepVC: stepViewController as! ORKWaitStepViewController)
+            }
         case "conclusion":
             // Don't allow going back to wait step from completion step.
             stepViewController.navigationItem.hidesBackButton = true
