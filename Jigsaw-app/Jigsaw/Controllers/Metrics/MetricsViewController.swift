@@ -95,6 +95,9 @@ class MetricsViewController: UIViewController {
     private func authenticationChanged(_ notification: Notification) {
         achievementsButton.isEnabled = notification.object as? Bool ?? false
         leaderboardButton.isEnabled = notification.object as? Bool ?? false
+        // Dim the buttons when disabled.
+        achievementsButton.alpha = achievementsButton.isEnabled ? 1 : 0.6
+        leaderboardButton.alpha = leaderboardButton.isEnabled ? 1 : 0.6
     }
 }
 
