@@ -63,7 +63,7 @@ class MatchingViewController: UIViewController {
     }
     
     private func handleAddedMatchingGroup(group: GameGroup) {
-        guard let game = selectedGame else { return }
+        guard let game = selectedGame, group.gameName == game.gameName else { return }
         let urls: [URL]
         let questionnaires: [Questionnaire]
         // Find which subgroup does current player belong to.
