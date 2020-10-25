@@ -129,6 +129,7 @@ static const CGFloat ORKSignatureTopPadding = 37.0;
         _webView.navigationDelegate = self;
 //        _webView.scrollView.scrollEnabled = NO;
         _webView.scrollView.delegate = self;
+        _webView.allowsBackForwardNavigationGestures = true;
         
         [_scrollView addSubview:_webView];
         [self setupNavigationFooterView];
@@ -170,7 +171,7 @@ static const CGFloat ORKSignatureTopPadding = 37.0;
         [NSLayoutConstraint deactivateConstraints:_constraints];
     }
 
-    UIView *viewForiPad = [self viewForiPadLayoutConstraints];
+    // UIView *viewForiPad = [self viewForiPadLayoutConstraints];
 
     _constraints = nil;
     _webView.translatesAutoresizingMaskIntoConstraints = NO;
@@ -182,28 +183,28 @@ static const CGFloat ORKSignatureTopPadding = 37.0;
         [NSLayoutConstraint constraintWithItem:_scrollView
                                      attribute:NSLayoutAttributeTop
                                      relatedBy:NSLayoutRelationEqual
-                                        toItem:viewForiPad ? : self.view.safeAreaLayoutGuide
+                                        toItem:self.view.safeAreaLayoutGuide
                                      attribute:NSLayoutAttributeTop
                                     multiplier:1.0
                                       constant:0.0],
         [NSLayoutConstraint constraintWithItem:_scrollView
                                      attribute:NSLayoutAttributeLeading
                                      relatedBy:NSLayoutRelationEqual
-                                        toItem:viewForiPad ? : self.view
+                                        toItem:self.view
                                      attribute:NSLayoutAttributeLeading
                                     multiplier:1.0
                                       constant:0.0],
         [NSLayoutConstraint constraintWithItem:_scrollView
                                      attribute:NSLayoutAttributeTrailing
                                      relatedBy:NSLayoutRelationEqual
-                                        toItem:viewForiPad ? : self.view
+                                        toItem:self.view
                                      attribute:NSLayoutAttributeTrailing
                                     multiplier:1.0
                                       constant:0.0],
         [NSLayoutConstraint constraintWithItem:_scrollView
                                      attribute:NSLayoutAttributeBottom
                                      relatedBy:NSLayoutRelationEqual
-                                        toItem:viewForiPad ? : self.view
+                                        toItem:self.view
                                      attribute:NSLayoutAttributeBottom
                                     multiplier:1.0
                                       constant:0.0],
@@ -232,14 +233,14 @@ static const CGFloat ORKSignatureTopPadding = 37.0;
         [NSLayoutConstraint constraintWithItem:_navigationFooterView
                                      attribute:NSLayoutAttributeLeft
                                      relatedBy:NSLayoutRelationEqual
-                                        toItem:viewForiPad ? : self.view
+                                        toItem:self.view
                                      attribute:NSLayoutAttributeLeft
                                     multiplier:1.0
                                       constant:0],
         [NSLayoutConstraint constraintWithItem:_navigationFooterView
                                      attribute:NSLayoutAttributeRight
                                      relatedBy:NSLayoutRelationEqual
-                                        toItem:viewForiPad ? : self.view
+                                        toItem:self.view
                                      attribute:NSLayoutAttributeRight
                                     multiplier:1.0
                                       constant:0]
@@ -289,14 +290,14 @@ static const CGFloat ORKSignatureTopPadding = 37.0;
             [NSLayoutConstraint constraintWithItem:_webView
                                          attribute:NSLayoutAttributeBottom
                                          relatedBy:NSLayoutRelationEqual
-                                            toItem:self.view
+                                            toItem:_navigationFooterView
                                          attribute:NSLayoutAttributeBottom
                                         multiplier:1.0
                                           constant:0.0],
             [NSLayoutConstraint constraintWithItem:_navigationFooterView
                                          attribute:NSLayoutAttributeBottom
                                          relatedBy:NSLayoutRelationEqual
-                                            toItem:viewForiPad ? : self.view
+                                            toItem:self.view
                                          attribute:NSLayoutAttributeBottom
                                         multiplier:1.0
                                           constant:0.0],
@@ -415,11 +416,12 @@ static const CGFloat ORKSignatureTopPadding = 37.0;
     [webView evaluateJavaScript:@"document.readyState" completionHandler:^(id complete, NSError *readyError) {
         if (complete != nil) {
             [webView evaluateJavaScript:@"document.body.scrollHeight" completionHandler:^(id result, NSError *error) {
-                if (result != nil) {
-                    NSString *resultString = [NSString stringWithFormat:@"%@", result];
-                    CGFloat height = [resultString floatValue];
-                    [_webView.heightAnchor constraintEqualToConstant:height].active = YES;
-                }
+                // 201025 don't need to have exact height for content.
+//                if (result != nil) {
+//                    NSString *resultString = [NSString stringWithFormat:@"%@", result];
+//                    CGFloat height = [resultString floatValue];
+//                    [_webView.heightAnchor constraintEqualToConstant:height].active = YES;
+//                }
                 
                 if (_webViewDelegate != nil && [_webViewDelegate respondsToSelector:@selector(didFinishLoadingWebStepViewController:)]) {
                     [_webViewDelegate didFinishLoadingWebStepViewController:self];
