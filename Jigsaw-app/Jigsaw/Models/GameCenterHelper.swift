@@ -107,7 +107,7 @@ class GameCenterHelper: NSObject, GKLocalPlayerListener {
             if let error = error {
                 os_log(.error, "Error: %@", error.localizedDescription)
             } else {
-                print("✅ Achievement reported for \(category.label).")
+                os_log(.info, "✅ Achievement reported for %@", category.label)
             }
         }
     }
