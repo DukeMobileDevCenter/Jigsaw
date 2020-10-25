@@ -99,7 +99,7 @@
                     <navigationItem key="navigationItem" title="Games - 2P" id="UZt-g5-Jhh">
                         <barButtonItem key="rightBarButtonItem" id="wtT-oG-gy1">
                             <segmentedControl key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="KsP-MD-Xda">
-                                <rect key="frame" x="302" y="5.5" width="92" height="33"/>
+                                <rect key="frame" x="302" y="5.6666666666666679" width="92" height="33"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <segments>
                                     <segment title="" image="person" catalog="system"/>
@@ -229,7 +229,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="32" translatesAutoresizingMaskIntoConstraints="NO" id="LOa-rs-QeJ">
-                                        <rect key="frame" x="20" y="0.0" width="374" height="572"/>
+                                        <rect key="frame" x="20" y="0.0" width="374" height="659"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HA6-LZ-aPL" customClass="PieChartView" customModule="Charts">
                                                 <rect key="frame" x="0.0" y="0.0" width="374" height="249.5"/>
@@ -294,11 +294,11 @@
                                                     </collectionViewCell>
                                                 </cells>
                                             </collectionView>
-                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="q2v-nd-Ad1">
-                                                <rect key="frame" x="0.0" y="516" width="374" height="56"/>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xL5-AP-Aag">
+                                                <rect key="frame" x="0.0" y="516" width="374" height="143"/>
                                                 <subviews>
                                                     <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UTC-HK-7Oi">
-                                                        <rect key="frame" x="0.0" y="0.0" width="374" height="56"/>
+                                                        <rect key="frame" x="47" y="20" width="280.5" height="56"/>
                                                         <color key="backgroundColor" systemColor="linkColor"/>
                                                         <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -312,7 +312,7 @@
                                                         </connections>
                                                     </button>
                                                     <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="H2e-gw-yxt">
-                                                        <rect key="frame" x="0.0" y="0.0" width="374" height="0.0"/>
+                                                        <rect key="frame" x="47" y="84" width="280.5" height="39"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                                         <state key="normal" title="👉Fill out this survey👈"/>
                                                         <connections>
@@ -321,9 +321,15 @@
                                                     </button>
                                                 </subviews>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" relation="lessThanOrEqual" constant="400" id="0be-qB-sIr"/>
+                                                    <constraint firstItem="UTC-HK-7Oi" firstAttribute="top" secondItem="xL5-AP-Aag" secondAttribute="top" constant="20" symbolic="YES" id="Hvh-Gx-hHQ"/>
+                                                    <constraint firstItem="H2e-gw-yxt" firstAttribute="centerX" secondItem="UTC-HK-7Oi" secondAttribute="centerX" id="LF1-vF-9hh"/>
+                                                    <constraint firstItem="UTC-HK-7Oi" firstAttribute="width" secondItem="xL5-AP-Aag" secondAttribute="width" multiplier="0.75" priority="750" id="cUL-l9-oPY"/>
+                                                    <constraint firstItem="H2e-gw-yxt" firstAttribute="top" secondItem="UTC-HK-7Oi" secondAttribute="bottom" constant="8" symbolic="YES" id="fzG-pB-pyK"/>
+                                                    <constraint firstItem="H2e-gw-yxt" firstAttribute="width" secondItem="UTC-HK-7Oi" secondAttribute="width" id="p7C-Y2-1MV"/>
+                                                    <constraint firstItem="UTC-HK-7Oi" firstAttribute="centerX" secondItem="xL5-AP-Aag" secondAttribute="centerX" id="pcq-zK-ngR"/>
+                                                    <constraint firstAttribute="bottom" secondItem="H2e-gw-yxt" secondAttribute="bottom" constant="20" symbolic="YES" id="qme-i4-0wF"/>
                                                 </constraints>
-                                            </stackView>
+                                            </view>
                                         </subviews>
                                     </stackView>
                                 </subviews>
