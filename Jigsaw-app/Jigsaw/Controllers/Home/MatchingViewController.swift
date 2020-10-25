@@ -54,16 +54,6 @@ class MatchingViewController: UIViewController {
     
     // MARK: Methods to handle player matching
     
-    private func setGameGroupListener() {
-        // Listen to game group changes when the player joined a waiting queue.
-        gameGroupListener = FirebaseConstants.gamegroups.addSnapshotListener { [weak self] querySnapshot, _ in
-            guard let snapshot = querySnapshot else { return }
-            snapshot.documentChanges.forEach { change in
-                self?.handleDocumentChange(change)
-            }
-        }
-    }
-    
     private func addPlayerToPlayersQueue(queueReference: CollectionReference) {
         do {
             try queueReference.document(Profiles.currentPlayer.userID).setData(from: Profiles.currentPlayer)
@@ -117,6 +107,16 @@ class MatchingViewController: UIViewController {
             handleAddedMatchingGroup(group: currentGroup)
         default:
             break
+        }
+    }
+    
+    private func setGameGroupListener() {
+        // Listen to game group changes when the player joined a waiting queue.
+        gameGroupListener = FirebaseConstants.gamegroups.addSnapshotListener { [weak self] querySnapshot, _ in
+            guard let snapshot = querySnapshot else { return }
+            snapshot.documentChanges.forEach { change in
+                self?.handleDocumentChange(change)
+            }
         }
     }
     

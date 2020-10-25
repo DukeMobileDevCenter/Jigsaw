@@ -410,8 +410,9 @@ extension RoomProgressViewController: ORKTaskViewControllerDelegate {
         case "Countdown":
             handleCountdownStep(taskViewController: taskViewController, stepViewController: stepViewController as! ORKActiveStepViewController)
         case "Wait":
-            // Mitigate #116.
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [weak self] in
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) { [weak self] in
+                // Mitigate #116 that has timing issue when all players get
+                // to the wait page on the exact same time.
                 self?.handleWaitStep(taskVC: taskViewController, stepVC: stepViewController as! ORKWaitStepViewController)
             }
         case "conclusion":
