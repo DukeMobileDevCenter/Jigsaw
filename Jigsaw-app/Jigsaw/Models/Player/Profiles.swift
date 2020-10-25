@@ -51,6 +51,8 @@ class Profiles: CustomStringConvertible {
             
             if let userID = newValue {
                 defaults.set(userID, forKey: key)
+                // Post a global notification when a new userID is set.
+                NotificationCenter.default.post(name: .userIDChanged, object: userID)
             } else {
                 defaults.removeObject(forKey: key)
             }
@@ -103,4 +105,8 @@ class Profiles: CustomStringConvertible {
             UserDefaults.standard.set(newValue.timeIntervalSince1970, forKey: key)
         }
     }
+}
+
+extension Notification.Name {
+    static let userIDChanged = Notification.Name(rawValue: "userIDChanged")
 }

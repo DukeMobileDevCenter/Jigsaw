@@ -28,6 +28,14 @@ class ProfileViewController: FormViewController {
         loadInsetGroupedTableView()
         super.viewDidLoad()
         configureRefreshControl()
+        
+        // Add an observer to monitor changed user ID and reload the table.
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(loadPlayerProfile),
+            name: .userIDChanged,
+            object: nil
+        )
     }
     
     override func viewWillAppear(_ animated: Bool) {

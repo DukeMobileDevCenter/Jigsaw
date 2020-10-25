@@ -188,6 +188,14 @@ class HomeCollectionViewController: UICollectionViewController {
         collectionView.delegate = self
         collectionView.dataSource = GameCategoryClass.shared
         
+        // Add an observer to monitor changed user ID and reload the data.
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(loadFromRemote),
+            name: .userIDChanged,
+            object: nil
+        )
+        
         // Configure pull to refresh.
         configureRefreshControl()
         // Load games and player's game histories (if exist) from remote.
