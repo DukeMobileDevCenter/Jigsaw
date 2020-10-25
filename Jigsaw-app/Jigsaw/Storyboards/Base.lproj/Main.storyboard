@@ -3,7 +3,7 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17126"/>
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -565,7 +565,7 @@
         <scene sceneID="Z2A-Se-NWt">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Nu6-tE-NdJ" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Games" image="gamecontroller" catalog="system" id="CPe-5h-vOP"/>
+                    <tabBarItem key="tabBarItem" title="Games" image="gamecontroller" catalog="system" selectedImage="gamecontroller.fill" id="CPe-5h-vOP"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="sHT-qx-WLs">
                         <rect key="frame" x="0.0" y="44" width="414" height="96"/>
@@ -584,7 +584,7 @@
         <scene sceneID="BUY-Wy-Iag">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="zcL-v5-oxf" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Profiles" image="person" catalog="system" id="YRA-a0-TyO"/>
+                    <tabBarItem key="tabBarItem" title="Profiles" image="person" catalog="system" selectedImage="person.fill" id="YRA-a0-TyO"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="M4R-Te-ZuO">
                         <rect key="frame" x="0.0" y="44" width="414" height="96"/>
@@ -603,7 +603,7 @@
         <scene sceneID="5yD-yv-s1x">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="H4S-qx-FML" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Metrics" image="chart.bar" catalog="system" id="Vh5-1M-hEe"/>
+                    <tabBarItem key="tabBarItem" title="Metrics" image="chart.bar" catalog="system" selectedImage="chart.bar.fill" id="Vh5-1M-hEe"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="EKV-uM-81v">
                         <rect key="frame" x="0.0" y="44" width="414" height="96"/>
@@ -718,10 +718,13 @@
     <resources>
         <image name="arrow.right.circle" catalog="system" width="128" height="121"/>
         <image name="chart.bar" catalog="system" width="128" height="90"/>
+        <image name="chart.bar.fill" catalog="system" width="128" height="92"/>
         <image name="gamecontroller" catalog="system" width="128" height="80"/>
+        <image name="gamecontroller.fill" catalog="system" width="128" height="80"/>
         <image name="person" catalog="system" width="128" height="117"/>
         <image name="person.2" catalog="system" width="128" height="81"/>
         <image name="person.circle" catalog="system" width="128" height="121"/>
+        <image name="person.fill" catalog="system" width="128" height="120"/>
         <namedColor name="darkBackgroundWithOpacity">
             <color white="0.30000001192092896" alpha="0.60000002384185791" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </namedColor>
