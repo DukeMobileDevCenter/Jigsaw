@@ -63,7 +63,14 @@ class MatchingViewController: UIViewController {
     }
     
     private func handleAddedMatchingGroup(group: GameGroup) {
-        guard let game = selectedGame, group.gameName == game.gameName else { return }
+        guard
+            let game = selectedGame,
+            // The new group must have the correct game, to mitigate #117.
+            group.gameName == game.gameName,
+            // The new game must be created within 10 seconds, to avoid #117.
+            Date().timeIntervalSince(group.createdDate) < 10
+        else { return }
+        
         let urls: [URL]
         let questionnaires: [Questionnaire]
         // Find which subgroup does current player belong to.
