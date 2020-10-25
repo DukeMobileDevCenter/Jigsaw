@@ -51,9 +51,11 @@ class MetricsViewController: UIViewController {
         )
         
         setup(radarChartView: chartView)
+        chartView.animate(xAxisDuration: 1.4, yAxisDuration: 1.4, easingOption: .easeOutBack)
         
         ProgressHUD.show(interaction: false)
-        FirebaseHelper.getGameHistory(userID: Profiles.userID) { [weak self] histories, error in
+        guard let userID = Profiles.userID else { return }
+        FirebaseHelper.getGameHistory(userID: userID) { [weak self] histories, error in
             ProgressHUD.dismiss()
             guard let self = self else { return }
             if let histories = histories {
@@ -66,8 +68,6 @@ class MetricsViewController: UIViewController {
                 self.presentAlert(error: error)
             }
         }
-        
-        chartView.animate(xAxisDuration: 1.4, yAxisDuration: 1.4, easingOption: .easeOutBack)
     }
     
     private func historiesToEntries(histories: [GameHistory]) -> [RadarChartDataEntry] {

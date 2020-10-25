@@ -71,8 +71,9 @@ class GameHistoryTimelineTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Game History"
+        guard let userID = Profiles.userID else { return }
         ProgressHUD.show()
-        FirebaseHelper.getGameHistory(userID: Profiles.userID) { [weak self] histories, error in
+        FirebaseHelper.getGameHistory(userID: userID) { [weak self] histories, error in
             ProgressHUD.dismiss()
             if let histories = histories {
                 self?.gameHistories = histories

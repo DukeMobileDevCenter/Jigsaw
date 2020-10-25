@@ -22,6 +22,7 @@ struct TeamRanking: Codable, CustomStringConvertible {
     }
     
     var isMyTeam: Bool {
-        playerIDs.contains(Profiles.userID)
+        guard Profiles.userID != nil else { return false }
+        return playerIDs.contains(Profiles.userID)
     }
 }
