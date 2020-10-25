@@ -12,7 +12,7 @@ enum OnboardingSteps {
     static let instructionStep: ORKInstructionStep = {
         let instructionStep = ORKInstructionStep(identifier: "InstructionStepIdentifier")
         instructionStep.title = "Welcome"
-        instructionStep.detailText = "Welcome to [NAME]! Through a series of interactive games, you'll learn about the presidential candidates' stances on important issues ahead of the election. First, let's get you on board!"
+        instructionStep.detailText = "Welcome to Jigsaw! Through a series of interactive games, you'll learn about the presidential candidates' stances on important issues ahead of the election. First, let's get you on board!"
         instructionStep.image = UIImage(named: "onboarding_welcome")!
         instructionStep.imageContentMode = .scaleAspectFill
         return instructionStep
