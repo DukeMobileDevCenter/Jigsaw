@@ -54,6 +54,8 @@ The app design includes 3 major functionalities: Games, Stats and Profiles.
 
 ## History & Progress Notes
 
+The project refactors the original [Jigsaw course project](https://gitlab.oit.duke.edu/MobileCenter/jigsaw).
+
 Originally prototyped by Grant Larson, Mengqian Liu, Shaopeng Zhang and Diego Chamorro, the app was later on continued by Xinyi Hong and Xiaochen Zhou at *Duke's Center for Mobile Development*. 
 
 Based on previous efforts, Ting(@yo1995) refactored the app and made it public on GitHub.
