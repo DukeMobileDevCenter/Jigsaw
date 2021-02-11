@@ -28,7 +28,7 @@ class GameViewController: ORKTaskViewController {
         step.detailText =
         """
         Hi team! You can now chat about what you've just seen.
-        Remember that different team members have seen different quotations from different candidates' websites, and the whole team needs to know about all of these quotations in order to escape to the next room.
+        Remember that different team members have seen different pieces of informatio, and the whole team needs to know about all of these pieces in order to escape to the next room.
         """
         step.iconImage = UIImage(systemName: "bubble.left.and.bubble.right")!
         return step
