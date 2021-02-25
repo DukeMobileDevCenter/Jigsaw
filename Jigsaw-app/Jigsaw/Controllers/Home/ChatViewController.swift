@@ -335,7 +335,7 @@ extension ChatViewController: MessagesDataSource {
             case .join:
                 return Message(message: message, content: "👋")
             case .leave:
-                return Message(message: message, content: "👋👋")
+                return Message(message: message, content: "✌️")
             }
         } else {
             return message

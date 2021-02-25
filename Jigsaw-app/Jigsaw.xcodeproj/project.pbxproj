@@ -422,8 +422,8 @@
 				0070DFED24B0060400E71F46 /* HomeCollectionViewController.swift */,
 				0000321025130A85004681AF /* CategoryCollectionViewController.swift */,
 				0020D56624E263C600DB20E1 /* MatchingViewController.swift */,
-				007FC9532536202B00D8D9A1 /* RoomProgressViewController.swift */,
 				00D0862624CD2D9A00FB7A20 /* GameViewController.swift */,
+				007FC9532536202B00D8D9A1 /* RoomProgressViewController.swift */,
 				005856BD24D923630010BE55 /* ChatViewController.swift */,
 				00D9F5122506DDC900898DFA /* PreviewDetailViewController.swift */,
 			);
