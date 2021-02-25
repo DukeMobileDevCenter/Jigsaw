@@ -60,13 +60,6 @@ class GameViewController: ORKTaskViewController {
         return step
     }()
     
-    /// Changes continueButtonTitle from "Get Started" to "Chat Now" for the ChatroomInstruction step
-    override func stepViewControllerWillAppear(_ stepViewController: ORKStepViewController) {
-        if self.currentStepViewController?.step?.identifier == "ChatroomInstruction" {
-            self.currentStepViewController!.continueButtonTitle = "Chat Now"
-        }
-    }
-    
     /// Create an `ORKOrderedTask` from the a game.
     ///
     /// - Parameters:
