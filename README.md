@@ -4,7 +4,7 @@
 
 <div align="center">
     <img src="https://img.shields.io/badge/Swift-5.3-orange.svg?style=flat" alt="Swift 5">
-    <img src="https://img.shields.io/badge/Xcode-12.1-blue.svg?style=flat" alt="Xcode 12">
+    <img src="https://img.shields.io/badge/Xcode-12.2-blue.svg?style=flat" alt="Xcode 12">
     <img src="https://img.shields.io/badge/macOS-10.15.7-green.svg?style=flat" alt="macOS Catalina">
     <img src="https://img.shields.io/badge/version-1.0%20build%20201025-blue.svg?style=flat" alt="version">
 </div>
