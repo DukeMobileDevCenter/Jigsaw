@@ -375,7 +375,7 @@ PODS:
   - PINRemoteImage/PINCache (3.0.1):
     - PINCache (~> 3.0.1)
     - PINRemoteImage/Core
-  - ProgressHUD (13.4)
+  - ProgressHUD (13.5)
   - PromisesObjC (1.2.10)
   - SwiftyGif (5.3.0)
   - ViewRow (0.8):
@@ -474,7 +474,7 @@ SPEC CHECKSUMS:
   PINCache: ee3c4abadd09970a61cdda0cfc345e69a3d75b26
   PINOperation: 3a967a927e7867e61976c6cc23e5770416449fbc
   PINRemoteImage: 3b7cedb118c2d357f87e9eabc7c81ba0202cb236
-  ProgressHUD: 137a7fc677487c5581668f4490563124fb35c232
+  ProgressHUD: 028e3828c7b582022c34a74604fc6073f8628d99
   PromisesObjC: b14b1c6b68e306650688599de8a45e49fae81151
   SwiftyGif: e466e86c660d343357ab944a819a101c4127cb40
   ViewRow: 8da541e9c019f3be63f4e28f311a62cac2045ecf
