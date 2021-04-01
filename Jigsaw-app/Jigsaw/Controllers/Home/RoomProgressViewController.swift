@@ -407,6 +407,9 @@ extension RoomProgressViewController: ORKTaskViewControllerDelegate {
     func taskViewController(_ taskViewController: ORKTaskViewController, stepViewControllerWillAppear stepViewController: ORKStepViewController) {
         guard let step = stepViewController.step else { return }
         switch step.identifier {
+        /// Changes continueButtonTitle from "Get Started" to "Chat Now" for the ChatroomInstruction step
+        case "ChatroomInstruction":
+                stepViewController.continueButtonTitle = "Chat Now"
         case "Countdown":
             handleCountdownStep(taskViewController: taskViewController, stepViewController: stepViewController as! ORKActiveStepViewController)
         case "Wait":

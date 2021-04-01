@@ -26,7 +26,7 @@ class MatchingViewController: UIViewController {
     /// The label to show the game name and level.
     @IBOutlet var gameNameLabel: UILabel! {
         didSet {
-            gameNameLabel.text = "\(selectedGame.gameName), level \(selectedGame.level). Good luck! 😉"
+            gameNameLabel.text = "\(selectedGame.gameName). Good luck! 😉"
         }
     }
     /// The button to join the waiting queue.

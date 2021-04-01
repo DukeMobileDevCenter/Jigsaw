@@ -333,9 +333,9 @@ extension ChatViewController: MessagesDataSource {
             // Replace the control message with emoji.
             switch metaMessage {
             case .join:
-                return Message(message: message, content: "🧩")
-            case .leave:
                 return Message(message: message, content: "👋")
+            case .leave:
+                return Message(message: message, content: "✌️")
             }
         } else {
             return message

@@ -28,7 +28,7 @@ class GameViewController: ORKTaskViewController {
         step.detailText =
         """
         Hi team! You can now chat about what you've just seen.
-        Remember that different team members have seen different quotations from different candidates' websites, and the whole team needs to know about all of these quotations in order to escape to the next room.
+        Remember that different team members have seen different pieces of information, and the whole team needs to know about all of these pieces in order to escape to the next room.
         """
         step.iconImage = UIImage(systemName: "bubble.left.and.bubble.right")!
         return step
@@ -47,7 +47,7 @@ class GameViewController: ORKTaskViewController {
     private let questionsInstructionStep: ORKInstructionStep = {
         let step = ORKInstructionStep(identifier: "QuestionsInstruction")
         step.title = "Quiz"
-        step.detailText = "You can escape this room if your team answers all of the following questions correctly.\nLet's go!🤠"
+        step.detailText = "You will now be quizzed on the information you and your teammate just shared.\nYou can escape this room if your team answers all of the following questions correctly.\nLet's go!🤠"
         step.iconImage = UIImage(systemName: "exclamationmark.square")
         return step
     }()
