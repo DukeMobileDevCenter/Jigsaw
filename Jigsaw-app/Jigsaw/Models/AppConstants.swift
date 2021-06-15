@@ -12,6 +12,7 @@ import Foundation
 enum AppConstants {
     /// The URL of feedback Google Forms.
     static let feedbackFormURL = URL(string: "https://docs.google.com/forms/d/e/1FAIpQLSfgHUhazZeB1pfKQ_i_vSubSkkejVCiXTDz49uRIvUi5QBpYg/viewform")!
+    static let surveyURL = URL(string: "https://duke.qualtrics.com/jfe/form/SV_eRFROcIlVmfq27I")!
     
     /// A style sheet for displaying detail instruction text as well as preview text.
     static let simpleStylesheet =
