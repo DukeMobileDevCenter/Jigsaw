@@ -71,15 +71,15 @@ class MatchingViewController: UIViewController {
             Date().timeIntervalSince(group.createdDate) < 10
         else { return }
         
-        let urls: [URL]
+        let contents: [String]
         let questionnaires: [Questionnaire]
         // Find which subgroup does current player belong to.
         switch group.whichGroupContains(userID: Profiles.userID) {
         case 1:
-            urls = game.group1resourceURLs
+            contents = game.group1resourceContents
             questionnaires = game.group1Questionnaires
         case 2:
-            urls = game.group2resourceURLs
+            contents = game.group2resourceContents
             questionnaires = game.group2Questionnaires
         default:
             return
@@ -92,7 +92,7 @@ class MatchingViewController: UIViewController {
             gameID: game.gameID,
             gameName: game.gameName,
             detailText: game.detailText,
-            resourceURLs: urls,
+            resourceContent: contents,
             questionnaires: questionnaires,
             category: game.category
         )

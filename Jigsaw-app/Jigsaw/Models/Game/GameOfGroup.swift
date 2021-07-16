@@ -21,8 +21,8 @@ struct GameOfGroup {
     let gameName: String
     /// Description detail text.
     let detailText: String
-    /// Group resource URLs.
-    let resourceURLs: [URL]
+    /// Group resource content (markdown).
+    let resourceContent: [String]
     /// Group questionnaires.
     let questionnaires: [Questionnaire]
     /// The category/topic of the game.
