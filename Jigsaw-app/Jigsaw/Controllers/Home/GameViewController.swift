@@ -7,6 +7,7 @@
 //
 
 import ResearchKit
+import Down
 
 class GameViewController: ORKTaskViewController {
     private let game: GameOfGroup
@@ -70,9 +71,9 @@ class GameViewController: ORKTaskViewController {
         var steps = [ORKStep]()
         
         // Resource reading page.
-        let webStep = ORKWebViewStep(identifier: "Resource", url: game.resourceURLs[currentRoom])
-        webStep.title = "Quotation"
-        steps.append(webStep)
+        let promptStep = ORKInstructionStep(identifier: "Prompt \(currentRoom)")
+        promptStep.detailText = game.resourceContent[currentRoom]
+        steps.append(promptStep)
         
         // Chatroom instruction step.
         steps.append(chatroomInstructionStep)
