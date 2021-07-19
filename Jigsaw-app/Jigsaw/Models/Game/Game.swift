@@ -23,6 +23,8 @@ struct Game {
     let maxAttempts: Int
     /// Description for the first page/preview page.
     let detailText: String
+    /// Topic introduction text
+    let introductionText: String
     /// Game card background image URL, can also use for styling.
     let backgroundImageURL: URL
     /// Group 1 resource contents (markdown).
@@ -66,6 +68,7 @@ struct Game {
             let maxAttempts = data["maxAttempts"] as? Int,
             let gameName = data["gameName"] as? String,
             let detailText = data["detailText"] as? String,
+            let introductionText = data["introduction"] as? String,
             let group1resourceContents = data["group1resourceContents"] as? [String],
             let group2resourceContents = data["group2resourceContents"] as? [String],
             let backgroundImageURL = data["backgroundImageURL"] as? String,
@@ -92,6 +95,7 @@ struct Game {
         self.group2resourceContents = group2resourceContents
         self.backgroundImageURL = URL(string: backgroundImageURL)!
         self.category = category
+        self.introductionText = introductionText
         
         self.group1Questionnaires = group1Questionnaires.compactMap { Game.decodeQuestionnaireData(data: $0) }
         self.group2Questionnaires = group2Questionnaires.compactMap { Game.decodeQuestionnaireData(data: $0) }

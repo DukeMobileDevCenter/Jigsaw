@@ -208,7 +208,7 @@ class HomeCollectionViewController: UICollectionViewController {
             // Triggered by tapping on a category cell.
             if let cell = sender as? GameCollectionCell, let selectedIndexPath = collectionView.indexPath(for: cell) {
                 let selectedCategory = GameCategoryClass.shared.allCases[selectedIndexPath.item]
-                let destinationVC = segue.destination as! CategoryCollectionViewController
+                let destinationVC = segue.destination as! CategoryViewController
                 destinationVC.title = selectedCategory.label
                 destinationVC.category = selectedCategory
                 destinationVC.queueType = queueType
