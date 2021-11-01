@@ -114,7 +114,7 @@ class ChatViewController: MessagesViewController {
         messagesCollectionView.messagesLayoutDelegate = self
         messagesCollectionView.messageCellDelegate = self
         messagesCollectionView.messagesDisplayDelegate = self
-        
+/*
         let cameraItem = InputBarButtonItem(type: .system)
         cameraItem.image = UIImage(systemName: "camera")
         cameraItem.addTarget(
@@ -123,10 +123,10 @@ class ChatViewController: MessagesViewController {
             for: .primaryActionTriggered
         )
         cameraItem.setSize(CGSize(width: 60, height: 30), animated: false)
-        
-        messageInputBar.leftStackView.alignment = .center
-        messageInputBar.setLeftStackViewWidthConstant(to: 50, animated: false)
-        messageInputBar.setStackViewItems([cameraItem], forStack: .left, animated: false)
+  */
+  //      messageInputBar.leftStackView.alignment = .center
+   //     messageInputBar.setLeftStackViewWidthConstant(to: 50, animated: false)
+ //       messageInputBar.setStackViewItems([cameraItem], forStack: .left, animated: false)
     }
     
     // MARK: - Actions

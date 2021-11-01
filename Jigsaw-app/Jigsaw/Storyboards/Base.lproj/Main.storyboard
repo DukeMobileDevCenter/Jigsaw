@@ -143,13 +143,15 @@
                                     <segue destination="qIk-Vr-9mo" kind="show" identifier="showGame" id="rVx-W0-BSe"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This is where the introduction blob goes. This label can hold ten lines at once." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="15" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sgy-e6-IfX">
-                                <rect key="frame" x="16" y="156" width="382" height="250"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="250" id="1nQ-5t-n7o"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                                <nil key="textColor"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="30" baselineAdjustment="alignBaselines" translatesAutoresizingMaskIntoConstraints="NO" id="sgy-e6-IfX">
+                                <rect key="frame" x="16" y="141" width="382" height="659"/>
+                                <attributedString key="attributedText">
+                                    <fragment content="This is where the introduction blob goes. ">
+                                        <attributes>
+                                            <font key="NSFont" metaFont="system" size="15"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
@@ -160,8 +162,10 @@
                             <constraint firstItem="2Ki-KC-pjw" firstAttribute="leading" secondItem="JM3-WW-yYK" secondAttribute="leading" constant="16" id="5YH-TR-NA4"/>
                             <constraint firstItem="JM3-WW-yYK" firstAttribute="trailing" secondItem="sgy-e6-IfX" secondAttribute="trailing" constant="16" id="Dtu-e4-NDg"/>
                             <constraint firstItem="JM3-WW-yYK" firstAttribute="bottom" secondItem="2Ki-KC-pjw" secondAttribute="bottom" constant="16" id="HpV-tu-HJt"/>
-                            <constraint firstItem="sgy-e6-IfX" firstAttribute="top" secondItem="JM3-WW-yYK" secondAttribute="top" constant="16" id="dlm-ww-qtu"/>
+                            <constraint firstItem="JM3-WW-yYK" firstAttribute="bottom" secondItem="2Ki-KC-pjw" secondAttribute="bottom" constant="16" id="MeT-2d-zAn"/>
+                            <constraint firstItem="sgy-e6-IfX" firstAttribute="top" secondItem="JM3-WW-yYK" secondAttribute="top" constant="1" id="dlm-ww-qtu"/>
                             <constraint firstItem="sgy-e6-IfX" firstAttribute="leading" secondItem="JM3-WW-yYK" secondAttribute="leading" constant="16" id="sdh-r2-1GM"/>
+                            <constraint firstItem="2Ki-KC-pjw" firstAttribute="top" secondItem="sgy-e6-IfX" secondAttribute="bottom" constant="1" id="xEW-oX-6cT"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="SL9-R9-Aeb"/>
