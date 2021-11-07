@@ -101,7 +101,7 @@ struct GameResult {
                 return .skipped
             }
             let correctAnswers = (question as? MultipleChoiceQuestion)?.correctAnswers
-            outcome = answers.map { $0 as? String } == correctAnswers ? .correct : .incorrect
+            outcome = answers.map { ($0 as? String)! } == correctAnswers ? .correct : .incorrect
         case .singleChoice:
             guard let answer = (result as? ORKChoiceQuestionResult)?.choiceAnswers?.first else {
                 return .skipped

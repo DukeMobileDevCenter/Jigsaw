@@ -74,7 +74,7 @@ class HomeCollectionViewController: UICollectionViewController {
                 }
             }
             DispatchQueue.main.async { [weak self] in
-                self?.collectionView.refreshControl?.endRefreshing()
+                self?.collectionView!.refreshControl?.endRefreshing()
             }
         }
     }
@@ -114,8 +114,8 @@ class HomeCollectionViewController: UICollectionViewController {
     
     private func configureRefreshControl() {
         // Add the refresh control to UIScrollView object.
-        collectionView.refreshControl = UIRefreshControl()
-        collectionView.refreshControl?.addTarget(self, action: #selector(loadFromRemote), for: .valueChanged)
+        collectionView!.refreshControl = UIRefreshControl()
+        collectionView!.refreshControl?.addTarget(self, action: #selector(loadFromRemote), for: .valueChanged)
     }
     
     private func isRandomCell(for indexPath: IndexPath) -> Bool {
@@ -123,7 +123,7 @@ class HomeCollectionViewController: UICollectionViewController {
     }
     
     private func handleRandomPerform(for indexPath: IndexPath) {
-        let cell = collectionView.cellForItem(at: indexPath)
+        let cell = collectionView!.cellForItem(at: indexPath)
         if isRandomCell(for: indexPath) {
             // Handle random cell specifically.
             getGameWithLeastWaitingTime(queueType: queueType) { [unowned self] game in
@@ -185,8 +185,8 @@ class HomeCollectionViewController: UICollectionViewController {
         // Do any additional setup after loading the view.
         super.viewDidLoad()
         // Set collection view delegates.
-        collectionView.delegate = self
-        collectionView.dataSource = GameCategoryClass.shared
+        collectionView!.delegate = self
+        collectionView!.dataSource = GameCategoryClass.shared
         
         // Add an observer to monitor changed user ID and reload the data.
         NotificationCenter.default.addObserver(
@@ -206,7 +206,7 @@ class HomeCollectionViewController: UICollectionViewController {
         switch segue.identifier {
         case "showCategory":
             // Triggered by tapping on a category cell.
-            if let cell = sender as? GameCollectionCell, let selectedIndexPath = collectionView.indexPath(for: cell) {
+            if let cell = sender as? GameCollectionCell, let selectedIndexPath = collectionView!.indexPath(for: cell) {
                 let selectedCategory = GameCategoryClass.shared.allCases[selectedIndexPath.item]
                 let destinationVC = segue.destination as! CategoryViewController
                 destinationVC.title = selectedCategory.label
@@ -235,7 +235,8 @@ extension HomeCollectionViewController: UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let collectionViewSize = collectionView.bounds.inset(by: collectionView.safeAreaInsets).size
+   //     let collectionViewSize = collectionView.bounds.inset(by: collectionView.safeAreaInsets).size
+        let collectionViewSize = collectionView.bounds.size
         let spacing: CGFloat = 10
         // First, try for 3 items in a row.
         var width = (collectionViewSize.width - 4 * spacing) / 3

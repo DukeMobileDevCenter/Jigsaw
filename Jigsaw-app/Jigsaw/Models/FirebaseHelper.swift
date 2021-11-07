@@ -70,7 +70,7 @@ enum FirebaseHelper {
             if let snapshot = querySnapshot {
                 for gameHistory in snapshot.documents {
                     if let history = try? gameHistory.data(as: GameHistory.self) {
-                        gameHistories.append(history)
+                        gameHistories.append(history!)
                     }
                 }
                 completion(gameHistories, nil)
@@ -90,7 +90,7 @@ enum FirebaseHelper {
             if let snapshot = querySnapshot {
                 for ranking in snapshot.documents {
                     if let rank = try? ranking.data(as: TeamRanking.self) {
-                        rankings.append(rank)
+                        rankings.append(rank!)
                     }
                 }
                 completion(rankings, nil)
