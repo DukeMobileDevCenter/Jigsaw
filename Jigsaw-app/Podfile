@@ -9,20 +9,21 @@ target 'Jigsaw' do
   use_frameworks!
 
   # Firebase framework
-  pod 'Firebase/Database'
-  pod 'Firebase/Auth'
-  pod 'Firebase/Storage'
-  pod 'Firebase/Firestore'
-  pod 'Firebase/Functions'
+  pod 'Firebase/Database', '~> 8.9.0'
+  pod 'Firebase/Auth', '~> 8.9.0'
+  pod 'Firebase/Storage', '~> 8.9.0'
+  pod 'Firebase/Firestore', '~> 8.9.1'
+  pod 'Firebase/Functions', '~> 8.9.0'
 
   # Firebase UI for sign up/in
-  pod 'FirebaseUI/Auth'
-  pod 'FirebaseUI/Google'
-  pod 'FirebaseUI/Email'
-  pod 'FirebaseUI/OAuth'  # Used for Sign in with Apple, Twitter, etc
+  pod 'FirebaseUI/Auth', '~> 12.0.2'
+  pod 'FirebaseUI/Google', '~> 12.0.2'
+  pod 'FirebaseUI/Email', '~> 12.0.2'
+  pod 'FirebaseUI/OAuth', '~> 12.0.2'  # Used for Sign in with Apple, Twitter, etc
 
   # Swift Codable
-  pod 'FirebaseFirestoreSwift'
+  # pod 'FirebaseFirestore'
+  pod 'FirebaseFirestoreSwift', '~> 8.9.0-beta'
 
   # pod 'ResearchKit'
 
