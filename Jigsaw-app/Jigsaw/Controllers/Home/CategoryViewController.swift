@@ -9,7 +9,6 @@
 import UIKit
 
 class CategoryViewController: UIViewController {
-    
     var category: GameCategory!
     var queueType: PlayersQueue!
     @IBOutlet weak var playButton: UIButton!
@@ -39,4 +38,3 @@ class CategoryViewController: UIViewController {
         }
     }
 }
-
