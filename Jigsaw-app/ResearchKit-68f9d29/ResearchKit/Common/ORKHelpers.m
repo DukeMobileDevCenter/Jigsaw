@@ -396,6 +396,7 @@ NSURL *ORKURLFromBookmarkData(NSData *data) {
                                                      error:&bookmarkError];
     if (!bookmarkURL) {
         ORK_Log_Error("Error loading URL from bookmark: %@", bookmarkError);
+        return nil;
     }
     
     return bookmarkURL;
@@ -413,6 +414,7 @@ NSData *ORKBookmarkDataFromURL(NSURL *url) {
                                               error:&error];
     if (!bookmark) {
         ORK_Log_Error("Error converting URL to bookmark: %@", error);
+        return nil;
     }
     return bookmark;
 }
