@@ -1,7 +1,12 @@
+# The purpose of keeping this file is to reflect the changes made in https://github.com/DukeMobileDevCenter/Jigsaw/issues/147
+# where Ting removed CocoaPods and moved to SPM for dependency management.
+# 
+# This file may be removed in future releases.
+
 # Uncomment the next line to define a global platform for your project
 platform :ios, '13.0'
 
-# ignore all warnings from all pods
+# Ignore all warnings from all pods
 inhibit_all_warnings!
 
 target 'Jigsaw' do
