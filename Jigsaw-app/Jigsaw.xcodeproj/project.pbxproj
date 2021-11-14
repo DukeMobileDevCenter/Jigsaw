@@ -78,6 +78,26 @@
 		00D0862324CD192800FB7A20 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00D0862224CD192800FB7A20 /* OnboardingViewController.swift */; };
 		00D0862524CD24EA00FB7A20 /* OnboardingSteps.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00D0862424CD24EA00FB7A20 /* OnboardingSteps.swift */; };
 		00D0862724CD2D9A00FB7A20 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00D0862624CD2D9A00FB7A20 /* GameViewController.swift */; };
+		00D645812740CD2300582198 /* Agrume in Frameworks */ = {isa = PBXBuildFile; productRef = 00D645802740CD2300582198 /* Agrume */; };
+		00D645842740CDD800582198 /* Down in Frameworks */ = {isa = PBXBuildFile; productRef = 00D645832740CDD800582198 /* Down */; };
+		00D645872740CE2B00582198 /* Yams in Frameworks */ = {isa = PBXBuildFile; productRef = 00D645862740CE2B00582198 /* Yams */; };
+		00D6458A2740D0EB00582198 /* Charts in Frameworks */ = {isa = PBXBuildFile; productRef = 00D645892740D0EB00582198 /* Charts */; };
+		00D6458D2740D1EC00582198 /* ProgressHUD in Frameworks */ = {isa = PBXBuildFile; productRef = 00D6458C2740D1EC00582198 /* ProgressHUD */; };
+		00D645902740D28C00582198 /* Eureka in Frameworks */ = {isa = PBXBuildFile; productRef = 00D6458F2740D28C00582198 /* Eureka */; };
+		00D645932740D2D800582198 /* ViewRow in Frameworks */ = {isa = PBXBuildFile; productRef = 00D645922740D2D800582198 /* ViewRow */; };
+		00D645962740D32A00582198 /* PINRemoteImage in Frameworks */ = {isa = PBXBuildFile; productRef = 00D645952740D32A00582198 /* PINRemoteImage */; };
+		00D645992740D36700582198 /* MessageKit in Frameworks */ = {isa = PBXBuildFile; productRef = 00D645982740D36700582198 /* MessageKit */; };
+		00D6459C2740D50700582198 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 00D6459B2740D50700582198 /* FirebaseAuth */; };
+		00D6459E2740D50700582198 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = 00D6459D2740D50700582198 /* FirebaseDatabase */; };
+		00D645A02740D50700582198 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 00D6459F2740D50700582198 /* FirebaseFirestore */; };
+		00D645A22740D50700582198 /* FirebaseFirestoreSwift-Beta in Frameworks */ = {isa = PBXBuildFile; productRef = 00D645A12740D50700582198 /* FirebaseFirestoreSwift-Beta */; };
+		00D645A42740D50700582198 /* FirebaseFunctions in Frameworks */ = {isa = PBXBuildFile; productRef = 00D645A32740D50700582198 /* FirebaseFunctions */; };
+		00D645A62740D50700582198 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 00D645A52740D50700582198 /* FirebaseStorage */; };
+		00D645A92740D73E00582198 /* FirebaseAnonymousAuthUI in Frameworks */ = {isa = PBXBuildFile; productRef = 00D645A82740D73E00582198 /* FirebaseAnonymousAuthUI */; };
+		00D645AB2740D73E00582198 /* FirebaseAuthUI in Frameworks */ = {isa = PBXBuildFile; productRef = 00D645AA2740D73E00582198 /* FirebaseAuthUI */; };
+		00D645AD2740D73E00582198 /* FirebaseEmailAuthUI in Frameworks */ = {isa = PBXBuildFile; productRef = 00D645AC2740D73E00582198 /* FirebaseEmailAuthUI */; };
+		00D645AF2740D73E00582198 /* FirebaseGoogleAuthUI in Frameworks */ = {isa = PBXBuildFile; productRef = 00D645AE2740D73E00582198 /* FirebaseGoogleAuthUI */; };
+		00D645B12740D73E00582198 /* FirebaseOAuthUI in Frameworks */ = {isa = PBXBuildFile; productRef = 00D645B02740D73E00582198 /* FirebaseOAuthUI */; };
 		00D9F5132506DDC900898DFA /* PreviewDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00D9F5122506DDC900898DFA /* PreviewDetailViewController.swift */; };
 		00D9F5162506DEDF00898DFA /* PreviewDetailViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 00D9F5152506DEDF00898DFA /* PreviewDetailViewController.storyboard */; };
 		00E6A86E2533C828000D54B3 /* String+toEmojiImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E6A86D2533C828000D54B3 /* String+toEmojiImage.swift */; };
@@ -90,7 +110,6 @@
 		00F2197C24CCF99800B72858 /* MetricsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F2197B24CCF99800B72858 /* MetricsViewController.swift */; };
 		00F2197E24CCF9A200B72858 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F2197D24CCF9A200B72858 /* ProfileViewController.swift */; };
 		00F6302224EE385E00BCAD11 /* AnswerCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F6302124EE385E00BCAD11 /* AnswerCategory.swift */; };
-		E9545E830C4AC402F137F037 /* Pods_Jigsaw.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 293BC418FD35E5E6DE46D2A4 /* Pods_Jigsaw.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -219,9 +238,6 @@
 		00F2197B24CCF99800B72858 /* MetricsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetricsViewController.swift; sourceTree = "<group>"; };
 		00F2197D24CCF9A200B72858 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		00F6302124EE385E00BCAD11 /* AnswerCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswerCategory.swift; sourceTree = "<group>"; };
-		293BC418FD35E5E6DE46D2A4 /* Pods_Jigsaw.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Jigsaw.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		3DBAC1462F21202C7E5E4D74 /* Pods-Jigsaw.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Jigsaw.release.xcconfig"; path = "Target Support Files/Pods-Jigsaw/Pods-Jigsaw.release.xcconfig"; sourceTree = "<group>"; };
-		5AF8F85A70D28A5E7F01DC85 /* Pods-Jigsaw.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Jigsaw.debug.xcconfig"; path = "Target Support Files/Pods-Jigsaw/Pods-Jigsaw.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -229,9 +245,28 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				00D645AD2740D73E00582198 /* FirebaseEmailAuthUI in Frameworks */,
+				00D6459E2740D50700582198 /* FirebaseDatabase in Frameworks */,
+				00D645962740D32A00582198 /* PINRemoteImage in Frameworks */,
+				00D645842740CDD800582198 /* Down in Frameworks */,
+				00D645AB2740D73E00582198 /* FirebaseAuthUI in Frameworks */,
+				00D6458D2740D1EC00582198 /* ProgressHUD in Frameworks */,
+				00D645992740D36700582198 /* MessageKit in Frameworks */,
+				00D645B12740D73E00582198 /* FirebaseOAuthUI in Frameworks */,
+				00D6458A2740D0EB00582198 /* Charts in Frameworks */,
+				00D645902740D28C00582198 /* Eureka in Frameworks */,
+				00D645872740CE2B00582198 /* Yams in Frameworks */,
+				00D6459C2740D50700582198 /* FirebaseAuth in Frameworks */,
+				00D645812740CD2300582198 /* Agrume in Frameworks */,
+				00D645932740D2D800582198 /* ViewRow in Frameworks */,
+				00D645A42740D50700582198 /* FirebaseFunctions in Frameworks */,
+				00D645A62740D50700582198 /* FirebaseStorage in Frameworks */,
 				00A88312252924CF00186BED /* GameKit.framework in Frameworks */,
+				00D645A22740D50700582198 /* FirebaseFirestoreSwift-Beta in Frameworks */,
+				00D645AF2740D73E00582198 /* FirebaseGoogleAuthUI in Frameworks */,
+				00D645A92740D73E00582198 /* FirebaseAnonymousAuthUI in Frameworks */,
 				005308CA25168A96002A429F /* ResearchKit.framework in Frameworks */,
-				E9545E830C4AC402F137F037 /* Pods_Jigsaw.framework in Frameworks */,
+				00D645A02740D50700582198 /* FirebaseFirestore in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -346,7 +381,6 @@
 				0070DFFF24B0060500E71F46 /* JigsawTests */,
 				0070DFE724B0060400E71F46 /* Products */,
 				C3C20A15E3D3B23BD23C86AF /* Frameworks */,
-				5468D76B6A3E1F4A42D79584 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -532,20 +566,10 @@
 			path = YAMLQuestions;
 			sourceTree = "<group>";
 		};
-		5468D76B6A3E1F4A42D79584 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				5AF8F85A70D28A5E7F01DC85 /* Pods-Jigsaw.debug.xcconfig */,
-				3DBAC1462F21202C7E5E4D74 /* Pods-Jigsaw.release.xcconfig */,
-			);
-			path = Pods;
-			sourceTree = "<group>";
-		};
 		C3C20A15E3D3B23BD23C86AF /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
 				00A88311252924CF00186BED /* GameKit.framework */,
-				293BC418FD35E5E6DE46D2A4 /* Pods_Jigsaw.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -557,21 +581,40 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0070E00524B0060500E71F46 /* Build configuration list for PBXNativeTarget "Jigsaw" */;
 			buildPhases = (
-				E22ED8E77BB91691A192613B /* [CP] Check Pods Manifest.lock */,
 				006EB049253BA63E00FE5D8A /* Set Bundle Build Version to date */,
 				0070DFE224B0060400E71F46 /* Sources */,
 				0070DFE324B0060400E71F46 /* Frameworks */,
 				0070DFE424B0060400E71F46 /* Resources */,
 				0070E00B24B0066B00E71F46 /* SwiftLint */,
 				005308CC25168A96002A429F /* Embed Frameworks */,
-				BDB450100A64FAD1834D5E77 /* [CP] Embed Pods Frameworks */,
-				A078524F86602E5219562382 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = Jigsaw;
+			packageProductDependencies = (
+				00D645802740CD2300582198 /* Agrume */,
+				00D645832740CDD800582198 /* Down */,
+				00D645862740CE2B00582198 /* Yams */,
+				00D645892740D0EB00582198 /* Charts */,
+				00D6458C2740D1EC00582198 /* ProgressHUD */,
+				00D6458F2740D28C00582198 /* Eureka */,
+				00D645922740D2D800582198 /* ViewRow */,
+				00D645952740D32A00582198 /* PINRemoteImage */,
+				00D645982740D36700582198 /* MessageKit */,
+				00D6459B2740D50700582198 /* FirebaseAuth */,
+				00D6459D2740D50700582198 /* FirebaseDatabase */,
+				00D6459F2740D50700582198 /* FirebaseFirestore */,
+				00D645A12740D50700582198 /* FirebaseFirestoreSwift-Beta */,
+				00D645A32740D50700582198 /* FirebaseFunctions */,
+				00D645A52740D50700582198 /* FirebaseStorage */,
+				00D645A82740D73E00582198 /* FirebaseAnonymousAuthUI */,
+				00D645AA2740D73E00582198 /* FirebaseAuthUI */,
+				00D645AC2740D73E00582198 /* FirebaseEmailAuthUI */,
+				00D645AE2740D73E00582198 /* FirebaseGoogleAuthUI */,
+				00D645B02740D73E00582198 /* FirebaseOAuthUI */,
+			);
 			productName = Jigsaw;
 			productReference = 0070DFE624B0060400E71F46 /* Jigsaw.app */;
 			productType = "com.apple.product-type.application";
@@ -622,6 +665,19 @@
 				Base,
 			);
 			mainGroup = 0070DFDD24B0060400E71F46;
+			packageReferences = (
+				00D6457F2740CD2300582198 /* XCRemoteSwiftPackageReference "Agrume" */,
+				00D645822740CDD800582198 /* XCRemoteSwiftPackageReference "Down" */,
+				00D645852740CE2B00582198 /* XCRemoteSwiftPackageReference "Yams" */,
+				00D645882740D0EB00582198 /* XCRemoteSwiftPackageReference "Charts" */,
+				00D6458B2740D1EC00582198 /* XCRemoteSwiftPackageReference "ProgressHUD" */,
+				00D6458E2740D28C00582198 /* XCRemoteSwiftPackageReference "Eureka" */,
+				00D645912740D2D800582198 /* XCRemoteSwiftPackageReference "ViewRow" */,
+				00D645942740D32A00582198 /* XCRemoteSwiftPackageReference "PINRemoteImage" */,
+				00D645972740D36700582198 /* XCRemoteSwiftPackageReference "MessageKit" */,
+				00D6459A2740D50700582198 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				00D645A72740D73E00582198 /* XCRemoteSwiftPackageReference "FirebaseUI-iOS" */,
+			);
 			productRefGroup = 0070DFE724B0060400E71F46 /* Products */;
 			projectDirPath = "";
 			projectReferences = (
@@ -717,62 +773,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nif which swiftlint >/dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
-		};
-		A078524F86602E5219562382 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Jigsaw/Pods-Jigsaw-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Jigsaw/Pods-Jigsaw-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Jigsaw/Pods-Jigsaw-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		BDB450100A64FAD1834D5E77 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Jigsaw/Pods-Jigsaw-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Jigsaw/Pods-Jigsaw-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Jigsaw/Pods-Jigsaw-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		E22ED8E77BB91691A192613B /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-Jigsaw-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -1010,7 +1010,6 @@
 		};
 		0070E00624B0060500E71F46 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5AF8F85A70D28A5E7F01DC85 /* Pods-Jigsaw.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Jigsaw/Jigsaw.entitlements;
@@ -1023,7 +1022,7 @@
 					"$(PROJECT_DIR)/Pods",
 				);
 				INFOPLIST_FILE = Jigsaw/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1038,7 +1037,6 @@
 		};
 		0070E00724B0060500E71F46 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3DBAC1462F21202C7E5E4D74 /* Pods-Jigsaw.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Jigsaw/Jigsaw.entitlements;
@@ -1051,7 +1049,7 @@
 					"$(PROJECT_DIR)/Pods",
 				);
 				INFOPLIST_FILE = Jigsaw/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1137,6 +1135,200 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		00D6457F2740CD2300582198 /* XCRemoteSwiftPackageReference "Agrume" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/JanGorman/Agrume";
+			requirement = {
+				kind = upToNextMinorVersion;
+				minimumVersion = 5.8.0;
+			};
+		};
+		00D645822740CDD800582198 /* XCRemoteSwiftPackageReference "Down" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/johnxnguyen/Down";
+			requirement = {
+				kind = upToNextMinorVersion;
+				minimumVersion = 0.11.0;
+			};
+		};
+		00D645852740CE2B00582198 /* XCRemoteSwiftPackageReference "Yams" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/jpsim/Yams";
+			requirement = {
+				kind = upToNextMinorVersion;
+				minimumVersion = 4.0.6;
+			};
+		};
+		00D645882740D0EB00582198 /* XCRemoteSwiftPackageReference "Charts" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/danielgindi/Charts";
+			requirement = {
+				kind = upToNextMinorVersion;
+				minimumVersion = 4.0.1;
+			};
+		};
+		00D6458B2740D1EC00582198 /* XCRemoteSwiftPackageReference "ProgressHUD" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/relatedcode/ProgressHUD";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+		00D6458E2740D28C00582198 /* XCRemoteSwiftPackageReference "Eureka" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/xmartlabs/Eureka";
+			requirement = {
+				kind = upToNextMinorVersion;
+				minimumVersion = 5.3.0;
+			};
+		};
+		00D645912740D2D800582198 /* XCRemoteSwiftPackageReference "ViewRow" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/EurekaCommunity/ViewRow";
+			requirement = {
+				kind = upToNextMinorVersion;
+				minimumVersion = 0.9.0;
+			};
+		};
+		00D645942740D32A00582198 /* XCRemoteSwiftPackageReference "PINRemoteImage" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/pinterest/PINRemoteImage";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.0.0;
+			};
+		};
+		00D645972740D36700582198 /* XCRemoteSwiftPackageReference "MessageKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/MessageKit/MessageKit";
+			requirement = {
+				kind = upToNextMinorVersion;
+				minimumVersion = 3.7.0;
+			};
+		};
+		00D6459A2740D50700582198 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMinorVersion;
+				minimumVersion = 8.9.1;
+			};
+		};
+		00D645A72740D73E00582198 /* XCRemoteSwiftPackageReference "FirebaseUI-iOS" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/FirebaseUI-iOS";
+			requirement = {
+				kind = upToNextMinorVersion;
+				minimumVersion = 11.1.3;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		00D645802740CD2300582198 /* Agrume */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 00D6457F2740CD2300582198 /* XCRemoteSwiftPackageReference "Agrume" */;
+			productName = Agrume;
+		};
+		00D645832740CDD800582198 /* Down */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 00D645822740CDD800582198 /* XCRemoteSwiftPackageReference "Down" */;
+			productName = Down;
+		};
+		00D645862740CE2B00582198 /* Yams */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 00D645852740CE2B00582198 /* XCRemoteSwiftPackageReference "Yams" */;
+			productName = Yams;
+		};
+		00D645892740D0EB00582198 /* Charts */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 00D645882740D0EB00582198 /* XCRemoteSwiftPackageReference "Charts" */;
+			productName = Charts;
+		};
+		00D6458C2740D1EC00582198 /* ProgressHUD */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 00D6458B2740D1EC00582198 /* XCRemoteSwiftPackageReference "ProgressHUD" */;
+			productName = ProgressHUD;
+		};
+		00D6458F2740D28C00582198 /* Eureka */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 00D6458E2740D28C00582198 /* XCRemoteSwiftPackageReference "Eureka" */;
+			productName = Eureka;
+		};
+		00D645922740D2D800582198 /* ViewRow */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 00D645912740D2D800582198 /* XCRemoteSwiftPackageReference "ViewRow" */;
+			productName = ViewRow;
+		};
+		00D645952740D32A00582198 /* PINRemoteImage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 00D645942740D32A00582198 /* XCRemoteSwiftPackageReference "PINRemoteImage" */;
+			productName = PINRemoteImage;
+		};
+		00D645982740D36700582198 /* MessageKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 00D645972740D36700582198 /* XCRemoteSwiftPackageReference "MessageKit" */;
+			productName = MessageKit;
+		};
+		00D6459B2740D50700582198 /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 00D6459A2740D50700582198 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+		00D6459D2740D50700582198 /* FirebaseDatabase */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 00D6459A2740D50700582198 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseDatabase;
+		};
+		00D6459F2740D50700582198 /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 00D6459A2740D50700582198 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
+		};
+		00D645A12740D50700582198 /* FirebaseFirestoreSwift-Beta */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 00D6459A2740D50700582198 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = "FirebaseFirestoreSwift-Beta";
+		};
+		00D645A32740D50700582198 /* FirebaseFunctions */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 00D6459A2740D50700582198 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFunctions;
+		};
+		00D645A52740D50700582198 /* FirebaseStorage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 00D6459A2740D50700582198 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseStorage;
+		};
+		00D645A82740D73E00582198 /* FirebaseAnonymousAuthUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 00D645A72740D73E00582198 /* XCRemoteSwiftPackageReference "FirebaseUI-iOS" */;
+			productName = FirebaseAnonymousAuthUI;
+		};
+		00D645AA2740D73E00582198 /* FirebaseAuthUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 00D645A72740D73E00582198 /* XCRemoteSwiftPackageReference "FirebaseUI-iOS" */;
+			productName = FirebaseAuthUI;
+		};
+		00D645AC2740D73E00582198 /* FirebaseEmailAuthUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 00D645A72740D73E00582198 /* XCRemoteSwiftPackageReference "FirebaseUI-iOS" */;
+			productName = FirebaseEmailAuthUI;
+		};
+		00D645AE2740D73E00582198 /* FirebaseGoogleAuthUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 00D645A72740D73E00582198 /* XCRemoteSwiftPackageReference "FirebaseUI-iOS" */;
+			productName = FirebaseGoogleAuthUI;
+		};
+		00D645B02740D73E00582198 /* FirebaseOAuthUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 00D645A72740D73E00582198 /* XCRemoteSwiftPackageReference "FirebaseUI-iOS" */;
+			productName = FirebaseOAuthUI;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 0070DFDE24B0060400E71F46 /* Project object */;
 }
