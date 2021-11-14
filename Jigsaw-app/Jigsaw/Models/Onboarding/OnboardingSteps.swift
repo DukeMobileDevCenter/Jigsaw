@@ -12,7 +12,7 @@ enum OnboardingSteps {
     static let instructionStep: ORKInstructionStep = {
         let instructionStep = ORKInstructionStep(identifier: "InstructionStepIdentifier")
         instructionStep.title = "Welcome"
-        instructionStep.detailText = "Welcome to Jigsaw! Through a series of interactive games, you'll learn about the presidential candidates' stances on important issues ahead of the election. First, let's get you on board!"
+        instructionStep.detailText = "Welcome to Jigsaw! Through a series of interactive games, you'll learn about different stances on important and polarizing issues. First, let's get you on board!"
         instructionStep.image = UIImage(named: "onboarding_welcome")!
         instructionStep.imageContentMode = .scaleAspectFill
         return instructionStep
@@ -21,7 +21,7 @@ enum OnboardingSteps {
     static let informedConsentInstructionStep: ORKInstructionStep = {
         let informedConsentInstructionStep = ORKInstructionStep(identifier: "ConsentStepIdentifier")
         informedConsentInstructionStep.title = "Before We Start"
-        informedConsentInstructionStep.detailText = "The goal of this game is to escape from a series of rooms. To do so, you will need to cooperate with your team in information-gathering tasks about a political issue or candidate.\n"
+        informedConsentInstructionStep.detailText = "The goal of this game is to escape from a series of rooms. To do so, you will need to cooperate with your team in information-gathering tasks about a political issue.\n"
         informedConsentInstructionStep.iconImage = UIImage(systemName: "doc.plaintext")
         let infoItem = ORKBodyItem(
             text: "Each team member will receive a few crucial pieces of information that other team members do not have.",
@@ -52,7 +52,7 @@ enum OnboardingSteps {
             bodyItemStyle: .image
         )
         let rankingItem = ORKBodyItem(
-            text: "Teams will be ranked on the percentage of quiz questions that the team gets correct. Ties will be broken by how quickly the team ws able to move through all of the rooms in this series.",
+            text: "Teams will be ranked on the percentage of quiz questions that the team gets correct. Ties will be broken by how quickly the team was able to move through all of the rooms in this series.",
             detailText: nil,
             image: UIImage(systemName: "list.bullet.indent"),
             learnMoreItem: nil,
@@ -90,7 +90,7 @@ enum OnboardingSteps {
     static let completionStep: ORKCompletionStep = {
         let completionStep = ORKCompletionStep(identifier: "CompletionStep")
         completionStep.title = "All Done"
-        completionStep.detailText = "Let's start to explore the world of Jigsaw!"
+        completionStep.detailText = "Start playing now!"
         return completionStep
     }()
 }

@@ -89,6 +89,32 @@ Please refer to [CONTRIBUTING](docs/CONTRIBUTING.md) for more details.
 
 Please refer to [build setup](docs/build-setup.md) for more details.
 
+### Troubleshooting
+
+General issues, that aren't specific to Jigsaw: 
+
+**Problem:** "Xcode Buildtime Error: 'Unable to load contents of file list: '…/Info.plist' (in target 'xxxx')" 
+
+**Solution:**
+Run the following commands in your project's working directory in your terminal:
+
+- `pod deintegrate`
+- `sudo gem install cocoapods-clean`
+- `pod clean` (delete the `Pods` folder in your project after this)
+- `pod setup`
+- `pod install`
+
+Firebase specific issues:
+
+**Problem:** Buildtime errors along the lines of: `firebase ui no visible @interface ...`
+
+This is a [known](https://github.com/firebase/FirebaseUI-iOS/issues/938) [issue](https://github.com/firebase/FirebaseUI-iOS/issues/938) in FirebaseUI's v10.0.2. To get around this, the Podfile in this repo has been modified to specifially use FirebaseUI v8.0. If issues still persist, run:
+
+- `pod cache clean --all`
+- `rm -rf Pods/`
+
+And try again with a clean cache.
+
 ### Upload to TestFlight
 
 Please refer to [TestFlight setup](docs/TestFlight-setup.md) for more details.

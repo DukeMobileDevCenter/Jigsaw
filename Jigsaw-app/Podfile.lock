@@ -212,7 +212,7 @@ PODS:
     - abseil/base/base_internal
     - abseil/base/config
     - abseil/meta/type_traits
-  - Agrume (5.6.9):
+  - Agrume (5.6.13):
     - SwiftyGif
   - AppAuth (1.4.0):
     - AppAuth/Core (= 1.4.0)
@@ -228,31 +228,31 @@ PODS:
   - Charts (3.6.0):
     - Charts/Core (= 3.6.0)
   - Charts/Core (3.6.0)
-  - Down (0.9.3)
-  - Eureka (5.3.0)
-  - Firebase/Auth (6.33.0):
+  - Down (0.11.0)
+  - Eureka (5.3.3)
+  - Firebase/Auth (6.34.0):
     - Firebase/CoreOnly
     - FirebaseAuth (~> 6.9.2)
-  - Firebase/CoreOnly (6.33.0):
-    - FirebaseCore (= 6.10.3)
-  - Firebase/Database (6.33.0):
+  - Firebase/CoreOnly (6.34.0):
+    - FirebaseCore (= 6.10.4)
+  - Firebase/Database (6.34.0):
     - Firebase/CoreOnly
     - FirebaseDatabase (~> 6.6.0)
-  - Firebase/Firestore (6.33.0):
+  - Firebase/Firestore (6.34.0):
     - Firebase/CoreOnly
-    - FirebaseFirestore (~> 1.18.0)
-  - Firebase/Functions (6.33.0):
+    - FirebaseFirestore (~> 1.19.0)
+  - Firebase/Functions (6.34.0):
     - Firebase/CoreOnly
     - FirebaseFunctions (~> 2.9.0)
-  - Firebase/Storage (6.33.0):
+  - Firebase/Storage (6.34.0):
     - Firebase/CoreOnly
-    - FirebaseStorage (~> 3.9.0)
+    - FirebaseStorage (~> 3.9.1)
   - FirebaseAuth (6.9.2):
     - FirebaseCore (~> 6.10)
     - GoogleUtilities/AppDelegateSwizzler (~> 6.7)
     - GoogleUtilities/Environment (~> 6.7)
     - GTMSessionFetcher/Core (~> 1.1)
-  - FirebaseCore (6.10.3):
+  - FirebaseCore (6.10.4):
     - FirebaseCoreDiagnostics (~> 1.6)
     - GoogleUtilities/Environment (~> 6.7)
     - GoogleUtilities/Logger (~> 6.7)
@@ -264,7 +264,7 @@ PODS:
   - FirebaseDatabase (6.6.0):
     - FirebaseCore (~> 6.10)
     - leveldb-library (~> 1.22)
-  - FirebaseFirestore (1.18.0):
+  - FirebaseFirestore (1.19.0):
     - abseil/algorithm (= 0.20200225.0)
     - abseil/base (= 0.20200225.0)
     - abseil/memory (= 0.20200225.0)
@@ -281,7 +281,7 @@ PODS:
   - FirebaseFunctions (2.9.0):
     - FirebaseCore (~> 6.10)
     - GTMSessionFetcher/Core (~> 1.1)
-  - FirebaseStorage (3.9.0):
+  - FirebaseStorage (3.9.1):
     - FirebaseCore (~> 6.10)
     - GTMSessionFetcher/Core (~> 1.1)
   - FirebaseUI/Auth (8.5.1):
@@ -294,7 +294,7 @@ PODS:
     - GoogleSignIn (~> 5.0)
   - FirebaseUI/OAuth (8.5.1):
     - FirebaseUI/Auth
-  - GoogleDataTransport (7.4.0):
+  - GoogleDataTransport (7.5.1):
     - nanopb (~> 1.30906.0)
   - GoogleSignIn (5.0.2):
     - AppAuth (~> 1.2)
@@ -341,46 +341,42 @@ PODS:
     - BoringSSL-GRPC (= 0.0.7)
     - gRPC-Core/Interface (= 1.28.2)
   - gRPC-Core/Interface (1.28.2)
-  - GTMAppAuth (1.0.0):
-    - AppAuth/Core (~> 1.0)
-    - GTMSessionFetcher (~> 1.1)
-  - GTMSessionFetcher (1.4.0):
-    - GTMSessionFetcher/Full (= 1.4.0)
-  - GTMSessionFetcher/Core (1.4.0)
-  - GTMSessionFetcher/Full (1.4.0):
-    - GTMSessionFetcher/Core (= 1.4.0)
-  - InputBarAccessoryView (5.2.0):
-    - InputBarAccessoryView/Core (= 5.2.0)
-  - InputBarAccessoryView/Core (5.2.0)
-  - leveldb-library (1.22)
-  - MessageKit (3.4.1):
-    - InputBarAccessoryView (~> 5.2.0)
+  - GTMAppAuth (1.2.2):
+    - AppAuth/Core (~> 1.4)
+    - GTMSessionFetcher/Core (~> 1.5)
+  - GTMSessionFetcher/Core (1.5.0)
+  - InputBarAccessoryView (5.3.1):
+    - InputBarAccessoryView/Core (= 5.3.1)
+  - InputBarAccessoryView/Core (5.3.1)
+  - leveldb-library (1.22.1)
+  - MessageKit (3.6.1):
+    - InputBarAccessoryView (~> 5.3.1)
   - nanopb (1.30906.0):
     - nanopb/decode (= 1.30906.0)
     - nanopb/encode (= 1.30906.0)
   - nanopb/decode (1.30906.0)
   - nanopb/encode (1.30906.0)
-  - PINCache (3.0.1):
-    - PINCache/Arc-exception-safe (= 3.0.1)
-    - PINCache/Core (= 3.0.1)
-  - PINCache/Arc-exception-safe (3.0.1):
+  - PINCache (3.0.3):
+    - PINCache/Arc-exception-safe (= 3.0.3)
+    - PINCache/Core (= 3.0.3)
+  - PINCache/Arc-exception-safe (3.0.3):
     - PINCache/Core
-  - PINCache/Core (3.0.1):
-    - PINOperation (~> 1.2.0)
-  - PINOperation (1.2)
-  - PINRemoteImage (3.0.1):
-    - PINRemoteImage/PINCache (= 3.0.1)
-  - PINRemoteImage/Core (3.0.1):
+  - PINCache/Core (3.0.3):
+    - PINOperation (~> 1.2.1)
+  - PINOperation (1.2.1)
+  - PINRemoteImage (3.0.3):
+    - PINRemoteImage/PINCache (= 3.0.3)
+  - PINRemoteImage/Core (3.0.3):
     - PINOperation
-  - PINRemoteImage/PINCache (3.0.1):
-    - PINCache (~> 3.0.1)
+  - PINRemoteImage/PINCache (3.0.3):
+    - PINCache (~> 3.0.3)
     - PINRemoteImage/Core
-  - ProgressHUD (13.5)
-  - PromisesObjC (1.2.10)
-  - SwiftyGif (5.3.0)
+  - ProgressHUD (13.6)
+  - PromisesObjC (1.2.12)
+  - SwiftyGif (5.4.0)
   - ViewRow (0.8):
     - Eureka (>= 5.0.0)
-  - Yams (4.0.0)
+  - Yams (4.0.6)
 
 DEPENDENCIES:
   - Agrume
@@ -393,10 +389,10 @@ DEPENDENCIES:
   - Firebase/Functions
   - Firebase/Storage
   - FirebaseFirestoreSwift
-  - FirebaseUI/Auth
-  - FirebaseUI/Email
-  - FirebaseUI/Google
-  - FirebaseUI/OAuth
+  - FirebaseUI/Auth (~> 8.0)
+  - FirebaseUI/Email (~> 8.0)
+  - FirebaseUI/Google (~> 8.0)
+  - FirebaseUI/OAuth (~> 8.0)
   - MessageKit
   - PINRemoteImage
   - ProgressHUD
@@ -444,42 +440,42 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   abseil: 6c8eb7892aefa08d929b39f9bb108e5367e3228f
-  Agrume: 4c6fc502f4a4aa8b3dd69c8c2e22bcb282be1032
+  Agrume: 21b96a1138abc0f890211bfcb12f8b1e3464b4c1
   AppAuth: 31bcec809a638d7bd2f86ea8a52bd45f6e81e7c7
   BoringSSL-GRPC: 8edf627ee524575e2f8d19d56f068b448eea3879
   Charts: b1e3a1f5a1c9ba5394438ca3b91bd8c9076310af
-  Down: 4553b984236807e384fa0ef7c7e360ef9f7c425d
-  Eureka: 49239596c9d2eed9ab523990c34de62b6feac9f0
-  Firebase: 8db6f2d1b2c5e2984efba4949a145875a8f65fe5
+  Down: b6ba1bc985c9d2f4e15e3b293d2207766fa12612
+  Eureka: e6d720290c56bb23333ad1a0e020b2a98a0e9a43
+  Firebase: c23a36d9e4cdf7877dfcba8dd0c58add66358999
   FirebaseAuth: c92d49ada7948d1a23466e3db17bc4c2039dddc3
-  FirebaseCore: d889d9e12535b7f36ac8bfbf1713a0836a3012cd
+  FirebaseCore: d3a978a3cfa3240bf7e4ba7d137fdf5b22b628ec
   FirebaseCoreDiagnostics: 770ac5958e1372ce67959ae4b4f31d8e127c3ac1
   FirebaseDatabase: 13a865a4b85897462b930eb683bda8f52583713f
-  FirebaseFirestore: adff4877869ca91a11250cc0989a6cd56bad163f
+  FirebaseFirestore: 9b2f1b9b9a6f2f0b6fb7484b9e32ab7e39243554
   FirebaseFirestoreSwift: 2c46dbc1156db97dc4f6dd798d4f5b57b9c7fab6
   FirebaseFunctions: 27518fdd14d8b3a849e2443f921cd1b471ab7acd
-  FirebaseStorage: 33b92875a9b556824886cc7a65120c7d2cb3a8d8
+  FirebaseStorage: 15e0f15ef3c7fec3d1899d68623e47d4447066b4
   FirebaseUI: 9df84336a56f1d755ae4c37d5885c237d3084b6b
-  GoogleDataTransport: b7f406340a291370045a270c599e53c6fa6ec20f
+  GoogleDataTransport: f56af7caa4ed338dc8e138a5d7c5973e66440833
   GoogleSignIn: 7137d297ddc022a7e0aa4619c86d72c909fa7213
   GoogleUtilities: 7f2f5a07f888cdb145101d6042bc4422f57e70b3
   "gRPC-C++": 13d8ccef97d5c3c441b7e3c529ef28ebee86fad2
   gRPC-Core: 4afa11bfbedf7cdecd04de535a9e046893404ed5
-  GTMAppAuth: 4deac854479704f348309e7b66189e604cf5e01e
-  GTMSessionFetcher: 6f5c8abbab8a9bce4bb3f057e317728ec6182b10
-  InputBarAccessoryView: ac1bc2a11508fc2490c2322beb1d4c9f05c8e634
-  leveldb-library: 55d93ee664b4007aac644a782d11da33fba316f7
-  MessageKit: aa047ad093f022189ed5a0d1cea04fc59f064c93
+  GTMAppAuth: ad5c2b70b9a8689e1a04033c9369c4915bfcbe89
+  GTMSessionFetcher: b3503b20a988c4e20cc189aa798fd18220133f52
+  InputBarAccessoryView: 1f75d8c9f75e5e57f3ffac36ed58635a8005e0bc
+  leveldb-library: 50c7b45cbd7bf543c81a468fe557a16ae3db8729
+  MessageKit: d153fbbbcb12f3f4045a1ba8874298924dacfb62
   nanopb: 59317e09cf1f1a0af72f12af412d54edf52603fc
-  PINCache: ee3c4abadd09970a61cdda0cfc345e69a3d75b26
-  PINOperation: 3a967a927e7867e61976c6cc23e5770416449fbc
-  PINRemoteImage: 3b7cedb118c2d357f87e9eabc7c81ba0202cb236
-  ProgressHUD: 028e3828c7b582022c34a74604fc6073f8628d99
-  PromisesObjC: b14b1c6b68e306650688599de8a45e49fae81151
-  SwiftyGif: e466e86c660d343357ab944a819a101c4127cb40
+  PINCache: 7a8fc1a691173d21dbddbf86cd515de6efa55086
+  PINOperation: 00c935935f1e8cf0d1e2d6b542e75b88fc3e5e20
+  PINRemoteImage: f1295b29f8c5e640e25335a1b2bd9d805171bd01
+  ProgressHUD: 4bdaa0d2ddf676b23324b199f9facffb5c3a1620
+  PromisesObjC: 3113f7f76903778cf4a0586bd1ab89329a0b7b97
+  SwiftyGif: 5d4af95df24caf1c570dbbcb32a3b8a0763bc6d7
   ViewRow: 8da541e9c019f3be63f4e28f311a62cac2045ecf
-  Yams: 9d49b85824751ee13d31e9ec6617c4dfb9a8c3cd
+  Yams: ed1c49f0d6be84f305ad3f93f997b1df039afd9e
 
-PODFILE CHECKSUM: 7659aedaf1ded1716caff36b3489f36e6c9d43cc
+PODFILE CHECKSUM: e4e90e0731152300a0fdc4b24ca03b5fd1949641
 
 COCOAPODS: 1.10.1

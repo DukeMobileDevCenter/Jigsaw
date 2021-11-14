@@ -23,12 +23,14 @@ struct Game {
     let maxAttempts: Int
     /// Description for the first page/preview page.
     let detailText: String
+    /// Topic introduction text
+    let introductionText: String
     /// Game card background image URL, can also use for styling.
     let backgroundImageURL: URL
-    /// Group 1 resource URLs.
-    let group1resourceURLs: [URL]
+    /// Group 1 resource contents (markdown).
+    let group1resourceContents: [String]
     /// Group 2 resource URL.
-    let group2resourceURLs: [URL]
+    let group2resourceContents: [String]
     /// Group 1 questionnaires.
     let group1Questionnaires: [Questionnaire]
     /// Group 2 questionnaires.
@@ -66,8 +68,9 @@ struct Game {
             let maxAttempts = data["maxAttempts"] as? Int,
             let gameName = data["gameName"] as? String,
             let detailText = data["detailText"] as? String,
-            let group1resourceURLs = data["group1resourceURLs"] as? [String],
-            let group2resourceURLs = data["group2resourceURLs"] as? [String],
+            let introductionText = data["introduction"] as? String,
+            let group1resourceContents = data["group1resourceContents"] as? [String],
+            let group2resourceContents = data["group2resourceContents"] as? [String],
             let backgroundImageURL = data["backgroundImageURL"] as? String,
             let categoryString = data["category"] as? String,
             let category = GameCategory(rawValue: categoryString),  // Avoid unknown category.
@@ -77,8 +80,8 @@ struct Game {
         
         // Check if the game has correct amount of room content pairs.
         guard
-            Set([group1resourceURLs.count,
-                 group2resourceURLs.count,
+            Set([group1resourceContents.count,
+                 group2resourceContents.count,
                  group1Questionnaires.count,
                  group2Questionnaires.count]).count == 1
         else { return nil }
@@ -88,10 +91,11 @@ struct Game {
         self.maxAttempts = maxAttempts
         self.gameName = gameName
         self.detailText = detailText
-        self.group1resourceURLs = group1resourceURLs.compactMap { URL(string: $0) }
-        self.group2resourceURLs = group2resourceURLs.compactMap { URL(string: $0) }
+        self.group1resourceContents = group1resourceContents
+        self.group2resourceContents = group2resourceContents
         self.backgroundImageURL = URL(string: backgroundImageURL)!
         self.category = category
+        self.introductionText = introductionText
         
         self.group1Questionnaires = group1Questionnaires.compactMap { Game.decodeQuestionnaireData(data: $0) }
         self.group2Questionnaires = group2Questionnaires.compactMap { Game.decodeQuestionnaireData(data: $0) }

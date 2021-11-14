@@ -189,6 +189,17 @@ class ProfileViewController: FormViewController {
                 self?.present(controller, animated: true)
             }
         }
+            
+        +++ Section("Miscellaneous")
+        <<< ButtonRow { row in
+            row.title = "Take Survey"
+        }
+        .onCellSelection { [weak self] _, _ in
+            DispatchQueue.main.async { [weak self] in
+                let controller = SFSafariViewController(url: AppConstants.surveyURL)
+                self?.present(controller, animated: true)
+            }
+        }
         
         // Add app info to the end of this page.
         +++ Section("\(AppInfo.appName) app 🧩 Version \(AppInfo.versionNumber) (\(AppInfo.buildNumber))")

@@ -106,7 +106,7 @@ class GameStore: NSObject {
                     if let data = data,
                        let content = String(data: data, encoding: .utf8),
                        let dataDict = try? Yams.load(yaml: content) as? [String: Any] {
-                        if let game = Game(data: dataDict) {
+                        if let game = Game(data: dataDict!) {
                             let category = game.category
                             switch category {
                             case .immigration:

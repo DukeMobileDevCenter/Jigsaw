@@ -71,15 +71,15 @@ class MatchingViewController: UIViewController {
             Date().timeIntervalSince(group.createdDate) < 10
         else { return }
         
-        let urls: [URL]
+        let contents: [String]
         let questionnaires: [Questionnaire]
         // Find which subgroup does current player belong to.
         switch group.whichGroupContains(userID: Profiles.userID) {
         case 1:
-            urls = game.group1resourceURLs
+            contents = game.group1resourceContents
             questionnaires = game.group1Questionnaires
         case 2:
-            urls = game.group2resourceURLs
+            contents = game.group2resourceContents
             questionnaires = game.group2Questionnaires
         default:
             return
@@ -92,7 +92,7 @@ class MatchingViewController: UIViewController {
             gameID: game.gameID,
             gameName: game.gameName,
             detailText: game.detailText,
-            resourceURLs: urls,
+            resourceContent: contents,
             questionnaires: questionnaires,
             category: game.category
         )
@@ -106,12 +106,12 @@ class MatchingViewController: UIViewController {
     private func handleDocumentChange(_ change: DocumentChange) {
         guard let currentGroup = try? change.document.data(as: GameGroup.self),
               // Only proceed if current player is in the matching group.
-              currentGroup.whichGroupContains(userID: Profiles.userID) != nil else { return }
-        gameGroup = GameGroup(id: change.document.documentID, group: currentGroup)
+              currentGroup!.whichGroupContains(userID: Profiles.userID) != nil else { return }
+        gameGroup = GameGroup(id: change.document.documentID, group: currentGroup!)
         // Only listen to added matching gamegroup events.
         switch change.type {
         case .added:
-            handleAddedMatchingGroup(group: currentGroup)
+            handleAddedMatchingGroup(group: currentGroup!)
         default:
             break
         }

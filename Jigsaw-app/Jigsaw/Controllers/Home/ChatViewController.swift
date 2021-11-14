@@ -114,7 +114,7 @@ class ChatViewController: MessagesViewController {
         messagesCollectionView.messagesLayoutDelegate = self
         messagesCollectionView.messageCellDelegate = self
         messagesCollectionView.messagesDisplayDelegate = self
-        
+/*
         let cameraItem = InputBarButtonItem(type: .system)
         cameraItem.image = UIImage(systemName: "camera")
         cameraItem.addTarget(
@@ -123,21 +123,21 @@ class ChatViewController: MessagesViewController {
             for: .primaryActionTriggered
         )
         cameraItem.setSize(CGSize(width: 60, height: 30), animated: false)
-        
-        messageInputBar.leftStackView.alignment = .center
-        messageInputBar.setLeftStackViewWidthConstant(to: 50, animated: false)
-        messageInputBar.setStackViewItems([cameraItem], forStack: .left, animated: false)
+  */
+  //      messageInputBar.leftStackView.alignment = .center
+   //     messageInputBar.setLeftStackViewWidthConstant(to: 50, animated: false)
+ //       messageInputBar.setStackViewItems([cameraItem], forStack: .left, animated: false)
     }
     
     // MARK: - Actions
-    
+/*
     @objc
     private func cameraButtonPressed(_ sender: InputBarButtonItem) {
         let picker = UIImagePickerController()
         picker.delegate = self
         picker.sourceType = .photoLibrary
         present(picker, animated: true, completion: nil)
-    }
+    }*/
 }
 
 // MARK: - Helpers
@@ -200,18 +200,18 @@ extension ChatViewController {
             break
         }
     }
-    
+/*
     private func uploadImage(_ image: UIImage, to channel: Chatroom, completion: @escaping (URL?) -> Void) {
         guard let channelID = channel.id else {
             completion(nil)
             return
         }
         
-        guard let scaledImage = image.scaledToSafeUploadSize, let data = scaledImage.jpegData(compressionQuality: 0.4) else {
+        guard let scaledImage = image.scaledToSafeUploadSize, let data = scaledImage.UIImageJPEGRepresentation(compressionQuality: 0.4) else {
             completion(nil)
             return
         }
-        
+ 
         let metadata = StorageMetadata()
         metadata.contentType = "image/jpeg"
         
@@ -228,7 +228,7 @@ extension ChatViewController {
             }
         }
     }
-    
+
     private func sendPhoto(_ image: UIImage) {
         isSendingPhoto = true
         
@@ -241,7 +241,7 @@ extension ChatViewController {
             self.messagesCollectionView.scrollToBottom()
         }
     }
-    
+  */
     private func sendControlMessage(type: ControlMetaMessage) {
         let message = Message(user: user, controlMetaMessage: type)
         save(message)
@@ -428,7 +428,7 @@ extension ChatViewController: InputBarAccessoryViewDelegate {
 }
 
 // MARK: - UIImagePickerControllerDelegate
-
+/*
 extension ChatViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
         picker.dismiss(animated: true, completion: nil)
@@ -449,3 +449,4 @@ extension ChatViewController: UIImagePickerControllerDelegate, UINavigationContr
         picker.dismiss(animated: true, completion: nil)
     }
 }
+*/
