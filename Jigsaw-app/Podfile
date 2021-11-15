@@ -16,10 +16,11 @@ target 'Jigsaw' do
   pod 'Firebase/Functions', '~> 8.9.0'
 
   # Firebase UI for sign up/in
-  pod 'FirebaseUI/Auth', '~> 12.0.2'
-  pod 'FirebaseUI/Google', '~> 12.0.2'
-  pod 'FirebaseUI/Email', '~> 12.0.2'
-  pod 'FirebaseUI/OAuth', '~> 12.0.2'  # Used for Sign in with Apple, Twitter, etc
+  # pod 'FirebaseUI', '~> 12.0.2'
+  pod 'FirebaseUI/Auth'
+  pod 'FirebaseUI/Google'
+  pod 'FirebaseUI/Email'
+  pod 'FirebaseUI/OAuth'  # Used for Sign in with Apple, Twitter, etc
 
   # Swift Codable
   # pod 'FirebaseFirestore'

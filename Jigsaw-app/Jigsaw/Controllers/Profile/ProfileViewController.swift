@@ -12,7 +12,12 @@ import SafariServices
 import ResearchKit
 import Eureka
 import ViewRow
-import FirebaseUI
+
+// FirebaseUI separate modules
+import FirebaseAuthUI
+import FirebaseOAuthUI
+import FirebaseEmailAuthUI
+import FirebaseGoogleAuthUI
 
 class ProfileViewController: FormViewController {
     // During onboarding, the form cannot be filled without player info.
@@ -276,7 +281,7 @@ extension ProfileViewController {
         if !existingProviderIDs.isEmpty { return nil }
         
         let providers: [FUIAuthProvider] = [
-            FUIGoogleAuth(),
+            FUIGoogleAuth(authUI: authUI),
             FUIOAuth.appleAuthProvider(),
             FUIOAuth.githubAuthProvider(),
             FUIEmailAuth()

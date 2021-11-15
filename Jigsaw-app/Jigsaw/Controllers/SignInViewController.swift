@@ -8,8 +8,13 @@
 
 import os
 import UIKit
-import FirebaseUI
 import ProgressHUD
+
+// FirebaseUI separate modules
+import FirebaseAuthUI
+import FirebaseOAuthUI
+import FirebaseEmailAuthUI
+import FirebaseGoogleAuthUI
 
 protocol SignInManagerDelegate: AnyObject {
     func didCompleteSignIn(withAnonymousUser user: User)
@@ -91,7 +96,7 @@ class SignInViewController: UIViewController {
         // Assign delegate to receive sign in result.
         authUI.delegate = self
         let providers: [FUIAuthProvider] = [
-            FUIGoogleAuth(),
+            FUIGoogleAuth(authUI: authUI),
             FUIOAuth.appleAuthProvider(),
             FUIOAuth.githubAuthProvider(),
             FUIEmailAuth()
