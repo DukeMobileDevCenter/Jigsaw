@@ -698,7 +698,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nformatDate=$(date \"+%y%m%d\")\nbuildNumber=\"${formatDate}\"\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\" \"$INFOPLIST_FILE\"\n";
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nformatDate=$(date \"+%Y%m%d\")\nbuildNumber=\"${formatDate}\"\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\" \"$INFOPLIST_FILE\"\n";
 		};
 		0070E00B24B0066B00E71F46 /* SwiftLint */ = {
 			isa = PBXShellScriptBuildPhase;
