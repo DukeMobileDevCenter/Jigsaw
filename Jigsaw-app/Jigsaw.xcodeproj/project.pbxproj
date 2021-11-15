@@ -24,6 +24,8 @@
 		0051950F24E9CDD4008F1CE0 /* QuestionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0051950E24E9CDD4008F1CE0 /* QuestionType.swift */; };
 		005308D125168D84002A429F /* FirebaseConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005308D025168D84002A429F /* FirebaseConstants.swift */; };
 		005308E12516F65F002A429F /* GameError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005308E02516F65F002A429F /* GameError.swift */; };
+		0055B0C42741E63000041454 /* ResearchKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0055B0BA2741E00700041454 /* ResearchKit.framework */; platformFilter = ios; };
+		0055B0C52741E63000041454 /* ResearchKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0055B0BA2741E00700041454 /* ResearchKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		005856BC24D91C4A0010BE55 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 005856BB24D91C4A0010BE55 /* GoogleService-Info.plist */; };
 		005856BE24D923630010BE55 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005856BD24D923630010BE55 /* ChatViewController.swift */; };
 		005856C024D924970010BE55 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005856BF24D924970010BE55 /* Message.swift */; };
@@ -122,6 +124,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				0055B0C52741E63000041454 /* ResearchKit.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -228,6 +231,7 @@
 			files = (
 				00A88312252924CF00186BED /* GameKit.framework in Frameworks */,
 				E9545E830C4AC402F137F037 /* Pods_Jigsaw.framework in Frameworks */,
+				0055B0C42741E63000041454 /* ResearchKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
