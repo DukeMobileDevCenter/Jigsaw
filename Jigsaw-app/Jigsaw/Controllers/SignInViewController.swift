@@ -33,6 +33,8 @@ class SignInViewController: UIViewController {
     /// The play anonymously button.
     @IBOutlet var playAnonymouslyButton: UIButton! {
         didSet {
+            playAnonymouslyButton.titleLabel?.adjustsFontSizeToFitWidth = true
+            playAnonymouslyButton.titleLabel?.minimumScaleFactor = 0.5
             playAnonymouslyButton.layer.cornerRadius = 8
         }
     }
