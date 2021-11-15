@@ -25,6 +25,8 @@ class SignInViewController: UIViewController {
     /// The sign in button.
     @IBOutlet var signInButton: UIButton! {
         didSet {
+            signInButton.titleLabel?.adjustsFontSizeToFitWidth = true
+            signInButton.titleLabel?.minimumScaleFactor = 0.5
             signInButton.layer.cornerRadius = 8
         }
     }
