@@ -25,7 +25,7 @@ class GameCenterHelper: NSObject, GKLocalPlayerListener {
     /// The GameCenterViewController that displays player stats.
     /// Create it everytime so the controller have correct appearances.
     private var gameCenterViewController: GKGameCenterViewController {
-        let controller = GKGameCenterViewController()
+        let controller = GKGameCenterViewController.init(state: .leaderboards)
         controller.gameCenterDelegate = self
         return controller
     }
@@ -55,16 +55,6 @@ class GameCenterHelper: NSObject, GKLocalPlayerListener {
                 os_log(.error, "Error: %@", error.localizedDescription)
             }
         }
-    }
-    
-    func presentLeaderBoard() {
-        gameCenterViewController.viewState = .leaderboards
-        viewController?.present(gameCenterViewController, animated: true)
-    }
-    
-    func presentAchievements() {
-        gameCenterViewController.viewState = .achievements
-        viewController?.present(gameCenterViewController, animated: true)
     }
     
     func submitAverageScore(_ score: Double) {
