@@ -69,8 +69,10 @@ enum FirebaseHelper {
         historyRef.getDocuments { querySnapshot, error in
             if let snapshot = querySnapshot {
                 for gameHistory in snapshot.documents {
-                    if let history = try? gameHistory.data(as: GameHistory.self) {
-                        gameHistories.append(history!)
+                    // FIXME: This might be a compiler bug in Swift 5.4/5.5.
+                    // The [original proposal](https://github.com/apple/swift-evolution/blob/master/proposals/0230-flatten-optional-try.md) was released in Swift 5.0.
+                    if let history = (try? gameHistory.data(as: GameHistory.self)) as? GameHistory {
+                        gameHistories.append(history)
                     }
                 }
                 completion(gameHistories, nil)
@@ -89,8 +91,8 @@ enum FirebaseHelper {
         query.getDocuments { querySnapshot, error in
             if let snapshot = querySnapshot {
                 for ranking in snapshot.documents {
-                    if let rank = try? ranking.data(as: TeamRanking.self) {
-                        rankings.append(rank!)
+                    if let rank = (try? ranking.data(as: TeamRanking.self)) as? TeamRanking {
+                        rankings.append(rank)
                     }
                 }
                 completion(rankings, nil)

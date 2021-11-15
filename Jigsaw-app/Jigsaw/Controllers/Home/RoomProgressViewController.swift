@@ -157,27 +157,28 @@ class RoomProgressViewController: UIViewController {
     // MARK: FireStore listener related methods
     
     private func handleDocumentChange(_ change: DocumentChange) {
-        guard let currentGroup = try? change.document.data(as: GameGroup.self),
+        guard let group = try? change.document.data(as: GameGroup.self),
+              let currentGroup = group,
               // Only proceed if current player is in the matching group.
-              currentGroup!.whichGroupContains(userID: Profiles.userID) != nil else { return }
+              currentGroup.whichGroupContains(userID: Profiles.userID) != nil else { return }
         
         switch change.type {
         case .modified:
             // Only handle increment.
-            if currentGroup!.chatroomReadyUserIDs.count > gameGroup.chatroomReadyUserIDs.count {
-                handleModifiedReadyPlayerCount(group: currentGroup!)
-            } else if currentGroup!.roomAttemptedUserIDs.count > gameGroup.roomAttemptedUserIDs.count {
-                handleModifiedAttemptedPlayerCount(group: currentGroup!)
-            } else if currentGroup!.roomFinishedUserIDs.count > gameGroup.roomFinishedUserIDs.count {
-                handleModifiedFinishedPlayerCount(group: currentGroup!)
+            if currentGroup.chatroomReadyUserIDs.count > gameGroup.chatroomReadyUserIDs.count {
+                handleModifiedReadyPlayerCount(group: currentGroup)
+            } else if currentGroup.roomAttemptedUserIDs.count > gameGroup.roomAttemptedUserIDs.count {
+                handleModifiedAttemptedPlayerCount(group: currentGroup)
+            } else if currentGroup.roomFinishedUserIDs.count > gameGroup.roomFinishedUserIDs.count {
+                handleModifiedFinishedPlayerCount(group: currentGroup)
             }
             // Handle deletion when players finished all the rooms.
-            if currentGroup!.allRoomsFinishedUserScores.count > gameGroup.allRoomsFinishedUserScores.count {
-                handleAllRoomFinished(group: currentGroup!)
+            if currentGroup.allRoomsFinishedUserScores.count > gameGroup.allRoomsFinishedUserScores.count {
+                handleAllRoomFinished(group: currentGroup)
             }
         case .removed:
             // If any player dropped the game before they finish, the others cannot play anymore.
-            if currentGroup!.allRoomsFinishedUserScores.count < currentGroup!.allPlayersUserIDs.count {
+            if currentGroup.allRoomsFinishedUserScores.count < currentGroup.allPlayersUserIDs.count {
                 isMeDropped = false
                 taskViewController(roomViewController, didFinishWith: .failed, error: GameError.otherPlayerDropped)
             }
@@ -185,7 +186,7 @@ class RoomProgressViewController: UIViewController {
             break
         }
         // Hold a copy of the changed game group.
-        gameGroup = GameGroup(id: change.document.documentID, group: currentGroup!)
+        gameGroup = GameGroup(id: change.document.documentID, group: currentGroup)
     }
     
     private func handleModifiedReadyPlayerCount(group: GameGroup) {
@@ -201,7 +202,7 @@ class RoomProgressViewController: UIViewController {
             // All players have reached the wait page.
             if group.roomFinishedUserIDs.count < group.roomAttemptedUserIDs.count {
                 // Some players failed.
-                // MARK: This is the area that doesn't work.
+                // FIXME: This is the area that doesn't work.
                 // Reset the attempted and finished array.
                 FirebaseConstants.gamegroups.document(gameGroup.id!).updateData([
                     "roomAttemptedUserIDs": FieldValue.arrayRemove([Profiles.userID!]),
