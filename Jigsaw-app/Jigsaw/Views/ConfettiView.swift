@@ -43,8 +43,8 @@ final class ConfettiView: UIView, CAAnimationDelegate {
         let animation = CAKeyframeAnimation()
         animation.keyPath = #keyPath(Layer.birthRate)
         animation.duration = duration
-        animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseIn)
-        animation.fillMode = "forwards"
+        animation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeIn)
+        animation.fillMode = convertToCAMediaTimingFillMode("forwards")
         animation.values = [1, 0, 0]
         animation.keyTimes = [0, 0.5, 1]
         animation.isRemovedOnCompletion = false
@@ -139,8 +139,8 @@ final class ConfettiView: UIView, CAAnimationDelegate {
         override func layoutSublayers() {
             super.layoutSublayers()
             
-            emitterMode = "outline"
-            emitterShape = "line"
+            emitterMode = convertToCAEmitterLayerEmitterMode("outline")
+            emitterShape = convertToCAEmitterLayerEmitterShape("line")
             emitterSize = CGSize(width: frame.size.width, height: 1.0)
             emitterPosition = CGPoint(x: frame.size.width / 2.0, y: 0)
         }
@@ -214,4 +214,19 @@ private extension NSAttributedString {
             self.draw(at: .zero)
         }
     }
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertToCAMediaTimingFillMode(_ input: String) -> CAMediaTimingFillMode {
+	return CAMediaTimingFillMode(rawValue: input)
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertToCAEmitterLayerEmitterMode(_ input: String) -> CAEmitterLayerEmitterMode {
+	return CAEmitterLayerEmitterMode(rawValue: input)
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertToCAEmitterLayerEmitterShape(_ input: String) -> CAEmitterLayerEmitterShape {
+	return CAEmitterLayerEmitterShape(rawValue: input)
 }

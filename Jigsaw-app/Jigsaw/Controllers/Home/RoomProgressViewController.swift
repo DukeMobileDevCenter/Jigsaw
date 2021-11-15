@@ -157,7 +157,7 @@ class RoomProgressViewController: UIViewController {
     // MARK: FireStore listener related methods
     
     private func handleDocumentChange(_ change: DocumentChange) {
-        guard let group = try? change.document.data(as: GameGroup.self),
+        guard let group = (try? change.document.data(as: GameGroup.self)) as? GameGroup,
               let currentGroup = group,
               // Only proceed if current player is in the matching group.
               currentGroup.whichGroupContains(userID: Profiles.userID) != nil else { return }

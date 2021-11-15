@@ -19,7 +19,7 @@ class GameCenterHelper: NSObject, GKLocalPlayerListener {
     private var achievements = [GKAchievement]()
     
     static var isAuthenticated: Bool {
-        return GKLocalPlayer.localPlayer().isAuthenticated
+        return GKLocalPlayer.local.isAuthenticated
     }
     
     /// The GameCenterViewController that displays player stats.
@@ -33,11 +33,11 @@ class GameCenterHelper: NSObject, GKLocalPlayerListener {
     override init() {
         super.init()
         
-        GKLocalPlayer.localPlayer().authenticateHandler = { gcAuthVC, error in
-            NotificationCenter.default.post(name: .authenticationChanged, object: GKLocalPlayer.localPlayer().isAuthenticated)
+        GKLocalPlayer.local.authenticateHandler = { gcAuthVC, error in
+            NotificationCenter.default.post(name: .authenticationChanged, object: GKLocalPlayer.local.isAuthenticated)
             
-            if GKLocalPlayer.localPlayer().isAuthenticated {
-                GKLocalPlayer.localPlayer().register(self)
+            if GKLocalPlayer.local.isAuthenticated {
+                GKLocalPlayer.local.register(self)
             } else if let vc = gcAuthVC {
                 self.viewController?.present(vc, animated: true)
             } else if let error = error {

@@ -606,6 +606,7 @@
 				TargetAttributes = {
 					0070DFE524B0060400E71F46 = {
 						CreatedOnToolsVersion = 11.5;
+						LastSwiftMigration = 1310;
 					};
 					0070DFFB24B0060500E71F46 = {
 						CreatedOnToolsVersion = 11.5;
@@ -1031,7 +1032,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = edu.duke.mobilecenter.Jigsaw;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -1059,7 +1060,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = edu.duke.mobilecenter.Jigsaw;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;

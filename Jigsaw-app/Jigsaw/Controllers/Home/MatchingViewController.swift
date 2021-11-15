@@ -104,8 +104,7 @@ class MatchingViewController: UIViewController {
     }
     
     private func handleDocumentChange(_ change: DocumentChange) {
-        guard let group = try? change.document.data(as: GameGroup.self),
-              let currentGroup = group,
+        guard let currentGroup = (try? change.document.data(as: GameGroup.self)) as? GameGroup,
               // Only proceed if current player is in the matching group.
               currentGroup.whichGroupContains(userID: Profiles.userID) != nil else { return }
         gameGroup = GameGroup(id: change.document.documentID, group: currentGroup)
