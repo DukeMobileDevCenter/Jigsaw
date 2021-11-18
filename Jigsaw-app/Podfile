@@ -1,7 +1,7 @@
 # Uncomment the next line to define a global platform for your project
-platform :ios, '13.0'
+platform :ios, '14.0'
 
-# ignore all warnings from all pods
+# Ignore all warnings from all pods
 inhibit_all_warnings!
 
 target 'Jigsaw' do
@@ -9,20 +9,22 @@ target 'Jigsaw' do
   use_frameworks!
 
   # Firebase framework
-  pod 'Firebase/Database'
-  pod 'Firebase/Auth'
-  pod 'Firebase/Storage'
-  pod 'Firebase/Firestore'
-  pod 'Firebase/Functions'
+  pod 'Firebase/Database', '~> 8.9.0'
+  pod 'Firebase/Auth', '~> 8.9.0'
+  pod 'Firebase/Storage', '~> 8.9.0'
+  pod 'Firebase/Firestore', '~> 8.9.1'
+  pod 'Firebase/Functions', '~> 8.9.0'
 
   # Firebase UI for sign up/in
-  pod 'FirebaseUI/Auth', '~> 8.0'
-  pod 'FirebaseUI/Google', '~> 8.0'
-  pod 'FirebaseUI/Email', '~> 8.0'
-  pod 'FirebaseUI/OAuth', '~> 8.0'  # Used for Sign in with Apple, Twitter, etc
+  # pod 'FirebaseUI', '~> 12.0.2'
+  pod 'FirebaseUI/Auth'
+  pod 'FirebaseUI/Google'
+  pod 'FirebaseUI/Email'
+  pod 'FirebaseUI/OAuth'  # Used for Sign in with Apple, Twitter, etc
 
   # Swift Codable
-  pod 'FirebaseFirestoreSwift'
+  # pod 'FirebaseFirestore'
+  pod 'FirebaseFirestoreSwift', '~> 8.9.0-beta'
 
   # pod 'ResearchKit'
 
@@ -53,11 +55,11 @@ target 'Jigsaw' do
 
 end
 
-# Bump all Pod minimum target to iOS 13, to cope with Xcode 12
+# Bump all Pod minimum target to iOS 14, to cope with Xcode 13
 post_install do |pi|
   pi.pods_project.targets.each do |t|
     t.build_configurations.each do |bc|
-      bc.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '13.0'
+      bc.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '14.0'
     end
   end
 end

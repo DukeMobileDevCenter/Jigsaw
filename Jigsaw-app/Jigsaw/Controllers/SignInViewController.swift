@@ -8,8 +8,13 @@
 
 import os
 import UIKit
-import FirebaseUI
 import ProgressHUD
+
+// FirebaseUI separate modules
+import FirebaseAuthUI
+import FirebaseOAuthUI
+import FirebaseEmailAuthUI
+import FirebaseGoogleAuthUI
 
 protocol SignInManagerDelegate: AnyObject {
     func didCompleteSignIn(withAnonymousUser user: User)
@@ -20,12 +25,16 @@ class SignInViewController: UIViewController {
     /// The sign in button.
     @IBOutlet var signInButton: UIButton! {
         didSet {
+            signInButton.titleLabel?.adjustsFontSizeToFitWidth = true
+            signInButton.titleLabel?.minimumScaleFactor = 0.5
             signInButton.layer.cornerRadius = 8
         }
     }
     /// The play anonymously button.
     @IBOutlet var playAnonymouslyButton: UIButton! {
         didSet {
+            playAnonymouslyButton.titleLabel?.adjustsFontSizeToFitWidth = true
+            playAnonymouslyButton.titleLabel?.minimumScaleFactor = 0.5
             playAnonymouslyButton.layer.cornerRadius = 8
         }
     }
@@ -91,7 +100,7 @@ class SignInViewController: UIViewController {
         // Assign delegate to receive sign in result.
         authUI.delegate = self
         let providers: [FUIAuthProvider] = [
-            FUIGoogleAuth(),
+            FUIGoogleAuth(authUI: authUI),
             FUIOAuth.appleAuthProvider(),
             FUIOAuth.githubAuthProvider(),
             FUIEmailAuth()

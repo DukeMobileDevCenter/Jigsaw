@@ -14,10 +14,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "0070DFE524B0060400E71F46"
-               BuildableName = "Jigsaw.app"
-               BlueprintName = "Jigsaw"
-               ReferencedContainer = "container:Jigsaw.xcodeproj">
+               BlueprintIdentifier = "B18FF3A41A9FE25700C0C3B0"
+               BuildableName = "docs"
+               BlueprintName = "docs"
+               ReferencedContainer = "container:ResearchKit.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -40,16 +40,15 @@
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
+      <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "0070DFE524B0060400E71F46"
-            BuildableName = "Jigsaw.app"
-            BlueprintName = "Jigsaw"
-            ReferencedContainer = "container:Jigsaw.xcodeproj">
+            BlueprintIdentifier = "B18FF3A41A9FE25700C0C3B0"
+            BuildableName = "docs"
+            BlueprintName = "docs"
+            ReferencedContainer = "container:ResearchKit.xcodeproj">
          </BuildableReference>
-      </BuildableProductRunnable>
+      </MacroExpansion>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"
@@ -57,16 +56,15 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
+      <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "0070DFE524B0060400E71F46"
-            BuildableName = "Jigsaw.app"
-            BlueprintName = "Jigsaw"
-            ReferencedContainer = "container:Jigsaw.xcodeproj">
+            BlueprintIdentifier = "B18FF3A41A9FE25700C0C3B0"
+            BuildableName = "docs"
+            BlueprintName = "docs"
+            ReferencedContainer = "container:ResearchKit.xcodeproj">
          </BuildableReference>
-      </BuildableProductRunnable>
+      </MacroExpansion>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">

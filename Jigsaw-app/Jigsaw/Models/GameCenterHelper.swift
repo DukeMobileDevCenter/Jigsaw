@@ -19,13 +19,13 @@ class GameCenterHelper: NSObject, GKLocalPlayerListener {
     private var achievements = [GKAchievement]()
     
     static var isAuthenticated: Bool {
-        return GKLocalPlayer.localPlayer().isAuthenticated
+        return GKLocalPlayer.local.isAuthenticated
     }
     
     /// The GameCenterViewController that displays player stats.
     /// Create it everytime so the controller have correct appearances.
-    private var gameCenterViewController: GKGameCenterViewController {
-        let controller = GKGameCenterViewController()
+    private func gameCenterViewController(state: GKGameCenterViewControllerState = .leaderboards) -> GKGameCenterViewController {
+        let controller = GKGameCenterViewController(state: state)
         controller.gameCenterDelegate = self
         return controller
     }
@@ -33,11 +33,11 @@ class GameCenterHelper: NSObject, GKLocalPlayerListener {
     override init() {
         super.init()
         
-        GKLocalPlayer.localPlayer().authenticateHandler = { gcAuthVC, error in
-            NotificationCenter.default.post(name: .authenticationChanged, object: GKLocalPlayer.localPlayer().isAuthenticated)
+        GKLocalPlayer.local.authenticateHandler = { gcAuthVC, error in
+            NotificationCenter.default.post(name: .authenticationChanged, object: GKLocalPlayer.local.isAuthenticated)
             
-            if GKLocalPlayer.localPlayer().isAuthenticated {
-                GKLocalPlayer.localPlayer().register(self)
+            if GKLocalPlayer.local.isAuthenticated {
+                GKLocalPlayer.local.register(self)
             } else if let vc = gcAuthVC {
                 self.viewController?.present(vc, animated: true)
             } else if let error = error {
@@ -58,13 +58,11 @@ class GameCenterHelper: NSObject, GKLocalPlayerListener {
     }
     
     func presentLeaderBoard() {
-        gameCenterViewController.viewState = .leaderboards
-        viewController?.present(gameCenterViewController, animated: true)
+        viewController?.present(gameCenterViewController(), animated: true)
     }
     
     func presentAchievements() {
-        gameCenterViewController.viewState = .achievements
-        viewController?.present(gameCenterViewController, animated: true)
+        viewController?.present(gameCenterViewController(state: .achievements), animated: true)
     }
     
     func submitAverageScore(_ score: Double) {

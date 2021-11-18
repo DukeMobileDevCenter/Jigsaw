@@ -165,7 +165,7 @@ extension ChatViewController {
                 self.presentAlert(error: error)
                 return
             }
-            self.messagesCollectionView.scrollToBottom()
+            self.messagesCollectionView.scrollToLastItem()
             self.messageInputBar.sendButton.stopAnimating()
         }
     }
@@ -184,7 +184,7 @@ extension ChatViewController {
         
         if shouldScrollToBottom {
             DispatchQueue.main.async {
-                self.messagesCollectionView.scrollToBottom(animated: true)
+                self.messagesCollectionView.scrollToLastItem(animated: true)
             }
         }
     }

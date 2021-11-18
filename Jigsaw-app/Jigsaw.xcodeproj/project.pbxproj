@@ -22,10 +22,10 @@
 		0047630624ED1154007767A5 /* GameCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0047630524ED1154007767A5 /* GameCategory.swift */; };
 		004A4B0D24FDB55A000FA2C8 /* FormViewController+insetGrouped.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004A4B0C24FDB55A000FA2C8 /* FormViewController+insetGrouped.swift */; };
 		0051950F24E9CDD4008F1CE0 /* QuestionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0051950E24E9CDD4008F1CE0 /* QuestionType.swift */; };
-		005308CA25168A96002A429F /* ResearchKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 009D06822511F15B002E488F /* ResearchKit.framework */; };
-		005308CB25168A96002A429F /* ResearchKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 009D06822511F15B002E488F /* ResearchKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		005308D125168D84002A429F /* FirebaseConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005308D025168D84002A429F /* FirebaseConstants.swift */; };
 		005308E12516F65F002A429F /* GameError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005308E02516F65F002A429F /* GameError.swift */; };
+		0055B0C42741E63000041454 /* ResearchKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0055B0BA2741E00700041454 /* ResearchKit.framework */; platformFilter = ios; };
+		0055B0C52741E63000041454 /* ResearchKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0055B0BA2741E00700041454 /* ResearchKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		005856BC24D91C4A0010BE55 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 005856BB24D91C4A0010BE55 /* GoogleService-Info.plist */; };
 		005856BE24D923630010BE55 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005856BD24D923630010BE55 /* ChatViewController.swift */; };
 		005856C024D924970010BE55 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005856BF24D924970010BE55 /* Message.swift */; };
@@ -94,26 +94,26 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		0055B0B92741E00700041454 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0055B0B32741E00700041454 /* ResearchKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = B183A5951A8535D100C76870;
+			remoteInfo = ResearchKit;
+		};
+		0055B0BB2741E00700041454 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0055B0B32741E00700041454 /* ResearchKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 86CC8E9A1AC09332001CCD89;
+			remoteInfo = ResearchKitTests;
+		};
 		0070DFFD24B0060500E71F46 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 0070DFDE24B0060400E71F46 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 0070DFE524B0060400E71F46;
 			remoteInfo = Jigsaw;
-		};
-		009D06812511F15B002E488F /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 009D067B2511F15A002E488F /* ResearchKit.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = B183A5951A8535D100C76870;
-			remoteInfo = ResearchKit;
-		};
-		009D06832511F15B002E488F /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 009D067B2511F15A002E488F /* ResearchKit.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 86CC8E9A1AC09332001CCD89;
-			remoteInfo = ResearchKitTests;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -124,7 +124,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				005308CB25168A96002A429F /* ResearchKit.framework in Embed Frameworks */,
+				0055B0C52741E63000041454 /* ResearchKit.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -149,6 +149,7 @@
 		0051950E24E9CDD4008F1CE0 /* QuestionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionType.swift; sourceTree = "<group>"; };
 		005308D025168D84002A429F /* FirebaseConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseConstants.swift; sourceTree = "<group>"; };
 		005308E02516F65F002A429F /* GameError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameError.swift; sourceTree = "<group>"; };
+		0055B0B32741E00700041454 /* ResearchKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ResearchKit.xcodeproj; path = "ResearchKit-d10a427/ResearchKit.xcodeproj"; sourceTree = "<group>"; };
 		005856BB24D91C4A0010BE55 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		005856BD24D923630010BE55 /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		005856BF24D924970010BE55 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
@@ -176,7 +177,6 @@
 		0071E9222520161F0025702E /* FirebaseHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseHelper.swift; sourceTree = "<group>"; };
 		0078315124DF557800B35A98 /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		007FC9532536202B00D8D9A1 /* RoomProgressViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomProgressViewController.swift; sourceTree = "<group>"; };
-		009D067B2511F15A002E488F /* ResearchKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ResearchKit.xcodeproj; path = "ResearchKit-68f9d29/ResearchKit.xcodeproj"; sourceTree = "<group>"; };
 		00A06D8C24E8A9B400030649 /* GameGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameGroup.swift; sourceTree = "<group>"; };
 		00A88311252924CF00186BED /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
 		00A8831425292D4E00186BED /* GameCenterHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameCenterHelper.swift; sourceTree = "<group>"; };
@@ -230,8 +230,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				00A88312252924CF00186BED /* GameKit.framework in Frameworks */,
-				005308CA25168A96002A429F /* ResearchKit.framework in Frameworks */,
 				E9545E830C4AC402F137F037 /* Pods_Jigsaw.framework in Frameworks */,
+				0055B0C42741E63000041454 /* ResearchKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -295,6 +295,15 @@
 			path = Player;
 			sourceTree = "<group>";
 		};
+		0055B0B42741E00700041454 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				0055B0BA2741E00700041454 /* ResearchKit.framework */,
+				0055B0BC2741E00700041454 /* ResearchKitTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		005856C724D92D400010BE55 /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
@@ -341,7 +350,7 @@
 		0070DFDD24B0060400E71F46 = {
 			isa = PBXGroup;
 			children = (
-				009D067B2511F15A002E488F /* ResearchKit.xcodeproj */,
+				0055B0B32741E00700041454 /* ResearchKit.xcodeproj */,
 				0070DFE824B0060400E71F46 /* Jigsaw */,
 				0070DFFF24B0060500E71F46 /* JigsawTests */,
 				0070DFE724B0060400E71F46 /* Products */,
@@ -405,15 +414,6 @@
 				00D9F5152506DEDF00898DFA /* PreviewDetailViewController.storyboard */,
 			);
 			path = "Controller Storyboards";
-			sourceTree = "<group>";
-		};
-		009D067C2511F15A002E488F /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				009D06822511F15B002E488F /* ResearchKit.framework */,
-				009D06842511F15B002E488F /* ResearchKitTests.xctest */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 		00B0A67524E3CAD500887701 /* Home */ = {
@@ -606,6 +606,7 @@
 				TargetAttributes = {
 					0070DFE524B0060400E71F46 = {
 						CreatedOnToolsVersion = 11.5;
+						LastSwiftMigration = 1310;
 					};
 					0070DFFB24B0060500E71F46 = {
 						CreatedOnToolsVersion = 11.5;
@@ -626,8 +627,8 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = 009D067C2511F15A002E488F /* Products */;
-					ProjectRef = 009D067B2511F15A002E488F /* ResearchKit.xcodeproj */;
+					ProductGroup = 0055B0B42741E00700041454 /* Products */;
+					ProjectRef = 0055B0B32741E00700041454 /* ResearchKit.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -639,18 +640,18 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		009D06822511F15B002E488F /* ResearchKit.framework */ = {
+		0055B0BA2741E00700041454 /* ResearchKit.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = ResearchKit.framework;
-			remoteRef = 009D06812511F15B002E488F /* PBXContainerItemProxy */;
+			remoteRef = 0055B0B92741E00700041454 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		009D06842511F15B002E488F /* ResearchKitTests.xctest */ = {
+		0055B0BC2741E00700041454 /* ResearchKitTests.xctest */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
 			path = ResearchKitTests.xctest;
-			remoteRef = 009D06832511F15B002E488F /* PBXContainerItemProxy */;
+			remoteRef = 0055B0BB2741E00700041454 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -698,7 +699,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nformatDate=$(date \"+%y%m%d\")\nbuildNumber=\"${formatDate}\"\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\" \"$INFOPLIST_FILE\"\n";
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nformatDate=$(date \"+%Y%m%d\")\nbuildNumber=\"${formatDate}\"\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\" \"$INFOPLIST_FILE\"\n";
 		};
 		0070E00B24B0066B00E71F46 /* SwiftLint */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -943,7 +944,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -998,7 +999,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -1023,7 +1024,7 @@
 					"$(PROJECT_DIR)/Pods",
 				);
 				INFOPLIST_FILE = Jigsaw/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1031,7 +1032,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = edu.duke.mobilecenter.Jigsaw;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -1051,7 +1052,7 @@
 					"$(PROJECT_DIR)/Pods",
 				);
 				INFOPLIST_FILE = Jigsaw/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1059,7 +1060,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = edu.duke.mobilecenter.Jigsaw;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
