@@ -71,7 +71,7 @@ class GameViewController: ORKTaskViewController {
         var steps = [ORKStep]()
         
         // Resource reading page.
-        let promptStep = ORKInstructionStep(identifier: "Prompt \(currentRoom)")
+        let promptStep = ORKInstructionStep(identifier: "Resource")
         promptStep.detailText = game.resourceContent[currentRoom]
         steps.append(promptStep)
         

@@ -201,7 +201,6 @@ class RoomProgressViewController: UIViewController {
             // All players have reached the wait page.
             if group.roomFinishedUserIDs.count < group.roomAttemptedUserIDs.count {
                 // Some players failed.
-                // FIXME: This is the area that doesn't work.
                 // Reset the attempted and finished array.
                 FirebaseConstants.gamegroups.document(gameGroup.id!).updateData([
                     "roomAttemptedUserIDs": FieldValue.arrayRemove([Profiles.userID!]),
