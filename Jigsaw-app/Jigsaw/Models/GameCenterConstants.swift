@@ -14,7 +14,7 @@ enum GameCenterConstants {
         switch category {
         case .economy:
             return "edu.duke.mobilecenter.JigsawBeta.economyFinished"
-        case .justice, .immigration, .environment, .health, .international:
+        case .justice, .immigration, .environment, .health, .international, .charterSchools, .minimumWage:
             // FIXME: for beta, temporary disable other categories
             // as no available/designed achievements yet.
             return nil

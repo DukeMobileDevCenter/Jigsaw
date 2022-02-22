@@ -17,6 +17,8 @@ enum GameCategory: String, CaseIterable, Codable {
     case health
     case international
     case random
+    case charterSchools
+    case minimumWage
     
     var iconImage: UIImage {
         let iconImage: UIImage
@@ -35,6 +37,10 @@ enum GameCategory: String, CaseIterable, Codable {
             iconImage = UIImage(systemName: "globe")!
         case .random:
             iconImage = UIImage(systemName: "questionmark")!
+        case .minimumWage:
+            iconImage = UIImage(systemName: "dollarsign.circle")!
+        case .charterSchools:
+            iconImage = UIImage(systemName: "book")!
         }
         return iconImage
     }
@@ -59,6 +65,10 @@ enum GameCategory: String, CaseIterable, Codable {
             return "International"
         case .random:
             return "Random"
+        case .charterSchools:
+            return "Charter Schools"
+        case .minimumWage:
+            return "Minimum Wage"
         }
     }
     
@@ -78,6 +88,10 @@ enum GameCategory: String, CaseIterable, Codable {
             return "International is an adjective (also used as a noun) meaning \"between nations\"."
         case .random:
             return "Lead me to a random topic!"
+        case .minimumWage:
+            return "Minimum wage is the legal minimum hourly wage a person may be paid for their labor."
+        case .charterSchools:
+            return "Charter schools are publicly-funded, privately-operated schools."
         }
     }
 }
@@ -88,15 +102,27 @@ class GameCategoryClass: NSObject, UICollectionViewDataSource {
     
     // FIXME: for beta, don't include the random option.
     /// A wrapper to all of the enum cases.
-    let allCases = GameCategory.allCases.dropLast()
+    // let allCases = GameCategory.allCases.dropLast()
+    var foundCategories: [GameCategory] {
+        var categories = [GameCategory]()
+        
+        GameStore.shared.allGames.forEach { game in
+            if !categories.contains(game.category) {
+                categories.append(game.category)
+            }
+        }
+        
+        return categories
+    }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        allCases.count
+        print("foundCategories.count \(foundCategories.count)")
+        return foundCategories.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "GameCollectionCell", for: indexPath) as! GameCollectionCell
-        let category = allCases[indexPath.item]
+        let category = foundCategories[indexPath.item]
         cell.nameLabel.text = category.label
         cell.iconImageView.setImage(category.iconImage)
         cell.backgroundImageView.setImage(category.backgroundImage)

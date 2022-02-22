@@ -16,6 +16,8 @@ private class GameCollections {
     var environmentGames = [Game]()
     var healthGames = [Game]()
     var internationalGames = [Game]()
+    var minimumWageGames = [Game]()
+    var charterSchoolGames = [Game]()
     
     func sortAll() {
         let levelAscending: (Game, Game) -> Bool = { $0.level < $1.level }
@@ -25,6 +27,8 @@ private class GameCollections {
         environmentGames.sort(by: levelAscending)
         healthGames.sort(by: levelAscending)
         internationalGames.sort(by: levelAscending)
+        minimumWageGames.sort(by: levelAscending)
+        charterSchoolGames.sort(by: levelAscending)
     }
     
     func removeAll() {
@@ -34,6 +38,8 @@ private class GameCollections {
         environmentGames.removeAll()
         healthGames.removeAll()
         internationalGames.removeAll()
+        minimumWageGames.removeAll()
+        charterSchoolGames.removeAll()
     }
 }
 
@@ -61,6 +67,10 @@ class GameStore: NSObject {
             return collections.healthGames
         case .international:
             return collections.internationalGames
+        case .minimumWage:
+            return collections.minimumWageGames
+        case .charterSchools:
+            return collections.charterSchoolGames
         case .random:
             return []
         }
@@ -89,6 +99,8 @@ class GameStore: NSObject {
             var environmentGames = [Game]()
             var healthGames = [Game]()
             var internationalGames = [Game]()
+            var minimumWageGames = [Game]()
+            var charterSchoolGames = [Game]()
             
             let downloadGroup = DispatchGroup()
             
@@ -107,6 +119,7 @@ class GameStore: NSObject {
                        let content = String(data: data, encoding: .utf8),
                        let dataDict = (try? Yams.load(yaml: content)) as? [String: Any] {
                         if let game = Game(data: dataDict) {
+                            print("Game found: \(game)")
                             let category = game.category
                             switch category {
                             case .immigration:
@@ -121,6 +134,10 @@ class GameStore: NSObject {
                                 healthGames.append(game)
                             case .international:
                                 internationalGames.append(game)
+                            case .charterSchools:
+                                charterSchoolGames.append(game)
+                            case .minimumWage:
+                                minimumWageGames.append(game)
                             case .random:
                                 break
                             }
