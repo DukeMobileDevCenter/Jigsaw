@@ -74,6 +74,7 @@ class HomeCollectionViewController: UICollectionViewController {
                 }
             }
             DispatchQueue.main.async { [weak self] in
+                self?.collectionView?.reloadData()
                 self?.collectionView?.refreshControl?.endRefreshing()
             }
         }
@@ -207,7 +208,7 @@ class HomeCollectionViewController: UICollectionViewController {
         case "showCategory":
             // Triggered by tapping on a category cell.
             if let cell = sender as? GameCollectionCell, let selectedIndexPath = collectionView?.indexPath(for: cell) {
-                let selectedCategory = GameCategoryClass.shared.allCases[selectedIndexPath.item]
+                let selectedCategory = GameCategoryClass.shared.foundCategories[selectedIndexPath.item]
                 let destinationVC = segue.destination as! CategoryViewController
                 destinationVC.title = selectedCategory.label
                 destinationVC.category = selectedCategory
@@ -253,7 +254,7 @@ extension HomeCollectionViewController: UICollectionViewDelegateFlowLayout {
 extension HomeCollectionViewController {
     override func collectionView(_ collectionView: UICollectionView, contextMenuConfigurationForItemAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
         let index = indexPath.item
-        let category = GameCategoryClass.shared.allCases[index]
+        let category = GameCategoryClass.shared.foundCategories[index]
         let identifier = "\(index)" as NSString
         let previewControllerProvider = { () -> UIViewController? in
             let storyboard = UIStoryboard(name: "PreviewDetailViewController", bundle: .main)
