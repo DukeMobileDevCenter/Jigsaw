@@ -26,9 +26,9 @@ enum GameError: LocalizedError, CustomStringConvertible {
             // Also means the current player dropped.
             return "😞 Max attempts reached."
         case .currentPlayerFailed(let wrongCount):
-            return "🤨 Uh-oh. You didn't pass the room with \(wrongCount) wrong answers.\nDiscuss and try again!"
+            return "🤨 You didn't pass the room with \(wrongCount) wrong answers.\nDiscuss and try again!"
         case .otherPlayerFailed:
-            return "🤨 Uh-oh. Your peers didn't pass the room.\nHelp them and try again!"
+            return "🤨 Your peers didn't pass the room.\nHelp them and try again!"
         case .unknown:
             return "🤐 Unknown error. Developers are trembling. 🤯"
         }
