@@ -24,17 +24,17 @@ enum GameCategory: String, CaseIterable, Codable {
         let iconImage: UIImage
         switch self {
         case .immigration:
-            iconImage = UIImage(systemName: "hand.raised.slash")!
-        case .economy:
-            iconImage = UIImage(systemName: "dollarsign.circle")!
-        case .justice:
             iconImage = UIImage(systemName: "shield.lefthalf.fill")!
+        case .economy:
+            iconImage = UIImage(systemName: "books.vertical.fill")!
+        case .justice:
+            iconImage = UIImage(systemName: "banknote.fill")!
         case .environment:
-            iconImage = UIImage(systemName: "cloud.sun")!
+            iconImage = UIImage(systemName: "rectangle.badge.checkmark")!
         case .health:
-            iconImage = UIImage(systemName: "staroflife")!
+            iconImage = UIImage(systemName: "dollarsign.circle")!
         case .international:
-            iconImage = UIImage(systemName: "globe")!
+            iconImage = UIImage(systemName: "equal.circle.fill")!
         case .random:
             iconImage = UIImage(systemName: "questionmark")!
         case .minimumWage:
@@ -54,15 +54,15 @@ enum GameCategory: String, CaseIterable, Codable {
         case .immigration:
             return "Immigration"
         case .economy:
-            return "Economy"
+            return "Charter Schools"
         case .justice:
-            return "Justice"
+            return "Minimum Wage"
         case .environment:
-            return "Environment"
+            return "Electoral College"
         case .health:
-            return "Health"
+            return "Economic Inequality"
         case .international:
-            return "International"
+            return "Affirmative Action"
         case .random:
             return "Random"
         case .charterSchools:
@@ -77,15 +77,15 @@ enum GameCategory: String, CaseIterable, Codable {
         case .immigration:
             return "Immigration is the international movement of people to a destination country of which they are not natives or where they do not possess citizenship in order to settle as permanent residents or naturalized citizens."
         case .economy:
-            return "Economy is defined as a social domain that emphasize the practices, discourses, and material expressions associated with the production, use, and management of resources."
+            return "Charter schools are publicly-funded, privately-operated schools."
         case .justice:
-            return "Law commonly refers to a system of rules created and enforced through social or governmental institutions to regulate behavior."
+            return "Minimum wage is the legal minimum hourly wage a person may be paid for their labor."
         case .environment:
-            return "The natural environment encompasses all living and non-living things occurring naturally, meaning in this case not artificial."
+            return "Is it time to get rid of the Electoral College? The United States is unique in using an Electoral College to elect the President."
         case .health:
-            return "Health is a state of physical, mental and social well-being in which disease and infirmity are absent."
+            return "Should the government reduce economic inequality by redistributing wealth?"
         case .international:
-            return "International is an adjective (also used as a noun) meaning \"between nations\"."
+            return "Affirmative action refers to a policy of preferring minorities from underrepresented groups for college admission."
         case .random:
             return "Lead me to a random topic!"
         case .minimumWage:
