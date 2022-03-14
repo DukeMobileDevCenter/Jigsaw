@@ -76,7 +76,7 @@ class RoomProgressViewController: UIViewController {
                     roomLevelLabel.text = "You've completed the game! 🎉"
                     nextRoomButton.isHidden = true
                     surveyButton.isHidden = false
-                    navigationItem.hidesBackButton = false
+                    showNewBackButton()
                 } else {
                     roomLevelLabel.text = "You are now in room \(room + 1)"
                     nextRoomButton.isEnabled = true
@@ -85,11 +85,21 @@ class RoomProgressViewController: UIViewController {
                 roomLevelLabel.text = "Jigsaw broken 😞"
                 nextRoomButton.isEnabled = false
                 surveyButton.isHidden = false
-                navigationItem.hidesBackButton = false
+                showNewBackButton()
             }
         }
     }
     
+    func showNewBackButton() {
+        navigationItem.hidesBackButton = true
+        let newBackButton = UIBarButtonItem(title: "Back", style: UIBarButtonItem.Style.plain, target: self, action: #selector(RoomProgressViewController.back(sender:)))
+        navigationItem.leftBarButtonItem = newBackButton
+    }
+    
+    @objc func back(sender: UIBarButtonItem) {
+        performSegue(withIdentifier: "backToHome", sender: nil)
+    }
+
     /// A boolean to indicate if all rooms are done in a game.
     private var gameCompleted: Bool {
         guard let room = currentRoom, room >= gameOfMyGroup.questionnaires.count else {
@@ -222,6 +232,12 @@ class RoomProgressViewController: UIViewController {
         if group.roomFinishedUserIDs.count == group.allPlayersUserIDs.count {
             // All players have passed. Move forward from the wait step.
             roomViewController.goForward()
+            let confettiViewChild = ConfettiView()
+            roomViewController.view.addSubview(confettiViewChild)
+            confettiViewChild.emit([
+                .text("🎊"),
+                .text("🎉")
+            ], for: 3)
         }
     }
     
@@ -309,12 +325,6 @@ class RoomProgressViewController: UIViewController {
                     .text("🧩"),
                     .text("🧩")
                 ], for: 5)
-            } else {
-                // Emit some confetti.
-                confettiView.emit([
-                    .text("🎊"),
-                    .text("🎉")
-                ], for: 3)
             }
         case .failure(let gameError):
             // Set room level to invalid.
@@ -361,7 +371,7 @@ extension RoomProgressViewController: ORKTaskViewControllerDelegate {
             stepViewController.title = "Done"
             stepViewController.show(chatroomViewController, sender: nil)
             // Hide the back button until all players join the chatroom.
-            chatroomViewController.navigationItem.hidesBackButton = false
+            chatroomViewController.navigationItem.hidesBackButton = true
             // Mark chatrooom is shown for current room level.
             isChatroomShown = true
         }

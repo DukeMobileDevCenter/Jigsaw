@@ -107,6 +107,7 @@ class ChatViewController: MessagesViewController {
         
         maintainPositionOnKeyboardFrameChanged = true
         messageInputBar.sendButton.setTitle("", for: .normal)
+        messageInputBar.inputTextView.placeholder = "Type here..."
         messageInputBar.sendButton.setImage(UIImage(systemName: "paperplane"), for: .normal)
         messageInputBar.delegate = self
         
@@ -178,14 +179,11 @@ extension ChatViewController {
         chatMessages.sort()
         
         let isLatestMessage = chatMessages.firstIndex(of: message) == (chatMessages.count - 1)
-        let shouldScrollToBottom = messagesCollectionView.isAtBottom && isLatestMessage
         
         messagesCollectionView.reloadData()
         
-        if shouldScrollToBottom {
-            DispatchQueue.main.async {
-                self.messagesCollectionView.scrollToLastItem(animated: true)
-            }
+        DispatchQueue.main.async {
+            self.messagesCollectionView.scrollToLastItem(animated: true)
         }
     }
     
@@ -252,7 +250,11 @@ extension ChatViewController {
 
 extension ChatViewController: MessagesDisplayDelegate {
     func backgroundColor(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> UIColor {
-        isFromCurrentSender(message: message) ? messagesCollectionView.tintColor : .systemGray3
+        if getMetaMessage(at: indexPath) != nil {
+            return UIColor.darkGray
+        }
+
+        return isFromCurrentSender(message: message) ? messagesCollectionView.tintColor : .systemGray3
     }
     
     func shouldDisplayHeader(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> Bool {
@@ -260,6 +262,9 @@ extension ChatViewController: MessagesDisplayDelegate {
     }
     
     func messageStyle(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> MessageStyle {
+        if getMetaMessage(at: indexPath) != nil {
+            return .bubble
+        }
         let corner: MessageStyle.TailCorner = isFromCurrentSender(message: message) ? .bottomRight : .bottomLeft
         return .bubbleTail(corner, .curved)
     }
@@ -329,44 +334,27 @@ extension ChatViewController: MessagesDataSource {
     
     func messageForItem(at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> MessageType {
         let message = chatMessages[indexPath.section]
+        let piece = getUserPiece(uid: message.sender.senderId)
         if let metaMessage = ControlMetaMessage(rawValue: message.content) {
             // Replace the control message with emoji.
+            let content: String
             switch metaMessage {
             case .join:
-                return Message(message: message, content: "👋")
+                content = "\(piece.label) has joined the chat"
             case .leave:
-                return Message(message: message, content: "✌️")
+                content = "\(piece.label) has left the chat to take the quiz"
             }
+
+            let attributedContent = NSMutableAttributedString(string: content)
+            attributedContent.addAttributes([NSAttributedString.Key.font: UIFont.italicSystemFont(ofSize: UIFont.systemFontSize)], range: NSRange(location: 0, length: NSString.init(string: content).length))
+            attributedContent.addAttributes([NSAttributedString.Key.foregroundColor: UIColor.white], range: NSRange(location: 0, length: NSString.init(string: content).length))
+            return Message(message: message, content: content, kind: .attributedText(attributedContent))
         } else {
             return message
         }
     }
     
     func cellTopLabelAttributedText(for message: MessageType, at indexPath: IndexPath) -> NSAttributedString? {
-        // Display control metadata.
-        switch message.kind {
-        case .text:
-            let piece = getUserPiece(uid: message.sender.senderId)
-            if let metaMessage = getMetaMessage(at: indexPath) {
-                let string: String
-                switch metaMessage {
-                case .join:
-                    string = "\(piece.label) joined the conversation"
-                case .leave:
-                    string = "\(piece.label) has moved on to the quiz"
-                }
-                return NSAttributedString(
-                    string: string,
-                    attributes: [
-                        .font: UIFont.systemFont(ofSize: 10),
-                        .foregroundColor: UIColor.darkGray
-                    ]
-                )
-            }
-        default:
-            break
-        }
-        
         // If no control data, display time every 10 messages.
         if indexPath.section % 10 == 0 {
             return NSAttributedString(
@@ -386,14 +374,14 @@ extension ChatViewController: MessagesDataSource {
         switch message.kind {
         case .text:
             if getMetaMessage(at: indexPath) != nil {
-                return UIFont.systemFont(ofSize: 10).capHeight * 2
+                return UIFont.systemFont(ofSize: 16).capHeight * 2
             }
         default:
             break
         }
         // Display send date.
         if indexPath.section % 10 == 0 {
-            return UIFont.boldSystemFont(ofSize: 10).capHeight * 2
+            return UIFont.boldSystemFont(ofSize: 16).capHeight * 2
         }
         // Do not display top label.
         return 0
