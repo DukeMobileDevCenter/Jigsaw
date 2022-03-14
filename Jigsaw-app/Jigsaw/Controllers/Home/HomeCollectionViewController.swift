@@ -28,7 +28,7 @@ class HomeCollectionViewController: UICollectionViewController {
 //    }
     
     @IBAction func segmentedControlValueChanged(_ sender: UISegmentedControl) {
-        navigationItem.title = playersCountSegmentedControl.selectedSegmentIndex == 0 ? "Games - 2P" : "Games - 4P"
+        navigationItem.title = "Issues"
     }
     
     private func testShowChatroom(_ sender: UIBarButtonItem) {
@@ -178,6 +178,7 @@ class HomeCollectionViewController: UICollectionViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        playersCountSegmentedControl.isHidden = true
         // Check if reload from remote is needed everytime when the view will appear.
         reloadFromRemoteIfNeeded()
     }
@@ -275,5 +276,9 @@ extension HomeCollectionViewController {
         animator.addCompletion {
             self.handleRandomPerform(for: indexPath)
         }
+    }
+
+    @IBAction func unwindToHome( _ seg: UIStoryboardSegue) {
+        print("Unwound using \(seg.identifier)")
     }
 }

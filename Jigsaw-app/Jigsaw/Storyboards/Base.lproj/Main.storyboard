@@ -13,7 +13,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Games - 2P-->
+        <!--Issues-->
         <scene sceneID="RIo-hk-tt8">
             <objects>
                 <collectionViewController id="4a0-lW-Yyi" customClass="HomeCollectionViewController" customModule="Jigsaw" customModuleProvider="target" sceneMemberID="viewController">
@@ -96,7 +96,7 @@
                             <outlet property="delegate" destination="4a0-lW-Yyi" id="Fdj-V6-GIU"/>
                         </connections>
                     </collectionView>
-                    <navigationItem key="navigationItem" title="Games - 2P" id="UZt-g5-Jhh">
+                    <navigationItem key="navigationItem" title="Issues" id="UZt-g5-Jhh">
                         <barButtonItem key="rightBarButtonItem" id="wtT-oG-gy1">
                             <segmentedControl key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="KsP-MD-Xda">
                                 <rect key="frame" x="302" y="5.5" width="92" height="33"/>
@@ -190,10 +190,10 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bb6-1P-OcK">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="361"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="353"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="28" translatesAutoresizingMaskIntoConstraints="NO" id="1I7-Qy-U85">
-                                                <rect key="frame" x="92" y="0.0" width="230.5" height="272"/>
+                                                <rect key="frame" x="92" y="0.0" width="230.5" height="216"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HnM-In-fDm">
                                                         <rect key="frame" x="87" y="0.0" width="56" height="116.5"/>
@@ -213,30 +213,33 @@
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="82k-nw-Y9U">
-                                                        <rect key="frame" x="83" y="244" width="64" height="28"/>
-                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleCallout"/>
-                                                        <state key="normal" title="I'm Ready!"/>
-                                                        <connections>
-                                                            <action selector="joinGameButtonTapped:" destination="qIk-Vr-9mo" eventType="touchUpInside" id="aLV-dt-Pew"/>
-                                                        </connections>
-                                                    </button>
                                                 </subviews>
                                             </stackView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Game detail text is shown here." lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uVo-kd-Rpu">
-                                                <rect key="frame" x="20" y="308" width="374" height="17"/>
+                                                <rect key="frame" x="20" y="252" width="374" height="17"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="82k-nw-Y9U">
+                                                <rect key="frame" x="175" y="297" width="64" height="28"/>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleCallout"/>
+                                                <state key="normal" title="I'm Ready!"/>
+                                                <connections>
+                                                    <action selector="joinGameButtonTapped:" destination="qIk-Vr-9mo" eventType="touchUpInside" id="aLV-dt-Pew"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                         <constraints>
                                             <constraint firstAttribute="trailing" secondItem="uVo-kd-Rpu" secondAttribute="trailing" constant="20" symbolic="YES" id="1pv-J1-Iq7"/>
+                                            <constraint firstItem="82k-nw-Y9U" firstAttribute="centerX" secondItem="bb6-1P-OcK" secondAttribute="centerX" id="6mV-BO-u1g"/>
                                             <constraint firstItem="uVo-kd-Rpu" firstAttribute="leading" secondItem="bb6-1P-OcK" secondAttribute="leading" constant="20" symbolic="YES" id="OV1-9J-QpL"/>
                                             <constraint firstItem="1I7-Qy-U85" firstAttribute="centerX" secondItem="bb6-1P-OcK" secondAttribute="centerX" id="a5J-Id-SMh"/>
+                                            <constraint firstItem="82k-nw-Y9U" firstAttribute="top" secondItem="uVo-kd-Rpu" secondAttribute="bottom" constant="28" id="i4J-O0-YtO"/>
                                             <constraint firstItem="uVo-kd-Rpu" firstAttribute="top" secondItem="1I7-Qy-U85" secondAttribute="bottom" constant="36" id="pgQ-Jr-v8n"/>
-                                            <constraint firstAttribute="bottom" secondItem="uVo-kd-Rpu" secondAttribute="bottom" constant="36" id="rvc-gi-PpP"/>
+                                            <constraint firstAttribute="bottom" secondItem="uVo-kd-Rpu" secondAttribute="bottomMargin" constant="92" id="rvc-gi-PpP"/>
                                             <constraint firstAttribute="top" secondItem="1I7-Qy-U85" secondAttribute="top" id="wNY-4x-qhS"/>
+                                            <constraint firstAttribute="bottom" secondItem="82k-nw-Y9U" secondAttribute="bottom" constant="28" id="waB-cm-7lA"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -418,9 +421,11 @@
                         <outlet property="nextRoomButton" destination="UTC-HK-7Oi" id="HH9-at-kRa"/>
                         <outlet property="roomLevelLabel" destination="0jn-tq-vfH" id="s4W-Ss-nMT"/>
                         <outlet property="surveyButton" destination="H2e-gw-yxt" id="hcb-ez-BIW"/>
+                        <segue destination="jqG-ey-ZGx" kind="unwind" identifier="backToHome" unwindAction="unwindToHome:" id="6dv-G3-jzc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dF0-Gs-Eqs" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <exit id="jqG-ey-ZGx" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="4379.7101449275369" y="-169.41964285714286"/>
         </scene>
@@ -691,7 +696,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="rVx-W0-BSe"/>
+        <segue reference="tOa-KL-BCv"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="arrow.right.circle" catalog="system" width="128" height="121"/>

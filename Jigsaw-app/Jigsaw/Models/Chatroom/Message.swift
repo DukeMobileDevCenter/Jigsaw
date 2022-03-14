@@ -65,6 +65,18 @@ struct Message: MessageType {
         self.senderJigsawValue = message.senderJigsawValue
     }
     
+    init(message: Message, content: String, kind: MessageKind) {
+        self.user = message.user
+        // The content string is the control message.
+        self.content = message.content
+        self.sentDate = message.sentDate
+        self.id = message.id
+        // The kind enum case is the emoji string.
+        self.kind = kind
+        self.downloadURL = message.downloadURL
+        self.senderJigsawValue = message.senderJigsawValue
+    }
+
     init(user: User, controlMetaMessage: ControlMetaMessage) {
         self.user = ChatUser(senderId: user.uid, displayName: Profiles.displayName, jigsawValue: Profiles.jigsawValue)
         self.content = controlMetaMessage.rawValue
