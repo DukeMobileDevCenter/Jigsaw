@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Down
 
 class CategoryViewController: UIViewController {
     var category: GameCategory!
@@ -19,7 +20,8 @@ class CategoryViewController: UIViewController {
         super.viewDidLoad()
         playButton.layer.cornerRadius = 15
         let selectedGame = GameStore.shared.getGames(for: category)[0]
-        introductionLabel.text = selectedGame.introductionText
+        let attributedText = try? Down(markdownString: selectedGame.introductionText).toAttributedString(.default, stylesheet: AppConstants.simpleStylesheet)
+        introductionLabel.attributedText = attributedText
     }
     
     override func viewWillAppear(_ animated: Bool) {
