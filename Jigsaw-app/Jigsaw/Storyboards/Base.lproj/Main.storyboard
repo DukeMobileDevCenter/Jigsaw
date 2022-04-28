@@ -222,9 +222,10 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="82k-nw-Y9U">
-                                                <rect key="frame" x="175" y="297" width="64" height="28"/>
-                                                <fontDescription key="fontDescription" style="UICTFontTextStyleCallout"/>
-                                                <state key="normal" title="I'm Ready!"/>
+                                                <rect key="frame" x="163" y="297" width="88" height="28"/>
+                                                <buttonConfiguration key="configuration" style="filled" title="I'm Ready!" cornerStyle="capsule">
+                                                    <fontDescription key="titleFontDescription" style="UICTFontTextStyleCallout"/>
+                                                </buttonConfiguration>
                                                 <connections>
                                                     <action selector="joinGameButtonTapped:" destination="qIk-Vr-9mo" eventType="touchUpInside" id="aLV-dt-Pew"/>
                                                 </connections>
