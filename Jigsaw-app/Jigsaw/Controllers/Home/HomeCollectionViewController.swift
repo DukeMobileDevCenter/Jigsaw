@@ -179,8 +179,7 @@ class HomeCollectionViewController: UICollectionViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         playersCountSegmentedControl.isHidden = true
-        // Check if reload from remote is needed everytime when the view will appear.
-        reloadFromRemoteIfNeeded()
+        loadFromRemote()
     }
     
     override func viewDidLoad() {
