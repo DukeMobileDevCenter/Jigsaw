@@ -189,7 +189,7 @@ class RoomProgressViewController: UIViewController {
             // If any player dropped the game before they finish, the others cannot play anymore.
             if currentGroup.allRoomsFinishedUserScores.count < currentGroup.allPlayersUserIDs.count {
                 isMeDropped = false
-                taskViewController(roomViewController, didFinishWith: .failed, error: GameError.otherPlayerDropped)
+                self.taskViewController(self.roomViewController, didFinishWith: .failed, error: GameError.otherPlayerDropped)
             }
         default:
             break

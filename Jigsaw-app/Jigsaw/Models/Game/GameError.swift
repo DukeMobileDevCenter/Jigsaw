@@ -21,7 +21,7 @@ enum GameError: LocalizedError, CustomStringConvertible {
         case .currentPlayerDropped:
             return "😢 You didn't pass the game."
         case .otherPlayerDropped:
-            return "😢 Your peers didn't pass the game."
+            return "😢 Your teammate just quit the game. Please go back to the home screen to find a new teammate."
         case .maxAttemptReached:
             // Also means the current player dropped.
             return "😞 Max attempts reached."
