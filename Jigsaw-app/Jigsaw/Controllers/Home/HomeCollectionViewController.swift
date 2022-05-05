@@ -53,6 +53,7 @@ class HomeCollectionViewController: UICollectionViewController {
         // additional bandwidth cost.
         Profiles.lastLoadGameDate = Date()
         // Load history first, then load games.
+        ProgressHUD.dismiss()
         loadHistories { [weak self] in
             self?.loadGames()
         }
@@ -98,6 +99,7 @@ class HomeCollectionViewController: UICollectionViewController {
     /// Read from `UserDefaults` to get last load game date. If the date is before today, reload the game and player histories.
     /// This is assuming the app session is not killed overnight, and should check daily if new games/histories are added.
     private func reloadFromRemoteIfNeeded() {
+        ProgressHUD.show("Loading", interaction: false)
         guard let lastLoadGameDate = Profiles.lastLoadGameDate else {
             // Last date does not exist. Load anyway.
             loadFromRemote()
@@ -109,8 +111,10 @@ class HomeCollectionViewController: UICollectionViewController {
         if interval > dateNow.timeIntervalSince(startOfToday) {
             // If the game is last loaded before today.
             loadFromRemote()
+        } else {
+            // Do nothing if the games are up-to-date.
+            ProgressHUD.dismiss()
         }
-        // Do nothing if the games are up-to-date.
     }
     
     private func configureRefreshControl() {
@@ -179,7 +183,7 @@ class HomeCollectionViewController: UICollectionViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         playersCountSegmentedControl.isHidden = true
-        loadFromRemote()
+        reloadFromRemoteIfNeeded()
     }
     
     override func viewDidLoad() {

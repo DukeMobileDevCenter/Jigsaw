@@ -72,9 +72,9 @@ class GameViewController: ORKTaskViewController {
         
         // Resource reading page.
         let promptStep = ORKInstructionStep(identifier: "Resource")
-        promptStep.detailText = game.resourceContent[currentRoom]
+        promptStep.detailText = "Please read the following statement carefully. Once you move on, you will not be able to view it again.\n\n\(game.resourceContent[currentRoom])"
         steps.append(promptStep)
-        
+
         // Chatroom instruction step.
         steps.append(chatroomInstructionStep)
         

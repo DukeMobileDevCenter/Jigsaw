@@ -84,8 +84,21 @@ class ChatViewController: MessagesViewController {
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        // Send a left message when leaving the chatroom.
-        sendControlMessage(type: .leave)
+    }
+
+    @objc
+    func back(sender: UIBarButtonItem) {
+        let confirmationAlert = UIAlertController(title: "Sure?", message: "Are you sure you want to exit the chat? If you leave, you will go straight to the quiz and will not be able to come back.", preferredStyle: .alert)
+
+        confirmationAlert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { (action: UIAlertAction!) in
+            self.sendControlMessage(type: .leave)
+            self.navigationController?.popViewController(animated: true)
+          }))
+
+        confirmationAlert.addAction(UIAlertAction(title: "No", style: .cancel, handler: { (action: UIAlertAction!) in
+          }))
+
+        present(confirmationAlert, animated: true, completion: nil)
     }
     
     override func viewDidLoad() {
@@ -96,6 +109,10 @@ class ChatViewController: MessagesViewController {
             return
         }
         
+        self.navigationItem.hidesBackButton = true
+        let newBackButton = UIBarButtonItem(title: "Back", style: .plain, target: self, action: #selector(ChatViewController.back(sender:)))
+        self.navigationItem.leftBarButtonItem = newBackButton
+
         messagesReference = FirebaseConstants.chatroomMessagesRef(chatroomID: id)
         
         messageListener = messagesReference?.addSnapshotListener { [weak self] querySnapshot, _ in
