@@ -11,8 +11,8 @@ import ResearchKit
 enum OnboardingSteps {
     static let instructionStep: ORKInstructionStep = {
         let instructionStep = ORKInstructionStep(identifier: "InstructionStepIdentifier")
-        instructionStep.title = "Welcome"
-        instructionStep.detailText = "Welcome to Jigsaw! Through a series of interactive games, you'll learn about different stances on important and polarizing issues. First, let's get you on board!"
+        instructionStep.title = "Welcome to Jigsaw Escape!"
+        instructionStep.detailText = "In Jigsaw Escape, you will play  interactive games andlearn about opposing stances on important and polarizing issues. First, let's get you on board!"
         instructionStep.image = UIImage(named: "onboarding_welcome")!
         instructionStep.imageContentMode = .scaleAspectFill
         return instructionStep
@@ -21,31 +21,31 @@ enum OnboardingSteps {
     static let informedConsentInstructionStep: ORKInstructionStep = {
         let informedConsentInstructionStep = ORKInstructionStep(identifier: "ConsentStepIdentifier")
         informedConsentInstructionStep.title = "Before We Start"
-        informedConsentInstructionStep.detailText = "The goal of this game is to escape from a series of rooms. To do so, you will need to cooperate with your team in information-gathering tasks about a political issue.\n"
+        informedConsentInstructionStep.detailText = "The goal of this game is to escape from a series of rooms by cooperating with your team in information-gathering tasks about a controversial political issue.\n"
         informedConsentInstructionStep.iconImage = UIImage(systemName: "doc.plaintext")
         let infoItem = ORKBodyItem(
-            text: "Each team member will receive a few crucial pieces of information that other team members do not have.",
+            text: "Each member of your team will receive crucial pieces of information about common arguments for positions on the issue.  Each team member will receive bits of information that others do not have.",
             detailText: nil,
             image: UIImage(systemName: "info"),
             learnMoreItem: nil,
             bodyItemStyle: .image
         )
         let chatItem = ORKBodyItem(
-            text: "After receiving your information, you will have a chance to chat with your teammates in order to share your information and learn about theirs.",
+            text: "Your team members will then chat together and share their information with others.",
             detailText: nil,
             image: UIImage(systemName: "bubble.left.and.bubble.right"),
             learnMoreItem: nil,
             bodyItemStyle: .image
         )
         let quizItem = ORKBodyItem(
-            text: "After the chat, you will each receive a short quiz covering all the information gathered and shared by all of your team members.",
+            text: "After chatting, each member of your team  will separately take a short quiz covering all the information gathered and shared by all of your team members.",
             detailText: nil,
             image: UIImage(systemName: "checkmark.rectangle"),
             learnMoreItem: nil,
             bodyItemStyle: .image
         )
         let retryItem = ORKBodyItem(
-            text: "If all members of your team pass the quiz, then you escape that room and go to the next. If you do not all pass the quiz, you will have a chance to go back into the chat and talk as a team about the questions that were missed. Then you will have another chance to escape the room by passing a quiz on the same quotations.",
+            text: "If everyone on your team passes the quiz, then your whole team escapes that room—hurrah!—and you can go to the next. If your team does not all pass the quiz, then you will have a chance to go back into the chat and talk together about the questions that were missed. Then your team will have another chance to escape the room by all passing a quiz on the same quotations.",
             detailText: nil,
             image: UIImage(systemName: "repeat"),
             learnMoreItem: nil,
