@@ -12,7 +12,7 @@ enum OnboardingSteps {
     static let instructionStep: ORKInstructionStep = {
         let instructionStep = ORKInstructionStep(identifier: "InstructionStepIdentifier")
         instructionStep.title = "Welcome to Jigsaw Escape!"
-        instructionStep.detailText = "In Jigsaw Escape, you will play  interactive games andlearn about opposing stances on important and polarizing issues. First, let's get you on board!"
+        instructionStep.detailText = "In Jigsaw Escape, you will play interactive games and learn about opposing stances on important and polarizing issues. First, let's get you on board!"
         instructionStep.image = UIImage(named: "onboarding_welcome")!
         instructionStep.imageContentMode = .scaleAspectFill
         return instructionStep
@@ -31,7 +31,7 @@ enum OnboardingSteps {
             bodyItemStyle: .image
         )
         let chatItem = ORKBodyItem(
-            text: "Your team members will then chat together and share their information with others.",
+            text: "You will then chat as a team to share the information that each team member has seen.",
             detailText: nil,
             image: UIImage(systemName: "bubble.left.and.bubble.right"),
             learnMoreItem: nil,
@@ -45,7 +45,7 @@ enum OnboardingSteps {
             bodyItemStyle: .image
         )
         let retryItem = ORKBodyItem(
-            text: "If everyone on your team passes the quiz, then your whole team escapes that room—hurrah!—and you can go to the next. If your team does not all pass the quiz, then you will have a chance to go back into the chat and talk together about the questions that were missed. Then your team will have another chance to escape the room by all passing a quiz on the same quotations.",
+            text: "If everyone on your team passes the quiz, then your whole team escapes that room---hurrah!---and you can go on to the next room. If your team does not all pass the quiz, then you will have a chance to go back into the chat to discuss the questions that were missed. Then your team will have another chance to escape the room by each team member passing a quiz on the same quotations.",
             detailText: nil,
             image: UIImage(systemName: "repeat"),
             learnMoreItem: nil,
