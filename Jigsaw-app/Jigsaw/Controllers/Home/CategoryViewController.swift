@@ -12,15 +12,17 @@ import Down
 class CategoryViewController: UIViewController {
     var category: GameCategory!
     var queueType: PlayersQueue!
+    private var darkMode: Bool = false
     @IBOutlet weak var playButton: UIButton!
-    @IBOutlet weak var introductionLabel: UILabel!
+    @IBOutlet weak var introductionLabel: UITextView!
     
     override func viewDidLoad() {
         // Do any additional setup after loading the view.
         super.viewDidLoad()
         playButton.layer.cornerRadius = 15
         let selectedGame = GameStore.shared.getGames(for: category)[0]
-        let attributedText = try? Down(markdownString: selectedGame.introductionText).toAttributedString(.default, stylesheet: AppConstants.simpleStylesheet)
+        darkMode = self.traitCollection.userInterfaceStyle == .dark
+        let attributedText = try? Down(markdownString: selectedGame.introductionText).toAttributedString(.default, stylesheet: darkMode ? AppConstants.darkModeStylesheet : AppConstants.simpleStylesheet)
         introductionLabel.attributedText = attributedText
     }
     

@@ -16,11 +16,20 @@ enum AppConstants {
     
     /// A style sheet for displaying detail instruction text as well as preview text.
     static let simpleStylesheet =
-    """
-    body { font: -apple-system-body }
-    h1 { font: -apple-system-title1 }
-    h2 { font: -apple-system-title2 }
-    h3 { font: -apple-system-title3 }
-    h4, h5, h6 { font: -apple-system-headline }
-    """
+        """
+        body { font: -apple-system-body }
+        h1 { font: -apple-system-title1 }
+        h2 { font: -apple-system-title2 }
+        h3 { font: -apple-system-title3 }
+        h4, h5, h6 { font: -apple-system-headline }
+        """
+    
+    static let darkModeStylesheet =
+        """
+        body { font: -apple-system-body; color: white }
+        h1 { font: -apple-system-title1 }
+        h2 { font: -apple-system-title2 }
+        h3 { font: -apple-system-title3 }
+        h4, h5, h6 { font: -apple-system-headline }
+        """
 }

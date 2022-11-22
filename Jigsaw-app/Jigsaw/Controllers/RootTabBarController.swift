@@ -32,6 +32,7 @@ class RootTabBarController: UITabBarController {
         controller.auth = auth
         controller.signInManagerDelegate = self
         controller.modalPresentationStyle = .fullScreen
+        //MARK: Sign-In page is being presented here
         present(controller, animated: animated)
         
         // Check if the user is signed in.
