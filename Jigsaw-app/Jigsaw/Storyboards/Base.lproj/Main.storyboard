@@ -218,12 +218,6 @@
                                                     </label>
                                                 </subviews>
                                             </stackView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Game detail text is shown here." lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uVo-kd-Rpu">
-                                                <rect key="frame" x="20" y="252" width="374" height="17"/>
-                                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="82k-nw-Y9U">
                                                 <rect key="frame" x="163" y="297" width="88" height="28"/>
                                                 <buttonConfiguration key="configuration" style="filled" title="I'm Ready!" cornerStyle="capsule">
@@ -233,15 +227,26 @@
                                                     <action selector="joinGameButtonTapped:" destination="qIk-Vr-9mo" eventType="touchUpInside" id="aLV-dt-Pew"/>
                                                 </connections>
                                             </button>
+                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" text="Game Detail text is shown here." textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="fAP-Fp-pAk">
+                                                <rect key="frame" x="26" y="233" width="240" height="48"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="240" id="spk-gj-zk5"/>
+                                                    <constraint firstAttribute="height" constant="48" id="wcO-kh-8ML"/>
+                                                </constraints>
+                                                <color key="textColor" systemColor="labelColor"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                <dataDetectorType key="dataDetectorTypes" link="YES"/>
+                                            </textView>
                                         </subviews>
                                         <constraints>
-                                            <constraint firstAttribute="trailing" secondItem="uVo-kd-Rpu" secondAttribute="trailing" constant="20" symbolic="YES" id="1pv-J1-Iq7"/>
                                             <constraint firstItem="82k-nw-Y9U" firstAttribute="centerX" secondItem="bb6-1P-OcK" secondAttribute="centerX" id="6mV-BO-u1g"/>
-                                            <constraint firstItem="uVo-kd-Rpu" firstAttribute="leading" secondItem="bb6-1P-OcK" secondAttribute="leading" constant="20" symbolic="YES" id="OV1-9J-QpL"/>
+                                            <constraint firstItem="fAP-Fp-pAk" firstAttribute="leading" secondItem="bb6-1P-OcK" secondAttribute="leading" constant="26" id="H4J-vL-zaH"/>
+                                            <constraint firstAttribute="bottom" secondItem="fAP-Fp-pAk" secondAttribute="bottom" constant="72" id="TdA-Id-rtw"/>
+                                            <constraint firstItem="82k-nw-Y9U" firstAttribute="top" secondItem="fAP-Fp-pAk" secondAttribute="bottom" constant="16" id="ZKY-hv-A6e"/>
                                             <constraint firstItem="1I7-Qy-U85" firstAttribute="centerX" secondItem="bb6-1P-OcK" secondAttribute="centerX" id="a5J-Id-SMh"/>
-                                            <constraint firstItem="82k-nw-Y9U" firstAttribute="top" secondItem="uVo-kd-Rpu" secondAttribute="bottom" constant="28" id="i4J-O0-YtO"/>
-                                            <constraint firstItem="uVo-kd-Rpu" firstAttribute="top" secondItem="1I7-Qy-U85" secondAttribute="bottom" constant="36" id="pgQ-Jr-v8n"/>
-                                            <constraint firstAttribute="bottom" secondItem="uVo-kd-Rpu" secondAttribute="bottomMargin" constant="92" id="rvc-gi-PpP"/>
+                                            <constraint firstItem="fAP-Fp-pAk" firstAttribute="top" secondItem="1I7-Qy-U85" secondAttribute="bottom" constant="17" id="uyl-XU-4Qm"/>
                                             <constraint firstAttribute="top" secondItem="1I7-Qy-U85" secondAttribute="top" id="wNY-4x-qhS"/>
                                             <constraint firstAttribute="bottom" secondItem="82k-nw-Y9U" secondAttribute="bottom" constant="28" id="waB-cm-7lA"/>
                                         </constraints>
@@ -269,7 +274,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="Matching" id="pOI-3B-ZJ7"/>
                     <connections>
-                        <outlet property="detailTextLabel" destination="uVo-kd-Rpu" id="I9M-Zp-sKk"/>
+                        <outlet property="detailTextView" destination="fAP-Fp-pAk" id="LuG-yg-ypy"/>
                         <outlet property="gameNameLabel" destination="SrW-5i-19I" id="Sm4-Da-u2i"/>
                         <outlet property="joinGameButton" destination="82k-nw-Y9U" id="elT-dz-n51"/>
                         <outlet property="playerCountLabel" destination="HnM-In-fDm" id="anW-g6-z0I"/>
