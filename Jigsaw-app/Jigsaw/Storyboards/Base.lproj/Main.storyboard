@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Wrc-Ft-HSs">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Wrc-Ft-HSs">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -143,34 +143,37 @@
                                     <segue destination="qIk-Vr-9mo" kind="show" identifier="showGame" id="rVx-W0-BSe"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="30" baselineAdjustment="alignBaselines" translatesAutoresizingMaskIntoConstraints="NO" id="sgy-e6-IfX">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="y6n-LL-6kN">
                                 <rect key="frame" x="16" y="141" width="382" height="659"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <attributedString key="attributedText">
-                                    <fragment content="This is where the introduction blob goes. ">
+                                    <fragment>
+                                        <string key="content">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                         <attributes>
-                                            <font key="NSFont" metaFont="system" size="15"/>
+                                            <color key="NSColor" systemColor="labelColor"/>
+                                            <font key="NSFont" metaFont="system" size="14"/>
                                         </attributes>
                                     </fragment>
                                 </attributedString>
-                                <nil key="highlightedColor"/>
-                            </label>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="JM3-WW-yYK"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="JM3-WW-yYK" firstAttribute="trailing" secondItem="y6n-LL-6kN" secondAttribute="trailing" constant="16" id="0Hg-ap-fos"/>
                             <constraint firstItem="JM3-WW-yYK" firstAttribute="trailing" secondItem="2Ki-KC-pjw" secondAttribute="trailing" constant="16" id="15z-9q-v7U"/>
                             <constraint firstItem="2Ki-KC-pjw" firstAttribute="leading" secondItem="JM3-WW-yYK" secondAttribute="leading" constant="16" id="5YH-TR-NA4"/>
-                            <constraint firstItem="JM3-WW-yYK" firstAttribute="trailing" secondItem="sgy-e6-IfX" secondAttribute="trailing" constant="16" id="Dtu-e4-NDg"/>
+                            <constraint firstItem="y6n-LL-6kN" firstAttribute="top" secondItem="JM3-WW-yYK" secondAttribute="top" constant="1" id="9nA-82-KTI"/>
                             <constraint firstItem="JM3-WW-yYK" firstAttribute="bottom" secondItem="2Ki-KC-pjw" secondAttribute="bottom" constant="16" id="HpV-tu-HJt"/>
                             <constraint firstItem="JM3-WW-yYK" firstAttribute="bottom" secondItem="2Ki-KC-pjw" secondAttribute="bottom" constant="16" id="MeT-2d-zAn"/>
-                            <constraint firstItem="sgy-e6-IfX" firstAttribute="top" secondItem="JM3-WW-yYK" secondAttribute="top" constant="1" id="dlm-ww-qtu"/>
-                            <constraint firstItem="sgy-e6-IfX" firstAttribute="leading" secondItem="JM3-WW-yYK" secondAttribute="leading" constant="16" id="sdh-r2-1GM"/>
-                            <constraint firstItem="2Ki-KC-pjw" firstAttribute="top" secondItem="sgy-e6-IfX" secondAttribute="bottom" constant="1" id="xEW-oX-6cT"/>
+                            <constraint firstItem="y6n-LL-6kN" firstAttribute="leading" secondItem="JM3-WW-yYK" secondAttribute="leading" constant="16" id="uT7-cY-2d4"/>
+                            <constraint firstItem="2Ki-KC-pjw" firstAttribute="top" secondItem="y6n-LL-6kN" secondAttribute="bottom" constant="1" id="yLV-2n-del"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="SL9-R9-Aeb"/>
                     <connections>
-                        <outlet property="introductionLabel" destination="sgy-e6-IfX" id="OS5-Ui-Yvs"/>
+                        <outlet property="introductionLabel" destination="y6n-LL-6kN" id="cla-co-A4a"/>
                         <outlet property="playButton" destination="2Ki-KC-pjw" id="5nS-0h-Wyq"/>
                     </connections>
                 </viewController>
@@ -712,6 +715,9 @@
         <namedColor name="darkBackgroundWithOpacity">
             <color white="0.30000001192092896" alpha="0.60000002384185791" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </namedColor>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
         <systemColor name="linkColor">
             <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
