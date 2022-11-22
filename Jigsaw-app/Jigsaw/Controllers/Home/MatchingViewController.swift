@@ -15,10 +15,12 @@ class MatchingViewController: UIViewController {
     // MARK: Storyboard views
     
     /// The label to show the detail text of a game.
-    @IBOutlet var detailTextLabel: UILabel! {
+    @IBOutlet weak var detailTextView: UITextView! {
         didSet {
             let attributedText = try? Down(markdownString: selectedGame.detailText).toAttributedString(.default, stylesheet: AppConstants.simpleStylesheet)
-            detailTextLabel.attributedText = attributedText?.labelColorAttributedString
+            detailTextView.attributedText = attributedText?.labelColorAttributedString
+            detailTextView.translatesAutoresizingMaskIntoConstraints = true
+            detailTextView.sizeToFit()
         }
     }
     /// The label to show current players count in the waiting queue.
