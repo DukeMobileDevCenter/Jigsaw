@@ -539,7 +539,7 @@ extension RoomProgressViewController: ChartViewDelegate {
         chartView.highlightPerTapEnabled = true
         chartView.holeRadiusPercent = 0.58
         chartView.transparentCircleRadiusPercent = 0.61
-        chartView.chartDescription?.enabled = false
+        chartView.chartDescription.enabled = false
         chartView.setExtraOffsets(left: 5, top: 10, right: 5, bottom: 5)
         
         chartView.delegate = self
@@ -559,7 +559,7 @@ extension RoomProgressViewController: ChartViewDelegate {
         chartView.drawCenterTextEnabled = true
         chartView.centerAttributedText = chartCenterText
         // Legend settings.
-        chartView.legend.horizontalAlignment = .right
+        chartView.legend.horizontalAlignment = .center
         chartView.legend.verticalAlignment = .top
         chartView.legend.orientation = .horizontal
         chartView.legend.drawInside = false
@@ -601,12 +601,13 @@ extension RoomProgressViewController: ChartViewDelegate {
         percentageFormatter.maximumFractionDigits = 1
         percentageFormatter.multiplier = 1
         percentageFormatter.percentSymbol = "%"
-        data.setValueFormatter(DefaultValueFormatter(formatter: percentageFormatter))
+        
     
         data.setValueFont(UIFont(name: "HelveticaNeue-Light", size: 13)!)
         data.setValueTextColor(.white)
         
         chartView.data = data
+        chartView.data?.setValueFormatter(DefaultValueFormatter(formatter: percentageFormatter))
         chartView.setNeedsDisplay()
     }
 }

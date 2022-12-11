@@ -351,9 +351,10 @@ PODS:
   - BoringSSL-GRPC/Implementation (0.0.7):
     - BoringSSL-GRPC/Interface (= 0.0.7)
   - BoringSSL-GRPC/Interface (0.0.7)
-  - Charts (3.6.0):
-    - Charts/Core (= 3.6.0)
-  - Charts/Core (3.6.0)
+  - Charts (4.1.0):
+    - Charts/Core (= 4.1.0)
+  - Charts/Core (4.1.0):
+    - SwiftAlgorithms (~> 1.0)
   - Down (0.11.0)
   - Eureka (5.3.4)
   - Firebase/Auth (8.9.1):
@@ -516,6 +517,7 @@ PODS:
     - PINRemoteImage/Core
   - ProgressHUD (13.6)
   - PromisesObjC (2.0.0)
+  - SwiftAlgorithms (1.0.0)
   - SwiftyGif (5.4.2)
   - ViewRow (0.8):
     - Eureka (>= 5.0.0)
@@ -581,6 +583,7 @@ SPEC REPOS:
     - PINRemoteImage
     - ProgressHUD
     - PromisesObjC
+    - SwiftAlgorithms
     - SwiftyGif
     - ViewRow
     - Yams
@@ -590,7 +593,7 @@ SPEC CHECKSUMS:
   Agrume: 0b1a42b5bfbc3aa9f0801f2857d8df1138cf2951
   AppAuth: 31bcec809a638d7bd2f86ea8a52bd45f6e81e7c7
   BoringSSL-GRPC: 8edf627ee524575e2f8d19d56f068b448eea3879
-  Charts: b1e3a1f5a1c9ba5394438ca3b91bd8c9076310af
+  Charts: 354f86803d11d9c35de280587fef50d1af063978
   Down: b6ba1bc985c9d2f4e15e3b293d2207766fa12612
   Eureka: 60cf058f86a8fb3ed26165ba5292b9850361b0a6
   Firebase: fb5114cd2bf96e2ff7bcb01d0d9a156cf5fd2f07
@@ -623,6 +626,7 @@ SPEC CHECKSUMS:
   PINRemoteImage: f1295b29f8c5e640e25335a1b2bd9d805171bd01
   ProgressHUD: 4bdaa0d2ddf676b23324b199f9facffb5c3a1620
   PromisesObjC: 68159ce6952d93e17b2dfe273b8c40907db5ba58
+  SwiftAlgorithms: 38dda4731d19027fdeee1125f973111bf3386b53
   SwiftyGif: dec758a9dd3d278e5a855dbf279bf062c923c387
   ViewRow: 8da541e9c019f3be63f4e28f311a62cac2045ecf
   Yams: ed1c49f0d6be84f305ad3f93f997b1df039afd9e

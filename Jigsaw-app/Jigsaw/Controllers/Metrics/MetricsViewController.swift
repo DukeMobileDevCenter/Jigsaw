@@ -12,7 +12,11 @@ import ResearchKit
 import Charts
 import ProgressHUD
 
-class MetricsViewController: UIViewController {
+class MetricsViewController: UIViewController, AxisValueFormatter {
+    func stringForValue(_ value: Double, axis: AxisBase?) -> String {
+        return categoryLabels[Int(value) % categoryLabels.count]
+    }
+    
     @IBOutlet var chartView: RadarChartView!
     
     @IBOutlet var achievementsButton: UIButton! {
@@ -107,7 +111,7 @@ extension MetricsViewController: ChartViewDelegate {
         chartView.backgroundColor = .secondarySystemBackground
         chartView.layer.cornerRadius = 20
         
-        chartView.chartDescription?.enabled = false
+        chartView.chartDescription.enabled = false
         chartView.webLineWidth = 1
         chartView.innerWebLineWidth = 1
         chartView.webColor = .darkGray
@@ -167,8 +171,8 @@ extension MetricsViewController: ChartViewDelegate {
     }
 }
 
-extension MetricsViewController: IAxisValueFormatter {
-    func stringForValue(_ value: Double, axis: AxisBase?) -> String {
-        return categoryLabels[Int(value) % categoryLabels.count]
-    }
-}
+//extension MetricsViewController: AxisValueFormatter{
+//    func stringForValue(_ value: Double, axis: AxisBase?) -> String {
+//        return categoryLabels[Int(value) % categoryLabels.count]
+//    }
+//}
