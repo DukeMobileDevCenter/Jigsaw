@@ -19,8 +19,6 @@ class MatchingViewController: UIViewController {
         didSet {
             let attributedText = try? Down(markdownString: selectedGame.detailText).toAttributedString(.default, stylesheet: AppConstants.simpleStylesheet)
             detailTextView.attributedText = attributedText?.labelColorAttributedString
-            detailTextView.translatesAutoresizingMaskIntoConstraints = true
-            detailTextView.sizeToFit()
         }
     }
     /// The label to show current players count in the waiting queue.
