@@ -110,7 +110,7 @@ class ChatViewController: MessagesViewController {
         }
         
         self.navigationItem.hidesBackButton = true
-        let newBackButton = UIBarButtonItem(title: "Back", style: .plain, target: self, action: #selector(ChatViewController.back(sender:)))
+        let newBackButton = UIBarButtonItem(title: "Quiz", style: .plain, target: self, action: #selector(ChatViewController.back(sender:)))
         self.navigationItem.leftBarButtonItem = newBackButton
 
         messagesReference = FirebaseConstants.chatroomMessagesRef(chatroomID: id)
