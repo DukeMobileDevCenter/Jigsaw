@@ -11,6 +11,7 @@ import UIKit
 import FirebaseAuth
 import ProgressHUD
 
+
 class HomeCollectionViewController: UICollectionViewController {
     /// The flow layout of the collection view.
     @IBOutlet private var collectionViewFlowLayout: UICollectionViewFlowLayout!
