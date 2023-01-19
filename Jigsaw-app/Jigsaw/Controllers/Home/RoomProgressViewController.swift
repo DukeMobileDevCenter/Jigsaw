@@ -381,6 +381,7 @@ extension RoomProgressViewController: ORKTaskViewControllerDelegate {
         // Everytime the player reaches wait step, add attempts count.
         attempts += 1
         // Calculate the game result for current room.
+        guard currentRoom != nil else {return}
         currentWaitStepRoomResult = GameResult(taskResults: [taskVC.result], questionnaires: [gameOfMyGroup.questionnaires[currentRoom!]])
         let progress = CGFloat(gameGroup.roomAttemptedUserIDs.count + 1) / CGFloat(gameGroup.allPlayersUserIDs.count)
         stepVC.updateText("Below is a summary of current room (for debug, UI needs update):\n\(currentWaitStepRoomResult.summary)")

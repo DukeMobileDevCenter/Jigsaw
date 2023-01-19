@@ -528,11 +528,11 @@ DEPENDENCIES:
   - Charts
   - Down
   - Eureka
-  - Firebase/Auth (~> 8.9.0)
-  - Firebase/Database (~> 8.9.0)
-  - Firebase/Firestore (~> 8.9.1)
-  - Firebase/Functions (~> 8.9.0)
-  - Firebase/Storage (~> 8.9.0)
+  - Firebase/Auth
+  - Firebase/Database
+  - Firebase/Firestore
+  - Firebase/Functions
+  - Firebase/Storage
   - FirebaseFirestoreSwift (~> 8.9.0-beta)
   - FirebaseUI/Auth
   - FirebaseUI/Email
@@ -631,6 +631,6 @@ SPEC CHECKSUMS:
   ViewRow: 8da541e9c019f3be63f4e28f311a62cac2045ecf
   Yams: ed1c49f0d6be84f305ad3f93f997b1df039afd9e
 
-PODFILE CHECKSUM: 2425411c4abb8cff0aba2692d40e93c9053fc1f4
+PODFILE CHECKSUM: 0dc132b2b95ccaf9875e7aae6712c8fe9be564fe
 
 COCOAPODS: 1.11.3

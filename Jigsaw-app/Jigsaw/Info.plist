@@ -23,12 +23,12 @@
 			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>com.googleusercontent.apps.637123784713-84gpq4iu4rpq6ib3jkbqpt54rcupgius</string>
+				<string>com.googleusercontent.apps.637123784713-oim2lflf2sr3amqo0q0k1eedgp4fs8hp</string>
 			</array>
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>20221224</string>
+	<string>20230119</string>
 	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
 	<key>LSRequiresIPhoneOS</key>
