@@ -91,6 +91,9 @@
 		00F2197E24CCF9A200B72858 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F2197D24CCF9A200B72858 /* ProfileViewController.swift */; };
 		00F6302224EE385E00BCAD11 /* AnswerCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F6302124EE385E00BCAD11 /* AnswerCategory.swift */; };
 		4B6BC5216F406984814D285C /* Pods_Jigsaw.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E56A7DB0937DE7CF6C2161B /* Pods_Jigsaw.framework */; };
+		C5F14B742979E5B100233909 /* swiftgen.yml in Resources */ = {isa = PBXBuildFile; fileRef = C5F14B732979E5B000233909 /* swiftgen.yml */; };
+		C5F14B772979EC5300233909 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = C5F14B792979EC5300233909 /* Localizable.strings */; };
+		C5F14B7D2979EE1D00233909 /* Strings+Generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5F14B7C2979EE1D00233909 /* Strings+Generated.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -222,6 +225,9 @@
 		00F6302124EE385E00BCAD11 /* AnswerCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswerCategory.swift; sourceTree = "<group>"; };
 		0C9A03E3D4824F81B83A633D /* Pods-Jigsaw.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Jigsaw.release.xcconfig"; path = "Target Support Files/Pods-Jigsaw/Pods-Jigsaw.release.xcconfig"; sourceTree = "<group>"; };
 		7E56A7DB0937DE7CF6C2161B /* Pods_Jigsaw.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Jigsaw.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C5F14B732979E5B000233909 /* swiftgen.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = swiftgen.yml; sourceTree = SOURCE_ROOT; };
+		C5F14B782979EC5300233909 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		C5F14B7C2979EE1D00233909 /* Strings+Generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Strings+Generated.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -379,8 +385,11 @@
 				00CDFF0424B2E8E1009C789D /* Controllers */,
 				00CDFF0324B2E8C3009C789D /* Extensions */,
 				00CDFF0224B2E8AA009C789D /* Storyboards */,
+				C5F14B7B2979EDD900233909 /* Generated */,
 				0070DFE924B0060400E71F46 /* AppDelegate.swift */,
 				0070DFEB24B0060400E71F46 /* SceneDelegate.swift */,
+				C5F14B732979E5B000233909 /* swiftgen.yml */,
+				C5F14B792979EC5300233909 /* Localizable.strings */,
 				0070DFF224B0060500E71F46 /* Assets.xcassets */,
 				005856BB24D91C4A0010BE55 /* GoogleService-Info.plist */,
 				0071E921252005780025702E /* Jigsaw.entitlements */,
@@ -550,6 +559,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		C5F14B7B2979EDD900233909 /* Generated */ = {
+			isa = PBXGroup;
+			children = (
+				C5F14B7C2979EE1D00233909 /* Strings+Generated.swift */,
+			);
+			path = Generated;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -558,6 +575,7 @@
 			buildConfigurationList = 0070E00524B0060500E71F46 /* Build configuration list for PBXNativeTarget "Jigsaw" */;
 			buildPhases = (
 				6BBA0005C545D7B548D68484 /* [CP] Check Pods Manifest.lock */,
+				C5CCF7872979E394007631EC /* Run Script */,
 				006EB049253BA63E00FE5D8A /* Set Bundle Build Version to date */,
 				0070DFE224B0060400E71F46 /* Sources */,
 				0070DFE324B0060400E71F46 /* Frameworks */,
@@ -662,6 +680,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				00B6306324FB26A8008975CE /* GameHistoryTimeline.storyboard in Resources */,
+				C5F14B742979E5B100233909 /* swiftgen.yml in Resources */,
+				C5F14B772979EC5300233909 /* Localizable.strings in Resources */,
 				0071E91E251FF6F50025702E /* SignInViewController.storyboard in Resources */,
 				0070DFF624B0060500E71F46 /* LaunchScreen.storyboard in Resources */,
 				005856BC24D91C4A0010BE55 /* GoogleService-Info.plist in Resources */,
@@ -775,6 +795,24 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Jigsaw/Pods-Jigsaw-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		C5CCF7872979E394007631EC /* Run Script */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Run Script";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if [[ -f \"${PODS_ROOT}/SwiftGen/bin/swiftgen\" ]]; then\n  \"${PODS_ROOT}/SwiftGen/bin/swiftgen\"\nelse\n  echo \"warning: SwiftGen is not installed. Run 'pod install --repo-update' to install it.\"\nfi \n";
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -810,6 +848,7 @@
 				0047630624ED1154007767A5 /* GameCategory.swift in Sources */,
 				00BA555D24DA7CF7006A207E /* Gender.swift in Sources */,
 				00E8BA562536DEF900863F7D /* AppConstants.swift in Sources */,
+				C5F14B7D2979EE1D00233909 /* Strings+Generated.swift in Sources */,
 				007FC9542536202B00D8D9A1 /* RoomProgressViewController.swift in Sources */,
 				00B2AB7024DA5B3100607346 /* UIColor.swift in Sources */,
 				00CF5DC924F4DE9900B501BB /* InstructionQuestion.swift in Sources */,
@@ -888,6 +927,14 @@
 				0070DFF524B0060500E71F46 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		C5F14B792979EC5300233909 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C5F14B782979EC5300233909 /* en */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

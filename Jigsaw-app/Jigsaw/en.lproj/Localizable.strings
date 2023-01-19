@@ -1,0 +1,11 @@
+/* 
+  Localizable.strings
+  Jigsaw
+
+  Created by Ruitong Su on 1/19/23.
+  Copyright © 2023 DukeMobileDevCenter. All rights reserved.
+*/
+
+// MARK: - OnboardingSteps
+"Onboarding.instruction.title" = "Welcome to Jigsaw Escape!";
+"Onboarding.instruction.detailText" = "In Jigsaw Escape, you will play interactive games and learn about opposing stances on important and polarizing issues. First, let's get you on board!";
