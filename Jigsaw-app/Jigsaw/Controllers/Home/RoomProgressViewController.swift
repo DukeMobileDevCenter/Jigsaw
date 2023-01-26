@@ -117,7 +117,8 @@ class RoomProgressViewController: UIViewController {
     @IBAction func surveyButtonTapped(_ sender: UIButton) {
         let controller = SFSafariViewController(url: AppConstants.feedbackFormURL)
         present(controller, animated: true)
-        surveyButton.isHidden = true
+        // Always show survey button
+        // surveyButton.isHidden = true
     }
     
     private func presentRoom(room: Int) {
