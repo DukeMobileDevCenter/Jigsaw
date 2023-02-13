@@ -18,7 +18,7 @@ enum GameCenterConstants {
             // FIXME: for beta, temporary disable other categories
             // as no available/designed achievements yet.
             return nil
-        case .random:
+        case .random, .demo:
             return nil
         }
     }

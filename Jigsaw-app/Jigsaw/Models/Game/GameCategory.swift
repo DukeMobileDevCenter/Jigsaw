@@ -19,6 +19,7 @@ enum GameCategory: String, CaseIterable, Codable {
     case random
     case charterSchools
     case minimumWage
+    case demo
     
     var iconImage: UIImage {
         let iconImage: UIImage
@@ -36,6 +37,8 @@ enum GameCategory: String, CaseIterable, Codable {
         case .international:
             iconImage = UIImage(systemName: "equal.circle.fill")!
         case .random:
+            iconImage = UIImage(systemName: "questionmark")!
+        case .demo:
             iconImage = UIImage(systemName: "questionmark")!
         case .minimumWage:
             iconImage = UIImage(systemName: "dollarsign.circle")!
@@ -65,6 +68,8 @@ enum GameCategory: String, CaseIterable, Codable {
             return "Affirmative Action"
         case .random:
             return "Random"
+        case .demo:
+            return "Demo"
         case .charterSchools:
             return "Charter Schools"
         case .minimumWage:
@@ -88,6 +93,8 @@ enum GameCategory: String, CaseIterable, Codable {
             return "Affirmative action refers to a policy of preferring minorities from underrepresented groups for college admission."
         case .random:
             return "Lead me to a random topic!"
+        case .demo:
+            return "Get ready to jump into adventure! Welcome to the exciting world of Jigsaw!"
         case .minimumWage:
             return "Minimum wage is the legal minimum hourly wage a person may be paid for their labor."
         case .charterSchools:

@@ -20,10 +20,17 @@ class CategoryViewController: UIViewController {
         // Do any additional setup after loading the view.
         super.viewDidLoad()
         playButton.layer.cornerRadius = 15
-        let selectedGame = GameStore.shared.getGames(for: category)[0]
         darkMode = self.traitCollection.userInterfaceStyle == .dark
-        let attributedText = try? Down(markdownString: selectedGame.introductionText).toAttributedString(.default, stylesheet: darkMode ? AppConstants.darkModeStylesheet : AppConstants.simpleStylesheet)
-        introductionLabel.attributedText = attributedText
+        // normal games
+        if let selectedGame = GameStore.shared.getGames(for: category).first {
+            let attributedText = try? Down(markdownString: selectedGame.introductionText).toAttributedString(.default, stylesheet: darkMode ? AppConstants.darkModeStylesheet : AppConstants.simpleStylesheet)
+            introductionLabel.attributedText = attributedText
+        }
+        // demo game
+        else {
+            introductionLabel.text = "Demo"
+        }
+            
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -37,6 +44,8 @@ class CategoryViewController: UIViewController {
             let destinationVC = segue.destination as! MatchingViewController
             destinationVC.queueType = queueType
             destinationVC.selectedGame = selectedGame
+        case "showDemo"?:
+            print("[debug]")
         default:
             preconditionFailure("Unexpected segue identifier.")
         }

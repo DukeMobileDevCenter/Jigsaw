@@ -23,6 +23,16 @@ class HomeCollectionViewController: UICollectionViewController {
         playersCountSegmentedControl.selectedSegmentIndex == 0 ? .twoPlayersQueue : .fourPlayersQueue
     }
     
+    private lazy var demoButton: UIBarButtonItem = {
+        let gameControllerImage = UIImage(systemName: "gamecontroller")
+        let button = UIButton(type: .system)
+        button.setImage(gameControllerImage, for: .normal)
+        button.setTitle("Demo", for: .normal)
+        button.addTarget(self, action: #selector(demoButtonTapped), for: .touchUpInside)
+        return UIBarButtonItem(customView: button)
+    }()
+
+
 //    @IBAction func testBarButtonTapped(_ sender: UIBarButtonItem) {
 //        testShowChatroom(sender)
 //    }
@@ -180,6 +190,10 @@ class HomeCollectionViewController: UICollectionViewController {
         }
     }
     
+    @objc func demoButtonTapped(_ sender: UIBarButtonItem) {
+        performSegue(withIdentifier: "showDemo", sender: sender)
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         playersCountSegmentedControl.isHidden = true
@@ -192,6 +206,9 @@ class HomeCollectionViewController: UICollectionViewController {
         // Set collection view delegates.
         collectionView?.delegate = self
         collectionView?.dataSource = GameCategoryClass.shared
+        
+        // configure demo button
+        navigationItem.rightBarButtonItem = demoButton
         
         // Add an observer to monitor changed user ID and reload the data.
         NotificationCenter.default.addObserver(
@@ -226,6 +243,11 @@ class HomeCollectionViewController: UICollectionViewController {
             destinationVC.queueType = queueType
             destinationVC.selectedGame = randomGame
             os_log(.info, "Random game is %s", randomGame.gameName)
+        case"showDemo":
+            let destinationVC = segue.destination as! CategoryViewController
+            destinationVC.title = "Demo"
+            destinationVC.category = .demo
+            destinationVC.queueType = queueType
         default:
             preconditionFailure("Unexpected segue identifier.")
         }
