@@ -59,6 +59,8 @@ class ChatViewController: MessagesViewController {
     private let chatroom: Chatroom
     /// An array to hold all chat messages.
     private var chatMessages = [Message]()
+    /// Enter demo game
+    private var isDemo: Bool
     
     private let timeFormatter: DateComponentsFormatter = {
         let formatter = DateComponentsFormatter()
@@ -74,9 +76,10 @@ class ChatViewController: MessagesViewController {
         os_log(.info, "✅ chatroom deinit")
     }
     
-    init(user: User, chatroom: Chatroom) {
+    init(user: User, chatroom: Chatroom, isDemo: Bool) {
         self.user = user
         self.chatroom = chatroom
+        self.isDemo = isDemo
         super.init(nibName: nil, bundle: nil)
         title = chatroom.name
     }
@@ -460,7 +463,10 @@ extension ChatViewController: InputBarAccessoryViewDelegate {
         save(message)
         // Clear the input field after sending the message.
         inputBar.inputTextView.text = ""
-        didReceiveUserMessage()
+        // bot chat
+        if isDemo {
+            didReceiveUserMessage()
+        }
     }
 }
 

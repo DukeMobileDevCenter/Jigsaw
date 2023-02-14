@@ -154,7 +154,7 @@ class RoomProgressViewController: UIViewController {
         chatroomsRef.getDocument { [weak self] document, error in
             guard let self = self else { return }
             if let document = document, let chatroom = Chatroom(document: document) {
-                let controller = ChatViewController(user: FirebaseConstants.auth.currentUser!, chatroom: chatroom)
+                let controller = ChatViewController(user: FirebaseConstants.auth.currentUser!, chatroom: chatroom, isDemo: false)
                 controller.chatroomUserIDs = self.gameGroup.allPlayersUserIDs
                 self.chatroomViewController = controller
             } else if let error = error {
