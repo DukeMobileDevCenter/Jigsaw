@@ -460,13 +460,14 @@ extension ChatViewController: InputBarAccessoryViewDelegate {
     func inputBar(_ inputBar: InputBarAccessoryView, didPressSendButtonWith text: String) {
         messageInputBar.sendButton.startAnimating()
         let message = Message(user: user, content: text)
-        save(message)
-        // Clear the input field after sending the message.
-        inputBar.inputTextView.text = ""
         // bot chat
         if isDemo {
             didReceiveUserMessage()
+        } else {
+            save(message)
         }
+        // Clear the input field after sending the message.
+        inputBar.inputTextView.text = ""
     }
 }
 
