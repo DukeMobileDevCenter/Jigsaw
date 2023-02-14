@@ -118,7 +118,7 @@
                         <outlet property="playersCountSegmentedControl" destination="KsP-MD-Xda" id="ADk-vn-DWX"/>
                         <segue destination="qIk-Vr-9mo" kind="show" identifier="showRandom" id="tOa-KL-BCv"/>
                         <segue destination="keb-o0-fdv" kind="show" identifier="showCategory" id="ILr-o5-fGM"/>
-                        <segue destination="keb-o0-fdv" kind="show" identifier="showDemo" id="NoM-EW-gCQ"/>
+                        <segue destination="keb-o0-fdv" kind="show" identifier="showDemoCategory" id="NoM-EW-gCQ"/>
                     </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FUz-N4-EiH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -143,7 +143,7 @@
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" title="Play"/>
                                 <connections>
-                                    <segue destination="qIk-Vr-9mo" kind="show" identifier="showGame" id="rVx-W0-BSe"/>
+                                    <action selector="playButtonTapped:" destination="keb-o0-fdv" eventType="touchUpInside" id="t08-ar-BKD"/>
                                 </connections>
                             </button>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="y6n-LL-6kN">
@@ -178,6 +178,8 @@
                     <connections>
                         <outlet property="introductionLabel" destination="y6n-LL-6kN" id="cla-co-A4a"/>
                         <outlet property="playButton" destination="2Ki-KC-pjw" id="5nS-0h-Wyq"/>
+                        <segue destination="qIk-Vr-9mo" kind="show" identifier="showGame" id="s2p-up-qFt"/>
+                        <segue destination="qIk-Vr-9mo" kind="show" identifier="showDemoGame" id="zO6-OJ-6cX"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gax-mQ-X7g" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -283,7 +285,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wGu-n6-NeV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3444.9275362318845" y="-169.41964285714286"/>
+            <point key="canvasLocation" x="3441" y="-170"/>
         </scene>
         <!--Progress-->
         <scene sceneID="lLC-EH-0bx">
@@ -705,7 +707,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="rVx-W0-BSe"/>
+        <segue reference="zO6-OJ-6cX"/>
         <segue reference="NoM-EW-gCQ"/>
     </inferredMetricsTieBreakers>
     <resources>

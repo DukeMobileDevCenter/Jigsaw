@@ -191,7 +191,7 @@ class HomeCollectionViewController: UICollectionViewController {
     }
     
     @objc func demoButtonTapped(_ sender: UIBarButtonItem) {
-        performSegue(withIdentifier: "showDemo", sender: sender)
+        performSegue(withIdentifier: "showDemoCategory", sender: sender)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -243,9 +243,10 @@ class HomeCollectionViewController: UICollectionViewController {
             destinationVC.queueType = queueType
             destinationVC.selectedGame = randomGame
             os_log(.info, "Random game is %s", randomGame.gameName)
-        case"showDemo":
+        case"showDemoCategory":
             let destinationVC = segue.destination as! CategoryViewController
             destinationVC.title = "Demo"
+            destinationVC.isDemo = true
             destinationVC.category = .demo
             destinationVC.queueType = queueType
         default:

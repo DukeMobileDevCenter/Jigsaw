@@ -76,7 +76,7 @@ class ChatViewController: MessagesViewController {
         os_log(.info, "✅ chatroom deinit")
     }
     
-    init(user: User, chatroom: Chatroom, isDemo: Bool) {
+    init(user: User, chatroom: Chatroom, isDemo: Bool = false) {
         self.user = user
         self.chatroom = chatroom
         self.isDemo = isDemo

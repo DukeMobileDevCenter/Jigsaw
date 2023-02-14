@@ -35,6 +35,11 @@ struct GameGroup: Codable {
         self.group2 = group.group2
     }
     
+    /// Empty GameGroup for Demo Game
+//    init() {
+//        
+//    }
+    
     /// A sorted array of all players' IDs in current game group.
     /// - Note: The count of all players can be 2 or 4.
     var allPlayersUserIDs: [String] {

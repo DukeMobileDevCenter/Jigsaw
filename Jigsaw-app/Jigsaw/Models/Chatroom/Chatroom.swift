@@ -43,6 +43,12 @@ struct Chatroom: Codable {
             self.playerIDs = nil
         }
     }
+    
+    init() {
+        self.id = UUID().uuidString
+        self.name = "Demo Chatroom"
+        self.playerIDs = nil
+    }
 }
 
 extension Chatroom: Comparable {
