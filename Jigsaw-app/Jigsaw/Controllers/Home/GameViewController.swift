@@ -17,7 +17,6 @@ class GameViewController: ORKTaskViewController {
         super.init(task: nil, taskRun: taskRunUUID)
         task = createSurveyTask(from: game, currentRoom: currentRoom)
     }
-    // IM a comment, have mercy
     
     
     @available(*, unavailable)
@@ -60,6 +59,13 @@ class GameViewController: ORKTaskViewController {
         step.indicatorType = .progressBar
         step.title = "Please Wait"
         step.detailText = "Please wait for other players to finish."
+        return step
+    }()
+    
+    private var scoreboardStep: ORKActiveStep = {
+        let step = ORKActiveStep(identifier: "ScoreboardActiveStep")
+        step.title = "Scoreboard"
+        step.detailText = "Your performance: "
         return step
     }()
     
@@ -107,6 +113,7 @@ class GameViewController: ORKTaskViewController {
             }
         }
         
+        steps.append(scoreboardStep)
         // Wait step
         steps.append(waitStep)
         

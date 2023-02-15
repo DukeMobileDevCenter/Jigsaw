@@ -66,6 +66,13 @@ class RoomProgressViewController: UIViewController {
     /// A flag to indicate if the game failure is caused by the current player.
     private var isMeDropped = true
     
+    // UILabel to display score information in the ScoreboardActiveStep
+    private let scoreLabel: UILabel = {
+        let label = UILabel()
+        label.numberOfLines = 0
+        return label
+    }()
+    
     /// The attempts count for each room.
     private var attempts = 0
     /// The index of current room, e.g. 0, 1, 2, 3...
@@ -99,7 +106,7 @@ class RoomProgressViewController: UIViewController {
     @objc func back(sender: UIBarButtonItem) {
         performSegue(withIdentifier: "backToHome", sender: nil)
     }
-
+    
     /// A boolean to indicate if all rooms are done in a game.
     private var gameCompleted: Bool {
         guard let room = currentRoom, room >= gameOfMyGroup.questionnaires.count else {
@@ -378,13 +385,22 @@ extension RoomProgressViewController: ORKTaskViewControllerDelegate {
         }
     }
     
+    private func handleScoreboardActiveStep(_ taskViewController: ORKTaskViewController, activeStepViewController stepViewController: ORKActiveStepViewController){
+        // Calculate the game result for current room.
+        currentWaitStepRoomResult = GameResult(taskResults: [taskViewController.result], questionnaires: [gameOfMyGroup.questionnaires[currentRoom!]])
+        
+        // Update the UILabel to reflect the score calculated above
+        scoreLabel.text = currentWaitStepRoomResult.summary
+        stepViewController.customView = scoreLabel
+    }
+    
     private func handleWaitStep(taskVC: ORKTaskViewController, stepVC: ORKWaitStepViewController) {
         // Everytime the player reaches wait step, add attempts count.
         attempts += 1
         // Calculate the game result for current room.
         currentWaitStepRoomResult = GameResult(taskResults: [taskVC.result], questionnaires: [gameOfMyGroup.questionnaires[currentRoom!]])
         let progress = CGFloat(gameGroup.roomAttemptedUserIDs.count + 1) / CGFloat(gameGroup.allPlayersUserIDs.count)
-        stepVC.updateText("Below is a summary of current room (for debug, UI needs update):\n\(currentWaitStepRoomResult.summary)")
+//        stepVC.updateText("Below is a summary of current room (for debug, UI needs update):\n\(currentWaitStepRoomResult.summary)")
         stepVC.setProgress(progress, animated: true)
         
         if !currentWaitStepRoomResult.isPassed {
@@ -415,12 +431,13 @@ extension RoomProgressViewController: ORKTaskViewControllerDelegate {
         }
     }
     
+    
     func taskViewController(_ taskViewController: ORKTaskViewController, stepViewControllerWillAppear stepViewController: ORKStepViewController) {
         guard let step = stepViewController.step else { return }
         switch step.identifier {
-        /// Changes continueButtonTitle from "Get Started" to "Chat Now" for the ChatroomInstruction step
+            /// Changes continueButtonTitle from "Get Started" to "Chat Now" for the ChatroomInstruction step
         case "ChatroomInstruction":
-                stepViewController.continueButtonTitle = "Chat Now"
+            stepViewController.continueButtonTitle = "Chat Now"
         case "Countdown":
             handleCountdownStep(taskViewController: taskViewController, stepViewController: stepViewController as! ORKActiveStepViewController)
         case "Wait":
@@ -429,6 +446,8 @@ extension RoomProgressViewController: ORKTaskViewControllerDelegate {
                 // to the wait page on the exact same time.
                 self?.handleWaitStep(taskVC: taskViewController, stepVC: stepViewController as! ORKWaitStepViewController)
             }
+        case "ScoreboardActiveStep":
+            handleScoreboardActiveStep(taskViewController, activeStepViewController: stepViewController as! ORKActiveStepViewController)
         case "conclusion":
             // Don't allow going back to wait step from completion step.
             stepViewController.navigationItem.hidesBackButton = true
@@ -603,7 +622,7 @@ extension RoomProgressViewController: ChartViewDelegate {
         percentageFormatter.multiplier = 1
         percentageFormatter.percentSymbol = "%"
         
-    
+        
         data.setValueFont(UIFont(name: "HelveticaNeue-Light", size: 13)!)
         data.setValueTextColor(.white)
         
