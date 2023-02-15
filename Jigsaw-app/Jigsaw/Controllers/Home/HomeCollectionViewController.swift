@@ -23,6 +23,8 @@ class HomeCollectionViewController: UICollectionViewController {
         playersCountSegmentedControl.selectedSegmentIndex == 0 ? .twoPlayersQueue : .fourPlayersQueue
     }
     
+    // Create a lazy stored property for a custom UIBarButtonItem with an image of a game controller and text "Demo".
+    // The button will call the demoButtonTapped method when tapped.
     private lazy var demoButton: UIBarButtonItem = {
         let gameControllerImage = UIImage(systemName: "gamecontroller")
         let button = UIButton(type: .system)
@@ -245,7 +247,7 @@ class HomeCollectionViewController: UICollectionViewController {
             os_log(.info, "Random game is %s", randomGame.gameName)
         case"showDemoCategory":
             let destinationVC = segue.destination as! CategoryViewController
-            destinationVC.title = "Demo"
+            destinationVC.title = "Demo Game"
             destinationVC.isDemo = true
             destinationVC.category = .demo
             destinationVC.queueType = queueType
