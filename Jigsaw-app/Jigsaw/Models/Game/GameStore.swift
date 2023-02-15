@@ -71,7 +71,7 @@ class GameStore: NSObject {
             return collections.minimumWageGames
         case .charterSchools:
             return collections.charterSchoolGames
-        case .random:
+        case .random, .demo:
             return []
         }
     }
@@ -138,7 +138,7 @@ class GameStore: NSObject {
                                 charterSchoolGames.append(game)
                             case .minimumWage:
                                 minimumWageGames.append(game)
-                            case .random:
+                            case .random, .demo:
                                 break
                             }
                             games.append(game)

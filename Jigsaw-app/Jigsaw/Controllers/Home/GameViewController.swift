@@ -10,14 +10,18 @@ import ResearchKit
 import Down
 
 class GameViewController: ORKTaskViewController {
-    private let game: GameOfGroup
+//    private let game: GameOfGroup
     
-    init(game: GameOfGroup, currentRoom: Int, taskRun taskRunUUID: UUID? = nil) {
-        self.game = game
+    init(game: GameOfGroup, currentRoom: Int, taskRun taskRunUUID: UUID? = nil, isDemo: Bool = false) {
+//        self.game = game
         super.init(task: nil, taskRun: taskRunUUID)
         task = createSurveyTask(from: game, currentRoom: currentRoom)
     }
     
+    init() {
+        super.init(task: nil, taskRun: nil)
+        task = createDemoTask()
+    }
     
     @available(*, unavailable)
     required init(coder aDecoder: NSCoder) {
@@ -126,4 +130,60 @@ class GameViewController: ORKTaskViewController {
         let task = ORKNavigableOrderedTask(identifier: "surveyTask", steps: steps)
         return task
     }
+    
+    private func createDemoTask() -> ORKNavigableOrderedTask {
+            var steps = [ORKStep]()
+
+            // Resource reading page.
+            let promptStep = ORKInstructionStep(identifier: "Resource")
+            promptStep.detailText = "A statement will be shown in the actual game. Please read it carefully, as you will not be able to view it again once you move on."
+            steps.append(promptStep)
+
+            // Chatroom instruction step.
+            steps.append(chatroomInstructionStep)
+
+            // Chatroom step.
+            steps.append(chatroomCountdownStep)
+
+            // Questions instructions step.
+            steps.append(questionsInstructionStep)
+
+            // Sample questions.
+//            let multipleChoiceQuestion = MultipleChoiceQuestion(
+//                title: "sample_multiple_choice",
+//                prompt: "What is the capital of France?",
+//                isOptional: false,
+//                choices: ["Paris", "London", "New York"]
+//            )
+//            let booleanQuestion = BooleanQuestion(
+//                title: "sample_boolean",
+//                prompt: "Is the earth flat?",
+//                isOptional: false,
+//                trueDescription: "Yes",
+//                falseDescription: "No"
+//            )
+//            let scaleQuestion = ScaleQuestion(
+//                title: "sample_scale",
+//                prompt: "How much do you like apples?",
+//                isOptional: false,
+//                maxValue: 10,
+//                minValue: 0,
+//                step: 1,
+//                defaultValue: 5,
+//                maxDescription: "I like it very much",
+//                minDescription: "I don't like it at all"
+//            )
+
+            steps.append(QuestionStepsModel.multipleChoiceStep(question: MultipleChoiceQuestion()))
+//            steps.append(QuestionStepsModel.booleanStep(question: booleanQuestion))
+//            steps.append(QuestionStepsModel.scaleStep(question: scaleQuestion))
+
+            // Completion instruction.
+            let completionStep = ORKOrderedTask.makeCompletionStep()
+            completionStep.title = "Room Escaped 🎉"
+            completionStep.text = "Congratulations on escaping the Room.\nKeep going!"
+            steps.append(completionStep)
+            let task = ORKNavigableOrderedTask(identifier: "demoTask", steps: steps)
+            return task
+        }
 }

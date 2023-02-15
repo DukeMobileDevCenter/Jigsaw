@@ -23,6 +23,18 @@ class HomeCollectionViewController: UICollectionViewController {
         playersCountSegmentedControl.selectedSegmentIndex == 0 ? .twoPlayersQueue : .fourPlayersQueue
     }
     
+    // Create a lazy stored property for a custom UIBarButtonItem with an image of a game controller and text "Demo".
+    // The button will call the demoButtonTapped method when tapped.
+    private lazy var demoButton: UIBarButtonItem = {
+        let gameControllerImage = UIImage(systemName: "gamecontroller")
+        let button = UIButton(type: .system)
+        button.setImage(gameControllerImage, for: .normal)
+        button.setTitle("Demo", for: .normal)
+        button.addTarget(self, action: #selector(demoButtonTapped), for: .touchUpInside)
+        return UIBarButtonItem(customView: button)
+    }()
+
+
 //    @IBAction func testBarButtonTapped(_ sender: UIBarButtonItem) {
 //        testShowChatroom(sender)
 //    }
@@ -36,7 +48,7 @@ class HomeCollectionViewController: UICollectionViewController {
         chatroomsRef.getDocument { [weak self] document, error in
             guard let self = self else { return }
             if let document = document, let chatroom = Chatroom(document: document) {
-                let chatroomVC = ChatViewController(user: FirebaseConstants.auth.currentUser!, chatroom: chatroom)
+                let chatroomVC = ChatViewController(user: FirebaseConstants.auth.currentUser!, chatroom: chatroom, isDemo: false)
                 // Don't show bottom tab bar.
                 chatroomVC.hidesBottomBarWhenPushed = true
                 self.show(chatroomVC, sender: sender)
@@ -180,6 +192,10 @@ class HomeCollectionViewController: UICollectionViewController {
         }
     }
     
+    @objc func demoButtonTapped(_ sender: UIBarButtonItem) {
+        performSegue(withIdentifier: "showDemoCategory", sender: sender)
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         playersCountSegmentedControl.isHidden = true
@@ -192,6 +208,9 @@ class HomeCollectionViewController: UICollectionViewController {
         // Set collection view delegates.
         collectionView?.delegate = self
         collectionView?.dataSource = GameCategoryClass.shared
+        
+        // configure demo button
+        navigationItem.rightBarButtonItem = demoButton
         
         // Add an observer to monitor changed user ID and reload the data.
         NotificationCenter.default.addObserver(
@@ -226,6 +245,12 @@ class HomeCollectionViewController: UICollectionViewController {
             destinationVC.queueType = queueType
             destinationVC.selectedGame = randomGame
             os_log(.info, "Random game is %s", randomGame.gameName)
+        case"showDemoCategory":
+            let destinationVC = segue.destination as! CategoryViewController
+            destinationVC.title = "Demo Game"
+            destinationVC.isDemo = true
+            destinationVC.category = .demo
+            destinationVC.queueType = queueType
         default:
             preconditionFailure("Unexpected segue identifier.")
         }

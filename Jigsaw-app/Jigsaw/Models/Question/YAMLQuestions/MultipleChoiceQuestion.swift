@@ -30,4 +30,14 @@ struct MultipleChoiceQuestion: Codable, QuestionEssentialProperty {
         self.choices = choices
         self.correctAnswers = correctAnswers
     }
+    
+    // Demo MultipleChoiceQuestion
+    init() {
+        self.questionType = .multipleChoice
+        self.title = "Sample Multiple Choice"
+        self.prompt = "What is the capital of France?"
+        self.isOptional = false
+        self.choices = ["Paris", "London", "New York"]
+        self.correctAnswers = ["Paris", "London", "New York"]
+    }
 }

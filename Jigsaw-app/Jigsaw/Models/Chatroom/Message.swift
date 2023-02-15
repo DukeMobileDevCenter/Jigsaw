@@ -65,6 +65,16 @@ struct Message: MessageType {
         self.senderJigsawValue = message.senderJigsawValue
     }
     
+    init(user: ChatUser, content: String) {
+        self.user = user
+        self.content = content
+        self.sentDate = Date()
+        self.id = nil
+        self.kind = .text(content)
+        self.downloadURL = nil
+        self.senderJigsawValue = Profiles.jigsawValue
+    }
+    
     init(message: Message, content: String, kind: MessageKind) {
         self.user = message.user
         // The content string is the control message.
