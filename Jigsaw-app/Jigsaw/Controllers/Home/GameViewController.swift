@@ -66,6 +66,13 @@ class GameViewController: ORKTaskViewController {
         return step
     }()
     
+    private var scoreboardStep: ORKActiveStep = {
+        let step = ORKActiveStep(identifier: "ScoreboardActiveStep")
+        step.title = "Scoreboard"
+        step.detailText = "Your performance: "
+        return step
+    }()
+    
     /// Create an `ORKOrderedTask` from the a game.
     ///
     /// - Parameters:
@@ -110,6 +117,7 @@ class GameViewController: ORKTaskViewController {
             }
         }
         
+        steps.append(scoreboardStep)
         // Wait step
         steps.append(waitStep)
         
