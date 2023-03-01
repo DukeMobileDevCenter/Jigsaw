@@ -90,6 +90,7 @@
 		00F2197C24CCF99800B72858 /* MetricsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F2197B24CCF99800B72858 /* MetricsViewController.swift */; };
 		00F2197E24CCF9A200B72858 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F2197D24CCF9A200B72858 /* ProfileViewController.swift */; };
 		00F6302224EE385E00BCAD11 /* AnswerCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F6302124EE385E00BCAD11 /* AnswerCategory.swift */; };
+		2EF156BD29AEE4D80090AED0 /* Localizable2.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2EF156BC29AEE4D80090AED0 /* Localizable2.strings */; };
 		AFA264EE6A378B6ACEF37706 /* Pods_Jigsaw.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7AE24AC45EC3E71E51CD3B5 /* Pods_Jigsaw.framework */; };
 /* End PBXBuildFile section */
 
@@ -219,6 +220,7 @@
 		00F2197B24CCF99800B72858 /* MetricsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetricsViewController.swift; sourceTree = "<group>"; };
 		00F2197D24CCF9A200B72858 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		00F6302124EE385E00BCAD11 /* AnswerCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswerCategory.swift; sourceTree = "<group>"; };
+		2EF156BC29AEE4D80090AED0 /* Localizable2.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable2.strings; sourceTree = "<group>"; };
 		73D1E3E31906BFDDEF8C86A3 /* Pods-Jigsaw.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Jigsaw.release.xcconfig"; path = "Target Support Files/Pods-Jigsaw/Pods-Jigsaw.release.xcconfig"; sourceTree = "<group>"; };
 		880A66EE4B660B807C478CF4 /* Pods-Jigsaw.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Jigsaw.debug.xcconfig"; path = "Target Support Files/Pods-Jigsaw/Pods-Jigsaw.debug.xcconfig"; sourceTree = "<group>"; };
 		F7AE24AC45EC3E71E51CD3B5 /* Pods_Jigsaw.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Jigsaw.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -371,6 +373,7 @@
 		0070DFE824B0060400E71F46 /* Jigsaw */ = {
 			isa = PBXGroup;
 			children = (
+				2EF156BE29AEE4E30090AED0 /* en.lproj */,
 				0020D54C24DF95CC00DB20E1 /* Supporting Files */,
 				00CDFF0724B2E90E009C789D /* JavaScript */,
 				005856C724D92D400010BE55 /* Protocols */,
@@ -532,6 +535,14 @@
 			path = YAMLQuestions;
 			sourceTree = "<group>";
 		};
+		2EF156BE29AEE4E30090AED0 /* en.lproj */ = {
+			isa = PBXGroup;
+			children = (
+				2EF156BC29AEE4D80090AED0 /* Localizable2.strings */,
+			);
+			path = en.lproj;
+			sourceTree = "<group>";
+		};
 		5468D76B6A3E1F4A42D79584 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -661,6 +672,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2EF156BD29AEE4D80090AED0 /* Localizable2.strings in Resources */,
 				00B6306324FB26A8008975CE /* GameHistoryTimeline.storyboard in Resources */,
 				0071E91E251FF6F50025702E /* SignInViewController.storyboard in Resources */,
 				0070DFF624B0060500E71F46 /* LaunchScreen.storyboard in Resources */,

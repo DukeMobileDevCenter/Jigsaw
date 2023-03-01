@@ -2,6 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:/Users/loaner/Jigsaw/Jigsaw-app/Jigsaw/en.lproj">
+   </FileRef>
+   <FileRef
       location = "group:Jigsaw.xcodeproj">
    </FileRef>
    <FileRef
