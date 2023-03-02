@@ -99,3 +99,12 @@ enum OnboardingSteps {
         return completionStep
     }()
 }
+/*
+ FileName.ClassName.Variable.Attribute
+ //FIlename1
+ 
+ x constants in Localizable.strings
+ 
+ Onboarding
+ Onboarding.x.x.work
+ */

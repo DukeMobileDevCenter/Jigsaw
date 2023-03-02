@@ -26,13 +26,18 @@ class MatchingViewController: UIViewController {
     /// The label to show the game name and level.
     @IBOutlet var gameNameLabel: UILabel! {
         didSet {
-            gameNameLabel.text = "\(selectedGame.gameName). Good luck! 😉"
+            if !isDemo {
+                gameNameLabel.text = "\(selectedGame.gameName). Good luck! 😉"
+            }
         }
     }
     /// The button to join the waiting queue.
     @IBOutlet var joinGameButton: UIButton!
     
     // MARK: Properties
+    
+    /// A flag indicating whether the current game is a demo or not.
+    var isDemo = false
     
     /// The selected game set by the parent view controller.
     var selectedGame: Game!
@@ -130,10 +135,16 @@ class MatchingViewController: UIViewController {
     // MARK: Actions
     
     @IBAction func joinGameButtonTapped(_ sender: UIButton) {
-        addPlayerToPlayersQueue(queueReference: queuesRef)
-        // Only start to listen to game group updates after the player joins a game/room.
-        setGameGroupListener()
-        sender.isEnabled = false
+        if !isDemo {
+            addPlayerToPlayersQueue(queueReference: queuesRef)
+            // Only start to listen to game group updates after the player joins a game/room.
+            setGameGroupListener()
+            sender.isEnabled = false
+        } else {
+            // Show the room progress view controller.
+            performSegue(withIdentifier: "showProgress", sender: nil)
+        }
+        
     }
     
     // MARK: UIViewController
@@ -141,24 +152,36 @@ class MatchingViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showProgress" {
             let destinationVC = segue.destination as! RoomProgressViewController
-            destinationVC.gameGroup = gameGroup
-            destinationVC.gameOfMyGroup = gameOfMyGroup
-            // Record the game group ID to handle crash.
-            Profiles.currentGroupID = gameGroup.id
+            if !isDemo {
+                destinationVC.gameGroup = gameGroup
+                destinationVC.gameOfMyGroup = gameOfMyGroup
+                // Record the game group ID to handle crash.
+                Profiles.currentGroupID = gameGroup.id
+            } else {
+                destinationVC.isDemo = true
+            }
         }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        queuesRef = FirebaseConstants.gameQueueRef(gameName: selectedGame.gameName, queueType: queueType)
+        
+        if isDemo {
+            playerCountLabel.text = "1"
+            gameNameLabel.text = "Let's go for a demo game!"
+        } else {
+            queuesRef = FirebaseConstants.gameQueueRef(gameName: selectedGame.gameName, queueType: queueType)
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        // Listen to the waiting queue updates when in the matching page.
-        queuesListener = queuesRef.addSnapshotListener { [weak self] querySnapshot, _ in
-            guard let snapshot = querySnapshot else { return }
-            self?.playerCountLabel.text = "\(snapshot.documents.count)"
+        if !isDemo {
+            // Listen to the waiting queue updates when in the matching page.
+            queuesListener = queuesRef.addSnapshotListener { [weak self] querySnapshot, _ in
+                guard let snapshot = querySnapshot else { return }
+                self?.playerCountLabel.text = "\(snapshot.documents.count)"
+            }
         }
     }
     
@@ -174,7 +197,9 @@ class MatchingViewController: UIViewController {
     }
     
     deinit {
-        // Remove player from queue when it exits the matching page.
-        queuesRef.document(Profiles.userID).delete()
+        if !isDemo {
+            // Remove player from queue when it exits the matching page.
+            queuesRef.document(Profiles.userID).delete()
+        }
     }
 }

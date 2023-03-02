@@ -21,6 +21,18 @@ import InputBarAccessoryView
 import PINRemoteImage
 import Agrume
 
+let botMsg = ["Hi, I'm a bot. How can I assist you?",
+              "Thank you for contacting us. How can I help you today?",
+              "I'm here to help. What can I do for you?",
+              "Please let me know how can I assist you today.",
+              "Hello! How may I be of assistance?",
+              "Welcome! I'm here to help. What can I do for you?",
+              "How can I assist you today? Let me know!",
+              "Hello there! How may I help you today?",
+              "Greetings! What can I help you with?",
+              "Hi, I'm an AI assistant. What do you need help with?",
+              "Hi there! I'm here to assist you. How can I help?"]
+
 class ChatViewController: MessagesViewController {
     // MARK: Properties
     
@@ -47,6 +59,8 @@ class ChatViewController: MessagesViewController {
     private let chatroom: Chatroom
     /// An array to hold all chat messages.
     private var chatMessages = [Message]()
+    /// Enter demo game
+    private var isDemo: Bool
     
     private let timeFormatter: DateComponentsFormatter = {
         let formatter = DateComponentsFormatter()
@@ -62,9 +76,10 @@ class ChatViewController: MessagesViewController {
         os_log(.info, "✅ chatroom deinit")
     }
     
-    init(user: User, chatroom: Chatroom) {
+    init(user: User, chatroom: Chatroom, isDemo: Bool = false) {
         self.user = user
         self.chatroom = chatroom
+        self.isDemo = isDemo
         super.init(nibName: nil, bundle: nil)
         title = chatroom.name
     }
@@ -185,6 +200,25 @@ extension ChatViewController {
             }
             self.messagesCollectionView.scrollToLastItem()
             self.messageInputBar.sendButton.stopAnimating()
+        }
+    }
+    
+    private func didReceiveUserMessage() {
+        let robot = ChatUser(senderId: "robot", displayName: "Robot", jigsawValue: Profiles.jigsawValue)
+        srand48(Int(Date().timeIntervalSince1970))
+        let randomNumber = Int(arc4random_uniform(UInt32(botMsg.count)))
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+            
+            let robotMsg = Message(user: robot, content: botMsg[randomNumber])
+            
+            self.chatMessages.append(robotMsg)
+            self.chatMessages.sort()
+            
+            let isLatestMessage2 = self.chatMessages.firstIndex(of: robotMsg) == (self.chatMessages.count - 1)
+            
+            self.messagesCollectionView.reloadData()
+            self.messagesCollectionView.scrollToLastItem(animated: true)
         }
     }
     
@@ -429,6 +463,10 @@ extension ChatViewController: InputBarAccessoryViewDelegate {
         save(message)
         // Clear the input field after sending the message.
         inputBar.inputTextView.text = ""
+        // bot chat
+        if isDemo {
+            didReceiveUserMessage()
+        }
     }
 }
 

@@ -47,6 +47,8 @@ class RoomProgressViewController: UIViewController {
     var gameGroup: GameGroup!
     /// The allocated game resources for current player set by the parent view controller. Only set once.
     var gameOfMyGroup: GameOfGroup!
+    /// A flag indicating whether the current game is a demo or not.
+    var isDemo = false
     
     private let confettiView = ConfettiView()
     
@@ -65,6 +67,13 @@ class RoomProgressViewController: UIViewController {
     private var isChatroomShown = false
     /// A flag to indicate if the game failure is caused by the current player.
     private var isMeDropped = true
+    
+    // UILabel to display score information in the ScoreboardActiveStep
+    private let scoreLabel: UILabel = {
+        let label = UILabel()
+        label.numberOfLines = 0
+        return label
+    }()
     
     /// The attempts count for each room.
     private var attempts = 0
@@ -99,9 +108,13 @@ class RoomProgressViewController: UIViewController {
     @objc func back(sender: UIBarButtonItem) {
         performSegue(withIdentifier: "backToHome", sender: nil)
     }
-
+    
     /// A boolean to indicate if all rooms are done in a game.
     private var gameCompleted: Bool {
+        if isDemo {
+            return true
+        }
+        
         guard let room = currentRoom, room >= gameOfMyGroup.questionnaires.count else {
             return false
         }
@@ -117,12 +130,18 @@ class RoomProgressViewController: UIViewController {
     @IBAction func surveyButtonTapped(_ sender: UIButton) {
         let controller = SFSafariViewController(url: AppConstants.feedbackFormURL)
         present(controller, animated: true)
-        surveyButton.isHidden = true
+        // Always show survey button
+        // surveyButton.isHidden = true
     }
     
     private func presentRoom(room: Int) {
-        roomViewController = GameViewController(game: gameOfMyGroup, currentRoom: room)
-        roomViewController.delegate = self
+        if !isDemo {
+            roomViewController = GameViewController(game: gameOfMyGroup, currentRoom: room)
+            roomViewController.delegate = self
+        } else {
+            roomViewController = GameViewController()
+            roomViewController.delegate = self
+        }
         // Disallow dismiss-by-interactive-swipe-down for iOS 13 and above.
         roomViewController.isModalInPresentation = true
         present(roomViewController, animated: true)
@@ -149,19 +168,27 @@ class RoomProgressViewController: UIViewController {
     }
     
     private func loadChatroom(completion: @escaping () -> Void) {
-        let chatroomsRef = FirebaseConstants.chatrooms.document(gameGroup.chatroomID)
-        chatroomsRef.getDocument { [weak self] document, error in
-            guard let self = self else { return }
-            if let document = document, let chatroom = Chatroom(document: document) {
-                let controller = ChatViewController(user: FirebaseConstants.auth.currentUser!, chatroom: chatroom)
-                controller.chatroomUserIDs = self.gameGroup.allPlayersUserIDs
-                self.chatroomViewController = controller
-            } else if let error = error {
-                self.presentAlert(error: error)
-                self.currentRoom = nil
+        if !isDemo {
+            let chatroomsRef = FirebaseConstants.chatrooms.document(gameGroup.chatroomID)
+            chatroomsRef.getDocument { [weak self] document, error in
+                guard let self = self else { return }
+                if let document = document, let chatroom = Chatroom(document: document) {
+                    let controller = ChatViewController(user: FirebaseConstants.auth.currentUser!, chatroom: chatroom)
+                    controller.chatroomUserIDs = self.gameGroup.allPlayersUserIDs
+                    self.chatroomViewController = controller
+                } else if let error = error {
+                    self.presentAlert(error: error)
+                    self.currentRoom = nil
+                }
             }
-            completion()
+        } else {
+            /// Create Local Chatroom
+            let controller = ChatViewController(user: FirebaseConstants.auth.currentUser!,
+                                                chatroom: Chatroom(),
+                                                isDemo: true)
+            self.chatroomViewController = controller
         }
+        completion()
     }
     
     // MARK: FireStore listener related methods
@@ -252,10 +279,14 @@ class RoomProgressViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Listen to modification and removal of the game groups.
-        setGameGroupListener()
-        // Update the chart with an empty source.
-        setChartData(from: [.correct: 0, .skipped: 0, .incorrect: 0, .unknown: 1])
+        
+        if !isDemo {
+            // Listen to modification and removal of the game groups.
+            setGameGroupListener()
+            // Update the chart with an empty source.
+            setChartData(from: [.correct: 0, .skipped: 0, .incorrect: 0, .unknown: 1])
+        }
+        
         // Hide nav button to disallow players accidentally drop the game.
         navigationItem.hidesBackButton = true
         // Add confetti view to the main view.
@@ -354,20 +385,24 @@ extension RoomProgressViewController: ORKTaskViewControllerDelegate {
     private func handleCountdownStep(taskViewController: ORKTaskViewController, stepViewController: ORKActiveStepViewController) {
         // Don't show chatroom again when a player quit the chat and move on.
         if isChatroomShown {
-            // When the player has left chatroom, remove player id from the array.
-            FirebaseConstants.gamegroups.document(gameGroup.id!).updateData([
-                "chatroomReadyUserIDs": FieldValue.arrayRemove([Profiles.userID!])
-            ])
+            if !isDemo {
+                // When the player has left chatroom, remove player id from the array.
+                FirebaseConstants.gamegroups.document(gameGroup.id!).updateData([
+                    "chatroomReadyUserIDs": FieldValue.arrayRemove([Profiles.userID!])
+                ])
+            }
             // Call finish to automatically move to next screen. (Not valid for no timer step.)
             // stepViewController.finish()
             stepViewController.goForward()
             // Reset flag for chatroom. Not using `.toggle()` for clarity. :-)
             isChatroomShown = false
         } else {
-            // Mark the player who reached chatroom step as ready.
-            FirebaseConstants.gamegroups.document(gameGroup.id!).updateData([
-                "chatroomReadyUserIDs": FieldValue.arrayUnion([Profiles.userID!])
-            ])
+            if !isDemo {
+                // Mark the player who reached chatroom step as ready.
+                FirebaseConstants.gamegroups.document(gameGroup.id!).updateData([
+                    "chatroomReadyUserIDs": FieldValue.arrayUnion([Profiles.userID!])
+                ])
+            }
             stepViewController.title = "Done"
             stepViewController.show(chatroomViewController, sender: nil)
             // Hide the back button until all players join the chatroom.
@@ -377,13 +412,22 @@ extension RoomProgressViewController: ORKTaskViewControllerDelegate {
         }
     }
     
+    private func handleScoreboardActiveStep(_ taskViewController: ORKTaskViewController, activeStepViewController stepViewController: ORKActiveStepViewController){
+        // Calculate the game result for current room.
+        currentWaitStepRoomResult = GameResult(taskResults: [taskViewController.result], questionnaires: [gameOfMyGroup.questionnaires[currentRoom!]])
+        
+        // Update the UILabel to reflect the score calculated above
+        scoreLabel.text = currentWaitStepRoomResult.summary
+        stepViewController.customView = scoreLabel
+    }
+    
     private func handleWaitStep(taskVC: ORKTaskViewController, stepVC: ORKWaitStepViewController) {
         // Everytime the player reaches wait step, add attempts count.
         attempts += 1
         // Calculate the game result for current room.
         currentWaitStepRoomResult = GameResult(taskResults: [taskVC.result], questionnaires: [gameOfMyGroup.questionnaires[currentRoom!]])
         let progress = CGFloat(gameGroup.roomAttemptedUserIDs.count + 1) / CGFloat(gameGroup.allPlayersUserIDs.count)
-        stepVC.updateText("Below is a summary of current room (for debug, UI needs update):\n\(currentWaitStepRoomResult.summary)")
+//        stepVC.updateText("Below is a summary of current room (for debug, UI needs update):\n\(currentWaitStepRoomResult.summary)")
         stepVC.setProgress(progress, animated: true)
         
         if !currentWaitStepRoomResult.isPassed {
@@ -414,12 +458,13 @@ extension RoomProgressViewController: ORKTaskViewControllerDelegate {
         }
     }
     
+    
     func taskViewController(_ taskViewController: ORKTaskViewController, stepViewControllerWillAppear stepViewController: ORKStepViewController) {
         guard let step = stepViewController.step else { return }
         switch step.identifier {
-        /// Changes continueButtonTitle from "Get Started" to "Chat Now" for the ChatroomInstruction step
+            /// Changes continueButtonTitle from "Get Started" to "Chat Now" for the ChatroomInstruction step
         case "ChatroomInstruction":
-                stepViewController.continueButtonTitle = "Chat Now"
+            stepViewController.continueButtonTitle = "Chat Now"
         case "Countdown":
             handleCountdownStep(taskViewController: taskViewController, stepViewController: stepViewController as! ORKActiveStepViewController)
         case "Wait":
@@ -428,6 +473,8 @@ extension RoomProgressViewController: ORKTaskViewControllerDelegate {
                 // to the wait page on the exact same time.
                 self?.handleWaitStep(taskVC: taskViewController, stepVC: stepViewController as! ORKWaitStepViewController)
             }
+        case "ScoreboardActiveStep":
+            handleScoreboardActiveStep(taskViewController, activeStepViewController: stepViewController as! ORKActiveStepViewController)
         case "conclusion":
             // Don't allow going back to wait step from completion step.
             stepViewController.navigationItem.hidesBackButton = true
@@ -437,42 +484,52 @@ extension RoomProgressViewController: ORKTaskViewControllerDelegate {
     }
     
     func taskViewController(_ taskViewController: ORKTaskViewController, didFinishWith reason: ORKTaskViewControllerFinishReason, error: Error?) {
-        // Hold current room's result.
-        roomResults.append(taskViewController.result)
         
-        // Decide what is the outcome of current room.
-        switch reason {
-        case .failed, .discarded, .saved:
-            os_log(.info, "❌ Game failed or 💦 Canceled")
-            // Dismiss the game controller to avoid presenting issues.
-            taskViewController.dismiss(animated: true)
-            // Call the did finish function to handle remaining clean up.
-            if let error = error, let gameError = error as? GameError {
-                roomDidFinish(withResult: .failure(gameError))
-            } else if reason == .discarded {
-                // Current player dropped the game.
-                isMeDropped = true
-                roomDidFinish(withResult: .failure(.currentPlayerDropped))
-            } else {
-                // This should never happen.
-                isMeDropped = true
-                roomDidFinish(withResult: .failure(.unknown))
+        if !isDemo {
+            // Hold current room's result.
+            roomResults.append(taskViewController.result)
+            // Decide what is the outcome of current room.
+            switch reason {
+            case .failed, .discarded, .saved:
+                os_log(.info, "❌ Game failed or 💦 Canceled")
+                // Dismiss the game controller to avoid presenting issues.
+                taskViewController.dismiss(animated: true)
+                // Call the did finish function to handle remaining clean up.
+                if let error = error, let gameError = error as? GameError {
+                    roomDidFinish(withResult: .failure(gameError))
+                } else if reason == .discarded {
+                    // Current player dropped the game.
+                    isMeDropped = true
+                    roomDidFinish(withResult: .failure(.currentPlayerDropped))
+                } else {
+                    // This should never happen.
+                    isMeDropped = true
+                    roomDidFinish(withResult: .failure(.unknown))
+                }
+                // Log an unsuccessful game result.
+            case .completed:
+                os_log(.info, "✅ Game completed")
+                // Player has passed. Reset the all arrays.
+                guard let userID = Profiles.userID else { return }
+                FirebaseConstants.gamegroups.document(gameGroup.id!).updateData([
+                    "roomAttemptedUserIDs": FieldValue.arrayRemove([userID]),
+                    "roomFinishedUserIDs": FieldValue.arrayRemove([userID])
+                ])
+                // Dismiss the game controller.
+                taskViewController.dismiss(animated: true)
+                roomDidFinish(withResult: .success(currentRoom!))
+            @unknown default:
+                fatalError("Error: Game task yields unknown result.")
             }
-            // Log an unsuccessful game result.
-        case .completed:
-            os_log(.info, "✅ Game completed")
-            // Player has passed. Reset the all arrays.
-            guard let userID = Profiles.userID else { return }
-            FirebaseConstants.gamegroups.document(gameGroup.id!).updateData([
-                "roomAttemptedUserIDs": FieldValue.arrayRemove([userID]),
-                "roomFinishedUserIDs": FieldValue.arrayRemove([userID])
-            ])
+        } else {
+            roomLevelLabel.text = "You've completed the demo! 🎉"
+            nextRoomButton.isHidden = true
+            surveyButton.isHidden = true
+            showNewBackButton()
             // Dismiss the game controller.
             taskViewController.dismiss(animated: true)
-            roomDidFinish(withResult: .success(currentRoom!))
-        @unknown default:
-            fatalError("Error: Game task yields unknown result.")
         }
+       
     }
 }
 
@@ -480,7 +537,7 @@ extension RoomProgressViewController: ORKTaskViewControllerDelegate {
 
 extension RoomProgressViewController: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        gameOfMyGroup.questionnaires.count
+        isDemo ? 1 : gameOfMyGroup.questionnaires.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -602,7 +659,7 @@ extension RoomProgressViewController: ChartViewDelegate {
         percentageFormatter.multiplier = 1
         percentageFormatter.percentSymbol = "%"
         
-    
+        
         data.setValueFont(UIFont(name: "HelveticaNeue-Light", size: 13)!)
         data.setValueTextColor(.white)
         
