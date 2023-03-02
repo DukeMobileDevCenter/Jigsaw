@@ -11,8 +11,13 @@ import ResearchKit
 enum OnboardingSteps {
     static let instructionStep: ORKInstructionStep = {
         let instructionStep = ORKInstructionStep(identifier: "InstructionStepIdentifier")
-        instructionStep.title = "Welcome to Jigsaw Escape!"
-        instructionStep.detailText = "In Jigsaw Escape, you will play interactive games and learn about opposing stances on important and polarizing issues. First, let's get you on board!"
+
+/// DEMO: Localize strings
+///        instructionStep.title = "Welcome to Jigsaw Escape!"
+///        instructionStep.detailText = "In Jigsaw Escape, you will play interactive games and learn about opposing stances on important and polarizing issues. First, let's get you on board!"
+        instructionStep.title = Strings.Onboarding.Instruction.title
+        instructionStep.detailText = Strings.Onboarding.Instruction.detailText
+
         instructionStep.image = UIImage(named: "onboarding_welcome")!
         instructionStep.imageContentMode = .scaleAspectFill
         return instructionStep

@@ -518,6 +518,7 @@ PODS:
   - ProgressHUD (13.6)
   - PromisesObjC (2.0.0)
   - SwiftAlgorithms (1.0.0)
+  - SwiftGen (6.6.2)
   - SwiftyGif (5.4.2)
   - ViewRow (0.8):
     - Eureka (>= 5.0.0)
@@ -541,6 +542,7 @@ DEPENDENCIES:
   - MessageKit
   - PINRemoteImage
   - ProgressHUD
+  - SwiftGen (~> 6.0)
   - ViewRow
   - Yams
 
@@ -584,6 +586,7 @@ SPEC REPOS:
     - ProgressHUD
     - PromisesObjC
     - SwiftAlgorithms
+    - SwiftGen
     - SwiftyGif
     - ViewRow
     - Yams
@@ -627,10 +630,11 @@ SPEC CHECKSUMS:
   ProgressHUD: 4bdaa0d2ddf676b23324b199f9facffb5c3a1620
   PromisesObjC: 68159ce6952d93e17b2dfe273b8c40907db5ba58
   SwiftAlgorithms: 38dda4731d19027fdeee1125f973111bf3386b53
+  SwiftGen: 1366a7f71aeef49954ca5a63ba4bef6b0f24138c
   SwiftyGif: dec758a9dd3d278e5a855dbf279bf062c923c387
   ViewRow: 8da541e9c019f3be63f4e28f311a62cac2045ecf
   Yams: ed1c49f0d6be84f305ad3f93f997b1df039afd9e
 
-PODFILE CHECKSUM: 2425411c4abb8cff0aba2692d40e93c9053fc1f4
+PODFILE CHECKSUM: edc4bc47e8c33a45a699c8689f3c9b12390cf338
 
-COCOAPODS: 1.11.3
+COCOAPODS: 1.11.2

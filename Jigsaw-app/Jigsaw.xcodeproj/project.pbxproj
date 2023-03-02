@@ -90,8 +90,10 @@
 		00F2197C24CCF99800B72858 /* MetricsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F2197B24CCF99800B72858 /* MetricsViewController.swift */; };
 		00F2197E24CCF9A200B72858 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F2197D24CCF9A200B72858 /* ProfileViewController.swift */; };
 		00F6302224EE385E00BCAD11 /* AnswerCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F6302124EE385E00BCAD11 /* AnswerCategory.swift */; };
-		2EF156BD29AEE4D80090AED0 /* Localizable2.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2EF156BC29AEE4D80090AED0 /* Localizable2.strings */; };
-		AFA264EE6A378B6ACEF37706 /* Pods_Jigsaw.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7AE24AC45EC3E71E51CD3B5 /* Pods_Jigsaw.framework */; };
+		4B6BC5216F406984814D285C /* Pods_Jigsaw.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E56A7DB0937DE7CF6C2161B /* Pods_Jigsaw.framework */; };
+		C5F14B742979E5B100233909 /* swiftgen.yml in Resources */ = {isa = PBXBuildFile; fileRef = C5F14B732979E5B000233909 /* swiftgen.yml */; };
+		C5F14B772979EC5300233909 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = C5F14B792979EC5300233909 /* Localizable.strings */; };
+		C5F14B7D2979EE1D00233909 /* Strings+Generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5F14B7C2979EE1D00233909 /* Strings+Generated.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -178,6 +180,7 @@
 		0071E9222520161F0025702E /* FirebaseHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseHelper.swift; sourceTree = "<group>"; };
 		0078315124DF557800B35A98 /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		007FC9532536202B00D8D9A1 /* RoomProgressViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomProgressViewController.swift; sourceTree = "<group>"; };
+		0096D5B1F9745AA5FBF320B0 /* Pods-Jigsaw.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Jigsaw.debug.xcconfig"; path = "Target Support Files/Pods-Jigsaw/Pods-Jigsaw.debug.xcconfig"; sourceTree = "<group>"; };
 		00A06D8C24E8A9B400030649 /* GameGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameGroup.swift; sourceTree = "<group>"; };
 		00A88311252924CF00186BED /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
 		00A8831425292D4E00186BED /* GameCenterHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameCenterHelper.swift; sourceTree = "<group>"; };
@@ -220,10 +223,11 @@
 		00F2197B24CCF99800B72858 /* MetricsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetricsViewController.swift; sourceTree = "<group>"; };
 		00F2197D24CCF9A200B72858 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		00F6302124EE385E00BCAD11 /* AnswerCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswerCategory.swift; sourceTree = "<group>"; };
-		2EF156BC29AEE4D80090AED0 /* Localizable2.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable2.strings; sourceTree = "<group>"; };
-		73D1E3E31906BFDDEF8C86A3 /* Pods-Jigsaw.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Jigsaw.release.xcconfig"; path = "Target Support Files/Pods-Jigsaw/Pods-Jigsaw.release.xcconfig"; sourceTree = "<group>"; };
-		880A66EE4B660B807C478CF4 /* Pods-Jigsaw.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Jigsaw.debug.xcconfig"; path = "Target Support Files/Pods-Jigsaw/Pods-Jigsaw.debug.xcconfig"; sourceTree = "<group>"; };
-		F7AE24AC45EC3E71E51CD3B5 /* Pods_Jigsaw.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Jigsaw.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		0C9A03E3D4824F81B83A633D /* Pods-Jigsaw.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Jigsaw.release.xcconfig"; path = "Target Support Files/Pods-Jigsaw/Pods-Jigsaw.release.xcconfig"; sourceTree = "<group>"; };
+		7E56A7DB0937DE7CF6C2161B /* Pods_Jigsaw.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Jigsaw.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C5F14B732979E5B000233909 /* swiftgen.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = swiftgen.yml; sourceTree = SOURCE_ROOT; };
+		C5F14B782979EC5300233909 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		C5F14B7C2979EE1D00233909 /* Strings+Generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Strings+Generated.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -233,7 +237,7 @@
 			files = (
 				00A88312252924CF00186BED /* GameKit.framework in Frameworks */,
 				0055B0C42741E63000041454 /* ResearchKit.framework in Frameworks */,
-				AFA264EE6A378B6ACEF37706 /* Pods_Jigsaw.framework in Frameworks */,
+				4B6BC5216F406984814D285C /* Pods_Jigsaw.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -373,7 +377,6 @@
 		0070DFE824B0060400E71F46 /* Jigsaw */ = {
 			isa = PBXGroup;
 			children = (
-				2EF156BE29AEE4E30090AED0 /* en.lproj */,
 				0020D54C24DF95CC00DB20E1 /* Supporting Files */,
 				00CDFF0724B2E90E009C789D /* JavaScript */,
 				005856C724D92D400010BE55 /* Protocols */,
@@ -382,8 +385,11 @@
 				00CDFF0424B2E8E1009C789D /* Controllers */,
 				00CDFF0324B2E8C3009C789D /* Extensions */,
 				00CDFF0224B2E8AA009C789D /* Storyboards */,
+				C5F14B7B2979EDD900233909 /* Generated */,
 				0070DFE924B0060400E71F46 /* AppDelegate.swift */,
 				0070DFEB24B0060400E71F46 /* SceneDelegate.swift */,
+				C5F14B732979E5B000233909 /* swiftgen.yml */,
+				C5F14B792979EC5300233909 /* Localizable.strings */,
 				0070DFF224B0060500E71F46 /* Assets.xcassets */,
 				005856BB24D91C4A0010BE55 /* GoogleService-Info.plist */,
 				0071E921252005780025702E /* Jigsaw.entitlements */,
@@ -535,19 +541,11 @@
 			path = YAMLQuestions;
 			sourceTree = "<group>";
 		};
-		2EF156BE29AEE4E30090AED0 /* en.lproj */ = {
-			isa = PBXGroup;
-			children = (
-				2EF156BC29AEE4D80090AED0 /* Localizable2.strings */,
-			);
-			path = en.lproj;
-			sourceTree = "<group>";
-		};
 		5468D76B6A3E1F4A42D79584 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				880A66EE4B660B807C478CF4 /* Pods-Jigsaw.debug.xcconfig */,
-				73D1E3E31906BFDDEF8C86A3 /* Pods-Jigsaw.release.xcconfig */,
+				0096D5B1F9745AA5FBF320B0 /* Pods-Jigsaw.debug.xcconfig */,
+				0C9A03E3D4824F81B83A633D /* Pods-Jigsaw.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -556,9 +554,17 @@
 			isa = PBXGroup;
 			children = (
 				00A88311252924CF00186BED /* GameKit.framework */,
-				F7AE24AC45EC3E71E51CD3B5 /* Pods_Jigsaw.framework */,
+				7E56A7DB0937DE7CF6C2161B /* Pods_Jigsaw.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		C5F14B7B2979EDD900233909 /* Generated */ = {
+			isa = PBXGroup;
+			children = (
+				C5F14B7C2979EE1D00233909 /* Strings+Generated.swift */,
+			);
+			path = Generated;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -568,15 +574,16 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0070E00524B0060500E71F46 /* Build configuration list for PBXNativeTarget "Jigsaw" */;
 			buildPhases = (
-				892A259DB79323E101574CDB /* [CP] Check Pods Manifest.lock */,
+				6BBA0005C545D7B548D68484 /* [CP] Check Pods Manifest.lock */,
+				C5CCF7872979E394007631EC /* Run Script */,
 				006EB049253BA63E00FE5D8A /* Set Bundle Build Version to date */,
 				0070DFE224B0060400E71F46 /* Sources */,
 				0070DFE324B0060400E71F46 /* Frameworks */,
 				0070DFE424B0060400E71F46 /* Resources */,
 				0070E00B24B0066B00E71F46 /* SwiftLint */,
 				005308CC25168A96002A429F /* Embed Frameworks */,
-				226485862AE68C60632ABDF8 /* [CP] Embed Pods Frameworks */,
-				27CE12BA8668765A5779CF0A /* [CP] Copy Pods Resources */,
+				2465337B35A55FFA7DD5D6C6 /* [CP] Embed Pods Frameworks */,
+				C3FB92F52224C69B0BCC0A43 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -672,8 +679,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2EF156BD29AEE4D80090AED0 /* Localizable2.strings in Resources */,
 				00B6306324FB26A8008975CE /* GameHistoryTimeline.storyboard in Resources */,
+				C5F14B742979E5B100233909 /* swiftgen.yml in Resources */,
+				C5F14B772979EC5300233909 /* Localizable.strings in Resources */,
 				0071E91E251FF6F50025702E /* SignInViewController.storyboard in Resources */,
 				0070DFF624B0060500E71F46 /* LaunchScreen.storyboard in Resources */,
 				005856BC24D91C4A0010BE55 /* GoogleService-Info.plist in Resources */,
@@ -731,7 +739,7 @@
 			shellPath = /bin/sh;
 			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nif which swiftlint >/dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
 		};
-		226485862AE68C60632ABDF8 /* [CP] Embed Pods Frameworks */ = {
+		2465337B35A55FFA7DD5D6C6 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -748,24 +756,7 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Jigsaw/Pods-Jigsaw-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		27CE12BA8668765A5779CF0A /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Jigsaw/Pods-Jigsaw-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Jigsaw/Pods-Jigsaw-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Jigsaw/Pods-Jigsaw-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		892A259DB79323E101574CDB /* [CP] Check Pods Manifest.lock */ = {
+		6BBA0005C545D7B548D68484 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -786,6 +777,41 @@
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
+		};
+		C3FB92F52224C69B0BCC0A43 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Jigsaw/Pods-Jigsaw-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Jigsaw/Pods-Jigsaw-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Jigsaw/Pods-Jigsaw-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C5CCF7872979E394007631EC /* Run Script */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Run Script";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if [[ -f \"${PODS_ROOT}/SwiftGen/bin/swiftgen\" ]]; then\n  \"${PODS_ROOT}/SwiftGen/bin/swiftgen\"\nelse\n  echo \"warning: SwiftGen is not installed. Run 'pod install --repo-update' to install it.\"\nfi \n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -822,6 +848,7 @@
 				0047630624ED1154007767A5 /* GameCategory.swift in Sources */,
 				00BA555D24DA7CF7006A207E /* Gender.swift in Sources */,
 				00E8BA562536DEF900863F7D /* AppConstants.swift in Sources */,
+				C5F14B7D2979EE1D00233909 /* Strings+Generated.swift in Sources */,
 				007FC9542536202B00D8D9A1 /* RoomProgressViewController.swift in Sources */,
 				00B2AB7024DA5B3100607346 /* UIColor.swift in Sources */,
 				00CF5DC924F4DE9900B501BB /* InstructionQuestion.swift in Sources */,
@@ -900,6 +927,14 @@
 				0070DFF524B0060500E71F46 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		C5F14B792979EC5300233909 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C5F14B782979EC5300233909 /* en */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -1024,7 +1059,7 @@
 		};
 		0070E00624B0060500E71F46 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 880A66EE4B660B807C478CF4 /* Pods-Jigsaw.debug.xcconfig */;
+			baseConfigurationReference = 0096D5B1F9745AA5FBF320B0 /* Pods-Jigsaw.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Jigsaw/Jigsaw.entitlements;
@@ -1053,7 +1088,7 @@
 		};
 		0070E00724B0060500E71F46 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 73D1E3E31906BFDDEF8C86A3 /* Pods-Jigsaw.release.xcconfig */;
+			baseConfigurationReference = 0C9A03E3D4824F81B83A633D /* Pods-Jigsaw.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Jigsaw/Jigsaw.entitlements;

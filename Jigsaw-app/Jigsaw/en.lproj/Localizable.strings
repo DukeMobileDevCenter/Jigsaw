@@ -1,0 +1,234 @@
+/* 
+  Localizable.strings
+  Jigsaw
+
+  Created by Ruitong Su on 1/19/23.
+  Copyright © 2023 DukeMobileDevCenter. All rights reserved.
+*/
+
+// MARK: - OnboardingSteps
+"Onboarding.instruction.title" = "Welcome to Jigsaw Escape!";
+"Onboarding.instruction.detailText" = "In Jigsaw Escape, you will play interactive games and learn about opposing stances on important and polarizing issues. First, let's get you on board!";
+
+// MARK: - TeamRankingsViewController.swift
+"TeamRankingsViewController.TeamRankingsViewController.teamRankingsFooterLabel.text" = "Top 25 teams are displayed.";
+"TeamRankingsViewController.presentAlert.title" = "Placeholder my team";
+
+// MARK: - MetricsViewController.swift
+"MetricsViewController.set1.label" = "My Scores";
+"MetricsViewController.set2.label" = "Jigsaw Average";
+
+// MARK: - ChatViewController.swift
+"ChatViewController.confirmationAlert.title" = "Sure?";
+"ChatViewController.confirmationAlert.message" = "Are you sure you want to exit the chat? If you leave, you will go straight to the quiz and will not be able to come back.";
+"ChatViewController.messageInputBar.inputTextView.placeholder" = "Type here...";
+
+// MARK: - HomeCollectionViewController.swift
+"HomeCollectionViewController.navigationItem.title" = "Issues";
+"HomeCollectionViewController.handleRandomPerform.presentAlert.title" = "Info";
+"HomeCollectionViewController.handleRandomPerform.presentAlert.message" = "No random game available.";
+
+// MARK: - GameViewController.swift
+"GameViewController.chatroomInstructionStep.title" = "Chatroom";
+"GameViewController.chatroomInstructionStep.detailText" = "Hi team! You can now chat about what you've just seen.\nRemember that different team members have seen different pieces of information, and the whole team needs to know about all of these pieces in order to escape to the next room.";
+"GameViewController.questionsInstructionStep.title" = "Quiz";
+"GameViewController.questionsInstructionStep.detailText" = "You will now be quizzed on the information you and your teammate just shared.\nYou can escape this room if your team answers all of the following questions correctly.\nLet's go!🤠";
+"GameViewController.waitStep.title" = "Please Wait";
+"GameViewController.waitStep.detailText" = "Please wait for other players to finish.";
+"GameViewController.createSurveyTask.completionStep.title" = "Room Escaped 🎉";
+
+// MARK: - RoomProgressViewController.swift
+"RoomProgressViewController.currentRoom.gameCompleted.roomLevelLabel.text" = "You've completed the game! 🎉";
+"RoomProgressViewController.currentRoom.broken.roomLevelLabel.text" = "Jigsaw broken 😞";
+"RoomProgressViewController.viewDidLoad.ProgressHUD.show" = "Loading Rooms";
+
+// MARK: - DemographicsViewController.swift
+"DemographicsViewController.viewDidLoad.title" = "Demographics";
+// MARK: - ProfileViewController.swift
+"ProfileViewController.viewWillAppear.headerRow.tag" = "ProfileHeaderRow";
+"ProfileViewController.reloadRows.headerRow.tag" = "ProfileHeaderRow";
+"ProfileViewController.reloadRows.jigsawValueRow.tag" = "JigsawValueRow";
+"ProfileViewController.reloadRows.joinDateRow.tag" = "JoinDateRow";
+"ProfileViewController.userAccountBarButtonTapped.connectAction.title" = "Connect Online Account";
+"ProfileViewController.userAccountBarButtonTapped.signOutAction.title" = "Sign Out";
+"ProfileViewController.userAccountBarButtonTapped.signOutAction.alert.title" = "Be careful";
+"ProfileViewController.userAccountBarButtonTapped.signOutAction.alert.message" = "Sign out from anonymous account will lose all your data. Please confirm before proceed.";
+"ProfileViewController.userAccountBarButtonTapped.cancelAction.title" = "Cancel";
+// MARK: - GameHistoryTimelineTableViewController.swift
+"GameHistoryTimelineTableViewController.viewDidLoad.title" = "Game History";
+
+// MARK: - SignInViewController.swift
+"SignInViewController.playAnonymouslyButtonTapped.alert.title" = "Info";
+"SignInViewController.playAnonymouslyButtonTapped.alert.message" = "Playing anonymously might result in losing game records. Connect to one of your online accounts in your profile later.";
+
+//MARK: - GameError.swfit
+"GameError.GameError.description.currentPlayerDropped" = "😢 You didn't pass the game.";
+"GameError.GameError.description.otherPlayerDropped" = "😢 Your teammate just quit the game. Please go back to the home screen to find a new teammate.";
+"GameError.GameError.description.maxAttemptReached" = "😞 Max attempts reached.";
+"GameError.GameError.description.otherPlayerFailed" = "🤨 Your peers didn't pass the room.\nHelp them and try again!";
+"GameError.GameError.description.unknown" = "🤐 Unknown error. Developers are trembling. 🤯";
+
+//MARK: - QuestionType.swift
+"QuestionType.QuestionType.instruction" = "INSTRUCTION";
+"QuestionType.QuestionType.singleChoice" = "SINGLE CHOICE";
+"QuestionType.QuestionType.multipleChoice" = "MULTIPLE CHOICE";
+"QuestionType.QuestionType.numeric" = "NUMERIC";
+"QuestionType.QuestionType.scale" = "SCALE";
+"QuestionType.QuestionType.continuousScale" = "CONTINUOUS SCALE";
+"QuestionType.QuestionType.boolean" = "BOOLEAN";
+"QuestionType.QuestionType.unknown" = "UNKNOWN";
+
+
+//MARK: - AnswerCategory.swift
+"AnswerCategory.AnswerCategory.label.correct" = "Correct";
+"AnswerCategory.AnswerCategory.label.skipped" = "Skipped";
+"AnswerCategory.AnswerCategory.label.incorrect" = "Incorrect";
+"AnswerCategory.AnswerCategory.label.unknown" = "Unknown";
+
+//MARK: - Message.swift
+"Message.ControlMetaMessage.join" = "****join****";
+"Message.ControlMetaMessage.leave" = "****leave****";
+"Message.ControlMetaMessage.label.join" = "joined";
+"Message.ControlMetaMessage.label.leave" = "left";
+
+//MARK: - AppConstants.swift
+"AppConstants.AppConstants.feedbackFormURL" = "https://docs.google.com/forms/d/e/1FAIpQLSfgHUhazZeB1pfKQ_i_vSubSkkejVCiXTDz49uRIvUi5QBpYg/viewform";
+"AppConstants.AppConstants.surveyURL" = "https://duke.qualtrics.com/jfe/form/SV_eRFROcIlVmfq27I";
+
+//MARK: - OnboardingSteps.swift
+"OnboardingSteps.OnboardingSteps.instructionStep.title" = "Welcome to Jigsaw Escape!";
+"OnboardingSteps.OnboardingSteps.instructionStep.detailText" = "In Jigsaw Escape, you will play interactive games and learn about opposing stances on important and polarizing issues. First, let's get you on board!";
+
+"OnboardingSteps.OnboardingSteps.informedConsentInstructionStep.title" = "Before We Start";
+"OnboardingSteps.OnboardingSteps.informedConsentInstructionStep.detailText" = "The goal of this game is to escape from a series of rooms by cooperating with your team in information-gathering tasks about a controversial political issue.\n";
+"OnboardingSteps.OnboardingSteps.informedConsentInstructionStep.infoItem.text" = "Each member of your team will receive crucial pieces of information about common arguments for positions on the issue.  Each team member will receive bits of information that others do not have.";
+"OnboardingSteps.OnboardingSteps.informedConsentInstructionStep.chatItem.text" = "You will then chat as a team to share the information that each team member has seen.";
+"OnboardingSteps.OnboardingSteps.informedConsentInstructionStep.quizItem.text" = "After chatting, each member of your team  will separately take a short quiz covering all the information gathered and shared by all of your team members.";
+"OnboardingSteps.OnboardingSteps.informedConsentInstructionStep.retryItem.text" = "If everyone on your team passes the quiz, then your whole team escapes that room---hurrah!---and you can go on to the next room. If your team does not all pass the quiz, then you will have a chance to go back into the chat to discuss the questions that were missed. Then your team will have another chance to escape the room by each team member passing a quiz on the same quotations.";
+"OnboardingSteps.OnboardingSteps.informedConsentInstructionStep.rankingItem.text" = "Teams will be ranked on the percentage of quiz questions that the team gets correct. Ties will be broken by how quickly the team was able to move through all of the rooms in this series.";
+
+"OnboardingSteps.OnboardingSteps.politicalSliderStep.politicalSliderStep.title" = "Jigsaw Value";
+"OnboardingSteps.OnboardingSteps.politicalSliderStep.politicalSliderStep.question" = "Please indicate your political orientation on the slider below.";
+
+"OnboardingSteps.OnboardingSteps.completionStep.completionStep.title" = "All Done";
+"OnboardingSteps.OnboardingSteps.completionStep.completionStep.detailText" = "Start playing now!";
+
+//MARK: - JigsawPiece.swift
+"JigsawPiece.JigsawPiece.label.green" = "Green piece";
+"JigsawPiece.JigsawPiece.label.orange" = "Orange piece";
+"JigsawPiece.JigsawPiece.label.purple" = "Purple piece";
+"JigsawPiece.JigsawPiece.label.yellow" = "Yellow piece";
+"JigsawPiece.JigsawPiece.label.unknown" = "Jigsaw piece";
+
+"JigsawPiece.JigsawPiece.bundleName.green" = "jigsaw-green";
+"JigsawPiece.JigsawPiece.bundleName.orange" = "jigsaw-orange";
+"JigsawPiece.JigsawPiece.bundleName.purple" = "jigsaw-purple";
+"JigsawPiece.JigsawPiece.bundleName.yellow" = "jigsaw-yellow";
+"JigsawPiece.JigsawPiece.bundleName.unknown" = "jigsaw-unknown";
+
+// MARK: - GameCenterConstants.swift
+"GameCenterConstants.GameCenterConstants.averageScoreLeaderboardID"  = "edu.duke.mobilecenter.JigsawBeta.averageScore";
+"GameCenterConstants.GameCenterConstants.gamesPlayedLeaderboardID" = "edu.duke.mobilecenter.JigsawBeta.gamesPlayed";
+"GameCenterConstants.GameCenterConstants.getFinishedAchievementID.category.economy" = "edu.duke.mobilecenter.JigsawBeta.economyFinished";
+
+//MARK: - Gender.swift
+"Gender.Gender.label.male" = "Male";
+"Gender.Gender.label.female" = "Female";
+"Gender.Gender.label.other" = "Other";
+"Gender.Gender.label.unknown" = "Prefer not to answer";
+
+//MARK: - EducationLevel.swift
+"EducationLevel.EducationLevel.label.highSchool" = "High school or less";
+"EducationLevel.EducationLevel.label.college" = "Some college";
+"EducationLevel.EducationLevel.label.graduate" = "College graduate";
+"EducationLevel.EducationLevel.label.postGraduate" = "Post graduates";
+"EducationLevel.EducationLevel.label.unknown" = "Prefer not to answer";
+
+//MARK: - Ethnicity.swift
+"Ethnicity.Ethnicity.label.white" = "White";
+"Ethnicity.Ethnicity.label.black" = "Black or African American";
+"Ethnicity.Ethnicity.label.hispanic" = "Hispanic or Latino";
+"Ethnicity.Ethnicity.label.native" = "American Indian or Alaska Native";
+"Ethnicity.Ethnicity.label.asian" = "Asian";
+"Ethnicity.Ethnicity.label.other" = "Other";
+"Ethnicity.Ethnicity.label.unknown" = "Prefer not to answer";
+
+//MARK: - AgeGroup.swift
+"AgeGroup.AgeGroup.label.group15minus" = "15-";
+"AgeGroup.AgeGroup.label.group1520" = "15-20";
+"AgeGroup.AgeGroup.label.group2130" = "21-30";
+"AgeGroup.AgeGroup.label.group3140" = "31-40";
+"AgeGroup.AgeGroup.label.group4150" = "41-50";
+"AgeGroup.AgeGroup.label.group5160" = "51-60";
+"AgeGroup.AgeGroup.label.group61plus" = "61+";
+"AgeGroup.AgeGroup.label.unknown" = "Prefer not to answer";
+
+//MARK: - GameCenterHelper.swift
+"GameCenterHelper.GameCenterHelper.loadAchievements.error" = "Error: %@";
+"GameCenterHelper.GameCenterHelper.submitAverageScore.if" = "Error: %@";
+"GameCenterHelper.GameCenterHelper.submitAverageScore.else" = "✅ Average score reported.";
+"GameCenterHelper.GameCenterHelper.submitGamesPlayed.if" = "Error: %@";
+"GameCenterHelper.GameCenterHelper.submitGamesPlayed.else" = "✅ Games played reported.";
+"GameCenterHelper.GameCenterHelper.submitFinishedAchievement.if" = "Error: %@";
+"GameCenterHelper.GameCenterHelper.submitFinishedAchievement.else" = "✅ Achievement reported for %@";
+"GameCenterHelper.Notification.Name.authenticationChanged" = "authenticationChanged";
+
+//MARK: - AppInfo.swift
+"AppInfo.AppInfo.versionNumber" = "CFBundleShortVersionString";
+
+//MARK: - Game.swift
+"Game.init.version" = "version";
+"Game.init.level" = "level";
+"Game.init.maxAttempts" = "maxAttempts";
+"Game.init.gameName" = "gameName";
+"Game.init.detailText" = "detailText";
+"Game.init.introductionText" = "introduction";
+"Game.init.group1resourceContents" = "group1resourceContents";
+"Game.init.group2resrouceContents" = "group2resourceContents";
+"Game.init.backgroundImageURL" = "backgroundImageURL";
+"Game.init.categoryString" = "category";
+"Game.init.group1Questionnaires" = "group1Questionnaires";
+"Game.init.group2Questionnaires" = "group2Questionnaires";
+"Game.decodeQuestionnaireData.questionTypeString" = "questionType";
+
+//MARK: - GameStore.swift
+"GameStore.GameStore.collectionView.cell.withReuseIdentifier" = "GameCollectionCell";
+"GameStore.GameStore.collectionView.if.cell.iconImageView.image" = "🎉";
+"GameStore.GameStore.collectionView.else.cell.nameLabel.text" = "???";
+"GameStore.GameStore.collectionView.else.cell.iconImageView.image.systemName" = "lock";
+
+//MARK: - GameCategory.swift
+"GameCategory.iconImage.immigration" = "shield.lefthalf.fill";
+"GameCategory.iconImage.economy" = "books.vertical.fill";
+"GameCategory.iconImage.justice" = "banknote.fill";
+"GameCategory.iconImage.environment" = "rectangle.badge.checkmark";
+"GameCategory.iconImage.health" = "dollarsign.circle";
+"GameCategory.iconImage.international" = "equal.circle.fill";
+"GameCategory.iconImage.random" = "questionmark";
+"GameCategory.iconImage.demo" = "questionmark";
+"GameCategory.iconImage.minimumWage" = "dollarsign.circle";
+"GameCategory.iconImage.charterSchools" = "book";
+
+"GameCategory.label.immigration" = "Immigration";
+"GameCategory.label.economy" = "Charter Schools";
+"GameCategory.label.justice" = "Minimum Wage";
+"GameCategory.label.environment" = "Electoral College";
+"GameCategory.label.health" = "Economic Inequality";
+"GameCategory.label.international" = "Affirmative Action";
+"GameCategory.label.random" = "Random";
+"GameCategory.label.demo" = "Demo";
+"GameCategory.label.charterSchools" = "Charter Schools";
+"GameCategory.label.minimumWage" = "Minimum Wage";
+
+"GameCategory.detailText.immigration" = "Immigration is the international movement of people to a destination country of which they are not natives or where they do not possess citizenship in order to settle as permanent residents or naturalized citizens.";
+"GameCategory.detailText.economy" = "Charter schools are publicly-funded, privately-operated schools.";
+"GameCategory.detailText.justice" = "Minimum wage is the legal minimum hourly wage a person may be paid for their labor.";
+"GameCategory.detailText.environment" = "Is it time to get rid of the Electoral College? The United States is unique in using an Electoral College to elect the President.";
+"GameCategory.detailText.health" = "Should the government reduce economic inequality by redistributing wealth?";
+"GameCategory.detailText.international" = "Affirmative action refers to a policy of preferring minorities from underrepresented groups for college admission.";
+"GameCategory.detailText.random" = "Lead me to a random topic!";
+"GameCategory.detailText.demo" = "Get ready to jump into adventure! Welcome to the exciting world of Jigsaw!";
+"GameCategory.detailText.minimumWage" = "Minimum wage is the legal minimum hourly wage a person may be paid for their labor.";
+"GameCategory.detailText.charterSchools" = "Charter schools are publicly-funded, privately-operated schools.";
+
+"GameCategory.GameCategoryClass.collectionView.cell.withReuseIdentifier" = "GameCollectionCell";
