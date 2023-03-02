@@ -91,6 +91,7 @@
 		00F2197E24CCF9A200B72858 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F2197D24CCF9A200B72858 /* ProfileViewController.swift */; };
 		00F6302224EE385E00BCAD11 /* AnswerCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F6302124EE385E00BCAD11 /* AnswerCategory.swift */; };
 		2EF156BD29AEE4D80090AED0 /* Localizable2.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2EF156BC29AEE4D80090AED0 /* Localizable2.strings */; };
+		37094EC029B020590044F2EA /* Localizable3.strings in Resources */ = {isa = PBXBuildFile; fileRef = 37094EBE29B020590044F2EA /* Localizable3.strings */; };
 		AFA264EE6A378B6ACEF37706 /* Pods_Jigsaw.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7AE24AC45EC3E71E51CD3B5 /* Pods_Jigsaw.framework */; };
 /* End PBXBuildFile section */
 
@@ -221,6 +222,7 @@
 		00F2197D24CCF9A200B72858 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		00F6302124EE385E00BCAD11 /* AnswerCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswerCategory.swift; sourceTree = "<group>"; };
 		2EF156BC29AEE4D80090AED0 /* Localizable2.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable2.strings; sourceTree = "<group>"; };
+		37094EBF29B020590044F2EA /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = Localizable3.strings; sourceTree = "<group>"; };
 		73D1E3E31906BFDDEF8C86A3 /* Pods-Jigsaw.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Jigsaw.release.xcconfig"; path = "Target Support Files/Pods-Jigsaw/Pods-Jigsaw.release.xcconfig"; sourceTree = "<group>"; };
 		880A66EE4B660B807C478CF4 /* Pods-Jigsaw.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Jigsaw.debug.xcconfig"; path = "Target Support Files/Pods-Jigsaw/Pods-Jigsaw.debug.xcconfig"; sourceTree = "<group>"; };
 		F7AE24AC45EC3E71E51CD3B5 /* Pods_Jigsaw.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Jigsaw.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -539,6 +541,7 @@
 			isa = PBXGroup;
 			children = (
 				2EF156BC29AEE4D80090AED0 /* Localizable2.strings */,
+				37094EBE29B020590044F2EA /* Localizable3.strings */,
 			);
 			path = en.lproj;
 			sourceTree = "<group>";
@@ -673,6 +676,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2EF156BD29AEE4D80090AED0 /* Localizable2.strings in Resources */,
+				37094EC029B020590044F2EA /* Localizable3.strings in Resources */,
 				00B6306324FB26A8008975CE /* GameHistoryTimeline.storyboard in Resources */,
 				0071E91E251FF6F50025702E /* SignInViewController.storyboard in Resources */,
 				0070DFF624B0060500E71F46 /* LaunchScreen.storyboard in Resources */,
@@ -900,6 +904,14 @@
 				0070DFF524B0060500E71F46 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		37094EBE29B020590044F2EA /* Localizable3.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				37094EBF29B020590044F2EA /* en */,
+			);
+			name = Localizable3.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
