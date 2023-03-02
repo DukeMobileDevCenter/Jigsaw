@@ -30,6 +30,8 @@ class HomeCollectionViewController: UICollectionViewController {
         let button = UIButton(type: .system)
         button.setImage(gameControllerImage, for: .normal)
         button.setTitle("Demo", for: .normal)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 16) // Decrease font size to fit title
+        button.contentEdgeInsets = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 8) // Increase button width
         button.addTarget(self, action: #selector(demoButtonTapped), for: .touchUpInside)
         return UIBarButtonItem(customView: button)
     }()
