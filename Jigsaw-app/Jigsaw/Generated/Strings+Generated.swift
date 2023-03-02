@@ -297,18 +297,6 @@ public enum Strings {
       }
     }
   }
-  public enum GameGroup {
-    public enum GameGroup {
-      public enum UserScoreString {
-        /// @
-        public static let  = Strings.tr("Localizable", "GameGroup.GameGroup.userScoreString.@", fallback: "@")
-        /// %.6f
-        public static func format(_ p1: Float) -> String {
-          return Strings.tr("Localizable", "GameGroup.GameGroup.userScoreString.format", p1, fallback: "%.6f")
-        }
-      }
-    }
-  }
   public enum GameHistoryTimelineTableViewController {
     public enum ViewDidLoad {
       /// Game History

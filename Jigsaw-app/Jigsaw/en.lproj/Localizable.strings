@@ -191,11 +191,6 @@
 "Game.init.group2Questionnaires" = "group2Questionnaires";
 "Game.decodeQuestionnaireData.questionTypeString" = "questionType";
 
-//MARK: - GameGroup.swift
-
-"GameGroup.GameGroup.userScoreString.@" = "@";
-"GameGroup.GameGroup.userScoreString.format" = "%.6f";
-
 //MARK: - GameStore.swift
 "GameStore.GameStore.collectionView.cell.withReuseIdentifier" = "GameCollectionCell";
 "GameStore.GameStore.collectionView.if.cell.iconImageView.image" = "🎉";
