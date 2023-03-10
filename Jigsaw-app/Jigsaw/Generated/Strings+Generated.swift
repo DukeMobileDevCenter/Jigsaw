@@ -74,6 +74,40 @@ public enum Strings {
       }
     }
   }
+  public enum DemoGame {
+    ///  ## Instructions
+    /// 
+    ///   The whole game will take around 10 minutes.
+    /// 
+    ///   * On the next screen, you will be shown a statement about one side of the issue. Your teammate will be shown a statement about another side of the same issue. Afterwards, you'll have a chance to share your statement with your teammate in a chatroom and learn about the statement that your teammate saw.
+    /// 
+    ///   * Quotations have been edited only for typos and clarity.
+    public static let instruction = Strings.tr("Localizable", "DemoGame.instruction", fallback: " ## Instructions\n\n  The whole game will take around 10 minutes.\n\n  * On the next screen, you will be shown a statement about one side of the issue. Your teammate will be shown a statement about another side of the same issue. Afterwards, you'll have a chance to share your statement with your teammate in a chatroom and learn about the statement that your teammate saw.\n\n  * Quotations have been edited only for typos and clarity.")
+    ///   **Does affirmative action on campus do more harm than good?**
+    /// 
+    ///   Affirmative action refers to a policy of preferring minorities from underrepresented groups for college admission. Some argue that affirmative action is crucial for promoting diversity and providing equal opportunity to access higher education. Critics argue that the policy often benefits affluent students who already have numerous educational advantages. Should colleges continue to use affirmative action to make admissions decisions, or is it time for a different approach? Here is a controversial claim sometimes made about this issue:
+    /// 
+    ///   *Affirmative action on campus does more harm than good.*
+    /// 
+    ///   In what follows, you will see reasons given for and against this claim from people on both sides of the debate.
+    public static let introduction = Strings.tr("Localizable", "DemoGame.introduction", fallback: "  **Does affirmative action on campus do more harm than good?**\n\n  Affirmative action refers to a policy of preferring minorities from underrepresented groups for college admission. Some argue that affirmative action is crucial for promoting diversity and providing equal opportunity to access higher education. Critics argue that the policy often benefits affluent students who already have numerous educational advantages. Should colleges continue to use affirmative action to make admissions decisions, or is it time for a different approach? Here is a controversial claim sometimes made about this issue:\n\n  *Affirmative action on campus does more harm than good.*\n\n  In what follows, you will see reasons given for and against this claim from people on both sides of the debate.")
+    /// Affirmative action programs encourage people to pursue education when they might otherwise have been discouraged. Affirmative action is necessary to redress past racial injustices—and their ongoing effects—and to fight the present forms of discrimination that pervade society today.
+    public static let prompt = Strings.tr("Localizable", "DemoGame.prompt", fallback: "Affirmative action programs encourage people to pursue education when they might otherwise have been discouraged. Affirmative action is necessary to redress past racial injustices—and their ongoing effects—and to fight the present forms of discrimination that pervade society today.")
+    public enum Questions {
+      public enum One {
+        /// a. To redress past racial injustices
+        public static let a = Strings.tr("Localizable", "DemoGame.questions.one.a", fallback: "a. To redress past racial injustices")
+        /// b. To meet new federal quotas for diversity in higher education
+        public static let b = Strings.tr("Localizable", "DemoGame.questions.one.b", fallback: "b. To meet new federal quotas for diversity in higher education")
+        /// c. To help colleges retain non-profit status
+        public static let c = Strings.tr("Localizable", "DemoGame.questions.one.c", fallback: "c. To help colleges retain non-profit status")
+        /// d. To raise the cost of tuition
+        public static let d = Strings.tr("Localizable", "DemoGame.questions.one.d", fallback: "d. To raise the cost of tuition")
+        /// According to one of the statements that you and your teammate saw, what is a reason for affirmative action?
+        public static let prompt = Strings.tr("Localizable", "DemoGame.questions.one.prompt", fallback: "According to one of the statements that you and your teammate saw, what is a reason for affirmative action?")
+      }
+    }
+  }
   public enum DemographicsViewController {
     public enum ViewDidLoad {
       /// Demographics

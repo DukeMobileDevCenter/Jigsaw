@@ -37,9 +37,9 @@ class CategoryViewController: UIViewController {
         }
         // demo game
         else {
-            introductionLabel.text = "Jigsaw is an app that helps reduce bias and miscommunication among people with different political stances. The demo game page offers a fun and engaging jigsaw puzzle experience that promotes empathy and collaboration. By working towards a common goal, players from different political perspectives learn to understand and respect each other. Play the demo game and see how Jigsaw is changing the game when it comes to depolarization."
+            let attributedText = try? Down(markdownString: Strings.DemoGame.instruction).toAttributedString(.default, stylesheet: darkMode ? AppConstants.darkModeStylesheet : AppConstants.simpleStylesheet)
+            introductionLabel.attributedText = attributedText
         }
-            
     }
     
     override func viewWillAppear(_ animated: Bool) {

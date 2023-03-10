@@ -232,3 +232,25 @@
 "GameCategory.detailText.charterSchools" = "Charter schools are publicly-funded, privately-operated schools.";
 
 "GameCategory.GameCategoryClass.collectionView.cell.withReuseIdentifier" = "GameCollectionCell";
+
+// Mark: - Demo Game
+"DemoGame.introduction" = "  **Does affirmative action on campus do more harm than good?**
+
+  Affirmative action refers to a policy of preferring minorities from underrepresented groups for college admission. Some argue that affirmative action is crucial for promoting diversity and providing equal opportunity to access higher education. Critics argue that the policy often benefits affluent students who already have numerous educational advantages. Should colleges continue to use affirmative action to make admissions decisions, or is it time for a different approach? Here is a controversial claim sometimes made about this issue:
+
+  *Affirmative action on campus does more harm than good.*
+
+  In what follows, you will see reasons given for and against this claim from people on both sides of the debate.";
+"DemoGame.instruction" = " ## Instructions
+
+  The whole game will take around 10 minutes.
+
+  * On the next screen, you will be shown a statement about one side of the issue. Your teammate will be shown a statement about another side of the same issue. Afterwards, you'll have a chance to share your statement with your teammate in a chatroom and learn about the statement that your teammate saw.
+
+  * Quotations have been edited only for typos and clarity.";
+"DemoGame.prompt" = "Affirmative action programs encourage people to pursue education when they might otherwise have been discouraged. Affirmative action is necessary to redress past racial injustices—and their ongoing effects—and to fight the present forms of discrimination that pervade society today.";
+"DemoGame.questions.one.prompt" = "According to one of the statements that you and your teammate saw, what is a reason for affirmative action?";
+"DemoGame.questions.one.a" = "a. To redress past racial injustices";
+"DemoGame.questions.one.b" = "b. To meet new federal quotas for diversity in higher education";
+"DemoGame.questions.one.c" = "c. To help colleges retain non-profit status";
+"DemoGame.questions.one.d" = "d. To raise the cost of tuition";

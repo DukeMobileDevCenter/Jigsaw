@@ -10,10 +10,10 @@ import ResearchKit
 import Down
 
 class GameViewController: ORKTaskViewController {
-//    private let game: GameOfGroup
+    //    private let game: GameOfGroup
     
     init(game: GameOfGroup, currentRoom: Int, taskRun taskRunUUID: UUID? = nil, isDemo: Bool = false) {
-//        self.game = game
+        //        self.game = game
         super.init(task: nil, taskRun: taskRunUUID)
         task = createSurveyTask(from: game, currentRoom: currentRoom)
     }
@@ -42,10 +42,10 @@ class GameViewController: ORKTaskViewController {
     
     private let chatroomCountdownStep: ORKActiveStep = {
         let step = ORKActiveStep(identifier: "Countdown")
-//        step.stepDuration = TimeInterval(integerLiteral: 240)
-//        step.shouldShowDefaultTimer = true
-//        step.shouldStartTimerAutomatically = true
-//        step.shouldUseNextAsSkipButton = true
+        //        step.stepDuration = TimeInterval(integerLiteral: 240)
+        //        step.shouldShowDefaultTimer = true
+        //        step.shouldStartTimerAutomatically = true
+        //        step.shouldUseNextAsSkipButton = true
         step.shouldContinueOnFinish = true
         return step
     }()
@@ -132,58 +132,43 @@ class GameViewController: ORKTaskViewController {
     }
     
     private func createDemoTask() -> ORKNavigableOrderedTask {
-            var steps = [ORKStep]()
+        var steps = [ORKStep]()
 
-            // Resource reading page.
-            let promptStep = ORKInstructionStep(identifier: "Resource")
-            promptStep.detailText = "A statement will be shown in the actual game. Please read it carefully, as you will not be able to view it again once you move on."
-            steps.append(promptStep)
+        // Resource reading page.
+        let promptStep = ORKInstructionStep(identifier: "Resource")
+        promptStep.detailText = "Please read the following statement carefully. Once you move on, you will not be able to view it again.\n\n\(Strings.DemoGame.prompt)"
+        steps.append(promptStep)
 
-            // Chatroom instruction step.
-            steps.append(chatroomInstructionStep)
+        // Chatroom instruction step.
+        steps.append(chatroomInstructionStep)
 
-            // Chatroom step.
-            steps.append(chatroomCountdownStep)
+        // Chatroom step.
+        steps.append(chatroomCountdownStep)
 
-            // Questions instructions step.
-            steps.append(questionsInstructionStep)
+        // Questions instructions step.
+        steps.append(questionsInstructionStep)
 
-            // Sample questions.
-//            let multipleChoiceQuestion = MultipleChoiceQuestion(
-//                title: "sample_multiple_choice",
-//                prompt: "What is the capital of France?",
-//                isOptional: false,
-//                choices: ["Paris", "London", "New York"]
-//            )
-//            let booleanQuestion = BooleanQuestion(
-//                title: "sample_boolean",
-//                prompt: "Is the earth flat?",
-//                isOptional: false,
-//                trueDescription: "Yes",
-//                falseDescription: "No"
-//            )
-//            let scaleQuestion = ScaleQuestion(
-//                title: "sample_scale",
-//                prompt: "How much do you like apples?",
-//                isOptional: false,
-//                maxValue: 10,
-//                minValue: 0,
-//                step: 1,
-//                defaultValue: 5,
-//                maxDescription: "I like it very much",
-//                minDescription: "I don't like it at all"
-//            )
+        let questionOneData: [String: Any] = [
+            "title": "Single Choice Question",
+            "prompt": Strings.DemoGame.Questions.One.prompt,
+            "isOptional": false,
+            "choices": [Strings.DemoGame.Questions.One.a,
+                        Strings.DemoGame.Questions.One.b,
+                        Strings.DemoGame.Questions.One.c,
+                        Strings.DemoGame.Questions.One.d],
+            "correctAnswer": Strings.DemoGame.Questions.One.a
+        ]
 
-            steps.append(QuestionStepsModel.multipleChoiceStep(question: MultipleChoiceQuestion()))
-//            steps.append(QuestionStepsModel.booleanStep(question: booleanQuestion))
-//            steps.append(QuestionStepsModel.scaleStep(question: scaleQuestion))
+        let questionOne = SingleChoiceQuestion(data: questionOneData)
 
-            // Completion instruction.
-            let completionStep = ORKOrderedTask.makeCompletionStep()
-            completionStep.title = "Room Escaped 🎉"
-            completionStep.text = "Congratulations on escaping the Room.\nKeep going!"
-            steps.append(completionStep)
-            let task = ORKNavigableOrderedTask(identifier: "demoTask", steps: steps)
-            return task
-        }
+        steps.append(QuestionStepsModel.singleChoiceStep(question: questionOne!))
+
+        // Completion instruction.
+        let completionStep = ORKOrderedTask.makeCompletionStep()
+        completionStep.title = "Room Escaped 🎉"
+        completionStep.text = "Congratulations on escaping the Room.\nKeep going!"
+        steps.append(completionStep)
+        let task = ORKNavigableOrderedTask(identifier: "demoTask", steps: steps)
+        return task
+    }
 }
