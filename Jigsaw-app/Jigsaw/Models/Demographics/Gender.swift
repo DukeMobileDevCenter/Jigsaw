@@ -24,13 +24,13 @@ enum Gender: String, CaseIterable, Codable, CaseReverseInit {
     var label: String {
         switch self {
         case .male:
-            return "Male"
+            return Strings.Gender.Gender.Label.male
         case .female:
-            return "Female"
+            return Strings.Gender.Gender.Label.female
         case .other:
-            return "Other"
+            return Strings.Gender.Gender.Label.other
         case .unknown:
-            return "Prefer not to answer"
+            return Strings.Gender.Gender.Label.unknown
         }
     }
 }
