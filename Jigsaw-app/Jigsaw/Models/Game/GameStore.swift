@@ -193,7 +193,7 @@ extension GameStore: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "GameCollectionCell", for: indexPath) as! GameCollectionCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Strings.GameStore.GameStore.CollectionView.Cell.withReuseIdentifier, for: indexPath) as! GameCollectionCell
         // Find game.
         let game = getGames(for: selectedCategory)[indexPath.item]
         if game.isPlayed {
@@ -220,7 +220,7 @@ extension GameStore: UICollectionViewDataSource {
             cell.nameLabel.text = "???"
             // Set lock icon.
             cell.iconImageView.isHidden = false
-            cell.iconImageView.image = UIImage(systemName: "lock")!
+            cell.iconImageView.image = UIImage(systemName: Strings.GameStore.GameStore.CollectionView.Else.Cell.IconImageView.Image.systemName)!
             cell.iconBackgroundView.isHidden = false
             // Clear the image for reusing the cell.
             cell.backgroundImageView.image = nil
