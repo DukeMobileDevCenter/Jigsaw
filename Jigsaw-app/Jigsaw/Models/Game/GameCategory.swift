@@ -25,25 +25,25 @@ enum GameCategory: String, CaseIterable, Codable {
         let iconImage: UIImage
         switch self {
         case .immigration:
-            iconImage = UIImage(systemName: "shield.lefthalf.fill")!
+            iconImage = UIImage(systemName: Strings.GameCategory.IconImage.immigration)!
         case .economy:
-            iconImage = UIImage(systemName: "books.vertical.fill")!
+            iconImage = UIImage(systemName: Strings.GameCategory.IconImage.economy)!
         case .justice:
-            iconImage = UIImage(systemName: "banknote.fill")!
+            iconImage = UIImage(systemName: Strings.GameCategory.IconImage.justice)!
         case .environment:
-            iconImage = UIImage(systemName: "rectangle.badge.checkmark")!
+            iconImage = UIImage(systemName: Strings.GameCategory.IconImage.environment)!
         case .health:
-            iconImage = UIImage(systemName: "dollarsign.circle")!
+            iconImage = UIImage(systemName: Strings.GameCategory.IconImage.health)!
         case .international:
-            iconImage = UIImage(systemName: "equal.circle.fill")!
+            iconImage = UIImage(systemName: Strings.GameCategory.IconImage.international)!
         case .random:
-            iconImage = UIImage(systemName: "questionmark")!
+            iconImage = UIImage(systemName: Strings.GameCategory.IconImage.random)!
         case .demo:
-            iconImage = UIImage(systemName: "questionmark")!
+            iconImage = UIImage(systemName: Strings.GameCategory.IconImage.demo)!
         case .minimumWage:
-            iconImage = UIImage(systemName: "dollarsign.circle")!
+            iconImage = UIImage(systemName: Strings.GameCategory.IconImage.minimumWage)!
         case .charterSchools:
-            iconImage = UIImage(systemName: "book")!
+            iconImage = UIImage(systemName: Strings.GameCategory.IconImage.charterSchools)!
         }
         return iconImage
     }
@@ -55,50 +55,50 @@ enum GameCategory: String, CaseIterable, Codable {
     var label: String {
         switch self {
         case .immigration:
-            return "Immigration"
+            return Strings.GameCategory.Label.immigration
         case .economy:
-            return "Charter Schools"
+            return Strings.GameCategory.Label.charterSchools
         case .justice:
-            return "Minimum Wage"
+            return Strings.GameCategory.Label.justice
         case .environment:
-            return "Electoral College"
+            return Strings.GameCategory.Label.environment
         case .health:
-            return "Economic Inequality"
+            return Strings.GameCategory.Label.health
         case .international:
-            return "Affirmative Action"
+            return Strings.GameCategory.Label.international
         case .random:
-            return "Random"
+            return Strings.GameCategory.Label.random
         case .demo:
-            return "Demo"
+            return Strings.GameCategory.Label.demo
         case .charterSchools:
-            return "Charter Schools"
+            return Strings.GameCategory.Label.charterSchools
         case .minimumWage:
-            return "Minimum Wage"
+            return Strings.GameCategory.Label.minimumWage
         }
     }
     
     var detailText: String {
         switch self {
         case .immigration:
-            return "Immigration is the international movement of people to a destination country of which they are not natives or where they do not possess citizenship in order to settle as permanent residents or naturalized citizens."
+            return Strings.GameCategory.DetailText.immigration
         case .economy:
-            return "Charter schools are publicly-funded, privately-operated schools."
+            return Strings.GameCategory.DetailText.economy
         case .justice:
-            return "Minimum wage is the legal minimum hourly wage a person may be paid for their labor."
+            return Strings.GameCategory.DetailText.justice
         case .environment:
-            return "Is it time to get rid of the Electoral College? The United States is unique in using an Electoral College to elect the President."
+            return Strings.GameCategory.DetailText.environment
         case .health:
-            return "Should the government reduce economic inequality by redistributing wealth?"
+            return Strings.GameCategory.DetailText.health
         case .international:
-            return "Affirmative action refers to a policy of preferring minorities from underrepresented groups for college admission."
+            return Strings.GameCategory.DetailText.international
         case .random:
-            return "Lead me to a random topic!"
+            return Strings.GameCategory.DetailText.random
         case .demo:
-            return "Get ready to jump into adventure! Welcome to the exciting world of Jigsaw!"
+            return Strings.GameCategory.DetailText.demo
         case .minimumWage:
-            return "Minimum wage is the legal minimum hourly wage a person may be paid for their labor."
+            return Strings.GameCategory.DetailText.minimumWage
         case .charterSchools:
-            return "Charter schools are publicly-funded, privately-operated schools."
+            return Strings.GameCategory.DetailText.charterSchools
         }
     }
 }
