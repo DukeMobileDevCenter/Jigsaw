@@ -25,15 +25,15 @@ enum EducationLevel: String, CaseIterable, Codable, CaseReverseInit {
     var label: String {
         switch self {
         case .highSchool:
-            return "High school or less"
+            return Strings.EducationLevel.EducationLevel.Label.highSchool
         case .college:
-            return "Some college"
+            return Strings.EducationLevel.EducationLevel.Label.college
         case .graduate:
-            return "College graduate"
+            return Strings.EducationLevel.EducationLevel.Label.graduate
         case .postGraduate:
-            return "Post graduates"
+            return Strings.EducationLevel.EducationLevel.Label.postGraduate
         case .unknown:
-            return "Prefer not to answer"
+            return Strings.EducationLevel.EducationLevel.Label.unknown
         }
     }
 }
