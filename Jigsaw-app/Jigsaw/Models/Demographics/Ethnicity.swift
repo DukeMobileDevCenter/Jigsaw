@@ -27,19 +27,19 @@ enum Ethnicity: String, CaseIterable, Codable, CaseReverseInit {
     var label: String {
         switch self {
         case .white:
-            return "White"
+            return Strings.Ethnicity.Ethnicity.Label.white
         case .black:
-            return "Black or African American"
+            return Strings.Ethnicity.Ethnicity.Label.black
         case .hispanic:
-            return "Hispanic or Latino"
+            return Strings.Ethnicity.Ethnicity.Label.hispanic
         case .native:
-            return "American Indian or Alaska Native"
+            return Strings.Ethnicity.Ethnicity.Label.native
         case .asian:
-            return "Asian"
+            return Strings.Ethnicity.Ethnicity.Label.asian
         case .other:
-            return "Other"
+            return Strings.Ethnicity.Ethnicity.Label.other
         case .unknown:
-            return "Prefer not to answer"
+            return Strings.Ethnicity.Ethnicity.Label.unknown
         }
     }
 }
