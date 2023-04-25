@@ -9,12 +9,12 @@
 import Foundation
 
 enum QuestionType: String, Codable, CaseIterable {
-    case instruction = "INSTRUCTION"
-    case singleChoice = "SINGLE CHOICE"
-    case multipleChoice = "MULTIPLE CHOICE"
-    case numeric = "NUMERIC"
-    case scale = "SCALE"
-    case continuousScale = "CONTINUOUS SCALE"
-    case boolean = "BOOLEAN"
-    case unknown = "UNKNOWN"
+    case instruction = Strings.QuestionType.instruction
+    case singleChoice = Strings.QuestionType.singleChoice
+    case multipleChoice = Strings.QuestionType.multipleChoice
+    case numeric = Strings.QuestionType.numeric
+    case scale = Strings.QuestionType.scale
+    case continuousScale = Strings.QuestionType.continuousScale
+    case boolean = Strings.QuestionType.boolean
+    case unknown = Strings.QuestionType.unknown
 }
