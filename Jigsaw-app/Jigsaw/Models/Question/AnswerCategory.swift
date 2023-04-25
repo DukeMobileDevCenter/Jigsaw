@@ -17,13 +17,13 @@ enum AnswerCategory: String, CaseIterable, Codable {
     var label: String {
         switch self {
         case .correct:
-            return "Correct"
+            return Strings.AnswerCategory.AnswerCategory.Label.correct
         case .skipped:
-            return "Skipped"
+            return Strings.AnswerCategory.AnswerCategory.Label.skipped
         case .incorrect:
-            return "Incorrect"
+            return Strings.AnswerCategory.AnswerCategory.Label.incorrect
         case .unknown:
-            return "Unknown"
+            return Strings.AnswerCategory.AnswerCategory.Label.unknown
         }
     }
 }
