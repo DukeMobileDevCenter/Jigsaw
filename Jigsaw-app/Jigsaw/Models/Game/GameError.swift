@@ -19,18 +19,18 @@ enum GameError: LocalizedError, CustomStringConvertible {
     var description: String {
         switch self {
         case .currentPlayerDropped:
-            return "😢 You didn't pass the game."
+            return Strings.GameError.GameError.Description.currentPlayerDropped
         case .otherPlayerDropped:
-            return "😢 Your teammate just quit the game. Please go back to the home screen to find a new teammate."
+            return Strings.GameError.GameError.Description.otherPlayerDropped
         case .maxAttemptReached:
             // Also means the current player dropped.
-            return "😞 Max attempts reached."
+            return Strings.GameError.GameError.Description.maxAttemptReached
         case .currentPlayerFailed(let wrongCount):
             return "🤨 You didn't pass the room with \(wrongCount) wrong answers.\nDiscuss and try again!"
         case .otherPlayerFailed:
-            return "🤨 Your peers didn't pass the room.\nHelp them and try again!"
+            return Strings.GameError.GameError.Description.otherPlayerFailed
         case .unknown:
-            return "🤐 Unknown error. Developers are trembling. 🤯"
+            return Strings.GameError.GameError.Description.unknown
         }
     }
 }

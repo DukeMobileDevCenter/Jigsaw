@@ -11,8 +11,8 @@ import Foundation
 /// A static enum to keep information that would be shared among the app.
 enum AppConstants {
     /// The URL of feedback Google Forms.
-    static let feedbackFormURL = URL(string: "https://docs.google.com/forms/d/e/1FAIpQLSfgHUhazZeB1pfKQ_i_vSubSkkejVCiXTDz49uRIvUi5QBpYg/viewform")!
-    static let surveyURL = URL(string: "https://duke.qualtrics.com/jfe/form/SV_eRFROcIlVmfq27I")!
+    static let feedbackFormURL = URL(string: Strings.AppConstants.AppConstants.feedbackFormURL)!
+    static let surveyURL = URL(string: Strings.AppConstants.AppConstants.surveyURL)!
     
     /// A style sheet for displaying detail instruction text as well as preview text.
     static let simpleStylesheet =

@@ -25,39 +25,39 @@ enum OnboardingSteps {
     
     static let informedConsentInstructionStep: ORKInstructionStep = {
         let informedConsentInstructionStep = ORKInstructionStep(identifier: "ConsentStepIdentifier")
-        informedConsentInstructionStep.title = "Before We Start"
-        informedConsentInstructionStep.detailText = "The goal of this game is to escape from a series of rooms by cooperating with your team in information-gathering tasks about a controversial political issue.\n"
+        informedConsentInstructionStep.title = Strings.OnboardingSteps.OnboardingSteps.InformedConsentInstructionStep.title
+        informedConsentInstructionStep.detailText = Strings.OnboardingSteps.OnboardingSteps.InformedConsentInstructionStep.detailText
         informedConsentInstructionStep.iconImage = UIImage(systemName: "doc.plaintext")
         let infoItem = ORKBodyItem(
-            text: "Each member of your team will receive crucial pieces of information about common arguments for positions on the issue.  Each team member will receive bits of information that others do not have.",
+            text: Strings.OnboardingSteps.OnboardingSteps.InformedConsentInstructionStep.InfoItem.text,
             detailText: nil,
             image: UIImage(systemName: "info"),
             learnMoreItem: nil,
             bodyItemStyle: .image
         )
         let chatItem = ORKBodyItem(
-            text: "You will then chat as a team to share the information that each team member has seen.",
+            text: Strings.OnboardingSteps.OnboardingSteps.InformedConsentInstructionStep.ChatItem.text,
             detailText: nil,
             image: UIImage(systemName: "bubble.left.and.bubble.right"),
             learnMoreItem: nil,
             bodyItemStyle: .image
         )
         let quizItem = ORKBodyItem(
-            text: "After chatting, each member of your team  will separately take a short quiz covering all the information gathered and shared by all of your team members.",
+            text: Strings.OnboardingSteps.OnboardingSteps.InformedConsentInstructionStep.QuizItem.text,
             detailText: nil,
             image: UIImage(systemName: "checkmark.rectangle"),
             learnMoreItem: nil,
             bodyItemStyle: .image
         )
         let retryItem = ORKBodyItem(
-            text: "If everyone on your team passes the quiz, then your whole team escapes that room---hurrah!---and you can go on to the next room. If your team does not all pass the quiz, then you will have a chance to go back into the chat to discuss the questions that were missed. Then your team will have another chance to escape the room by each team member passing a quiz on the same quotations.",
+            text: Strings.OnboardingSteps.OnboardingSteps.InformedConsentInstructionStep.RetryItem.text,
             detailText: nil,
             image: UIImage(systemName: "repeat"),
             learnMoreItem: nil,
             bodyItemStyle: .image
         )
         let rankingItem = ORKBodyItem(
-            text: "Teams will be ranked on the percentage of quiz questions that the team gets correct. Ties will be broken by how quickly the team was able to move through all of the rooms in this series.",
+            text: Strings.OnboardingSteps.OnboardingSteps.InformedConsentInstructionStep.RankingItem.text,
             detailText: nil,
             image: UIImage(systemName: "list.bullet.indent"),
             learnMoreItem: nil,
@@ -84,8 +84,8 @@ enum OnboardingSteps {
         sliderAnswerFormat.gradientColors = [.systemBlue, .systemYellow, .systemRed]
         let politicalSliderStep = ORKQuestionStep(
             identifier: "PoliticalSliderStep",
-            title: "Jigsaw Value",
-            question: "Please indicate your political orientation on the slider below.",
+            title: Strings.OnboardingSteps.OnboardingSteps.PoliticalSliderStep.PoliticalSliderStep.title,
+            question: Strings.OnboardingSteps.OnboardingSteps.PoliticalSliderStep.PoliticalSliderStep.question,
             answer: sliderAnswerFormat
         )
         politicalSliderStep.isOptional = false
@@ -94,8 +94,8 @@ enum OnboardingSteps {
     
     static let completionStep: ORKCompletionStep = {
         let completionStep = ORKCompletionStep(identifier: "CompletionStep")
-        completionStep.title = "All Done"
-        completionStep.detailText = "Start playing now!"
+        completionStep.title = Strings.OnboardingSteps.OnboardingSteps.CompletionStep.CompletionStep.title
+        completionStep.detailText = Strings.OnboardingSteps.OnboardingSteps.CompletionStep.CompletionStep.detailText
         return completionStep
     }()
 }
