@@ -15,7 +15,7 @@ class TeamRankingsViewController: UITableViewController {
     private var rankings = [TeamRanking]() {
         didSet {
             tableView.reloadData()
-            teamRankingsFooterLabel.text = "Top 25 teams are displayed."
+            teamRankingsFooterLabel.text = Strings.TeamRankingsViewController.TeamRankingsViewController.TeamRankingsFooterLabel.text
         }
     }
     
@@ -62,7 +62,7 @@ class TeamRankingsViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let rank = rankings[indexPath.row]
         if rank.isMyTeam {
-            presentAlert(title: "Placeholder my team", message: rank.description)
+            presentAlert(title: Strings.TeamRankingsViewController.PresentAlert.title, message: rank.description)
         }
         tableView.deselectRow(at: indexPath, animated: true)
     }
