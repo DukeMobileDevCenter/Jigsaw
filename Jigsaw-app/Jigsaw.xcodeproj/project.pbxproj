@@ -90,7 +90,7 @@
 		00F2197C24CCF99800B72858 /* MetricsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F2197B24CCF99800B72858 /* MetricsViewController.swift */; };
 		00F2197E24CCF9A200B72858 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F2197D24CCF9A200B72858 /* ProfileViewController.swift */; };
 		00F6302224EE385E00BCAD11 /* AnswerCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F6302124EE385E00BCAD11 /* AnswerCategory.swift */; };
-		4B6BC5216F406984814D285C /* Pods_Jigsaw.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E56A7DB0937DE7CF6C2161B /* Pods_Jigsaw.framework */; };
+		8D14B9A8FAA282F3B687E4F1 /* Pods_Jigsaw.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 902ABC563029D528DA26A7F8 /* Pods_Jigsaw.framework */; };
 		C5F14B742979E5B100233909 /* swiftgen.yml in Resources */ = {isa = PBXBuildFile; fileRef = C5F14B732979E5B000233909 /* swiftgen.yml */; };
 		C5F14B772979EC5300233909 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = C5F14B792979EC5300233909 /* Localizable.strings */; };
 		C5F14B7D2979EE1D00233909 /* Strings+Generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5F14B7C2979EE1D00233909 /* Strings+Generated.swift */; };
@@ -180,7 +180,6 @@
 		0071E9222520161F0025702E /* FirebaseHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseHelper.swift; sourceTree = "<group>"; };
 		0078315124DF557800B35A98 /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		007FC9532536202B00D8D9A1 /* RoomProgressViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomProgressViewController.swift; sourceTree = "<group>"; };
-		0096D5B1F9745AA5FBF320B0 /* Pods-Jigsaw.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Jigsaw.debug.xcconfig"; path = "Target Support Files/Pods-Jigsaw/Pods-Jigsaw.debug.xcconfig"; sourceTree = "<group>"; };
 		00A06D8C24E8A9B400030649 /* GameGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameGroup.swift; sourceTree = "<group>"; };
 		00A88311252924CF00186BED /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
 		00A8831425292D4E00186BED /* GameCenterHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameCenterHelper.swift; sourceTree = "<group>"; };
@@ -223,11 +222,12 @@
 		00F2197B24CCF99800B72858 /* MetricsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetricsViewController.swift; sourceTree = "<group>"; };
 		00F2197D24CCF9A200B72858 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		00F6302124EE385E00BCAD11 /* AnswerCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswerCategory.swift; sourceTree = "<group>"; };
-		0C9A03E3D4824F81B83A633D /* Pods-Jigsaw.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Jigsaw.release.xcconfig"; path = "Target Support Files/Pods-Jigsaw/Pods-Jigsaw.release.xcconfig"; sourceTree = "<group>"; };
-		7E56A7DB0937DE7CF6C2161B /* Pods_Jigsaw.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Jigsaw.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1ADEC1718EF7F2DB876D06F8 /* Pods-Jigsaw.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Jigsaw.release.xcconfig"; path = "Target Support Files/Pods-Jigsaw/Pods-Jigsaw.release.xcconfig"; sourceTree = "<group>"; };
+		902ABC563029D528DA26A7F8 /* Pods_Jigsaw.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Jigsaw.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C5F14B732979E5B000233909 /* swiftgen.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = swiftgen.yml; sourceTree = SOURCE_ROOT; };
 		C5F14B782979EC5300233909 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		C5F14B7C2979EE1D00233909 /* Strings+Generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Strings+Generated.swift"; sourceTree = "<group>"; };
+		D23703800D9A344B94E12F71 /* Pods-Jigsaw.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Jigsaw.debug.xcconfig"; path = "Target Support Files/Pods-Jigsaw/Pods-Jigsaw.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -237,7 +237,7 @@
 			files = (
 				00A88312252924CF00186BED /* GameKit.framework in Frameworks */,
 				0055B0C42741E63000041454 /* ResearchKit.framework in Frameworks */,
-				4B6BC5216F406984814D285C /* Pods_Jigsaw.framework in Frameworks */,
+				8D14B9A8FAA282F3B687E4F1 /* Pods_Jigsaw.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -544,8 +544,8 @@
 		5468D76B6A3E1F4A42D79584 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				0096D5B1F9745AA5FBF320B0 /* Pods-Jigsaw.debug.xcconfig */,
-				0C9A03E3D4824F81B83A633D /* Pods-Jigsaw.release.xcconfig */,
+				D23703800D9A344B94E12F71 /* Pods-Jigsaw.debug.xcconfig */,
+				1ADEC1718EF7F2DB876D06F8 /* Pods-Jigsaw.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -554,7 +554,7 @@
 			isa = PBXGroup;
 			children = (
 				00A88311252924CF00186BED /* GameKit.framework */,
-				7E56A7DB0937DE7CF6C2161B /* Pods_Jigsaw.framework */,
+				902ABC563029D528DA26A7F8 /* Pods_Jigsaw.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -574,7 +574,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0070E00524B0060500E71F46 /* Build configuration list for PBXNativeTarget "Jigsaw" */;
 			buildPhases = (
-				6BBA0005C545D7B548D68484 /* [CP] Check Pods Manifest.lock */,
+				071806055AAA7A98E01D4F94 /* [CP] Check Pods Manifest.lock */,
 				C5CCF7872979E394007631EC /* Run Script */,
 				006EB049253BA63E00FE5D8A /* Set Bundle Build Version to date */,
 				0070DFE224B0060400E71F46 /* Sources */,
@@ -582,8 +582,8 @@
 				0070DFE424B0060400E71F46 /* Resources */,
 				0070E00B24B0066B00E71F46 /* SwiftLint */,
 				005308CC25168A96002A429F /* Embed Frameworks */,
-				2465337B35A55FFA7DD5D6C6 /* [CP] Embed Pods Frameworks */,
-				C3FB92F52224C69B0BCC0A43 /* [CP] Copy Pods Resources */,
+				318A725F2FA68E577907A1B6 /* [CP] Embed Pods Frameworks */,
+				5940C539DB133FEED75CBA66 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -739,24 +739,7 @@
 			shellPath = /bin/sh;
 			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nif which swiftlint >/dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
 		};
-		2465337B35A55FFA7DD5D6C6 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Jigsaw/Pods-Jigsaw-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Jigsaw/Pods-Jigsaw-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Jigsaw/Pods-Jigsaw-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		6BBA0005C545D7B548D68484 /* [CP] Check Pods Manifest.lock */ = {
+		071806055AAA7A98E01D4F94 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -778,7 +761,24 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		C3FB92F52224C69B0BCC0A43 /* [CP] Copy Pods Resources */ = {
+		318A725F2FA68E577907A1B6 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Jigsaw/Pods-Jigsaw-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Jigsaw/Pods-Jigsaw-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Jigsaw/Pods-Jigsaw-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		5940C539DB133FEED75CBA66 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1059,7 +1059,7 @@
 		};
 		0070E00624B0060500E71F46 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0096D5B1F9745AA5FBF320B0 /* Pods-Jigsaw.debug.xcconfig */;
+			baseConfigurationReference = D23703800D9A344B94E12F71 /* Pods-Jigsaw.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Jigsaw/Jigsaw.entitlements;
@@ -1088,7 +1088,7 @@
 		};
 		0070E00724B0060500E71F46 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0C9A03E3D4824F81B83A633D /* Pods-Jigsaw.release.xcconfig */;
+			baseConfigurationReference = 1ADEC1718EF7F2DB876D06F8 /* Pods-Jigsaw.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Jigsaw/Jigsaw.entitlements;
