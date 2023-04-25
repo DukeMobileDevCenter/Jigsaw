@@ -103,7 +103,7 @@ class ChatViewController: MessagesViewController {
 
     @objc
     func back(sender: UIBarButtonItem) {
-        let confirmationAlert = UIAlertController(title: "Sure?", message: "Are you sure you want to exit the chat? If you leave, you will go straight to the quiz and will not be able to come back.", preferredStyle: .alert)
+        let confirmationAlert = UIAlertController(title: Strings.ChatViewController.ConfirmationAlert.title, message: Strings.ChatViewController.ConfirmationAlert.message, preferredStyle: .alert)
 
         confirmationAlert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { (action: UIAlertAction!) in
             self.sendControlMessage(type: .leave)
@@ -139,7 +139,7 @@ class ChatViewController: MessagesViewController {
         
         maintainPositionOnKeyboardFrameChanged = true
         messageInputBar.sendButton.setTitle("", for: .normal)
-        messageInputBar.inputTextView.placeholder = "Type here..."
+        messageInputBar.inputTextView.placeholder = Strings.ChatViewController.MessageInputBar.InputTextView.placeholder
         messageInputBar.sendButton.setImage(UIImage(systemName: "paperplane"), for: .normal)
         messageInputBar.delegate = self
         
