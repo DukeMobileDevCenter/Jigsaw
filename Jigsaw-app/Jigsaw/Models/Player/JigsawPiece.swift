@@ -37,15 +37,15 @@ enum JigsawPiece: String, CaseIterable, CaseReverseInit {
     var label: String {
         switch self {
         case .green:
-            return "Green piece"
+            return Strings.JigsawPiece.JigsawPiece.Label.green
         case .orange:
-            return "Orange piece"
+            return Strings.JigsawPiece.JigsawPiece.Label.orange
         case .purple:
-            return "Purple piece"
+            return Strings.JigsawPiece.JigsawPiece.Label.purple
         case .yellow:
-            return "Yellow piece"
+            return Strings.JigsawPiece.JigsawPiece.Label.yellow
         case .unknown:
-            return "Jigsaw piece"
+            return Strings.JigsawPiece.JigsawPiece.Label.unknown
         }
     }
     
@@ -53,15 +53,15 @@ enum JigsawPiece: String, CaseIterable, CaseReverseInit {
     var bundleName: String {
         switch self {
         case .green:
-            return "jigsaw-green"
+            return Strings.JigsawPiece.JigsawPiece.BundleName.green
         case .orange:
-            return "jigsaw-orange"
+            return Strings.JigsawPiece.JigsawPiece.BundleName.orange
         case .purple:
-            return "jigsaw-purple"
+            return Strings.JigsawPiece.JigsawPiece.BundleName.purple
         case .yellow:
-            return "jigsaw-yellow"
+            return Strings.JigsawPiece.JigsawPiece.BundleName.yellow
         case .unknown:
-            return "jigsaw-unknown"
+            return Strings.JigsawPiece.JigsawPiece.BundleName.unknown
         }
     }
 }
