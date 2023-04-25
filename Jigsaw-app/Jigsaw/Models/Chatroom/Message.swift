@@ -178,16 +178,16 @@ private struct ImageMediaItem: MediaItem {
 }
 
 /// A enum to leverage text message to send metadata info, such as user joined or left the chatroom.
-enum ControlMetaMessage: String {
+enum ControlMetaMessage: String {  
     case join = "****join****"
     case leave = "****leave****"
     
     var label: String {
         switch self {
         case .join:
-            return "joined"
+            return Strings.Message.ControlMetaMessage.Label.join
         case .leave:
-            return "left"
+            return Strings.Message.ControlMetaMessage.Label.leave
         }
     }
 }
