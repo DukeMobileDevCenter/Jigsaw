@@ -60,7 +60,7 @@ class DemographicsViewController: FormViewController {
         // Override the tableview appearance.
         loadInsetGroupedTableView()
         super.viewDidLoad()
-        title = "Demographics"
+        title = Strings.DemographicsViewController.ViewDidLoad.title
         createForm()
     }
     
