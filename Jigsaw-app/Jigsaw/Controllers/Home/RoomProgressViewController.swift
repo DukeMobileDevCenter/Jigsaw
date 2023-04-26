@@ -82,7 +82,7 @@ class RoomProgressViewController: UIViewController {
         didSet {
             if let room = currentRoom {
                 if gameCompleted {
-                    roomLevelLabel.text = "You've completed the game! 🎉"
+                    roomLevelLabel.text = Strings.RoomProgressViewController.CurrentRoom.GameCompleted.RoomLevelLabel.text
                     nextRoomButton.isHidden = true
                     surveyButton.isHidden = false
                     showNewBackButton()
@@ -91,7 +91,7 @@ class RoomProgressViewController: UIViewController {
                     nextRoomButton.isEnabled = true
                 }
             } else {
-                roomLevelLabel.text = "Jigsaw broken 😞"
+                roomLevelLabel.text = Strings.RoomProgressViewController.CurrentRoom.Broken.RoomLevelLabel.text
                 nextRoomButton.isEnabled = false
                 surveyButton.isHidden = false
                 showNewBackButton()
@@ -292,7 +292,7 @@ class RoomProgressViewController: UIViewController {
         // Add confetti view to the main view.
         view.addSubview(confettiView)
         // Load chatroom once for each game.
-        ProgressHUD.show("Loading Rooms", interaction: false)
+        ProgressHUD.show(Strings.RoomProgressViewController.ViewDidLoad.ProgressHUD.show, interaction: false)
         loadChatroom { [unowned self] in
             ProgressHUD.dismiss()
             // After the chatroom is loaded, present the first room.
