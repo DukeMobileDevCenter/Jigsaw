@@ -30,12 +30,8 @@ class GameViewController: ORKTaskViewController {
     
     private var chatroomInstructionStep: ORKInstructionStep {
         let step = ORKInstructionStep(identifier: "ChatroomInstruction")
-        step.title = "Chatroom"
-        step.detailText =
-        """
-        Hi team! You can now chat about what you've just seen.
-        Remember that different team members have seen different pieces of information, and the whole team needs to know about all of these pieces in order to escape to the next room.
-        """
+        step.title = Strings.GameViewController.ChatroomInstructionStep.title
+        step.detailText = Strings.GameViewController.ChatroomInstructionStep.detailText
         step.iconImage = UIImage(systemName: "bubble.left.and.bubble.right")!
         return step
     }
@@ -52,8 +48,8 @@ class GameViewController: ORKTaskViewController {
     
     private let questionsInstructionStep: ORKInstructionStep = {
         let step = ORKInstructionStep(identifier: "QuestionsInstruction")
-        step.title = "Quiz"
-        step.detailText = "You will now be quizzed on the information you and your teammate just shared.\nYou can escape this room if your team answers all of the following questions correctly.\nLet's go!🤠"
+        step.title = Strings.GameViewController.QuestionsInstructionStep.title
+        step.detailText = Strings.GameViewController.QuestionsInstructionStep.detailText
         step.iconImage = UIImage(systemName: "exclamationmark.square")
         return step
     }()
@@ -61,8 +57,8 @@ class GameViewController: ORKTaskViewController {
     private let waitStep: ORKWaitStep = {
         let step = ORKWaitStep(identifier: "Wait")
         step.indicatorType = .progressBar
-        step.title = "Please Wait"
-        step.detailText = "Please wait for other players to finish."
+        step.title = Strings.GameViewController.WaitStep.title
+        step.detailText = Strings.GameViewController.WaitStep.detailText
         return step
     }()
     
@@ -123,7 +119,7 @@ class GameViewController: ORKTaskViewController {
         
         // Completion instruction.
         let completionStep = ORKOrderedTask.makeCompletionStep()
-        completionStep.title = "Room Escaped 🎉"
+        completionStep.title = Strings.GameViewController.CreateSurveyTask.CompletionStep.title
         // Add 1 to current room to display human readable index.
         completionStep.text = "Congratulations on escaping from Room \(currentRoom + 1).\nKeep going!"
         steps.append(completionStep)
