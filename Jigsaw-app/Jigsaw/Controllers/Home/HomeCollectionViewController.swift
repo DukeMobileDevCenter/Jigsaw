@@ -42,7 +42,7 @@ class HomeCollectionViewController: UICollectionViewController {
 //    }
     
     @IBAction func segmentedControlValueChanged(_ sender: UISegmentedControl) {
-        navigationItem.title = "Issues"
+        navigationItem.title = Strings.HomeCollectionViewController.NavigationItem.title
     }
     
     private func testShowChatroom(_ sender: UIBarButtonItem) {
@@ -151,7 +151,7 @@ class HomeCollectionViewController: UICollectionViewController {
                     self.performSegue(withIdentifier: "showRandom", sender: cell)
                 } else {
                     // If the query returns empty game result, show an alert.
-                    self.presentAlert(title: "Info", message: "No random game available.")
+                    self.presentAlert(title: Strings.HomeCollectionViewController.HandleRandomPerform.PresentAlert.title, message: Strings.HomeCollectionViewController.HandleRandomPerform.PresentAlert.message)
                 }
             }
         } else {
