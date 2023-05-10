@@ -28,21 +28,21 @@ enum AgeGroup: String, CaseIterable, Codable, CaseReverseInit {
     var label: String {
         switch self {
         case .group15minus:
-            return "15-"
+            return Strings.AgeGroup.AgeGroup.Label.group15minus
         case .group1520:
-            return "15-20"
+            return Strings.AgeGroup.AgeGroup.Label.group1520
         case .group2130:
-            return "21-30"
+            return Strings.AgeGroup.AgeGroup.Label.group2130
         case .group3140:
-            return "31-40"
+            return Strings.AgeGroup.AgeGroup.Label.group3140
         case .group4150:
-            return "41-50"
+            return Strings.AgeGroup.AgeGroup.Label.group4150
         case .group5160:
-            return "51-60"
+            return Strings.AgeGroup.AgeGroup.Label.group5160
         case .group61plus:
-            return "61+"
+            return Strings.AgeGroup.AgeGroup.Label.group61plus
         case .unknown:
-            return "Prefer not to answer"
+            return Strings.AgeGroup.AgeGroup.Label.unknown
         }
     }
 }
