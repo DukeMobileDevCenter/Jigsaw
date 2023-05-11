@@ -52,7 +52,7 @@ class GameCenterHelper: NSObject, GKLocalPlayerListener {
             if let achievements = achievements {
                 self.achievements = achievements
             } else if let error = error {
-                os_log(.error, Strings.GameCenterHelper.GameCenterHelper.LoadAchievements.error.(nil), error.localizedDescription)
+                os_log(.error, "Error: %@", error.localizedDescription)
             }
         }
     }
@@ -70,9 +70,9 @@ class GameCenterHelper: NSObject, GKLocalPlayerListener {
         averageScore.value = Int64(score)
         GKScore.report([averageScore]) { error in
             if let error = error {
-                os_log(.error, Strings.GameCenterHelper.GameCenterHelper.SubmitAverageScore.if(nil), error.localizedDescription)
+                os_log(.error,  "Error: %@", error.localizedDescription)
             } else {
-                os_log(.info, Strings.GameCenterHelper.GameCenterHelper.SubmitAverageScore.else)
+                os_log(.info, "✅ Average score reported.")
             }
         }
     }
@@ -82,9 +82,9 @@ class GameCenterHelper: NSObject, GKLocalPlayerListener {
         gamesPlayed.value = Int64(count)
         GKScore.report([gamesPlayed]) { error in
             if let error = error {
-                os_log(.error, Strings.GameCenterHelper.GameCenterHelper.SubmitGamesPlayed.if(nil), error.localizedDescription)
+                os_log(.error, "Error: %@", error.localizedDescription)
             } else {
-                os_log(.info, Strings.GameCenterHelper.GameCenterHelper.SubmitGamesPlayed.else)
+                os_log(.info, "✅ Average score reported.")
             }
         }
     }
@@ -103,9 +103,9 @@ class GameCenterHelper: NSObject, GKLocalPlayerListener {
         achievement.showsCompletionBanner = true
         GKAchievement.report([achievement]) { error in
             if let error = error {
-                os_log(.error, Strings.GameCenterHelper.GameCenterHelper.SubmitFinishedAchievement.if(nil), error.localizedDescription)
+                os_log(.error, "Error: %@", error.localizedDescription)
             } else {
-                os_log(.info, Strings.GameCenterHelper.GameCenterHelper.SubmitFinishedAchievement.else(nil), category.label)
+                os_log(.info, "✅ Achievement reported for %@", category.label)
             }
         }
     }
