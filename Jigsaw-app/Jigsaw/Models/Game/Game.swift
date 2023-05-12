@@ -75,7 +75,7 @@ struct Game {
             let categoryString = data[Strings.Game.Init.categoryString] as? String,
             let category = GameCategory(rawValue: categoryString),  // Avoid unknown category.
             let group1Questionnaires = data[Strings.Game.Init.group1Questionnaires] as? [[[String: Any]]],
-            let group2Questionnaires = data[group2Questionnaires] as? [[[String: Any]]]
+            let group2Questionnaires = data[Strings.Game.Init.group2Questionnaires] as? [[[String: Any]]]
         else { return nil }
         
         // Check if the game has correct amount of room content pairs.
