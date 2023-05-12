@@ -25,25 +25,25 @@ enum GameCategory: String, CaseIterable, Codable {
         let iconImage: UIImage
         switch self {
         case .immigration:
-            iconImage = UIImage(systemName: "shield.lefthalf.fill")!
+            iconImage = UIImage(systemName: Strings.GameCategory.IconImage.immigration)!
         case .economy:
-            iconImage = UIImage(systemName: "books.vertical.fill")!
+            iconImage = UIImage(systemName: Strings.GameCategory.IconImage.economy)!
         case .justice:
-            iconImage = UIImage(systemName: "banknote.fill")!
+            iconImage = UIImage(systemName: Strings.GameCategory.IconImage.justice)!
         case .environment:
-            iconImage = UIImage(systemName: "rectangle.badge.checkmark")!
+            iconImage = UIImage(systemName: Strings.GameCategory.IconImage.environment)!
         case .health:
-            iconImage = UIImage(systemName: "dollarsign.circle")!
+            iconImage = UIImage(systemName: Strings.GameCategory.IconImage.health)!
         case .international:
-            iconImage = UIImage(systemName: "equal.circle.fill")!
+            iconImage = UIImage(systemName: Strings.GameCategory.IconImage.international)!
         case .random:
-            iconImage = UIImage(systemName: "questionmark")!
+            iconImage = UIImage(systemName: Strings.GameCategory.IconImage.random)!
         case .demo:
-            iconImage = UIImage(systemName: "questionmark")!
+            iconImage = UIImage(systemName: Strings.GameCategory.IconImage.demo)!
         case .minimumWage:
-            iconImage = UIImage(systemName: "dollarsign.circle")!
+            iconImage = UIImage(systemName: Strings.GameCategory.IconImage.minimumWage)!
         case .charterSchools:
-            iconImage = UIImage(systemName: "book")!
+            iconImage = UIImage(systemName: Strings.GameCategory.IconImage.charterSchools)!
         }
         return iconImage
     }
@@ -59,7 +59,7 @@ enum GameCategory: String, CaseIterable, Codable {
         case .economy:
             return Strings.GameCategory.Label.charterSchools
         case .justice:
-            return Strings.GameCategory.Label.minimumWage
+            return Strings.GameCategory.Label.justice
         case .environment:
             return Strings.GameCategory.Label.environment
         case .health:

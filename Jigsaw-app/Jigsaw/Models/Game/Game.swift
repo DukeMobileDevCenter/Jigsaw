@@ -63,19 +63,19 @@ struct Game {
     
     init?(data: [String: Any]) {
         guard
-            let version = data["version"] as? String,
-            let level = data["level"] as? Int,
-            let maxAttempts = data["maxAttempts"] as? Int,
-            let gameName = data["gameName"] as? String,
-            let detailText = data["detailText"] as? String,
-            let introductionText = data["introduction"] as? String,
-            let group1resourceContents = data["group1resourceContents"] as? [String],
-            let group2resourceContents = data["group2resourceContents"] as? [String],
-            let backgroundImageURL = data["backgroundImageURL"] as? String,
-            let categoryString = data["category"] as? String,
+            let version = data[Strings.Game.Init.version] as? String,
+            let level = data[Strings.Game.Init.level] as? Int,
+            let maxAttempts = data[Strings.Game.Init.maxAttempts] as? Int,
+            let gameName = data[Strings.Game.Init.gameName] as? String,
+            let detailText = data[Strings.Game.Init.detailText] as? String,
+            let introductionText = data[Strings.Game.Init.introductionText] as? String,
+            let group1resourceContents = data[Strings.Game.Init.group1resourceContents] as? [String],
+            let group2resourceContents = data[Strings.Game.Init.group2resrouceContents] as? [String],
+            let backgroundImageURL = data[Strings.Game.Init.backgroundImageURL] as? String,
+            let categoryString = data[Strings.Game.Init.categoryString] as? String,
             let category = GameCategory(rawValue: categoryString),  // Avoid unknown category.
-            let group1Questionnaires = data["group1Questionnaires"] as? [[[String: Any]]],
-            let group2Questionnaires = data["group2Questionnaires"] as? [[[String: Any]]]
+            let group1Questionnaires = data[Strings.Game.Init.group1Questionnaires] as? [[[String: Any]]],
+            let group2Questionnaires = data[Strings.Game.Init.group2Questionnaires] as? [[[String: Any]]]
         else { return nil }
         
         // Check if the game has correct amount of room content pairs.

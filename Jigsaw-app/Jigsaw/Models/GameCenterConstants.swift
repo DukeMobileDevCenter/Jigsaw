@@ -7,12 +7,13 @@
 //
 
 enum GameCenterConstants {
-    static let averageScoreLeaderboardID = "edu.duke.mobilecenter.JigsawBeta.averageScore"
-    static let gamesPlayedLeaderboardID = "edu.duke.mobilecenter.JigsawBeta.gamesPlayed"
+    static let averageScoreLeaderboardID = Strings.GameCenterConstants.GameCenterConstants.averageScoreLeaderboardID
+    static let gamesPlayedLeaderboardID = Strings.GameCenterConstants.GameCenterConstants.gamesPlayedLeaderboardID
     
     static func getFinishedAchievementID(for category: GameCategory) -> String? {
         switch category {
         case .economy:
+            return Strings.GameCenterConstants.GameCenterConstants.GetFinishedAchievementID.Category.economy
             return "edu.duke.mobilecenter.JigsawBeta.economyFinished"
         case .justice, .immigration, .environment, .health, .international, .charterSchools, .minimumWage:
             // FIXME: for beta, temporary disable other categories
