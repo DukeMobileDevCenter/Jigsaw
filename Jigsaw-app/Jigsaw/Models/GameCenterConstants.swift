@@ -14,7 +14,6 @@ enum GameCenterConstants {
         switch category {
         case .economy:
             return Strings.GameCenterConstants.GameCenterConstants.GetFinishedAchievementID.Category.economy
-            return "edu.duke.mobilecenter.JigsawBeta.economyFinished"
         case .justice, .immigration, .environment, .health, .international, .charterSchools, .minimumWage:
             // FIXME: for beta, temporary disable other categories
             // as no available/designed achievements yet.
