@@ -67,6 +67,19 @@ class MatchingViewController: UIViewController {
         }
     }
     
+    private func createGameOfMyGroup(game selectedGame: Game, contents: [String], questionnaire: [Questionnaire]){
+        gameOfMyGroup = GameOfGroup(
+            version: selectedGame.version,
+            level: selectedGame.level,
+            maxAttempts: selectedGame.maxAttempts,
+            gameID: selectedGame.gameID,
+            gameName: selectedGame.gameName,
+            detailText: selectedGame.detailText,
+            resourceContent: contents,
+            questionnaires: questionnaire,
+            category: selectedGame.category)
+    }
+    
     private func handleAddedMatchingGroup(group: GameGroup) {
         guard
             let game = selectedGame,
@@ -90,17 +103,7 @@ class MatchingViewController: UIViewController {
             return
         }
         // Create a sub game group for current player.
-        gameOfMyGroup = GameOfGroup(
-            version: game.version,
-            level: game.level,
-            maxAttempts: game.maxAttempts,
-            gameID: game.gameID,
-            gameName: game.gameName,
-            detailText: game.detailText,
-            resourceContent: contents,
-            questionnaires: questionnaires,
-            category: game.category
-        )
+        createGameOfMyGroup(game: game, contents: contents, questionnaire: questionnaires)
         // Stop listen to further updates to game groups.
         gameGroupListener?.remove()
         gameGroupListener = nil
@@ -158,7 +161,9 @@ class MatchingViewController: UIViewController {
                 // Record the game group ID to handle crash.
                 Profiles.currentGroupID = gameGroup.id
             } else {
+                createGameOfMyGroup(game: selectedGame, contents: selectedGame.group1resourceContents, questionnaire: selectedGame.group1Questionnaires)
                 destinationVC.isDemo = true
+                destinationVC.gameOfMyGroup = gameOfMyGroup
             }
         }
     }

@@ -135,13 +135,8 @@ class RoomProgressViewController: UIViewController {
     }
     
     private func presentRoom(room: Int) {
-        if !isDemo {
-            roomViewController = GameViewController(game: gameOfMyGroup, currentRoom: room)
-            roomViewController.delegate = self
-        } else {
-            roomViewController = GameViewController()
-            roomViewController.delegate = self
-        }
+        roomViewController = GameViewController(game: gameOfMyGroup, currentRoom: room, isDemo: isDemo)
+        roomViewController.delegate = self
         // Disallow dismiss-by-interactive-swipe-down for iOS 13 and above.
         roomViewController.isModalInPresentation = true
         present(roomViewController, animated: true)
@@ -334,7 +329,7 @@ class RoomProgressViewController: UIViewController {
             // Reset attempts.
             attempts = 0
             // All rooms passed, add the records to player's game history.
-            if gameCompleted {
+            if gameCompleted && !isDemo {
                 // Mark the player as all rooms finished.
                 let userScoreString = gameGroup.userScoreString(userID: Profiles.userID, score: allRoomsResult.score)
                 FirebaseConstants.gamegroups.document(gameGroup.id!).updateData([
@@ -485,7 +480,7 @@ extension RoomProgressViewController: ORKTaskViewControllerDelegate {
     
     func taskViewController(_ taskViewController: ORKTaskViewController, didFinishWith reason: ORKTaskViewControllerFinishReason, error: Error?) {
         
-        if !isDemo {
+//        if !isDemo {
             // Hold current room's result.
             roomResults.append(taskViewController.result)
             // Decide what is the outcome of current room.
@@ -510,25 +505,27 @@ extension RoomProgressViewController: ORKTaskViewControllerDelegate {
             case .completed:
                 os_log(.info, "✅ Game completed")
                 // Player has passed. Reset the all arrays.
-                guard let userID = Profiles.userID else { return }
-                FirebaseConstants.gamegroups.document(gameGroup.id!).updateData([
-                    "roomAttemptedUserIDs": FieldValue.arrayRemove([userID]),
-                    "roomFinishedUserIDs": FieldValue.arrayRemove([userID])
-                ])
+                if !isDemo{
+                    guard let userID = Profiles.userID else { return }
+                    FirebaseConstants.gamegroups.document(gameGroup.id!).updateData([
+                        "roomAttemptedUserIDs": FieldValue.arrayRemove([userID]),
+                        "roomFinishedUserIDs": FieldValue.arrayRemove([userID])
+                    ])
+                }
                 // Dismiss the game controller.
                 taskViewController.dismiss(animated: true)
                 roomDidFinish(withResult: .success(currentRoom!))
             @unknown default:
                 fatalError("Error: Game task yields unknown result.")
             }
-        } else {
-            roomLevelLabel.text = "You've completed the demo! 🎉"
-            nextRoomButton.isHidden = true
-            surveyButton.isHidden = true
-            showNewBackButton()
-            // Dismiss the game controller.
-            taskViewController.dismiss(animated: true)
-        }
+//        } else {
+//            roomLevelLabel.text = "You've completed the demo! 🎉"
+//            nextRoomButton.isHidden = true
+//            surveyButton.isHidden = true
+//            showNewBackButton()
+//            // Dismiss the game controller.
+//            taskViewController.dismiss(animated: true)
+//        }
        
     }
 }
@@ -537,7 +534,7 @@ extension RoomProgressViewController: ORKTaskViewControllerDelegate {
 
 extension RoomProgressViewController: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        isDemo ? 1 : gameOfMyGroup.questionnaires.count
+        gameOfMyGroup.questionnaires.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

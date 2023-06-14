@@ -15,13 +15,13 @@ class GameViewController: ORKTaskViewController {
     init(game: GameOfGroup, currentRoom: Int, taskRun taskRunUUID: UUID? = nil, isDemo: Bool = false) {
         //        self.game = game
         super.init(task: nil, taskRun: taskRunUUID)
-        task = createSurveyTask(from: game, currentRoom: currentRoom)
+        task = createSurveyTask(from: game, currentRoom: currentRoom, isDemo: isDemo)
     }
     
-    init() {
-        super.init(task: nil, taskRun: nil)
-        task = createDemoTask()
-    }
+//    init() {
+//        super.init(task: nil, taskRun: nil)
+//        task = createDemoTask()
+//    }
     
     @available(*, unavailable)
     required init(coder aDecoder: NSCoder) {
@@ -75,7 +75,7 @@ class GameViewController: ORKTaskViewController {
     ///   - game: A `GameOfGroup` that contains a series of room content.
     ///   - currentRoom: The current room (sub-level) of the current game.
     /// - Returns: An `ORKOrderedTask` surveyTask.
-    private func createSurveyTask(from game: GameOfGroup, currentRoom: Int) -> ORKNavigableOrderedTask {
+    private func createSurveyTask(from game: GameOfGroup, currentRoom: Int, isDemo: Bool) -> ORKNavigableOrderedTask {
         var steps = [ORKStep]()
         
         // Resource reading page.
@@ -115,8 +115,9 @@ class GameViewController: ORKTaskViewController {
         
         steps.append(scoreboardStep)
         // Wait step
-        steps.append(waitStep)
-        
+        if !isDemo{
+            steps.append(waitStep)
+        }
         // Completion instruction.
         let completionStep = ORKOrderedTask.makeCompletionStep()
         completionStep.title = Strings.GameViewController.CreateSurveyTask.CompletionStep.title
@@ -127,44 +128,44 @@ class GameViewController: ORKTaskViewController {
         return task
     }
     
-    private func createDemoTask() -> ORKNavigableOrderedTask {
-        var steps = [ORKStep]()
-
-        // Resource reading page.
-        let promptStep = ORKInstructionStep(identifier: "Resource")
-        promptStep.detailText = "Please read the following statement carefully. Once you move on, you will not be able to view it again.\n\n\(Strings.DemoGame.prompt)"
-        steps.append(promptStep)
-
-        // Chatroom instruction step.
-        steps.append(chatroomInstructionStep)
-
-        // Chatroom step.
-        steps.append(chatroomCountdownStep)
-
-        // Questions instructions step.
-        steps.append(questionsInstructionStep)
-
-        let questionOneData: [String: Any] = [
-            "title": "Single Choice Question",
-            "prompt": Strings.DemoGame.Questions.One.prompt,
-            "isOptional": false,
-            "choices": [Strings.DemoGame.Questions.One.a,
-                        Strings.DemoGame.Questions.One.b,
-                        Strings.DemoGame.Questions.One.c,
-                        Strings.DemoGame.Questions.One.d],
-            "correctAnswer": Strings.DemoGame.Questions.One.a
-        ]
-
-        let questionOne = SingleChoiceQuestion(data: questionOneData)
-
-        steps.append(QuestionStepsModel.singleChoiceStep(question: questionOne!))
-
-        // Completion instruction.
-        let completionStep = ORKOrderedTask.makeCompletionStep()
-        completionStep.title = "Room Escaped 🎉"
-        completionStep.text = "Congratulations on escaping the Room.\nKeep going!"
-        steps.append(completionStep)
-        let task = ORKNavigableOrderedTask(identifier: "demoTask", steps: steps)
-        return task
-    }
+//    private func createDemoTask() -> ORKNavigableOrderedTask {
+//        var steps = [ORKStep]()
+//
+//        // Resource reading page.
+//        let promptStep = ORKInstructionStep(identifier: "Resource")
+//        promptStep.detailText = "Please read the following statement carefully. Once you move on, you will not be able to view it again.\n\n\(Strings.DemoGame.prompt)"
+//        steps.append(promptStep)
+//
+//        // Chatroom instruction step.
+//        steps.append(chatroomInstructionStep)
+//
+//        // Chatroom step.
+//        steps.append(chatroomCountdownStep)
+//
+//        // Questions instructions step.
+//        steps.append(questionsInstructionStep)
+//
+////        let questionOneData: [String: Any] = [
+////            "title": "Single Choice Question",
+////            "prompt": Strings.DemoGame.Questions.One.prompt,
+////            "isOptional": false,
+////            "choices": [Strings.DemoGame.Questions.One.a,
+////                        Strings.DemoGame.Questions.One.b,
+////                        Strings.DemoGame.Questions.One.c,
+////                        Strings.DemoGame.Questions.One.d],
+////            "correctAnswer": Strings.DemoGame.Questions.One.a
+////        ]
+//
+////        let questionOne = SingleChoiceQuestion(data: questionOneData)
+////
+////        steps.append(QuestionStepsModel.singleChoiceStep(question: questionOne!))
+//
+//        // Completion instruction.
+//        let completionStep = ORKOrderedTask.makeCompletionStep()
+//        completionStep.title = "Room Escaped 🎉"
+//        completionStep.text = "Congratulations on escaping the Room.\nKeep going!"
+//        steps.append(completionStep)
+//        let task = ORKNavigableOrderedTask(identifier: "demoTask", steps: steps)
+//        return task
+//    }
 }
