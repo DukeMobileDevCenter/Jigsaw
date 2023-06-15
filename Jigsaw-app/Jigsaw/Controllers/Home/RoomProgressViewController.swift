@@ -357,7 +357,7 @@ class RoomProgressViewController: UIViewController {
             currentRoom = nil
             // Present the game failure type.
             presentAlert(gameError: gameError)
-            if isMeDropped { cleanUpRemoteAfterGameEnds() }
+            if isMeDropped && !isDemo{ cleanUpRemoteAfterGameEnds() }
         }
     }
     
