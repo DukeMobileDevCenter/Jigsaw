@@ -61,6 +61,10 @@ class ChatViewController: MessagesViewController {
     private var chatMessages = [Message]()
     /// Enter demo game
     private var isDemo: Bool
+    /// Current room for a game.
+    var currentGameRoom: Int?
+    /// Game Currently being played by the player
+    var gameOfMyGroup: GameOfGroup?
     
     private let timeFormatter: DateComponentsFormatter = {
         let formatter = DateComponentsFormatter()
@@ -76,7 +80,7 @@ class ChatViewController: MessagesViewController {
         os_log(.info, "✅ chatroom deinit")
     }
     
-    init(user: User, chatroom: Chatroom, isDemo: Bool = false) {
+        init(user: User, chatroom: Chatroom, isDemo: Bool = false) {
         self.user = user
         self.chatroom = chatroom
         self.isDemo = isDemo
@@ -210,7 +214,18 @@ extension ChatViewController {
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
             
-            let robotMsg = Message(user: robot, content: botMsg[randomNumber])
+            guard let gameOfMyGroup = self.gameOfMyGroup else{                return
+            }
+            
+            guard let demoGameChatbotMessages = demoChatbotMessages[gameOfMyGroup.gameName] else{
+                return
+            }
+            
+            guard let messageContent = demoGameChatbotMessages[self.currentGameRoom!] else{
+                return
+            }
+                                                                
+            let robotMsg = Message(user: robot, content: messageContent)
             
             self.chatMessages.append(robotMsg)
             self.chatMessages.sort()

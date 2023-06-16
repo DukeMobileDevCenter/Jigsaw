@@ -89,6 +89,7 @@
 		00F2197C24CCF99800B72858 /* MetricsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F2197B24CCF99800B72858 /* MetricsViewController.swift */; };
 		00F2197E24CCF9A200B72858 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F2197D24CCF9A200B72858 /* ProfileViewController.swift */; };
 		00F6302224EE385E00BCAD11 /* AnswerCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F6302124EE385E00BCAD11 /* AnswerCategory.swift */; };
+		4719B2272A3BA54A003BA546 /* DemoChatroomConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4719B2262A3BA54A003BA546 /* DemoChatroomConstants.swift */; };
 		47A3804C2A2FEE8700A0F325 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 47A3804B2A2FEE8700A0F325 /* GoogleService-Info.plist */; };
 		8D14B9A8FAA282F3B687E4F1 /* Pods_Jigsaw.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 902ABC563029D528DA26A7F8 /* Pods_Jigsaw.framework */; };
 		C5F14B742979E5B100233909 /* swiftgen.yml in Resources */ = {isa = PBXBuildFile; fileRef = C5F14B732979E5B000233909 /* swiftgen.yml */; };
@@ -222,6 +223,7 @@
 		00F2197D24CCF9A200B72858 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		00F6302124EE385E00BCAD11 /* AnswerCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswerCategory.swift; sourceTree = "<group>"; };
 		1ADEC1718EF7F2DB876D06F8 /* Pods-Jigsaw.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Jigsaw.release.xcconfig"; path = "Target Support Files/Pods-Jigsaw/Pods-Jigsaw.release.xcconfig"; sourceTree = "<group>"; };
+		4719B2262A3BA54A003BA546 /* DemoChatroomConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoChatroomConstants.swift; sourceTree = "<group>"; };
 		47A3804B2A2FEE8700A0F325 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		902ABC563029D528DA26A7F8 /* Pods_Jigsaw.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Jigsaw.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C5F14B732979E5B000233909 /* swiftgen.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = swiftgen.yml; sourceTree = SOURCE_ROOT; };
@@ -346,6 +348,7 @@
 		005856CC24D92F990010BE55 /* Chatroom */ = {
 			isa = PBXGroup;
 			children = (
+				4719B2222A3BA537003BA546 /* Demo */,
 				005856BF24D924970010BE55 /* Message.swift */,
 				005856C324D92CFB0010BE55 /* Chatroom.swift */,
 				005856CD24D92FB60010BE55 /* ChatUser.swift */,
@@ -539,6 +542,14 @@
 				00CF5DC824F4DE9900B501BB /* InstructionQuestion.swift */,
 			);
 			path = YAMLQuestions;
+			sourceTree = "<group>";
+		};
+		4719B2222A3BA537003BA546 /* Demo */ = {
+			isa = PBXGroup;
+			children = (
+				4719B2262A3BA54A003BA546 /* DemoChatroomConstants.swift */,
+			);
+			path = Demo;
 			sourceTree = "<group>";
 		};
 		5468D76B6A3E1F4A42D79584 /* Pods */ = {
@@ -825,6 +836,7 @@
 				005856C624D92D320010BE55 /* DatabaseRepresentation.swift in Sources */,
 				00B6306124FB1A05008975CE /* GameHistory.swift in Sources */,
 				005856C024D924970010BE55 /* Message.swift in Sources */,
+				4719B2272A3BA54A003BA546 /* DemoChatroomConstants.swift in Sources */,
 				00CF5DC124F4DD0200B501BB /* MultipleChoiceQuestion.swift in Sources */,
 				005308D125168D84002A429F /* FirebaseConstants.swift in Sources */,
 				0020D55024DFAED000DB20E1 /* GameOfGroup.swift in Sources */,

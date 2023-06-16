@@ -400,6 +400,8 @@ extension RoomProgressViewController: ORKTaskViewControllerDelegate {
             }
             stepViewController.title = "Done"
             stepViewController.show(chatroomViewController, sender: nil)
+            chatroomViewController.currentGameRoom = currentRoom!
+            chatroomViewController.gameOfMyGroup = gameOfMyGroup
             // Hide the back button until all players join the chatroom.
             chatroomViewController.navigationItem.hidesBackButton = true
             // Mark chatrooom is shown for current room level.
