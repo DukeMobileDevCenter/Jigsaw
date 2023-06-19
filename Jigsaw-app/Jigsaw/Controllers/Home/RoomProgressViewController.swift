@@ -357,7 +357,7 @@ class RoomProgressViewController: UIViewController {
             currentRoom = nil
             // Present the game failure type.
             presentAlert(gameError: gameError)
-            if isMeDropped { cleanUpRemoteAfterGameEnds() }
+            if isMeDropped && !isDemo{ cleanUpRemoteAfterGameEnds() }
         }
     }
     
@@ -400,6 +400,8 @@ extension RoomProgressViewController: ORKTaskViewControllerDelegate {
             }
             stepViewController.title = "Done"
             stepViewController.show(chatroomViewController, sender: nil)
+            chatroomViewController.currentGameRoom = currentRoom!
+            chatroomViewController.gameOfMyGroup = gameOfMyGroup
             // Hide the back button until all players join the chatroom.
             chatroomViewController.navigationItem.hidesBackButton = true
             // Mark chatrooom is shown for current room level.
