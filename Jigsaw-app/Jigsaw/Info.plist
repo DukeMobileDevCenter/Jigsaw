@@ -28,15 +28,13 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>20230621</string>
+	<string>20230626</string>
 	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSCameraUsageDescription</key>
 	<string>Apple ResearchKit wants to access your camera for an active task.</string>
-	<key>NSHealthShareUsageDescription</key>
-	<string>Apple ResearchKit wants to access your HealthKit data for an active task.</string>
 	<key>NSHealthUpdateUsageDescription</key>
 	<string>Apple ResearchKit wants to access your HealthKit data for an active task.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
