@@ -1085,12 +1085,13 @@
 					"$(PROJECT_DIR)/Pods",
 				);
 				INFOPLIST_FILE = Jigsaw/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Jigsaw-Depolarization";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "edu.duke.mobilecenter.Jigsaw-Beta";
+				PRODUCT_BUNDLE_IDENTIFIER = "edu.duke.mobilecenter.jigsaw-depolarization";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
@@ -1114,12 +1115,13 @@
 					"$(PROJECT_DIR)/Pods",
 				);
 				INFOPLIST_FILE = Jigsaw/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Jigsaw-Depolarization";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "edu.duke.mobilecenter.Jigsaw-Beta";
+				PRODUCT_BUNDLE_IDENTIFIER = "edu.duke.mobilecenter.jigsaw-depolarization";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
