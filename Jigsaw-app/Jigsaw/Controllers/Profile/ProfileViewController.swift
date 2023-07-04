@@ -128,10 +128,10 @@ class ProfileViewController: FormViewController {
     
     private var profileHeaderRow: ViewRow<ProfileHeaderView> {
         let row = ViewRow<ProfileHeaderView>("view")
-        .cellSetup { cell, _ in
-            // Construct the view
-            cell.view = self.profileHeaderView
-        }
+            .cellSetup { cell, _ in
+                // Construct the view
+                cell.view = self.profileHeaderView
+            }
         row.tag = "ProfileHeaderRow"
         return row
     }
@@ -194,7 +194,7 @@ class ProfileViewController: FormViewController {
                 self?.present(controller, animated: true)
             }
         }
-            
+        
         +++ Section("Miscellaneous")
         <<< ButtonRow { row in
             row.title = "Take Survey"
@@ -215,6 +215,40 @@ class ProfileViewController: FormViewController {
 // MARK: Firebase Auth and account connection
 
 extension ProfileViewController {
+    
+    
+    /// This function signs-out a user from the app and deletes their profile
+    /// if they were playing as anonymous
+    private func
+    signOutUser(){
+        // Sign out, delete if anonymous, and reset local profile.
+        do{
+            let isAnonymous = FirebaseConstants.auth.currentUser?.isAnonymous ?? false
+            let userID = FirebaseConstants.auth.currentUser?.uid
+            try FirebaseConstants.auth.signOut()
+            if isAnonymous, let userID = userID {
+                FirebaseHelper.deleteAnonymousPlayer(userID: userID)
+            }
+        }
+        catch{
+            self.presentAlert(error: error)
+        }
+    }
+    
+    private func goToSignInPage(){
+        Profiles.resetProfiles()
+        let tabBar = self.tabBarController as! RootTabBarController
+        tabBar.handlePresentSignInPage(animated: true)
+    }
+    
+    private func getUserSignInCredential(){
+        if let user = FirebaseConstants.auth.currentUser{
+            let providerID = user.providerData
+            print("Printing providerID")
+            print(providerID)
+        }
+    }
+    
     @IBAction func userAccountBarButtonTapped(_ sender: UIBarButtonItem) {
         // An action sheet for multiple actions.
         let alertController = UIAlertController(
@@ -241,22 +275,8 @@ extension ProfileViewController {
             )
             let signOutAction = UIAlertAction(title: "Sign Out", style: .destructive) { _ in
                 // Sign out here.
-                do {
-                    // Sign out, delete if anonymous, and reset local profile.
-                    let isAnonymous = FirebaseConstants.auth.currentUser?.isAnonymous ?? false
-                    let userID = FirebaseConstants.auth.currentUser?.uid
-                    try FirebaseConstants.auth.signOut()
-                    if isAnonymous, let userID = userID {
-                        FirebaseHelper.deleteAnonymousPlayer(userID: userID)
-                    }
-                    
-                    Profiles.resetProfiles()
-                    // Present the sign in page by the root tab bar.
-                    let tabBar = self.tabBarController as! RootTabBarController
-                    tabBar.handlePresentSignInPage(animated: true)
-                } catch {
-                    self.presentAlert(error: error)
-                }
+                self.signOutUser()
+                self.goToSignInPage()
             }
             let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
             alert.addAction(cancelAction)
@@ -265,8 +285,52 @@ extension ProfileViewController {
             self.present(alert, animated: true)
         }
         
+        let deleteAccountAction = UIAlertAction(title: "Delete Account", style: .destructive){_ in
+            let isAnonymous = FirebaseConstants.auth.currentUser?.isAnonymous ?? false
+            let userID = FirebaseConstants.auth.currentUser?.uid
+            if isAnonymous, let userID = userID {
+                FirebaseHelper.deleteAnonymousPlayer(userID: userID)
+            }
+            
+            let user = FirebaseConstants.auth.currentUser
+            user?.delete{error in
+                if error != nil{
+                    /*
+                     In this case, FIRAuthErrorCodeCredentialTooOld was
+                     returned by the delete function. Ask then user to then
+                     sign-in and avoid FIRAuthErrorCodeCredentialTooOld error
+                     */
+                    
+                    let signInAgainAlert = UIAlertController(
+                        title: "Sign-in Again",
+                        message: "Please reauthenticate to delete your account.",
+                        preferredStyle: .alert)
+                    let continueAction = UIAlertAction(title: "Continue", style: .destructive){_ in
+                        self.signOutUser()
+                        self.goToSignInPage()
+                    }
+                    signInAgainAlert.addAction(continueAction)
+                    signInAgainAlert.preferredAction = continueAction
+                    self.present(signInAgainAlert, animated: true)
+                }
+                else{
+                    let signOutAlert = UIAlertController(
+                        title: "Accound Successfully Deleted",
+                        message: "Your account was successfully deleted",
+                        preferredStyle: .alert)
+                    let okAction = UIAlertAction(title: "Ok", style: .default){_ in
+                        self.signOutUser()
+                        self.goToSignInPage()
+                    }
+                    signOutAlert.addAction(okAction)
+                    self.present(signOutAlert, animated: true)
+                }
+            }
+        }
+        
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
         alertController.addAction(signOutAction)
+        alertController.addAction(deleteAccountAction)
         alertController.addAction(cancelAction)
         alertController.popoverPresentationController?.barButtonItem = sender
         present(alertController, animated: true)
