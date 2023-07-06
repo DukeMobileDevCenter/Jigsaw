@@ -28,17 +28,19 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>20230704</string>
+	<string>20230705</string>
 	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSCameraUsageDescription</key>
 	<string>Apple ResearchKit wants to access your camera for an active task.</string>
+	<key>NSHealthShareUsageDescription</key>
+	<string>Jigsaw uses the Apple ResearchKit SDK which requires health data to be collected for an active task</string>
 	<key>NSHealthUpdateUsageDescription</key>
-	<string>Apple ResearchKit wants to access your HealthKit data for an active task.</string>
+	<string>Jigsaw uses the Apple ResearchKit SDK which requires health data to be collected and updated for an active task</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Apple ResearchKit wants to access your location data for a location based question.</string>
+	<string>Jigsaw uses the Apple ResearchKit SDK which requires location data to be collected for an active task</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>Apple ResearchKit wants to access your microphone for an active task.</string>
 	<key>NSMotionUsageDescription</key>
