@@ -205,6 +205,16 @@ class ProfileViewController: FormViewController {
                 self?.present(controller, animated: true)
             }
         }
+        <<< ButtonRow { row in
+            row.title = "Contact Developer"
+            row.baseCell.tintColor = .red
+        }
+        .onCellSelection{ cell,row in
+            DispatchQueue.main.async { [weak self] in
+                let controller = SFSafariViewController(url: AppConstants.contactDeveloperURL)
+                self?.present(controller, animated: true)
+            }
+        }
         
         // Add app info to the end of this page.
         +++ Section("\(AppInfo.appName) app 🧩 Version \(AppInfo.versionNumber) (\(AppInfo.buildNumber))")
