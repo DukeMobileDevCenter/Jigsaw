@@ -48,6 +48,8 @@ public enum Strings {
   }
   public enum AppConstants {
     public enum AppConstants {
+      /// https://forms.gle/oxc4fmwhTJ6yALYM8
+      public static let contactDeveloperURL = Strings.tr("Localizable", "AppConstants.AppConstants.contactDeveloperURL", fallback: "https://forms.gle/oxc4fmwhTJ6yALYM8")
       /// https://docs.google.com/forms/d/e/1FAIpQLSfgHUhazZeB1pfKQ_i_vSubSkkejVCiXTDz49uRIvUi5QBpYg/viewform
       public static let feedbackFormURL = Strings.tr("Localizable", "AppConstants.AppConstants.feedbackFormURL", fallback: "https://docs.google.com/forms/d/e/1FAIpQLSfgHUhazZeB1pfKQ_i_vSubSkkejVCiXTDz49uRIvUi5QBpYg/viewform")
       /// https://duke.qualtrics.com/jfe/form/SV_eRFROcIlVmfq27I

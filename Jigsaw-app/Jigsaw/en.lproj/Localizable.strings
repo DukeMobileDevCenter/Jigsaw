@@ -94,6 +94,7 @@
 //MARK: - AppConstants.swift
 "AppConstants.AppConstants.feedbackFormURL" = "https://docs.google.com/forms/d/e/1FAIpQLSfgHUhazZeB1pfKQ_i_vSubSkkejVCiXTDz49uRIvUi5QBpYg/viewform";
 "AppConstants.AppConstants.surveyURL" = "https://duke.qualtrics.com/jfe/form/SV_eRFROcIlVmfq27I";
+"AppConstants.AppConstants.contactDeveloperURL" = "https://forms.gle/oxc4fmwhTJ6yALYM8";
 
 //MARK: - OnboardingSteps.swift
 "OnboardingSteps.OnboardingSteps.instructionStep.title" = "Welcome to Jigsaw Escape!";
