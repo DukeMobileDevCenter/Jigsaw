@@ -13,6 +13,7 @@ enum AppConstants {
     /// The URL of feedback Google Forms.
     static let feedbackFormURL = URL(string: Strings.AppConstants.AppConstants.feedbackFormURL)!
     static let surveyURL = URL(string: Strings.AppConstants.AppConstants.surveyURL)!
+    static let contactDeveloperURL = URL(string: Strings.AppConstants.AppConstants.contactDeveloperURL!)
     
     /// A style sheet for displaying detail instruction text as well as preview text.
     static let simpleStylesheet =
