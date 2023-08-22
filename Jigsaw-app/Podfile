@@ -56,6 +56,9 @@ target 'Jigsaw' do
   # Localization
   pod 'SwiftGen', '~> 6.0'
 
+  # Profanity Filter
+  pod 'AAProfanityFilter'
+
 end
 
 # Bump all Pod minimum target to iOS 14, to cope with Xcode 13
