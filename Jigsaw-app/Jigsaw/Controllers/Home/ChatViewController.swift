@@ -233,7 +233,7 @@ extension ChatViewController {
     private func didReceiveUserMessage() {
         let robot = ChatUser(senderId: "robot", displayName: "Robot", jigsawValue: Profiles.jigsawValue)
         srand48(Int(Date().timeIntervalSince1970))
-        let randomNumber = Int(arc4random_uniform(UInt32(botMsg.count)))
+//        let randomNumber = Int(arc4random_uniform(UInt32(botMsg.count)))
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
             
@@ -253,7 +253,7 @@ extension ChatViewController {
             self.chatMessages.append(robotMsg)
             self.chatMessages.sort()
             
-            let isLatestMessage2 = self.chatMessages.firstIndex(of: robotMsg) == (self.chatMessages.count - 1)
+//            let isLatestMessage2 = self.chatMessages.firstIndex(of: robotMsg) == (self.chatMessages.count - 1)
             
             self.messagesCollectionView.reloadData()
             self.messagesCollectionView.scrollToLastItem(animated: true)
@@ -275,8 +275,7 @@ extension ChatViewController {
             }
         }
         messageContentStr = String(messageContentStrList.joined(by: " "))
-        var newMessage: Message = Message(message: message, content: messageContentStr)
-        return newMessage
+        return Message(message: message, content: messageContentStr)
     }
     
     private func insertNewMessage(_ message: Message) {
@@ -287,7 +286,7 @@ extension ChatViewController {
         chatMessages.append(newMessage)
         chatMessages.sort()
         
-        let isLatestMessage = chatMessages.firstIndex(of: message) == (chatMessages.count - 1)
+//        let isLatestMessage = chatMessages.firstIndex(of: message) == (chatMessages.count - 1)
         
         messagesCollectionView.reloadData()
         
