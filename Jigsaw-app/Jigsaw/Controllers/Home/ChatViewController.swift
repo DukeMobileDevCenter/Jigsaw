@@ -269,9 +269,9 @@ extension ChatViewController {
         
         var messageContentStr: String = message.content
         var messageContentStrList = messageContentStr.components(separatedBy: CharacterSet.whitespaces)
-        for i in 0..<messageContentStrList.capacity{
-            if(binarySearch(profaneWordList, messageContentStrList[i].lowercased()) != nil){
-                messageContentStrList[i] = "****"
+        for currentIndex in 0..<messageContentStrList.capacity{
+            if(binarySearch(profaneWordList, messageContentStrList[currentIndex].lowercased()) != nil){
+                messageContentStrList[currentIndex] = "****"
             }
         }
         messageContentStr = String(messageContentStrList.joined(by: " "))
