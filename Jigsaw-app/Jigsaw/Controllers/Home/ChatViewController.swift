@@ -328,48 +328,7 @@ extension ChatViewController {
             break
         }
     }
-    /*
-     private func uploadImage(_ image: UIImage, to channel: Chatroom, completion: @escaping (URL?) -> Void) {
-     guard let channelID = channel.id else {
-     completion(nil)
-     return
-     }
-     
-     guard let scaledImage = image.scaledToSafeUploadSize, let data = scaledImage.UIImageJPEGRepresentation(compressionQuality: 0.4) else {
-     completion(nil)
-     return
-     }
-     
-     let metadata = StorageMetadata()
-     metadata.contentType = "image/jpeg"
-     
-     let imageName = [UUID().uuidString, String(Date().timeIntervalSince1970)].joined()
-     let imageRef = FirebaseConstants.chatroomStorage.child(channelID).child(imageName)
-     imageRef.putData(data, metadata: metadata) { metadata, _ in
-     guard metadata != nil else {
-     completion(nil)
-     return
-     }
-     // Async fetch the download URL.
-     imageRef.downloadURL { url, _ in
-     completion(url)
-     }
-     }
-     }
-     
-     private func sendPhoto(_ image: UIImage) {
-     isSendingPhoto = true
-     
-     uploadImage(image, to: chatroom) { [weak self] url in
-     guard let self = self, let url = url else { return }
-     self.isSendingPhoto = false
-     
-     let message = Message(user: self.user, imageURL: url)
-     self.save(message)
-     self.messagesCollectionView.scrollToBottom()
-     }
-     }
-     */
+    
     private func sendControlMessage(type: ControlMetaMessage) {
         let message = Message(user: user, controlMetaMessage: type)
         save(message)
@@ -550,7 +509,7 @@ extension ChatViewController: InputBarAccessoryViewDelegate {
 }
 
 //extension ChatViewController{
-//
+//    
 //    fileprivate func messageInputBarCameraButtonSetup() {
 //        let cameraItem = InputBarButtonItem(type: .system)
 //        cameraItem.image = UIImage(systemName: "camera")
@@ -561,7 +520,49 @@ extension ChatViewController: InputBarAccessoryViewDelegate {
 //        )
 //        cameraItem.setSize(CGSize(width: 60, height: 30), animated: false)
 //    }
-//
+//    
+//    
+//    private func uploadImage(_ image: UIImage, to channel: Chatroom, completion: @escaping (URL?) -> Void) {
+//        guard let channelID = channel.id else {
+//            completion(nil)
+//            return
+//        }
+//        
+//        guard let scaledImage = image.scaledToSafeUploadSize, let data = scaledImage.UIImageJPEGRepresentation(compressionQuality: 0.4) else {
+//            completion(nil)
+//            return
+//        }
+//        
+//        let metadata = StorageMetadata()
+//        metadata.contentType = "image/jpeg"
+//        
+//        let imageName = [UUID().uuidString, String(Date().timeIntervalSince1970)].joined()
+//        let imageRef = FirebaseConstants.chatroomStorage.child(channelID).child(imageName)
+//        imageRef.putData(data, metadata: metadata) { metadata, _ in
+//            guard metadata != nil else {
+//                completion(nil)
+//                return
+//            }
+//            // Async fetch the download URL.
+//            imageRef.downloadURL { url, _ in
+//                completion(url)
+//            }
+//        }
+//    }
+//    
+//    private func sendPhoto(_ image: UIImage) {
+//        isSendingPhoto = true
+//        
+//        uploadImage(image, to: chatroom) { [weak self] url in
+//            guard let self = self, let url = url else { return }
+//            self.isSendingPhoto = false
+//            
+//            let message = Message(user: self.user, imageURL: url)
+//            self.save(message)
+//            self.messagesCollectionView.scrollToLastItem()
+//        }
+//    }
+//    
 //    @objc
 //    private func cameraButtonPressed(_ sender: InputBarButtonItem) {
 //        let picker = UIImagePickerController()
@@ -569,7 +570,7 @@ extension ChatViewController: InputBarAccessoryViewDelegate {
 //        picker.sourceType = .photoLibrary
 //        present(picker, animated: true, completion: nil)
 //    }
-//
+//    
 //}
 // MARK: - UIImagePickerControllerDelegate
 /*
