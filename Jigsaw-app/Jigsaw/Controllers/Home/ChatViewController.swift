@@ -22,6 +22,7 @@ import PINRemoteImage
 import Agrume
 
 
+/// <#Description#>
 class ChatViewController: MessagesViewController {
     // MARK: Properties
     
@@ -94,6 +95,25 @@ class ChatViewController: MessagesViewController {
         super.viewDidDisappear(animated)
     }
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        guard let id = chatroom.id else {
+            navigationController?.popViewController(animated: true)
+            return
+        }
+        
+        self.setupQuizButton()
+        self.setupReportActivityButton()
+        self.chatroomFirestoreSetup(id)
+        self.messageInputBarSetup()
+        
+        messagesCollectionView.messagesDataSource = self
+        messagesCollectionView.messagesLayoutDelegate = self
+        messagesCollectionView.messageCellDelegate = self
+        messagesCollectionView.messagesDisplayDelegate = self
+    }
+    
     @objc
     func back(sender: UIBarButtonItem) {
         let confirmationAlert = UIAlertController(title: Strings.ChatViewController.ConfirmationAlert.title, message: Strings.ChatViewController.ConfirmationAlert.message, preferredStyle: .alert)
@@ -103,8 +123,7 @@ class ChatViewController: MessagesViewController {
             self.navigationController?.popViewController(animated: true)
         }))
         
-        confirmationAlert.addAction(UIAlertAction(title: "No", style: .cancel, handler: { (action: UIAlertAction!) in
-        }))
+        confirmationAlert.addAction(UIAlertAction(title: "No", style: .cancel))
         
         present(confirmationAlert, animated: true, completion: nil)
     }
@@ -126,6 +145,9 @@ class ChatViewController: MessagesViewController {
         self.navigationItem.leftBarButtonItem = newBackButton
     }
     
+    /// Responsible for initializing FireStore Chatroom Collection Ref and
+    /// a listener for real-time updates to the same.
+    /// - Parameter chatroomID: Chatroom in which changes are being recorded
     fileprivate func chatroomFirestoreSetup(_ chatroomID: String) {
         messagesReference = FirebaseConstants.chatroomMessagesRef(chatroomID: chatroomID)
         messageListener = messagesReference?.addSnapshotListener { [weak self] querySnapshot, _ in
@@ -136,6 +158,7 @@ class ChatViewController: MessagesViewController {
         }
     }
     
+    /// Reponsible for setting up the Chat windows' input bar's send button.
     fileprivate func messageInputBarSetup() {
         maintainPositionOnKeyboardFrameChanged = true
         messageInputBar.sendButton.setTitle("", for: .normal)
@@ -143,48 +166,6 @@ class ChatViewController: MessagesViewController {
         messageInputBar.sendButton.setImage(UIImage(systemName: "paperplane"), for: .normal)
         messageInputBar.delegate = self
     }
-    
-//    fileprivate func messageInputBarCameraButtonSetup() {
-//        let cameraItem = InputBarButtonItem(type: .system)
-//        cameraItem.image = UIImage(systemName: "camera")
-//        cameraItem.addTarget(
-//            self,
-//            action: #selector(cameraButtonPressed),
-//            for: .primaryActionTriggered
-//        )
-//        cameraItem.setSize(CGSize(width: 60, height: 30), animated: false)
-//    }
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        guard let id = chatroom.id else {
-            navigationController?.popViewController(animated: true)
-            return
-        }
-        
-        self.setupQuizButton()
-        self.setupReportActivityButton()
-        self.chatroomFirestoreSetup(id)
-        self.messageInputBarSetup()
-        
-        messagesCollectionView.messagesDataSource = self
-        messagesCollectionView.messagesLayoutDelegate = self
-        messagesCollectionView.messageCellDelegate = self
-        messagesCollectionView.messagesDisplayDelegate = self
-        
-//        messageInputBarCameraButtonSetup()
-         
-    }
-    
-    // MARK: - Actions
-//     @objc
-//     private func cameraButtonPressed(_ sender: InputBarButtonItem) {
-//     let picker = UIImagePickerController()
-//     picker.delegate = self
-//     picker.sourceType = .photoLibrary
-//     present(picker, animated: true, completion: nil)
-//     }
 }
 
 // MARK: - Helpers
@@ -568,6 +549,28 @@ extension ChatViewController: InputBarAccessoryViewDelegate {
     }
 }
 
+//extension ChatViewController{
+//
+//    fileprivate func messageInputBarCameraButtonSetup() {
+//        let cameraItem = InputBarButtonItem(type: .system)
+//        cameraItem.image = UIImage(systemName: "camera")
+//        cameraItem.addTarget(
+//            self,
+//            action: #selector(cameraButtonPressed),
+//            for: .primaryActionTriggered
+//        )
+//        cameraItem.setSize(CGSize(width: 60, height: 30), animated: false)
+//    }
+//
+//    @objc
+//    private func cameraButtonPressed(_ sender: InputBarButtonItem) {
+//        let picker = UIImagePickerController()
+//        picker.delegate = self
+//        picker.sourceType = .photoLibrary
+//        present(picker, animated: true, completion: nil)
+//    }
+//
+//}
 // MARK: - UIImagePickerControllerDelegate
 /*
  extension ChatViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
