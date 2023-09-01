@@ -109,6 +109,52 @@ class ChatViewController: MessagesViewController {
         present(confirmationAlert, animated: true, completion: nil)
     }
     
+    /// Creates and shows the 'Report Activity' button on Chatroom window.
+    fileprivate func setupReportActivityButton() {
+        // Prevent the 'Report Activity' button from showing up in Demo Mode
+        if !isDemo && chatroomUserIDs.count == 2{
+            let newReportButton = UIBarButtonItem(title: "Report Activity", style: .plain, target: self, action: #selector(reportButton))
+            newReportButton.tintColor = .red
+            self.navigationItem.rightBarButtonItem = newReportButton
+        }
+    }
+    
+    /// Responsible for creating and showing the 'Quiz' button on the Chatroom
+    fileprivate func setupQuizButton() {
+        self.navigationItem.hidesBackButton = true
+        let newBackButton = UIBarButtonItem(title: "Quiz", style: .plain, target: self, action: #selector(ChatViewController.back(sender:)))
+        self.navigationItem.leftBarButtonItem = newBackButton
+    }
+    
+    fileprivate func chatroomFirestoreSetup(_ chatroomID: String) {
+        messagesReference = FirebaseConstants.chatroomMessagesRef(chatroomID: chatroomID)
+        messageListener = messagesReference?.addSnapshotListener { [weak self] querySnapshot, _ in
+            guard let snapshot = querySnapshot else { return }
+            snapshot.documentChanges.forEach { change in
+                self?.handleDocumentChange(change)
+            }
+        }
+    }
+    
+    fileprivate func messageInputBarSetup() {
+        maintainPositionOnKeyboardFrameChanged = true
+        messageInputBar.sendButton.setTitle("", for: .normal)
+        messageInputBar.inputTextView.placeholder = Strings.ChatViewController.MessageInputBar.InputTextView.placeholder
+        messageInputBar.sendButton.setImage(UIImage(systemName: "paperplane"), for: .normal)
+        messageInputBar.delegate = self
+    }
+    
+//    fileprivate func messageInputBarCameraButtonSetup() {
+//        let cameraItem = InputBarButtonItem(type: .system)
+//        cameraItem.image = UIImage(systemName: "camera")
+//        cameraItem.addTarget(
+//            self,
+//            action: #selector(cameraButtonPressed),
+//            for: .primaryActionTriggered
+//        )
+//        cameraItem.setSize(CGSize(width: 60, height: 30), animated: false)
+//    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -117,61 +163,28 @@ class ChatViewController: MessagesViewController {
             return
         }
         
-        self.navigationItem.hidesBackButton = true
-        let newBackButton = UIBarButtonItem(title: "Quiz", style: .plain, target: self, action: #selector(ChatViewController.back(sender:)))
-        self.navigationItem.leftBarButtonItem = newBackButton
-        
-        
-        if !isDemo && chatroomUserIDs.count == 2{
-            let newReportButton = UIBarButtonItem(title: "Report Activity", style: .plain, target: self, action: #selector(reportButton))
-            newReportButton.tintColor = .red
-            self.navigationItem.rightBarButtonItem = newReportButton
-        }
-        
-        
-        messagesReference = FirebaseConstants.chatroomMessagesRef(chatroomID: id)
-        
-        messageListener = messagesReference?.addSnapshotListener { [weak self] querySnapshot, _ in
-            guard let snapshot = querySnapshot else { return }
-            snapshot.documentChanges.forEach { change in
-                self?.handleDocumentChange(change)
-            }
-        }
-        
-        maintainPositionOnKeyboardFrameChanged = true
-        messageInputBar.sendButton.setTitle("", for: .normal)
-        messageInputBar.inputTextView.placeholder = Strings.ChatViewController.MessageInputBar.InputTextView.placeholder
-        messageInputBar.sendButton.setImage(UIImage(systemName: "paperplane"), for: .normal)
-        messageInputBar.delegate = self
+        self.setupQuizButton()
+        self.setupReportActivityButton()
+        self.chatroomFirestoreSetup(id)
+        self.messageInputBarSetup()
         
         messagesCollectionView.messagesDataSource = self
         messagesCollectionView.messagesLayoutDelegate = self
         messagesCollectionView.messageCellDelegate = self
         messagesCollectionView.messagesDisplayDelegate = self
-        /*
-         let cameraItem = InputBarButtonItem(type: .system)
-         cameraItem.image = UIImage(systemName: "camera")
-         cameraItem.addTarget(
-         self,
-         action: #selector(cameraButtonPressed),
-         for: .primaryActionTriggered
-         )
-         cameraItem.setSize(CGSize(width: 60, height: 30), animated: false)
-         */
-        //      messageInputBar.leftStackView.alignment = .center
-        //     messageInputBar.setLeftStackViewWidthConstant(to: 50, animated: false)
-        //       messageInputBar.setStackViewItems([cameraItem], forStack: .left, animated: false)
+        
+//        messageInputBarCameraButtonSetup()
+         
     }
     
     // MARK: - Actions
-    /*
-     @objc
-     private func cameraButtonPressed(_ sender: InputBarButtonItem) {
-     let picker = UIImagePickerController()
-     picker.delegate = self
-     picker.sourceType = .photoLibrary
-     present(picker, animated: true, completion: nil)
-     }*/
+//     @objc
+//     private func cameraButtonPressed(_ sender: InputBarButtonItem) {
+//     let picker = UIImagePickerController()
+//     picker.delegate = self
+//     picker.sourceType = .photoLibrary
+//     present(picker, animated: true, completion: nil)
+//     }
 }
 
 // MARK: - Helpers
@@ -222,7 +235,7 @@ extension ChatViewController {
         // Once a user presses this button, the collection 'isReported' gets updated in firestore
         // and the game exits
         let reportChatAction = UIAlertAction(title: "Report Chat", style: .destructive){_ in
-//            self.confirmReportAlert()
+            //            self.confirmReportAlert()
         }
         let cancelReportAction = UIAlertAction(title: "Cancel", style: .cancel)
         actionController.addAction(reportUserAction)
