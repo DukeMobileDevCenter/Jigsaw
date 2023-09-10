@@ -3,10 +3,10 @@
 </div>
 
 <div align="center">
-    <img src="https://img.shields.io/badge/Swift-5.3-orange.svg?style=flat" alt="Swift 5">
-    <img src="https://img.shields.io/badge/Xcode-12.2-blue.svg?style=flat" alt="Xcode 12">
-    <img src="https://img.shields.io/badge/macOS-10.15.7-green.svg?style=flat" alt="macOS Catalina">
-    <img src="https://img.shields.io/badge/version-1.0%20build%20201025-blue.svg?style=flat" alt="version">
+    <img src="https://img.shields.io/badge/Swift-5.7.1-orange?style=flat" alt="Swift 5.7.1">
+    <img src="https://img.shields.io/badge/Xcode-14.1-blue?style=flat" alt="Xcode 14.1">
+    <img src="https://img.shields.io/badge/macOS-13.4-green?style=flat" alt="macOS Ventura">
+    <img src="https://img.shields.io/badge/version-1.0%20build%20230909-blue?style=flat" alt="version">
 </div>
 
 <div align="center">
