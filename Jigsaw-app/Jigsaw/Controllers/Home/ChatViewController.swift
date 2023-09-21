@@ -190,6 +190,17 @@ func binarySearch<T:Comparable>(_ inputArr:Array<T>, _ searchItem: T) -> Int? {
 
 extension ChatViewController {
     
+    /// This function presents a `UIAlertController` on pressing the
+    /// 'Report User' option that pops up on pressing the 'Report Activity'
+    /// button in the chatroom
+    fileprivate func confirmReportUIAlertController() {
+        let uialertcontroller = UIAlertController(title: "Confirm Report", message: "User successfully reported. Please go to the next page, press cancel and quit the game", preferredStyle: .alert)
+        uialertcontroller.addAction(UIAlertAction(title: "Got it.", style: .default, handler:{ _ in
+            self.back(sender: UIBarButtonItem())
+        }))
+        self.present(uialertcontroller, animated: true)
+    }
+    
     /// Report the other user in the chat
     /// Works on the assumption that there are only two players in the chat
     /// including the current user.
@@ -212,8 +223,11 @@ extension ChatViewController {
             return
         }
         
+        // Retrieve the document's reference from Firebase
         let otherPlayerDbRef = FirebaseConstants.players.document(userBeingReported)
         
+        // Retrieve the other player's details from Firebase to create another
+        // entry in the ReportedPlayers Collection
         otherPlayerDbRef.getDocument{ document, error in
             if let document = document{
                 // Got the document for the other player in the chatroom
@@ -225,11 +239,10 @@ extension ChatViewController {
                 // Create a new entry for the player being reported in the database
                 FirebaseConstants.reportedPlayers.document(userBeingReported).setData(data)
                 
-                let uialertcontroller = UIAlertController(title: "Confirm Report", message: "User successfully reported. Please go to the next page, press cancel and quit the game", preferredStyle: .alert)
-                uialertcontroller.addAction(UIAlertAction(title: "Got it.", style: .default, handler:{ _ in
-                    self.back(sender: UIBarButtonItem())
-                }))
-                self.present(uialertcontroller, animated: true)
+                self.confirmReportUIAlertController()
+            }
+            else{
+                
             }
         }
     }
