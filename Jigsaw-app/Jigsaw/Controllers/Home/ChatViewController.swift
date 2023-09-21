@@ -191,10 +191,10 @@ func binarySearch<T:Comparable>(_ inputArr:Array<T>, _ searchItem: T) -> Int? {
 extension ChatViewController {
     
     /// This function presents a `UIAlertController` on pressing the
-    /// 'Report User' option that pops up on pressing the 'Report Activity'
-    /// button in the chatroom
-    fileprivate func confirmReportUIAlertController() {
-        let uialertcontroller = UIAlertController(title: "Confirm Report", message: "User successfully reported. Please go to the next page, press cancel and quit the game", preferredStyle: .alert)
+    /// 'Report User'/'Report Chat' option that pops up on pressing the
+    /// 'Report Activity' button in the chatroom
+    fileprivate func confirmReportUIAlertController(_ thing: String) {
+        let uialertcontroller = UIAlertController(title: "Confirm Report", message: "\(thing) successfully reported. Please press 'Cancel -> Quit Game' on the Quiz Page to exit and be depaired with the other player.", preferredStyle: .alert)
         uialertcontroller.addAction(UIAlertAction(title: "Got it.", style: .default, handler:{ _ in
             self.back(sender: UIBarButtonItem())
         }))
@@ -217,7 +217,7 @@ extension ChatViewController {
     /// Works on the assumption that there are only two players in the chat
     /// including the current user.
     fileprivate func reportUser(){
-        var userBeingReported: String? = self.getOtherPlayerInGameRoom()
+        let userBeingReported: String? = self.getOtherPlayerInGameRoom()
         
         // Now that we have the user that is going to be reported
         // Create a document in the ReportedUsers Collection in Firebase
@@ -243,7 +243,7 @@ extension ChatViewController {
                 }
                 // Create a new entry for the player being reported in the database
                 FirebaseConstants.reportedPlayers.document(userBeingReported).setData(data)
-                self.confirmReportUIAlertController()
+                self.confirmReportUIAlertController("User")
             }
             else{
                 os_log(.debug, "Document doesn't contain any data, check database")
@@ -256,7 +256,7 @@ extension ChatViewController {
     /// 'Reports' the current chatroom by creating a copy of the current
     /// chatroom in the 'ReportedChatrooms' collection in Firebase.
     fileprivate func reportChat(){
-        
+        print("Hello")
     }
     
     
