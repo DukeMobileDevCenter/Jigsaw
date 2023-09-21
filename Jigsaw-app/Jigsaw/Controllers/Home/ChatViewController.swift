@@ -216,7 +216,7 @@ extension ChatViewController {
     /// Report the other user in the chat
     /// Works on the assumption that there are only two players in the chat
     /// including the current user.
-    private func reportUser(){
+    fileprivate func reportUser(){
         var userBeingReported: String? = self.getOtherPlayerInGameRoom()
         
         // Now that we have the user that is going to be reported
@@ -252,8 +252,17 @@ extension ChatViewController {
     }
     
     
+    @objc
+    /// 'Reports' the current chatroom by creating a copy of the current
+    /// chatroom in the 'ReportedChatrooms' collection in Firebase.
+    fileprivate func reportChat(){
+        
+    }
+    
     
     @objc
+    /// This function is responsible for creating a `UIAlertController`
+    /// which handles the 'Report Activity' button of the chatroom.
     private func reportButton(){
         let actionController = UIAlertController(title: "Report Activity", message: "Please select an appropriate option from below: ", preferredStyle: .actionSheet)
         let reportUserAction = UIAlertAction(title: "Report User", style: .destructive){_ in
@@ -263,7 +272,8 @@ extension ChatViewController {
         // Once a user presses this button, the collection 'isReported' gets updated in firestore
         // and the game exits
         let reportChatAction = UIAlertAction(title: "Report Chat", style: .destructive){_ in
-            //            self.confirmReportAlert()
+            // Driver function for reporting the chat
+            self.reportChat()
         }
         let cancelReportAction = UIAlertAction(title: "Cancel", style: .cancel)
         actionController.addAction(reportUserAction)
