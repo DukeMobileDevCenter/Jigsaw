@@ -90,11 +90,12 @@
 		00F2197E24CCF9A200B72858 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F2197D24CCF9A200B72858 /* ProfileViewController.swift */; };
 		00F6302224EE385E00BCAD11 /* AnswerCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F6302124EE385E00BCAD11 /* AnswerCategory.swift */; };
 		4719B2272A3BA54A003BA546 /* DemoChatroomConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4719B2262A3BA54A003BA546 /* DemoChatroomConstants.swift */; };
-		47F344C82A50F3B8007F2403 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 47F344C72A50F3B8007F2403 /* GoogleService-Info.plist */; };
+		4730A4FA2ABA734D004C7CBC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4730A4F92ABA734D004C7CBC /* GoogleService-Info.plist */; };
+		4764BCEF2AA008FC005DCB63 /* ProfanityConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4764BCEE2AA008FC005DCB63 /* ProfanityConstants.swift */; };
 		C5F14B742979E5B100233909 /* swiftgen.yml in Resources */ = {isa = PBXBuildFile; fileRef = C5F14B732979E5B000233909 /* swiftgen.yml */; };
 		C5F14B772979EC5300233909 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = C5F14B792979EC5300233909 /* Localizable.strings */; };
 		C5F14B7D2979EE1D00233909 /* Strings+Generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5F14B7C2979EE1D00233909 /* Strings+Generated.swift */; };
-		DA734B0F00D68A020EEAEA94 /* Pods_Jigsaw.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7ED00D1B45BFE0836C7D9D1D /* Pods_Jigsaw.framework */; };
+		E3E2B4A3F8FD46E959B602BD /* Pods_Jigsaw.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5084B95B72B1BEB39C572C54 /* Pods_Jigsaw.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -147,6 +148,7 @@
 		003CD279250EE08100BD082E /* JigsawPiece.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JigsawPiece.swift; sourceTree = "<group>"; };
 		003CD27B250EEC0D00BD082E /* AgeGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgeGroup.swift; sourceTree = "<group>"; };
 		003CD27D250EF96B00BD082E /* CaseReverseInit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaseReverseInit.swift; sourceTree = "<group>"; };
+		003D49B934E331EA5742C3FB /* Pods-Jigsaw.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Jigsaw.debug.xcconfig"; path = "Target Support Files/Pods-Jigsaw/Pods-Jigsaw.debug.xcconfig"; sourceTree = "<group>"; };
 		0047630324ED10FE007767A5 /* QuestionEssentialProperty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionEssentialProperty.swift; sourceTree = "<group>"; };
 		0047630524ED1154007767A5 /* GameCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameCategory.swift; sourceTree = "<group>"; };
 		004A4B0C24FDB55A000FA2C8 /* FormViewController+insetGrouped.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FormViewController+insetGrouped.swift"; sourceTree = "<group>"; };
@@ -222,11 +224,11 @@
 		00F2197B24CCF99800B72858 /* MetricsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetricsViewController.swift; sourceTree = "<group>"; };
 		00F2197D24CCF9A200B72858 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		00F6302124EE385E00BCAD11 /* AnswerCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswerCategory.swift; sourceTree = "<group>"; };
-		044B283A6D040597BC329B5A /* Pods-Jigsaw.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Jigsaw.release.xcconfig"; path = "Target Support Files/Pods-Jigsaw/Pods-Jigsaw.release.xcconfig"; sourceTree = "<group>"; };
+		04FC35282C1317ACA4FE6254 /* Pods-Jigsaw.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Jigsaw.release.xcconfig"; path = "Target Support Files/Pods-Jigsaw/Pods-Jigsaw.release.xcconfig"; sourceTree = "<group>"; };
 		4719B2262A3BA54A003BA546 /* DemoChatroomConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoChatroomConstants.swift; sourceTree = "<group>"; };
-		47F344C72A50F3B8007F2403 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		7C60FC56ECF08CB437306FA8 /* Pods-Jigsaw.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Jigsaw.debug.xcconfig"; path = "Target Support Files/Pods-Jigsaw/Pods-Jigsaw.debug.xcconfig"; sourceTree = "<group>"; };
-		7ED00D1B45BFE0836C7D9D1D /* Pods_Jigsaw.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Jigsaw.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4730A4F92ABA734D004C7CBC /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		4764BCEE2AA008FC005DCB63 /* ProfanityConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfanityConstants.swift; sourceTree = "<group>"; };
+		5084B95B72B1BEB39C572C54 /* Pods_Jigsaw.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Jigsaw.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C5F14B732979E5B000233909 /* swiftgen.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = swiftgen.yml; sourceTree = SOURCE_ROOT; };
 		C5F14B782979EC5300233909 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		C5F14B7C2979EE1D00233909 /* Strings+Generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Strings+Generated.swift"; sourceTree = "<group>"; };
@@ -239,7 +241,7 @@
 			files = (
 				00A88312252924CF00186BED /* GameKit.framework in Frameworks */,
 				0055B0C42741E63000041454 /* ResearchKit.framework in Frameworks */,
-				DA734B0F00D68A020EEAEA94 /* Pods_Jigsaw.framework in Frameworks */,
+				E3E2B4A3F8FD46E959B602BD /* Pods_Jigsaw.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -352,6 +354,7 @@
 				005856BF24D924970010BE55 /* Message.swift */,
 				005856C324D92CFB0010BE55 /* Chatroom.swift */,
 				005856CD24D92FB60010BE55 /* ChatUser.swift */,
+				4764BCEE2AA008FC005DCB63 /* ProfanityConstants.swift */,
 			);
 			path = Chatroom;
 			sourceTree = "<group>";
@@ -393,7 +396,7 @@
 				0070DFEB24B0060400E71F46 /* SceneDelegate.swift */,
 				C5F14B732979E5B000233909 /* swiftgen.yml */,
 				C5F14B792979EC5300233909 /* Localizable.strings */,
-				47F344C72A50F3B8007F2403 /* GoogleService-Info.plist */,
+				4730A4F92ABA734D004C7CBC /* GoogleService-Info.plist */,
 				0070DFF224B0060500E71F46 /* Assets.xcassets */,
 				0071E921252005780025702E /* Jigsaw.entitlements */,
 				0070DFF724B0060500E71F46 /* Info.plist */,
@@ -555,8 +558,8 @@
 		5468D76B6A3E1F4A42D79584 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				7C60FC56ECF08CB437306FA8 /* Pods-Jigsaw.debug.xcconfig */,
-				044B283A6D040597BC329B5A /* Pods-Jigsaw.release.xcconfig */,
+				003D49B934E331EA5742C3FB /* Pods-Jigsaw.debug.xcconfig */,
+				04FC35282C1317ACA4FE6254 /* Pods-Jigsaw.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -565,7 +568,7 @@
 			isa = PBXGroup;
 			children = (
 				00A88311252924CF00186BED /* GameKit.framework */,
-				7ED00D1B45BFE0836C7D9D1D /* Pods_Jigsaw.framework */,
+				5084B95B72B1BEB39C572C54 /* Pods_Jigsaw.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -585,7 +588,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0070E00524B0060500E71F46 /* Build configuration list for PBXNativeTarget "Jigsaw" */;
 			buildPhases = (
-				49BBF9F517F636F407CEA4FD /* [CP] Check Pods Manifest.lock */,
+				64C68EBDDED9B9732DE30E81 /* [CP] Check Pods Manifest.lock */,
 				C5CCF7872979E394007631EC /* Run Script */,
 				006EB049253BA63E00FE5D8A /* Set Bundle Build Version to date */,
 				0070DFE224B0060400E71F46 /* Sources */,
@@ -593,8 +596,8 @@
 				0070DFE424B0060400E71F46 /* Resources */,
 				0070E00B24B0066B00E71F46 /* SwiftLint */,
 				005308CC25168A96002A429F /* Embed Frameworks */,
-				D26F1376B24AEB33E1E411F4 /* [CP] Embed Pods Frameworks */,
-				48E12D76666950EF15031028 /* [CP] Copy Pods Resources */,
+				B3EC30BDB47D88B9BD1C1C99 /* [CP] Embed Pods Frameworks */,
+				690421B4996F027D7EDF6F4F /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -698,7 +701,7 @@
 				00C89D0C253673BB0078E328 /* github-markdown.css in Resources */,
 				0070DFF324B0060500E71F46 /* Assets.xcassets in Resources */,
 				0070DFF124B0060400E71F46 /* Main.storyboard in Resources */,
-				47F344C82A50F3B8007F2403 /* GoogleService-Info.plist in Resources */,
+				4730A4FA2ABA734D004C7CBC /* GoogleService-Info.plist in Resources */,
 				00D9F5162506DEDF00898DFA /* PreviewDetailViewController.storyboard in Resources */,
 				00B0A67A24E3CF9600887701 /* ProfileHeaderView.xib in Resources */,
 			);
@@ -750,24 +753,7 @@
 			shellPath = /bin/sh;
 			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nif which swiftlint >/dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
 		};
-		48E12D76666950EF15031028 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Jigsaw/Pods-Jigsaw-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Jigsaw/Pods-Jigsaw-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Jigsaw/Pods-Jigsaw-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		49BBF9F517F636F407CEA4FD /* [CP] Check Pods Manifest.lock */ = {
+		64C68EBDDED9B9732DE30E81 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -789,6 +775,40 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		690421B4996F027D7EDF6F4F /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Jigsaw/Pods-Jigsaw-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Jigsaw/Pods-Jigsaw-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Jigsaw/Pods-Jigsaw-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B3EC30BDB47D88B9BD1C1C99 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Jigsaw/Pods-Jigsaw-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Jigsaw/Pods-Jigsaw-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Jigsaw/Pods-Jigsaw-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		C5CCF7872979E394007631EC /* Run Script */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -806,23 +826,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "if [[ -f \"${PODS_ROOT}/SwiftGen/bin/swiftgen\" ]]; then\n  \"${PODS_ROOT}/SwiftGen/bin/swiftgen\"\nelse\n  echo \"warning: SwiftGen is not installed. Run 'pod install --repo-update' to install it.\"\nfi \n";
-		};
-		D26F1376B24AEB33E1E411F4 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Jigsaw/Pods-Jigsaw-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Jigsaw/Pods-Jigsaw-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Jigsaw/Pods-Jigsaw-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -879,6 +882,7 @@
 				003CD27C250EEC0D00BD082E /* AgeGroup.swift in Sources */,
 				000D809D24ECEDBA0070041D /* EducationLevel.swift in Sources */,
 				0070DFEA24B0060400E71F46 /* AppDelegate.swift in Sources */,
+				4764BCEF2AA008FC005DCB63 /* ProfanityConstants.swift in Sources */,
 				00E6A86E2533C828000D54B3 /* String+toEmojiImage.swift in Sources */,
 				00CF5DC524F4DDA500B501BB /* ScaleQuestion.swift in Sources */,
 				00CDFF1624B44F4C009C789D /* QuestionStepsModel.swift in Sources */,
@@ -1071,7 +1075,7 @@
 		};
 		0070E00624B0060500E71F46 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7C60FC56ECF08CB437306FA8 /* Pods-Jigsaw.debug.xcconfig */;
+			baseConfigurationReference = 003D49B934E331EA5742C3FB /* Pods-Jigsaw.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Jigsaw/Jigsaw.entitlements;
@@ -1101,7 +1105,7 @@
 		};
 		0070E00724B0060500E71F46 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 044B283A6D040597BC329B5A /* Pods-Jigsaw.release.xcconfig */;
+			baseConfigurationReference = 04FC35282C1317ACA4FE6254 /* Pods-Jigsaw.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Jigsaw/Jigsaw.entitlements;
