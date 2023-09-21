@@ -22,7 +22,6 @@ import PINRemoteImage
 import Agrume
 
 
-/// <#Description#>
 class ChatViewController: MessagesViewController {
     // MARK: Properties
     
@@ -195,11 +194,42 @@ extension ChatViewController {
     /// Works on the assumption that there are only two players in the chat
     /// including the current user.
     private func reportUser(){
+        var userBeingReported: String? = nil
         for currentUser in chatroomUserIDs{
             if(currentUser != user.uid && chatroomUserIDs.count == 2){
                 // Found the user to be reported
-                print("The current user is: \(user.uid) and user being reported is: \(currentUser)")
+                userBeingReported = currentUser
                 break
+            }
+        }
+        
+        // Now that we have the user that is going to be reported
+        // Create a document in the ReportedUsers Collection in Firebase
+        // for further action
+        
+        guard let userBeingReported = userBeingReported else{
+            os_log("Some kind of unexpected error occured while trying to fetch the other player's details from the database")
+            return
+        }
+        
+        let otherPlayerDbRef = FirebaseConstants.players.document(userBeingReported)
+        
+        otherPlayerDbRef.getDocument{ document, error in
+            if let document = document{
+                // Got the document for the other player in the chatroom
+                let data = document.data()
+                guard let data = data else{
+                    os_log("Document of the other player \(userBeingReported) contains corrupted data")
+                    return
+                }
+                // Create a new entry for the player being reported in the database
+                FirebaseConstants.reportedPlayers.document(userBeingReported).setData(data)
+                
+                let uialertcontroller = UIAlertController(title: "Confirm Report", message: "User successfully reported. Please go to the next page, press cancel and quit the game", preferredStyle: .alert)
+                uialertcontroller.addAction(UIAlertAction(title: "Got it.", style: .default, handler:{ _ in
+                    self.back(sender: UIBarButtonItem())
+                }))
+                self.present(uialertcontroller, animated: true)
             }
         }
     }
