@@ -201,18 +201,23 @@ extension ChatViewController {
         self.present(uialertcontroller, animated: true)
     }
     
+    /// Function to get the userID of the other player in the Game Room
+    /// - Returns: String: Containing other player's user ID
+    fileprivate func getOtherPlayerInGameRoom() -> String? {
+        for currentUser in chatroomUserIDs{
+            if(currentUser != user.uid && chatroomUserIDs.count == 2){
+                // Found the user to be reported
+                return currentUser
+            }
+        }
+        return nil
+    }
+    
     /// Report the other user in the chat
     /// Works on the assumption that there are only two players in the chat
     /// including the current user.
     private func reportUser(){
-        var userBeingReported: String? = nil
-        for currentUser in chatroomUserIDs{
-            if(currentUser != user.uid && chatroomUserIDs.count == 2){
-                // Found the user to be reported
-                userBeingReported = currentUser
-                break
-            }
-        }
+        var userBeingReported: String? = self.getOtherPlayerInGameRoom()
         
         // Now that we have the user that is going to be reported
         // Create a document in the ReportedUsers Collection in Firebase
@@ -233,16 +238,15 @@ extension ChatViewController {
                 // Got the document for the other player in the chatroom
                 let data = document.data()
                 guard let data = data else{
-                    os_log("Document of the other player \(userBeingReported) contains corrupted data")
+                    os_log(.error, "Document of the other player \(userBeingReported) contains corrupted data")
                     return
                 }
                 // Create a new entry for the player being reported in the database
                 FirebaseConstants.reportedPlayers.document(userBeingReported).setData(data)
-                
                 self.confirmReportUIAlertController()
             }
             else{
-                
+                os_log(.debug, "Document doesn't contain any data, check database")
             }
         }
     }
@@ -251,7 +255,7 @@ extension ChatViewController {
     
     @objc
     private func reportButton(){
-        let actionController = UIAlertController(title: "Report Activity", message: "", preferredStyle: .actionSheet)
+        let actionController = UIAlertController(title: "Report Activity", message: "Please select an appropriate option from below: ", preferredStyle: .actionSheet)
         let reportUserAction = UIAlertAction(title: "Report User", style: .destructive){_ in
             // Present confirmation alert to the user for the report
             self.reportUser()
