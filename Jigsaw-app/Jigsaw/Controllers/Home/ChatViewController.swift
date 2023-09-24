@@ -54,6 +54,8 @@ class ChatViewController: MessagesViewController {
     var currentGameRoom: Int?
     /// Game Currently being played by the player
     var gameOfMyGroup: GameOfGroup?
+    /// Indicates if current chatroom is reported or not
+    var isChatroomReported: Bool
     
     private let timeFormatter: DateComponentsFormatter = {
         let formatter = DateComponentsFormatter()
@@ -73,6 +75,7 @@ class ChatViewController: MessagesViewController {
         self.user = user
         self.chatroom = chatroom
         self.isDemo = isDemo
+        self.isChatroomReported = false
         super.init(nibName: nil, bundle: nil)
         title = chatroom.name
     }
@@ -254,10 +257,10 @@ extension ChatViewController {
     
     /// This function copies all the data from the document referece to the
     /// ReportedChatroom collection in Firebase
-    fileprivate func copyChatroomDocuments(_ documentReference: DocumentReference){
-        let chatroomID = documentReference.documentID
+    fileprivate func copyChatroomDocuments(_ chatroomDocRef: DocumentReference){
+        let chatroomID = chatroomDocRef.documentID
         
-        documentReference.getDocument{ document, error in
+        chatroomDocRef.getDocument{ document, error in
             if let document = document{
                 // Got the document
                 guard let data = document.data() else{
@@ -268,13 +271,12 @@ extension ChatViewController {
                 // Create a copy of this document in the ReportedChatrooms Collection
                 reportedChatroomRef.setData(data)
                 self.messagesReference?.getDocuments{ querySnapshot, error in
-                    let reportedChatroomMsgsRef = reportedChatroomRef.collection("messages")
                     //
                     if let querySnapshot = querySnapshot {
                         // For each message document in the chatroom's messages
                         // collection, upload them to the reported chatroom collection
                         for document in querySnapshot.documents {
-                            reportedChatroomMsgsRef.document(document.documentID).setData(document.data())
+                            FirebaseConstants.reporteChatroomMessagesRef(chatroomID: chatroomID).document(document.documentID).setData(document.data())
                         }
                     }
                     else{
@@ -296,14 +298,16 @@ extension ChatViewController {
     /// 'Reports' the current chatroom by creating a copy of the current
     /// chatroom in the 'ReportedChatrooms' collection in Firebase.
     fileprivate func reportChat(){
+        self.isChatroomReported = true
+        
         guard let chatroomID = chatroom.id else{
             os_log(.debug, "Chatroom ID doesn't exist.")
             return
         }
         
         // Document reference for the chatroom user is currently in
-        let currentChatroomRef = FirebaseConstants.chatrooms.document(chatroomID)
-        self.copyChatroomDocuments(currentChatroomRef)
+        let chatroomDocRef = FirebaseConstants.chatrooms.document(chatroomID)
+        self.copyChatroomDocuments(chatroomDocRef)
     }
     
     
@@ -422,7 +426,17 @@ extension ChatViewController {
     }
     
     private func handleDocumentChange(_ change: DocumentChange) {
-        
+        // If the Chatroom is reported, for every new message sent to the
+        // chatroom, create a copy in the ReportedChatroom's messages
+        // subcollection.
+        // ReportedChatroom -> chatroom.id -> messages
+        if isChatroomReported{
+            guard let chatroomID = chatroom.id else{
+                os_log(.error, "Chatroom has null value")
+                return
+            }
+            FirebaseConstants.reporteChatroomMessagesRef(chatroomID: chatroomID).document(change.document.documentID).setData(change.document.data())
+        }
         guard let message = Message(document: change.document) else {
             return
         }

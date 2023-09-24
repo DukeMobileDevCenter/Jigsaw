@@ -32,6 +32,10 @@ enum FirebaseConstants {
         database.collection(["Chatrooms", chatroomID, "messages"].joined(separator: "/"))
     }
     
+    static func reporteChatroomMessagesRef(chatroomID: String) -> CollectionReference{
+        database.collection(["ReportedChatrooms", chatroomID, "messages"].joined(separator: "/"))
+    }
+    
     static func playerGameHistoryRef(userID: String) -> CollectionReference {
         database.collection(["Players", userID, "gameHistory"].joined(separator: "/"))
     }
