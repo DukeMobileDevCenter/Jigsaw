@@ -23,12 +23,17 @@ enum FirebaseConstants {
     /// A reference to the collection of team ranking stats.
     static let teamRankings = database.collection("TeamRankings")
     static let reportedPlayers = database.collection("ReportedPlayers")
+    static let reportedChatrooms = database.collection("ReportedChatrooms")
     
     static let gamesStorage = storage.reference(withPath: "Games")
     static let chatroomStorage = storage.reference(withPath: "Chatrooms")
     
     static func chatroomMessagesRef(chatroomID: String) -> CollectionReference {
         database.collection(["Chatrooms", chatroomID, "messages"].joined(separator: "/"))
+    }
+    
+    static func reporteChatroomMessagesRef(chatroomID: String) -> CollectionReference{
+        database.collection(["ReportedChatrooms", chatroomID, "messages"].joined(separator: "/"))
     }
     
     static func playerGameHistoryRef(userID: String) -> CollectionReference {

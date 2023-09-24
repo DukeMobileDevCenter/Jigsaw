@@ -54,6 +54,8 @@ class ChatViewController: MessagesViewController {
     var currentGameRoom: Int?
     /// Game Currently being played by the player
     var gameOfMyGroup: GameOfGroup?
+    /// Indicates if current chatroom is reported or not
+    var isChatroomReported: Bool
     
     private let timeFormatter: DateComponentsFormatter = {
         let formatter = DateComponentsFormatter()
@@ -73,6 +75,7 @@ class ChatViewController: MessagesViewController {
         self.user = user
         self.chatroom = chatroom
         self.isDemo = isDemo
+        self.isChatroomReported = false
         super.init(nibName: nil, bundle: nil)
         title = chatroom.name
     }
@@ -190,18 +193,34 @@ func binarySearch<T:Comparable>(_ inputArr:Array<T>, _ searchItem: T) -> Int? {
 
 extension ChatViewController {
     
-    /// Report the other user in the chat
-    /// Works on the assumption that there are only two players in the chat
-    /// including the current user.
-    private func reportUser(){
-        var userBeingReported: String? = nil
+    /// This function presents a `UIAlertController` on pressing the
+    /// 'Report User'/'Report Chat' option that pops up on pressing the
+    /// 'Report Activity' button in the chatroom
+    fileprivate func confirmReportUIAlertController(_ thing: String) {
+        let uialertcontroller = UIAlertController(title: "Confirm Report", message: "\(thing) successfully reported. Please press 'Cancel -> Quit Game' on the Quiz Page to exit and be depaired with the other player.", preferredStyle: .alert)
+        uialertcontroller.addAction(UIAlertAction(title: "Got it.", style: .default, handler:{ _ in
+            self.back(sender: UIBarButtonItem())
+        }))
+        self.present(uialertcontroller, animated: true)
+    }
+    
+    /// Function to get the userID of the other player in the Game Room
+    /// - Returns: String: Containing other player's user ID
+    fileprivate func getOtherPlayerInGameRoom() -> String? {
         for currentUser in chatroomUserIDs{
             if(currentUser != user.uid && chatroomUserIDs.count == 2){
                 // Found the user to be reported
-                userBeingReported = currentUser
-                break
+                return currentUser
             }
         }
+        return nil
+    }
+    
+    /// Report the other user in the chat
+    /// Works on the assumption that there are only two players in the chat
+    /// including the current user.
+    fileprivate func reportUser(){
+        let userBeingReported: String? = self.getOtherPlayerInGameRoom()
         
         // Now that we have the user that is going to be reported
         // Create a document in the ReportedUsers Collection in Firebase
@@ -212,33 +231,91 @@ extension ChatViewController {
             return
         }
         
+        // Retrieve the document's reference from Firebase
         let otherPlayerDbRef = FirebaseConstants.players.document(userBeingReported)
         
+        // Retrieve the other player's details from Firebase to create another
+        // entry in the ReportedPlayers Collection
         otherPlayerDbRef.getDocument{ document, error in
             if let document = document{
                 // Got the document for the other player in the chatroom
                 let data = document.data()
                 guard let data = data else{
-                    os_log("Document of the other player \(userBeingReported) contains corrupted data")
+                    os_log(.error, "Document of the other player \(userBeingReported) contains corrupted data")
                     return
                 }
                 // Create a new entry for the player being reported in the database
                 FirebaseConstants.reportedPlayers.document(userBeingReported).setData(data)
-                
-                let uialertcontroller = UIAlertController(title: "Confirm Report", message: "User successfully reported. Please go to the next page, press cancel and quit the game", preferredStyle: .alert)
-                uialertcontroller.addAction(UIAlertAction(title: "Got it.", style: .default, handler:{ _ in
-                    self.back(sender: UIBarButtonItem())
-                }))
-                self.present(uialertcontroller, animated: true)
+                // Show a confirmation message for the report
+                self.confirmReportUIAlertController("User")
+            }
+            else{
+                os_log(.debug, "Document doesn't contain any data, check database")
+            }
+        }
+    }
+    
+    /// This function copies all the data from the document referece to the
+    /// ReportedChatroom collection in Firebase
+    fileprivate func copyChatroomDocuments(_ chatroomDocRef: DocumentReference){
+        let chatroomID = chatroomDocRef.documentID
+        
+        chatroomDocRef.getDocument{ document, error in
+            if let document = document{
+                // Got the document
+                guard let data = document.data() else{
+                    os_log(.error, "Firebase document with chatroom id: \(chatroomID) has corrupt/null data")
+                    return
+                }
+                let reportedChatroomRef = FirebaseConstants.reportedChatrooms.document(chatroomID)
+                // Create a copy of this document in the ReportedChatrooms Collection
+                reportedChatroomRef.setData(data)
+                self.messagesReference?.getDocuments{ querySnapshot, error in
+                    //
+                    if let querySnapshot = querySnapshot {
+                        // For each message document in the chatroom's messages
+                        // collection, upload them to the reported chatroom collection
+                        for document in querySnapshot.documents {
+                            FirebaseConstants.reporteChatroomMessagesRef(chatroomID: chatroomID).document(document.documentID).setData(document.data())
+                        }
+                    }
+                    else{
+                        os_log(.error, "Couldn't upload messages from Chatroom: \(chatroomID) to ReportedChatrooms Collection")
+                    }
+                }
+                // Show a confirmation message showing the chat has been reported
+                self.confirmReportUIAlertController("Chat")
+            }
+            else{
+                // Somehow we didn't get the document even though it exists in Firebase
+                os_log(.error, "Unable to fetch chatroom document with id: \(chatroomID)")
             }
         }
     }
     
     
+    @objc
+    /// 'Reports' the current chatroom by creating a copy of the current
+    /// chatroom in the 'ReportedChatrooms' collection in Firebase.
+    fileprivate func reportChat(){
+        self.isChatroomReported = true
+        
+        guard let chatroomID = chatroom.id else{
+            os_log(.debug, "Chatroom ID doesn't exist.")
+            return
+        }
+        
+        // Document reference for the chatroom user is currently in
+        let chatroomDocRef = FirebaseConstants.chatrooms.document(chatroomID)
+        self.copyChatroomDocuments(chatroomDocRef)
+    }
+    
     
     @objc
+    /// This function is responsible for creating a `UIAlertController`
+    /// which handles the 'Report Activity' button of the chatroom.
     private func reportButton(){
-        let actionController = UIAlertController(title: "Report Activity", message: "", preferredStyle: .actionSheet)
+        let actionController = UIAlertController(title: "Report Activity", message: "Please select an appropriate option from below: ", preferredStyle: .actionSheet)
         let reportUserAction = UIAlertAction(title: "Report User", style: .destructive){_ in
             // Present confirmation alert to the user for the report
             self.reportUser()
@@ -246,7 +323,8 @@ extension ChatViewController {
         // Once a user presses this button, the collection 'isReported' gets updated in firestore
         // and the game exits
         let reportChatAction = UIAlertAction(title: "Report Chat", style: .destructive){_ in
-            //            self.confirmReportAlert()
+            // Driver function for reporting the chat
+            self.reportChat()
         }
         let cancelReportAction = UIAlertAction(title: "Cancel", style: .cancel)
         actionController.addAction(reportUserAction)
@@ -348,6 +426,17 @@ extension ChatViewController {
     }
     
     private func handleDocumentChange(_ change: DocumentChange) {
+        // If the Chatroom is reported, for every new message sent to the
+        // chatroom, create a copy in the ReportedChatroom's messages
+        // subcollection.
+        // ReportedChatroom -> chatroom.id -> messages
+        if isChatroomReported{
+            guard let chatroomID = chatroom.id else{
+                os_log(.error, "Chatroom has null value")
+                return
+            }
+            FirebaseConstants.reporteChatroomMessagesRef(chatroomID: chatroomID).document(change.document.documentID).setData(change.document.data())
+        }
         guard let message = Message(document: change.document) else {
             return
         }
