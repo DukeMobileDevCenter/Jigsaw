@@ -243,10 +243,50 @@ extension ChatViewController {
                 }
                 // Create a new entry for the player being reported in the database
                 FirebaseConstants.reportedPlayers.document(userBeingReported).setData(data)
+                // Show a confirmation message for the report
                 self.confirmReportUIAlertController("User")
             }
             else{
                 os_log(.debug, "Document doesn't contain any data, check database")
+            }
+        }
+    }
+    
+    /// This function copies all the data from the document referece to the
+    /// ReportedChatroom collection in Firebase
+    fileprivate func copyChatroomDocuments(_ documentReference: DocumentReference){
+        let chatroomID = documentReference.documentID
+        
+        documentReference.getDocument{ document, error in
+            if let document = document{
+                // Got the document
+                guard let data = document.data() else{
+                    os_log(.error, "Firebase document with chatroom id: \(chatroomID) has corrupt/null data")
+                    return
+                }
+                let reportedChatroomRef = FirebaseConstants.reportedChatrooms.document(chatroomID)
+                // Create a copy of this document in the ReportedChatrooms Collection
+                reportedChatroomRef.setData(data)
+                self.messagesReference?.getDocuments{ querySnapshot, error in
+                    let reportedChatroomMsgsRef = reportedChatroomRef.collection("messages")
+                    //
+                    if let querySnapshot = querySnapshot {
+                        // For each message document in the chatroom's messages
+                        // collection, upload them to the reported chatroom collection
+                        for document in querySnapshot.documents {
+                            reportedChatroomMsgsRef.document(document.documentID).setData(document.data())
+                        }
+                    }
+                    else{
+                        os_log(.error, "Couldn't upload messages from Chatroom: \(chatroomID) to ReportedChatrooms Collection")
+                    }
+                }
+                // Show a confirmation message showing the chat has been reported
+                self.confirmReportUIAlertController("Chat")
+            }
+            else{
+                // Somehow we didn't get the document even though it exists in Firebase
+                os_log(.error, "Unable to fetch chatroom document with id: \(chatroomID)")
             }
         }
     }
@@ -256,7 +296,14 @@ extension ChatViewController {
     /// 'Reports' the current chatroom by creating a copy of the current
     /// chatroom in the 'ReportedChatrooms' collection in Firebase.
     fileprivate func reportChat(){
-        print("Hello")
+        guard let chatroomID = chatroom.id else{
+            os_log(.debug, "Chatroom ID doesn't exist.")
+            return
+        }
+        
+        // Document reference for the chatroom user is currently in
+        let currentChatroomRef = FirebaseConstants.chatrooms.document(chatroomID)
+        self.copyChatroomDocuments(currentChatroomRef)
     }
     
     
@@ -375,6 +422,7 @@ extension ChatViewController {
     }
     
     private func handleDocumentChange(_ change: DocumentChange) {
+        
         guard let message = Message(document: change.document) else {
             return
         }

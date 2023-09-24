@@ -23,6 +23,7 @@ enum FirebaseConstants {
     /// A reference to the collection of team ranking stats.
     static let teamRankings = database.collection("TeamRankings")
     static let reportedPlayers = database.collection("ReportedPlayers")
+    static let reportedChatrooms = database.collection("ReportedChatrooms")
     
     static let gamesStorage = storage.reference(withPath: "Games")
     static let chatroomStorage = storage.reference(withPath: "Chatrooms")
